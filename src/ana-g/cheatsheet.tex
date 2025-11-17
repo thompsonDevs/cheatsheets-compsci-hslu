@@ -4,7 +4,6 @@
 
 \usepackage{lipsum}
 
-% Andrej Scheuer's Stuff
 \usepackage{tikz}
 
 \usetikzlibrary{positioning, calc, fit, matrix, decorations, angles, quotes, babel, 3d, arrows.meta, shadings, shapes.geometric}
@@ -13,7 +12,6 @@
 	overlaynote/.style={font = \footnotesize, fill = overlaycolor, draw = overlaycolor, rounded corners = 3pt},
 	overlayarrow/.style={thick, gray, ->}
 }
-
 
 % 3 column landscape layout with fewer margins
 \usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
@@ -78,9 +76,9 @@
 }
 
 % Metadata
-\title{Cheatsheet Analysis 1}
+\title{Cheatsheet ANA-G}
 \author{Thomas Schnyder}
-\date{August 2023}
+\date{Januar 2026}
 
 % Math helper stuff
 \def\limn{\lim_{n\to \infty}}
@@ -105,146 +103,126 @@
 
 \maketitle
 
-\section{Reelle Zahlen}
-\subsection{Definiton und Axiome}
-Die Menge $\R $ ist mit zwei Operatoren versehen: \\
-Addition $+$: $\R \times \R \to \R:  (x,y) \to x+y$
-\begin{subbox}{Axiome der Addition}
-  \vspace{-6pt}
-  A1 $\forall x,y,z \in \R: x+(y+z) = (x+y)+z$\\
-  A2 $\exists 0\in\R: x + 0 = x, \forall x \in \R$\\
-  A3 $\forall x \in \R, \exists y \in \R: x+y = 0$\\
-  A4 $\forall x,y \in \R: x+y = y+x$
-  \vspace{-6pt}
-\end{subbox}
-Multiplikation $\cdot$: $\R \times \R \to \R: (x,y) \to x\cdot y$
+\section{Differenzen- und Differentialquotient}
 
-\begin{subbox}{Axiome der Multiplikation}
-  \vspace{-6pt}
-  A1 $\forall x,y,z \in \R: x\cdot(y \cdot z) = (x \cdot y)\cdot z$\\
-  A2 $\exists 1\in\R: x \cdot 1 = x, \forall x \in \R$\\
-  A3 $\forall x \in \R, \exists y \in \R: x \cdot y = 1$\\
-  A4 $\forall x,y \in \R: x \cdot y = y \cdot x$
-  \vspace{-6pt}
+\begin{subbox}{Steigung einer Geraden}
+	\textbf{Gegeben:} Zwei Punkte $P_1(x_1/y_1)$ und $P_2(x_2/y_2)$ \\
+	\textbf{Steigung:}
+	$$m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1} = \frac{y_1 - y_2}{x_1 - x_2}$$
 \end{subbox}
 
-$\R$ ist ein angeordneter Körper.
+\begin{mainbox}{Geradengleichungen}
+\textbf{Allgemeine Form:} Gerade mit Steigung $m$ und $y$-Achsenabschnitt $t$
+$$y(x) = m \cdot x + t$$
 
-\begin{subbox}{Ordnungsaxiome}
-  \vspace{-6pt}
-  O1 $\forall x \in \R: x \leq x$\\
-  O2 $\forall x,y,z \in\R: x \leq y \land y \leq z \implies x \leq z$\\
-  O3 $\forall x,y \in \R: x \leq y \land y \leq x \implies x = y$\\
-  O4 $\forall x,y \in \R: x \leq y$ oder $y \leq x$\\
-  Die Ordnung ist konsistent mit Addition und Multiplikation.\\
-  K1: $\forall x,y,z \in \R : x \leq y \implies x + z \leq y + z$
-  K2: $\forall x \in \R^{+}$ und $\forall y \geq 0$
-  \vspace{-6pt}
-\end{subbox}
+\textbf{Punkt-Steigungsform:} Gerade durch $P_0(x_0/y_0)$ mit Steigung $m$
+$$y(x) = m \cdot (x - x_0) + y_0 = m \cdot x + (y_0 - m \cdot x_0)$$
 
-\begin{mainbox}{Ordnungsvollständigkeit}
-  \vspace{-4pt}
-  Seien $A$ und $B$ Teilmengen von $\R$, so dass \\
-  (i) $A \neq \emptyset, B \neq \emptyset$\\
-  (ii) $\forall a \in A$ und $\forall b \in B$ gilt: $a \leq b$\\
-  Dann gibt es (mindestens) ein $c \in \R$, so dass $\forall a \in A: a \leq c$ und $\forall b \in B: c \leq b$
-  \vspace{-4pt}
+\textbf{Zwei-Punkte-Form:} Gerade durch $P_1(x_1/y_1)$ und $P_2(x_2/y_2)$
+	$$y(x) = \frac{y_2 - y_1}{x_2 - x_1} \cdot (x - x_1) + y_1$$
 \end{mainbox}
 
-\begin{mainbox}{Archimedisches Prinzip}
-  \vspace{-4pt}
-  (1) Sei $x \in \R, x > 0$ und $y \in \R$. Dann gibt es $n \in \mathbb{N}$ mit $y \leq n \cdot x$ \\
-  (2) Für jedes $x \in \R$ existiert genau ein $n \in \mathbb{Z}$ mit $n \leq x < n+1$
-  \vspace{-4pt}
+\subsection{Differenzenquotient (Sekantensteigung)}
+
+\begin{mainbox}{Sekantensteigung - Form 1}
+	\textbf{Gegeben:} Funktion $f(x)$, zwei Stellen $x_1$ und $x_2$ \\
+	\textbf{Gesucht:} Steigung der Sekante durch $P_1(x_1/f(x_1))$ und $P_2(x_2/f(x_2))$ \\
+	\textbf{Differenzenquotient:}
+	$$m = \frac{\Delta y}{\Delta x} = \frac{f(x_2) - f(x_1)}{x_2 - x_1} = \frac{f(x_1) - f(x_2)}{x_1 - x_2}$$
 \end{mainbox}
 
-\arraycolsep=0pt\def\arraystretch{1}
-\begin{subbox}{Betragsrechenregeln}
-  \vspace{-6pt}
-  \begin{equation*}
-      \begin{array}{rcl}
-          (i) & |x| \geq 0 & \forall x \in \R\\
-          (ii) & |xy| = |x||y| & \forall x,y \in \R\\
-          (iii) & |x+y| \leq |x| + |y| & \forall x,y \in \R\\
-          (iv) & |x+y| \geq ||x| - |y|| & \forall x,y \in \R
-      \end{array}
-  \end{equation*}
-  \vspace{-10pt}
+\begin{mainbox}{Sekantensteigung - Form 2}
+	\textbf{Gegeben:} Funktion $f(x)$, Stelle $x_0$ und Abstand $h$ \\
+	\textbf{Gesucht:} Steigung der Sekante durch $P_0(x_0/f(x_0))$ und $P(x_0+h/f(x_0+h))$ \\
+	\textbf{Differenzenquotient:}
+	$$m = \frac{\Delta y}{\Delta x} = \frac{f(x_0 + h) - f(x_0)}{h}$$
+	\textbf{Interpretation:} Durchschnittliche Änderungsrate der Funktion zwischen $x_0$ und $x_0 + h$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Sekantensteigung}
+	Für $f(x) = x^2$ mit $x_1 = -1$ und $x_2 = 3$:
+	$$m = \frac{f(3) - f(-1)}{3 - (-1)} = \frac{9 - 1}{4} = \frac{8}{4} = 2$$
 \end{subbox}
 
-\begin{subbox}{Young'sche Ungleichung}
-  \vspace{-4pt}
-  $\forall \varepsilon>0, \forall x, y \in \R$ gilt $2 \cdot |x \cdot y| \leq \varepsilon \cdot x^2 + \frac{1}{\varepsilon} \cdot y^2$
-  \\ \textit{Beweisidee:} $(\sqrt{\varepsilon}\cdot |x| - \frac{1}{\sqrt{\varepsilon}} \cdot |y|)^2 \geq 0$
-  \vspace{-4pt}
+\subsection{Differentialquotient (Tangentensteigung)}
+
+\begin{mainbox}{Ableitung einer Funktion an der Stelle $x_0$ - Form 1}
+	\textbf{Gegeben:} Funktion $f(x)$, feste Stelle $x_0$ \\
+	\textbf{Gesucht:} Steigung der Tangente an $f$ bei $x_0$ \\
+	\textbf{Differentialquotient (Ableitung):}
+	$$f'(x_0) = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}$$
+	\textbf{Interpretation:} Momentane Änderungsrate der Funktion an der Stelle $x_0$
+\end{mainbox}
+
+\begin{mainbox}{Ableitung einer Funktion an der Stelle $x_0$ - Form 2}
+	\textbf{Gegeben:} Funktion $f(x)$, feste Stelle $x_0$ \\
+	\textbf{Differentialquotient (Ableitung):}
+	$$f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}$$
+	\textbf{Zusammenhang:} Grenzwert der Sekantensteigung für $h \to 0$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Ableitung von $f(x) = x^2$ bei $x_0 = 2$}
+	$$f'(2) = \lim_{h \to 0} \frac{(2+h)^2 - 2^2}{h} = \lim_{h \to 0} \frac{4 + 4h + h^2 - 4}{h}$$
+	$$= \lim_{h \to 0} \frac{4h + h^2}{h} = \lim_{h \to 0} (4 + h) = 4$$
 \end{subbox}
 
-Sei $A \subseteq \R, A \neq \emptyset$:
+\subsection{Ableitungsfunktion}
+
+\begin{mainbox}{Ableitungsfunktion $f'(x)$}
+	Die Ableitungsfunktion $f'(x)$ ordnet jeder Stelle $x$ die Tangentensteigung an dieser Stelle zu:
+	$$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
+	\textbf{Alternative Schreibweisen:}
+	$$\frac{df}{dx}, \quad \frac{d}{dx}f(x), \quad Df(x)$$
+\end{mainbox}
+
+\begin{mainbox}{Wichtige Ableitungsregeln}
+\textbf{Potenzregel:}
+$$f(x) = x^n \quad \Rightarrow \quad f'(x) = n \cdot x^{n-1}$$
+
+\textbf{Spezialfälle:}
 \begin{itemize}
-  \item $c \in \R$ ist eine \textbf{obere (untere) Schranke} von $A$ falls $\forall a \in A: a \leq (\geq) c$
-  \item Ein Element $M \in \R$ ist ein \textbf{Maximum (Minimum)} von $A$ falls $M \in A, \forall a \in A: a \leq (\geq) M$
-  \item Sei $A$ nach oben beschränkt. Die kleinste obere Schranke von $A$ ist das \textbf{Supremum} von $A$.
-  \item Sei $A$ nach unten beschränkt. Die grösste untere Schranke von $A$ ist das \textbf{Infimum} von $A$.
-
-  \item sup({$A \bigcup B$}) = max{(sup$A$, sup$B$)}
-  \item sup{($A + B$)} = sup($A$) + sup($B$)
-  \item sup($c \cdot A$) = $c \cdot $ sup($A$), $c > 0$
-  \item sup($c \cdot A$) = $c \cdot$ Inf($A$), $c < 0$
+	\item $f(x) = x^3 \Rightarrow f'(x) = 3x^2$
+	\item $f(x) = x^5 \Rightarrow f'(x) = 5x^4$
+	\item $f(x) = \frac{1}{x} = x^{-1} \Rightarrow f'(x) = -x^{-2} = -\frac{1}{x^2}$
 \end{itemize}
 
-\subsection{Euklidischer Raum}
-\begin{equation*}
-    \langle x, y \rangle = \sum_{i=1}^n x_i y_i \qquad ||x|| = \sqrt{\langle x,x \rangle}
-\end{equation*}
-\begin{subbox}{Cauchy-Schwarz}
-  \vspace{-6pt}
-    \begin{equation*}
-        |\langle x, y \rangle| \leq ||x|| \cdot ||y|| \quad \forall x,y \in \R^n
-    \end{equation*}
-    \vspace{-16pt}
-\end{subbox}
-\begin{subbox}{1.22}
-  \vspace{-4pt}
-    \begin{enumerate}
-        \item $||x|| \geq 0$ mit Gleichheit bei $x=0$.
-        \item $||\alpha \cdot x|| = |\alpha|\cdot ||x|| \quad \forall \alpha \in \R,~\forall x \in \R^n$
-        \item $||x+y|| \leq ||x|| + ||y|| \quad \forall x,y \in \R^n$
-    \end{enumerate}
-    \vspace{-12pt}
+\textbf{Trigonometrische Funktionen:}
+\begin{itemize}
+	\item $f(x) = \sin(x) \Rightarrow f'(x) = \cos(x)$
+	\item $f(x) = \cos(x) \Rightarrow f'(x) = -\sin(x)$
+\end{itemize}
+
+\textbf{Konstante:}
+$$f(x) = c \quad \Rightarrow \quad f'(x) = 0$$
+\end{mainbox}
+
+\begin{subbox}{Herleitung: Ableitung von $f(x) = x^3$}
+$$f'(x) = \lim_{h \to 0} \frac{(x+h)^3 - x^3}{h}$$
+Mit dem binomischen Satz: $(x+h)^3 = x^3 + 3x^2h + 3xh^2 + h^3$
+$$= \lim_{h \to 0} \frac{x^3 + 3x^2h + 3xh^2 + h^3 - x^3}{h}$$
+$$= \lim_{h \to 0} \frac{3x^2h + 3xh^2 + h^3}{h} = \lim_{h \to 0} (3x^2 + 3xh + h^2) = 3x^2$$
 \end{subbox}
 
-\subsection{Imaginäre Zahlen}
-\begin{center}
-  $i^2 = -1$\\
-  $z := x + iy$ \qquad $\overline{z} := x - iy$\\
-  $\text{Re}(z) := x \in \R$ \qquad  $\text{Im}(z) := y \in \R$
-\end{center}
-\begin{subbox}{1.24}
-  \vspace{-4pt}
-    \begin{enumerate}
-        \item $\overline{(z_1 + z_2)} = \overline{z_1} + \overline{z_2}, \forall z_1,z_2 \in \R$
-        \item $\overline{(z_1 z_2)} = \overline{z_1} \overline{z_2},  \forall z_1,z_2 \in \mathbb{C}$
-        \item $z\overline{z} = x^2 + y^2 = ||z||^2$
-    \end{enumerate}
-    \vspace{-12pt}
-\end{subbox}
-\begin{equation*}
-    z^{-1} = \frac{\overline{z}}{||z||^2}
-\end{equation*}
-Polarform: $z = ( \cos \phi + i \sin \phi)$, wobei $r = ||z||$ der \emph{Absolutbetrag} und $\phi$ das \emph{Argument} von $z$.
-\begin{mainbox}{Fundamentalsatz Algebra}
-  \vspace{-4pt}
-    $n \geq 1,~n\in \mathbb{N}$ und
-    \begin{equation*}
-        P(z) = z^n + a_{n-1} z^{n-1} + \ldots + a_o \quad a_j \in \mathbb{C}
-    \end{equation*}
-    Dann gibt es $z_1, ..., z_n$ in $\mathbb{C}$, sodass
-    \begin{equation*}
-        P(z) = (z - z_1)(z - z_2) \ldots(z-z_n)
-    \end{equation*}
-    \vspace{-16pt}
+\subsection{Tangentengleichung}
+
+\begin{mainbox}{Gleichung der Tangente}
+Tangente an $f(x)$ bei $x_0$ mit Steigung $f'(x_0)$:
+$$t(x) = f'(x_0) \cdot (x - x_0) + f(x_0)$$
+\textbf{Interpretation:} Die Tangente berührt den Graphen von $f$ bei $(x_0, f(x_0))$ und hat dort die gleiche Steigung wie $f$.
 \end{mainbox}
-Eulersche Formel: $e^{i\phi} = \cos \phi + i \sin \phi$
+
+\subsection{Begriffe und Interpretationen}
+
+\begin{subbox}{Wichtige Begriffe}
+\begin{itemize}
+	\item \textbf{Sekante:} Gerade durch zwei Punkte auf dem Funktionsgraphen
+	\item \textbf{Tangente:} Gerade, die den Funktionsgraphen in einem Punkt berührt
+	\item \textbf{Differenzenquotient:} Steigung der Sekante (durchschnittliche Änderungsrate)
+	\item \textbf{Differentialquotient:} Grenzwert des Differenzenquotienten (momentane Änderungsrate)
+	\item \textbf{Ableitung:} Tangentensteigung = Differentialquotient = $f'(x_0)$
+	\item \textbf{Ableitungsfunktion:} Funktion, die jeder Stelle die Ableitung zuordnet
+\end{itemize}
+\end{subbox}
 
 \section{Folgen}
 \subsection{Konvergenz}

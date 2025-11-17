@@ -224,6 +224,143 @@ $$t(x) = f'(x_0) \cdot (x - x_0) + f(x_0)$$
 \end{itemize}
 \end{subbox}
 
+\section{Grenzwerte}
+
+\begin{mainbox}{Definition des Grenzwerts}
+\textbf{Schreibweise:} Hat die Funktion $f(x)$ an der Stelle $x_0 \in \R$ den Grenzwert (Limes) $L \in \R$:
+$\lim_{x \to x_0} f(x) = L$
+
+\textbf{Bedeutung:} Je näher die Werte von $x$ der Stelle $x_0$ kommen, desto näher kommen die Werte von $f(x)$ der Stelle $L$.
+
+\textbf{Strenge mathematische Definition:}
+$\forall \varepsilon > 0 \; \exists \delta > 0: \; x \in U_\delta(x_0) \Rightarrow f(x) \in U_\varepsilon(L)$
+wobei $U_\delta(x_0) = \{x \mid |x - x_0| < \delta\} = \{x \mid x_0 - \delta < x < x_0 + \delta\}$
+\end{mainbox}
+
+\begin{mainbox}{Einseitige Grenzwerte}
+\textbf{Rechtsseitiger Grenzwert:} Annäherung von rechts ($x > x_0$)
+$\lim_{x \to x_0^+} f(x)$
+
+\textbf{Linksseitiger Grenzwert:} Annäherung von links ($x < x_0$)
+$\lim_{x \to x_0^-} f(x)$
+
+\textbf{Existenz des Grenzwerts:} Der Grenzwert $\lim_{x \to x_0} f(x)$ existiert nur, wenn:
+$\lim_{x \to x_0^-} f(x) = \lim_{x \to x_0^+} f(x)$
+\end{mainbox}
+
+\begin{mainbox}{Verhalten im Unendlichen}
+Grenzwerte für $x \to \infty$ oder $x \to -\infty$:
+$\lim_{x \to \infty} f(x) \quad \text{bzw.} \quad \lim_{x \to -\infty} f(x)$
+
+\textbf{Beispiel:}
+$\lim_{x \to \infty} \frac{1}{x} = \lim_{x \to -\infty} \frac{1}{x} = 0$
+\end{mainbox}
+
+\begin{mainbox}{Uneigentliche Grenzwerte}
+Wenn $x \to x_0$ und dabei $f(x) \to \pm\infty$:
+$\lim_{x \to x_0} f(x) = \infty \quad \text{oder} \quad \lim_{x \to x_0} f(x) = -\infty$
+
+\textbf{Beispiele:}
+$\lim_{x \to \frac{\pi}{2}^+} \tan(x) = -\infty \quad \text{und} \quad \lim_{x \to \frac{\pi}{2}^-} \tan(x) = \infty$
+$\lim_{x \to 0^+} \frac{1}{x^2} = \infty \quad \text{und} \quad \lim_{x \to 0^-} \frac{1}{x^2} = \infty$
+\end{mainbox}
+
+\begin{mainbox}{Rechenregeln für Grenzwerte}
+Seien $\lim_{x \to x_0} f(x) = a$ und $\lim_{x \to x_0} g(x) = b$, dann gilt:
+
+\textbf{Summe/Differenz:}
+$\lim_{x \to x_0} (f(x) \pm g(x)) = a \pm b$
+
+\textbf{Produkt:}
+$\lim_{x \to x_0} (f(x) \cdot g(x)) = a \cdot b$
+
+\textbf{Quotient:} (falls $b \neq 0$)
+$\lim_{x \to x_0} \frac{f(x)}{g(x)} = \frac{a}{b}$
+
+\textbf{Komposition:} (falls $f$ stetig)
+$\lim_{x \to x_0} f(g(x)) = f\left(\lim_{x \to x_0} g(x)\right) = f(b)$
+\end{mainbox}
+
+\begin{subbox}{Wichtige Grenzwerte}
+$\lim_{x \to 0} \frac{\sin(x)}{x} = 1$
+$\lim_{x \to 0} \frac{1 - \cos(x)}{x} = 0$
+$\lim_{x \to \infty} \frac{1}{x^2} = 0$
+\end{subbox}
+
+\begin{subbox}{Beispiele für Grenzwerte}
+\textbf{Algebraische Umformung:}
+$\lim_{x \to 1} \frac{x^2 - 1}{x - 1} = \lim_{x \to 1} \frac{(x-1)(x+1)}{x-1} = \lim_{x \to 1} (x+1) = 2$
+
+\textbf{Betragsfunktion:}
+$|x| = \begin{cases} -x, & \text{falls } x < 0 \\ x, & \text{falls } x \geq 0 \end{cases}$
+$\lim_{x \to 0^-} |x| = 0, \quad \lim_{x \to 0^+} |x| = 0 \quad \Rightarrow \quad \lim_{x \to 0} |x| = 0$
+
+\textbf{Heaviside-Funktion:}
+$H(x) = \begin{cases} 0, & \text{falls } x < 0 \\ 1, & \text{falls } x \geq 0 \end{cases}$
+$\lim_{x \to 0^-} H(x) = 0, \quad \lim_{x \to 0^+} H(x) = 1 \quad \Rightarrow \quad \lim_{x \to 0} H(x) \text{ existiert nicht}$
+
+\textbf{Signum-Funktion:}
+$\text{sgn}(x) = \begin{cases} -1, & \text{falls } x < 0 \\ 0, & \text{falls } x = 0 \\ 1, & \text{falls } x > 0 \end{cases}$
+$\lim_{x \to 0^-} \text{sgn}(x) = -1, \quad \lim_{x \to 0^+} \text{sgn}(x) = 1 \quad \Rightarrow \quad \lim_{x \to 0} \text{sgn}(x) \text{ existiert nicht}$
+\end{subbox}
+
+\section{Stetigkeit}
+
+\begin{mainbox}{Definition der Stetigkeit}
+\textbf{Ingenieurmässige Definition:} Eine Funktion ist stetig, wenn man sie zeichnen kann, ohne den Stift abzusetzen.
+
+\textbf{Mathematische Definition:} Eine Funktion $f$ ist an der Stelle $x_0$ stetig, wenn:
+$\lim_{x \to x_0^-} f(x) = \lim_{x \to x_0^+} f(x) = f(x_0)$
+
+\textbf{Bedingungen für Stetigkeit an $x_0$:}
+\begin{itemize}
+\item Der linksseitige Grenzwert existiert
+\item Der rechtsseitige Grenzwert existiert
+\item Beide Grenzwerte stimmen überein
+\item Der Funktionswert $f(x_0)$ ist definiert
+\item Der Funktionswert stimmt mit dem Grenzwert überein
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Stetige Funktion}
+Eine Funktion heißt \textbf{stetig}, wenn sie an allen Stellen ihres Definitionsbereichs stetig ist.
+
+\textbf{Wichtige stetige Funktionen:}
+\begin{itemize}
+\item Polynome: $p(x) = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0$
+\item Rationale Funktionen (außer an Polstellen)
+\item Exponentialfunktionen: $e^x$, $a^x$
+\item Logarithmusfunktionen: $\ln(x)$, $\log_a(x)$
+\item Trigonometrische Funktionen: $\sin(x)$, $\cos(x)$
+\item Betragsfunktion: $|x|$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiele für Stetigkeit}
+\textbf{Stetig an $x_0 = 0$:}
+\begin{itemize}
+\item $|x|$: $\lim_{x \to 0^-} |x| = 0 = \lim_{x \to 0^+} |x| = |0| = 0$ ✓
+\item $\text{sgn}^2(x)$: $\lim_{x \to 0^-} 1 = 1 = \lim_{x \to 0^+} 1 = \text{sgn}^2(0) = 0^2 = 0$? Nein! ✗
+\end{itemize}
+
+\textbf{Nicht stetig an $x_0 = 0$:}
+\begin{itemize}
+\item Heaviside-Funktion $H(x)$: Sprungstelle
+\item Signum-Funktion $\text{sgn}(x)$: Sprungstelle
+\item $\frac{1}{x}$: Nicht definiert bei $x = 0$
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Unstetigkeitsstellen}
+\textbf{Arten von Unstetigkeiten:}
+\begin{itemize}
+\item \textbf{Hebbare Unstetigkeit:} Grenzwert existiert, aber $f(x_0)$ fehlt oder weicht ab
+\item \textbf{Sprungstelle:} Linker und rechter Grenzwert existieren, sind aber verschieden
+\item \textbf{Polstelle:} Funktion divergiert gegen $\pm\infty$
+\item \textbf{Oszillation:} Grenzwert existiert nicht (z.B. $\sin(\frac{1}{x})$ bei $x = 0$)
+\end{itemize}
+\end{subbox}
+
 \section{Folgen}
 \subsection{Konvergenz}
 Eine Folge $(a_n)_{n\in \mathbb{N}}$ konvergiert gegen L \\ $\iff \lim_{n \to \infty} a_n = L $

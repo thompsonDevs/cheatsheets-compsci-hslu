@@ -1,6 +1,6 @@
 \documentclass[a4paper,fontsize = 7pt]{scrartcl}
 \usepackage[utf8]{inputenc}
-\usepackage[german]{babel}
+% \usepackage[german]{babel}  % Uncomment if german language pack is available
 
 \usepackage{lipsum}
 
@@ -354,154 +354,139 @@ Umkehrfunktion & $(f^{-1})' = \frac{1}{f'(f^{-1})}$ & $\frac{df^{-1}}{dx} = \lef
 	\end{itemize}
 \end{subbox}
 
-\section{Folgen}
-\subsection{Konvergenz}
-Eine Folge $(a_n)_{n\in \mathbb{N}}$ konvergiert gegen L \\ $\iff \lim_{n \to \infty} a_n = L $
-\\ $\iff \forall \varepsilon > 0 \ \exists N_\varepsilon \ \forall n \ge N_\varepsilon : \ | a_n - L | < \varepsilon$
-\\ $\iff \forall \varepsilon > 0 $ ist die Menge $\{n \in \N \mid a_n \notin ]l-\varepsilon,l+\varepsilon[\}$ endlich.
-\\ Es gibt für eine konvergente Folge $(a_n)_{n \geq 1}$ höchstens ein $L \in \R$, dass diese Bedingungen erfüllt. (Eindeutigkeit)
+\section{Kurvendiskussion}
 
+\subsection{Erste Ableitung und Monotonie}
 
-Wir dürfen (o.B.d.A.) annehmen, dass $\varepsilon $ durch eine Konstante $C \in \R$ beschränkt ist.
-Es gilt ausserdem:
+\begin{mainbox}{Monotonie und erste Ableitung}
+Die erste Ableitung $f'(x)$ gibt Auskunft über das Monotonieverhalten einer Funktion:
+
 \begin{itemize}
- \item konvergent $\implies$ beschränkt, aber nicht umgekehrt
- \item $(a_n)$ konvergent $\iff (a_n)$ beschränkt \textbf{und} $\lim \inf a_n = \lim \sup a_n$
+	\item $f'(x) > 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{streng monoton wachsend} auf $I$
+	\item $f'(x) \geq 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{monoton wachsend} auf $I$
+	\item $f'(x) < 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{streng monoton fallend} auf $I$
+	\item $f'(x) \leq 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{monoton fallend} auf $I$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Vorgehen: Monotoniebereiche bestimmen}
+	\begin{enumerate}
+		\item Erste Ableitung $f'(x)$ berechnen
+		\item Nullstellen von $f'(x)$ bestimmen (kritische Stellen)
+		\item Vorzeichen von $f'(x)$ in den Intervallen zwischen den Nullstellen prüfen
+		\item Monotonieverhalten ablesen
+	\end{enumerate}
+\end{subbox}
+
+\subsection{Kritische Punkte}
+
+\begin{mainbox}{Kritische Stellen und Punkte}
+\textbf{Definition:} Eine Stelle $x_0$ heisst \textbf{kritische Stelle} von $f$, falls:
+$$f'(x_0) = 0$$
+
+Der zugehörige Punkt $(x_0, f(x_0))$ heisst \textbf{kritischer Punkt}.
+
+\textbf{Arten von kritischen Punkten:}
+\begin{itemize}
+	\item \textbf{Relatives (lokales) Minimum}
+	\item \textbf{Relatives (lokales) Maximum}
+	\item \textbf{Sattelpunkt} (Wendepunkt mit horizontaler Tangente)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Vorgehen: Kritische Punkte finden}
+	\begin{enumerate}
+		\item Erste Ableitung $f'(x)$ berechnen
+		\item Gleichung $f'(x) = 0$ lösen $\Rightarrow$ kritische Stellen $x_0$
+		\item Funktionswerte $f(x_0)$ berechnen $\Rightarrow$ kritische Punkte $(x_0, f(x_0))$
+	\end{enumerate}
+\end{subbox}
+
+\subsection{Zweite Ableitung und Krümmungsverhalten}
+
+\begin{mainbox}{Krümmung und zweite Ableitung}
+Die zweite Ableitung $f''(x)$ gibt Auskunft über das Krümmungsverhalten:
+
+\begin{itemize}
+	\item $f''(x) > 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{linksgekrümmt} (konvex) auf $I$
+	\item $f''(x) < 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{rechtsgekrümmt} (konkav) auf $I$
 \end{itemize}
 
-Sei $(a_n)_{n \geq 1}$, $(b_n)_{n \geq 1}$ konvergente Folgen. mit \\$\limn a_n = a, \limn b_n = b$ dann gilt:
+\textbf{Anschauung:}
 \begin{itemize}
-  \item $(a_n \pm b_n)_{n \geq 1}$ konvergent, $\limn (a_n \pm b_n) = a \pm b$
-  \item $(a_n \cdot b_n)_{n \geq 1}$ konvergent, $\limn (a_n \cdot b_n) = a \cdot b$
-  \item $(a_n \div  b_n)_{n \geq 1}$ konvergent, $\limn (a_n \div b_n) = a \div b$ ($b_n \neq 0, \forall n \in \N, b \neq 0$)
-  \item Falls $\exists K \geq 1$ mit $a_n \leq b_n ~ \forall n \geq K$ folgt $a \leq b$
+	\item Linksgekrümmt: Graph liegt oberhalb seiner Tangenten (``Tal''-Form)
+	\item Rechtsgekrümmt: Graph liegt unterhalb seiner Tangenten (``Berg''-Form)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Wendepunkte}
+Ein \textbf{Wendepunkt} liegt vor, wenn sich das Krümmungsverhalten ändert.
+
+\textbf{Notwendige Bedingung:} $f''(x_0) = 0$
+
+\textbf{Hinreichende Bedingung:} $f''(x_0) = 0$ und $f'''(x_0) \neq 0$
+
+Alternativ: Vorzeichenwechsel von $f''(x)$ bei $x_0$
+\end{subbox}
+
+\subsection{Lokale Extrema}
+
+\begin{mainbox}{Kriterien für lokale Extrema}
+Sei $x_0$ eine kritische Stelle, d.h.\ $f'(x_0) = 0$.
+
+\textbf{Kriterium mit zweiter Ableitung:}
+\begin{itemize}
+	\item $f'(x_0) = 0$ und $f''(x_0) > 0$ $\Rightarrow$ \textbf{relatives Minimum} bei $x_0$
+	\item $f'(x_0) = 0$ und $f''(x_0) < 0$ $\Rightarrow$ \textbf{relatives Maximum} bei $x_0$
+	\item $f'(x_0) = 0$ und $f''(x_0) = 0$ $\Rightarrow$ \textbf{keine Aussage möglich}
 \end{itemize}
 
-\begin{subbox}{Limes superior \& inferior}
-  \vspace{-4pt}
-$\limn \inf x_n = \limn \left( \inf_{m \ge n} x_m \right)$ \\
-$\limn \sup x_n = \limn \left( \sup_{m \ge n} x_m \right)$
-  \vspace{-12pt}
+\textbf{Bei $f''(x_0) = 0$:} Vorzeichenwechsel von $f'(x)$ prüfen oder höhere Ableitungen betrachten.
+\end{mainbox}
+
+\begin{mainbox}{Vorzeichenwechsel-Kriterium}
+Sei $x_0$ eine kritische Stelle ($f'(x_0) = 0$).
+
+\begin{itemize}
+	\item $f'(x)$ wechselt von $+$ nach $-$ bei $x_0$ $\Rightarrow$ \textbf{relatives Maximum}
+	\item $f'(x)$ wechselt von $-$ nach $+$ bei $x_0$ $\Rightarrow$ \textbf{relatives Minimum}
+	\item $f'(x)$ wechselt das Vorzeichen nicht $\Rightarrow$ \textbf{Sattelpunkt}
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Kurvendiskussion}
+	$f(x) = x^3 - 3x$
+
+	\textbf{1. Ableitungen:}
+	$f'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x-1)(x+1)$
+
+	$f''(x) = 6x$
+
+	\textbf{2. Kritische Stellen:} $f'(x) = 0 \Rightarrow x_1 = -1, x_2 = 1$
+
+	\textbf{3. Klassifikation:}
+	\begin{itemize}
+		\item $f''(-1) = -6 < 0 \Rightarrow$ Maximum bei $x = -1$
+		\item $f''(1) = 6 > 0 \Rightarrow$ Minimum bei $x = 1$
+	\end{itemize}
+
+	\textbf{4. Extremwerte:} $f(-1) = 2$ (Max), $f(1) = -2$ (Min)
 \end{subbox}
 
-\begin{mainbox}{Einschliessungskriterium \\ (Sandwich-Theorem)}
-  \vspace{-4pt}
-Wenn $\limn a_n = \alpha, \ \limn b_n = \alpha$ und $a_n \le c_n \le b_n, \forall n \ge k$, dann $\limn c_n = \alpha$.
-  \vspace{-4pt}
-\end{mainbox}
-
-\begin{mainbox}{Weierstrass}
-Wenn $a_n$ monoton wachsend und nach oben beschränkt ist, dann konvergiert $a_n$ mit Grenzwert $\limn a_n = \sup \{a_n : \ n \ge 1\}$.
-
-Wenn $a_n$ monoton fallend und nach unten beschränkt ist, dann konvergiert $a_n$ mit Grenzwert $\limn a_n = \inf \{a_n : \ n \ge 1\}$.
-\end{mainbox}
-
-\textbf{Tipp:} umschreiben $f(x)^{g(x)} = e^{g(x) \cdot \ln \left( f(x) \right)}$ und Grenzwert im Exponent berechnen (l'Hopital).
-\begin{subbox}{	Berechne $\lim_{x \to 0^+} x^{\sin(x)}$.}
-  \vspace{-6pt}
-		$\lim_{x \to 0^+} x^{\sin(x)} = \lim_{x \to 0^+} e^{ \ln \left( x^{\sin(x)} \right)}
-    = \lim_{x \to 0^+} e^{\sin (x) \ln (x)}$
-	\\$e^x$ ist stetig $\Rightarrow$ Limes in Exponent.
-	$
-		\lim_{x \to 0^+} \sin(x) \ln(x) = \lim_{x \to 0^+} \frac{\ln(x)}{\frac{1}{\sin(x)}}
-		\\\overset{\text{H}}{=} \lim_{x \to 0^+} \frac{\frac{1}{x}}{\frac{-\cos (x)}{\sin^2 (x)}} = \lim_{x \to0^+} \frac{- \sin^2 (x)}{x \cos (x)}\\
-						= \lim_{x \to 0^+} \frac{- \sin x}{x} \cdot \frac{\overset{\to 0}{\sin x}}{\underset{\to 1}{\cos x}} = 0
-	$
-	\\Daraus folgt: $\lim_{x \to 0^+} e^{\sin (x) \ln (x)} = e^0 = 1$
-  \vspace{-4pt}
-\end{subbox}
-
-\begin{mainbox}{Bernoulli Ungleichung}
-  \vspace{-4pt}
-  $(1 + x)^n \geq 1 + n \cdot x \qquad \forall n \in \N, x > -1$
-  \vspace{-4pt}
-\end{mainbox}
-
-\begin{mainbox}{Cauchy-Kriterium}
-  \vspace{-4pt}
-Die Folge $a_n$ ist genau dann konvergent, falls \\ $\forall \varepsilon > 0, \ \exists N \ge 1$ so dass $\forall n,m \ge N: \\ | a_n - a_m | < \varepsilon$.
-  \vspace{-4pt}
-\end{mainbox}
-
-\subsubsection{Teilfolge}
-Eine Teilfolge von $a_n$ ist eine Folge $b_n$ wobei $b_n = a_{l(n)}$.
-\\ $l$ ist eine Funktion mit $l(n) < l(n+1) \quad \forall n \ge 1$ (z.B. $l = 2n$ für jedes gerade Folgenglied).
-
-\begin{subbox}{Bolzano-Weierstrass}
-Jede beschränkte Folge besitzt eine konvergente Teilfolge.
-\end{subbox}
- \textbf{Wenn 2 Teilfolgen nicht den gleichen Grenzwert haben, impliziert das Divergenz.}
-
-\subsection{Strategie - Konvergenz von Folgen}
+\begin{mainbox}{Schema: Vollständige Kurvendiskussion}
 \begin{enumerate}
- \item Bei Brüchen: Grösste Potenz von $n$ kürzen. Alle Brüche der Form $\frac{a}{n^a}$ streichen, da diese nach 0 gehen.
- \item Bei Wurzeln in Summe im Nenner: Multiplizieren des Nenners und Zählers mit der Differenz der Summe im Nenner. (z.B. $(a+b)$ mit $(a-b)$ multiplizieren)
- \item Bei rekursiven Folgen: Anwendung von Weierstrass zur monotonen Konvergenz
- \item Einschliessungskriterium (Sandwich-Theorem) anwenden.
- \item Mit bekannter Folge vergleichen.
- \item Grenzwert durch einfaches Umformen ermitteln.
- \item Limit per Definition der Konvergenz zeigen.
- \item Anwendung des Cauchy-Kriteriums.
- \item Suchen eines konvergenten Majoranten.
- \item Weinen und die Aufgabe überspringen;)
+	\item \textbf{Definitionsbereich} bestimmen
+	\item \textbf{Symmetrie} prüfen (gerade/ungerade Funktion)
+	\item \textbf{Nullstellen:} $f(x) = 0$ lösen
+	\item \textbf{Erste Ableitung} $f'(x)$ berechnen
+	\item \textbf{Kritische Stellen:} $f'(x) = 0$ lösen
+	\item \textbf{Zweite Ableitung} $f''(x)$ berechnen
+	\item \textbf{Art der Extrema} bestimmen (mit $f''$ oder Vorzeichenwechsel)
+	\item \textbf{Wendepunkte:} $f''(x) = 0$ lösen, Vorzeichenwechsel prüfen
+	\item \textbf{Verhalten für} $x \to \pm\infty$
+	\item \textbf{Graph skizzieren}
 \end{enumerate}
-
-\subsection{Strategie - Divergenz von Folgen}
-\begin{enumerate}
- \item Suchen einer divergenten Vergleichsfolge.
- \item Alternierende Folgen: Zeige, dass Teilfolgen nicht gleich werden, also $\limn a_{p_1(n)} \ne \limn a_{p_2(n)}$ (mit z.B. gerade/ungerade als Teilfolgen).
-\end{enumerate}
-
-\subsection{Tricks für Grenzwerte}
-\subsubsection{Binome}
-$$\lim_{x\to\infty} (\sqrt{x + 4} - \sqrt{x - 2}) = \lim_{x\to\infty} \frac{(x+4)-(x-2)}{\sqrt{x+4}+\sqrt{x-2}}$$
-
-\subsubsection{Substitution}
-$$\lim_{x\to\infty} x^2 \left(1-\cos\left(\frac{1}{x}\right)\right)$$
-Substituiere nun $u = \frac{1}{x}$:
-$$\lim_{u \to 0} \frac{1 - \cos(u)}{u^2} = \lim_{u \to 0} \frac{\sin(u)}{2u} = \lim_{u\to 0} \frac{\cos(u)}{2} = \frac{1}{2}$$
-
-\subsection{Grenzwerte von Funktionen}
-\begin{subbox}{Häufungspunkt}
-  \vspace{-4pt}
- $x_0 \in \R$ ist ein Häufungspunkt der Menge D falls $\forall \delta > 0: (]x_0 - \delta, x_0 + \delta[ \backslash \{x_0\}) \cap D \ne \varnothing$.
- \vspace{-8pt}
-\end{subbox}
-
-\begin{mainbox}{Grenzwert - Funktionen}
-  \vspace{-4pt}
- Wenn $f: D \to \R, x_0 \in \R$ ein Häufungspunkt von $D$ ist, dann ist $A \in \R$ der Grenzwert von $f(x)$ für $x \to x_0$ ($\lim_{x\to x_0} f(x) = A$), falls $\forall \varepsilon > 0 \ \exists \delta > 0$, so dass $\forall x \in D \cap (]x_0 - \delta, x_0 + \delta[ \backslash \{x_0\}): |f(x) - A| < \varepsilon$.
- \vspace{-4pt}
 \end{mainbox}
-Eine Funktion $f$ ist in $x_0$ stetig $\iff$ $\lim_{x \to x_0} f(x)$ existiert und gleich $f(x_0)$.
-\\ \\
-Die Stetigkeit einer abschnittweise definierten Funktion hängt auch vom Verhalten(links-/rechtsseitiger Grenzwert) an den Grenzen von Abschnittsintervallen ab.
-
-\begin{subbox}{Satz von L'Hôpital}
-  \vspace{-4pt}
-  Seien $f,g$ stetig und differenzierbar auf $]a,b[$. Wenn $\lim_{x\to c} f(x) = \lim_{x \to c} g(x) = 0$ oder $\pm \infty$ und $g'(x) \ne 0 \ \forall x \in I \backslash \{c\}$, dann gilt $$\lim_{x\to c} \frac{f(x)}{g(x)} = \lim_{x\to c}\frac{f'(x)}{g'(x)}$$
-  \vspace{-12pt}
-\end{subbox}
-
-Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e^{g(x)\cdot \ln(f(x))}$ und dann Bernoulli (nur Exponenten betrachten da $e$ stetig) anwenden oder vereinfachen berechnet werden.
-
-\begin{mainbox}{Wichtige Werte}
-\begin{center}
- \begin{tabular}{c|cccccc}
-  deg & 0° & 30° & 45° & 60° & 90° & 180° \\
-  \midrule
-  rad & 0 & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$ & $\pi$ \\
-  cos & 1 & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & 0 & -1 \\
-  sin & 0 & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & 1 & 0 \\
-  tan & 0 & $\frac{1}{\sqrt{3}}$ & 1 & $\sqrt{3}$ & $+\infty$ & 0 \\
- \end{tabular}
-\end{center}
-\end{mainbox}
-
-\begin{center}
-% \includegraphics[width=\linewidth]{degrees_circle.pdf}
-% Note: degrees_circle.pdf image file is required here
-\end{center}
 
 \section{Tabellen}
 \subsection{Grenzwerte}
@@ -533,6 +518,7 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
     \bottomrule
   \end{tabularx}
 \end{center}
+
 \subsection{Ableitungen}
 \begin{center}
   % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
@@ -561,6 +547,7 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
   \bottomrule
   \end{tabularx}
 \end{center}
+
 \subsection{Weitere Ableitungen}
 \begin{center}
   \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
@@ -574,6 +561,7 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
   \bottomrule
   \end{tabularx}
 \end{center}
+
 \subsection{Integrale}
 \begin{center}
  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
@@ -607,235 +595,45 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
   $$2I = \int_a^b1dx = b-a \implies I = \frac{b-a}{2}$$
 \end{mainbox}
 
+\subsection{Wichtige Werte}
+\begin{mainbox}{Trigonometrische Werte}
+\begin{center}
+ \begin{tabular}{c|cccccc}
+  deg & 0° & 30° & 45° & 60° & 90° & 180° \\
+  \midrule
+  rad & 0 & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$ & $\pi$ \\
+  cos & 1 & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & 0 & -1 \\
+  sin & 0 & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & 1 & 0 \\
+  tan & 0 & $\frac{1}{\sqrt{3}}$ & 1 & $\sqrt{3}$ & $+\infty$ & 0 \\
+ \end{tabular}
+\end{center}
+\end{mainbox}
+
 \subsection{Diverses}
 \begin{itemize}
-    \item $e=2,718$
-    \item $ln(0)=1$
+    \item $e \approx 2{,}718$
+    \item $\ln(1) = 0$
+    \item $\ln(e) = 1$
 \end{itemize}
+
 \section{Aufgaben}
-\subsection{Multiple-Choice}%
-\subsubsection{Generelle Tipps}
-
-\begin{itemize}
-	\item \textbf{Richtig lesen!!!}
-	\item (Gegen-)Beispiele suchen.
-	\item Monotonieverhalten bei verketteten/miteinander verechneten Funktionen bleibt nicht umbedingt erhalten.
-    \begin{itemize}
-      \item Sei $g: X \to Y$ streng monoton wachsend
-      \begin{itemize}
-        \item $f: Y \to Z$ (streng) monoton wachsend $\implies$ $f(g(x))$ (streng) monoton wachsend.
-        \item $f: Y \to Z$ (streng) monoton fallend $\implies$ $f(g(x))$ (streng) monoton fallend.
-      \end{itemize}
-      \item Sei $g: X \to Y$ monoton wachsend
-      \begin{itemize}
-        \item $f: Y \to Z$ (streng) monoton wachsend $\implies$ $f(g(x))$ monoton wachsend.
-        \item $f: Y \to Z$ (streng) monoton fallend $\implies$ $f(g(x))$ monoton fallend.
-      \end{itemize}
-      \item Die Inverse einer monoton wachsenden Funktion ist monoton wachsend.(Beweis mit Umkehrregel)
-      \item Die Multiplikation oder Division zweier monotonen Funktionen können monoton wachsend/fallend bleiben oder ihre Monotonie verlieren.
-      \item Monoton wachsende Funktion konvex(konkav) $\implies$ Inverse konkav(konvex).
-      \item Monoton fallende Funktion konvex(konkav) $\implies$ Inverse konvex(konkav).
-    \end{itemize}
-	\item Verkettete Funktionen:
-		\begin{itemize}
-			\item Falls äussere beschränkt $\implies$ Verkettung beschränkt.
-			\item Verkettung stetiger Funktionen ist stetig.
-			\item Verkettung (streng) konvexer Funktionen, muss nicht konvex sein.
-		\end{itemize}
-	\item Schauen ob Funktionsfolge $f_n$ \underline{gleichmässig} und nicht nur punktweise gegen $f$ konvergiert.
-		$ \implies$ Gewisse Eigenschaften (Stetigkeit) nur dann gültig.
-	\item $f''(x_0) = 0 \centernot \implies x_0$ ist ein Sattelpunkt von $f$.
-	\item $f$ stetig $\centernot \implies f'$ stetig.
-	\item Sei $f : \R \to \R$ eine ungerade Funktion. $\implies$ $f^{(i)} (0) = 0$ für $i$ gerade.
-	\item $X,Y,Z \subset \R$, $f: X \to Y$ und $g: Y \to Z$, sodass $g \circ f : X \to Z$ bijektiv.
-		$\implies$ $f$ injektiv, $g$ surjektiv
-	\item Sei $a,b \in \R$ mit $a < b$ mit $f: ]a,b[ \to \R$. Falls $f^2$ und $f^3$ in $]a,b[$
-		differenzierbar und $f(x) \neq 0~\forall x \in ]a,b[$ $ \implies$ $f$ in $]a,b[$ differenzierbar. (Da wir $f^3$ durch $f^2$ teilen).
-	\item Im Allg. muss eine Grenzfunktion $f$ nicht differenzierbar sein, und wenn sie es ist muss $f'$ nicht gleich $\limn f_n'$ sein.
-
-	\item $f: (0,1] \to \R$ monoton $\centernot \implies f$ beschränkt.
-	\\ Der Logarithmus $\ln: (0,1] \to \R$ ist monoton, aber nicht beschränkt.
-  \item $f: [a, b] \to \R$ für beliebige $a, b \in \R, a < b$ ist beschränkt.
-  \item $f(x) = |x| \cdot \text{sign}(x)$ ist stetig, da $|x| \cdot \text{sign}(x) = x$ und $g(x)=x$ stetig.
-\end{itemize}
-
-\subsubsection{Gegenbeispiele}
-
-    \paragraph{Reelle Zahlen}
-    \begin{itemize}
-        \item Die rationalen Zahlen $\mathbb{Q}$ sind kein vollständiger Körper.
-        \item Die komplexen Zahlen $\mathbb{C}$ sind kein angeordneter Körper.
-        \item Die reellen Zahlen $\mathbb{R}$ sind ein vollständig angeordneter Körper.
-        \item Eine Menge, die kein Maximum besitzt: $A = \lbrace{x \in \mathbb{Q}  \vert x \le \sqrt{5}}\rbrace$
-    \end{itemize}
-    \paragraph{Folgen}
-    \begin{itemize}
-        \item Seien $a_{n} = \frac{1}{n^2}$ und $b_{n} = \frac{1}{n}$. Dann gilt $a_{n} \le b_{n}, \forall n \in \mathbb{N}$, aber für die Grenzwerte $lim_{n \to +\infty} a_{n} = a$ und $lim_{n \to +\infty} b_{n} = b$ gilt $a \le b$, da $a=b=0$.
-        \item Die Folge $(-1)^n$ ist beschränkt, aber nicht konvergent, insbesondere weil $\liminf_{n\to \infty}{b_{n}} = -1$ ungleich $\limsup_{n \to \infty}{b_{n}} = 1$ ist.
-        \item Sei $b_{n} = (-1)^n$. Dann ist $b_{n}^2$ konvergent, $b_{n}$ aber nicht.
-        \item Die Folge $1,2,2,2+\frac{1}{2},3,3+\frac{1}{3},3+\frac{2}{3},4,4,4+\frac{1}{4},4+\frac{2}{4},4+\frac{3}{4},5...$ erfüllt das Cauchy-Kriterium für Folgen nicht, da nur $\vert a_{n}-a_{n+1}\vert < \epsilon$ für $n \ge N$.
-    \end{itemize}
-    \paragraph{Reihen}
-    \begin{itemize}
-        \item Eine Reihe die konvergiert aber nicht absolut: $\displaystyle\sum_{n=1}^{\infty} (-1)^n \frac{1}{n}$ (alternierende harmonische Reihe)
-        \item Die harmonische Reihe $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$ divergiert, aber $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^p}$ konvergiert für $p>1$.
-    \end{itemize}
-    \paragraph{Stetigkeit und Funktionenfolgen}
-    \begin{itemize}
-        \item Eine Stufenfunktion, wie bspw.
-        \[f(x)= \begin{cases}
-                1 &\text{für } x \ge 0 \\
-                0 &\text{für } x < 0
-                \end{cases}\]
-        ist unstetig im Punkt $0$.
-        \item Die Funktion
-        \[f(x)= \begin{cases}
-                sin(\frac{1}{x}) &\text{für } x \in \mathbb(R) \\
-                0 &\text{für } x=0
-                \end{cases}\]
-        ist unstetig in $0$.
-        \item Die Funktionenfolge $f_{n} = x^n$ auf $[0,1]$ konvergiert punktweise gegen
-        \[f(x)= \begin{cases}
-                0 &\text{für } x \in ]0,1[ \\
-                1 &\text{für } x=1
-                \end{cases}\]
-        aber die Konvergenz ist nicht gleichmässig gegen $1$ bei $x=1$.
-        \item Die Funktion $f(x)x^2$ ist stetig, aber nicht gleichmässig stetig.
-    \end{itemize}
-    \paragraph{Differentialrechnung}
-    \begin{itemize}
-        \item Die Funktion $f(x)=\vert x-a \vert$ für ein $a \in \mathbb(R)$ ist nicht differenzierbar im Punkt $x=a$.
-        \item Die Weierstrass-Funktion ist überall stetig, aber nirgends differenzierbar auf $\mathbb{R}$.
-        \item Sei $f(x)=x^3$. Dann gilt $f'(0) = 3*0^2$, aber $f$ hat in $0$ kein lokales Extremum.
-        \item Sei $f(x)=x^3$, also ist f streng monoton fallend. Aber es gilt $f'(x) = 3x^2 \ge 0$ für alle $x \in \mathbb{R}$ und nicht $f'(x) > 0$.
-        \item Unstetige Ableitung: Sei
-        \[f(x)= \begin{cases}
-                x^2 sin(\frac{1}{x}) &\text{für } x \ne 0 \\
-                0 &\text{für } x = 0
-                \end{cases}\]
-        Dann hat $f$ in $0$ eine Ableitung die unstetig ist.
-        \item Sei $f(x) = \frac{2}{x} + cos(\frac{1}{x})$ und $g(x) = \frac{1}{x}$. Dann existiert $\lim_{x \to 0}{\frac{f(x)}{g(x)}}$, aber $\lim_{x \to 0}{\frac{f'(x)}{g'(x)}}$ nicht.
-    \end{itemize}
-    \paragraph{Integralrechnung}
-    \begin{itemize}
-        \item Die Dirichletfunktion
-        \[f(x)= \begin{cases}
-                1 &\text{für } x \in \mathbb{Q} \\
-                0 &\text{für } x \in \mathbb{R} \backslash \mathbb{Q}
-                \end{cases}\]
-        ist nicht stetig aber trotzdem Riemann-integrierbar.
-        \item Die Dirac-$\delta$ Funktion ist nicht Riemann-integrierbar.
-        \item Das Integral $\int_{1}^{\infty}{\frac{1}{x}dx}$ existiert nicht, aber für $a > 1$ exisitiert $\int_{1}^{\infty}{\frac{1}{x^a}dx}$.
-    \end{itemize}
-\subsection{Trigonometrie}
-    Manipulation für $f(x) = \sin(\arctan (x))$ (funktioniert ähnlich für $\cos(\arctan (x))$):
-
-    \begin{align*}
-      f(x) &=\frac{\sin(\arctan(x))}{\sqrt{\sin^2(\arctan(x))+\cos^2(\arctan(x))}}\\
-      &=\frac{\frac{\sin(\arctan(x))}{\cos(\arctan(x))}}{\sqrt{\frac{\sin^2(\arctan(x))}{\cos^2(\arctan(x))}+1}}\\
-      &=\frac{\tan(\arctan(x))}{\sqrt{\tan^2(\arctan(x))+1}}\\
-      &=\frac{x}{\sqrt{x^2+1}}
-    \end{align*}
-
-    Manipulation für $f(x) = \tan(\arcsin (x))$:
-    \begin{align*}
-      f(x)&=\tan(\arcsin (x))\\
-      &=\frac{\sin(\arcsin(x))}{\cos(\arcsin(x))}\\
-      &=\frac{\sin(\arcsin(x))}{\sqrt{1-\sin^2(\arcsin(x))}}\\
-      &=\frac{x}{\sqrt{1-x^2}}.
-      \end{align*}
-
-\subsection{Konvergenzbeweise}
-\subsubsection{Folgen}
-    Beweise: $lim_{n \to \infty}\frac{n^2}{n^2 +1}=1$\\
-    Wähle: $\epsilon = 10^{-5}$. Finde ein $N \in \mathbb{N}$, sodass $\forall n \ge N$ gilt:
-    \[\lvert a_n - a\rvert=\lvert\frac{n^2}{n^2 +1}-1\rvert <\epsilon\]
-    Forme um:
-    \[\lvert \frac{n^2}{n^2 +1}-1\rvert = \lvert \frac{n^2 -n^2 -1}{n^2 +1}\rvert = \frac{1}{n^2 +1}<\epsilon\]
-    \[\implies n^2 +1 > \frac{1}{\epsilon} \implies n>\sqrt{\frac{1}{\epsilon}-1}\]
-    Die Bedingung $\lvert a_n -a\rvert <\epsilon$ impliziert somit $n>\sqrt{\frac{1}{\epsilon}-1}$. Damit eine natürliche Zahl entstehen kann, wählen wir $N \coloneqq [\sqrt{\frac{1}{\epsilon}-1}]$. Für alle $n\ge N$ gilt somit nach Konstruktion:
-    \[\lvert \frac{n^2}{n^2 +1}-1\rvert <\epsilon\]
-    Dies entspricht genau der anfänglichen Definition von $lim_{n \to \infty}\frac{n^2}{n^2 +1}=1$.
-\vspace{0.1 cm}
-\hrule
-\vspace{0.2 cm}
-    Man untersuche die nachstehenden Zahlenfolge. Konvergieret sie? Wenn ja: Welches ist ihr Grenzwert?
-    \[lim_{n\to +\infty}\frac{2n^3+n^2+1}{5(n^3)!+2}\]
-    Sei $\epsilon >0$. Es gilt:
-    \[0<\frac{2}{5(n^3)!+2} <\frac{2n^3+n^2-1}{5(n^3)!+2}\]
-    \[\le \frac{3n^3}{5(n^3)!+2}<\frac{3n^3}{3(n^3)!}=\frac{n^3}{(n^3)!}<\epsilon\]
-    wenn $n>N$ ist. Die Folge konvergiert gegen 0.
-\subsubsection{Reihen}
-    Zeige, dass der Konvergenzradius der Reihe
-    \[\sum_{n=0}^{+\infty} \frac{(n!)^2}{(2n)!}z^n\]
-    gleich $4$ ist.
-    Sei $x_n \coloneqq \frac{(n!)^2 z^n}{(2n)!}$. Die Reihe konvergiert trivialerweise, wenn $z=0$ ist. Nehmen wir an, dass $z\ne 0$ ist. Wir brechnen den folgenden Limes:
-    \[lim_{n\to +\infty} \frac{\lvert x_{n+1}\rvert}{\lvert x_n\rvert}\]
-    \[= lim_{n\to +\infty}\frac{((n+1)!)^2}{(2(n+1))!}\lvert z\rvert ^{n+1}\frac{(2n)!}{\lvert z\rvert ^n (n!)^2}\]
-    \[lim_{n\to +\infty}\frac{(n!)^2(n+1)^2}{(2n)!(2n+1)(2n+2)}\frac{(2n)!}{(n!)^2}\lvert z\rvert\]
-    \[=\lvert z\rvert lim_{n\to +\infty}\frac{(n+1)^2}{(2n+1)(2n+2)}\]
-    \[\lvert z\rvert lim_{n\to +\infty}(\frac{1}{4}+\frac{1}{4(2n+1)}) =\frac{\lvert z\rvert}{4}\]
-    Aus dem Quotientenkriterium können wir folgern, dass die Reihe absolut konvergent ist falls
-    \[limsup_{n\to \infty}\frac{\lvert x_{n+1}\rvert}{\lvert x_n\rvert}\]
-    \[=lim_{n\to +\infty}\frac{\lvert x_{n+1}\rvert}{x_n}=\frac{\lvert z\rvert}{4}<1\]
-    wobei $\lvert z\rvert <4$. Die Reihe ist divergent, falls
-    \[limsup_{n\to \infty}\frac{\lvert x_{n+1}\rvert}{\lvert x_n\rvert}\]
-    \[=lim_{n\to +\infty}\frac{\lvert x_{n+1}\rvert}{x_n}=\frac{\lvert z\rvert}{4}>1\]
-    wobei $\lvert z\rvert >4$. Somit haben wir gezeigt, dass der Konvergenzradius der Reihe gleich 4 ist.
-
-\subsubsection{Funktionen}
-    Beweise, dass folgende Gleichung gilt:
-    \[lim_{n\to +\infty}(\sqrt{n}-\sqrt{n+1})=0\]
-    Es gilt: $\sqrt{n}-\sqrt{n+1}=(\sqrt{n}-\sqrt{n+1})\frac{\sqrt{n}+\sqrt{n+1}}{\sqrt{n}+\sqrt{n+1}}$
-    \[=\frac{n-(n+1)}{\sqrt{n}+\sqrt{n+1}}=-\frac{1}{\sqrt{n}+\sqrt{n+1}}\]
-    \[\implies \lvert \sqrt{n}-\sqrt{n+1}\rvert =\frac{1}{\sqrt{n}+\sqrt{n+1}}\le \frac{1}{2\sqrt{n}}\]
-    Sei $\epsilon >0$. Dann:
-    \[\frac{1}{2\sqrt{n}}<\epsilon \iff \frac{1}{2\epsilon}<\sqrt{n}\iff \frac{1}{4{\epsilon}^2}<n\]
-    Wir haben gezeigt, dass für alle $\epsilon >0$ die Ungleichung
-    \[\lvert \sqrt{n}-\sqrt{n+1}\rvert <\epsilon\]
-    gilt, falls $n>N \coloneqq (4{\epsilon}^2)^{-1}$
-
-\subsection{Grenzwertberechnungen}
-    \[lim_{x\to 6}\frac{sin(\pi x)}{x^2 -36}\]
-    Benutze den Satz von L'Hôpital:
-    \[sin(\pi x)' = \pi cos(\pi x); (x^2 -36)' = 2x\]
-    \[\implies lim_{x \to 6}\frac{sin(\pi x)}{x^2 -36}=lim_{x \to 6}\pi \frac{cos(\pi x)}{2x}\]
-    Ausserdem gilt: $cos(6\pi)=1$ und $2\cdot 6 = 12$
-    \[\implies lim_{x\to 6}\pi \frac{cos(\pi x)}{2x} = \pi \frac{1}{12} = \frac{\pi}{12}\]
-\vspace{0.1 cm}
-\hrule
-\vspace{0.2 cm}
-    Bestimme: $lim_{n\to \infty} \sqrt{n^4+7n^2}-n^2$
-    \[=lim_{n\to \infty} \frac{(\sqrt{n^4+7n^2}-n^2)\cdot (\sqrt{n^4+7n^2}-n^2)}{\sqrt{n^4+7n^2}-n^2}\]
-    \[=lim_{n\to \infty} \frac{(n^4+7n^2)-n^4}{\sqrt{n^4(1+\frac{7}{n^2})}+n^2}\]
-    \[=lim_{n\to \infty} \frac{7n^2}{n^2\sqrt{1+\frac{7}{n^2}}+n^2}\]
-    \[=lim_{n\to \infty} \frac{7}{\underbrace{\sqrt{1+\frac{7}{n^2}}}_{\to 1}+1} = \frac{7}{2}\]
-\vspace{0.1 cm}
-\hrule
-\vspace{0.2 cm}
-    Bestimme: $lim_{x\to 6}\frac{sin(\pi x)}{x^2-36}$\\
-    Da das Limit gegen 0 läuft, ist die Verwendung der Regel von L'Hôpital angezeigt:
-    \[sin(\pi x)'=\pi cos(\pi x)\textit{; }(x^2-36)'=2x\]
-    \[lim_{x\to 6}\frac{sin(\pi x)}{x^2 -36}=lim_{x\to 6}\frac{cos(\pi x)}{2x}\]
-    Ausserdem wissen wir: $cos(6\pi)=1$ und $2\cdot 6=12$. Daraus folgt:
-    \[lim_{x\to 6}\pi \frac{cos(\pi x)}{2x}=\pi \frac{1}{12}=\frac{\pi}{12}\]
 \subsection{Differentialrechnungen}
 \subsubsection{Produktregel}
     \[f(x)=xe^x\]
     \[f'(x)=e^x+xe^x=(x+1)e^x\]
 \subsubsection{Quotientenregel}
-    \[f(x)=(\frac{e^x}{x+1})\]
+    \[f(x)=\left(\frac{e^x}{x+1}\right)\]
     \[f'(x)=\frac{(1+x)\frac{d}{dx}(e^x)-e^x\frac{d}{dx}(x+1)}{(x+1)^2}\]
     \[=\frac{(1+x)e^x -e^x}{(1+x)^2} = \frac{xe^x}{(1+x)^2}\]
 \subsubsection{Kettenregel}
-    \[f(x) = exp(x+exp(x))\]
-    \[f'(x) = exp(x+exp(x))*(1+exp(x))\]
-    \[= exp(x+exp(x))+exp(2x+exp(x))\]
+    \[f(x) = \exp(x+\exp(x))\]
+    \[f'(x) = \exp(x+\exp(x))\cdot(1+\exp(x))\]
+    \[= \exp(x+\exp(x))+\exp(2x+\exp(x))\]
 \subsubsection{Umkehrregel}
-    \[f(x)=log(x)\]
-    \[y=e^x\implies x=log(y)\]
-    \[y'=e^x\implies x'=\frac{1}{y'}=\frac{1}{e^x}=\frac{1}{e^{log(y)}}=\frac{1}{y}\]
-    Somit ist $log(x)'=\frac{1}{x}$
+    \[f(x)=\log(x)\]
+    \[y=e^x\implies x=\log(y)\]
+    \[y'=e^x\implies x'=\frac{1}{y'}=\frac{1}{e^x}=\frac{1}{e^{\log(y)}}=\frac{1}{y}\]
+    Somit ist $\log(x)'=\frac{1}{x}$
 \subsubsection{Taylor-Polynome}
     Bestimmen Sie mit Hilfe des linearen Taylorpolynoms um $t_0 = 8$ eine Näherung
     an $\sqrt[3]{7}$.
@@ -849,31 +647,17 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
     für ein $\xi \in [7, 8]$.
     Da $f''(t) =-\frac{2}{9} t^{-\frac{5}{3}}$ gilt:
     $$|\text{Fehler}| \leq \frac{1}{2} \sup_{\xi \in [7, 8]} |f''(\xi)| = \frac{1}{2}\cdot \frac{2}{9} \cdot \frac{1}{7^{5/3}} = \frac{1}{9 \cdot 7^{5/3}}.$$
-\vspace{0.1 cm}
-\hrule
-\vspace{0.2 cm}
-    Betrachte die Funktion $f: (0,+\infty)\to \mathbb{R}$ definiert durch:
-    \[f(x)= \int_x^2 \frac{e^{t^2}}{t}dt + log(\frac{x}{2})\]
-    (a) Berechne die Ableitung von $f$ und zeige, dass $f$ umkehrbar ist:\\
-    \[f'(x) = \frac{1}{x}(1-e^{x^2})\]
-    Für alle $x\in(0,+\infty)$ haben wir $e^{x^2} > 1$ und daher auch $\frac{1}{x}(1-e^{x^2}) < 0$ für alle $x \in (0,+\infty)$. Nun folgt aus dem Umkehrsatz, dass $f$ umkehrbar, und $f^{-1}$ differenzierbar ist.\\
-    (b) Berechne $f(2)$ und bestimme das Taylor-Polynom 1. Ordnung von $f^{-1}$ an der Stelle $x_0 = 0$:\\
-    \[f(2) = \int_2^2...+log(1) = 0\]
-    Das Taylor-Polynom berechnet sich folgendermassen:
-    \[f_{\textit{Taylor}}^{-1}(x) = f^{-1}(0)+(f^{-1})'(0)(x-0)\]
-    Aus Teil (a) wissen wir, $f^{-1}(0) = 2$. Aufgrund von Korollar 4.1.12 wissen wir $(f^{-1})'(y_0) = \frac{1}{f'(x_0)}$.\\
-    Daraus folgt: $(f^{-1})'(0) = \frac{1}{f'(2)} = \frac{2}{1-e^4}$.\\
-    Nun erhalten wir: $f_{\textit{Taylor}}^{-1} = 2+\frac{2}{1-e^4}x$
+
 \subsection{Integralrechnungen}
     Sonderfall: Ungerade Funktionen, bspw.
-    \[\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}(sin(x))^7 cos(x)dx\]
+    \[\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}(\sin(x))^7 \cos(x)dx\]
     Diese Integrale sind stets $=0$.
 \subsubsection{Partielle Integration}
-    \[\int_{-\infty}^{0}xexp(3x)dx\]
-    \[=[x\cdot \frac{1}{3}exp(3x)]_{-\infty}^{0} - \int_{-\infty}^{0}1 \cdot \frac{1}{3}exp(3x)dx\]
-    \[=[x \cdot \frac{1}{3}exp(3x)]_{-\infty}^{0} - \frac{1}{3}[\frac{1}{3}exp(3x)]_{-\infty}^{0}\]
-    \[=0-0-\frac{1}{3}(\frac{1}{3} \cdot 1-0) = -\frac{1}{9}\]
-    aufgrund von $lim_{x\to \infty}[xexp(3x)] \to 0$
+    \[\int_{-\infty}^{0}x\exp(3x)dx\]
+    \[=\left[x\cdot \frac{1}{3}\exp(3x)\right]_{-\infty}^{0} - \int_{-\infty}^{0}1 \cdot \frac{1}{3}\exp(3x)dx\]
+    \[=\left[x \cdot \frac{1}{3}\exp(3x)\right]_{-\infty}^{0} - \frac{1}{3}\left[\frac{1}{3}\exp(3x)\right]_{-\infty}^{0}\]
+    \[=0-0-\frac{1}{3}\left(\frac{1}{3} \cdot 1-0\right) = -\frac{1}{9}\]
+    aufgrund von $\lim_{x\to \infty}[x\exp(3x)] \to 0$
 \subsubsection{Substitution}
     \begin{align*}
       \int x\arcsin(x)\,\mathrm dx\\
@@ -881,7 +665,7 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
     Substitution mit $ x = \sin(u) $:
     \begin{align*}
       =\int \sin(u)\cos(u) u \, \mathrm du\\
-      = \int \frac{1}{2} sin(2u) u \, \mathrm du\\
+      = \int \frac{1}{2} \sin(2u) u \, \mathrm du\\
       = \frac{1}{2} \int \sin(2u) u \, \mathrm du\\
     \end{align*}
      Partielle Integration ( $u$ ableiten, $\sin(2u)$ integrieren):
@@ -893,27 +677,7 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
     \end{align*}
     $u = \arcsin(x)$ einsetzen liefert:
     $$= -\frac{1}{4} \arcsin(x) \cos(2\arcsin(x)) + \frac{1}{8} \sin(2\arcsin(x)) + C$$
-\vspace{0.1 cm}
-\hrule
-\vspace{0.2 cm}
-    Berechne: $\int_0^x xcos(x^2)dx$\\
-    Sei $u = x^2$, $du=2xdx \iff \frac{1}{2}du = xdx$\\
-    \[\int_0^x xcos(x^2)dx = \int_0^x \frac{1}{2}cos(u)du\]
-    \[=\frac{1}{2}[sin(u)]_{0}^{y}\]
-    \[=\frac{1}{2}sin(y^2)\]
-\vspace{0.1 cm}
-\hrule
-\vspace{0.2 cm}
-    Integriere das folgende uneigentliche Integral:
-    \[\int_1^{\infty} \frac{1}{x^3}\sqrt{\frac{x}{x+1}}dx\]
-    Wir formen zuerst um\\
-    und machen die folgende Abschätzung:
-    \[\frac{1}{x^3}\sqrt{\frac{1}{x+1}}\le \frac{1}{x^3}\]
-    Da $\frac{1}{x^3}$ bekanntlich konvergent ist und unser Integral monoton wachsend, können wir schliessen, das der Grenzwert für das Integral existiert, d.h. es konvergiert.\\
-    Wir führen die folgende Substitution durch: $t=\sqrt{\frac{x}{x+1}}$ und erhalten:
-    \[\int_1^{\infty}\sqrt{\frac{x}{x+1}}dx\]
-    \[=2(-\frac{1}{3}(\frac{t}{t+1})^{-\frac{3}{2}}+\sqrt{\frac{t}{t+1}}+\frac{2^{\frac{3}{2}}}{3})-\sqrt{2}\]
-    Für $t\to\infty$ ergibt das $\frac{3}{2}(2-\sqrt{2})$.
+
 \subsubsection{Partialbruchzerlegung}
     \[\int_{-2}^{-1}\frac{5x-8}{x^3 -4x^2 +4x}dx\]
     \[=\int_{-2}^{-1}\frac{5x-8}{x(x-2)^2}dx\]
@@ -925,14 +689,14 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
     Bestimme C durch Multiplikation mit $x(x-2)^2$ und Einsetzen von $x=2$
     \[\implies C=1\]
     Bestimme B durch einsetzen von A und C und anschliessendem  aurechnen:
-    \[\frac{B}{x-2}=\frac{5x-8}{x(x-2)^2}+\frac{2}{x}-\frac{1}{x-2}^2\]
+    \[\frac{B}{x-2}=\frac{5x-8}{x(x-2)^2}+\frac{2}{x}-\frac{1}{(x-2)^2}\]
     \[\frac{5x-8+2(x-2)^2 -x}{x(x-2)^2} = \frac{2}{x-2}\]
     \[\implies B=2\]
     Schreibe das durch die PBZ entstandene Integral auf:
     \[\int_{-2}^{-1}\frac{-2}{x}dx+\int_{-2}^{-1}\frac{2}{x-2}dx+\int_{-2}^{-1}\frac{1}{(x-2)^2}dx\]
     Berechne die einzelnen Integrale und setze die Grenzen ein:
-    \[\lbrack(-2ln(\lvert x\rvert)+2ln(\lvert x-2\rvert)-\frac{1}{(x-2)^2})\rbrack_{-2}^{-1}\]
-    \[2\cdot(ln(2)+ln(3)-ln(4))+\frac{1}{12}\]
-    \[=2\cdot(ln(\frac{3}{2}))+\frac{1}{12}\]
+    \[\left[(-2\ln(\lvert x\rvert)+2\ln(\lvert x-2\rvert)-\frac{1}{(x-2)^2})\right]_{-2}^{-1}\]
+    \[2\cdot(\ln(2)+\ln(3)-\ln(4))+\frac{1}{12}\]
+    \[=2\cdot\left(\ln\left(\frac{3}{2}\right)\right)+\frac{1}{12}\]
 
 \end{document}

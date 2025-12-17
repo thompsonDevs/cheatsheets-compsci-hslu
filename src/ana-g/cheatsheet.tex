@@ -589,6 +589,110 @@ Approximation: $\cos(0{,}1) \approx 1 - \frac{0{,}01}{2} = 0{,}995$ (exakt: $0{,
 \end{itemize}
 \end{mainbox}
 
+\section{Optimierungsprobleme}
+
+\begin{mainbox}{Vorgehen bei Optimierungsaufgaben}
+\textbf{Ziel:} Eine Grösse (Fläche, Volumen, Kosten, ...) maximieren oder minimieren.
+
+\textbf{Schema:}
+\begin{enumerate}
+	\item \textbf{Zielfunktion aufstellen:} $f(x, y)$ -- die zu optimierende Grösse
+	\item \textbf{Nebenbedingung formulieren:} $g(x, y) = c$ -- Einschränkung/Randbedingung
+	\item \textbf{Variable eliminieren:} Nebenbedingung nach einer Variable auflösen und in Zielfunktion einsetzen $\Rightarrow f(x)$
+	\item \textbf{Ableitung bilden:} $f'(x)$ berechnen
+	\item \textbf{Kritische Stellen:} $f'(x) = 0$ lösen
+	\item \textbf{Art des Extremums prüfen:} Mit $f''(x)$ oder Vorzeichenwechsel
+	\item \textbf{Lösung angeben:} Optimale Werte berechnen
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Extrema mit Nebenbedingung}
+\textbf{Gegeben:}
+\begin{itemize}
+	\item Zielfunktion $f(x, y)$ (zu optimieren)
+	\item Nebenbedingung $g(x, y) = c$
+\end{itemize}
+
+\textbf{Methode: Einsetzen}
+\begin{enumerate}
+	\item Nebenbedingung nach $y$ auflösen: $y = h(x)$
+	\item In Zielfunktion einsetzen: $F(x) = f(x, h(x))$
+	\item $F(x)$ wie gewohnt optimieren
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Rechteck maximaler Fläche}
+\textbf{Problem:} Rechteck mit maximalem Flächeninhalt bei gegebenem Umfang $U = 20$.
+
+\textbf{1. Zielfunktion:} $A(x, y) = x \cdot y$ (Fläche)
+
+\textbf{2. Nebenbedingung:} $2x + 2y = 20 \Rightarrow y = 10 - x$
+
+\textbf{3. Einsetzen:} $A(x) = x \cdot (10 - x) = 10x - x^2$
+
+\textbf{4. Ableitung:} $A'(x) = 10 - 2x$
+
+\textbf{5. Kritische Stelle:} $A'(x) = 0 \Rightarrow x = 5$
+
+\textbf{6. Prüfung:} $A''(x) = -2 < 0$ $\Rightarrow$ Maximum
+
+\textbf{7. Lösung:} $x = 5$, $y = 5$ $\Rightarrow$ Quadrat mit $A_{\max} = 25$
+\end{subbox}
+
+\begin{subbox}{Beispiel: Zylinder in Kugel}
+\textbf{Problem:} Zylinder mit maximalem Volumen in Kugel mit Radius $R$ einbeschreiben.
+
+\textbf{Variablen:} Zylinderradius $r$, Zylinderhöhe $h$
+
+\textbf{1. Zielfunktion:} $V(r, h) = \pi r^2 h$
+
+\textbf{2. Nebenbedingung:} Zylinder in Kugel $\Rightarrow r^2 + \left(\frac{h}{2}\right)^2 = R^2$
+
+$\Rightarrow h = 2\sqrt{R^2 - r^2}$
+
+\textbf{3. Einsetzen:} $V(r) = \pi r^2 \cdot 2\sqrt{R^2 - r^2} = 2\pi r^2 \sqrt{R^2 - r^2}$
+
+\textbf{4.--6.} Ableiten, Nullsetzen, Prüfen ergibt:
+
+$r = R\sqrt{\frac{2}{3}}$, $h = \frac{2R}{\sqrt{3}}$
+
+\textbf{7. Maximales Volumen:} $V_{\max} = \frac{4\pi R^3}{3\sqrt{3}}$
+\end{subbox}
+
+\begin{mainbox}{Typische Optimierungsaufgaben}
+\begin{itemize}
+	\item \textbf{Geometrie:} Maximale Fläche/Volumen bei gegebenem Umfang/Oberfläche
+	\item \textbf{Einbeschreibung:} Grösstes Rechteck in Dreieck/Kreis, Zylinder in Kugel
+	\item \textbf{Extremwertaufgaben:} Kürzeste Entfernung, minimaler Materialverbrauch
+	\item \textbf{Ökonomie:} Gewinnmaximierung, Kostenminimierung
+\end{itemize}
+
+\textbf{Wichtig:}
+\begin{itemize}
+	\item Definitionsbereich beachten (physikalisch sinnvolle Werte)
+	\item Randwerte des Definitionsbereichs prüfen!
+	\item Bei mehreren kritischen Stellen: Alle untersuchen
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Fläche unter Kurve}
+\textbf{Problem:} Grösstes Rechteck unter $H(x) = 4 + 2x - x^2$ mit Breite $B(x) = 4 - x$.
+
+\textbf{Zielfunktion:} $A(x) = B(x) \cdot H(x) = (4-x)(4 + 2x - x^2)$
+
+$= x^3 - 6x^2 + 4x + 16$
+
+\textbf{Ableitung:} $A'(x) = 3x^2 - 12x + 4 = 0$
+
+\textbf{Kritische Stellen:} $x_{1,2} = \frac{12 \pm \sqrt{144 - 48}}{6} = 2 \pm \frac{2\sqrt{6}}{3}$
+
+$x_1 \approx 0{,}367$, $x_2 \approx 3{,}633$
+
+\textbf{Prüfung:} $A''(x) = 6x - 12$
+
+$A''(x_1) = -4\sqrt{6} < 0$ $\Rightarrow$ Maximum bei $x_1$
+\end{subbox}
+
 \section{Numerische Verfahren}
 
 \subsection{Nullstellenbestimmung: Bisektion}

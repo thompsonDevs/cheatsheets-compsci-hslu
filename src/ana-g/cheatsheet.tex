@@ -693,6 +693,118 @@ $x_1 \approx 0{,}367$, $x_2 \approx 3{,}633$
 $A''(x_1) = -4\sqrt{6} < 0$ $\Rightarrow$ Maximum bei $x_1$
 \end{subbox}
 
+\section{Integralrechnung}
+
+\subsection{Das bestimmte Integral}
+
+\begin{mainbox}{Motivation: Flächenberechnung}
+\textbf{Problem:} Berechne die Fläche $A$ zwischen dem Graphen von $f(x)$ und der $x$-Achse im Intervall $[a, b]$.
+
+\textbf{Notation:}
+$$A = \int_a^b f(x) \, dx$$
+
+\textbf{Idee: Approximation durch Rechtecke}
+\begin{enumerate}
+	\item Intervall $[a, b]$ in $n$ Teilintervalle der Breite $\Delta x = \frac{b-a}{n}$ zerlegen
+	\item Stützstellen: $x_k = a + k \cdot \Delta x$ für $k = 0, 1, \ldots, n$
+	\item Rechteckflächen aufsummieren
+	\item Grenzwert für $n \to \infty$ bilden
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Unter- und Obersumme}
+\textbf{Untersumme} (einbeschriebene Rechtecke):
+$$\underline{A}_n = \Delta x \cdot \sum_{k=0}^{n-1} f(x_k) = \frac{b-a}{n} \sum_{k=0}^{n-1} f\left(a + k \cdot \frac{b-a}{n}\right)$$
+
+\textbf{Obersumme} (umbeschriebene Rechtecke):
+$$\overline{A}_n = \Delta x \cdot \sum_{k=1}^{n} f(x_k) = \frac{b-a}{n} \sum_{k=1}^{n} f\left(a + k \cdot \frac{b-a}{n}\right)$$
+
+\textbf{Fehlerabschätzung:} $|\overline{A}_n - \underline{A}_n|$ gibt den maximalen Fehler an.
+
+Für $n \to \infty$ gilt: $\lim_{n \to \infty} \underline{A}_n = \lim_{n \to \infty} \overline{A}_n = \int_a^b f(x) \, dx$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: $\int_1^2 x^2 \, dx$ mit Rechtecksummen}
+Mit $n = 5$: $\Delta x = \frac{2-1}{5} = 0{,}2$
+
+Stützstellen: $x_0 = 1$, $x_1 = 1{,}2$, $x_2 = 1{,}4$, $x_3 = 1{,}6$, $x_4 = 1{,}8$, $x_5 = 2$
+
+$\underline{A}_5 = 0{,}2 \cdot (1 + 1{,}44 + 1{,}96 + 2{,}56 + 3{,}24) = 2{,}04$
+
+$\overline{A}_5 = 0{,}2 \cdot (1{,}44 + 1{,}96 + 2{,}56 + 3{,}24 + 4) = 2{,}64$
+
+Fehler: $|\overline{A}_5 - \underline{A}_5| = 0{,}6$
+
+Exakter Wert: $\frac{7}{3} \approx 2{,}333$
+\end{subbox}
+
+\subsection{Faulhabersche Formeln}
+
+\begin{mainbox}{Summenformeln (Faulhaber)}
+Für die Berechnung von Rechtecksummen benötigt man:
+
+$$\sum_{k=1}^{n} k^0 = n$$
+
+$$\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$$
+
+$$\sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}$$
+
+$$\sum_{k=1}^{n} k^3 = \frac{n^2(n+1)^2}{4} = \left(\frac{n(n+1)}{2}\right)^2$$
+\end{mainbox}
+
+\begin{subbox}{Anwendung: Herleitung von $\int_0^1 x^2 \, dx$}
+Mit $\Delta x = \frac{1}{n}$ und $x_k = \frac{k}{n}$:
+
+$$\overline{A}_n = \frac{1}{n} \sum_{k=1}^{n} \left(\frac{k}{n}\right)^2 = \frac{1}{n^3} \sum_{k=1}^{n} k^2 = \frac{1}{n^3} \cdot \frac{n(n+1)(2n+1)}{6}$$
+
+$$= \frac{(n+1)(2n+1)}{6n^2} = \frac{2n^2 + 3n + 1}{6n^2} \xrightarrow{n \to \infty} \frac{2}{6} = \frac{1}{3}$$
+
+Also: $\int_0^1 x^2 \, dx = \frac{1}{3}$
+\end{subbox}
+
+\subsection{Der Hauptsatz}
+
+\begin{mainbox}{Hauptsatz der Differential- und Integralrechnung}
+Sei $F(x)$ eine \textbf{Stammfunktion} von $f(x)$, d.h.\ $F'(x) = f(x)$.
+
+Dann gilt:
+$$\boxed{\int_a^b f(x) \, dx = F(b) - F(a) = \Big[F(x)\Big]_a^b}$$
+
+\textbf{Interpretation:} Das bestimmte Integral ist die Differenz der Stammfunktionswerte an den Grenzen.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: $\int_1^2 x^2 \, dx$}
+Stammfunktion: $F(x) = \frac{x^3}{3}$
+
+$$\int_1^2 x^2 \, dx = \left[\frac{x^3}{3}\right]_1^2 = \frac{2^3}{3} - \frac{1^3}{3} = \frac{8}{3} - \frac{1}{3} = \frac{7}{3}$$
+\end{subbox}
+
+\begin{mainbox}{Eigenschaften des bestimmten Integrals}
+\textbf{Linearität:}
+$$\int_a^b (f(x) + g(x)) \, dx = \int_a^b f(x) \, dx + \int_a^b g(x) \, dx$$
+$$\int_a^b c \cdot f(x) \, dx = c \cdot \int_a^b f(x) \, dx$$
+
+\textbf{Intervalladditivität:}
+$$\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx$$
+
+\textbf{Grenzen vertauschen:}
+$$\int_a^b f(x) \, dx = -\int_b^a f(x) \, dx$$
+
+\textbf{Gleiche Grenzen:}
+$$\int_a^a f(x) \, dx = 0$$
+\end{mainbox}
+
+\begin{subbox}{Fläche bei negativen Funktionswerten}
+\textbf{Achtung:} Das Integral misst \textbf{orientierte} Fläche!
+
+Für $f(x) < 0$ liefert $\int_a^b f(x) \, dx$ einen negativen Wert.
+
+\textbf{Flächeninhalt} (immer positiv):
+$$A = \int_a^b |f(x)| \, dx$$
+
+Bei Vorzeichenwechsel: Integral aufteilen an Nullstellen!
+\end{subbox}
+
 \section{Numerische Verfahren}
 
 \subsection{Nullstellenbestimmung: Bisektion}

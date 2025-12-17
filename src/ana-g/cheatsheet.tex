@@ -478,6 +478,7 @@ Sei $x_0$ eine kritische Stelle ($f'(x_0) = 0$).
 	\item \textbf{Definitionsbereich} bestimmen
 	\item \textbf{Symmetrie} prüfen (gerade/ungerade Funktion)
 	\item \textbf{Nullstellen:} $f(x) = 0$ lösen
+	\item \textbf{Pole und Asymptoten} bestimmen
 	\item \textbf{Erste Ableitung} $f'(x)$ berechnen
 	\item \textbf{Kritische Stellen:} $f'(x) = 0$ lösen
 	\item \textbf{Zweite Ableitung} $f''(x)$ berechnen
@@ -487,6 +488,266 @@ Sei $x_0$ eine kritische Stelle ($f'(x_0) = 0$).
 	\item \textbf{Graph skizzieren}
 \end{enumerate}
 \end{mainbox}
+
+\begin{mainbox}{Sonderfälle: Höhere Ableitungen}
+Ist $f^{(k)}(x_0)$ die \textbf{erste nichtverschwindende Ableitung} an der Stelle $x_0$ (d.h.\ $f'(x_0) = f''(x_0) = \ldots = f^{(k-1)}(x_0) = 0$), so gilt:
+
+\begin{itemize}
+	\item $k$ \textbf{gerade} und $f^{(k)}(x_0) > 0$ $\Rightarrow$ \textbf{Minimum} bei $x_0$
+	\item $k$ \textbf{gerade} und $f^{(k)}(x_0) < 0$ $\Rightarrow$ \textbf{Maximum} bei $x_0$
+	\item $k$ \textbf{ungerade} $\Rightarrow$ \textbf{Wendepunkt} bei $x_0$
+\end{itemize}
+
+\textbf{Sattelpunkt:} Ein Wendepunkt mit waagerechter Tangente ($f'(x_0) = 0$).
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Sonderfall}
+$f(x) = x^4$ an der Stelle $x_0 = 0$:
+
+$f'(0) = 0$, $f''(0) = 0$, $f'''(0) = 0$, $f^{(4)}(0) = 24 > 0$
+
+$\Rightarrow$ $k = 4$ (gerade), $f^{(4)}(0) > 0$ $\Rightarrow$ \textbf{Minimum} bei $x = 0$
+\end{subbox}
+
+\section{Taylor- und MacLaurin-Reihen}
+
+\subsection{Taylor-Reihe}
+
+\begin{mainbox}{Taylor-Reihe um $x_0$}
+Eine (unendlich oft differenzierbare) Funktion $f$ kann als Potenzreihe dargestellt werden:
+
+$$\boxed{f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(x_0)}{k!} \cdot (x - x_0)^k}$$
+
+\textbf{Ausgeschrieben:}
+$$f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \frac{f'''(x_0)}{3!}(x-x_0)^3 + \ldots$$
+
+\textbf{Koeffizienten:} $a_k = \frac{f^{(k)}(x_0)}{k!}$
+\end{mainbox}
+
+\begin{mainbox}{MacLaurin-Reihe (Spezialfall $x_0 = 0$)}
+$$\boxed{f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(0)}{k!} \cdot x^k}$$
+
+\textbf{Ausgeschrieben:}
+$$f(x) = f(0) + f'(0) \cdot x + \frac{f''(0)}{2!} \cdot x^2 + \frac{f'''(0)}{3!} \cdot x^3 + \ldots$$
+\end{mainbox}
+
+\subsection{Taylor-Polynom}
+
+\begin{mainbox}{Taylor-Polynom $n$-ter Ordnung}
+Das Taylor-Polynom $T_n(x)$ ist die Approximation durch endlich viele Terme:
+
+$$T_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!} \cdot (x - x_0)^k$$
+
+\textbf{Restglied (Lagrange-Form):}
+$$R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} \cdot (x - x_0)^{n+1}$$
+für ein $\xi$ zwischen $x_0$ und $x$.
+
+Es gilt: $f(x) = T_n(x) + R_n(x)$
+\end{mainbox}
+
+\subsection{Wichtige MacLaurin-Reihen}
+
+\begin{mainbox}{Standardentwicklungen}
+\textbf{Exponentialfunktion:}
+$$e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \ldots \quad \text{für } x \in \mathbb{R}$$
+
+\textbf{Sinus:}
+$$\sin(x) = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k+1)!} x^{2k+1} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots \quad \text{für } x \in \mathbb{R}$$
+
+\textbf{Cosinus:}
+$$\cos(x) = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!} x^{2k} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \ldots \quad \text{für } x \in \mathbb{R}$$
+
+\textbf{Natürlicher Logarithmus:}
+$$\ln(1+x) = \sum_{k=1}^{\infty} \frac{(-1)^{k+1}}{k} x^k = x - \frac{x^2}{2} + \frac{x^3}{3} - \ldots \quad \text{für } |x| \leq 1, x \neq -1$$
+
+\textbf{Geometrische Reihe:}
+$$\frac{1}{1-x} = \sum_{k=0}^{\infty} x^k = 1 + x + x^2 + x^3 + \ldots \quad \text{für } |x| < 1$$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Taylor-Entwicklung von $e^x$ um $x_0 = 0$}
+$f(x) = e^x \Rightarrow f^{(k)}(x) = e^x \Rightarrow f^{(k)}(0) = 1$ für alle $k$
+
+$$e^x = \sum_{k=0}^{\infty} \frac{1}{k!} x^k = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + \ldots$$
+\end{subbox}
+
+\begin{subbox}{Beispiel: Taylor-Polynom 2. Ordnung}
+$f(x) = \cos(x)$ um $x_0 = 0$:
+
+$f(0) = 1$, $f'(0) = -\sin(0) = 0$, $f''(0) = -\cos(0) = -1$
+
+$$T_2(x) = 1 + 0 \cdot x + \frac{-1}{2!} x^2 = 1 - \frac{x^2}{2}$$
+
+Approximation: $\cos(0{,}1) \approx 1 - \frac{0{,}01}{2} = 0{,}995$ (exakt: $0{,}99500\ldots$)
+\end{subbox}
+
+\begin{mainbox}{Anwendungen der Taylor-Entwicklung}
+\begin{itemize}
+	\item \textbf{Approximation:} Funktionswerte näherungsweise berechnen
+	\item \textbf{Grenzwerte:} Unbestimmte Ausdrücke ($\frac{0}{0}$) auflösen
+	\item \textbf{Fehlerabschätzung:} Mit Restglied den Approximationsfehler abschätzen
+	\item \textbf{Numerik:} Grundlage für numerische Verfahren
+\end{itemize}
+\end{mainbox}
+
+\section{Numerische Verfahren}
+
+\subsection{Nullstellenbestimmung: Bisektion}
+
+\begin{mainbox}{Bisektionsverfahren (Intervallhalbierung)}
+\textbf{Voraussetzungen:}
+\begin{itemize}
+	\item Funktion $f$ ist stetig auf dem Intervall $I_0 = [a, b] = [a_0, b_0]$
+	\item Vorzeichenwechsel: $f(a) \cdot f(b) < 0$ (unterschiedliche Vorzeichen an den Enden)
+\end{itemize}
+
+\textbf{Algorithmus:}
+\begin{enumerate}
+	\item Berechne Intervallmitte: $m_k = \frac{a_k + b_k}{2}$
+	\item Falls $f(a_k) \cdot f(m_k) < 0$: Nullstelle liegt in $[a_k, m_k]$
+	      $\Rightarrow$ setze $[a_{k+1}, b_{k+1}] = [a_k, m_k]$
+	\item Sonst: Nullstelle liegt in $[m_k, b_k]$
+	      $\Rightarrow$ setze $[a_{k+1}, b_{k+1}] = [m_k, b_k]$
+	\item Wiederhole bis $b_k - a_k < \varepsilon$ (gewünschte Genauigkeit)
+\end{enumerate}
+
+\textbf{Näherungswert:} $x^* \approx m_k = \frac{a_k + b_k}{2}$
+\end{mainbox}
+
+\begin{subbox}{Eigenschaften der Bisektion}
+\begin{itemize}
+	\item \textbf{Konvergenz:} Garantiert (bei erfüllten Voraussetzungen)
+	\item \textbf{Fehler nach $n$ Schritten:} $|x^* - x_{\text{exakt}}| \leq \frac{b-a}{2^{n+1}}$
+	\item \textbf{Konvergenzordnung:} Linear (langsam, aber sicher)
+	\item \textbf{Pro Iteration:} Ein Funktionsaufruf, Intervall halbiert sich
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Beispiel: Bisektion}
+Finde Nullstelle von $f(x) = x^2 - 2$ im Intervall $[1, 2]$.
+
+$f(1) = -1 < 0$, $f(2) = 2 > 0$ $\checkmark$ Vorzeichenwechsel
+
+\textbf{Iteration 1:} $m_0 = 1{,}5$, $f(1{,}5) = 0{,}25 > 0$
+$\Rightarrow$ neues Intervall $[1, 1{,}5]$
+
+\textbf{Iteration 2:} $m_1 = 1{,}25$, $f(1{,}25) = -0{,}4375 < 0$
+$\Rightarrow$ neues Intervall $[1{,}25, 1{,}5]$
+
+$\Rightarrow$ Nullstelle $\sqrt{2} \approx 1{,}414...$ wird eingeschlossen.
+\end{subbox}
+
+\subsection{Nullstellenbestimmung: Newton-Verfahren}
+
+\begin{mainbox}{Newton-Verfahren (Tangentenverfahren)}
+\textbf{Voraussetzungen:}
+\begin{itemize}
+	\item Funktion $f$ ist stetig differenzierbar in der Nähe der Nullstelle
+	\item $f'(x) \neq 0$ an der Nullstelle
+	\item Startwert $x_0$ nahe der gesuchten Nullstelle
+\end{itemize}
+
+\textbf{Iterationsformel:}
+$$\boxed{x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}}$$
+
+\textbf{Idee:} Die Funktion wird an der Stelle $x_k$ durch ihre Tangente
+$$t(x) = f(x_k) + f'(x_k) \cdot (x - x_k)$$
+angenähert. Die Nullstelle der Tangente ist der neue Näherungswert.
+
+\textbf{Abbruchkriterium:} $|x_{k+1} - x_k| < \varepsilon$
+\end{mainbox}
+
+\begin{subbox}{Eigenschaften des Newton-Verfahrens}
+\begin{itemize}
+	\item \textbf{Konvergenzordnung:} Quadratisch (sehr schnell, wenn konvergent)
+	\item \textbf{Pro Iteration:} Je ein Aufruf von $f$ und $f'$
+	\item \textbf{Nachteil:} Konvergenz nicht garantiert (Startwert-abhängig)
+	\item \textbf{Problem bei:} $f'(x_k) = 0$ oder $f'(x_k) \approx 0$
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Beispiel: Newton-Verfahren}
+Finde $\sqrt{2}$ als Nullstelle von $f(x) = x^2 - 2$, $f'(x) = 2x$.
+
+Startwert $x_0 = 1$:
+
+$x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} = 1 - \frac{1-2}{2 \cdot 1} = 1 - \frac{-1}{2} = 1{,}5$
+
+$x_2 = 1{,}5 - \frac{1{,}5^2 - 2}{2 \cdot 1{,}5} = 1{,}5 - \frac{0{,}25}{3} = 1{,}41\overline{6}$
+
+$x_3 = 1{,}41\overline{6} - \frac{(1{,}41\overline{6})^2 - 2}{2 \cdot 1{,}41\overline{6}} \approx 1{,}41421568...$
+
+Exakt: $\sqrt{2} = 1{,}41421356...$
+\end{subbox}
+
+\begin{mainbox}{Vergleich: Bisektion vs. Newton}
+\renewcommand*{\arraystretch}{1.5}
+\begin{center}
+\begin{tabularx}{\linewidth}{l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+\toprule
+& \textbf{Bisektion} & \textbf{Newton} \\
+\midrule
+Konvergenz & Garantiert & Nicht garantiert \\
+Geschwindigkeit & Linear & Quadratisch \\
+Voraussetzung & Vorzeichenwechsel & $f'$ bekannt, $x_0$ nah \\
+Pro Iteration & 1 Funktionsaufruf & 2 Funktionsaufrufe \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{mainbox}
+
+\subsection{Numerisches Differenzieren}
+
+\begin{mainbox}{Differenzenquotienten zur Approximation}
+Gegeben: Funktion $f(x)$, Stelle $x_0$, kleine Schrittweite $h > 0$.
+
+Gesucht: Näherungswert für $f'(x_0)$.
+
+\textbf{Vorwärtsdifferenz:}
+$$f'(x_0) \approx \frac{f(x_0 + h) - f(x_0)}{h}$$
+
+\textbf{Rückwärtsdifferenz:}
+$$f'(x_0) \approx \frac{f(x_0) - f(x_0 - h)}{h}$$
+
+\textbf{Zentrale Differenz:}
+$$f'(x_0) \approx \frac{f(x_0 + h) - f(x_0 - h)}{2h}$$
+\end{mainbox}
+
+\begin{mainbox}{Fehlerordnung und optimale Schrittweite}
+\renewcommand*{\arraystretch}{1.5}
+\begin{center}
+\begin{tabularx}{\linewidth}{l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+\toprule
+\textbf{Methode} & \textbf{Fehlerordnung} & \textbf{Optimale Schrittweite} \\
+\midrule
+Vorwärtsdifferenz & $\mathcal{O}(h)$ & $h_{\text{opt}} = \sqrt{\varepsilon_{\text{Mach}}}$ \\
+Rückwärtsdifferenz & $\mathcal{O}(h)$ & $h_{\text{opt}} = \sqrt{\varepsilon_{\text{Mach}}}$ \\
+Zentrale Differenz & $\mathcal{O}(h^2)$ & $h_{\text{opt}} = \sqrt[3]{\varepsilon_{\text{Mach}}}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Hinweis:} $\varepsilon_{\text{Mach}}$ ist die Maschinengenauigkeit (ca. $10^{-16}$ für double precision).
+
+Die zentrale Differenz ist genauer (Fehler $\sim h^2$), benötigt aber zwei Funktionsauswertungen.
+\end{mainbox}
+
+\begin{subbox}{Herleitung der Fehlerordnung (Taylor)}
+\textbf{Vorwärtsdifferenz:}
+$$f(x_0 + h) = f(x_0) + h f'(x_0) + \frac{h^2}{2} f''(\xi)$$
+$$\Rightarrow \frac{f(x_0+h) - f(x_0)}{h} = f'(x_0) + \underbrace{\frac{h}{2} f''(\xi)}_{\mathcal{O}(h)}$$
+
+\textbf{Zentrale Differenz:}
+$$f(x_0 + h) = f(x_0) + h f'(x_0) + \frac{h^2}{2} f''(x_0) + \frac{h^3}{6} f'''(\xi_1)$$
+$$f(x_0 - h) = f(x_0) - h f'(x_0) + \frac{h^2}{2} f''(x_0) - \frac{h^3}{6} f'''(\xi_2)$$
+$$\Rightarrow \frac{f(x_0+h) - f(x_0-h)}{2h} = f'(x_0) + \underbrace{\frac{h^2}{6} f'''(\xi)}_{\mathcal{O}(h^2)}$$
+\end{subbox}
+
+\begin{subbox}{Numerische zweite Ableitung}
+\textbf{Zentrale Differenz für $f''(x_0)$:}
+$$f''(x_0) \approx \frac{f(x_0 + h) - 2f(x_0) + f(x_0 - h)}{h^2}$$
+
+Fehlerordnung: $\mathcal{O}(h^2)$
+\end{subbox}
 
 \section{Tabellen}
 \subsection{Grenzwerte}

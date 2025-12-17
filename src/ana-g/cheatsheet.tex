@@ -71,6 +71,11 @@
 
 % For hyperlinks
 \usepackage{hyperref}
+\usepackage{amsopn}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amstext}
 \hypersetup{
   colorlinks=true
 }
@@ -1863,18 +1868,18 @@ Sei $X$ eine Teilmenge von $\mathbb{R}$. Wir bezeichnen mit $-X$ die Menge
 ist, wenn X nicht leer und nach oben beschränkt ist. Beweisen Sie, dass folgendes
 gilt:
 \[inf(-X) = -sup(X)\]
-Lösung: Wenn es $x \in X$ gibt, dann ist $−x \in −X$. Darum ist $−X$ nicht leer. Sei
+Lösung: Wenn es $x \in X$ gibt, dann ist $-x \in -X$. Darum ist $-X$ nicht leer. Sei
 $M \coloneqq sup(X)$. Die Zahl $M$ ist endlich, weil $X$  nach oben beschränkt ist. Dann:
 \[M = sup(X) \implies (x \le M, \forall x \in X)\]
 \[\iff (−M \le −x, \forall x \in X)\]
 \[\iff(−M \le y, \forall y \in −X)\]
-Somit ist $−X$ nach unten beschränkt, und $inf(−X) \ge −M = − sup(X)$ ist. Sei
-$m \coloneqq inf(−X)$. In änlicher Weise gilt
-\[m = inf(−X) \implies (m \le y, \forall y \in −X)\]
+Somit ist $-X$ nach unten beschränkt, und $inf(-X) \ge -M = - sup(X)$ ist. Sei
+$m \coloneqq inf(-X)$. In änlicher Weise gilt
+\[m = inf(-X) \implies (m \le y, \forall y \in −X)\]
 \[\iff (−y \le −m, \forall y \in −X)\]
 \[\iff(x \lr −m \forall x \in X).\]
 Nach $m\ge -M$ und $M \le -m$, erhalten wir
-\[inf(−X) = m = −M = − sup(X)\]
+\[inf(-X) = m = -M = - sup(X)\]
 
 \vspace{0.1 cm}
 \hrule

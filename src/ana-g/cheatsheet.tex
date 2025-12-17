@@ -762,36 +762,91 @@ $$= \frac{(n+1)(2n+1)}{6n^2} = \frac{2n^2 + 3n + 1}{6n^2} \xrightarrow{n \to \in
 Also: $\int_0^1 x^2 \, dx = \frac{1}{3}$
 \end{subbox}
 
+\subsection{Stammfunktion und Flächenfunktion}
+
+\begin{mainbox}{Die Flächenfunktion}
+Fixiert man die \textbf{untere Grenze} $a$ und lässt die \textbf{obere Grenze variabel}, erhält man die \textbf{Flächenfunktion}:
+
+$$\boxed{F(x) = \int_a^x f(t) \, dt}$$
+
+\textbf{Interpretation:} $F(x)$ gibt die (orientierte) Fläche unter $f$ von $a$ bis $x$ an.
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+	\item $F(a) = \int_a^a f(t) \, dt = 0$
+	\item $F(x)$ wächst, wo $f(x) > 0$
+	\item $F(x)$ fällt, wo $f(x) < 0$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Stammfunktion und unbestimmtes Integral}
+\textbf{Flächenfunktion}, \textbf{Stammfunktion} und \textbf{unbestimmtes Integral} sind \textbf{synonym}.
+
+Eine Funktion $F(x)$ heisst \textbf{Stammfunktion} von $f(x)$, wenn gilt:
+$$F'(x) = f(x)$$
+
+\textbf{Notation für das unbestimmte Integral:}
+$$\int f(x) \, dx = F(x) + C$$
+
+Die Konstante $C$ entsteht, weil verschiedene untere Grenzen $a$ verschiedene Stammfunktionen ergeben, die sich nur um eine Konstante unterscheiden.
+\end{mainbox}
+
+\begin{subbox}{Stammfunktionen unterscheiden sich um Konstante}
+Für zwei Stammfunktionen $F_1$ und $F_2$ mit verschiedenen unteren Grenzen $a_1$ und $a_2$:
+
+$$F_1(x) - F_2(x) = \int_{a_1}^x f(t)\,dt - \int_{a_2}^x f(t)\,dt = \int_{a_1}^{a_2} f(t)\,dt = \text{const.}$$
+
+$\Rightarrow$ Alle Stammfunktionen einer Funktion unterscheiden sich nur um eine Konstante.
+\end{subbox}
+
 \subsection{Der Hauptsatz}
 
 \begin{mainbox}{Hauptsatz der Differential- und Integralrechnung}
-Sei $F(x)$ eine \textbf{Stammfunktion} von $f(x)$, d.h.\ $F'(x) = f(x)$.
+\textbf{Teil 1:} Die Flächenfunktion ist eine Stammfunktion.
 
-Dann gilt:
+Sei $F(x) = \int_a^x f(t)\,dt$. Dann gilt:
+$$\boxed{F'(x) = f(x)}$$
+
+\textbf{Teil 2:} Berechnung bestimmter Integrale mit Stammfunktionen.
+
+Ist $F(x)$ \textbf{irgendeine} Stammfunktion von $f(x)$, so gilt:
 $$\boxed{\int_a^b f(x) \, dx = F(b) - F(a) = \Big[F(x)\Big]_a^b}$$
-
-\textbf{Interpretation:} Das bestimmte Integral ist die Differenz der Stammfunktionswerte an den Grenzen.
 \end{mainbox}
 
+\begin{subbox}{Herleitung (Skizze)}
+Für $f$ monoton steigend und $\Delta x > 0$:
+$$f(x) \cdot \Delta x \leq F(x + \Delta x) - F(x) \leq f(x + \Delta x) \cdot \Delta x$$
+
+Division durch $\Delta x$ und Grenzübergang $\Delta x \to 0$:
+$$f(x) \leq \frac{F(x + \Delta x) - F(x)}{\Delta x} \leq f(x + \Delta x)$$
+$$\Rightarrow F'(x) = f(x)$$
+\end{subbox}
+
 \begin{subbox}{Beispiel: $\int_1^2 x^2 \, dx$}
-Stammfunktion: $F(x) = \frac{x^3}{3}$
+Stammfunktion: $F(x) = \frac{x^3}{3}$ \quad (denn $F'(x) = x^2 = f(x)$)
 
 $$\int_1^2 x^2 \, dx = \left[\frac{x^3}{3}\right]_1^2 = \frac{2^3}{3} - \frac{1^3}{3} = \frac{8}{3} - \frac{1}{3} = \frac{7}{3}$$
 \end{subbox}
 
-\begin{mainbox}{Eigenschaften des bestimmten Integrals}
+\subsection{Eigenschaften des bestimmten Integrals}
+
+\begin{mainbox}{Rechenregeln für bestimmte Integrale}
 \textbf{Linearität:}
 $$\int_a^b (f(x) + g(x)) \, dx = \int_a^b f(x) \, dx + \int_a^b g(x) \, dx$$
 $$\int_a^b c \cdot f(x) \, dx = c \cdot \int_a^b f(x) \, dx$$
 
 \textbf{Intervalladditivität:}
-$$\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx$$
+$$\int_a^c f(x) \, dx = \int_a^b f(x) \, dx + \int_b^c f(x) \, dx$$
 
 \textbf{Grenzen vertauschen:}
 $$\int_a^b f(x) \, dx = -\int_b^a f(x) \, dx$$
 
 \textbf{Gleiche Grenzen:}
 $$\int_a^a f(x) \, dx = 0$$
+
+\textbf{Orientierter Flächeninhalt:}
+$$f(x) \geq 0 \ \forall x \in [a,b] \Rightarrow \int_a^b f(x)\,dx \geq 0$$
+$$f(x) \leq 0 \ \forall x \in [a,b] \Rightarrow \int_a^b f(x)\,dx \leq 0$$
 \end{mainbox}
 
 \begin{subbox}{Fläche bei negativen Funktionswerten}
@@ -802,7 +857,9 @@ Für $f(x) < 0$ liefert $\int_a^b f(x) \, dx$ einen negativen Wert.
 \textbf{Flächeninhalt} (immer positiv):
 $$A = \int_a^b |f(x)| \, dx$$
 
-Bei Vorzeichenwechsel: Integral aufteilen an Nullstellen!
+Bei Vorzeichenwechsel: Integral an Nullstellen aufteilen!
+
+\textbf{Beispiel:} $\int_0^{2\pi} \sin(x)\,dx = 0$, aber Fläche $= \int_0^{\pi} \sin(x)\,dx + \left|\int_{\pi}^{2\pi} \sin(x)\,dx\right| = 2 + 2 = 4$
 \end{subbox}
 
 \section{Numerische Verfahren}

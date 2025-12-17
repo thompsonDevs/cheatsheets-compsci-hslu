@@ -4,3 +4,9 @@
 *.log
 *.out
 *.gz
+/.idea/.gitignore
+/.idea/cheatsheets-cs-hslu.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml

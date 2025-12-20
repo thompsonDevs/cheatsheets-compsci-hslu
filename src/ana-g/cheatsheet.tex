@@ -1534,6 +1534,38 @@ $\Sigma_3 = 1{,}22$ (Gewicht 2)
 $$s \approx \frac{h}{3}(\Sigma_1 + 4\Sigma_2 + 2\Sigma_3) = \frac{\pi}{24}(2{,}41 + 4 \cdot 2{,}43 + 2 \cdot 1{,}22) = \underline{1{,}91}$$
 \end{subbox}
 
+\begin{subbox}{Herleitung der Simpson-Regel (Einzelintervall)}
+Für ein Intervall $[a, b]$ mit Mittelpunkt $m = \frac{a+b}{2}$:
+
+Approximiere $f$ durch Parabel $p(x) = ux^2 + vx + w$ mit:
+$$p(a) = f(a), \quad p(m) = f(m), \quad p(b) = f(b)$$
+
+Integration ergibt:
+$$\int_a^b f(x)\,dx \approx \frac{b-a}{6}\left(f(a) + 4f\left(\frac{a+b}{2}\right) + f(b)\right)$$
+
+Bei $n$ Teilintervallen ($n$ gerade) wird die Formel auf je zwei aufeinanderfolgende Intervalle angewendet $\Rightarrow$ Gewichte $1, 4, 2, 4, 2, \ldots, 4, 1$.
+\end{subbox}
+
+\begin{mainbox}{Newton-Cotes-Formeln (Verallgemeinerung)}
+Trapez- und Simpson-Regel sind Spezialfälle der \textbf{Newton-Cotes-Formeln}.
+
+\textbf{Idee:} Interpoliere $f$ durch Polynom vom Grad $n-1$ an $n$ Stützstellen und integriere das Polynom.
+
+\renewcommand*{\arraystretch}{1.4}
+\begin{center}
+\begin{tabular}{l|c|c}
+\textbf{Formel} & \textbf{Gewichte} & \textbf{Fehler} \\
+\hline
+Trapezregel & $1, 1$ & $\mathcal{O}(h^2)$ \\
+Simpson & $1, 4, 1$ & $\mathcal{O}(h^4)$ \\
+3/8-Regel & $1, 3, 3, 1$ & $\mathcal{O}(h^4)$ \\
+Milne & $7, 32, 12, 32, 7$ & $\mathcal{O}(h^6)$ \\
+\end{tabular}
+\end{center}
+
+\textbf{Achtung:} Höhere Ordnungen sind nicht immer besser (Runge-Phänomen)!
+\end{mainbox}
+
 \begin{subbox}{Monte-Carlo-Integration}
 Zufallsbasierte Methode für komplexe Gebiete:
 
@@ -1544,6 +1576,21 @@ Zufallsbasierte Methode für komplexe Gebiete:
 \end{enumerate}
 
 \textbf{Fehler:} $\mathcal{O}(1/\sqrt{N})$ -- konvergiert langsam, aber dimensionsunabhängig!
+\end{subbox}
+
+\begin{subbox}{Konvergenzverhalten (Benchmark: $\int_1^5 \frac{1}{x}\,dx = \ln 5$)}
+\renewcommand*{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{r|c|c|c}
+$n$ & Trapez & Simpson & Monte-Carlo \\
+\hline
+$10$ & $3 \cdot 10^{-3}$ & $5 \cdot 10^{-6}$ & $\sim 10^{-1}$ \\
+$100$ & $3 \cdot 10^{-5}$ & $5 \cdot 10^{-10}$ & $\sim 10^{-2}$ \\
+$1000$ & $3 \cdot 10^{-7}$ & $5 \cdot 10^{-14}$ & $\sim 10^{-2}$ \\
+\end{tabular}
+\end{center}
+
+Simpson konvergiert bei glatten Funktionen sehr schnell!
 \end{subbox}
 
 \section{Tabellen}

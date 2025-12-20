@@ -1083,7 +1083,7 @@ $$\int_a^{b} f(x)\,dx = \int_a^{c} f(x)\,dx + \int_c^{b} f(x)\,dx$$
 \end{mainbox}
 
 \begin{subbox}{Beispiel: $\int_0^{1} \frac{1}{\sqrt{x}}\,dx$ (Polstelle bei $x=0$)}
-$$\int_0^{1} x^{-1/2}\,dx = \lim_{\varepsilon \to 0^+} \left[2\sqrt{x}\right]_{\varepsilon}^{1} = \lim_{\varepsilon \to 0^+} (2 - 2\sqrt{\varepsilon}) = 2$$
+$$\int_0^{1} x^{-1/2}\,dx = \lim_{\varepsilon \to 0^+} \left[2\sqrt{x}\right]_{\varepsilon}^{1} = 2$$
 \end{subbox}
 
 \subsection{Fläche zwischen zwei Kurven}
@@ -1328,18 +1328,14 @@ Exakt: $\sqrt{2} = 1{,}41421356...$
 \end{subbox}
 
 \begin{mainbox}{Vergleich: Bisektion vs. Newton}
-\renewcommand*{\arraystretch}{1.5}
+\renewcommand*{\arraystretch}{1.3}
 \begin{center}
-\begin{tabularx}{\linewidth}{l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-\toprule
-& \textbf{Bisektion} & \textbf{Newton} \\
-\midrule
-Konvergenz & Garantiert & Nicht garantiert \\
-Geschwindigkeit & Linear & Quadratisch \\
-Voraussetzung & Vorzeichenwechsel & $f'$ bekannt, $x_0$ nah \\
-Pro Iteration & 1 Funktionsaufruf & 2 Funktionsaufrufe \\
-\bottomrule
-\end{tabularx}
+\begin{tabular}{l|c|c}
+& \textbf{Bisek.} & \textbf{Newton} \\
+\hline
+Konvergenz & Ja & Nicht garantiert \\
+Ordnung & Linear & Quadratisch \\
+\end{tabular}
 \end{center}
 \end{mainbox}
 
@@ -1361,33 +1357,29 @@ $$f'(x_0) \approx \frac{f(x_0 + h) - f(x_0 - h)}{2h}$$
 \end{mainbox}
 
 \begin{mainbox}{Fehlerordnung und optimale Schrittweite}
-\renewcommand*{\arraystretch}{1.5}
+\renewcommand*{\arraystretch}{1.4}
 \begin{center}
-\begin{tabularx}{\linewidth}{l>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-\toprule
-\textbf{Methode} & \textbf{Fehlerordnung} & \textbf{Optimale Schrittweite} \\
-\midrule
-Vorwärtsdifferenz & $\mathcal{O}(h)$ & $h_{\text{opt}} = \sqrt{\varepsilon_{\text{Mach}}}$ \\
-Rückwärtsdifferenz & $\mathcal{O}(h)$ & $h_{\text{opt}} = \sqrt{\varepsilon_{\text{Mach}}}$ \\
-Zentrale Differenz & $\mathcal{O}(h^2)$ & $h_{\text{opt}} = \sqrt[3]{\varepsilon_{\text{Mach}}}$ \\
-\bottomrule
-\end{tabularx}
+\begin{tabular}{l|c|c}
+\textbf{Methode} & \textbf{Fehler} & \textbf{Opt.\ $h$} \\
+\hline
+Vorwärts & $\mathcal{O}(h)$ & $\sqrt{\varepsilon}$ \\
+Rückwärts & $\mathcal{O}(h)$ & $\sqrt{\varepsilon}$ \\
+Zentral & $\mathcal{O}(h^2)$ & $\sqrt[3]{\varepsilon}$ \\
+\end{tabular}
 \end{center}
 
-\textbf{Hinweis:} $\varepsilon_{\text{Mach}}$ ist die Maschinengenauigkeit (ca. $10^{-16}$ für double precision).
-
-Die zentrale Differenz ist genauer (Fehler $\sim h^2$), benötigt aber zwei Funktionsauswertungen.
+$\varepsilon = \varepsilon_{\text{Mach}} \approx 10^{-16}$ (Maschinengenauigkeit)
 \end{mainbox}
 
 \begin{subbox}{Herleitung der Fehlerordnung (Taylor)}
 \textbf{Vorwärtsdifferenz:}
-$$f(x_0 + h) = f(x_0) + h f'(x_0) + \frac{h^2}{2} f''(\xi)$$
-$$\Rightarrow \frac{f(x_0+h) - f(x_0)}{h} = f'(x_0) + \underbrace{\frac{h}{2} f''(\xi)}_{\mathcal{O}(h)}$$
+$f(x_0 + h) = f(x_0) + hf'(x_0) + \frac{h^2}{2}f''(\xi)$
 
-\textbf{Zentrale Differenz:}
-$$f(x_0 + h) = f(x_0) + h f'(x_0) + \frac{h^2}{2} f''(x_0) + \frac{h^3}{6} f'''(\xi_1)$$
-$$f(x_0 - h) = f(x_0) - h f'(x_0) + \frac{h^2}{2} f''(x_0) - \frac{h^3}{6} f'''(\xi_2)$$
-$$\Rightarrow \frac{f(x_0+h) - f(x_0-h)}{2h} = f'(x_0) + \underbrace{\frac{h^2}{6} f'''(\xi)}_{\mathcal{O}(h^2)}$$
+$\Rightarrow$ Fehler $= \frac{h}{2}f''(\xi) = \mathcal{O}(h)$
+
+\textbf{Zentrale Differenz:} Subtraktion der Taylor-Entwicklungen ergibt
+
+$\Rightarrow$ Fehler $= \frac{h^2}{6}f'''(\xi) = \mathcal{O}(h^2)$
 \end{subbox}
 
 \begin{subbox}{Numerische zweite Ableitung}
@@ -1411,7 +1403,7 @@ wobei $n$ die Anzahl der Teilintervalle ist.
 \begin{mainbox}{Rechteckregel (Mittelpunktsregel)}
 Approximation durch Rechtecke mit Funktionswert am rechten Rand:
 
-$$\boxed{\int_a^b f(x)\,dx \approx h \cdot (y_1 + y_2 + \ldots + y_n) = h \sum_{k=1}^{n} y_k}$$
+$$\int_a^b f(x)\,dx \approx h \cdot (y_1 + y_2 + \ldots + y_n)$$
 
 \textbf{Fehlerordnung:} $\mathcal{O}(h)$ (langsam konvergent)
 \end{mainbox}
@@ -1419,23 +1411,17 @@ $$\boxed{\int_a^b f(x)\,dx \approx h \cdot (y_1 + y_2 + \ldots + y_n) = h \sum_{
 \begin{mainbox}{Trapezregel}
 Approximation durch Trapeze (lineare Interpolation):
 
-$$\boxed{\int_a^b f(x)\,dx \approx h \left(\frac{y_0}{2} + y_1 + y_2 + \ldots + y_{n-1} + \frac{y_n}{2}\right)}$$
-
-Kurzform: $\displaystyle A \approx h \left(\frac{y_0 + y_n}{2} + \sum_{k=1}^{n-1} y_k\right)$
+$$\int_a^b f(x)\,dx \approx h \left(\frac{y_0}{2} + y_1 + \ldots + \frac{y_n}{2}\right)$$
 
 \textbf{Fehlerordnung:} $\mathcal{O}(h^2)$
 \end{mainbox}
 
 \begin{mainbox}{Simpson-Regel (Keplersche Fassregel)}
-Approximation durch Parabeln (quadratische Interpolation).
+Approximation durch Parabeln. \textbf{Voraussetzung:} $n$ gerade!
 
-\textbf{Voraussetzung:} $n$ muss \textbf{gerade} sein!
+$$\int_a^b f\,dx \approx \frac{h}{3}(y_0 + 4y_1 + 2y_2 + \ldots + y_n)$$
 
-$$\boxed{\int_a^b f\,dx \approx \frac{h}{3}(y_0 + 4y_1 + 2y_2 + \ldots + 4y_{n-1} + y_n)}$$
-
-\textbf{Gewichte:} $1, 4, 2, 4, 2, \ldots, 2, 4, 1$
-
-\textbf{Fehlerordnung:} $\mathcal{O}(h^4)$ (sehr genau!)
+\textbf{Gewichte:} $1, 4, 2, 4, \ldots, 4, 1$ \quad \textbf{Fehler:} $\mathcal{O}(h^4)$
 \end{mainbox}
 
 \begin{subbox}{Vergleich der Verfahren}
@@ -1473,40 +1459,21 @@ $k$ & $x_k$ & $y_k$ & Gruppe \\
 
 $\Sigma_1 = 2{,}41$, $\Sigma_2 = 3{,}65$
 
-$$s \approx h \left(\frac{\Sigma_1}{2} + \Sigma_2\right) = \frac{\pi}{8}(1{,}21 + 3{,}65) = \underline{1{,}93}$$
+$$s \approx h \left(\frac{\Sigma_1}{2} + \Sigma_2\right) = \underline{1{,}93}$$
 \end{subbox}
 
 \begin{subbox}{Beispiel: Simpson-Regel}
-$s = \int_0^{\pi/2} \sqrt{1 + \sin^2(x)}\,dx$ mit $n = 2$, $h = \frac{\pi}{8}$
-
-\renewcommand*{\arraystretch}{1.2}
-\begin{center}
-\begin{tabular}{c|c|c|c}
-$k$ & $x_k$ & $y_k$ & Gew. \\
-\hline
-0 & $0$ & $1{,}00$ & $1$ \\
-1 & $\pi/8$ & $1{,}07$ & $4$ \\
-2 & $\pi/4$ & $1{,}22$ & $2$ \\
-3 & $3\pi/8$ & $1{,}36$ & $4$ \\
-4 & $\pi/2$ & $1{,}41$ & $1$ \\
-\end{tabular}
-\end{center}
+$s = \int_0^{\pi/2} \sqrt{1 + \sin^2(x)}\,dx$ mit $n = 4$, $h = \frac{\pi}{8}$
 
 $\Sigma_1 = 2{,}41$ (Gew.\ 1), $\Sigma_2 = 2{,}43$ (Gew.\ 4), $\Sigma_3 = 1{,}22$ (Gew.\ 2)
 
-$$s \approx \frac{h}{3}(\Sigma_1 + 4\Sigma_2 + 2\Sigma_3) = \frac{\pi}{24}(2{,}41 + 9{,}72 + 2{,}44) = \underline{1{,}91}$$
+$$s \approx \frac{h}{3}(\Sigma_1 + 4\Sigma_2 + 2\Sigma_3) = \underline{1{,}91}$$
 \end{subbox}
 
-\begin{subbox}{Herleitung der Simpson-Regel (Einzelintervall)}
-Für ein Intervall $[a, b]$ mit Mittelpunkt $m = \frac{a+b}{2}$:
+\begin{subbox}{Herleitung der Simpson-Regel}
+Approximiere $f$ durch Parabel an $a$, $m = \frac{a+b}{2}$, $b$:
 
-Approximiere $f$ durch Parabel $p(x) = ux^2 + vx + w$ mit:
-$$p(a) = f(a), \quad p(m) = f(m), \quad p(b) = f(b)$$
-
-Integration ergibt:
-$$\int_a^b f(x)\,dx \approx \frac{b-a}{6}\left(f(a) + 4f\left(\frac{a+b}{2}\right) + f(b)\right)$$
-
-Bei $n$ Teilintervallen ($n$ gerade) wird die Formel auf je zwei aufeinanderfolgende Intervalle angewendet $\Rightarrow$ Gewichte $1, 4, 2, 4, 2, \ldots, 4, 1$.
+$$\int_a^b f(x)\,dx \approx \frac{b-a}{6}\left(f(a) + 4f(m) + f(b)\right)$$
 \end{subbox}
 
 \begin{mainbox}{Newton-Cotes-Formeln (Verallgemeinerung)}
@@ -1541,19 +1508,17 @@ Zufallsbasierte Methode für komplexe Gebiete:
 \textbf{Fehler:} $\mathcal{O}(1/\sqrt{N})$ -- konvergiert langsam, aber dimensionsunabhängig!
 \end{subbox}
 
-\begin{subbox}{Konvergenzverhalten (Benchmark: $\int_1^5 \frac{1}{x}\,dx = \ln 5$)}
+\begin{subbox}{Konvergenzverhalten (Benchmark: $\int_1^5 \frac{1}{x}dx$)}
 \renewcommand*{\arraystretch}{1.3}
 \begin{center}
 \begin{tabular}{r|c|c|c}
-$n$ & Trapez & Simpson & Monte-Carlo \\
+$n$ & Trapez & Simpson & MC \\
 \hline
-$10$ & $3 \cdot 10^{-3}$ & $5 \cdot 10^{-6}$ & $\sim 10^{-1}$ \\
-$100$ & $3 \cdot 10^{-5}$ & $5 \cdot 10^{-10}$ & $\sim 10^{-2}$ \\
-$1000$ & $3 \cdot 10^{-7}$ & $5 \cdot 10^{-14}$ & $\sim 10^{-2}$ \\
+$10$ & $3 \cdot 10^{-3}$ & $5 \cdot 10^{-6}$ & $10^{-1}$ \\
+$100$ & $3 \cdot 10^{-5}$ & $5 \cdot 10^{-10}$ & $10^{-2}$ \\
+$1000$ & $3 \cdot 10^{-7}$ & $5 \cdot 10^{-14}$ & $10^{-2}$ \\
 \end{tabular}
 \end{center}
-
-Simpson konvergiert bei glatten Funktionen sehr schnell!
 \end{subbox}
 
 \section{Tabellen}

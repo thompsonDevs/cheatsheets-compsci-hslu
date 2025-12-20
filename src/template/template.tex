@@ -1,0 +1,321 @@
+% ============================================================================
+% CHEATSHEET TEMPLATE
+% ============================================================================
+% Based on the ANA-G cheatsheet style
+%
+% Features:
+% - 4-column landscape layout on A4
+% - Colored boxes for main concepts and sub-concepts
+% - Compact formatting optimized for information density
+% - Mathematical typesetting support
+%
+% Usage:
+% 1. Replace metadata (title, author, date)
+% 2. Adjust number of columns if needed (see \Ncolumn)
+% 3. Add your content using mainbox and subbox environments
+% 4. Compile with pdflatex (run twice for proper layout)
+% ============================================================================
+
+\documentclass[a4paper, fontsize=7pt]{scrartcl}
+
+% ============================================================================
+% ENCODING & LANGUAGE
+% ============================================================================
+\usepackage[utf8]{inputenc}
+% \usepackage[german]{babel}    % Uncomment for German hyphenation
+% \usepackage[english]{babel}   % Uncomment for English hyphenation
+
+% ============================================================================
+% PAGE LAYOUT
+% ============================================================================
+% 4-column landscape layout with minimal margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+
+% Number of columns (adjust as needed: 3-4 recommended for A4)
+\Ncolumn{4}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0cm}
+
+% ============================================================================
+% COLORS & BOXES
+% ============================================================================
+\usepackage[most]{tcolorbox}
+
+% Base style for all boxes
+\tcbset{
+  base/.style={
+    boxrule=0.3mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!10!white,
+    coltitle=black,
+    toptitle=0.75mm,
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+% Main concept box (green accent)
+% Use for: definitions, theorems, important formulas
+\definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}  % Nice green
+\newtcolorbox{mainbox}[1]{
+  colframe=maincolor,
+  base={#1}
+}
+
+% Sub concept box (gray accent)
+% Use for: examples, remarks, minor concepts
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Alternative colors (uncomment to use)
+% \definecolor{maincolor}{rgb}{0.2, 0.4, 0.8}   % Blue
+% \definecolor{maincolor}{rgb}{0.8, 0.2, 0.2}   % Red
+% \definecolor{maincolor}{rgb}{0.5, 0.2, 0.6}   % Purple
+
+% ============================================================================
+% MATHEMATICS
+% ============================================================================
+\usepackage{amsmath, amsthm, mathtools, amssymb}
+\usepackage{amsfonts, amstext}
+\allowdisplaybreaks  % Allow page breaks in equations
+
+% Common math shortcuts (customize as needed)
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+
+% Number sets
+\def\N{\mathbb{N}}  % Natural numbers
+\def\Z{\mathbb{Z}}  % Integers
+\def\Q{\mathbb{Q}}  % Rationals
+\def\R{\mathbb{R}}  % Reals
+\def\C{\mathbb{C}}  % Complex
+
+% Calculus
+\def\dx{\,dx}
+\def\dt{\,dt}
+\def\dy{\,dy}
+\newcommand{\ddx}[1]{\frac{d#1}{dx}}
+\newcommand{\ddn}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdn}[2]{\frac{\partial #1}{\partial #2}}
+
+% Big O notation
+\def\oof{\mathcal{O}}
+
+% ============================================================================
+% TABLES
+% ============================================================================
+\usepackage{tabularx, multirow, booktabs}
+\renewcommand*{\arraystretch}{1.5}  % More spacing in tables
+
+% ============================================================================
+% LISTS
+% ============================================================================
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt, topsep=2pt}
+\setenumerate{itemsep=0.75pt, topsep=2pt}
+
+% ============================================================================
+% GRAPHICS & TIKZ
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  fit,
+  matrix,
+  decorations,
+  angles,
+  quotes,
+  babel,
+  3d,
+  arrows.meta,
+  shadings,
+  shapes.geometric
+}
+
+\tikzset{
+  >=stealth,
+  % Add custom TikZ styles here
+}
+
+% ============================================================================
+% HYPERLINKS
+% ============================================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}   % For \centernot command
+\usepackage{marvosym}    % Additional symbols
+\usepackage{wasysym}     % Additional symbols
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{Your Cheatsheet Title}
+\author{Your Name}
+\date{\today}
+
+% Table of contents depth
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% SECTION 1: EXAMPLE SECTION
+% ============================================================================
+\section{First Topic}
+
+\begin{mainbox}{Main Concept Title}
+This is a \textbf{main box} for important concepts, definitions, or theorems.
+
+\textbf{Key Formula:}
+$$\boxed{E = mc^2}$$
+
+Use the boxed command to highlight the most important formulas.
+\end{mainbox}
+
+\begin{subbox}{Example or Remark}
+This is a \textbf{sub box} for examples, remarks, or secondary information.
+
+\textbf{Example:} Calculate $E$ for $m = 1$ kg:
+$$E = 1 \cdot (3 \times 10^8)^2 = 9 \times 10^{16} \text{ J}$$
+\end{subbox}
+
+% ============================================================================
+% SUBSECTION EXAMPLE
+% ============================================================================
+\subsection{Subsection Title}
+
+\begin{mainbox}{Another Main Concept}
+\textbf{Definition:} A clear definition goes here.
+
+\textbf{Properties:}
+\begin{itemize}
+    \item First property
+    \item Second property
+    \item Third property
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Worked Example}
+\textbf{Problem:} Find the derivative of $f(x) = x^2$.
+
+\textbf{Solution:}
+$$f'(x) = \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} = \lim_{h \to 0} \frac{2xh + h^2}{h} = 2x$$
+\end{subbox}
+
+% ============================================================================
+% SECTION 2: TABLES EXAMPLE
+% ============================================================================
+\section{Tables and Lists}
+
+\begin{mainbox}{Comparison Table}
+\renewcommand*{\arraystretch}{1.4}
+\begin{center}
+\begin{tabular}{l|c|c}
+\textbf{Method} & \textbf{Pros} & \textbf{Cons} \\
+\hline
+Method A & Fast & Less accurate \\
+Method B & Accurate & Slower \\
+Method C & Balanced & Complex \\
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\begin{subbox}{Enumerated Steps}
+\textbf{Algorithm:}
+\begin{enumerate}
+    \item Initialize variables
+    \item Iterate until convergence
+    \item Return result
+\end{enumerate}
+\end{subbox}
+
+% ============================================================================
+% SECTION 3: FORMULAS REFERENCE
+% ============================================================================
+\section{Formula Reference}
+
+\begin{mainbox}{Important Formulas}
+\textbf{Derivatives:}
+\begin{align*}
+\ddx{x^n} &= nx^{n-1} \\
+\ddx{e^x} &= e^x \\
+\ddx{\ln x} &= \frac{1}{x}
+\end{align*}
+\end{mainbox}
+
+\begin{mainbox}{Integrals}
+\textbf{Basic Integrals:}
+\begin{align*}
+\int x^n \dx &= \frac{x^{n+1}}{n+1} + C \\
+\int e^x \dx &= e^x + C \\
+\int \frac{1}{x} \dx &= \ln|x| + C
+\end{align*}
+\end{mainbox}
+
+% ============================================================================
+% SECTION 4: REFERENCE TABLES
+% ============================================================================
+\section{Quick Reference}
+
+\begin{mainbox}{Symbol Reference}
+\renewcommand*{\arraystretch}{1.3}
+\begin{center}
+\begin{tabularx}{\linewidth}{lX}
+$\N$ & Natural numbers $\{1, 2, 3, \ldots\}$ \\
+$\Z$ & Integers $\{\ldots, -1, 0, 1, \ldots\}$ \\
+$\R$ & Real numbers \\
+$\C$ & Complex numbers \\
+\end{tabularx}
+\end{center}
+\end{mainbox}
+
+% ============================================================================
+% TIPS FOR AVOIDING OVERFULL BOXES
+% ============================================================================
+%
+% 1. Keep formulas concise - split long equations over multiple lines
+% 2. Use shorter variable names in inline math
+% 3. Abbreviate table headers
+% 4. Use align* environment for multi-line equations
+% 5. Test compile frequently to catch overflow early
+%
+% Example of splitting a long formula:
+% Instead of: $$a + b + c + d + e = f + g + h + i + j$$
+% Use:
+% \begin{align*}
+% a + b + c + d + e &= f + g + h \\
+%                   &\quad + i + j
+% \end{align*}
+%
+% ============================================================================
+
+\end{document}

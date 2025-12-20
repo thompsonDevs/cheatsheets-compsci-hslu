@@ -238,10 +238,11 @@ $$(f(x) \cdot g(x))' = f'(x) \cdot g(x) + f(x) \cdot g'(x)$$
 Die Ableitung wandert von einem Faktor zum anderen.
 
 \textbf{Für drei Faktoren:}
-$$(f(x) \cdot g(x) \cdot h(x))' = f'(x) \cdot g(x) \cdot h(x) + f(x) \cdot g'(x) \cdot h(x) + f(x) \cdot g(x) \cdot h'(x)$$
+\begin{align*}
+(f \cdot g \cdot h)' = f' \cdot g \cdot h + f \cdot g' \cdot h + f \cdot g \cdot h'
+\end{align*}
 
-\textbf{Allgemein für $n$ Faktoren:}
-$$(p \cdot q \cdot r \cdot s)' = p' \cdot q \cdot r \cdot s + p \cdot q' \cdot r \cdot s + p \cdot q \cdot r' \cdot s + p \cdot q \cdot r \cdot s'$$
+\textbf{Allgemein:} Jeder Faktor wird einmal abgeleitet, die anderen bleiben.
 \end{mainbox}
 
 \begin{subbox}{Beispiel: Produktregel}
@@ -321,13 +322,13 @@ $$\left.\frac{df^{-1}}{dx}\right|_{x=x_0} = \left(\left.\frac{df}{dx}\right|_{x=
 \toprule
 \textbf{Regel} & \textbf{Newton} & \textbf{Leibniz} \\
 \midrule
-Konst.\ Summand & $(f + c)' = f'$ & $\frac{d(f+c)}{dx} = \frac{df}{dx}$ \\
-Konst.\ Faktor & $(c \cdot f)' = c \cdot f'$ & $\frac{d(c \cdot f)}{dx} = c \cdot \frac{df}{dx}$ \\
-Summenregel & $(f \pm g)' = f' \pm g'$ & $\frac{d(f+g)}{dx} = \frac{df}{dx} + \frac{dg}{dx}$ \\
-Produktregel & $(f \cdot g)' = f' g + f g'$ & $\frac{d(fg)}{dx} = \frac{df}{dx} g + f \frac{dg}{dx}$ \\
-Quotientenregel & $\left(\frac{f}{g}\right)' = \frac{f'g - fg'}{g^2}$ & $\frac{d}{dx}\left(\frac{f}{g}\right) = \frac{1}{g^2}\left(\frac{df}{dx} g - f \frac{dg}{dx}\right)$ \\
-Kettenregel & $(f(g))' = f'(g) \cdot g'$ & $\frac{d(f \circ g)}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}$ \\
-Umkehrfunktion & $(f^{-1})' = \frac{1}{f'(f^{-1})}$ & $\frac{df^{-1}}{dx} = \left(\frac{df}{dx}\big|_{f^{-1}}\right)^{-1}$ \\
+Konstante & $(f + c)' = f'$ & $\frac{d(f+c)}{dx} = \frac{df}{dx}$ \\
+Faktor & $(cf)' = cf'$ & $\frac{d(cf)}{dx} = c\frac{df}{dx}$ \\
+Summe & $(f \pm g)' = f' \pm g'$ & $\frac{d(f+g)}{dx} = \frac{df}{dx} + \frac{dg}{dx}$ \\
+Produkt & $(fg)' = f'g + fg'$ & $\frac{d(fg)}{dx} = g\frac{df}{dx} + f\frac{dg}{dx}$ \\
+Quotient & $(\frac{f}{g})' = \frac{f'g - fg'}{g^2}$ & -- \\
+Kette & $(f(g))' = f'(g) \cdot g'$ & $\frac{df}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}$ \\
+Umkehr & $(f^{-1})' = \frac{1}{f'(f^{-1})}$ & -- \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -516,10 +517,9 @@ $\Rightarrow$ $k = 4$ (gerade), $f^{(4)}(0) > 0$ $\Rightarrow$ \textbf{Minimum} 
 \begin{mainbox}{Taylor-Reihe um $x_0$}
 Eine (unendlich oft differenzierbare) Funktion $f$ kann als Potenzreihe dargestellt werden:
 
-$$\boxed{f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(x_0)}{k!} \cdot (x - x_0)^k}$$
+$$\boxed{f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k}$$
 
-\textbf{Ausgeschrieben:}
-$$f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \frac{f'''(x_0)}{3!}(x-x_0)^3 + \ldots$$
+\textbf{Ausgeschrieben:} $f = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \ldots$
 
 \textbf{Koeffizienten:} $a_k = \frac{f^{(k)}(x_0)}{k!}$
 \end{mainbox}
@@ -527,8 +527,7 @@ $$f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \frac{f'''(x_0
 \begin{mainbox}{MacLaurin-Reihe (Spezialfall $x_0 = 0$)}
 $$\boxed{f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(0)}{k!} \cdot x^k}$$
 
-\textbf{Ausgeschrieben:}
-$$f(x) = f(0) + f'(0) \cdot x + \frac{f''(0)}{2!} \cdot x^2 + \frac{f'''(0)}{3!} \cdot x^3 + \ldots$$
+\textbf{Ausgeschrieben:} $f = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \frac{f'''(0)}{3!}x^3 + \ldots$
 \end{mainbox}
 
 \subsection{Taylor-Polynom}
@@ -548,20 +547,20 @@ Es gilt: $f(x) = T_n(x) + R_n(x)$
 \subsection{Wichtige MacLaurin-Reihen}
 
 \begin{mainbox}{Standardentwicklungen}
-\textbf{Exponentialfunktion:}
-$$e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \ldots \quad \text{für } x \in \mathbb{R}$$
+\textbf{Exponentialfunktion:} ($x \in \mathbb{R}$)
+$$e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \ldots$$
 
-\textbf{Sinus:}
-$$\sin(x) = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k+1)!} x^{2k+1} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots \quad \text{für } x \in \mathbb{R}$$
+\textbf{Sinus:} ($x \in \mathbb{R}$)
+$$\sin(x) = \sum_{k=0}^{\infty} \frac{(-1)^k x^{2k+1}}{(2k+1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots$$
 
-\textbf{Cosinus:}
-$$\cos(x) = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!} x^{2k} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \ldots \quad \text{für } x \in \mathbb{R}$$
+\textbf{Cosinus:} ($x \in \mathbb{R}$)
+$$\cos(x) = \sum_{k=0}^{\infty} \frac{(-1)^k x^{2k}}{(2k)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \ldots$$
 
-\textbf{Natürlicher Logarithmus:}
-$$\ln(1+x) = \sum_{k=1}^{\infty} \frac{(-1)^{k+1}}{k} x^k = x - \frac{x^2}{2} + \frac{x^3}{3} - \ldots \quad \text{für } |x| \leq 1, x \neq -1$$
+\textbf{Natürlicher Logarithmus:} ($|x| \leq 1$, $x \neq -1$)
+$$\ln(1+x) = \sum_{k=1}^{\infty} \frac{(-1)^{k+1}}{k} x^k = x - \frac{x^2}{2} + \frac{x^3}{3} - \ldots$$
 
-\textbf{Geometrische Reihe:}
-$$\frac{1}{1-x} = \sum_{k=0}^{\infty} x^k = 1 + x + x^2 + x^3 + \ldots \quad \text{für } |x| < 1$$
+\textbf{Geometrische Reihe:} ($|x| < 1$)
+$$\frac{1}{1-x} = \sum_{k=0}^{\infty} x^k = 1 + x + x^2 + x^3 + \ldots$$
 \end{mainbox}
 
 \begin{subbox}{Beispiel: Taylor-Entwicklung von $e^x$ um $x_0 = 0$}
@@ -714,14 +713,14 @@ $$A = \int_a^b f(x) \, dx$$
 
 \begin{mainbox}{Unter- und Obersumme}
 \textbf{Untersumme} (einbeschriebene Rechtecke):
-$$\underline{A}_n = \Delta x \cdot \sum_{k=0}^{n-1} f(x_k) = \frac{b-a}{n} \sum_{k=0}^{n-1} f\left(a + k \cdot \frac{b-a}{n}\right)$$
+$$\underline{A}_n = \Delta x \sum_{k=0}^{n-1} f(x_k) = \frac{b-a}{n} \sum_{k=0}^{n-1} f(x_k)$$
 
 \textbf{Obersumme} (umbeschriebene Rechtecke):
-$$\overline{A}_n = \Delta x \cdot \sum_{k=1}^{n} f(x_k) = \frac{b-a}{n} \sum_{k=1}^{n} f\left(a + k \cdot \frac{b-a}{n}\right)$$
+$$\overline{A}_n = \Delta x \sum_{k=1}^{n} f(x_k) = \frac{b-a}{n} \sum_{k=1}^{n} f(x_k)$$
 
 \textbf{Fehlerabschätzung:} $|\overline{A}_n - \underline{A}_n|$ gibt den maximalen Fehler an.
 
-Für $n \to \infty$ gilt: $\lim_{n \to \infty} \underline{A}_n = \lim_{n \to \infty} \overline{A}_n = \int_a^b f(x) \, dx$
+Für $n \to \infty$: $\lim_{n \to \infty} \underline{A}_n = \lim_{n \to \infty} \overline{A}_n = \int_a^b f(x) \, dx$
 \end{mainbox}
 
 \begin{subbox}{Beispiel: $\int_1^2 x^2 \, dx$ mit Rechtecksummen}
@@ -755,9 +754,9 @@ $$\sum_{k=1}^{n} k^3 = \frac{n^2(n+1)^2}{4} = \left(\frac{n(n+1)}{2}\right)^2$$
 \begin{subbox}{Anwendung: Herleitung von $\int_0^1 x^2 \, dx$}
 Mit $\Delta x = \frac{1}{n}$ und $x_k = \frac{k}{n}$:
 
-$$\overline{A}_n = \frac{1}{n} \sum_{k=1}^{n} \left(\frac{k}{n}\right)^2 = \frac{1}{n^3} \sum_{k=1}^{n} k^2 = \frac{1}{n^3} \cdot \frac{n(n+1)(2n+1)}{6}$$
+$$\overline{A}_n = \frac{1}{n} \sum_{k=1}^{n} \left(\frac{k}{n}\right)^2 = \frac{1}{n^3} \cdot \frac{n(n+1)(2n+1)}{6}$$
 
-$$= \frac{(n+1)(2n+1)}{6n^2} = \frac{2n^2 + 3n + 1}{6n^2} \xrightarrow{n \to \infty} \frac{2}{6} = \frac{1}{3}$$
+$$= \frac{(n+1)(2n+1)}{6n^2} \xrightarrow{n \to \infty} \frac{1}{3}$$
 
 Also: $\int_0^1 x^2 \, dx = \frac{1}{3}$
 \end{subbox}
@@ -792,11 +791,9 @@ Die Konstante $C$ entsteht, weil verschiedene untere Grenzen $a$ verschiedene St
 \end{mainbox}
 
 \begin{subbox}{Stammfunktionen unterscheiden sich um Konstante}
-Für zwei Stammfunktionen $F_1$ und $F_2$ mit verschiedenen unteren Grenzen $a_1$ und $a_2$:
+Für zwei Stammfunktionen $F_1$, $F_2$ mit verschiedenen unteren Grenzen:
 
-$$F_1(x) - F_2(x) = \int_{a_1}^x f(t)\,dt - \int_{a_2}^x f(t)\,dt = \int_{a_1}^{a_2} f(t)\,dt = \text{const.}$$
-
-$\Rightarrow$ Alle Stammfunktionen einer Funktion unterscheiden sich nur um eine Konstante.
+$F_1(x) - F_2(x) = \int_{a_1}^x f\,dt - \int_{a_2}^x f\,dt = \text{const.}$
 \end{subbox}
 
 \subsection{Der Hauptsatz}
@@ -893,8 +890,7 @@ $$\int (f(x) + g(x))\,dx = \int f(x)\,dx + \int g(x)\,dx$$
 \textbf{Faktorregel:}
 $$\int c \cdot f(x)\,dx = c \cdot \int f(x)\,dx$$
 
-\textbf{Linearität:}
-$$\int (a \cdot f(x) + b \cdot g(x))\,dx = a \int f(x)\,dx + b \int g(x)\,dx$$
+\textbf{Linearität:} $\int (af + bg)\,dx = a \int f\,dx + b \int g\,dx$
 \end{mainbox}
 
 \subsection{Integration durch Substitution}
@@ -941,11 +937,9 @@ $$\boxed{\int_a^b f(g(x)) \cdot g'(x)\,dx = \int_{g(a)}^{g(b)} f(u)\,du}$$
 \begin{subbox}{Beispiel: Bestimmtes Integral}
 $$\int_0^1 2x \cdot e^{x^2}\,dx$$
 
-\textbf{Substitution:} $u = x^2$, $du = 2x\,dx$
+\textbf{Substitution:} $u = x^2$, $du = 2x\,dx$. Grenzen: $u(0) = 0$, $u(1) = 1$
 
-\textbf{Grenzen:} $x = 0 \Rightarrow u = 0$, $x = 1 \Rightarrow u = 1$
-
-$$\int_0^1 2x \cdot e^{x^2}\,dx = \int_0^1 e^u\,du = \Big[e^u\Big]_0^1 = e^1 - e^0 = e - 1$$
+$$\int_0^1 2x \cdot e^{x^2}\,dx = \int_0^1 e^u\,du = e - 1$$
 \end{subbox}
 
 \begin{mainbox}{Typische Substitutionen}
@@ -967,23 +961,19 @@ $\sqrt{a^2 + x^2}$ & $x = a \tan t$ \\
 \end{mainbox}
 
 \begin{subbox}{Beispiel: Lineare Substitution}
-$$\int \cos(3x + 2)\,dx$$
+$\int \cos(3x + 2)\,dx$ mit $u = 3x + 2$, $dx = \frac{1}{3}du$:
 
-\textbf{Substitution:} $u = 3x + 2$ $\Rightarrow$ $du = 3\,dx$ $\Rightarrow$ $dx = \frac{1}{3}du$
+$$= \frac{1}{3}\int \cos(u)\,du = \frac{1}{3}\sin(3x + 2) + C$$
 
-$$\int \cos(3x + 2)\,dx = \int \cos(u) \cdot \frac{1}{3}\,du = \frac{1}{3}\sin(u) + C = \frac{1}{3}\sin(3x + 2) + C$$
-
-\textbf{Merkregel für $\int f(ax+b)\,dx$:}
-$$\int f(ax + b)\,dx = \frac{1}{a} F(ax + b) + C$$
+\textbf{Merkregel:} $\int f(ax + b)\,dx = \frac{1}{a} F(ax + b) + C$
 \end{subbox}
 
 \begin{subbox}{Beispiel: Logarithmische Integration}
 $$\int \frac{f'(x)}{f(x)}\,dx = \ln|f(x)| + C$$
 
-\textbf{Beispiel:} $\int \frac{2x}{x^2 + 1}\,dx$
+\textbf{Beispiel:} $\int \frac{2x}{x^2 + 1}\,dx$ mit $u = x^2 + 1$:
 
-Mit $u = x^2 + 1$, $du = 2x\,dx$:
-$$\int \frac{2x}{x^2 + 1}\,dx = \int \frac{1}{u}\,du = \ln|u| + C = \ln(x^2 + 1) + C$$
+$$= \int \frac{1}{u}\,du = \ln|u| + C = \ln(x^2 + 1) + C$$
 \end{subbox}
 
 \subsection{Partielle Integration}
@@ -992,10 +982,9 @@ $$\int \frac{2x}{x^2 + 1}\,dx = \int \frac{1}{u}\,du = \ln|u| + C = \ln(x^2 + 1)
 Die partielle Integration ist die Umkehrung der Produktregel.
 
 \textbf{Formel:}
-$$\boxed{\int u(x) \cdot v'(x)\,dx = u(x) \cdot v(x) - \int u'(x) \cdot v(x)\,dx}$$
+$$\boxed{\int u \cdot v'\,dx = u \cdot v - \int u' \cdot v\,dx}$$
 
-Kurzschreibweise:
-$$\boxed{\int u \cdot dv = u \cdot v - \int v \cdot du}$$
+Kurzschreibweise: $\int u\,dv = uv - \int v\,du$
 
 \textbf{Vorgehen:}
 \begin{enumerate}
@@ -1021,36 +1010,32 @@ Wähle $u$ (zum Ableiten) in dieser Priorität:
 Was weiter oben steht, wird $u$ (abgeleitet), der Rest wird $v'$ (integriert).
 \end{subbox}
 
-\begin{subbox}{Beispiel: $\int x \cdot e^x\,dx$}
-\textbf{Wahl:} $u = x$ (Polynom), $v' = e^x$
+\begin{subbox}{Beispiel: $\int x e^x\,dx$}
+\textbf{Wahl:} $u = x$, $v' = e^x$ $\Rightarrow$ $u' = 1$, $v = e^x$
 
-$\Rightarrow$ $u' = 1$, $v = e^x$
-
-$$\int x \cdot e^x\,dx = x \cdot e^x - \int 1 \cdot e^x\,dx = x \cdot e^x - e^x + C = e^x(x - 1) + C$$
+$$\int x e^x dx = x e^x - \int e^x dx = e^x(x - 1) + C$$
 \end{subbox}
 
 \begin{subbox}{Beispiel: $\int \ln x\,dx$}
 \textbf{Trick:} Schreibe $\ln x = \ln x \cdot 1$
 
-\textbf{Wahl:} $u = \ln x$, $v' = 1$
+\textbf{Wahl:} $u = \ln x$, $v' = 1$ $\Rightarrow$ $u' = \frac{1}{x}$, $v = x$
 
-$\Rightarrow$ $u' = \frac{1}{x}$, $v = x$
-
-$$\int \ln x\,dx = x \cdot \ln x - \int x \cdot \frac{1}{x}\,dx = x \cdot \ln x - \int 1\,dx = x \ln x - x + C$$
+$$\int \ln x\,dx = x \ln x - \int x \cdot \frac{1}{x}\,dx = x \ln x - x + C$$
 \end{subbox}
 
-\begin{subbox}{Beispiel: $\int x^2 \cdot \sin x\,dx$ (zweimal partiell)}
+\begin{subbox}{Beispiel: $\int x^2 \sin x\,dx$ (zweimal partiell)}
 \textbf{1. Durchgang:} $u = x^2$, $v' = \sin x$ $\Rightarrow$ $u' = 2x$, $v = -\cos x$
 
 $$\int x^2 \sin x\,dx = -x^2 \cos x + \int 2x \cos x\,dx$$
 
 \textbf{2. Durchgang:} $u = 2x$, $v' = \cos x$ $\Rightarrow$ $u' = 2$, $v = \sin x$
 
-$$= -x^2 \cos x + 2x \sin x - \int 2 \sin x\,dx = -x^2 \cos x + 2x \sin x + 2\cos x + C$$
+$$= -x^2 \cos x + 2x \sin x + 2\cos x + C$$
 \end{subbox}
 
 \begin{mainbox}{Partielle Integration bei bestimmten Integralen}
-$$\boxed{\int_a^b u(x) \cdot v'(x)\,dx = \Big[u(x) \cdot v(x)\Big]_a^b - \int_a^b u'(x) \cdot v(x)\,dx}$$
+$$\boxed{\int_a^b u \cdot v'\,dx = \Big[u \cdot v\Big]_a^b - \int_a^b u' \cdot v\,dx}$$
 \end{mainbox}
 
 \subsection{Uneigentliche Integrale}
@@ -1078,7 +1063,7 @@ Das Integral konvergiert mit Wert $1$.
 \end{subbox}
 
 \begin{subbox}{Beispiel: $\int_1^{\infty} \frac{1}{x}\,dx$ (divergent)}
-$$\int_1^{\infty} \frac{1}{x}\,dx = \lim_{b \to \infty} \Big[\ln|x|\Big]_1^b = \lim_{b \to \infty} (\ln b - \ln 1) = \infty$$
+$$\int_1^{\infty} \frac{1}{x}\,dx = \lim_{b \to \infty} \Big[\ln x\Big]_1^b = \lim_{b \to \infty} \ln b = \infty$$
 
 Das Integral divergiert.
 \end{subbox}
@@ -1098,8 +1083,7 @@ $$\int_a^{b} f(x)\,dx = \int_a^{c} f(x)\,dx + \int_c^{b} f(x)\,dx$$
 \end{mainbox}
 
 \begin{subbox}{Beispiel: $\int_0^{1} \frac{1}{\sqrt{x}}\,dx$ (Polstelle bei $x=0$)}
-$$\int_0^{1} \frac{1}{\sqrt{x}}\,dx = \lim_{\varepsilon \to 0^+} \int_{\varepsilon}^{1} x^{-1/2}\,dx = \lim_{\varepsilon \to 0^+} \left[2\sqrt{x}\right]_{\varepsilon}^{1}$$
-$$= \lim_{\varepsilon \to 0^+} \left(2 - 2\sqrt{\varepsilon}\right) = 2 - 0 = 2$$
+$$\int_0^{1} x^{-1/2}\,dx = \lim_{\varepsilon \to 0^+} \left[2\sqrt{x}\right]_{\varepsilon}^{1} = \lim_{\varepsilon \to 0^+} (2 - 2\sqrt{\varepsilon}) = 2$$
 \end{subbox}
 
 \subsection{Fläche zwischen zwei Kurven}
@@ -1122,24 +1106,15 @@ $$A = \int_a^b (f(x) - g(x))\,dx$$
 \end{mainbox}
 
 \begin{subbox}{Beispiel: Fläche zwischen $f(x) = x^2$ und $g(x) = x$}
-\textbf{Schnittpunkte:} $x^2 = x$ $\Rightarrow$ $x(x-1) = 0$ $\Rightarrow$ $x_1 = 0$, $x_2 = 1$
+\textbf{Schnittpunkte:} $x^2 = x$ $\Rightarrow$ $x \in \{0, 1\}$. Für $x \in (0,1)$: $x > x^2$
 
-\textbf{Prüfung:} Für $x \in (0, 1)$: $g(x) = x > x^2 = f(x)$
-
-\textbf{Fläche:}
-$$A = \int_0^1 (x - x^2)\,dx = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}$$
+$$A = \int_0^1 (x - x^2)\,dx = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1 = \frac{1}{6}$$
 \end{subbox}
 
 \begin{subbox}{Beispiel mit Vorzeichenwechsel}
 Fläche zwischen $f(x) = x^3$ und $g(x) = x$ auf $[-1, 1]$:
 
-\textbf{Schnittpunkte:} $x^3 = x$ $\Rightarrow$ $x(x^2-1) = 0$ $\Rightarrow$ $x \in \{-1, 0, 1\}$
-
-\textbf{Aufteilen:}
-\begin{itemize}
-	\item $[-1, 0]$: $x^3 > x$ (Kubische oben)
-	\item $[0, 1]$: $x > x^3$ (Gerade oben)
-\end{itemize}
+\textbf{Schnittpunkte:} $x \in \{-1, 0, 1\}$. Aufteilen bei $x = 0$.
 
 $$A = \int_{-1}^{0} (x^3 - x)\,dx + \int_0^{1} (x - x^3)\,dx = \frac{1}{4} + \frac{1}{4} = \frac{1}{2}$$
 \end{subbox}
@@ -1183,15 +1158,11 @@ $$V_y = \pi \int_c^d \left[g(y)\right]^2\,dy = \pi \int_c^d x^2\,dy$$
 \end{mainbox}
 
 \begin{subbox}{Beispiel: Kegel mit Radius $R$ und Höhe $h$}
-Gerade: $f(x) = \frac{R}{h}x$ auf $[0, h]$
-
-$$V = \pi \int_0^h \left(\frac{R}{h}x\right)^2 dx = \pi \frac{R^2}{h^2} \int_0^h x^2\,dx = \pi \frac{R^2}{h^2} \cdot \frac{h^3}{3} = \frac{1}{3}\pi R^2 h$$
+$f(x) = \frac{R}{h}x$ auf $[0, h]$: $V = \pi \int_0^h \left(\frac{Rx}{h}\right)^2 dx = \frac{\pi R^2 h}{3}$
 \end{subbox}
 
 \begin{subbox}{Beispiel: Kugel mit Radius $R$}
-Halbkreis: $f(x) = \sqrt{R^2 - x^2}$ auf $[-R, R]$
-
-$$V = \pi \int_{-R}^{R} (R^2 - x^2)\,dx = \pi \left[R^2 x - \frac{x^3}{3}\right]_{-R}^{R} = \pi \cdot \frac{4R^3}{3} = \frac{4}{3}\pi R^3$$
+$f(x) = \sqrt{R^2 - x^2}$ auf $[-R, R]$: $V = \pi \int_{-R}^{R} (R^2 - x^2)\,dx = \frac{4}{3}\pi R^3$
 \end{subbox}
 
 \subsection{Mantelfläche}
@@ -1213,11 +1184,9 @@ Umfang $\times$ Bogenlänge: $2\pi \cdot f(x) \cdot ds$
 \end{mainbox}
 
 \begin{subbox}{Beispiel: Kugeloberfläche mit Radius $R$}
-$f(x) = \sqrt{R^2 - x^2}$, $f'(x) = \frac{-x}{\sqrt{R^2-x^2}}$
+$f(x) = \sqrt{R^2 - x^2}$, \quad $1 + (f')^2 = \frac{R^2}{R^2-x^2}$
 
-$1 + (f'(x))^2 = 1 + \frac{x^2}{R^2-x^2} = \frac{R^2}{R^2-x^2}$
-
-$$M = 2\pi \int_{-R}^{R} \sqrt{R^2-x^2} \cdot \frac{R}{\sqrt{R^2-x^2}}\,dx = 2\pi R \int_{-R}^{R} dx = 2\pi R \cdot 2R = 4\pi R^2$$
+$$M = 2\pi \int_{-R}^{R} \sqrt{R^2-x^2} \cdot \frac{R}{\sqrt{R^2-x^2}}\,dx = 4\pi R^2$$
 \end{subbox}
 
 \subsection{Praxisbeispiel: Trinkflasche}
@@ -1254,16 +1223,16 @@ $(0; 1{,}2)$, $(1{,}5; 1{,}5)$, $(2; 1{,}25)$, $(5{,}5; 3)$, $(12; 3{,}1)$, ...
 \end{subbox}
 
 \begin{mainbox}{Zusammenfassung: Integralformeln}
-\renewcommand*{\arraystretch}{1.8}
+\renewcommand*{\arraystretch}{1.6}
 \begin{center}
 \begin{tabular}{l|c}
 \textbf{Grösse} & \textbf{Formel} \\
 \hline
-Fläche unter Kurve & $A = \int_a^b f(x)\,dx$ \\
-Fläche zwischen Kurven & $A = \int_a^b |f(x) - g(x)|\,dx$ \\
-Bogenlänge & $s = \int_a^b \sqrt{1 + (f'(x))^2}\,dx$ \\
-Rotationsvolumen ($x$-Achse) & $V_x = \pi \int_a^b [f(x)]^2\,dx$ \\
-Mantelfläche ($x$-Achse) & $M_x = 2\pi \int_a^b f(x)\sqrt{1+(f'(x))^2}\,dx$ \\
+Fläche unter Kurve & $\int_a^b f(x)\,dx$ \\
+Fläche zw.\ Kurven & $\int_a^b |f - g|\,dx$ \\
+Bogenlänge & $\int_a^b \sqrt{1 + f'^2}\,dx$ \\
+Rotationsvolumen & $\pi \int_a^b f^2\,dx$ \\
+Mantelfläche & $2\pi \int_a^b f\sqrt{1+f'^2}\,dx$ \\
 \end{tabular}
 \end{center}
 \end{mainbox}
@@ -1462,7 +1431,7 @@ Approximation durch Parabeln (quadratische Interpolation).
 
 \textbf{Voraussetzung:} $n$ muss \textbf{gerade} sein!
 
-$$\boxed{\int_a^b f(x)\,dx \approx \frac{h}{3}(y_0 + 4y_1 + 2y_2 + 4y_3 + \ldots + 2y_{n-2} + 4y_{n-1} + y_n)}$$
+$$\boxed{\int_a^b f\,dx \approx \frac{h}{3}(y_0 + 4y_1 + 2y_2 + \ldots + 4y_{n-1} + y_n)}$$
 
 \textbf{Gewichte:} $1, 4, 2, 4, 2, \ldots, 2, 4, 1$
 
@@ -1504,34 +1473,28 @@ $k$ & $x_k$ & $y_k$ & Gruppe \\
 
 $\Sigma_1 = 2{,}41$, $\Sigma_2 = 3{,}65$
 
-$$s \approx h \cdot \left(\frac{1}{2}\Sigma_1 + \Sigma_2\right) = \frac{\pi}{8}\left(\frac{1}{2} \cdot 2{,}41 + 3{,}65\right) = \underline{1{,}93}$$
+$$s \approx h \left(\frac{\Sigma_1}{2} + \Sigma_2\right) = \frac{\pi}{8}(1{,}21 + 3{,}65) = \underline{1{,}93}$$
 \end{subbox}
 
 \begin{subbox}{Beispiel: Simpson-Regel}
-$\displaystyle s = \int_0^{\pi/2} \sqrt{1 + \sin^2(x)}\,dx$ mit $n = 2$ (4 Teilpunkte)
-
-$h = \frac{\pi/2}{2 \cdot 2} = \frac{\pi}{8}$
+$s = \int_0^{\pi/2} \sqrt{1 + \sin^2(x)}\,dx$ mit $n = 2$, $h = \frac{\pi}{8}$
 
 \renewcommand*{\arraystretch}{1.2}
 \begin{center}
 \begin{tabular}{c|c|c|c}
-$k$ & $x_k$ & $y_k$ & Gewicht \\
+$k$ & $x_k$ & $y_k$ & Gew. \\
 \hline
-0 & $0$ & $1{,}00$ & $\times 1$ \\
-1 & $\pi/8$ & $1{,}07$ & $\times 4$ \\
-2 & $2\pi/8$ & $1{,}22$ & $\times 2$ \\
-3 & $3\pi/8$ & $1{,}36$ & $\times 4$ \\
-4 & $4\pi/8$ & $1{,}41$ & $\times 1$ \\
+0 & $0$ & $1{,}00$ & $1$ \\
+1 & $\pi/8$ & $1{,}07$ & $4$ \\
+2 & $\pi/4$ & $1{,}22$ & $2$ \\
+3 & $3\pi/8$ & $1{,}36$ & $4$ \\
+4 & $\pi/2$ & $1{,}41$ & $1$ \\
 \end{tabular}
 \end{center}
 
-$\Sigma_1 = 1{,}00 + 1{,}41 = 2{,}41$ (Gewicht 1)
+$\Sigma_1 = 2{,}41$ (Gew.\ 1), $\Sigma_2 = 2{,}43$ (Gew.\ 4), $\Sigma_3 = 1{,}22$ (Gew.\ 2)
 
-$\Sigma_2 = 1{,}07 + 1{,}36 = 2{,}43$ (Gewicht 4)
-
-$\Sigma_3 = 1{,}22$ (Gewicht 2)
-
-$$s \approx \frac{h}{3}(\Sigma_1 + 4\Sigma_2 + 2\Sigma_3) = \frac{\pi}{24}(2{,}41 + 4 \cdot 2{,}43 + 2 \cdot 1{,}22) = \underline{1{,}91}$$
+$$s \approx \frac{h}{3}(\Sigma_1 + 4\Sigma_2 + 2\Sigma_3) = \frac{\pi}{24}(2{,}41 + 9{,}72 + 2{,}44) = \underline{1{,}91}$$
 \end{subbox}
 
 \begin{subbox}{Herleitung der Simpson-Regel (Einzelintervall)}

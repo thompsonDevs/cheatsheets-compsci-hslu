@@ -1428,6 +1428,124 @@ $$f''(x_0) \approx \frac{f(x_0 + h) - 2f(x_0) + f(x_0 - h)}{h^2}$$
 Fehlerordnung: $\mathcal{O}(h^2)$
 \end{subbox}
 
+\subsection{Numerische Integration}
+
+\begin{mainbox}{Grundidee: Numerische Quadratur}
+Berechne $\int_a^b f(x)\,dx$ näherungsweise, wenn keine analytische Stammfunktion bekannt ist.
+
+\textbf{Gemeinsame Notation:}
+$$h = \frac{b-a}{n}, \quad x_k = a + k \cdot h, \quad y_k = f(x_k)$$
+
+wobei $n$ die Anzahl der Teilintervalle ist.
+\end{mainbox}
+
+\begin{mainbox}{Rechteckregel (Mittelpunktsregel)}
+Approximation durch Rechtecke mit Funktionswert am rechten Rand:
+
+$$\boxed{\int_a^b f(x)\,dx \approx h \cdot (y_1 + y_2 + \ldots + y_n) = h \sum_{k=1}^{n} y_k}$$
+
+\textbf{Fehlerordnung:} $\mathcal{O}(h)$ (langsam konvergent)
+\end{mainbox}
+
+\begin{mainbox}{Trapezregel}
+Approximation durch Trapeze (lineare Interpolation):
+
+$$\boxed{\int_a^b f(x)\,dx \approx h \left(\frac{y_0}{2} + y_1 + y_2 + \ldots + y_{n-1} + \frac{y_n}{2}\right)}$$
+
+Kurzform: $\displaystyle A \approx h \left(\frac{y_0 + y_n}{2} + \sum_{k=1}^{n-1} y_k\right)$
+
+\textbf{Fehlerordnung:} $\mathcal{O}(h^2)$
+\end{mainbox}
+
+\begin{mainbox}{Simpson-Regel (Keplersche Fassregel)}
+Approximation durch Parabeln (quadratische Interpolation).
+
+\textbf{Voraussetzung:} $n$ muss \textbf{gerade} sein!
+
+$$\boxed{\int_a^b f(x)\,dx \approx \frac{h}{3}(y_0 + 4y_1 + 2y_2 + 4y_3 + \ldots + 2y_{n-2} + 4y_{n-1} + y_n)}$$
+
+\textbf{Gewichte:} $1, 4, 2, 4, 2, \ldots, 2, 4, 1$
+
+\textbf{Fehlerordnung:} $\mathcal{O}(h^4)$ (sehr genau!)
+\end{mainbox}
+
+\begin{subbox}{Vergleich der Verfahren}
+\renewcommand*{\arraystretch}{1.4}
+\begin{center}
+\begin{tabular}{l|c|c}
+\textbf{Methode} & \textbf{Fehler} & \textbf{Interpolation} \\
+\hline
+Rechteckregel & $\mathcal{O}(h)$ & Konstante \\
+Trapezregel & $\mathcal{O}(h^2)$ & Linear \\
+Simpson-Regel & $\mathcal{O}(h^4)$ & Quadratisch \\
+\end{tabular}
+\end{center}
+
+Die Simpson-Regel ist bei gleicher Anzahl Stützstellen deutlich genauer!
+\end{subbox}
+
+\begin{subbox}{Beispiel: Trapezregel}
+$\displaystyle s = \int_0^{\pi/2} \sqrt{1 + \sin^2(x)}\,dx$ mit $n = 4$
+
+$h = \frac{\pi/2 - 0}{4} = \frac{\pi}{8}$, \quad $y_k = \sqrt{1 + \sin^2(x_k)}$
+
+\renewcommand*{\arraystretch}{1.2}
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$k$ & $x_k$ & $y_k$ & Gruppe \\
+\hline
+0 & $0$ & $1{,}00$ & $\Sigma_1$ \\
+1 & $\pi/8$ & $1{,}07$ & $\Sigma_2$ \\
+2 & $2\pi/8$ & $1{,}22$ & $\Sigma_2$ \\
+3 & $3\pi/8$ & $1{,}36$ & $\Sigma_2$ \\
+4 & $4\pi/8$ & $1{,}41$ & $\Sigma_1$ \\
+\end{tabular}
+\end{center}
+
+$\Sigma_1 = 2{,}41$, $\Sigma_2 = 3{,}65$
+
+$$s \approx h \cdot \left(\frac{1}{2}\Sigma_1 + \Sigma_2\right) = \frac{\pi}{8}\left(\frac{1}{2} \cdot 2{,}41 + 3{,}65\right) = \underline{1{,}93}$$
+\end{subbox}
+
+\begin{subbox}{Beispiel: Simpson-Regel}
+$\displaystyle s = \int_0^{\pi/2} \sqrt{1 + \sin^2(x)}\,dx$ mit $n = 2$ (4 Teilpunkte)
+
+$h = \frac{\pi/2}{2 \cdot 2} = \frac{\pi}{8}$
+
+\renewcommand*{\arraystretch}{1.2}
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$k$ & $x_k$ & $y_k$ & Gewicht \\
+\hline
+0 & $0$ & $1{,}00$ & $\times 1$ \\
+1 & $\pi/8$ & $1{,}07$ & $\times 4$ \\
+2 & $2\pi/8$ & $1{,}22$ & $\times 2$ \\
+3 & $3\pi/8$ & $1{,}36$ & $\times 4$ \\
+4 & $4\pi/8$ & $1{,}41$ & $\times 1$ \\
+\end{tabular}
+\end{center}
+
+$\Sigma_1 = 1{,}00 + 1{,}41 = 2{,}41$ (Gewicht 1)
+
+$\Sigma_2 = 1{,}07 + 1{,}36 = 2{,}43$ (Gewicht 4)
+
+$\Sigma_3 = 1{,}22$ (Gewicht 2)
+
+$$s \approx \frac{h}{3}(\Sigma_1 + 4\Sigma_2 + 2\Sigma_3) = \frac{\pi}{24}(2{,}41 + 4 \cdot 2{,}43 + 2 \cdot 1{,}22) = \underline{1{,}91}$$
+\end{subbox}
+
+\begin{subbox}{Monte-Carlo-Integration}
+Zufallsbasierte Methode für komplexe Gebiete:
+
+\begin{enumerate}
+	\item Wähle $N$ zufällige Punkte $(x_i, y_i)$ im Rechteck $[a,b] \times [0, y_{\max}]$
+	\item Zähle Punkte $N_{\text{unter}}$ unterhalb der Kurve $f(x)$
+	\item Fläche $\approx \frac{N_{\text{unter}}}{N} \cdot (b-a) \cdot y_{\max}$
+\end{enumerate}
+
+\textbf{Fehler:} $\mathcal{O}(1/\sqrt{N})$ -- konvergiert langsam, aber dimensionsunabhängig!
+\end{subbox}
+
 \section{Tabellen}
 \subsection{Grenzwerte}
 \arraycolsep=1pt\def\arraystretch{1.5}

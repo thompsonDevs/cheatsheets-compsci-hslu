@@ -647,4 +647,173 @@ Für quadratische $n \times n$-Matrix $\mathbf{A}$:
 \textbf{Nachteil:} Mehr Rechenaufwand als reines Gauss-Verfahren
 \end{mainbox}
 
+% ============================================================================
+% SECTION 5: SW05 - VEKTORPRODUKT
+% ============================================================================
+\section{SW05: Vektorprodukt}
+
+\begin{mainbox}{Vektorprodukt (Kreuzprodukt)}
+Das \textbf{Vektorprodukt} $\mathbf{u} \times \mathbf{v}$ liefert einen Vektor, der \textbf{senkrecht} auf $\mathbf{u}$ und $\mathbf{v}$ steht.
+
+$$\mathbf{u} \times \mathbf{v} = \begin{pmatrix} u_1 \\ u_2 \\ u_3 \end{pmatrix} \times \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} = \begin{pmatrix} u_2v_3 - u_3v_2 \\ u_3v_1 - u_1v_3 \\ u_1v_2 - u_2v_1 \end{pmatrix}$$
+
+\textbf{Länge:} $|\mathbf{u} \times \mathbf{v}| = |\mathbf{u}| \cdot |\mathbf{v}| \cdot \sin\varphi$
+
+\textbf{Geometrisch:} Fläche des aufgespannten Parallelogramms
+\end{mainbox}
+
+\begin{mainbox}{Vektorprodukt: Merkregel Sarrus}
+$$\mathbf{a} \times \mathbf{b} = \begin{vmatrix} \mathbf{e}_1 & \mathbf{e}_2 & \mathbf{e}_3 \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix}$$
+
+Entwicklung nach Sarrus mit Einheitsvektoren:
+\begin{align*}
+&= (a_2b_3 - a_3b_2)\mathbf{e}_1 + (a_3b_1 - a_1b_3)\mathbf{e}_2 \\
+&\quad + (a_1b_2 - a_2b_1)\mathbf{e}_3
+\end{align*}
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften Vektorprodukt}
+\textbf{Bilinearität:}
+\begin{itemize}
+    \item $(\mathbf{a} + \mathbf{b}) \times \mathbf{c} = \mathbf{a} \times \mathbf{c} + \mathbf{b} \times \mathbf{c}$
+    \item $\mathbf{a} \times (\mathbf{b} + \mathbf{c}) = \mathbf{a} \times \mathbf{b} + \mathbf{a} \times \mathbf{c}$
+    \item $(\lambda\mathbf{a}) \times \mathbf{b} = \lambda(\mathbf{a} \times \mathbf{b}) = \mathbf{a} \times (\lambda\mathbf{b})$
+\end{itemize}
+
+\textbf{Antikommutativität:}
+$$\mathbf{a} \times \mathbf{b} = -(\mathbf{b} \times \mathbf{a})$$
+$$\mathbf{a} \times \mathbf{a} = \mathbf{0}$$
+
+\textbf{Spatprodukt} (Determinante):
+$$(\mathbf{a} \times \mathbf{b}) \cdot \mathbf{c} = \det(\mathbf{a}, \mathbf{b}, \mathbf{c})$$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Vektorprodukt}
+$\mathbf{u} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$, $\mathbf{v} = \begin{pmatrix} 4 \\ 5 \\ 6 \end{pmatrix}$
+
+$\mathbf{u} \times \mathbf{v} = \begin{pmatrix} 2 \cdot 6 - 3 \cdot 5 \\ 3 \cdot 4 - 1 \cdot 6 \\ 1 \cdot 5 - 2 \cdot 4 \end{pmatrix} = \begin{pmatrix} -3 \\ 6 \\ -3 \end{pmatrix}$
+
+\textbf{Probe:} $\mathbf{u} \cdot (\mathbf{u} \times \mathbf{v}) = -3 + 12 - 9 = 0$ \checkmark
+\end{subbox}
+
+% ============================================================================
+% SECTION 6: SW06 - LINEARE ABBILDUNGEN
+% ============================================================================
+\section{SW06: Lineare Abbildungen}
+
+\begin{mainbox}{Definition: Lineare Abbildung}
+$A: D \rightarrow W$ heisst \textbf{linear}, wenn:
+$$A(\mathbf{u} + \mathbf{v}) = A(\mathbf{u}) + A(\mathbf{v}) \quad \forall \mathbf{u}, \mathbf{v} \in D$$
+$$A(s \cdot \mathbf{u}) = s \cdot A(\mathbf{u}) \quad \forall s \in \R, \forall \mathbf{u} \in D$$
+
+\textbf{Matrix-Vektor-Multiplikation} ist eine lineare Abbildung!
+
+\textbf{Spalten der Matrix} = Bilder der Einheitsvektoren
+$$\mathbf{A} = \begin{pmatrix} | & | \\ A(\mathbf{e}_1) & A(\mathbf{e}_2) \\ | & | \end{pmatrix}$$
+\end{mainbox}
+
+\begin{mainbox}{Basis und Einheitsvektoren}
+\textbf{Einheitsvektoren} im $\R^n$:
+$$\mathbf{e}_1 = \begin{pmatrix} 1 \\ 0 \\ \vdots \end{pmatrix}, \; \mathbf{e}_2 = \begin{pmatrix} 0 \\ 1 \\ \vdots \end{pmatrix}, \; \ldots$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Länge 1: $|\mathbf{e}_k| = 1$
+    \item Paarweise orthogonal: $\mathbf{e}_i \cdot \mathbf{e}_j = 0$ für $i \neq j$
+    \item Bilden die Einheitsmatrix $\mathbf{I}_n$
+\end{itemize}
+
+\textbf{Jeder Vektor} als Linearkombination:
+$$\mathbf{v} = v_1\mathbf{e}_1 + v_2\mathbf{e}_2 + \cdots + v_n\mathbf{e}_n$$
+\end{mainbox}
+
+\begin{mainbox}{Skalierung}
+$$\mathbf{S} = \begin{pmatrix} s_x & 0 \\ 0 & s_y \end{pmatrix}$$
+
+\textbf{Gleichmässig:} $s_x = s_y = s$
+$$\mathbf{S} = \begin{pmatrix} s & 0 \\ 0 & s \end{pmatrix} = s \cdot \mathbf{I}$$
+
+Vergrösserung: $s > 1$, Verkleinerung: $0 < s < 1$
+\end{mainbox}
+
+\begin{mainbox}{Drehung (Rotation)}
+Drehung um Winkel $\varphi$ (gegen Uhrzeigersinn):
+$$\mathbf{R}_\varphi = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item $\det(\mathbf{R}_\varphi) = 1$
+    \item $\mathbf{R}_\varphi^{-1} = \mathbf{R}_{-\varphi} = \mathbf{R}_\varphi^T$
+    \item Längenerhaltend (orthogonal)
+\end{itemize}
+
+\textbf{Drehstreckung:} $r \cdot \mathbf{R}_\varphi$ (Drehung + Skalierung)
+\end{mainbox}
+
+\begin{mainbox}{Spiegelungen}
+\textbf{An $x$-Achse:}
+$$\mathbf{S}_x = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$$
+
+\textbf{An $y$-Achse:}
+$$\mathbf{S}_y = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$$
+
+\textbf{An Gerade durch Ursprung} (Winkel $\varphi$ zur $x$-Achse):
+$$\mathbf{S}_\varphi = \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
+
+\textbf{Eigenschaft:} $\det(\mathbf{S}) = -1$ (Orientierung wechselt)
+\end{mainbox}
+
+\begin{mainbox}{Scherung}
+\textbf{Horizontale Scherung:}
+$$\mathbf{H}_k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$$
+
+\textbf{Vertikale Scherung:}
+$$\mathbf{V}_k = \begin{pmatrix} 1 & 0 \\ k & 1 \end{pmatrix}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item $\det = 1$ (flächenerhaltend)
+    \item Parallele Linien bleiben parallel
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Zusammensetzung von Abbildungen}
+Hintereinanderausführung von $A$ dann $B$:
+$$\mathbf{x} \xrightarrow{A} \mathbf{y} \xrightarrow{B} \mathbf{z}$$
+
+\textbf{Resultierende Matrix:}
+$$\mathbf{C} = \mathbf{B} \cdot \mathbf{A}$$
+
+\textbf{Achtung:} Reihenfolge! Erste Abbildung \textbf{rechts}.
+
+$$\mathbf{z} = \mathbf{B}(\mathbf{A}\mathbf{x}) = (\mathbf{BA})\mathbf{x} = \mathbf{Cx}$$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Spiegelung an beliebiger Achse}
+Spiegelung an Achse mit Winkel $\varphi$:
+\begin{enumerate}
+    \item Drehe um $-\varphi$ (Achse $\rightarrow$ $x$-Achse)
+    \item Spiegle an $x$-Achse
+    \item Drehe um $+\varphi$ (zurück)
+\end{enumerate}
+
+$$\mathbf{S}_\varphi = \mathbf{R}_\varphi \cdot \mathbf{S}_x \cdot \mathbf{R}_{-\varphi}$$
+
+$$= \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} \cos\varphi & \sin\varphi \\ -\sin\varphi & \cos\varphi \end{pmatrix}$$
+
+$$= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
+\end{subbox}
+
+\begin{mainbox}{Übersicht: 2D-Transformationsmatrizen}
+\small
+\begin{tabular}{ll}
+\textbf{Identität} & $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ \\[8pt]
+\textbf{Skalierung} & $\begin{pmatrix} s_x & 0 \\ 0 & s_y \end{pmatrix}$ \\[8pt]
+\textbf{Drehung} & $\begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix}$ \\[8pt]
+\textbf{Spieg. $x$} & $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$ \\[8pt]
+\textbf{Spieg. $y$} & $\begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$ \\[8pt]
+\textbf{Scherung} & $\begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$
+\end{tabular}
+\end{mainbox}
+
 \end{document}

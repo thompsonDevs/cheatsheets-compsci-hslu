@@ -105,9 +105,9 @@
 \maketitle
 
 % ============================================================================
-% SECTION 1: SW01 - VEKTOREN, MATRIZEN, LGS
+% SECTION 1: VEKTOREN, MATRIZEN, LGS
 % ============================================================================
-\section{SW01: Vektoren, Matrizen, LGS}
+\section{Vektoren, Matrizen, LGS}
 
 \begin{mainbox}{Vektoren: Grundlagen}
 \textbf{Skalar:} Nur Betrag (Temperatur, Druck)\\
@@ -186,9 +186,9 @@ $$(\mathbf{A} \mid \mathbf{b}) = \left(\begin{array}{ccc|c} a_{1,1} & \cdots & a
 \end{mainbox}
 
 % ============================================================================
-% SECTION 2: SW02 - GAUSS-ALGORITHMUS
+% SECTION 2: GAUSS-ALGORITHMUS
 % ============================================================================
-\section{SW02: Gauss-Algorithmus}
+\section{Gauss-Algorithmus}
 
 \begin{mainbox}{Lineares Gleichungssystem (LGS)}
 Ein \textbf{LGS} besteht aus Gleichungen der Form:
@@ -322,9 +322,9 @@ $x_2$ frei wählbar
 \end{mainbox}
 
 % ============================================================================
-% SECTION 3: SW03 - LU-ZERLEGUNG
+% SECTION 3: LU-ZERLEGUNG
 % ============================================================================
-\section{SW03: LU-Zerlegung, Matrizen}
+\section{LU-Zerlegung, Matrixoperationen}
 
 \begin{mainbox}{Matrixmultiplikation}
 $\mathbf{A} \in \R^{l \times m}$, $\mathbf{B} \in \R^{m \times n}$ $\Rightarrow$ $\mathbf{C} = \mathbf{AB} \in \R^{l \times n}$
@@ -455,9 +455,9 @@ $l_{31} = -3$, $l_{32} = 2$
 \end{subbox}
 
 % ============================================================================
-% SECTION 4: SW04 - GAUSS-JORDAN, INVERSE, DETERMINANTE
+% SECTION 4: GAUSS-JORDAN, INVERSE, DETERMINANTE
 % ============================================================================
-\section{SW04: Gauss-Jordan, Inverse, Determinante}
+\section{Gauss-Jordan, Inverse, Determinante}
 
 \begin{mainbox}{Gauss-Jordan-Verfahren}
 \textbf{Erweiterung} des Gauss-Verfahrens: Koeffizientenmatrix wird zur \textbf{Diagonalmatrix} (nicht nur ZSF).
@@ -648,9 +648,9 @@ Für quadratische $n \times n$-Matrix $\mathbf{A}$:
 \end{mainbox}
 
 % ============================================================================
-% SECTION 5: SW05 - VEKTORPRODUKT
+% SECTION 5: VEKTORPRODUKT
 % ============================================================================
-\section{SW05: Vektorprodukt}
+\section{Vektorprodukt}
 
 \begin{mainbox}{Vektorprodukt (Kreuzprodukt)}
 Das \textbf{Vektorprodukt} $\mathbf{u} \times \mathbf{v}$ liefert einen Vektor, der \textbf{senkrecht} auf $\mathbf{u}$ und $\mathbf{v}$ steht.
@@ -697,9 +697,9 @@ $\mathbf{u} \times \mathbf{v} = \begin{pmatrix} 2 \cdot 6 - 3 \cdot 5 \\ 3 \cdot
 \end{subbox}
 
 % ============================================================================
-% SECTION 6: SW06 - LINEARE ABBILDUNGEN
+% SECTION 6: LINEARE ABBILDUNGEN
 % ============================================================================
-\section{SW06: Lineare Abbildungen}
+\section{Lineare Abbildungen}
 
 \begin{mainbox}{Definition: Lineare Abbildung}
 $A: D \rightarrow W$ heisst \textbf{linear}, wenn:
@@ -814,6 +814,128 @@ $$= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\
 \textbf{Spieg. $y$} & $\begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$ \\[8pt]
 \textbf{Scherung} & $\begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$
 \end{tabular}
+\end{mainbox}
+
+% ============================================================================
+% SECTION 7: ORTHOGONALE ABBILDUNGEN, HOMOGENE KOORDINATEN
+% ============================================================================
+\section{Orthogonale Abb., Homogene Koord.}
+
+\begin{mainbox}{Orthogonale Abbildungen}
+\textbf{Definition:} Eine Abbildung $\mathbf{A}$ ist \textbf{orthogonal}, wenn sie \textbf{längen- und winkeltreu} ist.
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Erhält Skalarprodukt: $\mathbf{x} \cdot \mathbf{y} = (\mathbf{Ax}) \cdot (\mathbf{Ay})$
+    \item Inverse = Transponierte: $\mathbf{A}^{-1} = \mathbf{A}^T$
+    \item $\det(\mathbf{A}) = \pm 1$
+    \item Spalten (und Zeilen) sind normiert: $|\mathbf{a}_i| = 1$
+    \item Spalten stehen paarweise senkrecht
+\end{itemize}
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item Drehung: $\det = +1$ (orientierungserhaltend)
+    \item Spiegelung: $\det = -1$ (orientierungsumkehrend)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Homogene Koordinaten: Idee}
+\textbf{Problem:} Translation ist \textbf{nicht linear} ($\mathbf{0}$ wird verschoben).
+
+\textbf{Lösung:} Dimension erhöhen $\rightarrow$ \textbf{homogene Koordinaten}
+
+\textbf{2D $\rightarrow$ 3D:}
+$$\begin{pmatrix} x \\ y \end{pmatrix} \rightarrow \begin{pmatrix} x \\ y \\ 1 \end{pmatrix}$$
+
+\textbf{3D $\rightarrow$ 4D:}
+$$\begin{pmatrix} x \\ y \\ z \end{pmatrix} \rightarrow \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}$$
+
+$\Rightarrow$ Rotation \textbf{und} Translation als Matrixmultiplikation!
+\end{mainbox}
+
+\begin{mainbox}{2D-Rotation (homogen)}
+Rotation um Winkel $\varphi$ um den Ursprung:
+$$\mathbf{R}_\varphi = \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 \\ \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
+
+$$\mathbf{R}_\varphi \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} = \begin{pmatrix} x\cos\varphi - y\sin\varphi \\ x\sin\varphi + y\cos\varphi \\ 1 \end{pmatrix}$$
+\end{mainbox}
+
+\begin{mainbox}{2D-Translation (homogen)}
+Verschiebung um $(u, v)^T$:
+$$\mathbf{T}_{u,v} = \begin{pmatrix} 1 & 0 & u \\ 0 & 1 & v \\ 0 & 0 & 1 \end{pmatrix}$$
+
+$$\mathbf{T}_{u,v} \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} = \begin{pmatrix} x + u \\ y + v \\ 1 \end{pmatrix}$$
+
+\textbf{Inverse:} $\mathbf{T}_{u,v}^{-1} = \mathbf{T}_{-u,-v}$
+\end{mainbox}
+
+\begin{mainbox}{Verkettung: Nicht kommutativ!}
+\textbf{Zuerst $\mathbf{A}$, dann $\mathbf{B}$:} $\mathbf{C} = \mathbf{B} \cdot \mathbf{A}$
+
+\textbf{Rotation, dann Translation:}
+$$\mathbf{T} \cdot \mathbf{R} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u \\ \sin\varphi & \cos\varphi & v \\ 0 & 0 & 1 \end{pmatrix}$$
+
+\textbf{Translation, dann Rotation:}
+$$\mathbf{R} \cdot \mathbf{T} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u\cos\varphi - v\sin\varphi \\ \sin\varphi & \cos\varphi & u\sin\varphi + v\cos\varphi \\ 0 & 0 & 1 \end{pmatrix}$$
+
+$\mathbf{T} \cdot \mathbf{R} \neq \mathbf{R} \cdot \mathbf{T}$ im Allgemeinen!
+\end{mainbox}
+
+\begin{subbox}{Drehung um beliebiges Zentrum}
+Drehung um Punkt $\mathbf{c} = (c_x, c_y)^T$:
+\begin{enumerate}
+    \item Translation: $\mathbf{c} \rightarrow \mathbf{0}$
+    \item Rotation um Ursprung
+    \item Translation: $\mathbf{0} \rightarrow \mathbf{c}$
+\end{enumerate}
+
+$$\mathbf{M} = \mathbf{T}_{c_x, c_y} \cdot \mathbf{R}_\varphi \cdot \mathbf{T}_{-c_x, -c_y}$$
+\end{subbox}
+
+\begin{mainbox}{3D-Rotationen (homogen)}
+\textbf{Um $x$-Achse:}
+$$\mathbf{R}_x(\varphi) = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & \cos\varphi & -\sin\varphi & 0 \\ 0 & \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
+
+\textbf{Um $y$-Achse:}
+$$\mathbf{R}_y(\varphi) = \begin{pmatrix} \cos\varphi & 0 & \sin\varphi & 0 \\ 0 & 1 & 0 & 0 \\ -\sin\varphi & 0 & \cos\varphi & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
+
+\textbf{Um $z$-Achse:}
+$$\mathbf{R}_z(\varphi) = \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 & 0 \\ \sin\varphi & \cos\varphi & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
+\end{mainbox}
+
+\begin{mainbox}{3D-Translation (homogen)}
+Verschiebung um $(u, v, w)^T$:
+$$\mathbf{T}_{u,v,w} = \begin{pmatrix} 1 & 0 & 0 & u \\ 0 & 1 & 0 & v \\ 0 & 0 & 1 & w \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
+
+$$\mathbf{T} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x + u \\ y + v \\ z + w \\ 1 \end{pmatrix}$$
+\end{mainbox}
+
+\begin{mainbox}{Struktur homogener Matrizen}
+\textbf{Allgemeine Form (2D):}
+$$\begin{pmatrix} \mathbf{A}_{2\times 2} & \mathbf{t} \\ \mathbf{0}^T & 1 \end{pmatrix} = \begin{pmatrix} a & b & t_x \\ c & d & t_y \\ 0 & 0 & 1 \end{pmatrix}$$
+
+\textbf{Allgemeine Form (3D):}
+$$\begin{pmatrix} \mathbf{A}_{3\times 3} & \mathbf{t} \\ \mathbf{0}^T & 1 \end{pmatrix}$$
+
+$\mathbf{A}$: Lineare Transformation (Rotation, Skalierung, ...)\\
+$\mathbf{t}$: Translationsvektor
+\end{mainbox}
+
+\begin{mainbox}{Zusammenfassung: Homogene Koord.}
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Einheitliche Behandlung von linearen Abb. und Translation
+    \item Verkettung durch Matrixmultiplikation
+    \item Wichtig für Computergrafik
+\end{itemize}
+
+\textbf{Merke:}
+\begin{itemize}
+    \item Letzte Zeile: $(0 \; \cdots \; 0 \; 1)$
+    \item Letzte Koordinate des Vektors: $1$
+    \item Erste Abbildung steht \textbf{rechts}
+\end{itemize}
 \end{mainbox}
 
 \end{document}

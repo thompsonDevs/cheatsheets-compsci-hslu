@@ -1,9 +1,6 @@
 % ============================================================================
-% LIAL SW01 CHEATSHEET
-% Vektoren, Matrizen und lineare Gleichungssysteme
-% ============================================================================
-% Based on the lecture slides from Hochschule Luzern
-% Course: Lineare Algebra (I.BA_LIAL)
+% LIAL CHEATSHEET
+% Lineare Algebra - Hochschule Luzern
 % ============================================================================
 
 \documentclass[a4paper, fontsize=7pt]{scrartcl}
@@ -22,10 +19,7 @@
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 
-% Number of columns
 \Ncolumn{4}
-
-% Remove paragraph indentation
 \setlength{\parindent}{0cm}
 
 % ============================================================================
@@ -33,7 +27,6 @@
 % ============================================================================
 \usepackage[most]{tcolorbox}
 
-% Base style for all boxes
 \tcbset{
   base/.style={
     boxrule=0.3mm,
@@ -49,14 +42,12 @@
   }
 }
 
-% Main concept box (green accent)
 \definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}
 \newtcolorbox{mainbox}[1]{
   colframe=maincolor,
   base={#1}
 }
 
-% Sub concept box (gray accent)
 \newtcolorbox{subbox}[1]{
   colframe=black!20!white,
   base={#1}
@@ -69,7 +60,6 @@
 \usepackage{amsfonts, amstext}
 \allowdisplaybreaks
 
-% Number sets
 \def\N{\mathbb{N}}
 \def\Z{\mathbb{Z}}
 \def\Q{\mathbb{Q}}
@@ -77,48 +67,28 @@
 \def\C{\mathbb{C}}
 
 % ============================================================================
-% TABLES
+% TABLES & LISTS
 % ============================================================================
 \usepackage{tabularx, multirow, booktabs}
-\renewcommand*{\arraystretch}{1.5}
+\renewcommand*{\arraystretch}{1.4}
 
-% ============================================================================
-% LISTS
-% ============================================================================
 \usepackage{enumitem}
 \setitemize{itemsep=0.5pt, topsep=2pt}
 \setenumerate{itemsep=0.75pt, topsep=2pt}
 
 % ============================================================================
-% GRAPHICS & TIKZ
+% GRAPHICS
 % ============================================================================
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{
-  positioning,
-  calc,
-  arrows.meta
-}
-
-\tikzset{
-  >=stealth,
-}
+\usetikzlibrary{positioning, calc, arrows.meta}
+\tikzset{>=stealth}
 
 % ============================================================================
 % HYPERLINKS
 % ============================================================================
 \usepackage{hyperref}
-\hypersetup{
-  colorlinks=true,
-  linkcolor=maincolor,
-  urlcolor=maincolor
-}
-
-% ============================================================================
-% ADDITIONAL PACKAGES
-% ============================================================================
-\usepackage{centernot}
-\usepackage{marvosym}
+\hypersetup{colorlinks=true, linkcolor=maincolor, urlcolor=maincolor}
 
 % ============================================================================
 % DOCUMENT METADATA
@@ -131,10 +101,7 @@
 \setcounter{secnumdepth}{4}
 
 % ============================================================================
-% DOCUMENT START
-% ============================================================================
 \begin{document}
-
 \maketitle
 
 % ============================================================================
@@ -142,414 +109,216 @@
 % ============================================================================
 \section{SW01: Vektoren, Matrizen, LGS}
 
-\begin{mainbox}{Kartesisches Koordinatensystem}
-Das 2D kartesische Koordinatensystem besteht aus:
+\begin{mainbox}{Vektoren: Grundlagen}
+\textbf{Skalar:} Nur Betrag (Temperatur, Druck)\\
+\textbf{Vektor:} Betrag und Richtung (Kraft, Geschwindigkeit)
+
+\textbf{Notation:} $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$ (2D), \quad $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}$ (3D)
+
+\textbf{Ortsvektor:} Vom Ursprung zum Punkt $P$\\
+\textbf{Verbindungsvektor:} $\overrightarrow{AB} = \mathbf{b} - \mathbf{a}$
+\end{mainbox}
+
+\begin{mainbox}{Vektoroperationen}
+\textbf{Addition:}
+$\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \end{pmatrix}$
+
+\textbf{Skalare Multiplikation:}
+$\lambda \mathbf{a} = \begin{pmatrix} \lambda a_1 \\ \lambda a_2 \end{pmatrix}$
+
+\textbf{Subtraktion:} $\mathbf{a} - \mathbf{b} = \mathbf{a} + (-1)\mathbf{b}$
+
+\textbf{Linearkombination:} $\alpha\mathbf{a} + \beta\mathbf{b} + \gamma\mathbf{c}$
+\end{mainbox}
+
+\begin{mainbox}{Geraden und Ebenen}
+\textbf{Gerade} durch $P$ mit Richtung $\mathbf{u}$:
+$$g: \mathbf{r} = \mathbf{p} + \lambda\mathbf{u}, \quad \lambda \in \R$$
+
+\textbf{Ebene} durch $P$ aufgespannt durch $\mathbf{u}, \mathbf{v}$:
+$$E: \mathbf{r} = \mathbf{p} + \lambda\mathbf{u} + \mu\mathbf{v}, \quad \lambda,\mu \in \R$$
+
+\textbf{Schnittpunkte:} Gleichsetzen $\rightarrow$ LGS lösen
+\end{mainbox}
+
+\begin{mainbox}{Matrizen}
+$(m \times n)$-Matrix: $m$ Zeilen, $n$ Spalten
+
+$\mathbf{A} = (a_{i,j})$, \quad $a_{i,j}$ in Zeile $i$, Spalte $j$
+
+\textbf{Matrix-Vektor-Produkt:}
+$$\mathbf{A}\mathbf{x} = \begin{pmatrix} \sum_j a_{1,j}x_j \\ \vdots \\ \sum_j a_{m,j}x_j \end{pmatrix}$$
+Zeile $\cdot$ Spalte $\rightarrow$ Komponente
+\end{mainbox}
+
+\begin{mainbox}{LGS in Matrixform}
+$\mathbf{A}\mathbf{x} = \mathbf{b}$ mit Koeffizientenmatrix $\mathbf{A}$, Lösungsvektor $\mathbf{x}$, rechte Seite $\mathbf{b}$
+
+\textbf{Erweiterte Koeffizientenmatrix:}
+$$(\mathbf{A} \mid \mathbf{b}) = \left(\begin{array}{ccc|c} a_{1,1} & \cdots & a_{1,n} & b_1 \\ \vdots & \ddots & \vdots & \vdots \\ a_{m,1} & \cdots & a_{m,n} & b_m \end{array}\right)$$
+\end{mainbox}
+
+\begin{mainbox}{Skalarprodukt}
+\textbf{Geometrisch:} $\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\varphi$
+
+\textbf{Arithmetisch:} $\mathbf{a} \cdot \mathbf{b} = a_1b_1 + a_2b_2 + a_3b_3$
+
+\textbf{Betrag:} $|\mathbf{a}| = \sqrt{\mathbf{a} \cdot \mathbf{a}} = \sqrt{a_1^2 + a_2^2}$
+
+\textbf{Winkel:} $\cos\varphi = \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}$
+
+\textbf{Orthogonal:} $\mathbf{a} \perp \mathbf{b} \Leftrightarrow \mathbf{a} \cdot \mathbf{b} = 0$
+
+\textbf{Einheitsvektor:} $\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}$
+\end{mainbox}
+
+\begin{mainbox}{Rechenregeln}
+\textbf{Vektorraum-Axiome:}
 \begin{itemize}
-    \item \textbf{x-Achse} (Abszisse, horizontal)
-    \item \textbf{y-Achse} (Ordinate, vertikal)
+    \item $\mathbf{a} + \mathbf{b} = \mathbf{b} + \mathbf{a}$ (kommutativ)
+    \item $(\mathbf{a} + \mathbf{b}) + \mathbf{c} = \mathbf{a} + (\mathbf{b} + \mathbf{c})$ (assoziativ)
+    \item $\mathbf{a} + \mathbf{0} = \mathbf{a}$, \quad $\mathbf{a} + (-\mathbf{a}) = \mathbf{0}$
+    \item $\lambda(\mathbf{a} + \mathbf{b}) = \lambda\mathbf{a} + \lambda\mathbf{b}$
+    \item $(\lambda + \mu)\mathbf{a} = \lambda\mathbf{a} + \mu\mathbf{a}$
 \end{itemize}
 
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item Achsen stehen senkrecht aufeinander
-    \item Gleicher Massstab auf beiden Achsen
-    \item Rechtshändiges System (Linksdrehung positiv)
-\end{itemize}
-
-\textbf{Punktnotation:} $P(x/y)$ oder $P(x,y)$
-\end{mainbox}
-
-\begin{mainbox}{Skalare vs. Vektoren}
-\textbf{Skalar:} Nur Betrag (z.B. Temperatur, Druck)
-
-\textbf{Vektor:} Betrag \textbf{und} Richtung
-\begin{itemize}
-    \item Hat eine \textbf{Länge} (Betrag)
-    \item Hat eine \textbf{Richtung}
-    \item Geometrisch: Pfeil
-    \item Arithmetisch: Zahlen in Klammern
-\end{itemize}
-
-Beispiele: Kraft, Geschwindigkeit, Verschiebung
-\end{mainbox}
-
-\begin{mainbox}{Vektornotation}
-\textbf{Spaltenvektor:}
-$$\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} \quad \text{(2D)}, \quad \mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} \quad \text{(3D)}$$
-
-\textbf{Verbindungsvektor:} $\overrightarrow{AB}$ von $A$ nach $B$
-
-\textbf{Ortsvektor:} Vom Ursprung $O$ zum Punkt $P$
-$$\overrightarrow{OP} = \begin{pmatrix} p_1 \\ p_2 \end{pmatrix}$$
-
-\textbf{Wichtig:} Zwei Vektoren mit gleicher Länge und Richtung sind \textbf{gleich} (unabhängig vom Anfangspunkt).
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Verbindungsvektor}
-$A(-7/-3)$, $B(13/-5)$:
-$$\overrightarrow{AB} = \begin{pmatrix} 13 - (-7) \\ -5 - (-3) \end{pmatrix} = \begin{pmatrix} 20 \\ -2 \end{pmatrix}$$
-\end{subbox}
-
-% ============================================================================
-% VEKTOROPERATIONEN
-% ============================================================================
-\subsubsection{Vektoroperationen}
-
-\begin{mainbox}{Vektoraddition}
-\textbf{Geometrisch:} Spitze-an-Fuss-Methode
-
-\textbf{Arithmetisch:}
-$$\boxed{\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} + \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} = \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \end{pmatrix}}$$
-
-Komponenten werden einzeln addiert.
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Addition}
-$$\mathbf{a} = \begin{pmatrix} -5 \\ 3 \end{pmatrix}, \quad \mathbf{b} = \begin{pmatrix} 11 \\ 7 \end{pmatrix}$$
-$$\mathbf{a} + \mathbf{b} = \begin{pmatrix} -5 + 11 \\ 3 + 7 \end{pmatrix} = \begin{pmatrix} 6 \\ 10 \end{pmatrix}$$
-\end{subbox}
-
-\begin{mainbox}{Skalare Multiplikation}
-\textbf{Geometrisch:}
-\begin{itemize}
-    \item $\lambda > 1$: Vektor wird gestreckt
-    \item $0 < \lambda < 1$: Vektor wird gestaucht
-    \item $\lambda < 0$: Richtung wird umgekehrt
-    \item $\lambda = -1$: Gegenvektor
-\end{itemize}
-
-\textbf{Arithmetisch:}
-$$\boxed{\lambda \mathbf{a} = \lambda \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} = \begin{pmatrix} \lambda a_1 \\ \lambda a_2 \end{pmatrix}}$$
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Skalare Multiplikation}
-$$\mathbf{a} = \begin{pmatrix} 3 \\ 2 \end{pmatrix}, \quad 3\mathbf{a} = \begin{pmatrix} 9 \\ 6 \end{pmatrix}$$
-\end{subbox}
-
-\begin{mainbox}{Vektorsubtraktion}
-$$\boxed{\mathbf{a} - \mathbf{b} = \mathbf{a} + (-1) \cdot \mathbf{b} = \begin{pmatrix} a_1 - b_1 \\ a_2 - b_2 \end{pmatrix}}$$
-
-\textbf{Geometrisch:} $\mathbf{a} - \mathbf{b}$ zeigt von der Spitze von $\mathbf{b}$ zur Spitze von $\mathbf{a}$.
-\end{mainbox}
-
-\begin{mainbox}{Linearkombination}
-Eine \textbf{Linearkombination} der Vektoren $\mathbf{a}, \mathbf{b}, \mathbf{c}$ mit Skalaren $\alpha, \beta, \gamma$:
-$$\boxed{\alpha \mathbf{a} + \beta \mathbf{b} + \gamma \mathbf{c}}$$
-
-Allgemein: $\displaystyle\sum_{i=1}^{n} \lambda_i \mathbf{v}_i$
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Linearkombination}
-$3\mathbf{a} - 2\mathbf{b} + \mathbf{c}$ mit
-$\mathbf{a} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$,
-$\mathbf{b} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}$,
-$\mathbf{c} = \begin{pmatrix} 1 \\ 3 \end{pmatrix}$:
-$$3\begin{pmatrix} 2 \\ 1 \end{pmatrix} - 2\begin{pmatrix} -1 \\ 2 \end{pmatrix} + \begin{pmatrix} 1 \\ 3 \end{pmatrix} = \begin{pmatrix} 9 \\ 2 \end{pmatrix}$$
-\end{subbox}
-
-% ============================================================================
-% RECHENREGELN
-% ============================================================================
-\subsubsection{Vektorraumaxiome}
-
-\begin{mainbox}{Rechenregeln für Vektoren}
-Für Vektoren $\mathbf{a}, \mathbf{b}, \mathbf{c}$ und Skalare $\lambda, \mu \in \R$:
-
-\renewcommand*{\arraystretch}{1.3}
-\begin{tabular}{ll}
-$\mathbf{a} + \mathbf{b} = \mathbf{b} + \mathbf{a}$ & Kommutativgesetz \\
-$\mathbf{a} + (\mathbf{b} + \mathbf{c}) = (\mathbf{a} + \mathbf{b}) + \mathbf{c}$ & Assoziativgesetz \\
-$\mathbf{a} + \mathbf{0} = \mathbf{a}$ & Neutralelement \\
-$\mathbf{a} + (-\mathbf{a}) = \mathbf{0}$ & Inverses Element \\
-$\lambda(\mathbf{a} + \mathbf{b}) = \lambda\mathbf{a} + \lambda\mathbf{b}$ & Distributivgesetz \\
-$(\lambda + \mu)\mathbf{a} = \lambda\mathbf{a} + \mu\mathbf{a}$ & Distributivgesetz \\
-$(\lambda\mu)\mathbf{a} = \lambda(\mu\mathbf{a})$ & Assoziativgesetz \\
-$1 \cdot \mathbf{a} = \mathbf{a}$ & Neutrales Elem. \\
-\end{tabular}
-
-Diese 8 Regeln definieren einen \textbf{Vektorraum}.
+\textbf{Skalarprodukt:} kommutativ, distributiv
 \end{mainbox}
 
 % ============================================================================
-% SUBSECTION: GERADEN UND EBENEN
+% SECTION 2: SW02 - GAUSS-ALGORITHMUS
 % ============================================================================
-\subsection{Geraden und Ebenen}
-
-\begin{mainbox}{Punkt-Richtungsform einer Geraden}
-Eine Gerade $g$ durch Punkt $P$ (Ortsvektor $\mathbf{p}$) mit Richtungsvektor $\mathbf{u}$:
-$$\boxed{g: \mathbf{r} = \mathbf{p} + \lambda \mathbf{u}, \quad \lambda \in \R}$$
-
-$\lambda$ ist der \textbf{Parameter}. Für verschiedene $\lambda$ erhält man verschiedene Punkte auf der Geraden.
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Geradengleichung}
-$$g: \mathbf{r} = \begin{pmatrix} -3 \\ 2 \end{pmatrix} + \lambda \begin{pmatrix} 2 \\ 2 \end{pmatrix}$$
-\begin{itemize}
-    \item Stützpunkt: $(-3/2)$
-    \item Richtung: $(2/2)$
-\end{itemize}
-\end{subbox}
-
-\begin{mainbox}{Schnittpunkt zweier Geraden}
-Gegeben: $g: \mathbf{r} = \mathbf{p}_1 + \lambda \mathbf{u}$ und $h: \mathbf{r} = \mathbf{p}_2 + \mu \mathbf{v}$
-
-\textbf{Vorgehen:}
-\begin{enumerate}
-    \item Gleichsetzen: $\mathbf{p}_1 + \lambda \mathbf{u} = \mathbf{p}_2 + \mu \mathbf{v}$
-    \item LGS mit 2 Gleichungen und 2 Unbekannten ($\lambda, \mu$) lösen
-    \item $\lambda$ oder $\mu$ in Geradengleichung einsetzen
-\end{enumerate}
-
-\textbf{Mögliche Lösungen:}
-\begin{itemize}
-    \item Genau ein Schnittpunkt
-    \item Keine Lösung (parallel)
-    \item Unendlich viele (identisch)
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Punkt-Richtungsform einer Ebene}
-Eine Ebene $E$ durch Punkt $P$ (Ortsvektor $\mathbf{p}$) aufgespannt durch $\mathbf{u}$ und $\mathbf{v}$ (nicht parallel):
-$$\boxed{E: \mathbf{r} = \mathbf{p} + \lambda \mathbf{u} + \mu \mathbf{v}, \quad \lambda, \mu \in \R}$$
-
-$\mathbf{u}$ und $\mathbf{v}$ heissen \textbf{Spannvektoren}.
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Ebenengleichung}
-$$E: \mathbf{r} = \begin{pmatrix} 2 \\ 3 \\ 1 \end{pmatrix} + \mu \begin{pmatrix} 4 \\ 2 \\ 9 \end{pmatrix} + \nu \begin{pmatrix} 3 \\ 1 \\ 6 \end{pmatrix}$$
-\end{subbox}
-
-\begin{mainbox}{Schnittpunkt Gerade-Ebene}
-Gegeben: Gerade $g: \mathbf{r} = \mathbf{p}_g + \lambda \mathbf{u}$ und Ebene $E: \mathbf{r} = \mathbf{p}_E + \mu \mathbf{v} + \nu \mathbf{w}$
-
-\textbf{Vorgehen:}
-\begin{enumerate}
-    \item Gleichsetzen der Parameterdarstellungen
-    \item LGS mit 3 Gleichungen und 3 Unbekannten ($\lambda, \mu, \nu$) lösen
-    \item $\lambda$ in Geradengleichung einsetzen
-\end{enumerate}
-
-\textbf{Mögliche Lösungen:}
-\begin{itemize}
-    \item Genau ein Schnittpunkt
-    \item Keine Lösung (parallel zur Ebene)
-    \item Unendlich viele (Gerade liegt in Ebene)
-\end{itemize}
-\end{mainbox}
-
-% ============================================================================
-% SUBSECTION: MATRIZEN
-% ============================================================================
-\subsection{Matrizen}
-
-\begin{mainbox}{Definition einer Matrix}
-Eine $(m \times n)$-\textbf{Matrix} ist ein rechteckiges Schema von Zahlen mit $m$ Zeilen und $n$ Spalten:
-$$\mathbf{A} = \begin{pmatrix} a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\ a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m,1} & a_{m,2} & \cdots & a_{m,n} \end{pmatrix}$$
-
-\textbf{Notation:} $a_{i,j}$ = Element in Zeile $i$, Spalte $j$
-
-\textbf{Kurzschreibweise:} $\mathbf{A} = (a_{i,j})$
-
-\textbf{Quadratische Matrix:} $m = n$
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Matrix}
-$(2 \times 3)$-Matrix:
-$$\mathbf{A} = \begin{pmatrix} 2 & 3 & -1 \\ 1 & -2 & 1 \end{pmatrix}$$
-$a_{1,2} = 3$ (1. Zeile, 2. Spalte)
-\end{subbox}
-
-\begin{mainbox}{Anwendungen von Matrizen}
-\begin{itemize}
-    \item Lösen von Gleichungssystemen
-    \item Bilder: Graustufenwerte (Matrix), Farbbilder (3 Matrizen für RGB)
-    \item Graphentheorie: Adjazenz-/Inzidenzmatrix
-    \item PageRank-Algorithmus (Google)
-    \item Künstliche neuronale Netze
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Matrix-Vektor-Multiplikation}
-$(m \times n)$-Matrix $\mathbf{A}$ mal $n$-dimensionaler Vektor $\mathbf{x}$:
-$$\boxed{\mathbf{A}\mathbf{x} = \begin{pmatrix} a_{1,1} & \cdots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \cdots & a_{m,n} \end{pmatrix} \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} = \begin{pmatrix} \sum_{j=1}^n a_{1,j} x_j \\ \vdots \\ \sum_{j=1}^n a_{m,j} x_j \end{pmatrix}}$$
-
-\textbf{Merke:} Zeile $\cdot$ Spalte $\rightarrow$ Komponente
-
-Ergebnis: $m$-dimensionaler Vektor
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Matrix-Vektor-Produkt}
-$$\begin{pmatrix} 1 & 2 & 4 \\ 3 & 1 & -1 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} x + 2y + 4z \\ 3x + y - z \end{pmatrix}$$
-\end{subbox}
-
-% ============================================================================
-% SUBSECTION: LGS
-% ============================================================================
-\subsection{Lineare Gleichungssysteme}
-
-\begin{mainbox}{Lineare Gleichung}
-Eine \textbf{lineare Gleichung} in einer Variablen $x$:
-$$ax + b = 0$$
-
-\textbf{Lösungsfälle:}
-\begin{itemize}
-    \item $a \neq 0$: Genau eine Lösung $x = -\frac{b}{a}$
-    \item $a = 0, b \neq 0$: Keine Lösung
-    \item $a = 0, b = 0$: Unendlich viele Lösungen
-\end{itemize}
-\end{mainbox}
+\section{SW02: Gauss-Algorithmus}
 
 \begin{mainbox}{Lineares Gleichungssystem (LGS)}
-\textbf{Allgemeine Form:}
-\begin{align*}
-a_{1,1}x_1 + a_{1,2}x_2 + \cdots + a_{1,n}x_n &= b_1 \\
-a_{2,1}x_1 + a_{2,2}x_2 + \cdots + a_{2,n}x_n &= b_2 \\
-\vdots \\
-a_{m,1}x_1 + a_{m,2}x_2 + \cdots + a_{m,n}x_n &= b_m
-\end{align*}
+Ein \textbf{LGS} besteht aus Gleichungen der Form:
+$$a_{1,1}x_1 + a_{1,2}x_2 + \cdots + a_{1,n}x_n = b_1$$
 
-\textbf{Matrixform:}
-$$\boxed{\mathbf{A}\mathbf{x} = \mathbf{b}}$$
-\end{mainbox}
-
-\begin{mainbox}{Koeffizientenmatrix}
-\textbf{Koeffizientenmatrix} $\mathbf{A}$: Enthält die Koeffizienten $a_{i,j}$
-
-\textbf{Lösungsvektor} $\mathbf{x}$: Enthält die Unbekannten
-
-\textbf{Rechte Seite (RHS)} $\mathbf{b}$: Enthält die Konstanten
-
-$$\underbrace{\begin{pmatrix} a_{1,1} & a_{1,2} \\ a_{2,1} & a_{2,2} \end{pmatrix}}_{\mathbf{A}} \underbrace{\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}}_{\mathbf{x}} = \underbrace{\begin{pmatrix} b_1 \\ b_2 \end{pmatrix}}_{\mathbf{b}}$$
-\end{mainbox}
-
-\begin{mainbox}{Erweiterte Koeffizientenmatrix}
-Die \textbf{erweiterte Koeffizientenmatrix} enthält $\mathbf{A}$ und $\mathbf{b}$:
-$$(\mathbf{A} \mid \mathbf{b}) = \left(\begin{array}{ccc|c} a_{1,1} & \cdots & a_{1,n} & b_1 \\ \vdots & \ddots & \vdots & \vdots \\ a_{m,1} & \cdots & a_{m,n} & b_m \end{array}\right)$$
-
-Diese Form wird für das Gaussverfahren verwendet.
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Erweiterte Matrix}
-LGS:
-$\begin{cases} s - 160t = 0 \\ s - 120t = 100 \end{cases}$
-
-Erweiterte Matrix:
-$$\left(\begin{array}{cc|c} 1 & -160 & 0 \\ 1 & -120 & 100 \end{array}\right)$$
-\end{subbox}
-
-\begin{mainbox}{Lösungsmethoden}
+\textbf{Kriterien für Linearität:}
 \begin{itemize}
-    \item \textbf{Substitutionsmethode:} Eine Variable isolieren und einsetzen
-    \item \textbf{Gleichsetzungsmethode:} Beide Gleichungen nach derselben Variable auflösen
-    \item \textbf{Eliminationsmethode (Gauss):} Zeilen addieren/subtrahieren zur Elimination
+    \item Variablen nur in 1. Potenz
+    \item Keine Produkte von Variablen ($xy$)
+    \item Keine Funktionen von Variablen ($\sin x$)
 \end{itemize}
 
-\textbf{Gaussverfahren:} Erweiterte Matrix auf Stufenform bringen, dann \textbf{Rückwärtseinsetzen}.
+\textbf{Nicht linear:} $3xy + 5y = -10$, \quad $\sin z = 2$
 \end{mainbox}
 
-\begin{subbox}{Beispiel: Elimination}
-$$\left(\begin{array}{cc|c} 1 & -160 & 0 \\ 1 & -120 & 100 \end{array}\right) \xrightarrow{Z_2 - Z_1} \left(\begin{array}{cc|c} 1 & -160 & 0 \\ 0 & 40 & 100 \end{array}\right)$$
-$\Rightarrow t = 2.5, \quad s = 400$
+\begin{mainbox}{Zeilenstufenform (ZSF)}
+Eine Matrix ist in \textbf{Zeilenstufenform}, wenn:
+\begin{itemize}
+    \item Jeder Leitkoeffizient steht rechts vom darüberliegenden
+    \item Nullzeilen stehen ganz unten
+\end{itemize}
+
+$$\begin{pmatrix} \fbox{2} & 5 & -8 & -1 \\ 0 & 0 & \fbox{2} & 4 \\ 0 & 0 & 0 & \fbox{9} \\ 0 & 0 & 0 & 0 \end{pmatrix}$$
+
+\textbf{Leitkoeffizient:} Erster $\neq 0$ Eintrag einer Zeile\\
+\textbf{Pivotelement:} Leitkoeffizient in ZSF
+\end{mainbox}
+
+\begin{mainbox}{Elementare Zeilenumformungen}
+\textbf{Drei erlaubte Operationen:}
+
+\textbf{I. Skalieren:} Zeile mit $\lambda \neq 0$ multiplizieren
+$$Z_i \rightarrow \lambda \cdot Z_i$$
+
+\textbf{II. Vertauschen:} Zwei Zeilen tauschen
+$$Z_i \leftrightarrow Z_j$$
+
+\textbf{III. Addition:} Vielfaches einer Zeile zu anderer addieren
+$$Z_i \rightarrow Z_i + \lambda \cdot Z_j$$
+
+Diese Operationen ändern die Lösungsmenge \textbf{nicht}!
+\end{mainbox}
+
+\begin{mainbox}{Gauss-Eliminationsverfahren}
+\textbf{Ziel:} Erweiterte Koeffizientenmatrix in ZSF bringen
+
+\textbf{Algorithmus:}
+\begin{enumerate}
+    \item Wähle Pivotelement (erstes $\neq 0$ in Spalte)
+    \item Bringe Pivotzeile nach oben (Typ II)
+    \item Eliminiere alle Einträge unter Pivot (Typ III)
+    \item Wiederhole für nächste Spalte/Zeile
+    \item \textbf{Rückwärtseinsetzen} zur Lösung
+\end{enumerate}
+
+\textbf{Tipp:} Pivotelement mit grösstem Betrag wählen (numerische Stabilität)
+\end{mainbox}
+
+\begin{mainbox}{Rückwärtseinsetzen}
+Nach Erreichen der ZSF: Von unten nach oben lösen
+
+\textbf{Beispiel in ZSF:}
+\begin{align*}
+2x + 5y - 2z &= -3 \\
+3y + 2z &= 7 \\
+5z &= 10
+\end{align*}
+
+\textbf{Lösung:}
+\begin{enumerate}
+    \item Aus Zeile 3: $z = 2$
+    \item In Zeile 2: $3y + 4 = 7 \Rightarrow y = 1$
+    \item In Zeile 1: $2x + 5 - 4 = -3 \Rightarrow x = -2$
+\end{enumerate}
+
+Lösung: $(x, y, z) = (-2, 1, 2)$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Gauss-Elimination}
+$$\left(\begin{array}{ccc|c} 6 & -1 & -1 & 4 \\ 1 & 1 & 10 & -6 \\ 2 & -1 & 1 & -2 \end{array}\right)$$
+
+$Z_1 \leftrightarrow Z_2$ (besseres Pivot):
+$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 6 & -1 & -1 & 4 \\ 2 & -1 & 1 & -2 \end{array}\right)$$
+
+$Z_2 - 6Z_1$, $Z_3 - 2Z_1$:
+$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & -3 & -19 & 10 \end{array}\right)$$
+
+$7Z_3 - 3Z_2$:
+$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & 0 & 50 & -50 \end{array}\right)$$
+
+$\Rightarrow z = -1, \; y = 3, \; x = 1$
 \end{subbox}
 
-% ============================================================================
-% SUBSECTION: SKALARPRODUKT
-% ============================================================================
-\subsection{Das Skalarprodukt}
+\begin{mainbox}{Dreiecksmatrizen}
+\textbf{Obere Dreiecksmatrix:} Alle Einträge unter Hauptdiagonale sind 0
+$$\begin{pmatrix} a & b & c \\ 0 & d & e \\ 0 & 0 & f \end{pmatrix}$$
 
-\begin{mainbox}{Definition Skalarprodukt}
-\textbf{Geometrisch:}
-$$\boxed{\mathbf{a} \bullet \mathbf{b} = |\mathbf{a}| \cdot |\mathbf{b}| \cdot \cos \varphi}$$
-wobei $\varphi$ der Winkel zwischen $\mathbf{a}$ und $\mathbf{b}$.
+\textbf{Untere Dreiecksmatrix:} Alle Einträge über Hauptdiagonale sind 0
 
-\textbf{Arithmetisch (kartesisch):}
-$$\boxed{\mathbf{a} \bullet \mathbf{b} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \bullet \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} = a_1 b_1 + a_2 b_2}$$
-
-\textbf{3D:} $\mathbf{a} \bullet \mathbf{b} = a_1 b_1 + a_2 b_2 + a_3 b_3$
-
-\textbf{Ergebnis:} Ein \textbf{Skalar} (Zahl), kein Vektor!
+\textbf{Hinweis:} ZSF $\neq$ Dreiecksmatrix (Pivots nicht zwingend auf Diagonale)
 \end{mainbox}
 
-\begin{mainbox}{Betrag (Länge) eines Vektors}
-$$\boxed{|\mathbf{a}| = \sqrt{\mathbf{a} \bullet \mathbf{a}} = \sqrt{a_1^2 + a_2^2}}$$
+\begin{mainbox}{Lösbarkeit von LGS}
+Nach Gauss-Elimination prüfen:
 
-\textbf{3D:} $|\mathbf{a}| = \sqrt{a_1^2 + a_2^2 + a_3^2}$
+\textbf{Eindeutige Lösung:} Jede Variable hat Pivot
+$$\left(\begin{array}{cc|c} 1 & 2 & 3 \\ 0 & 1 & 4 \end{array}\right) \checkmark$$
 
-Dies folgt aus dem Satz des Pythagoras.
+\textbf{Keine Lösung:} Widerspruchszeile $(0 \; 0 \; | \; c)$ mit $c \neq 0$
+$$\left(\begin{array}{cc|c} 1 & 2 & 3 \\ 0 & 0 & 5 \end{array}\right) \lightning$$
+
+\textbf{Unendlich viele:} Freie Variablen (Spalten ohne Pivot)
+$$\left(\begin{array}{ccc|c} 1 & 2 & 3 & 4 \\ 0 & 0 & 1 & 2 \end{array}\right)$$
+$x_2$ frei wählbar
 \end{mainbox}
 
-\begin{mainbox}{Winkel zwischen Vektoren}
-Aus $\mathbf{a} \bullet \mathbf{b} = |\mathbf{a}| \cdot |\mathbf{b}| \cdot \cos \varphi$ folgt:
-$$\boxed{\cos \varphi = \frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}| \cdot |\mathbf{b}|}}$$
+\begin{mainbox}{Zusammenfassung Gauss}
+\begin{enumerate}
+    \item Erweiterte Koeffizientenmatrix aufstellen
+    \item Mit elem. Zeilenumformungen in ZSF bringen
+    \item Lösbarkeit prüfen (Widerspruchszeile?)
+    \item Rückwärtseinsetzen für Lösung
+\end{enumerate}
 
-$$\boxed{\varphi = \arccos\left(\frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}| \cdot |\mathbf{b}|}\right)}$$
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Systematisch und algorithmisch
+    \item Funktioniert für beliebig grosse LGS
+    \item Zeigt Lösbarkeit direkt an
+\end{itemize}
 \end{mainbox}
-
-\begin{mainbox}{Einheitsvektor}
-Ein \textbf{Einheitsvektor} hat Länge 1.
-
-Normierung von $\mathbf{a}$ auf Länge 1:
-$$\boxed{\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|} = \frac{1}{|\mathbf{a}|} \mathbf{a}}$$
-
-Es gilt: $|\hat{\mathbf{a}}| = 1$
-\end{mainbox}
-
-\begin{mainbox}{Orthogonalität}
-Zwei Vektoren $\mathbf{a}$ und $\mathbf{b}$ sind \textbf{orthogonal} (senkrecht), wenn:
-$$\boxed{\mathbf{a} \bullet \mathbf{b} = 0 \quad \Leftrightarrow \quad \mathbf{a} \perp \mathbf{b}}$$
-
-(Der Nullvektor ist zu jedem Vektor orthogonal.)
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Orthogonaler Vektor}
-Finde $\mathbf{b}$ orthogonal zu $\mathbf{a} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$:
-
-$\mathbf{a} \bullet \mathbf{b} = 2b_1 + b_2 = 0$
-
-$\Rightarrow b_2 = -2b_1$
-
-Z.B. $\mathbf{b} = \begin{pmatrix} 1 \\ -2 \end{pmatrix}$ oder $\mathbf{b} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}$
-\end{subbox}
-
-\begin{mainbox}{Rechenregeln Skalarprodukt}
-Für $\lambda \in \R$ und Vektoren $\mathbf{a}, \mathbf{b}, \mathbf{c}$:
-
-\renewcommand*{\arraystretch}{1.3}
-\begin{tabular}{ll}
-$\mathbf{a} \bullet \mathbf{b} = \mathbf{b} \bullet \mathbf{a}$ & Kommutativ \\
-$\mathbf{a} \bullet (\mathbf{b} + \mathbf{c}) = \mathbf{a} \bullet \mathbf{b} + \mathbf{a} \bullet \mathbf{c}$ & Distributiv \\
-$\lambda(\mathbf{a} \bullet \mathbf{b}) = (\lambda\mathbf{a}) \bullet \mathbf{b} = \mathbf{a} \bullet (\lambda\mathbf{b})$ & \\
-\end{tabular}
-
-\textbf{Hinweis:} $\bullet$ und $\cdot$ werden oft gleich geschrieben.
-\end{mainbox}
-
-% ============================================================================
-% SUBSECTION: SCHNELLREFERENZ
-% ============================================================================
-\subsection{Schnellreferenz}
-
-\begin{mainbox}{Wichtige Formeln}
-\renewcommand*{\arraystretch}{1.5}
-\begin{center}
-\begin{tabularx}{\linewidth}{lX}
-\textbf{Addition:} & $\mathbf{a} + \mathbf{b} = (a_1+b_1, a_2+b_2)^T$ \\
-\textbf{Skalarmult.:} & $\lambda\mathbf{a} = (\lambda a_1, \lambda a_2)^T$ \\
-\textbf{Betrag:} & $|\mathbf{a}| = \sqrt{a_1^2 + a_2^2}$ \\
-\textbf{Skalarprodukt:} & $\mathbf{a} \bullet \mathbf{b} = a_1 b_1 + a_2 b_2$ \\
-\textbf{Winkel:} & $\cos\varphi = \frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}$ \\
-\textbf{Orthogonal:} & $\mathbf{a} \perp \mathbf{b} \Leftrightarrow \mathbf{a} \bullet \mathbf{b} = 0$ \\
-\textbf{Einheitsv.:} & $\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}$ \\
-\textbf{Gerade:} & $\mathbf{r} = \mathbf{p} + \lambda\mathbf{u}$ \\
-\textbf{Ebene:} & $\mathbf{r} = \mathbf{p} + \lambda\mathbf{u} + \mu\mathbf{v}$ \\
-\textbf{LGS:} & $\mathbf{A}\mathbf{x} = \mathbf{b}$ \\
-\end{tabularx}
-\end{center}
-\end{mainbox}
-
-\begin{subbox}{Dimensionen n-D}
-Alle Formeln gelten analog für $n$-dimensionale Vektoren:
-$$\mathbf{a} \bullet \mathbf{b} = \sum_{i=1}^{n} a_i b_i, \quad |\mathbf{a}| = \sqrt{\sum_{i=1}^{n} a_i^2}$$
-\end{subbox}
 
 \end{document}

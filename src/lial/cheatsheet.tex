@@ -321,4 +321,137 @@ $x_2$ frei wählbar
 \end{itemize}
 \end{mainbox}
 
+% ============================================================================
+% SECTION 3: SW03 - LU-ZERLEGUNG
+% ============================================================================
+\section{SW03: LU-Zerlegung, Matrizen}
+
+\begin{mainbox}{Matrixmultiplikation}
+$\mathbf{A} \in \R^{l \times m}$, $\mathbf{B} \in \R^{m \times n}$ $\Rightarrow$ $\mathbf{C} = \mathbf{AB} \in \R^{l \times n}$
+
+$$c_{ik} = \sum_{j=1}^{m} a_{ij} b_{jk}$$
+
+\textbf{Regeln:}
+\begin{itemize}
+    \item Spalten von $\mathbf{A}$ = Zeilen von $\mathbf{B}$
+    \item $c_{ik}$ = Skalarprodukt (Zeile $i$ von $\mathbf{A}$) $\cdot$ (Spalte $k$ von $\mathbf{B}$)
+    \item \textbf{Nicht kommutativ:} $\mathbf{AB} \neq \mathbf{BA}$
+    \item \textbf{Assoziativ:} $(\mathbf{AB})\mathbf{C} = \mathbf{A}(\mathbf{BC})$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Einheitsmatrix}
+$$\mathbf{I}_n = \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 1 \end{pmatrix}$$
+
+\textbf{Eigenschaft:} $\mathbf{IA} = \mathbf{AI} = \mathbf{A}$
+
+Neutrales Element der Matrixmultiplikation (wie 1 bei Zahlen).
+\end{mainbox}
+
+\begin{mainbox}{Transponierte Matrix}
+$\mathbf{A}^T$: Zeilen und Spalten vertauschen
+
+$(a_{ij})^T = (a_{ji})$ \quad (Spiegelung an Hauptdiagonale)
+
+\textbf{Rechenregeln:}
+\begin{itemize}
+    \item $(\mathbf{A}^T)^T = \mathbf{A}$
+    \item $(\mathbf{A} + \mathbf{B})^T = \mathbf{A}^T + \mathbf{B}^T$
+    \item $(\mathbf{AB})^T = \mathbf{B}^T \mathbf{A}^T$ (Reihenfolge!)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Inverse Matrix}
+$\mathbf{A}$ ist \textbf{invertierbar/regulär}, wenn $\mathbf{A}^{-1}$ existiert mit:
+$$\mathbf{A} \cdot \mathbf{A}^{-1} = \mathbf{A}^{-1} \cdot \mathbf{A} = \mathbf{I}$$
+
+\textbf{Für $2 \times 2$:}
+$$\begin{pmatrix} a & b \\ c & d \end{pmatrix}^{-1} = \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
+
+\textbf{Rechenregeln:}
+\begin{itemize}
+    \item $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$
+    \item $(\mathbf{AB})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}$ (Reihenfolge!)
+\end{itemize}
+
+\textbf{Singulär:} $\mathbf{A}$ nicht invertierbar $\Leftrightarrow$ $\det(\mathbf{A}) = 0$
+\end{mainbox}
+
+\begin{mainbox}{Permutationsmatrix}
+$\mathbf{P}$: Einheitsmatrix mit vertauschten Zeilen/Spalten
+
+Jede Zeile/Spalte enthält genau eine 1, Rest 0.
+
+\textbf{Wirkung:}
+\begin{itemize}
+    \item $\mathbf{PA}$: Zeilen von $\mathbf{A}$ vertauschen
+    \item $\mathbf{AP}$: Spalten von $\mathbf{A}$ vertauschen
+\end{itemize}
+
+$$\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix} = \begin{pmatrix} c & d \\ a & b \end{pmatrix}$$
+\end{mainbox}
+
+\begin{mainbox}{LU-Zerlegung (LR-Zerlegung)}
+Zerlege $\mathbf{A}$ in:
+$$\mathbf{A} = \mathbf{LU}$$
+
+\textbf{L} = \textbf{L}ower triangular (untere Dreiecksmatrix)\\
+\textbf{U} = \textbf{U}pper triangular (obere Dreiecksmatrix, ZSF)
+
+$$\begin{pmatrix} 2 & 1 \\ 8 & 7 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 4 & 1 \end{pmatrix} \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$$
+
+\textbf{L} enthält die Eliminationsfaktoren $l_{ij}$\\
+\textbf{U} ist das Ergebnis der Gauss-Elimination
+\end{mainbox}
+
+\begin{mainbox}{Eliminationsmatrizen}
+$\mathbf{E}_{ij}$: Eliminiert $a_{ij}$ durch Zeilenoperation
+
+$$\mathbf{E}_{21} = \begin{pmatrix} 1 & 0 \\ -4 & 1 \end{pmatrix}$$
+bewirkt: $Z_2 \leftarrow Z_2 - 4 \cdot Z_1$
+
+\textbf{Inverse:} $\mathbf{L}_{ij} = \mathbf{E}_{ij}^{-1}$ (Vorzeichen umkehren)
+
+$$\mathbf{L}_{21} = \begin{pmatrix} 1 & 0 \\ +4 & 1 \end{pmatrix}$$
+
+Für $3 \times 3$: $\mathbf{E}_{32}\mathbf{E}_{31}\mathbf{E}_{21}\mathbf{A} = \mathbf{U}$
+\end{mainbox}
+
+\begin{mainbox}{LGS lösen mit LU-Zerlegung}
+Gegeben: $\mathbf{Ax} = \mathbf{b}$ mit $\mathbf{A} = \mathbf{LU}$
+
+\textbf{Schritt 1:} Löse $\mathbf{Ly} = \mathbf{b}$ (Vorwärtseinsetzen)
+$$y_i = \frac{1}{l_{ii}} \left( b_i - \sum_{k=1}^{i-1} l_{ik} y_k \right)$$
+
+\textbf{Schritt 2:} Löse $\mathbf{Ux} = \mathbf{y}$ (Rückwärtseinsetzen)
+$$x_i = \frac{1}{u_{ii}} \left( y_i - \sum_{k=i+1}^{n} u_{ik} x_k \right)$$
+
+\textbf{Vorteil:} Bei gleichem $\mathbf{A}$, verschiedenen $\mathbf{b}$ muss LU nur einmal berechnet werden!
+\end{mainbox}
+
+\begin{mainbox}{LU mit Pivotisierung}
+Falls Pivot = 0: Zeilentausch nötig $\rightarrow$ Permutationsmatrix $\mathbf{P}$
+
+$$\mathbf{PA} = \mathbf{LU}$$
+
+\textbf{LGS lösen:}
+\begin{enumerate}
+    \item Berechne $\hat{\mathbf{b}} = \mathbf{Pb}$
+    \item Löse $\mathbf{Ly} = \hat{\mathbf{b}}$
+    \item Löse $\mathbf{Ux} = \mathbf{y}$
+\end{enumerate}
+
+\textbf{Tipp:} Für numerische Stabilität: grösstes Element als Pivot wählen (Spaltenpivotsuche)
+\end{mainbox}
+
+\begin{subbox}{Beispiel: LU-Zerlegung}
+$\mathbf{A} = \begin{pmatrix} 1 & 2 & 1 \\ 2 & 1 & 0 \\ -3 & 0 & 9 \end{pmatrix}$
+
+Nach Elimination:
+$$\mathbf{L} = \begin{pmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ -3 & 2 & 1 \end{pmatrix}, \quad \mathbf{U} = \begin{pmatrix} 1 & 2 & 1 \\ 0 & -3 & -2 \\ 0 & 0 & 8 \end{pmatrix}$$
+
+$l_{21} = 2$ (Faktor für $Z_2 - 2Z_1$)\\
+$l_{31} = -3$, $l_{32} = 2$
+\end{subbox}
+
 \end{document}

@@ -9,7 +9,7 @@
 % ENCODING & LANGUAGE
 % ============================================================================
 \usepackage[utf8]{inputenc}
-\usepackage[german]{babel}
+\usepackage[ngerman]{babel}
 
 % ============================================================================
 % PAGE LAYOUT
@@ -298,7 +298,7 @@ Nach Gauss-Elimination prüfen:
 $$\left(\begin{array}{cc|c} 1 & 2 & 3 \\ 0 & 1 & 4 \end{array}\right) \checkmark$$
 
 \textbf{Keine Lösung:} Widerspruchszeile $(0 \; 0 \; | \; c)$ mit $c \neq 0$
-$$\left(\begin{array}{cc|c} 1 & 2 & 3 \\ 0 & 0 & 5 \end{array}\right) \lightning$$
+$$\left(\begin{array}{cc|c} 1 & 2 & 3 \\ 0 & 0 & 5 \end{array}\right) \; \times$$
 
 \textbf{Unendlich viele:} Freie Variablen (Spalten ohne Pivot)
 $$\left(\begin{array}{ccc|c} 1 & 2 & 3 & 4 \\ 0 & 0 & 1 & 2 \end{array}\right)$$
@@ -453,5 +453,198 @@ $$\mathbf{L} = \begin{pmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ -3 & 2 & 1 \end{pmatrix
 $l_{21} = 2$ (Faktor für $Z_2 - 2Z_1$)\\
 $l_{31} = -3$, $l_{32} = 2$
 \end{subbox}
+
+% ============================================================================
+% SECTION 4: SW04 - GAUSS-JORDAN, INVERSE, DETERMINANTE
+% ============================================================================
+\section{SW04: Gauss-Jordan, Inverse, Determinante}
+
+\begin{mainbox}{Gauss-Jordan-Verfahren}
+\textbf{Erweiterung} des Gauss-Verfahrens: Koeffizientenmatrix wird zur \textbf{Diagonalmatrix} (nicht nur ZSF).
+
+\textbf{Vorteil:} Lösung direkt ablesbar, \textbf{kein Rückwärtseinsetzen} nötig.
+
+\textbf{Vorgehen} (nach ZSF):
+\begin{enumerate}
+    \item Von \textbf{rechts nach links}, \textbf{unten nach oben}
+    \item Alle Einträge \textbf{oberhalb} der Pivots eliminieren
+    \item Pivotelemente auf 1 normieren (Zeile $\cdot$ Kehrwert)
+    \item Keine Zeilenvertauschungen mehr
+\end{enumerate}
+
+\textbf{Resultat:} Reduzierte Zeilenstufenform (RZSF)
+$$\left(\begin{array}{ccc|c} 1 & 0 & 0 & x \\ 0 & 1 & 0 & y \\ 0 & 0 & 1 & z \end{array}\right)$$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Gauss-Jordan}
+Ausgehend von ZSF:
+$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & 0 & 50 & -50 \end{array}\right)$$
+
+$Z_3 \cdot \frac{1}{50}$:
+$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
+
+$Z_2 + 61Z_3$, $Z_1 - 10Z_3$:
+$$\left(\begin{array}{ccc|c} 1 & 1 & 0 & 4 \\ 0 & -7 & 0 & -21 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
+
+$Z_2 \cdot (-\frac{1}{7})$:
+$$\left(\begin{array}{ccc|c} 1 & 1 & 0 & 4 \\ 0 & 1 & 0 & 3 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
+
+$Z_1 - Z_2$:
+$$\left(\begin{array}{ccc|c} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 3 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
+
+$\Rightarrow x = 1, \; y = 3, \; z = -1$
+\end{subbox}
+
+\begin{mainbox}{Inverse mit Gauss-Jordan}
+Berechne $\mathbf{A}^{-1}$ durch simultanes Lösen von $n$ LGS:
+$$\mathbf{A}\mathbf{x}_i = \mathbf{e}_i \quad (i = 1, \ldots, n)$$
+
+\textbf{Verfahren:}
+\begin{enumerate}
+    \item Bilde erweiterte Matrix $(\mathbf{A} \mid \mathbf{I})$
+    \item Wende Gauss-Jordan an
+    \item Ergebnis: $(\mathbf{I} \mid \mathbf{A}^{-1})$
+\end{enumerate}
+
+$$(\mathbf{A} \mid \mathbf{I}) \xrightarrow{\text{Gauss-Jordan}} (\mathbf{I} \mid \mathbf{A}^{-1})$$
+
+\textbf{Falls} $\mathbf{A}$ \textbf{singulär:} Nullzeile in $\mathbf{A}$-Teil $\Rightarrow$ keine Inverse
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Inverse berechnen}
+$\mathbf{A} = \begin{pmatrix} 1 & 3 \\ 2 & 7 \end{pmatrix}$
+
+$$\left(\begin{array}{cc|cc} 1 & 3 & 1 & 0 \\ 2 & 7 & 0 & 1 \end{array}\right)$$
+
+$Z_2 - 2Z_1$:
+$$\left(\begin{array}{cc|cc} 1 & 3 & 1 & 0 \\ 0 & 1 & -2 & 1 \end{array}\right)$$
+
+$Z_1 - 3Z_2$:
+$$\left(\begin{array}{cc|cc} 1 & 0 & 7 & -3 \\ 0 & 1 & -2 & 1 \end{array}\right)$$
+
+$\Rightarrow \mathbf{A}^{-1} = \begin{pmatrix} 7 & -3 \\ -2 & 1 \end{pmatrix}$
+\end{subbox}
+
+\begin{mainbox}{Determinante: Definition}
+Die \textbf{Determinante} ist ein Skalar, der jeder quadratischen Matrix zugeordnet wird.
+
+\textbf{Schreibweisen:} $\det(\mathbf{A})$, $\det\mathbf{A}$, $|\mathbf{A}|$
+
+\textbf{Bedeutung:}
+\begin{itemize}
+    \item $\det(\mathbf{A}) \neq 0$: $\mathbf{A}$ \textbf{regulär} (invertierbar)
+    \item $\det(\mathbf{A}) = 0$: $\mathbf{A}$ \textbf{singulär} (nicht invertierbar)
+\end{itemize}
+
+\textbf{Geometrisch:}
+\begin{itemize}
+    \item 2D: Fläche des aufgespannten Parallelogramms
+    \item 3D: Volumen des aufgespannten Spats
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Determinante $2 \times 2$}
+$$\mathbf{A} = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$$
+
+$$\det(\mathbf{A}) = ad - bc$$
+
+\textbf{Inverse (falls $\det \neq 0$):}
+$$\mathbf{A}^{-1} = \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
+
+\textbf{Merkregel:} Hauptdiagonale minus Nebendiagonale
+\end{mainbox}
+
+\begin{mainbox}{Determinante $3 \times 3$: Sarrus}
+$$\mathbf{A} = \begin{pmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{pmatrix}$$
+
+\textbf{Regel von Sarrus:}
+\begin{align*}
+\det(\mathbf{A}) &= a_1b_2c_3 + b_1c_2a_3 + c_1a_2b_3 \\
+&\quad - c_1b_2a_3 - a_1c_2b_3 - b_1a_2c_3
+\end{align*}
+
+\textbf{Merkregel:} Matrix um 2 Spalten erweitern, Diagonalen bilden
+
+\textbf{Achtung:} Sarrus gilt \textbf{nur} für $3 \times 3$!
+\end{mainbox}
+
+\begin{mainbox}{Determinanten-Rechenregeln}
+\textbf{Zeilenoperationen:}
+\begin{itemize}
+    \item Zeilen vertauschen: $\det \rightarrow -\det$
+    \item Zeile $\cdot \lambda$: $\det \rightarrow \lambda \cdot \det$
+    \item Vielfaches addieren: $\det$ unverändert
+\end{itemize}
+
+\textbf{Weitere Regeln:}
+\begin{itemize}
+    \item $\det(\mathbf{A}^T) = \det(\mathbf{A})$
+    \item $\det(\mathbf{AB}) = \det(\mathbf{A}) \cdot \det(\mathbf{B})$
+    \item $\det(\mathbf{A}^{-1}) = \frac{1}{\det(\mathbf{A})}$
+    \item $\det(\lambda\mathbf{A}) = \lambda^n \det(\mathbf{A})$ für $n \times n$
+\end{itemize}
+
+\textbf{Dreiecksmatrix:} $\det$ = Produkt der Diagonalelemente
+$$\det\begin{pmatrix} 2 & 3 & 1 \\ 0 & 1 & 2 \\ 0 & 0 & 5 \end{pmatrix} = 2 \cdot 1 \cdot 5 = 10$$
+\end{mainbox}
+
+\begin{mainbox}{Determinante: Einheitsmatrix}
+$$\det(\mathbf{I}_n) = 1$$
+
+Da $\mathbf{I}$ eine Dreiecksmatrix mit Diagonale = 1 ist.
+\end{mainbox}
+
+\begin{mainbox}{Cramersche Regel}
+Für $\mathbf{Ax} = \mathbf{b}$ mit $\det(\mathbf{A}) \neq 0$:
+
+$$x_i = \frac{\det(\mathbf{A}_i)}{\det(\mathbf{A})}$$
+
+wobei $\mathbf{A}_i$ = $\mathbf{A}$ mit $i$-ter Spalte durch $\mathbf{b}$ ersetzt.
+
+\textbf{Für $2 \times 2$:}
+$$x = \frac{\det(\mathbf{b}, \mathbf{a}_2)}{\det(\mathbf{A})}, \quad y = \frac{\det(\mathbf{a}_1, \mathbf{b})}{\det(\mathbf{A})}$$
+
+\textbf{Für $3 \times 3$:}
+$$x = \frac{D_x}{D}, \quad y = \frac{D_y}{D}, \quad z = \frac{D_z}{D}$$
+
+$D = \det(\mathbf{A})$, $D_x = \det(\mathbf{d}, \mathbf{b}, \mathbf{c})$, etc.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Cramersche Regel}
+$\begin{cases} 2x + 3y = 8 \\ x - y = 1 \end{cases}$
+
+$D = \det\begin{pmatrix} 2 & 3 \\ 1 & -1 \end{pmatrix} = -2 - 3 = -5$
+
+$D_x = \det\begin{pmatrix} 8 & 3 \\ 1 & -1 \end{pmatrix} = -8 - 3 = -11$
+
+$D_y = \det\begin{pmatrix} 2 & 8 \\ 1 & 1 \end{pmatrix} = 2 - 8 = -6$
+
+$x = \frac{-11}{-5} = \frac{11}{5}, \quad y = \frac{-6}{-5} = \frac{6}{5}$
+\end{subbox}
+
+\begin{mainbox}{Äquivalente Aussagen}
+Für quadratische $n \times n$-Matrix $\mathbf{A}$:
+
+\textbf{Folgende Aussagen sind äquivalent:}
+\begin{itemize}
+    \item $\mathbf{A}$ ist regulär (invertierbar)
+    \item $\mathbf{A}^T$ ist regulär
+    \item $\det(\mathbf{A}) \neq 0$
+    \item $\mathbf{Ax} = \mathbf{0}$ hat nur Lösung $\mathbf{x} = \mathbf{0}$
+    \item $\text{Rang}(\mathbf{A}) = n$
+    \item Alle Pivotelemente $\neq 0$ in ZSF
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Gauss-Jordan: Vorteile}
+\begin{itemize}
+    \item \textbf{Simultane Lösung:} Mehrere rechte Seiten gleichzeitig
+    \item \textbf{Inverse berechnen:} $(\mathbf{A}|\mathbf{I}) \rightarrow (\mathbf{I}|\mathbf{A}^{-1})$
+    \item \textbf{Direkte Lösung:} Kein Rückwärtseinsetzen
+    \item \textbf{Überprüfung:} Invertierbarkeit direkt erkennbar
+\end{itemize}
+
+\textbf{Nachteil:} Mehr Rechenaufwand als reines Gauss-Verfahren
+\end{mainbox}
 
 \end{document}

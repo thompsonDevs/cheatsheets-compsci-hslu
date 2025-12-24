@@ -938,4 +938,129 @@ $\mathbf{t}$: Translationsvektor
 \end{itemize}
 \end{mainbox}
 
+% ============================================================================
+% SECTION 8: LINEARE REGRESSION
+% ============================================================================
+\section{Lineare Regression}
+
+\begin{mainbox}{Problem: Überbestimmtes LGS}
+Gegeben: $m$ Datenpunkte $(t_1, b_1), \ldots, (t_m, b_m)$
+
+Gesucht: Gerade $b = C + Dt$ durch alle Punkte
+
+\textbf{Gleichungssystem:}
+$$\underbrace{\begin{pmatrix} 1 & t_1 \\ 1 & t_2 \\ \vdots & \vdots \\ 1 & t_m \end{pmatrix}}_{\mathbf{A}} \underbrace{\begin{pmatrix} C \\ D \end{pmatrix}}_{\mathbf{x}} = \underbrace{\begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{pmatrix}}_{\mathbf{b}}$$
+
+\textbf{Problem:} $m > 2$ $\Rightarrow$ i.A. \textbf{keine exakte Lösung}!
+
+$\mathbf{b}$ liegt nicht im Spaltenraum $C(\mathbf{A})$.
+\end{mainbox}
+
+\begin{mainbox}{Methode der kleinsten Quadrate}
+\textbf{Ziel:} Minimiere den Fehler $\mathbf{e} = \mathbf{b} - \mathbf{A}\mathbf{x}$
+
+\textbf{Lösung:} Finde $\hat{\mathbf{x}}$, das $\|\mathbf{e}\|^2$ minimiert.
+
+\textbf{Geometrisch:} Projiziere $\mathbf{b}$ orthogonal auf $C(\mathbf{A})$
+
+$$\mathbf{p} = \mathbf{A}\hat{\mathbf{x}}$$
+
+Der Fehlervektor $\mathbf{e} = \mathbf{b} - \mathbf{p}$ steht \textbf{senkrecht} auf $C(\mathbf{A})$.
+\end{mainbox}
+
+\begin{mainbox}{Normalengleichung}
+$\mathbf{e} \perp C(\mathbf{A})$ bedeutet: $\mathbf{A}^T\mathbf{e} = \mathbf{0}$
+
+$$\mathbf{A}^T(\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}) = \mathbf{0}$$
+
+\textbf{Normalengleichung:}
+$$\boxed{\mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}}$$
+
+\textbf{Lösung} (falls $\mathbf{A}$ linear unabh. Spalten hat):
+$$\boxed{\hat{\mathbf{x}} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}}$$
+\end{mainbox}
+
+\begin{mainbox}{Projektion auf Vektor}
+Projektion von $\mathbf{b}$ auf Vektor $\mathbf{a}$:
+
+$$\mathbf{p} = \frac{\mathbf{a}^T\mathbf{b}}{\mathbf{a}^T\mathbf{a}}\mathbf{a} = \frac{\mathbf{a}\mathbf{a}^T}{\mathbf{a}^T\mathbf{a}}\mathbf{b}$$
+
+\textbf{Projektionsmatrix:}
+$$\mathbf{P} = \frac{\mathbf{a}\mathbf{a}^T}{\mathbf{a}^T\mathbf{a}}$$
+
+\textbf{Skalarfaktor:} $\hat{x} = \frac{\mathbf{a}^T\mathbf{b}}{\mathbf{a}^T\mathbf{a}} = \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}|^2}$
+\end{mainbox}
+
+\begin{mainbox}{Projektion auf Spaltenraum}
+Projektion von $\mathbf{b}$ auf $C(\mathbf{A})$:
+
+$$\mathbf{p} = \mathbf{A}\hat{\mathbf{x}} = \mathbf{A}(\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}$$
+
+\textbf{Projektionsmatrix:}
+$$\boxed{\mathbf{P} = \mathbf{A}(\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item $\mathbf{P}^2 = \mathbf{P}$ (idempotent)
+    \item $\mathbf{P}^T = \mathbf{P}$ (symmetrisch)
+    \item $\mathbf{Pb} = \mathbf{b}$ falls $\mathbf{b} \in C(\mathbf{A})$
+    \item $\mathbf{Pb} = \mathbf{0}$ falls $\mathbf{b} \perp C(\mathbf{A})$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Wann existiert die Lösung?}
+\textbf{Theorem:} $\mathbf{A}^T\mathbf{A}$ ist invertierbar $\Leftrightarrow$ $\mathbf{A}$ hat linear unabhängige Spalten.
+
+\textbf{Beweis-Idee:} $N(\mathbf{A}^T\mathbf{A}) = N(\mathbf{A})$
+
+Falls Spalten von $\mathbf{A}$ linear unabhängig:\\
+$N(\mathbf{A}) = \{\mathbf{0}\}$ $\Rightarrow$ $N(\mathbf{A}^T\mathbf{A}) = \{\mathbf{0}\}$\\
+$\Rightarrow$ $\mathbf{A}^T\mathbf{A}$ invertierbar
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Regressionsgerade}
+Datenpunkte: $(0, 6)$, $(1, 0)$, $(2, 0)$
+
+$\mathbf{A} = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}$, $\mathbf{b} = \begin{pmatrix} 6 \\ 0 \\ 0 \end{pmatrix}$
+
+$\mathbf{A}^T\mathbf{A} = \begin{pmatrix} 3 & 3 \\ 3 & 5 \end{pmatrix}$, $\mathbf{A}^T\mathbf{b} = \begin{pmatrix} 6 \\ 0 \end{pmatrix}$
+
+$\hat{\mathbf{x}} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b} = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$
+
+\textbf{Regressionsgerade:} $b = 5 - 3t$
+\end{subbox}
+
+\begin{mainbox}{Regressionsmodell}
+\textbf{Modell:} $b = C + Dt + \varepsilon$ \quad ($\varepsilon$ = Fehler/Rauschen)
+
+\textbf{Datenmatrix und Zielvektor:}
+$$\mathbf{A} = \begin{pmatrix} 1 & t_1 \\ 1 & t_2 \\ \vdots & \vdots \\ 1 & t_m \end{pmatrix}, \quad \mathbf{b} = \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{pmatrix}$$
+
+\textbf{Beste Schätzung:}
+$$\begin{pmatrix} \hat{C} \\ \hat{D} \end{pmatrix} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}$$
+
+\textbf{Vorhersage:} $\hat{b} = \hat{C} + \hat{D}t$
+
+\textbf{Residuen:} $\mathbf{e} = \mathbf{b} - \mathbf{A}\hat{\mathbf{x}}$
+
+\textbf{Summe der Quadrate:} $SQR = \|\mathbf{e}\|^2$
+\end{mainbox}
+
+\begin{mainbox}{Zusammenfassung: Lineare Regression}
+\textbf{Gegeben:} Überbestimmtes System $\mathbf{Ax} = \mathbf{b}$
+
+\textbf{Gesucht:} Beste Näherungslösung $\hat{\mathbf{x}}$
+
+\textbf{Vorgehen:}
+\begin{enumerate}
+    \item Berechne $\mathbf{A}^T\mathbf{A}$ und $\mathbf{A}^T\mathbf{b}$
+    \item Löse $\mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}$
+    \item Projektion: $\mathbf{p} = \mathbf{A}\hat{\mathbf{x}}$
+    \item Fehler: $\mathbf{e} = \mathbf{b} - \mathbf{p}$
+\end{enumerate}
+
+\textbf{Interpretation:}\\
+$\hat{\mathbf{x}}$ minimiert $\|\mathbf{b} - \mathbf{Ax}\|^2$ (kleinste Quadrate)
+\end{mainbox}
+
 \end{document}

@@ -2072,6 +2072,118 @@ Rückwärtseinsetzen & Lösung von $\mathbf{Ux} = \mathbf{y}$ (unten nach oben)
 \end{subbox}
 
 % ============================================================================
+% SINGULÄRWERTZERLEGUNG (SVD)
+% ============================================================================
+\section{Singulärwertzerlegung (SVD)}
+
+\begin{mainbox}{SVD - Definition}
+Die Singulärwertzerlegung (Singular Value Decomposition, SVD) zerlegt jede beliebige $m \times n$-Matrix $\mathbf{A}$ in drei Matrizen:
+
+$$\mathbf{A} = \mathbf{U\Sigma V}^T$$
+
+\textbf{Dabei sind:}
+\begin{itemize}
+    \item $\mathbf{U}$: orthogonale $m \times m$-Matrix ($\mathbf{U}^T\mathbf{U} = \mathbf{I}$, d.h. $\mathbf{U}^{-1} = \mathbf{U}^T$)
+    \item $\mathbf{\Sigma}$: $m \times n$-Diagonalmatrix mit Singulärwerten auf der Diagonale
+    \item $\mathbf{V}$: orthogonale $n \times n$-Matrix ($\mathbf{V}^T\mathbf{V} = \mathbf{I}$, d.h. $\mathbf{V}^{-1} = \mathbf{V}^T$)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{SVD als Summe von Rang-Eins-Matrizen}
+Die SVD kann auch als Summe geschrieben werden:
+
+$$\mathbf{A} = \mathbf{U\Sigma V}^T = \sigma_1\mathbf{u}_1\mathbf{v}_1^T + \sigma_2\mathbf{u}_2\mathbf{v}_2^T + \cdots + \sigma_n\mathbf{u}_n\mathbf{v}_n^T$$
+
+wobei die Singulärwerte $\sigma_i$ positiv und geordnet sind: $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n \geq 0$
+\end{mainbox}
+
+\begin{mainbox}{Berechnung der SVD}
+Die SVD wird über die symmetrischen Matrizen $\mathbf{A}^T\mathbf{A}$ und $\mathbf{AA}^T$ berechnet:
+
+\textbf{Rechts-Singulärvektoren (Spalten von $\mathbf{V}$):}
+$$\mathbf{A}^T\mathbf{A} = \mathbf{V\Sigma}^2\mathbf{V}^T$$
+Die Spalten von $\mathbf{V}$ sind die Eigenvektoren von $\mathbf{A}^T\mathbf{A}$
+
+\textbf{Links-Singulärvektoren (Spalten von $\mathbf{U}$):}
+$$\mathbf{AA}^T = \mathbf{U\Sigma}^2\mathbf{U}^T$$
+Die Spalten von $\mathbf{U}$ sind die Eigenvektoren von $\mathbf{AA}^T$
+
+\textbf{Singulärwerte:}
+$$\sigma_i = \sqrt{\lambda_i}$$
+wobei $\lambda_i$ die Eigenwerte von $\mathbf{A}^T\mathbf{A}$ (bzw. $\mathbf{AA}^T$) sind
+
+\textbf{Wichtig:} $\mathbf{A}^T\mathbf{A}$ und $\mathbf{AA}^T$ haben die gleichen Eigenwerte
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften der SVD}
+\textbf{Matrixgleichung:}
+$$\mathbf{AV} = \mathbf{U\Sigma} \quad \Leftrightarrow \quad \mathbf{A}\mathbf{v}_i = \sigma_i\mathbf{u}_i$$
+
+\textbf{Geometrische Interpretation:}
+Jede lineare Abbildung $\mathbf{y} = \mathbf{Ax}$ ist die Zusammensetzung von:
+\begin{enumerate}
+    \item Drehung/Reflektion ($\mathbf{V}^T$)
+    \item Streckung ($\mathbf{\Sigma}$)
+    \item Drehung/Reflektion ($\mathbf{U}$)
+\end{enumerate}
+
+Eine $n$-dimensionale Hyperkugel wird auf ein $m$-dimensionales Hyperellipsoid abgebildet
+\end{mainbox}
+
+\begin{subbox}{SVD - Berechnungsschritte}
+\textbf{Gegeben:} Matrix $\mathbf{A}$ ($m \times n$)
+
+\textbf{Schritt 1:} Berechne $\mathbf{A}^T\mathbf{A}$ ($n \times n$)
+
+\textbf{Schritt 2:} Bestimme Eigenwerte $\lambda_i$ und Eigenvektoren $\mathbf{v}_i$ von $\mathbf{A}^T\mathbf{A}$
+\begin{itemize}
+    \item Eigenvektoren bilden Spalten von $\mathbf{V}$
+    \item Singulärwerte: $\sigma_i = \sqrt{\lambda_i}$
+\end{itemize}
+
+\textbf{Schritt 3:} Berechne $\mathbf{AA}^T$ ($m \times m$)
+
+\textbf{Schritt 4:} Bestimme Eigenvektoren $\mathbf{u}_i$ von $\mathbf{AA}^T$
+\begin{itemize}
+    \item Eigenvektoren bilden Spalten von $\mathbf{U}$
+\end{itemize}
+
+\textbf{Alternative für $\mathbf{U}$:}
+$$\mathbf{U} = \mathbf{AV\Sigma}^{-1}$$
+\end{subbox}
+
+\begin{subbox}{Anwendungen der SVD}
+\textbf{Bildkompression:}
+Approximiere $\mathbf{A}$ durch die $k$ grössten Singulärwerte:
+$$\mathbf{A} \approx \sum_{i=1}^{k} \sigma_i\mathbf{u}_i\mathbf{v}_i^T$$
+
+Speicherersparnis: $(m + 1 + n)k$ statt $m \cdot n$ Werte
+
+\textbf{Kompressionsfaktor:} $\frac{(m + 1 + n)k}{mn}$
+
+\textbf{Weitere Anwendungen:}
+\begin{itemize}
+    \item Principal Component Analysis (PCA)
+    \item Pseudoinverse (falls $\mathbf{A}^{-1}$ nicht existiert)
+    \item Dimensionsreduktion
+    \item Rauschunterdrückung
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Wichtige Formeln - SVD}
+\renewcommand*{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{lX}
+\textbf{SVD-Zerlegung} & $\mathbf{A} = \mathbf{U\Sigma V}^T$ \\[2mm]
+\textbf{Summenform} & $\mathbf{A} = \sum_{i=1}^{n} \sigma_i\mathbf{u}_i\mathbf{v}_i^T$ \\[2mm]
+\textbf{Singulärwerte} & $\sigma_i = \sqrt{\lambda_i}$ \\[2mm]
+\textbf{Rechts-Singulärvektoren} & Eigenvektoren von $\mathbf{A}^T\mathbf{A}$ \\[2mm]
+\textbf{Links-Singulärvektoren} & Eigenvektoren von $\mathbf{AA}^T$ \\[2mm]
+\textbf{Matrixgleichung} & $\mathbf{A}\mathbf{v}_i = \sigma_i\mathbf{u}_i$ \\[2mm]
+\textbf{Approximation} & $\mathbf{A}_k = \sum_{i=1}^{k} \sigma_i\mathbf{u}_i\mathbf{v}_i^T$
+\end{tabularx}
+\end{mainbox}
+
+% ============================================================================
 % QUICK REFERENCE
 % ============================================================================
 \section{Kurzreferenz}

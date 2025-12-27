@@ -435,6 +435,168 @@ Für Vektoren $\mathbf{a}, \mathbf{b}, \mathbf{c}$ und Skalar $\lambda \in \R$:
 \end{subbox}
 
 % ============================================================================
+% MATRIXMULTIPLIKATION UND SPEZIELLE MATRIZEN
+% ============================================================================
+\section{Matrixmultiplikation}
+
+\begin{mainbox}{Matrixmultiplikation - Definition}
+$\mathbf{A} \in \R^{l \times m}$ (l Zeilen, m Spalten), $\mathbf{B} \in \R^{m \times n}$ (m Zeilen, n Spalten)
+
+$$\mathbf{C} = \mathbf{AB} \in \R^{l \times n}: \quad c_{ik} = \sum_{j=1}^{m} a_{ij}b_{jk}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Spalten von $\mathbf{A}$ = Zeilen von $\mathbf{B}$ (= m)
+    \item $\mathbf{C}$: l Zeilen (wie $\mathbf{A}$), n Spalten (wie $\mathbf{B}$)
+    \item $c_{ik}$ = Skalarprodukt: i-te Zeile von $\mathbf{A}$ mit k-ter Spalte von $\mathbf{B}$
+    \item NICHT kommutativ: $\mathbf{AB} \neq \mathbf{BA}$ (im Allgemeinen)
+    \item Assoziativ: $(\mathbf{AB})\mathbf{C} = \mathbf{A}(\mathbf{BC}) = \mathbf{ABC}$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Einheitsmatrix}
+$$\mathbf{E} = \mathbf{I} = \begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Hauptdiagonale: nur Einsen
+    \item Alle anderen Einträge: 0
+    \item Notation: $\mathbf{E}_n$ oder $\mathbf{I}_n$ für $n \times n$ Matrix
+    \item Neutrales Element: $\mathbf{EA} = \mathbf{AE} = \mathbf{A}$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Transponierte Matrix}
+$$\mathbf{A}^T: \text{ Zeilen } \leftrightarrow \text{ Spalten vertauschen}$$
+
+Spiegelung an der Hauptdiagonalen
+
+\textbf{Regel für Produkte:}
+$$(\mathbf{AB})^T = \mathbf{B}^T \mathbf{A}^T$$
+
+\textbf{Achtung:} Reihenfolge wird vertauscht!
+\end{mainbox}
+
+\begin{mainbox}{Inverse Matrix}
+$\mathbf{A}$ heißt \textbf{invertierbar/regulär/nichtsingulär}, wenn eine Matrix $\mathbf{B}$ existiert mit:
+$$\mathbf{AB} = \mathbf{BA} = \mathbf{E}$$
+
+Dann: $\mathbf{B} = \mathbf{A}^{-1}$ (inverse Matrix zu $\mathbf{A}$)
+
+\textbf{Inverse eines Produkts:}
+$$(\mathbf{AB})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}$$
+
+\textbf{Achtung:} Reihenfolge wird vertauscht!
+
+\textbf{Hinweis:} Nicht alle Matrizen sind invertierbar
+\end{mainbox}
+
+\begin{mainbox}{Permutationsmatrix}
+Quadratische $n \times n$ Matrix mit:
+\begin{itemize}
+    \item Jede Zeile: genau eine 1, Rest 0
+    \item Jede Spalte: genau eine 1, Rest 0
+\end{itemize}
+
+\textbf{Wirkung:}
+\begin{itemize}
+    \item $\mathbf{PA}$: vertauscht Zeilen von $\mathbf{A}$
+    \item $\mathbf{AP}$: vertauscht Spalten von $\mathbf{A}$
+\end{itemize}
+
+\textbf{Entstehung:} Umordnung der Zeilen/Spalten einer Einheitsmatrix
+\end{mainbox}
+
+% ============================================================================
+% LU-ZERLEGUNG
+% ============================================================================
+\section{LU-Zerlegung (LU Decomposition)}
+
+\begin{mainbox}{LU-Zerlegung - Grundidee}
+Ziel: Matrix $\mathbf{A}$ als Produkt zweier Dreiecksmatrizen schreiben
+$$\mathbf{A} = \mathbf{LU}$$
+
+\begin{itemize}
+    \item $\mathbf{L}$: untere Dreiecksmatrix (Lower)
+    \item $\mathbf{U}$: obere Dreiecksmatrix (Upper)
+\end{itemize}
+
+\textbf{Mit Zeilentausch:}
+$$\mathbf{PA} = \mathbf{LU}$$
+wobei $\mathbf{P}$ eine Permutationsmatrix ist
+\end{mainbox}
+
+\begin{mainbox}{Eliminationsmatrix}
+Matrix $\mathbf{E}_{ij}$: eliminiert Element $a_{i,j}$ (macht es zu 0)
+
+\textbf{Beispiel 2×2:}
+$$\mathbf{E}_{21} = \begin{pmatrix} 1 & 0 \\ -l_{21} & 1 \end{pmatrix}$$
+macht $a_{21}$ zu 0 durch Subtraktion von $l_{21}$ mal Zeile 1 von Zeile 2
+
+\textbf{Inverse:}
+$$\mathbf{E}_{21}^{-1} = \mathbf{L}_{21} = \begin{pmatrix} 1 & 0 \\ l_{21} & 1 \end{pmatrix}$$
+Vorzeichen von $-l_{ij}$ wird zu $+l_{ij}$ (außer Hauptdiagonale)
+\end{mainbox}
+
+\begin{mainbox}{LU-Zerlegung durchführen}
+\textbf{Schritt 1:} Eliminiere Einträge unter Hauptdiagonale durch $\mathbf{E}_{ij}$-Matrizen
+$$\mathbf{E}_{32}\mathbf{E}_{31}\mathbf{E}_{21}\mathbf{A} = \mathbf{U}$$
+
+\textbf{Schritt 2:} Invertiere beide Seiten
+$$\mathbf{A} = \mathbf{E}_{21}^{-1}\mathbf{E}_{31}^{-1}\mathbf{E}_{32}^{-1}\mathbf{U} = \mathbf{LU}$$
+
+\textbf{Resultat:}
+\begin{itemize}
+    \item $\mathbf{L} = \mathbf{E}_{21}^{-1}\mathbf{E}_{31}^{-1}\mathbf{E}_{32}^{-1}$ (untere Dreiecksmatrix)
+    \item $\mathbf{U}$ (obere Dreiecksmatrix aus Gauss-Elimination)
+    \item Eliminationsfaktor $l_{ij}$ steht in Zeile i, Spalte j von $\mathbf{L}$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{LGS lösen mit LU-Zerlegung}
+Gegeben: $\mathbf{Ax} = \mathbf{b}$
+
+\textbf{Schritt 1:} LU-Zerlegung: $\mathbf{A} = \mathbf{LU}$
+
+\textbf{Schritt 2:} Setze $\mathbf{Ux} = \mathbf{y}$, dann:
+$$\mathbf{LUx} = \mathbf{b} \Rightarrow \mathbf{Ly} = \mathbf{b}$$
+
+\textbf{Schritt 3:} Löse $\mathbf{Ly} = \mathbf{b}$ durch \textbf{Vorwärtseinsetzen}:
+$$y_1 = \frac{b_1}{l_{11}}, \quad y_i = \frac{1}{l_{ii}}\left(b_i - \sum_{k=1}^{i-1} l_{ik}y_k\right)$$
+
+\textbf{Schritt 4:} Löse $\mathbf{Ux} = \mathbf{y}$ durch \textbf{Rückwärtseinsetzen}:
+$$x_n = \frac{y_n}{u_{nn}}, \quad x_i = \frac{1}{u_{ii}}\left(y_i - \sum_{k=i+1}^{n} u_{ik}x_k\right)$$
+\end{subbox}
+
+\begin{subbox}{LU mit Pivotisierung}
+Falls Pivotelement = 0: Zeilentausch mit Permutationsmatrix $\mathbf{P}$ nötig
+
+$$\mathbf{PA} = \mathbf{LU}$$
+
+\textbf{Vorgehen:}
+\begin{enumerate}
+    \item Multipliziere $\mathbf{A}$ und $\mathbf{b}$ mit $\mathbf{P}$
+    \item $\mathbf{PA} = \hat{\mathbf{A}}$, $\mathbf{Pb} = \hat{\mathbf{b}}$
+    \item Löse $\hat{\mathbf{A}}\mathbf{x} = \hat{\mathbf{b}}$ mit LU wie oben
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Vorteile der LU-Zerlegung}
+\textbf{Effizienz bei mehreren rechten Seiten:}
+\begin{itemize}
+    \item Gleiche Matrix $\mathbf{A}$, verschiedene $\mathbf{b}$
+    \item LU-Zerlegung nur einmal berechnen
+    \item Für jedes neue $\mathbf{b}$: nur Vorwärts- und Rückwärtseinsetzen
+    \item Viel effizienter als wiederholtes Gauss-Verfahren
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % GAUSS-ELIMINATION
 % ============================================================================
 \section{Gauss-Eliminationsverfahren}
@@ -564,6 +726,10 @@ Nun Rückwärtseinsetzen $\Rightarrow$ Lösung: $(1, 3, -1)$
 \textbf{Gerade} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u}$ \\[2mm]
 \textbf{Ebene} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u} + \mu \mathbf{v}$ \\[2mm]
 \textbf{Matrix-Vektor} & $(\mathbf{A}\mathbf{x})_i = \sum_{j} a_{i,j} x_j$ \\[2mm]
+\textbf{Matrix-Matrix} & $c_{ik} = \sum_{j} a_{ij}b_{jk}$ \\[2mm]
+\textbf{Transponierte} & $(\mathbf{AB})^T = \mathbf{B}^T\mathbf{A}^T$ \\[2mm]
+\textbf{Inverse} & $(\mathbf{AB})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}$ \\[2mm]
+\textbf{LU-Zerlegung} & $\mathbf{A} = \mathbf{LU}$ oder $\mathbf{PA} = \mathbf{LU}$ \\[2mm]
 \textbf{Skalarprodukt} & $\mathbf{a} \bullet \mathbf{b} = \sum_i a_i b_i = |\mathbf{a}||\mathbf{b}|\cos\varphi$ \\[2mm]
 \textbf{Betrag} & $|\mathbf{a}| = \sqrt{\mathbf{a} \bullet \mathbf{a}} = \sqrt{\sum_i a_i^2}$ \\[2mm]
 \textbf{Winkel} & $\varphi = \arccos\left(\frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\right)$ \\[2mm]
@@ -587,11 +753,18 @@ $\mathbf{a} \perp \mathbf{b}$ & $\mathbf{a}$ orthogonal zu $\mathbf{b}$ \\
 $\hat{\mathbf{a}}$ & Einheitsvektor in Richtung $\mathbf{a}$ \\
 $(m \times n)$ & Matrix mit $m$ Zeilen, $n$ Spalten \\
 $a_{i,j}$ & Element in Zeile $i$, Spalte $j$ \\
+$\mathbf{A}^T$ & Transponierte Matrix \\
+$\mathbf{A}^{-1}$ & Inverse Matrix \\
+$\mathbf{E}, \mathbf{I}$ & Einheitsmatrix \\
+$\mathbf{P}$ & Permutationsmatrix \\
 $(\mathbf{A}|\mathbf{b})$ & Erweiterte Koeffizientenmatrix \\
 Leitkoeffizient & Erster Eintrag $\neq 0$ in Zeile \\
 Pivotelement & Leitkoeffizient in Zeilenstufenform \\
 Zeilenstufenform & Leitkoeff. nach rechts versetzt, Nullzeilen unten \\
-Rückwärtseinsetzen & Lösung von unten nach oben
+$\mathbf{L}$ & Untere Dreiecksmatrix (Lower) \\
+$\mathbf{U}$ & Obere Dreiecksmatrix (Upper) \\
+Vorwärtseinsetzen & Lösung von $\mathbf{Ly} = \mathbf{b}$ (oben nach unten) \\
+Rückwärtseinsetzen & Lösung von $\mathbf{Ux} = \mathbf{y}$ (unten nach oben)
 \end{tabularx}
 \end{subbox}
 

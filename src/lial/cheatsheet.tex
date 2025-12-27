@@ -1143,6 +1143,221 @@ $$= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\
 \end{subbox}
 
 % ============================================================================
+% ORTHOGONALE ABBILDUNGEN
+% ============================================================================
+\section{Orthogonale Abbildungen}
+
+\begin{mainbox}{Orthogonale Abbildung - Definition}
+\textbf{Definition:} Eine orthogonale Abbildung ist längen- und winkeltreu, d.h. sie lässt Längen und Winkel ungeändert
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Erhält Skalarprodukt: $\mathbf{x} \bullet \mathbf{y} = (\mathbf{Ax}) \bullet (\mathbf{Ay})$ für alle $\mathbf{x}, \mathbf{y} \in \R^n$
+    \item Inverse = Transponierte: $\mathbf{A}^{-1} = \mathbf{A}^T$
+    \item Determinante: $\det(\mathbf{A}) = \pm 1$
+    \item Spalten (und Zeilen) sind auf 1 normiert
+    \item Spalten (und Zeilen) stehen paarweise senkrecht aufeinander
+\end{itemize}
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item Drehungen: $\det(\mathbf{A}) = 1$
+    \item Spiegelungen: $\det(\mathbf{A}) = -1$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Charakterisierung orthogonaler Matrizen}
+Matrix $\mathbf{A}$ ist orthogonal $\Leftrightarrow$ eine der folgenden gilt:
+
+\begin{itemize}
+    \item $\mathbf{A}^T\mathbf{A} = \mathbf{I}$ (bzw. $\mathbf{AA}^T = \mathbf{I}$)
+    \item $\mathbf{A}^{-1} = \mathbf{A}^T$
+    \item Spalten bilden Orthonormalbasis
+    \item Zeilen bilden Orthonormalbasis
+    \item $|\mathbf{Ax}| = |\mathbf{x}|$ für alle $\mathbf{x}$
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
+% HOMOGENE KOORDINATEN 2D
+% ============================================================================
+\section{Homogene Koordinaten in 2D}
+
+\begin{mainbox}{Rotation und Translation in 2D}
+\textbf{Rotation um Winkel $\varphi$:}
+$$\begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} x\cos\varphi - y\sin\varphi \\ x\sin\varphi + y\cos\varphi \end{pmatrix}$$
+
+\textbf{Eigenschaften:} Matrixmultiplikation, Nullvektor $\to$ Nullvektor, linear
+
+\textbf{Translation um Vektor $(u, v)^T$:}
+$$\begin{pmatrix} x \\ y \end{pmatrix} + \begin{pmatrix} u \\ v \end{pmatrix} = \begin{pmatrix} x + u \\ y + v \end{pmatrix}$$
+
+\textbf{Eigenschaften:} Vektoraddition, Nullvektor $\not\to$ Nullvektor, nichtlinear
+
+\textbf{Problem:} Unterschiedliche Operationen (Multiplikation vs. Addition)
+\end{mainbox}
+
+\begin{mainbox}{Homogene Koordinaten - Grundidee}
+\textbf{Ziel:} Einheitliche Beschreibung von Rotation und Translation
+
+\textbf{Lösung:} Dimension erhöhen - erweitere auf $\R^3$
+
+\textbf{2D-Vektor in homogenen Koordinaten:}
+$$\begin{pmatrix} x \\ y \end{pmatrix} \to \begin{pmatrix} x \\ y \\ 1 \end{pmatrix}$$
+
+\textbf{Vorteil:} Rotation und Translation als Matrixmultiplikation darstellbar
+\end{mainbox}
+
+\begin{mainbox}{Rotation in homogenen Koordinaten}
+$$\begin{pmatrix} \cos\varphi & -\sin\varphi & 0 \\ \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} = \begin{pmatrix} x\cos\varphi - y\sin\varphi \\ x\sin\varphi + y\cos\varphi \\ 1 \end{pmatrix}$$
+
+\textbf{Struktur:}
+$$\begin{pmatrix} \text{Rotationsmatrix} & \mathbf{0} \\ \mathbf{0}^T & 1 \end{pmatrix}$$
+\end{mainbox}
+
+\begin{mainbox}{Translation in homogenen Koordinaten}
+$$\begin{pmatrix} 1 & 0 & u \\ 0 & 1 & v \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} = \begin{pmatrix} x + u \\ y + v \\ 1 \end{pmatrix}$$
+
+\textbf{Struktur:}
+$$\begin{pmatrix} \mathbf{I} & \mathbf{t} \\ \mathbf{0}^T & 1 \end{pmatrix}$$
+
+wobei $\mathbf{t} = \begin{pmatrix} u \\ v \end{pmatrix}$ der Translationsvektor ist
+\end{mainbox}
+
+\begin{subbox}{Zusammensetzung von Abbildungen}
+Gegeben: Abbildungen $\mathbf{A}$ und $\mathbf{B}$ in homogenen Koordinaten
+
+\textbf{Schritt 1:} $\mathbf{y} = \mathbf{Ax}$
+
+\textbf{Schritt 2:} $\mathbf{z} = \mathbf{By}$
+
+\textbf{Zusammengesetzt:}
+$$\mathbf{z} = \mathbf{By} = \mathbf{B}(\mathbf{Ax}) = (\mathbf{BA})\mathbf{x}$$
+
+\textbf{Wichtig:} Zuerst ausgeführte Abbildung steht \textbf{rechts}
+
+\textbf{Mehrere Abbildungen:}
+Reihenfolge: zuerst $\mathbf{A}$, dann $\mathbf{B}$, dann $\mathbf{C}$
+$$\Rightarrow \mathbf{CBA}$$
+\end{subbox}
+
+\begin{subbox}{Nicht-Kommutativität}
+\textbf{Warnung:} Die Reihenfolge ist wichtig!
+
+Rotation $\mathbf{R}$, Translation $\mathbf{T}$:
+
+\textbf{Zuerst Rotation, dann Translation:}
+$$\mathbf{TR} = \begin{pmatrix} 1 & 0 & u \\ 0 & 1 & v \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 \\ \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u \\ \sin\varphi & \cos\varphi & v \\ 0 & 0 & 1 \end{pmatrix}$$
+
+\textbf{Zuerst Translation, dann Rotation:}
+$$\mathbf{RT} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u\cos\varphi - v\sin\varphi \\ \sin\varphi & \cos\varphi & u\sin\varphi + v\cos\varphi \\ 0 & 0 & 1 \end{pmatrix}$$
+
+$$\mathbf{TR} \neq \mathbf{RT}$$
+\end{subbox}
+
+\begin{subbox}{Beispiel: Drehung um beliebiges Zentrum}
+\textbf{Aufgabe:} Drehe um Zentrum $(c_x, c_y)^T$ statt Ursprung
+
+\textbf{Methode:} 3 Schritte zusammensetzen
+\begin{enumerate}
+    \item Verschiebe Zentrum in Ursprung: $\mathbf{T}_1$ mit $(-c_x, -c_y)^T$
+    \item Drehe um Ursprung: $\mathbf{R}$ mit Winkel $\varphi$
+    \item Verschiebe zurück: $\mathbf{T}_2$ mit $(c_x, c_y)^T$
+\end{enumerate}
+
+\textbf{Gesamtabbildung:}
+$$\mathbf{A} = \mathbf{T}_2 \mathbf{R} \mathbf{T}_1$$
+
+$$= \begin{pmatrix} 1 & 0 & c_x \\ 0 & 1 & c_y \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 \\ \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 & -c_x \\ 0 & 1 & -c_y \\ 0 & 0 & 1 \end{pmatrix}$$
+\end{subbox}
+
+% ============================================================================
+% HOMOGENE KOORDINATEN 3D
+% ============================================================================
+\section{Homogene Koordinaten in 3D}
+
+\begin{mainbox}{3D-Rotation um x-Achse}
+$$\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & \cos\varphi & -\sin\varphi & 0 \\
+0 & \sin\varphi & \cos\varphi & 0 \\
+0 & 0 & 0 & 1
+\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x \\ y\cos\varphi - z\sin\varphi \\ y\sin\varphi + z\cos\varphi \\ 1 \end{pmatrix}$$
+
+\textbf{Merke:} x-Koordinate bleibt unverändert, Rotation in yz-Ebene
+\end{mainbox}
+
+\begin{mainbox}{3D-Rotation um y-Achse}
+$$\begin{pmatrix}
+\cos\varphi & 0 & \sin\varphi & 0 \\
+0 & 1 & 0 & 0 \\
+-\sin\varphi & 0 & \cos\varphi & 0 \\
+0 & 0 & 0 & 1
+\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x\cos\varphi + z\sin\varphi \\ y \\ -x\sin\varphi + z\cos\varphi \\ 1 \end{pmatrix}$$
+
+\textbf{Merke:} y-Koordinate bleibt unverändert, Rotation in xz-Ebene
+
+\textbf{Achtung:} Vorzeichen bei $\sin\varphi$ vertauscht (Rechtshändigkeit)
+\end{mainbox}
+
+\begin{mainbox}{3D-Rotation um z-Achse}
+$$\begin{pmatrix}
+\cos\varphi & -\sin\varphi & 0 & 0 \\
+\sin\varphi & \cos\varphi & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x\cos\varphi - y\sin\varphi \\ x\sin\varphi + y\cos\varphi \\ z \\ 1 \end{pmatrix}$$
+
+\textbf{Merke:} z-Koordinate bleibt unverändert, Rotation in xy-Ebene
+
+(wie 2D-Rotation)
+\end{mainbox}
+
+\begin{mainbox}{3D-Translation}
+$$\begin{pmatrix}
+1 & 0 & 0 & u \\
+0 & 1 & 0 & v \\
+0 & 0 & 1 & w \\
+0 & 0 & 0 & 1
+\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x + u \\ y + v \\ z + w \\ 1 \end{pmatrix}$$
+
+\textbf{Struktur:}
+$$\begin{pmatrix} \mathbf{I}_3 & \mathbf{t} \\ \mathbf{0}^T & 1 \end{pmatrix}$$
+
+mit Translationsvektor $\mathbf{t} = \begin{pmatrix} u \\ v \\ w \end{pmatrix}$
+\end{mainbox}
+
+\begin{subbox}{Allgemeine 3D-Transformation}
+\textbf{Kombination von Rotation und Translation:}
+$$\begin{pmatrix}
+\mathbf{R}_{3 \times 3} & \mathbf{t}_{3 \times 1} \\
+\mathbf{0}^T_{1 \times 3} & 1
+\end{pmatrix}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item $\mathbf{R}$: $3 \times 3$ Rotationsmatrix (orthogonal)
+    \item $\mathbf{t}$: $3 \times 1$ Translationsvektor
+    \item Letzte Zeile: $(0, 0, 0, 1)$
+    \item Zusammensetzung: Matrixmultiplikation
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Interpretation der Multiplikation}
+\textbf{Multiplikation von links:} Transformation im festen Koordinatensystem
+$$\mathbf{C} = \mathbf{BA} \quad \text{(erst } \mathbf{A}\text{, dann } \mathbf{B}\text{)}$$
+
+\textbf{Multiplikation von rechts:} Transformation im mitbewegten Koordinatensystem
+$$\mathbf{C} = \mathbf{AB} \quad \text{(bezüglich lokalem System)}$$
+
+\textbf{Anwendung:}
+\begin{itemize}
+    \item Festes System: Objekte im Raum transformieren
+    \item Mitbewegt: Kamerabewegung, Roboterkinematik
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % QUICK REFERENCE
 % ============================================================================
 \section{Kurzreferenz}

@@ -2184,6 +2184,211 @@ Speicherersparnis: $(m + 1 + n)k$ statt $m \cdot n$ Werte
 \end{mainbox}
 
 % ============================================================================
+% REDUZIERTE SVD UND HAUPTKOMPONENTENANALYSE (PCA)
+% ============================================================================
+\section{Reduzierte SVD und PCA}
+
+\begin{mainbox}{Reduzierte (kompakte) SVD}
+Falls der Rang von $\mathbf{A}$ gleich $r$ ist ($r = \text{rang}(\mathbf{A})$), dann enthält $\mathbf{\Sigma}$ nur $r$ von Null verschiedene Singulärwerte.
+
+\textbf{Reduzierte SVD:}
+$$\mathbf{A}_{(m \times n)} = \mathbf{U}_r^{(m \times r)} \mathbf{\Sigma}_r^{(r \times r)} \mathbf{V}_r^{T(r \times n)}$$
+
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Platzsparend: kleinere Matrizen
+    \item Effizienter für Berechnungen
+    \item Nur relevante Singulärwerte werden gespeichert
+\end{itemize}
+
+\textbf{Beispiel:} Für $\mathbf{A} = \begin{pmatrix} 1 & 1 \\ -1 & -1 \end{pmatrix}$ mit $\text{rang}(\mathbf{A}) = 1$:
+$$\mathbf{A} = \mathbf{U}_r \mathbf{\Sigma}_r \mathbf{V}_r^T = \begin{pmatrix} -1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix} [2] \begin{pmatrix} -1/\sqrt{2} & -1/\sqrt{2} \end{pmatrix}$$
+\end{mainbox}
+
+% ============================================================================
+% HAUPTKOMPONENTENANALYSE (PCA)
+% ============================================================================
+\section{Hauptkomponentenanalyse (PCA)}
+
+\begin{mainbox}{PCA - Grundidee}
+\textbf{Principal Component Analysis (PCA)} ist ein Verfahren zur Dimensionsreduktion hochdimensionaler Daten.
+
+\textbf{Ziel:} Strukturen in Daten eines $n$-dimensionalen Raums finden und in einem Raum mit Dimension $k \ll n$ darstellen, wobei möglichst wenig Information verloren geht.
+
+\textbf{Anwendungen:}
+\begin{itemize}
+    \item Visualisierung hochdimensionaler Daten
+    \item Datenreduktion
+    \item Klassifizierung von Daten
+    \item Rauschunterdrückung
+\end{itemize}
+
+\textbf{Geschichte:} Erfunden 1901 von Karl Pearson, weiterentwickelt in den 1930er Jahren von Harold Hotelling
+\end{mainbox}
+
+\begin{mainbox}{Datenmatrix}
+Die Datenmatrix $\tilde{\mathbf{X}}$ hat:
+\begin{itemize}
+    \item $m$ Zeilen: Samples (Beobachtungen, Messungen)
+    \item $n$ Spalten: Variablen (Features, Merkmale)
+\end{itemize}
+
+\textbf{Beispiel - IRIS-Datensatz:}
+\begin{itemize}
+    \item 150 Schwertlilien ($m = 150$)
+    \item 3 Typen: Setosa, Virginica, Versicolor (je 50)
+    \item 4 Merkmale ($n = 4$): Kelchblatt-Länge/-Breite (sepal length/width), Kronblatt-Länge/-Breite (petal length/width)
+\end{itemize}
+
+\textbf{Zentrierung der Datenmatrix:}
+$$\mathbf{M} = \mathbf{I} - \frac{1}{m}\mathbf{1}$$
+$$\mathbf{X} = \mathbf{M}\tilde{\mathbf{X}}$$
+
+wobei $\mathbf{1}$ eine Matrix aus lauter Einsen ist.
+
+\textbf{Wichtig:} Die Datenmatrix muss zentriert sein!
+\end{mainbox}
+
+\begin{mainbox}{Kovarianzmatrix}
+Für eine zentrierte $m \times n$-Datenmatrix $\mathbf{X}$ ist die Kovarianzmatrix:
+
+$$\mathbf{C} = \frac{1}{m-1}\mathbf{X}^T\mathbf{X}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item $\mathbf{C}$ ist eine $n \times n$-Matrix
+    \item $\mathbf{C}$ ist symmetrisch
+    \item Diagonale: Varianzen (Streuung) der $n$ Variablen
+    \item Nebendiagonale: Kovarianzen zwischen Variablen
+\end{itemize}
+
+\textbf{Interpretation der Kovarianz $C_{i,j}$:}
+\begin{itemize}
+    \item $C_{i,j} = 0$: Variablen $i$ und $j$ sind nicht korreliert
+    \item $C_{i,j} > 0$: Zunahme von Variable $i$ $\Rightarrow$ Zunahme von Variable $j$
+    \item $C_{i,j} < 0$: Zunahme von Variable $i$ $\Rightarrow$ Abnahme von Variable $j$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{PCA via Eigenwertzerlegung}
+\textbf{Methode 1:} Eigenwertzerlegung der Kovarianzmatrix
+
+$$\mathbf{C} = \mathbf{V\Lambda V}^T$$
+
+\textbf{Ergebnis:}
+\begin{itemize}
+    \item Spalten von $\mathbf{V}$: Hauptachsen/-richtungen (principal directions/axes)
+    \item Eigenwerte in $\mathbf{\Lambda}$: Varianzen im gedrehten Koordinatensystem
+    \item Eigenwerte werden absteigend sortiert: $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n \geq 0$
+\end{itemize}
+
+\textbf{Hauptachsen:}
+\begin{itemize}
+    \item 1. Hauptachse (größter Eigenwert): Richtung der größten Varianz
+    \item 2. Hauptachse (zweitgrößter Eigenwert): senkrecht zur 1. Hauptachse, zweitgrößte Varianz
+    \item etc.
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{PCA via SVD der Datenmatrix}
+\textbf{Methode 2:} SVD der zentrierten Datenmatrix
+
+Sei $\mathbf{X} = \mathbf{U\Sigma V}^T$ die SVD von $\mathbf{X}$. Dann:
+
+$$\mathbf{C} = \frac{1}{m-1}\mathbf{X}^T\mathbf{X} = \frac{1}{m-1}\mathbf{V\Sigma}^T\mathbf{U}^T\mathbf{U\Sigma V}^T = \mathbf{V}\frac{\mathbf{\Sigma}^2}{m-1}\mathbf{V}^T$$
+
+\textbf{Zusammenhang:}
+\begin{itemize}
+    \item Spalten von $\mathbf{V}$: Hauptachsenrichtungen (principal directions)
+    \item Spalten von $\mathbf{U\Sigma} = \mathbf{XV}$: Hauptkomponenten (principal components, scores)
+    \item Beziehung: $\lambda_i = \frac{\sigma_i^2}{m-1}$
+\end{itemize}
+
+\textbf{Dimensionsreduktion von $n$ auf $k < n$:}
+\begin{itemize}
+    \item Verwende erste $k$ Spalten von $\mathbf{U}$ (oder $\mathbf{V}$)
+    \item Verwende $k \times k$-Submatrix von $\mathbf{\Sigma}$
+    \item Reduzierte Datenmatrix: $\mathbf{U}_k\mathbf{\Sigma}_k$ (erste $k$ Hauptkomponenten)
+\end{itemize}
+\end{mainbox}
+
+% ============================================================================
+% PSEUDOINVERSE
+% ============================================================================
+\section{Moore-Penrose-Pseudoinverse}
+
+\begin{mainbox}{Pseudoinverse - Definition}
+Die Moore-Penrose-Pseudoinverse ist die beste Inverse einer beliebigen $m \times n$-Matrix $\mathbf{A}$.
+
+Für jede Matrix $\mathbf{A}$ existiert eine eindeutige $n \times m$-Matrix $\mathbf{A}^+$, die folgende Bedingungen erfüllt:
+
+\begin{enumerate}
+    \item $\mathbf{AA}^+\mathbf{A} = \mathbf{A}$ (d.h. $\mathbf{AA}^+$ bildet Spalten von $\mathbf{A}$ auf sich ab)
+    \item $\mathbf{A}^+\mathbf{AA}^+ = \mathbf{A}^+$
+    \item $(\mathbf{AA}^+)^T = \mathbf{AA}^+$ (d.h. $\mathbf{AA}^+$ ist symmetrisch)
+    \item $(\mathbf{A}^+\mathbf{A})^T = \mathbf{A}^+\mathbf{A}$ (d.h. $\mathbf{A}^+\mathbf{A}$ ist symmetrisch)
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Berechnung der Pseudoinverse via SVD}
+Sei $\mathbf{A} = \mathbf{U\Sigma V}^T$ die SVD von $\mathbf{A}$. Dann:
+
+$$\mathbf{A}^+ = \mathbf{V\Sigma}^+\mathbf{U}^T$$
+
+wobei $\mathbf{\Sigma}^+$ auf der Diagonale die Kehrwerte der Singulärwerte enthält:
+
+$$\sigma_i^+ = \begin{cases}
+\frac{1}{\sigma_i} & \text{falls } \sigma_i \neq 0 \\
+0 & \text{falls } \sigma_i = 0
+\end{cases}$$
+
+für $i = 1, 2, \ldots, r$ (wobei $r = \text{rang}(\mathbf{A})$)
+\end{mainbox}
+
+\begin{mainbox}{Spezialfälle der Pseudoinverse}
+\textbf{Falls $\mathbf{A}$ linear unabhängige Zeilen hat:}
+$$\mathbf{A}^+ = \mathbf{A}^T(\mathbf{AA}^T)^{-1}$$
+$\mathbf{A}^+$ ist ein Rechtsinverses: $\mathbf{AA}^+ = \mathbf{I}$
+
+\textbf{Falls $\mathbf{A}$ linear unabhängige Spalten hat:}
+$$\mathbf{A}^+ = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T$$
+$\mathbf{A}^+$ ist ein Linksinverses: $\mathbf{A}^+\mathbf{A} = \mathbf{I}$
+
+\textbf{Falls $\mathbf{A}$ regulär ist:}
+$$\mathbf{A}^+ = \mathbf{A}^{-1}$$
+\end{mainbox}
+
+\begin{subbox}{Anwendung: Lineare Regression}
+In der linearen Regression mit Datenmatrix $\mathbf{X}$ und Zielvariable $\mathbf{y}$:
+
+\textbf{Normalgleichung:}
+$$\mathbf{X}^T\mathbf{X}\hat{\mathbf{b}} = \mathbf{X}^T\mathbf{y}$$
+
+\textbf{Lösung (falls $\mathbf{X}^T\mathbf{X}$ invertierbar):}
+$$\hat{\mathbf{b}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
+
+\textbf{Falls Inverse nicht existiert:} Verwende Pseudoinverse
+$$\hat{\mathbf{b}} = (\mathbf{X}^T\mathbf{X})^+\mathbf{X}^T\mathbf{y}$$
+
+wobei $(\mathbf{X}^T\mathbf{X})^+ = \mathbf{V\Sigma}^+\mathbf{U}^T$ aus der SVD von $\mathbf{X}^T\mathbf{X} = \mathbf{U\Sigma V}^T$
+\end{subbox}
+
+\begin{mainbox}{Wichtige Formeln - PCA und Pseudoinverse}
+\renewcommand*{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{lX}
+\textbf{Reduzierte SVD} & $\mathbf{A} = \mathbf{U}_r\mathbf{\Sigma}_r\mathbf{V}_r^T$ \\[2mm]
+\textbf{Zentrierte Datenmatrix} & $\mathbf{X} = \mathbf{M}\tilde{\mathbf{X}}$, $\mathbf{M} = \mathbf{I} - \frac{1}{m}\mathbf{1}$ \\[2mm]
+\textbf{Kovarianzmatrix} & $\mathbf{C} = \frac{1}{m-1}\mathbf{X}^T\mathbf{X}$ \\[2mm]
+\textbf{PCA via Eigenwerte} & $\mathbf{C} = \mathbf{V\Lambda V}^T$ \\[2mm]
+\textbf{PCA via SVD} & $\mathbf{X} = \mathbf{U\Sigma V}^T$, dann $\mathbf{C} = \mathbf{V}\frac{\mathbf{\Sigma}^2}{m-1}\mathbf{V}^T$ \\[2mm]
+\textbf{Hauptkomponenten} & $\mathbf{U\Sigma} = \mathbf{XV}$ \\[2mm]
+\textbf{Zusammenhang} & $\lambda_i = \frac{\sigma_i^2}{m-1}$ \\[2mm]
+\textbf{Pseudoinverse} & $\mathbf{A}^+ = \mathbf{V\Sigma}^+\mathbf{U}^T$ \\[2mm]
+\textbf{$\mathbf{\Sigma}^+$} & $\sigma_i^+ = 1/\sigma_i$ für $\sigma_i \neq 0$
+\end{tabularx}
+\end{mainbox}
+
+% ============================================================================
 % QUICK REFERENCE
 % ============================================================================
 \section{Kurzreferenz}

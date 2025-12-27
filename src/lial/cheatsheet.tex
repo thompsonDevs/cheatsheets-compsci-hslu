@@ -1804,6 +1804,219 @@ Berechne $R^2 = 1 - \frac{\text{SQR}}{\text{SQT}}$
 \end{subbox}
 
 % ============================================================================
+% EIGENWERTE UND EIGENVEKTOREN
+% ============================================================================
+\section{Eigenwerte und Eigenvektoren}
+
+\begin{mainbox}{Eigenwert und Eigenvektor - Definition}
+\textbf{Gegeben:} Quadratische Matrix $\mathbf{A}$
+
+\textbf{Gesucht:} Vektoren $\mathbf{x} \neq \mathbf{0}$, die bei Multiplikation mit $\mathbf{A}$ ihre Richtung beibehalten:
+
+$$\mathbf{Ax} = \lambda\mathbf{x}$$
+
+\begin{itemize}
+    \item $\mathbf{x}$: Eigenvektor der Matrix $\mathbf{A}$
+    \item $\lambda$: Eigenwert der Matrix $\mathbf{A}$
+    \item $\mathbf{x} \neq \mathbf{0}$ (nur nichttriviale Lösungen)
+\end{itemize}
+
+\textbf{Umformung:}
+$$\mathbf{Ax} = \lambda\mathbf{x} \Rightarrow (\mathbf{A} - \lambda\mathbf{I})\mathbf{x} = \mathbf{0}$$
+
+\textbf{Bedingung:} Homogenes GS hat nichttriviale Lösung $\Rightarrow$ $\mathbf{A} - \lambda\mathbf{I}$ muss singulär sein
+\end{mainbox}
+
+\begin{mainbox}{Charakteristische Gleichung}
+\textbf{Eigenwerte bestimmen:}
+$$\det(\mathbf{A} - \lambda\mathbf{I}) = 0$$
+
+Diese Gleichung heißt \textbf{charakteristische Gleichung}.
+
+\textbf{Für $n \times n$-Matrix:} Gleichung $n$-ten Grades
+
+\textbf{Beispiel 2×2:}
+$$\mathbf{A} - \lambda\mathbf{I} = \begin{pmatrix} a_{11} - \lambda & a_{12} \\ a_{21} & a_{22} - \lambda \end{pmatrix}$$
+
+$$\det(\mathbf{A} - \lambda\mathbf{I}) = (a_{11} - \lambda)(a_{22} - \lambda) - a_{12}a_{21} = 0$$
+\end{mainbox}
+
+\begin{mainbox}{Eigenvektoren berechnen}
+\textbf{Vorgehen in 2 Schritten:}
+
+\textbf{Schritt 1:} Eigenwerte aus charakteristischer Gleichung
+$$\det(\mathbf{A} - \lambda\mathbf{I}) = 0$$
+
+\textbf{Schritt 2:} Für jeden Eigenwert $\lambda_i$ löse homogenes LGS
+$$(\mathbf{A} - \lambda_i\mathbf{I})\mathbf{x} = \mathbf{0}$$
+
+Die nichttriviale Lösung $\mathbf{x}_i \neq \mathbf{0}$ ist der zum Eigenwert $\lambda_i$ gehörende Eigenvektor.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Eigenwerte und Eigenvektoren}
+\textbf{Gegeben:} $\mathbf{A} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$
+
+\textbf{Schritt 1 - Eigenwerte:}
+$$\det(\mathbf{A} - \lambda\mathbf{I}) = \det\begin{pmatrix} 2-\lambda & 1 \\ 1 & 2-\lambda \end{pmatrix} = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = 0$$
+
+$$(\lambda - 3)(\lambda - 1) = 0 \Rightarrow \lambda_1 = 3, \quad \lambda_2 = 1$$
+
+\textbf{Schritt 2 - Eigenvektoren:}
+
+Für $\lambda_1 = 3$:
+$$\begin{pmatrix} -1 & 1 \\ 1 & -1 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \Rightarrow \mathbf{x}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$$
+
+Für $\lambda_2 = 1$:
+$$\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \Rightarrow \mathbf{x}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix}$$
+\end{subbox}
+
+% ============================================================================
+% SYMMETRISCHE MATRIZEN
+% ============================================================================
+\section{Symmetrische Matrizen}
+
+\begin{mainbox}{Eigenschaften symmetrischer Matrizen}
+\textbf{Definition:} Matrix $\mathbf{A}$ ist symmetrisch, wenn $\mathbf{A}^T = \mathbf{A}$
+
+\textbf{Spezielle Eigenschaften:}
+\begin{enumerate}
+    \item Die Eigenwerte sind reell
+    \item Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal
+    \item Diese orthogonalen Vektoren können auf Länge 1 normiert werden
+\end{enumerate}
+
+\textbf{Theorem:}
+Eine Matrix hat reelle Eigenwerte und $n$ orthonormale reelle Eigenvektoren genau dann, wenn es eine reelle, symmetrische Matrix ist.
+\end{mainbox}
+
+\begin{mainbox}{Normierung von Eigenvektoren}
+\textbf{Eigenvektor normieren:}
+$$\hat{\mathbf{x}} = \frac{\mathbf{x}}{|\mathbf{x}|}$$
+
+\textbf{Eigenschaften normierter Eigenvektoren:}
+\begin{itemize}
+    \item Länge: $|\hat{\mathbf{x}}| = 1$
+    \item Orthonormal: $\hat{\mathbf{x}}_i \bullet \hat{\mathbf{x}}_j = 0$ für $i \neq j$
+    \item $\hat{\mathbf{x}}_i \bullet \hat{\mathbf{x}}_i = 1$
+\end{itemize}
+
+\textbf{Beispiel:}
+$$\mathbf{x} = \begin{pmatrix} 1 \\ 1 \end{pmatrix} \Rightarrow \hat{\mathbf{x}} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}$$
+\end{mainbox}
+
+% ============================================================================
+% EIGENSCHAFTEN DER EIGENWERTE
+% ============================================================================
+\section{Eigenschaften der Eigenwerte}
+
+\begin{mainbox}{Determinante und Spur}
+\textbf{Determinante = Produkt der Eigenwerte:}
+$$\det(\mathbf{A}) = \prod_{i=1}^{n} \lambda_i$$
+
+\textbf{Spur = Summe der Eigenwerte:}
+$$\text{spur}(\mathbf{A}) = \sum_{i=1}^{n} \lambda_i$$
+
+\textbf{Spur einer Matrix:} Summe der Diagonalelemente
+$$\text{spur}(\mathbf{A}) = \sum_{i=1}^{n} a_{i,i}$$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Determinante und Spur}
+\textbf{Matrix:} $\mathbf{A} = \begin{pmatrix} 1 & 3 \\ 3 & 1 \end{pmatrix}$
+
+\textbf{Eigenwerte:} $\lambda_1 = 4$, $\lambda_2 = -2$
+
+\textbf{Determinante:}
+$$\det(\mathbf{A}) = 1 \cdot 1 - 3 \cdot 3 = -8 = 4 \cdot (-2) = \lambda_1 \lambda_2$$
+
+\textbf{Spur:}
+$$\text{spur}(\mathbf{A}) = 1 + 1 = 2 = 4 + (-2) = \lambda_1 + \lambda_2$$
+\end{subbox}
+
+% ============================================================================
+% SPEKTRALZERLEGUNG
+% ============================================================================
+\section{Spektralzerlegung}
+
+\begin{mainbox}{Eigenwertzerlegung}
+\textbf{Für symmetrische Matrix $\mathbf{A}$:}
+
+$$\mathbf{AV} = \mathbf{V\Lambda}$$
+
+wobei:
+\begin{itemize}
+    \item $\mathbf{V} = (\mathbf{x}_1 \mid \mathbf{x}_2 \mid \cdots \mid \mathbf{x}_n)$: Matrix mit Eigenvektoren als Spalten
+    \item $\mathbf{\Lambda} = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)$: Diagonalmatrix mit Eigenwerten
+\end{itemize}
+
+\textbf{Umformung:}
+$$\mathbf{A} = \mathbf{V\Lambda V}^T$$
+
+\textbf{Wichtig:} Reihenfolge der Spalten in $\mathbf{V}$ und $\mathbf{\Lambda}$ muss übereinstimmen!
+
+\textbf{Eigenschaft:} Für symmetrische Matrix gilt $\mathbf{V}^{-1} = \mathbf{V}^T$
+\end{mainbox}
+
+\begin{mainbox}{Spektraldarstellung}
+\textbf{Herleitung:}
+$$\mathbf{A} = \mathbf{V\Lambda V}^T = (\mathbf{x}_1 \mid \mathbf{x}_2)\begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix}\begin{pmatrix} \mathbf{x}_1^T \\ \mathbf{x}_2^T \end{pmatrix}$$
+
+$$= (\mathbf{x}_1 \mid \mathbf{x}_2)\begin{pmatrix} \lambda_1\mathbf{x}_1^T \\ \lambda_2\mathbf{x}_2^T \end{pmatrix}$$
+
+$$= \lambda_1\mathbf{x}_1\mathbf{x}_1^T + \lambda_2\mathbf{x}_2\mathbf{x}_2^T$$
+
+\textbf{Spektralzerlegung:}
+$$\mathbf{A} = \sum_{i=1}^{n} \lambda_i\mathbf{x}_i\mathbf{x}_i^T$$
+
+Symmetrische Matrix als Summe von Matrizen vom Rang 1.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Spektralzerlegung}
+\textbf{Gegeben:} $\mathbf{A} = \begin{pmatrix} 1 & 3 \\ 3 & 1 \end{pmatrix}$
+
+$\lambda_1 = 4$, $\lambda_2 = -2$
+
+$\mathbf{x}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}$, $\mathbf{x}_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \end{pmatrix}$
+
+\textbf{Eigenwertzerlegung:}
+$$\mathbf{A} = \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \end{pmatrix}\begin{pmatrix} 4 & 0 \\ 0 & -2 \end{pmatrix}\begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \end{pmatrix}$$
+
+\textbf{Spektraldarstellung:}
+$$\mathbf{A} = 4 \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix} - 2\begin{pmatrix} 1/2 & -1/2 \\ -1/2 & 1/2 \end{pmatrix}$$
+
+$$= \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} - \begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 3 \\ 3 & 1 \end{pmatrix}$$
+\end{subbox}
+
+% ============================================================================
+% ZUSAMMENFASSUNG EIGENWERTE
+% ============================================================================
+\section{Eigenwerte - Kurzreferenz}
+
+\begin{mainbox}{Wichtige Formeln - Eigenwerte}
+\renewcommand*{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{lX}
+\textbf{Eigenwertgleichung} & $\mathbf{Ax} = \lambda\mathbf{x}$ \\[2mm]
+\textbf{Charakteristische Gl.} & $\det(\mathbf{A} - \lambda\mathbf{I}) = 0$ \\[2mm]
+\textbf{Eigenvektor zu $\lambda_i$} & $(\mathbf{A} - \lambda_i\mathbf{I})\mathbf{x} = \mathbf{0}$ \\[2mm]
+\textbf{Determinante} & $\det(\mathbf{A}) = \prod_{i=1}^{n} \lambda_i$ \\[2mm]
+\textbf{Spur} & $\text{spur}(\mathbf{A}) = \sum_{i=1}^{n} \lambda_i = \sum_{i=1}^{n} a_{i,i}$ \\[2mm]
+\textbf{Eigenwertzerlegung} & $\mathbf{A} = \mathbf{V\Lambda V}^T$ \\[2mm]
+\textbf{Spektralzerlegung} & $\mathbf{A} = \sum_{i=1}^{n} \lambda_i\mathbf{x}_i\mathbf{x}_i^T$ \\[2mm]
+\textbf{Eigenvektor normieren} & $\hat{\mathbf{x}} = \frac{\mathbf{x}}{|\mathbf{x}|}$
+\end{tabularx}
+\end{mainbox}
+
+\begin{subbox}{Symmetrische Matrizen - Eigenschaften}
+\textbf{Für symmetrische Matrix $\mathbf{A}$ ($\mathbf{A}^T = \mathbf{A}$):}
+\begin{itemize}
+    \item Alle Eigenwerte sind reell
+    \item Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal
+    \item Eigenvektoren können orthonormal gewählt werden
+    \item $\mathbf{V}^{-1} = \mathbf{V}^T$ (orthogonale Matrix)
+    \item $\mathbf{A} = \mathbf{V\Lambda V}^T$ (Eigenwertzerlegung)
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % QUICK REFERENCE
 % ============================================================================
 \section{Kurzreferenz}

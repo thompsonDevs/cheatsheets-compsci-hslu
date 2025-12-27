@@ -714,6 +714,249 @@ Nun Rückwärtseinsetzen $\Rightarrow$ Lösung: $(1, 3, -1)$
 \end{subbox}
 
 % ============================================================================
+% GAUSS-JORDAN UND DETERMINANTEN
+% ============================================================================
+\section{Gauss-Jordan-Verfahren}
+
+\begin{mainbox}{Gauss-Jordan-Verfahren - Grundidee}
+\textbf{Ziel:} Erweiterte Koeffizientenmatrix weiter vereinfachen, sodass Lösung direkt ablesbar ist (ohne Rückwärtseinsetzen)
+
+\textbf{Ausgangssituation:} Matrix bereits in Zeilenstufenform (nach Gauss-Elimination)
+
+\textbf{Vorgehen:} Erzeuge Nullen \textbf{oberhalb} der Diagonalen
+\begin{itemize}
+    \item Von rechts nach links, von unten nach oben
+    \item Keine Zeilenvertauschungen mehr
+    \item Alle Pivotelemente auf 1 normieren
+    \item Leitkoeffizient = Pivotelement
+\end{itemize}
+
+\textbf{Resultat:} Diagonalmatrix (bzw. reduzierte Zeilenstufenform)
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Gauss-Jordan}
+Gegeben in Zeilenstufenform:
+$$\left(\begin{array}{ccc|c}
+1 & 1 & 10 & -6 \\
+0 & -7 & -61 & 40 \\
+0 & 0 & 50 & -50
+\end{array}\right)$$
+
+\textbf{Schritt 1:} Z3 normieren (÷50):
+$$\left(\begin{array}{ccc|c}
+1 & 1 & 10 & -6 \\
+0 & -7 & -61 & 40 \\
+0 & 0 & 1 & -1
+\end{array}\right)$$
+
+\textbf{Schritt 2:} Nullen über Pivot in Spalte 3:
+Z2 + 61·Z3, Z1 - 10·Z3
+
+\textbf{Schritt 3:} Z2 normieren, dann Nullen über Pivot in Spalte 2
+
+\textbf{Resultat:} Lösung direkt ablesbar
+\end{subbox}
+
+\begin{mainbox}{Anwendung: Mehrere rechte Seiten}
+Gauss-Jordan kann simultan für mehrere rechte Seiten durchgeführt werden:
+
+$$\mathbf{Ax} = \mathbf{a}, \quad \mathbf{Ax} = \mathbf{b}, \quad \mathbf{Ax} = \mathbf{c}, \ldots$$
+
+\textbf{Vorteil:} Lösungen $\mathbf{L}_a, \mathbf{L}_b, \mathbf{L}_c, \ldots$ simultan berechnen
+
+\textbf{Effizienz:} LU-Zerlegung nur einmal, dann für jedes neue $\mathbf{b}$ nur Vorwärts- und Rückwärtseinsetzen
+\end{mainbox}
+
+% ============================================================================
+% INVERSE MATRIX
+% ============================================================================
+\section{Inverse Matrix mit Gauss-Jordan}
+
+\begin{mainbox}{Inverse Matrix berechnen}
+\textbf{Ziel:} Berechne $\mathbf{A}^{-1}$ für quadratische Matrix $\mathbf{A}$
+
+\textbf{Ansatz:} $\mathbf{A}\mathbf{A}^{-1} = \mathbf{I}$
+
+Schreibe $\mathbf{A}^{-1}$ spaltenweise: $\mathbf{A}^{-1} = (\mathbf{x}_1 \mid \mathbf{x}_2 \mid \cdots \mid \mathbf{x}_n)$
+
+Dann gilt: $\mathbf{A}\mathbf{x}_i = \mathbf{e}_i$ für jede Spalte der Einheitsmatrix
+
+\textbf{Methode:} Erweitere $\mathbf{A}$ mit $\mathbf{I}$:
+$$(\mathbf{A} \mid \mathbf{I}) \xrightarrow{\text{Gauss-Jordan}} (\mathbf{I} \mid \mathbf{A}^{-1})$$
+
+Wende elementare Zeilenumformungen an, bis linke Seite = $\mathbf{I}$
+
+Rechte Seite enthält dann $\mathbf{A}^{-1}$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Inverse 2×2-Matrix}
+Gegeben: $\mathbf{A} = \begin{pmatrix} 1 & 3 \\ 2 & 7 \end{pmatrix}$
+
+$$\left(\begin{array}{cc|cc}
+1 & 3 & 1 & 0 \\
+2 & 7 & 0 & 1
+\end{array}\right)$$
+
+\textbf{Z2 - 2·Z1:}
+$$\left(\begin{array}{cc|cc}
+1 & 3 & 1 & 0 \\
+0 & 1 & -2 & 1
+\end{array}\right)$$
+
+\textbf{Z1 - 3·Z2:}
+$$\left(\begin{array}{cc|cc}
+1 & 0 & 7 & -3 \\
+0 & 1 & -2 & 1
+\end{array}\right)$$
+
+$$\mathbf{A}^{-1} = \begin{pmatrix} 7 & -3 \\ -2 & 1 \end{pmatrix}$$
+\end{subbox}
+
+\begin{subbox}{Formel für 2×2-Inverse}
+Für $\mathbf{A} = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$:
+
+$$\mathbf{A}^{-1} = \frac{1}{ad - bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
+
+Existiert nur wenn $\det(\mathbf{A}) = ad - bc \neq 0$
+\end{subbox}
+
+% ============================================================================
+% CRAMERSCHE REGEL
+% ============================================================================
+\section{Cramersche Regel}
+
+\begin{mainbox}{Cramersche Regel für 2×2-Systeme}
+Gegeben:
+$$\begin{array}{rcl}
+a_1x + b_1y &=& c_1 \\
+a_2x + b_2y &=& c_2
+\end{array}$$
+
+\textbf{Determinante 2×2:}
+$$\det(\mathbf{u}, \mathbf{v}) = \begin{vmatrix} u_1 & v_1 \\ u_2 & v_2 \end{vmatrix} = u_1v_2 - u_2v_1$$
+
+\textbf{Lösungsformeln:}
+$$D = \det(\mathbf{a}, \mathbf{b}) = \begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix}$$
+
+$$D_x = \det(\mathbf{c}, \mathbf{b}) = \begin{vmatrix} c_1 & b_1 \\ c_2 & b_2 \end{vmatrix}, \quad x = \frac{D_x}{D}$$
+
+$$D_y = \det(\mathbf{a}, \mathbf{c}) = \begin{vmatrix} a_1 & c_1 \\ a_2 & c_2 \end{vmatrix}, \quad y = \frac{D_y}{D}$$
+
+\textbf{Voraussetzung:} $D \neq 0$ (Matrix regulär)
+\end{mainbox}
+
+\begin{mainbox}{Cramersche Regel für 3×3-Systeme}
+Gegeben:
+$$\begin{array}{rcl}
+a_1x + b_1y + c_1z &=& d_1 \\
+a_2x + b_2y + c_2z &=& d_2 \\
+a_3x + b_3y + c_3z &=& d_3
+\end{array}$$
+
+\textbf{Regel von Sarrus (3×3-Determinante):}
+$$\det(\mathbf{u}, \mathbf{v}, \mathbf{w}) = \begin{vmatrix} u_1 & v_1 & w_1 \\ u_2 & v_2 & w_2 \\ u_3 & v_3 & w_3 \end{vmatrix}$$
+$$= u_1v_2w_3 + u_2v_3w_1 + u_3v_1w_2 - u_3v_2w_1 - u_2v_1w_3 - u_1v_3w_2$$
+
+\textbf{Lösungen:}
+$$D = \det(\mathbf{a}, \mathbf{b}, \mathbf{c})$$
+$$x = \frac{D_x}{D}, \quad y = \frac{D_y}{D}, \quad z = \frac{D_z}{D}$$
+
+wobei $D_x = \det(\mathbf{d}, \mathbf{b}, \mathbf{c})$, $D_y = \det(\mathbf{a}, \mathbf{d}, \mathbf{c})$, $D_z = \det(\mathbf{a}, \mathbf{b}, \mathbf{d})$
+\end{mainbox}
+
+% ============================================================================
+% DETERMINANTE
+% ============================================================================
+\section{Determinante}
+
+\begin{mainbox}{Determinante - Definition}
+\textbf{Definition:} Die Determinante ist eine Zahl (Skalar), die einer quadratischen Matrix zugeordnet wird
+
+\textbf{Schreibweise:} $\det(\mathbf{A})$, $\det\mathbf{A}$ oder $|\mathbf{A}|$
+
+\textbf{Bedeutung:}
+\begin{itemize}
+    \item 2D: Flächeninhalt des Parallelogramms
+    \item 3D: Volumen des Spats (Parallelepiped)
+    \item Indikator für Invertierbarkeit
+\end{itemize}
+
+\textbf{Regularität:}
+\begin{itemize}
+    \item $\det(\mathbf{A}) \neq 0$: Matrix regulär (invertierbar)
+    \item $\det(\mathbf{A}) = 0$: Matrix singulär (nicht invertierbar)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Determinante 2×2}
+$$\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$$
+
+\textbf{Geometrische Bedeutung:} Flächeninhalt des durch $\begin{pmatrix} a \\ c \end{pmatrix}$ und $\begin{pmatrix} b \\ d \end{pmatrix}$ aufgespannten Parallelogramms
+\end{mainbox}
+
+\begin{mainbox}{Determinante 3×3 - Regel von Sarrus}
+$$\det\begin{pmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{pmatrix}$$
+
+\textbf{Sarrus-Schema:} Schreibe erste zwei Spalten rechts an
+$$\begin{vmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{vmatrix} \begin{matrix} a_1 & b_1 \\ a_2 & b_2 \\ a_3 & b_3 \end{matrix}$$
+
+\textbf{Berechnung:}
+\begin{itemize}
+    \item Hauptdiagonale (+): $a_1b_2c_3 + b_1c_2a_3 + c_1a_2b_3$
+    \item Nebendiagonale (−): $c_1b_2a_3 + a_1c_2b_3 + b_1a_2c_3$
+\end{itemize}
+
+\textbf{Geometrisch:} Volumen des Spats
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften der Determinante}
+Für elementare Zeilenumformungen:
+
+\textbf{Typ I - Multiplikation:} Zeile mit $\lambda$ multiplizieren
+$$\det(\mathbf{A}') = \lambda \cdot \det(\mathbf{A})$$
+
+\textbf{Typ II - Vertauschung:} Zwei Zeilen vertauschen
+$$\det(\mathbf{A}') = -\det(\mathbf{A})$$
+
+\textbf{Typ III - Addition:} Vielfaches einer Zeile zu anderer addieren
+$$\det(\mathbf{A}') = \det(\mathbf{A}) \quad \text{(unverändert)}$$
+
+\textbf{Weitere Eigenschaften:}
+\begin{itemize}
+    \item $\det(\mathbf{A}^T) = \det(\mathbf{A})$
+    \item Dreiecksmatrix: $\det(\mathbf{A}) = \prod \text{Diagonalelemente}$
+    \item $\det(\mathbf{I}) = 1$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Determinante für beliebige Größen}
+\textbf{Methode:} Bringe Matrix durch Zeilenumformungen auf Dreiecksgestalt
+
+\textbf{Vorgehen:}
+\begin{enumerate}
+    \item Gauss-Elimination durchführen
+    \item Zähle Zeilenvertauschungen: $k$ Vertauschungen $\Rightarrow$ Faktor $(-1)^k$
+    \item Merke Zeilenmultiplikationen: Produkt der Faktoren
+    \item $\det(\mathbf{A}) = (-1)^k \cdot (\text{Produkt Faktoren}) \cdot (\text{Produkt Diagonale})$
+\end{enumerate}
+
+\textbf{Einfacher:} Bei Dreiecksmatrix:
+$$\det(\mathbf{A}) = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn}$$
+\end{subbox}
+
+\begin{subbox}{Äquivalente Aussagen}
+Für quadratische $n \times n$-Matrix $\mathbf{A}$ sind äquivalent:
+
+\begin{itemize}
+    \item $\mathbf{A}$ ist regulär (invertierbar)
+    \item $\mathbf{A}^T$ ist regulär
+    \item $\det(\mathbf{A}) \neq 0$
+    \item $\mathbf{Ax} = \mathbf{0}$ hat nur die triviale Lösung $\mathbf{x} = \mathbf{0}$
+    \item $\text{Rang}(\mathbf{A}) = n$
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % QUICK REFERENCE
 % ============================================================================
 \section{Kurzreferenz}

@@ -957,6 +957,192 @@ Für quadratische $n \times n$-Matrix $\mathbf{A}$ sind äquivalent:
 \end{subbox}
 
 % ============================================================================
+% VEKTORPRODUKT
+% ============================================================================
+\section{Vektorprodukt (Kreuzprodukt)}
+
+\begin{mainbox}{Vektorprodukt - Definition}
+\textbf{Problem:} Finde Vektor $\mathbf{x}$ im $\R^3$, der senkrecht zu zwei gegebenen Vektoren $\mathbf{u}$ und $\mathbf{v}$ steht
+
+\textbf{Bedingung:} $\mathbf{u} \bullet \mathbf{x} = 0$ und $\mathbf{v} \bullet \mathbf{x} = 0$
+
+\textbf{Lösung - Vektorprodukt:}
+$$\mathbf{u} \times \mathbf{v} = \begin{pmatrix}
+u_2v_3 - u_3v_2 \\
+u_3v_1 - u_1v_3 \\
+u_1v_2 - u_2v_1
+\end{pmatrix}$$
+
+\textbf{Notation:} $\mathbf{u} \times \mathbf{v}$ (Kreuzprodukt, Vektorprodukt)
+
+\textbf{Länge:}
+$$|\mathbf{u} \times \mathbf{v}| = |\mathbf{u}| \cdot |\mathbf{v}| \cdot \sin \varphi$$
+wobei $\varphi$ der Winkel zwischen $\mathbf{u}$ und $\mathbf{v}$ ist
+\end{mainbox}
+
+\begin{mainbox}{Berechnung mit Sarrus-Regel}
+$$\mathbf{a} \times \mathbf{b} = \begin{vmatrix}
+a_1 & b_1 & \mathbf{e}_1 \\
+a_2 & b_2 & \mathbf{e}_2 \\
+a_3 & b_3 & \mathbf{e}_3
+\end{vmatrix}$$
+
+\textbf{Hauptdiagonale (+):} $a_1b_2\mathbf{e}_3 + b_1\mathbf{e}_2a_3 + \mathbf{e}_1a_2b_3$
+
+\textbf{Nebendiagonale ($-$):} $a_3b_2\mathbf{e}_1 + b_3\mathbf{e}_2a_1 + \mathbf{e}_3a_2b_1$
+
+\textbf{Resultat:}
+$$= (a_2b_3 - a_3b_2)\mathbf{e}_1 + (a_3b_1 - a_1b_3)\mathbf{e}_2 + (a_1b_2 - a_2b_1)\mathbf{e}_3$$
+\end{mainbox}
+
+\begin{subbox}{Eigenschaften des Vektorprodukts}
+\textbf{Bilinearität:}
+\begin{itemize}
+    \item $(\mathbf{a} + \mathbf{b}) \times \mathbf{c} = \mathbf{a} \times \mathbf{c} + \mathbf{b} \times \mathbf{c}$
+    \item $\mathbf{a} \times (\mathbf{b} + \mathbf{c}) = \mathbf{a} \times \mathbf{b} + \mathbf{a} \times \mathbf{c}$
+    \item $(\lambda \mathbf{a}) \times \mathbf{b} = \lambda(\mathbf{a} \times \mathbf{b}) = \mathbf{a} \times (\lambda \mathbf{b})$
+\end{itemize}
+
+\textbf{Antikommutativität:}
+$$\mathbf{a} \times \mathbf{b} = -\mathbf{b} \times \mathbf{a}$$
+$$\mathbf{a} \times \mathbf{a} = \mathbf{0}$$
+
+\textbf{Beziehung zur Determinante:}
+$$(\mathbf{a} \times \mathbf{b}) \bullet \mathbf{c} = \det(\mathbf{a}, \mathbf{b}, \mathbf{c})$$
+\end{subbox}
+
+% ============================================================================
+% LINEARE ABBILDUNGEN
+% ============================================================================
+\section{Lineare Abbildungen}
+
+\begin{mainbox}{Einheitsvektoren}
+\textbf{Definition:} Im $\R^n$ existieren $n$ Einheitsvektoren $\mathbf{e}_k$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Alle Koordinaten = 0, außer einer Koordinate = 1
+    \item Länge: $|\mathbf{e}_k| = 1$
+    \item Orthogonal: $\mathbf{e}_i \bullet \mathbf{e}_j = 0$ für $i \neq j$
+    \item Zusammen: Einheitsmatrix $\mathbf{E}_n = (\mathbf{e}_1 \mid \mathbf{e}_2 \mid \cdots \mid \mathbf{e}_n)$
+    \item Bilden Basis des $\R^n$
+\end{itemize}
+
+\textbf{Vektor als Linearkombination:}
+$$\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} = v_1\mathbf{e}_1 + v_2\mathbf{e}_2 + v_3\mathbf{e}_3$$
+\end{mainbox}
+
+\begin{mainbox}{Lineare Abbildung - Definition}
+Eine Abbildung $A: D \to W$ (von Vektorraum $D$ nach $W$) heißt \textbf{linear}, wenn:
+
+$$A(\mathbf{u} + \mathbf{v}) = A(\mathbf{u}) + A(\mathbf{v}) \quad \forall \mathbf{u}, \mathbf{v} \in D$$
+
+$$A(s \cdot \mathbf{u}) = s \cdot A(\mathbf{u}) \quad \forall s \in \R, \forall \mathbf{u} \in D$$
+
+\textbf{Wichtig:} Matrix-Vektor-Multiplikation erfüllt diese Eigenschaften
+
+\textbf{Basis-Transformation:}
+Wenn Basis $(\mathbf{e}_1, \mathbf{e}_2)$ in Basis $(\mathbf{f}_1, \mathbf{f}_2)$ transformiert wird, kennt man die Transformation aller Vektoren
+
+Matrix $\mathbf{A}$ mit Spalten = neue Basisvektoren:
+$$\mathbf{A} = (\mathbf{f}_1 \mid \mathbf{f}_2)$$
+\end{mainbox}
+
+% ============================================================================
+% BEISPIELE 2D ABBILDUNGEN
+% ============================================================================
+\section{Beispiele 2D linearer Abbildungen}
+
+\begin{mainbox}{Skalierung}
+$$\mathbf{A} = \begin{pmatrix} s_x & 0 \\ 0 & s_y \end{pmatrix}$$
+
+\textbf{Wirkung:} Streckt/staucht in x-Richtung um Faktor $s_x$, in y-Richtung um $s_y$
+
+\textbf{Uniform:} $s_x = s_y = s$ (gleichmäßige Skalierung)
+\end{mainbox}
+
+\begin{mainbox}{Drehung}
+$$\mathbf{A} = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix}$$
+
+\textbf{Wirkung:} Drehung um Winkel $\varphi$ gegen den Uhrzeigersinn um Ursprung
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Längen bleiben erhalten
+    \item Winkel bleiben erhalten
+    \item $\det(\mathbf{A}) = 1$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Drehstreckung}
+$$\mathbf{A} = \begin{pmatrix} a & -b \\ b & a \end{pmatrix} = r\begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix}$$
+
+mit $r = \sqrt{a^2 + b^2}$, $\cos\varphi = \frac{a}{r}$, $\sin\varphi = \frac{b}{r}$
+
+\textbf{Wirkung:} Kombination aus Drehung um $\varphi$ und Streckung um Faktor $r$
+\end{mainbox}
+
+\begin{mainbox}{Achsenspiegelung}
+\textbf{Spiegelung an x-Achse:}
+$$\mathbf{A}_x = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$$
+
+\textbf{Spiegelung an y-Achse:}
+$$\mathbf{A}_y = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$$
+
+\textbf{Spiegelung an Achse mit Winkel $\varphi$:}
+$$\mathbf{A}_\varphi = \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
+\end{mainbox}
+
+\begin{mainbox}{Scherung}
+\textbf{Horizontale Scherung:}
+$$\mathbf{A} = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$$
+
+\textbf{Vertikale Scherung:}
+$$\mathbf{A} = \begin{pmatrix} 1 & 0 \\ k & 1 \end{pmatrix}$$
+
+\textbf{Wirkung:} Verschiebt Punkte parallel zu einer Achse, proportional zur anderen Koordinate
+
+\textbf{Eigenschaft:} Flächen bleiben erhalten ($\det(\mathbf{A}) = 1$)
+\end{mainbox}
+
+% ============================================================================
+% ZUSAMMENSETZUNG
+% ============================================================================
+\section{Zusammensetzung von Abbildungen}
+
+\begin{mainbox}{Hintereinanderausführung}
+Gegeben: Abbildungen $\mathbf{A}$ und $\mathbf{B}$
+
+$$\mathbf{x} \xrightarrow{\mathbf{A}} \mathbf{y} \xrightarrow{\mathbf{B}} \mathbf{z}$$
+
+\textbf{Schritt 1:} $\mathbf{Ax} = \mathbf{y}$
+
+\textbf{Schritt 2:} $\mathbf{By} = \mathbf{z}$
+
+\textbf{Zusammengesetzt:}
+$$\mathbf{z} = \mathbf{By} = \mathbf{B}(\mathbf{Ax}) = (\mathbf{BA})\mathbf{x} = \mathbf{Cx}$$
+
+mit $\mathbf{C} = \mathbf{BA}$
+
+\textbf{Wichtig:} Zuerst angewendete Abbildung steht \textbf{rechts}
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Spiegelung an beliebiger Achse}
+Spiegelachse schließt Winkel $\varphi$ mit x-Achse ein
+
+\textbf{Methode:} 3 Schritte zusammensetzen
+\begin{enumerate}
+    \item Drehe um $-\varphi$ (Achse liegt auf x-Achse)
+    \item Spiegle an x-Achse
+    \item Drehe um $+\varphi$ zurück
+\end{enumerate}
+
+$$\mathbf{A} = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} \cos(-\varphi) & -\sin(-\varphi) \\ \sin(-\varphi) & \cos(-\varphi) \end{pmatrix}$$
+
+$$= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
+\end{subbox}
+
+% ============================================================================
 % QUICK REFERENCE
 % ============================================================================
 \section{Kurzreferenz}

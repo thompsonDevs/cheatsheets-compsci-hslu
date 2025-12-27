@@ -903,7 +903,7 @@ $$\begin{vmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{vma
 \textbf{Berechnung:}
 \begin{itemize}
     \item Hauptdiagonale (+): $a_1b_2c_3 + b_1c_2a_3 + c_1a_2b_3$
-    \item Nebendiagonale (−): $c_1b_2a_3 + a_1c_2b_3 + b_1a_2c_3$
+    \item Nebendiagonale (-): $c_1b_2a_3 + a_1c_2b_3 + b_1a_2c_3$
 \end{itemize}
 
 \textbf{Geometrisch:} Volumen des Spats
@@ -940,7 +940,7 @@ $$\det(\mathbf{A}') = \det(\mathbf{A}) \quad \text{(unverändert)}$$
     \item $\det(\mathbf{A}) = (-1)^k \cdot (\text{Produkt Faktoren}) \cdot (\text{Produkt Diagonale})$
 \end{enumerate}
 
-\textbf{Einfacher:} Bei Dreiecksmatrix:
+\textbf{Einfacher bei Dreiecksmatrix:}
 $$\det(\mathbf{A}) = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn}$$
 \end{subbox}
 
@@ -1354,6 +1354,224 @@ $$\mathbf{C} = \mathbf{AB} \quad \text{(bezüglich lokalem System)}$$
 \begin{itemize}
     \item Festes System: Objekte im Raum transformieren
     \item Mitbewegt: Kamerabewegung, Roboterkinematik
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
+% LINEARE REGRESSION
+% ============================================================================
+\section{Einfache lineare Regression}
+
+\begin{mainbox}{Voraussetzungen}
+\textbf{Erforderliches Verständnis:}
+\begin{itemize}
+    \item Matrix-Vektor-Multiplikation als Linearkombination der Spalten
+    \item Skalarprodukt in der Form $\mathbf{a}^T\mathbf{b}$
+    \item Orthogonalität: $\mathbf{a} \perp \mathbf{b} \Leftrightarrow \mathbf{a}^T\mathbf{b} = 0$
+    \item Abstand Punkt-Ebene = orthogonale Projektion
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Motivation - Lineare Regression}
+\textbf{Fragestellung:} Gibt es einen linearen Zusammenhang zwischen Einfluss- und Zielgröße?
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item Blutdruck $p$ vs. Alter $a$: $p = f(a)$?
+    \item BMI $m$ vs. Körpergröße $h$: $m = l(h)$?
+    \item Treibstoffverbrauch vs. Geschwindigkeit
+    \item Hauspreis vs. Zimmer, Fläche, Stockwerke, ...
+\end{itemize}
+
+\textbf{Lineare Regression:}
+\begin{itemize}
+    \item Methode des überwachten Lernens
+    \item Vorhersage stetiger Zielgröße
+    \item Annahme: linearer Zusammenhang
+    \item Einfache Regression: eine Prädiktorvariable
+\end{itemize}
+\end{mainbox}
+
+% ============================================================================
+% PROBLEM UND LÖSUNG
+% ============================================================================
+\section{Das Regressionsproblem}
+
+\begin{mainbox}{Problemstellung}
+\textbf{Gegeben:} $m$ Datenpunkte $(t_1, b_1), (t_2, b_2), \ldots, (t_m, b_m)$
+
+\textbf{Gesucht:} Gerade $b = C + Dt$, die "am besten" durch die Punkte geht
+
+\textbf{Gleichungssystem:}
+$$\begin{array}{rcl}
+C &=& b_1 \\
+C + D &=& b_2 \\
+C + 2D &=& b_3
+\end{array} \quad \Leftrightarrow \quad \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix} \begin{pmatrix} C \\ D \end{pmatrix} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$$
+
+$$\mathbf{Ax} = \mathbf{b}$$
+
+\textbf{Problem:} Im Allgemeinen keine exakte Lösung (überbestimmt)
+
+\textbf{Fehler:} $\mathbf{e} = \mathbf{b} - \mathbf{Ax}$
+\end{mainbox}
+
+\begin{mainbox}{Spaltenraum und Projektion}
+\textbf{Beobachtung:}
+\begin{itemize}
+    \item $\mathbf{Ax}$ liegt im Spaltenraum $C(\mathbf{A})$
+    \item $C(\mathbf{A})$ ist Ebene aufgespannt durch Spalten von $\mathbf{A}$
+    \item $\mathbf{b}$ liegt i.A. nicht in $C(\mathbf{A})$
+\end{itemize}
+
+\textbf{Beste Lösung:}
+Finde $\hat{\mathbf{x}}$ so, dass $\mathbf{p} = \mathbf{A}\hat{\mathbf{x}}$ die orthogonale Projektion von $\mathbf{b}$ auf $C(\mathbf{A})$ ist
+
+\textbf{Grund:} Minimiert $\|\mathbf{e}\| = \|\mathbf{b} - \mathbf{Ax}\|$
+
+Dies ergibt kleinstes Fehlerquadrat $\|\mathbf{e}\|^2$
+
+$\Rightarrow$ \textbf{Methode der kleinsten Quadrate}
+\end{mainbox}
+
+% ============================================================================
+% PROJEKTION AUF VEKTOR
+% ============================================================================
+\section{Orthogonale Projektion}
+
+\begin{mainbox}{Projektion von $\mathbf{b}$ auf Vektor $\mathbf{a}$}
+\textbf{Geometrie:}
+$$b_a = |\mathbf{b}| \cos\varphi$$
+
+\textbf{Projektion:}
+$$\mathbf{p} = b_a \frac{\mathbf{a}}{\|\mathbf{a}\|} = \frac{\mathbf{a}^T\mathbf{b}}{\mathbf{a}^T\mathbf{a}} \mathbf{a}$$
+
+\textbf{Projektionsmatrix:}
+$$\mathbf{P} = \frac{1}{\mathbf{a}^T\mathbf{a}} \mathbf{aa}^T = \frac{1}{a_1^2 + a_2^2 + a_3^2} \begin{pmatrix} a_1^2 & a_1a_2 & a_1a_3 \\ a_2a_1 & a_2^2 & a_2a_3 \\ a_3a_1 & a_3a_2 & a_3^2 \end{pmatrix}$$
+
+$$\mathbf{p} = \mathbf{Pb}$$
+\end{mainbox}
+
+\begin{subbox}{Eigenschaften der Projektion}
+\begin{itemize}
+    \item $\mathbf{p}$ liegt in Richtung von $\mathbf{a}$
+    \item $\mathbf{e} = \mathbf{b} - \mathbf{p} \perp \mathbf{a}$
+    \item $\mathbf{P}^2 = \mathbf{P}$ (Idempotenz)
+    \item $\mathbf{P} = \mathbf{P}^T$ (symmetrisch)
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
+% PROJEKTION AUF SPALTENRAUM
+% ============================================================================
+\section{Projektion auf Spaltenraum}
+
+\begin{mainbox}{Orthogonale Projektion auf $C(\mathbf{A})$}
+\textbf{Bedingung:} Fehler $\mathbf{e} = \mathbf{b} - \mathbf{p}$ orthogonal zu $C(\mathbf{A})$
+
+Das heißt: $\mathbf{e} \perp$ jeder Spalte von $\mathbf{A}$
+
+$$\mathbf{a}_1^T\mathbf{e} = \mathbf{a}_1^T(\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}) = 0$$
+$$\mathbf{a}_2^T\mathbf{e} = \mathbf{a}_2^T(\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}) = 0$$
+
+\textbf{In Matrixform:}
+$$\mathbf{A}^T\mathbf{e} = \mathbf{A}^T(\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}) = \mathbf{0}$$
+
+\textbf{Normalgleichung:}
+$$\mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}$$
+\end{mainbox}
+
+\begin{mainbox}{Lösung des Regressionsproblems}
+Falls Spalten von $\mathbf{A}$ linear unabhängig, dann ist $\mathbf{A}^T\mathbf{A}$ invertierbar:
+
+$$\hat{\mathbf{x}} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}$$
+
+\textbf{Projektion:}
+$$\mathbf{p} = \mathbf{A}\hat{\mathbf{x}} = \mathbf{A}(\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b} = \mathbf{Pb}$$
+
+\textbf{Projektionsmatrix:}
+$$\mathbf{P} = \mathbf{A}(\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item $\mathbf{P}^2 = \mathbf{P}$
+    \item $\mathbf{P}^T = \mathbf{P}$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Warum ist $\mathbf{A}^T\mathbf{A}$ invertierbar?}
+\textbf{Theorem:} $\mathbf{A}^T\mathbf{A}$ ist genau dann invertierbar, wenn $\mathbf{A}$ linear unabhängige Spalten hat
+
+\textbf{Beweis:} Zeige $N(\mathbf{A}^T\mathbf{A}) = N(\mathbf{A})$
+
+\textbf{$N(\mathbf{A}) \subset N(\mathbf{A}^T\mathbf{A})$:}
+Wenn $\mathbf{Ax} = \mathbf{0}$, dann $\mathbf{A}^T\mathbf{Ax} = \mathbf{0}$
+
+\textbf{$N(\mathbf{A}^T\mathbf{A}) \subset N(\mathbf{A})$:}
+Wenn $\mathbf{A}^T\mathbf{Ax} = \mathbf{0}$, dann:
+$$\mathbf{0} = \mathbf{x}^T\mathbf{A}^T\mathbf{Ax} = (\mathbf{Ax})^T(\mathbf{Ax}) = \|\mathbf{Ax}\|^2$$
+Also $\mathbf{Ax} = \mathbf{0}$
+
+Wenn Spalten linear unabhängig $\Rightarrow N(\mathbf{A}) = \{\mathbf{0}\} \Rightarrow N(\mathbf{A}^T\mathbf{A}) = \{\mathbf{0}\}$
+\end{subbox}
+
+% ============================================================================
+% ALLGEMEINES VORGEHEN
+% ============================================================================
+\section{Regressionsproblem - Zusammenfassung}
+
+\begin{mainbox}{Regressionsmodell}
+\textbf{Annahme:} Linearer Zusammenhang
+$$b = C + Dt + \varepsilon$$
+
+wobei $\varepsilon$ Messfehler/Rauschen
+
+\textbf{Gegeben:} $m$ Datenpunkte $(t_1, b_1), (t_2, b_2), \ldots, (t_m, b_m)$
+
+\textbf{Datenmatrix:}
+$$\mathbf{A} = \begin{pmatrix} 1 & t_1 \\ 1 & t_2 \\ \vdots & \vdots \\ 1 & t_m \end{pmatrix}, \quad \mathbf{b} = \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{pmatrix}$$
+
+\textbf{Beste Lösung (Least Squares):}
+$$\begin{pmatrix} \hat{C} \\ \hat{D} \end{pmatrix} = \hat{\mathbf{x}} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}$$
+
+\textbf{Regressionsgerade:}
+$$\hat{b} = \hat{C} + \hat{D}t$$
+
+\textbf{Summe der Fehlerquadrate:}
+$$SQR = \|\mathbf{e}\|^2 = \|\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}\|^2$$
+\end{mainbox}
+
+\begin{subbox}{Visualisierung}
+\textbf{2D-Darstellung (Scatterplot):}
+\begin{itemize}
+    \item Datenpunkte $(t_i, b_i)$ als Punkte
+    \item Regressionsgerade $\hat{b} = \hat{C} + \hat{D}t$
+    \item Vertikale Abstände = Fehler $e_i$
+\end{itemize}
+
+\textbf{3D-Darstellung (Spaltenraum):}
+\begin{itemize}
+    \item $C(\mathbf{A})$ als Ebene
+    \item $\mathbf{b}$ als Punkt außerhalb
+    \item $\mathbf{p} = \mathbf{A}\hat{\mathbf{x}}$ als Projektion
+    \item $\mathbf{e} = \mathbf{b} - \mathbf{p}$ orthogonal zu Ebene
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Interpretation}
+\textbf{Regressionskoeffizienten:}
+\begin{itemize}
+    \item $\hat{C}$: y-Achsenabschnitt (Intercept)
+    \item $\hat{D}$: Steigung (Slope)
+\end{itemize}
+
+\textbf{Vorhersage:}
+Für neues $t$: $\hat{b} = \hat{C} + \hat{D}t$
+
+\textbf{Güte der Anpassung:}
+\begin{itemize}
+    \item Kleinere $SQR$ = bessere Anpassung
+    \item $R^2$-Wert (Bestimmtheitsmaß) für Erklärungskraft
 \end{itemize}
 \end{subbox}
 

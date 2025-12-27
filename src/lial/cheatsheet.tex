@@ -1,6 +1,8 @@
 % ============================================================================
-% LIAL CHEATSHEET
-% Lineare Algebra - Hochschule Luzern
+% LINEARE ALGEBRA CHEATSHEET
+% ============================================================================
+% Based on SW 01: Vektoren, Matrizen und lineare Gleichungssysteme
+% Hochschule Luzern - Lineare Algebra (I.BA_LIAL)
 % ============================================================================
 
 \documentclass[a4paper, fontsize=7pt]{scrartcl}
@@ -9,7 +11,7 @@
 % ENCODING & LANGUAGE
 % ============================================================================
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
+\usepackage[german]{babel}
 
 % ============================================================================
 % PAGE LAYOUT
@@ -18,7 +20,6 @@
 \usepackage{flowfram}
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
-
 \Ncolumn{4}
 \setlength{\parindent}{0cm}
 
@@ -60,6 +61,7 @@
 \usepackage{amsfonts, amstext}
 \allowdisplaybreaks
 
+% Number sets
 \def\N{\mathbb{N}}
 \def\Z{\mathbb{Z}}
 \def\Q{\mathbb{Q}}
@@ -70,997 +72,403 @@
 % TABLES & LISTS
 % ============================================================================
 \usepackage{tabularx, multirow, booktabs}
-\renewcommand*{\arraystretch}{1.4}
-
+\renewcommand*{\arraystretch}{1.5}
 \usepackage{enumitem}
 \setitemize{itemsep=0.5pt, topsep=2pt}
 \setenumerate{itemsep=0.75pt, topsep=2pt}
 
 % ============================================================================
-% GRAPHICS
+% GRAPHICS & TIKZ
 % ============================================================================
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{positioning, calc, arrows.meta}
+\usetikzlibrary{positioning, calc, fit, matrix, decorations, angles, quotes, babel, 3d, arrows.meta, shadings, shapes.geometric}
 \tikzset{>=stealth}
 
 % ============================================================================
 % HYPERLINKS
 % ============================================================================
 \usepackage{hyperref}
-\hypersetup{colorlinks=true, linkcolor=maincolor, urlcolor=maincolor}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}
+\usepackage{marvosym}
+\usepackage{wasysym}
 
 % ============================================================================
 % DOCUMENT METADATA
 % ============================================================================
-\title{LIAL}
-\author{Your Name}
-\date{Januar 2026}
+\title{Lineare Algebra Cheatsheet}
+\author{SW 01: Vektoren, Matrizen, LGS}
+\date{}
 
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 
 % ============================================================================
+% DOCUMENT START
+% ============================================================================
 \begin{document}
+
 \maketitle
 
 % ============================================================================
-% SECTION 1: VEKTOREN, MATRIZEN, LGS
+% VEKTOREN
 % ============================================================================
-\section{Vektoren, Matrizen, LGS}
+\section{Vektoren}
 
-\begin{mainbox}{Vektoren: Grundlagen}
-\textbf{Skalar:} Nur Betrag (Temperatur, Druck)\\
-\textbf{Vektor:} Betrag und Richtung (Kraft, Geschwindigkeit)
-
-\textbf{Notation:} $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$ (2D), \quad $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}$ (3D)
-
-\textbf{Ortsvektor:} Vom Ursprung zum Punkt $P$\\
-\textbf{Verbindungsvektor:} $\overrightarrow{AB} = \mathbf{b} - \mathbf{a}$
-\end{mainbox}
-
-\begin{mainbox}{Vektoroperationen}
-\textbf{Addition:}
-$\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \end{pmatrix}$
-
-\textbf{Skalare Multiplikation:}
-$\lambda \mathbf{a} = \begin{pmatrix} \lambda a_1 \\ \lambda a_2 \end{pmatrix}$
-
-\textbf{Subtraktion:} $\mathbf{a} - \mathbf{b} = \mathbf{a} + (-1)\mathbf{b}$
-
-\textbf{Linearkombination:} $\alpha\mathbf{a} + \beta\mathbf{b} + \gamma\mathbf{c}$
-\end{mainbox}
-
-\begin{mainbox}{Geraden und Ebenen}
-\textbf{Gerade} durch $P$ mit Richtung $\mathbf{u}$:
-$$g: \mathbf{r} = \mathbf{p} + \lambda\mathbf{u}, \quad \lambda \in \R$$
-
-\textbf{Ebene} durch $P$ aufgespannt durch $\mathbf{u}, \mathbf{v}$:
-$$E: \mathbf{r} = \mathbf{p} + \lambda\mathbf{u} + \mu\mathbf{v}, \quad \lambda,\mu \in \R$$
-
-\textbf{Schnittpunkte:} Gleichsetzen $\rightarrow$ LGS lösen
-\end{mainbox}
-
-\begin{mainbox}{Matrizen}
-$(m \times n)$-Matrix: $m$ Zeilen, $n$ Spalten
-
-$\mathbf{A} = (a_{i,j})$, \quad $a_{i,j}$ in Zeile $i$, Spalte $j$
-
-\textbf{Matrix-Vektor-Produkt:}
-$$\mathbf{A}\mathbf{x} = \begin{pmatrix} \sum_j a_{1,j}x_j \\ \vdots \\ \sum_j a_{m,j}x_j \end{pmatrix}$$
-Zeile $\cdot$ Spalte $\rightarrow$ Komponente
-\end{mainbox}
-
-\begin{mainbox}{LGS in Matrixform}
-$\mathbf{A}\mathbf{x} = \mathbf{b}$ mit Koeffizientenmatrix $\mathbf{A}$, Lösungsvektor $\mathbf{x}$, rechte Seite $\mathbf{b}$
-
-\textbf{Erweiterte Koeffizientenmatrix:}
-$$(\mathbf{A} \mid \mathbf{b}) = \left(\begin{array}{ccc|c} a_{1,1} & \cdots & a_{1,n} & b_1 \\ \vdots & \ddots & \vdots & \vdots \\ a_{m,1} & \cdots & a_{m,n} & b_m \end{array}\right)$$
-\end{mainbox}
-
-\begin{mainbox}{Skalarprodukt}
-\textbf{Geometrisch:} $\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}|\cos\varphi$
-
-\textbf{Arithmetisch:} $\mathbf{a} \cdot \mathbf{b} = a_1b_1 + a_2b_2 + a_3b_3$
-
-\textbf{Betrag:} $|\mathbf{a}| = \sqrt{\mathbf{a} \cdot \mathbf{a}} = \sqrt{a_1^2 + a_2^2}$
-
-\textbf{Winkel:} $\cos\varphi = \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}$
-
-\textbf{Orthogonal:} $\mathbf{a} \perp \mathbf{b} \Leftrightarrow \mathbf{a} \cdot \mathbf{b} = 0$
-
-\textbf{Einheitsvektor:} $\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}$
-\end{mainbox}
-
-\begin{mainbox}{Rechenregeln}
-\textbf{Vektorraum-Axiome:}
+\begin{mainbox}{Kartesisches Koordinatensystem (2D)}
+\textbf{Eigenschaften:}
 \begin{itemize}
-    \item $\mathbf{a} + \mathbf{b} = \mathbf{b} + \mathbf{a}$ (kommutativ)
-    \item $(\mathbf{a} + \mathbf{b}) + \mathbf{c} = \mathbf{a} + (\mathbf{b} + \mathbf{c})$ (assoziativ)
-    \item $\mathbf{a} + \mathbf{0} = \mathbf{a}$, \quad $\mathbf{a} + (-\mathbf{a}) = \mathbf{0}$
+    \item x-Achse (Abszisse, horizontal), y-Achse (Ordinate, vertikal)
+    \item Achsen senkrecht, gleicher Massstab, rechtshändig
+    \item Punkt: $A(-7/-3)$ bedeutet $x=-7$, $y=-3$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Vektor - Definition}
+Ein Vektor hat:
+\begin{itemize}
+    \item Länge (Betrag)
+    \item Richtung
+    \item Darstellung: Pfeil (geometrisch) oder Zahlen (arithmetisch)
+\end{itemize}
+
+\textbf{Ortsvektor:} Anfangspunkt im Ursprung
+
+\textbf{Schreibweise (2D):} $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$
+
+\textbf{Schreibweise (3D):} $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}$
+
+\textbf{Allgemein (nD):} $\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}$
+\end{mainbox}
+
+\begin{mainbox}{Vektoraddition}
+$$\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} + \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} = \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \end{pmatrix}$$
+
+\textbf{Geometrisch:} Verschiebe $\mathbf{b}$ so, dass sein Fusspunkt an der Spitze von $\mathbf{a}$ liegt. Summe: vom Fusspunkt von $\mathbf{a}$ zur Spitze von $\mathbf{b}'$.
+\end{mainbox}
+
+\begin{mainbox}{Skalare Multiplikation}
+$$\lambda \mathbf{a} = \lambda \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} = \begin{pmatrix} \lambda a_1 \\ \lambda a_2 \end{pmatrix}$$
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item $|\lambda| > 1$: Vektor wird gestreckt
+    \item $0 < |\lambda| < 1$: Vektor wird gestaucht
+    \item $\lambda < 0$: Richtung wird umgekehrt
+    \item $\lambda = 0$: Nullvektor
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Vektorsubtraktion}
+$$\mathbf{a} - \mathbf{b} = \mathbf{a} + (-1)\mathbf{b} = \begin{pmatrix} a_1 - b_1 \\ a_2 - b_2 \end{pmatrix}$$
+
+\textbf{Geometrisch:} Von Spitze $\mathbf{b}$ zur Spitze $\mathbf{a}$ (bei gleichem Fusspunkt)
+\end{mainbox}
+
+\begin{mainbox}{Linearkombination}
+Multiplikation mehrerer Vektoren mit Skalaren und Addition:
+$$\lambda_1 \mathbf{a}_1 + \lambda_2 \mathbf{a}_2 + \cdots + \lambda_n \mathbf{a}_n$$
+
+\textbf{Beispiel:} $3\mathbf{a} - 2\mathbf{b} + \mathbf{c}$
+\end{mainbox}
+
+\begin{subbox}{Rechenregeln für Vektoren}
+Für Vektoren $\mathbf{a}, \mathbf{b}, \mathbf{c}$ und Skalare $\lambda, \mu \in \R$:
+
+\begin{enumerate}
+    \item $\mathbf{a} + \mathbf{b} = \mathbf{b} + \mathbf{a}$ (Kommutativ)
+    \item $\mathbf{a} + (\mathbf{b} + \mathbf{c}) = (\mathbf{a} + \mathbf{b}) + \mathbf{c}$ (Assoziativ)
+    \item $\mathbf{a} + \mathbf{0} = \mathbf{a}$ (Neutralelement)
+    \item $\mathbf{a} + (-\mathbf{a}) = \mathbf{0}$ (Inverses)
     \item $\lambda(\mathbf{a} + \mathbf{b}) = \lambda\mathbf{a} + \lambda\mathbf{b}$
     \item $(\lambda + \mu)\mathbf{a} = \lambda\mathbf{a} + \mu\mathbf{a}$
+    \item $(\lambda\mu)\mathbf{a} = \lambda(\mu\mathbf{a}) = \mu(\lambda\mathbf{a})$
+    \item $1 \cdot \mathbf{a} = \mathbf{a}$
+\end{enumerate}
+
+Diese 8 Regeln definieren einen Vektorraum.
+\end{subbox}
+
+% ============================================================================
+% GERADEN UND EBENEN
+% ============================================================================
+\section{Geraden und Ebenen}
+
+\begin{mainbox}{Punkt-Richtungsform: Gerade}
+$$g: \mathbf{r} = \mathbf{p} + \lambda \mathbf{u}, \quad \lambda \in \R$$
+
+\begin{itemize}
+    \item $\mathbf{p}$: Stützvektor (Punkt auf der Geraden)
+    \item $\mathbf{u}$: Richtungsvektor
+    \item $\lambda$: Parameter
 \end{itemize}
 
-\textbf{Skalarprodukt:} kommutativ, distributiv
+\textbf{Alle Punkte der Geraden:} Variiere $\lambda$ von $-\infty$ bis $+\infty$
 \end{mainbox}
 
+\begin{mainbox}{Punkt-Richtungsform: Ebene}
+$$E: \mathbf{r} = \mathbf{p} + \lambda \mathbf{u} + \mu \mathbf{v}, \quad \lambda, \mu \in \R$$
+
+\begin{itemize}
+    \item $\mathbf{p}$: Stützvektor (Punkt auf der Ebene)
+    \item $\mathbf{u}, \mathbf{v}$: Richtungsvektoren (nicht kollinear!)
+    \item $\lambda, \mu$: Parameter
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Schnittpunkt zweier Geraden}
+Gegeben: $g: \mathbf{r} = \mathbf{p}_1 + \lambda \mathbf{u}_1$ und $h: \mathbf{r} = \mathbf{p}_2 + \mu \mathbf{u}_2$
+
+\textbf{Ansatz:} $\mathbf{p}_1 + \lambda \mathbf{u}_1 = \mathbf{p}_2 + \mu \mathbf{u}_2$
+
+Löse LGS für $\lambda$ und $\mu$, setze in eine Gleichung ein.
+\end{subbox}
+
+\begin{subbox}{Schnittpunkt Gerade mit Ebene}
+Gegeben: $g: \mathbf{r} = \mathbf{p}_g + \lambda \mathbf{u}_g$ und $E: \mathbf{r} = \mathbf{p}_E + \mu \mathbf{u}_E + \nu \mathbf{v}_E$
+
+\textbf{Ansatz:} $\mathbf{p}_g + \lambda \mathbf{u}_g = \mathbf{p}_E + \mu \mathbf{u}_E + \nu \mathbf{v}_E$
+
+Löse LGS für $\lambda, \mu, \nu$, setze $\lambda$ in Geradengleichung ein.
+\end{subbox}
+
 % ============================================================================
-% SECTION 2: GAUSS-ALGORITHMUS
+% MATRIZEN
 % ============================================================================
-\section{Gauss-Algorithmus}
+\section{Matrizen}
+
+\begin{mainbox}{Matrix - Definition}
+Eine $(m \times n)$-Matrix: $m$ Zeilen, $n$ Spalten
+
+$$\mathbf{A} = \begin{pmatrix}
+a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m,1} & a_{m,2} & \cdots & a_{m,n}
+\end{pmatrix} = (a_{i,j})$$
+
+\textbf{Notation:}
+\begin{itemize}
+    \item $a_{i,j}$: Element in Zeile $i$, Spalte $j$
+    \item Erster Index: Zeile, zweiter Index: Spalte
+    \item Quadratisch: $m = n$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Matrix-Vektor-Multiplikation}
+$(m \times n)$-Matrix $\mathbf{A}$ mal $n$-Vektor $\mathbf{x}$ ergibt $m$-Vektor:
+
+$$\mathbf{A}\mathbf{x} = \begin{pmatrix}
+a_{1,1} & \cdots & a_{1,n} \\
+\vdots & \ddots & \vdots \\
+a_{m,1} & \cdots & a_{m,n}
+\end{pmatrix} \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} = \begin{pmatrix}
+a_{1,1}x_1 + \cdots + a_{1,n}x_n \\
+\vdots \\
+a_{m,1}x_1 + \cdots + a_{m,n}x_n
+\end{pmatrix}$$
+
+\textbf{Merkregel:} $i$-te Komponente = Skalarprodukt von $i$-ter Zeile mit $\mathbf{x}$
+
+$$(\mathbf{A}\mathbf{x})_i = \sum_{j=1}^{n} a_{i,j} x_j$$
+\end{mainbox}
+
+\begin{subbox}{Anwendung: Gleichungssystem als Matrix}
+$$\begin{array}{rcl}
+x + 2y + 4z &=& 1 \\
+3x + y - z &=& -1
+\end{array} \quad \Leftrightarrow \quad \begin{pmatrix} 1 & 2 & 4 \\ 3 & 1 & -1 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 1 \\ -1 \end{pmatrix}$$
+
+$$\mathbf{A}\mathbf{x} = \mathbf{b}$$
+\end{subbox}
+
+% ============================================================================
+% LINEARE GLEICHUNGSSYSTEME
+% ============================================================================
+\section{Lineare Gleichungssysteme}
+
+\begin{mainbox}{Lineare Gleichung}
+Allgemeine Form in einer Variable:
+$$ax + b = 0$$
+
+\textbf{Lösungen:}
+\begin{itemize}
+    \item $a \neq 0$: genau eine Lösung $x = -\frac{b}{a}$
+    \item $a = 0, b \neq 0$: keine Lösung
+    \item $a = 0, b = 0$: unendlich viele Lösungen
+\end{itemize}
+\end{mainbox}
 
 \begin{mainbox}{Lineares Gleichungssystem (LGS)}
-Ein \textbf{LGS} besteht aus Gleichungen der Form:
-$$a_{1,1}x_1 + a_{1,2}x_2 + \cdots + a_{1,n}x_n = b_1$$
+$$\mathbf{A}\mathbf{x} = \mathbf{b}$$
 
-\textbf{Kriterien für Linearität:}
 \begin{itemize}
-    \item Variablen nur in 1. Potenz
-    \item Keine Produkte von Variablen ($xy$)
-    \item Keine Funktionen von Variablen ($\sin x$)
+    \item $\mathbf{A}$: Koeffizientenmatrix $(m \times n)$
+    \item $\mathbf{x}$: Lösungsvektor ($n$ Unbekannte)
+    \item $\mathbf{b}$: Rechte Seite (RHS, $m$ Gleichungen)
 \end{itemize}
-
-\textbf{Nicht linear:} $3xy + 5y = -10$, \quad $\sin z = 2$
 \end{mainbox}
 
-\begin{mainbox}{Zeilenstufenform (ZSF)}
-Eine Matrix ist in \textbf{Zeilenstufenform}, wenn:
-\begin{itemize}
-    \item Jeder Leitkoeffizient steht rechts vom darüberliegenden
-    \item Nullzeilen stehen ganz unten
-\end{itemize}
+\begin{mainbox}{Koeffizientenmatrix}
+Aus dem LGS:
+$$\begin{array}{rcl}
+a_{1,1}x_1 + \cdots + a_{1,n}x_n &=& b_1 \\
+\vdots & & \vdots \\
+a_{m,1}x_1 + \cdots + a_{m,n}x_n &=& b_m
+\end{array}$$
 
-$$\begin{pmatrix} \fbox{2} & 5 & -8 & -1 \\ 0 & 0 & \fbox{2} & 4 \\ 0 & 0 & 0 & \fbox{9} \\ 0 & 0 & 0 & 0 \end{pmatrix}$$
+\textbf{Koeffizientenmatrix:} 
+$$\mathbf{A} = \begin{pmatrix}
+a_{1,1} & \cdots & a_{1,n} \\
+\vdots & \ddots & \vdots \\
+a_{m,1} & \cdots & a_{m,n}
+\end{pmatrix}$$
 
-\textbf{Leitkoeffizient:} Erster $\neq 0$ Eintrag einer Zeile\\
-\textbf{Pivotelement:} Leitkoeffizient in ZSF
+\textbf{Erweiterte Koeffizientenmatrix:}
+$$(\mathbf{A}|\mathbf{b}) = \left(\begin{array}{ccc|c}
+a_{1,1} & \cdots & a_{1,n} & b_1 \\
+\vdots & \ddots & \vdots & \vdots \\
+a_{m,1} & \cdots & a_{m,n} & b_m
+\end{array}\right)$$
 \end{mainbox}
 
-\begin{mainbox}{Elementare Zeilenumformungen}
-\textbf{Drei erlaubte Operationen:}
+\begin{subbox}{Lösungsmethoden für LGS}
+\textbf{1. Substitutionsmethode (Einsetzverfahren):} Löse eine Gleichung nach einer Variable auf, setze in andere ein.
 
-\textbf{I. Skalieren:} Zeile mit $\lambda \neq 0$ multiplizieren
-$$Z_i \rightarrow \lambda \cdot Z_i$$
+\textbf{2. Eliminationsmethode (Additionsverfahren, Gauss):} Addiere/subtrahiere Gleichungen, um Variablen zu eliminieren.
 
-\textbf{II. Vertauschen:} Zwei Zeilen tauschen
-$$Z_i \leftrightarrow Z_j$$
+\textbf{3. Gleichsetzungsmethode:} Löse zwei Gleichungen nach derselben Variable auf, setze gleich.
 
-\textbf{III. Addition:} Vielfaches einer Zeile zu anderer addieren
-$$Z_i \rightarrow Z_i + \lambda \cdot Z_j$$
-
-Diese Operationen ändern die Lösungsmenge \textbf{nicht}!
-\end{mainbox}
-
-\begin{mainbox}{Gauss-Eliminationsverfahren}
-\textbf{Ziel:} Erweiterte Koeffizientenmatrix in ZSF bringen
-
-\textbf{Algorithmus:}
-\begin{enumerate}
-    \item Wähle Pivotelement (erstes $\neq 0$ in Spalte)
-    \item Bringe Pivotzeile nach oben (Typ II)
-    \item Eliminiere alle Einträge unter Pivot (Typ III)
-    \item Wiederhole für nächste Spalte/Zeile
-    \item \textbf{Rückwärtseinsetzen} zur Lösung
-\end{enumerate}
-
-\textbf{Tipp:} Pivotelement mit grösstem Betrag wählen (numerische Stabilität)
-\end{mainbox}
-
-\begin{mainbox}{Rückwärtseinsetzen}
-Nach Erreichen der ZSF: Von unten nach oben lösen
-
-\textbf{Beispiel in ZSF:}
-\begin{align*}
-2x + 5y - 2z &= -3 \\
-3y + 2z &= 7 \\
-5z &= 10
-\end{align*}
-
-\textbf{Lösung:}
-\begin{enumerate}
-    \item Aus Zeile 3: $z = 2$
-    \item In Zeile 2: $3y + 4 = 7 \Rightarrow y = 1$
-    \item In Zeile 1: $2x + 5 - 4 = -3 \Rightarrow x = -2$
-\end{enumerate}
-
-Lösung: $(x, y, z) = (-2, 1, 2)$
-\end{mainbox}
+\textbf{Matrixform:} Zeilenoperationen auf erweiterte Koeffizientenmatrix, dann Rückwärtseinsetzen.
+\end{subbox}
 
 \begin{subbox}{Beispiel: Gauss-Elimination}
-$$\left(\begin{array}{ccc|c} 6 & -1 & -1 & 4 \\ 1 & 1 & 10 & -6 \\ 2 & -1 & 1 & -2 \end{array}\right)$$
+$$\begin{array}{rcl}
+s - 160t &=& 0 \\
+s - 120t &=& 100
+\end{array} \quad \Rightarrow \quad \left(\begin{array}{cc|c}
+1 & -160 & 0 \\
+1 & -120 & 100
+\end{array}\right)$$
 
-$Z_1 \leftrightarrow Z_2$ (besseres Pivot):
-$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 6 & -1 & -1 & 4 \\ 2 & -1 & 1 & -2 \end{array}\right)$$
+Subtrahiere Zeile 1 von Zeile 2:
+$$\left(\begin{array}{cc|c}
+1 & -160 & 0 \\
+0 & 40 & 100
+\end{array}\right)$$
 
-$Z_2 - 6Z_1$, $Z_3 - 2Z_1$:
-$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & -3 & -19 & 10 \end{array}\right)$$
-
-$7Z_3 - 3Z_2$:
-$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & 0 & 50 & -50 \end{array}\right)$$
-
-$\Rightarrow z = -1, \; y = 3, \; x = 1$
-\end{subbox}
-
-\begin{mainbox}{Dreiecksmatrizen}
-\textbf{Obere Dreiecksmatrix:} Alle Einträge unter Hauptdiagonale sind 0
-$$\begin{pmatrix} a & b & c \\ 0 & d & e \\ 0 & 0 & f \end{pmatrix}$$
-
-\textbf{Untere Dreiecksmatrix:} Alle Einträge über Hauptdiagonale sind 0
-
-\textbf{Hinweis:} ZSF $\neq$ Dreiecksmatrix (Pivots nicht zwingend auf Diagonale)
-\end{mainbox}
-
-\begin{mainbox}{Lösbarkeit von LGS}
-Nach Gauss-Elimination prüfen:
-
-\textbf{Eindeutige Lösung:} Jede Variable hat Pivot
-$$\left(\begin{array}{cc|c} 1 & 2 & 3 \\ 0 & 1 & 4 \end{array}\right) \checkmark$$
-
-\textbf{Keine Lösung:} Widerspruchszeile $(0 \; 0 \; | \; c)$ mit $c \neq 0$
-$$\left(\begin{array}{cc|c} 1 & 2 & 3 \\ 0 & 0 & 5 \end{array}\right) \; \times$$
-
-\textbf{Unendlich viele:} Freie Variablen (Spalten ohne Pivot)
-$$\left(\begin{array}{ccc|c} 1 & 2 & 3 & 4 \\ 0 & 0 & 1 & 2 \end{array}\right)$$
-$x_2$ frei wählbar
-\end{mainbox}
-
-\begin{mainbox}{Zusammenfassung Gauss}
-\begin{enumerate}
-    \item Erweiterte Koeffizientenmatrix aufstellen
-    \item Mit elem. Zeilenumformungen in ZSF bringen
-    \item Lösbarkeit prüfen (Widerspruchszeile?)
-    \item Rückwärtseinsetzen für Lösung
-\end{enumerate}
-
-\textbf{Vorteile:}
-\begin{itemize}
-    \item Systematisch und algorithmisch
-    \item Funktioniert für beliebig grosse LGS
-    \item Zeigt Lösbarkeit direkt an
-\end{itemize}
-\end{mainbox}
-
-% ============================================================================
-% SECTION 3: LU-ZERLEGUNG
-% ============================================================================
-\section{LU-Zerlegung, Matrixoperationen}
-
-\begin{mainbox}{Matrixmultiplikation}
-$\mathbf{A} \in \R^{l \times m}$, $\mathbf{B} \in \R^{m \times n}$ $\Rightarrow$ $\mathbf{C} = \mathbf{AB} \in \R^{l \times n}$
-
-$$c_{ik} = \sum_{j=1}^{m} a_{ij} b_{jk}$$
-
-\textbf{Regeln:}
-\begin{itemize}
-    \item Spalten von $\mathbf{A}$ = Zeilen von $\mathbf{B}$
-    \item $c_{ik}$ = Skalarprodukt (Zeile $i$ von $\mathbf{A}$) $\cdot$ (Spalte $k$ von $\mathbf{B}$)
-    \item \textbf{Nicht kommutativ:} $\mathbf{AB} \neq \mathbf{BA}$
-    \item \textbf{Assoziativ:} $(\mathbf{AB})\mathbf{C} = \mathbf{A}(\mathbf{BC})$
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Einheitsmatrix}
-$$\mathbf{I}_n = \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 1 \end{pmatrix}$$
-
-\textbf{Eigenschaft:} $\mathbf{IA} = \mathbf{AI} = \mathbf{A}$
-
-Neutrales Element der Matrixmultiplikation (wie 1 bei Zahlen).
-\end{mainbox}
-
-\begin{mainbox}{Transponierte Matrix}
-$\mathbf{A}^T$: Zeilen und Spalten vertauschen
-
-$(a_{ij})^T = (a_{ji})$ \quad (Spiegelung an Hauptdiagonale)
-
-\textbf{Rechenregeln:}
-\begin{itemize}
-    \item $(\mathbf{A}^T)^T = \mathbf{A}$
-    \item $(\mathbf{A} + \mathbf{B})^T = \mathbf{A}^T + \mathbf{B}^T$
-    \item $(\mathbf{AB})^T = \mathbf{B}^T \mathbf{A}^T$ (Reihenfolge!)
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Inverse Matrix}
-$\mathbf{A}$ ist \textbf{invertierbar/regulär}, wenn $\mathbf{A}^{-1}$ existiert mit:
-$$\mathbf{A} \cdot \mathbf{A}^{-1} = \mathbf{A}^{-1} \cdot \mathbf{A} = \mathbf{I}$$
-
-\textbf{Für $2 \times 2$:}
-$$\begin{pmatrix} a & b \\ c & d \end{pmatrix}^{-1} = \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
-
-\textbf{Rechenregeln:}
-\begin{itemize}
-    \item $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$
-    \item $(\mathbf{AB})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}$ (Reihenfolge!)
-\end{itemize}
-
-\textbf{Singulär:} $\mathbf{A}$ nicht invertierbar $\Leftrightarrow$ $\det(\mathbf{A}) = 0$
-\end{mainbox}
-
-\begin{mainbox}{Permutationsmatrix}
-$\mathbf{P}$: Einheitsmatrix mit vertauschten Zeilen/Spalten
-
-Jede Zeile/Spalte enthält genau eine 1, Rest 0.
-
-\textbf{Wirkung:}
-\begin{itemize}
-    \item $\mathbf{PA}$: Zeilen von $\mathbf{A}$ vertauschen
-    \item $\mathbf{AP}$: Spalten von $\mathbf{A}$ vertauschen
-\end{itemize}
-
-$$\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix} = \begin{pmatrix} c & d \\ a & b \end{pmatrix}$$
-\end{mainbox}
-
-\begin{mainbox}{LU-Zerlegung (LR-Zerlegung)}
-Zerlege $\mathbf{A}$ in:
-$$\mathbf{A} = \mathbf{LU}$$
-
-\textbf{L} = \textbf{L}ower triangular (untere Dreiecksmatrix)\\
-\textbf{U} = \textbf{U}pper triangular (obere Dreiecksmatrix, ZSF)
-
-$$\begin{pmatrix} 2 & 1 \\ 8 & 7 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 4 & 1 \end{pmatrix} \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$$
-
-\textbf{L} enthält die Eliminationsfaktoren $l_{ij}$\\
-\textbf{U} ist das Ergebnis der Gauss-Elimination
-\end{mainbox}
-
-\begin{mainbox}{Eliminationsmatrizen}
-$\mathbf{E}_{ij}$: Eliminiert $a_{ij}$ durch Zeilenoperation
-
-$$\mathbf{E}_{21} = \begin{pmatrix} 1 & 0 \\ -4 & 1 \end{pmatrix}$$
-bewirkt: $Z_2 \leftarrow Z_2 - 4 \cdot Z_1$
-
-\textbf{Inverse:} $\mathbf{L}_{ij} = \mathbf{E}_{ij}^{-1}$ (Vorzeichen umkehren)
-
-$$\mathbf{L}_{21} = \begin{pmatrix} 1 & 0 \\ +4 & 1 \end{pmatrix}$$
-
-Für $3 \times 3$: $\mathbf{E}_{32}\mathbf{E}_{31}\mathbf{E}_{21}\mathbf{A} = \mathbf{U}$
-\end{mainbox}
-
-\begin{mainbox}{LGS lösen mit LU-Zerlegung}
-Gegeben: $\mathbf{Ax} = \mathbf{b}$ mit $\mathbf{A} = \mathbf{LU}$
-
-\textbf{Schritt 1:} Löse $\mathbf{Ly} = \mathbf{b}$ (Vorwärtseinsetzen)
-$$y_i = \frac{1}{l_{ii}} \left( b_i - \sum_{k=1}^{i-1} l_{ik} y_k \right)$$
-
-\textbf{Schritt 2:} Löse $\mathbf{Ux} = \mathbf{y}$ (Rückwärtseinsetzen)
-$$x_i = \frac{1}{u_{ii}} \left( y_i - \sum_{k=i+1}^{n} u_{ik} x_k \right)$$
-
-\textbf{Vorteil:} Bei gleichem $\mathbf{A}$, verschiedenen $\mathbf{b}$ muss LU nur einmal berechnet werden!
-\end{mainbox}
-
-\begin{mainbox}{LU mit Pivotisierung}
-Falls Pivot = 0: Zeilentausch nötig $\rightarrow$ Permutationsmatrix $\mathbf{P}$
-
-$$\mathbf{PA} = \mathbf{LU}$$
-
-\textbf{LGS lösen:}
-\begin{enumerate}
-    \item Berechne $\hat{\mathbf{b}} = \mathbf{Pb}$
-    \item Löse $\mathbf{Ly} = \hat{\mathbf{b}}$
-    \item Löse $\mathbf{Ux} = \mathbf{y}$
-\end{enumerate}
-
-\textbf{Tipp:} Für numerische Stabilität: grösstes Element als Pivot wählen (Spaltenpivotsuche)
-\end{mainbox}
-
-\begin{subbox}{Beispiel: LU-Zerlegung}
-$\mathbf{A} = \begin{pmatrix} 1 & 2 & 1 \\ 2 & 1 & 0 \\ -3 & 0 & 9 \end{pmatrix}$
-
-Nach Elimination:
-$$\mathbf{L} = \begin{pmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ -3 & 2 & 1 \end{pmatrix}, \quad \mathbf{U} = \begin{pmatrix} 1 & 2 & 1 \\ 0 & -3 & -2 \\ 0 & 0 & 8 \end{pmatrix}$$
-
-$l_{21} = 2$ (Faktor für $Z_2 - 2Z_1$)\\
-$l_{31} = -3$, $l_{32} = 2$
+\textbf{Rückwärtseinsetzen:} $40t = 100 \Rightarrow t = 2.5$, dann $s = 160 \cdot 2.5 = 400$
 \end{subbox}
 
 % ============================================================================
-% SECTION 4: GAUSS-JORDAN, INVERSE, DETERMINANTE
+% SKALARPRODUKT
 % ============================================================================
-\section{Gauss-Jordan, Inverse, Determinante}
+\section{Skalarprodukt}
 
-\begin{mainbox}{Gauss-Jordan-Verfahren}
-\textbf{Erweiterung} des Gauss-Verfahrens: Koeffizientenmatrix wird zur \textbf{Diagonalmatrix} (nicht nur ZSF).
+\begin{mainbox}{Skalarprodukt - Definition}
+$$\mathbf{a} \bullet \mathbf{b} = |\mathbf{a}| \cdot |\mathbf{b}| \cdot \cos \varphi$$
 
-\textbf{Vorteil:} Lösung direkt ablesbar, \textbf{kein Rückwärtseinsetzen} nötig.
-
-\textbf{Vorgehen} (nach ZSF):
-\begin{enumerate}
-    \item Von \textbf{rechts nach links}, \textbf{unten nach oben}
-    \item Alle Einträge \textbf{oberhalb} der Pivots eliminieren
-    \item Pivotelemente auf 1 normieren (Zeile $\cdot$ Kehrwert)
-    \item Keine Zeilenvertauschungen mehr
-\end{enumerate}
-
-\textbf{Resultat:} Reduzierte Zeilenstufenform (RZSF)
-$$\left(\begin{array}{ccc|c} 1 & 0 & 0 & x \\ 0 & 1 & 0 & y \\ 0 & 0 & 1 & z \end{array}\right)$$
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Gauss-Jordan}
-Ausgehend von ZSF:
-$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & 0 & 50 & -50 \end{array}\right)$$
-
-$Z_3 \cdot \frac{1}{50}$:
-$$\left(\begin{array}{ccc|c} 1 & 1 & 10 & -6 \\ 0 & -7 & -61 & 40 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
-
-$Z_2 + 61Z_3$, $Z_1 - 10Z_3$:
-$$\left(\begin{array}{ccc|c} 1 & 1 & 0 & 4 \\ 0 & -7 & 0 & -21 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
-
-$Z_2 \cdot (-\frac{1}{7})$:
-$$\left(\begin{array}{ccc|c} 1 & 1 & 0 & 4 \\ 0 & 1 & 0 & 3 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
-
-$Z_1 - Z_2$:
-$$\left(\begin{array}{ccc|c} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 3 \\ 0 & 0 & 1 & -1 \end{array}\right)$$
-
-$\Rightarrow x = 1, \; y = 3, \; z = -1$
-\end{subbox}
-
-\begin{mainbox}{Inverse mit Gauss-Jordan}
-Berechne $\mathbf{A}^{-1}$ durch simultanes Lösen von $n$ LGS:
-$$\mathbf{A}\mathbf{x}_i = \mathbf{e}_i \quad (i = 1, \ldots, n)$$
-
-\textbf{Verfahren:}
-\begin{enumerate}
-    \item Bilde erweiterte Matrix $(\mathbf{A} \mid \mathbf{I})$
-    \item Wende Gauss-Jordan an
-    \item Ergebnis: $(\mathbf{I} \mid \mathbf{A}^{-1})$
-\end{enumerate}
-
-$$(\mathbf{A} \mid \mathbf{I}) \xrightarrow{\text{Gauss-Jordan}} (\mathbf{I} \mid \mathbf{A}^{-1})$$
-
-\textbf{Falls} $\mathbf{A}$ \textbf{singulär:} Nullzeile in $\mathbf{A}$-Teil $\Rightarrow$ keine Inverse
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Inverse berechnen}
-$\mathbf{A} = \begin{pmatrix} 1 & 3 \\ 2 & 7 \end{pmatrix}$
-
-$$\left(\begin{array}{cc|cc} 1 & 3 & 1 & 0 \\ 2 & 7 & 0 & 1 \end{array}\right)$$
-
-$Z_2 - 2Z_1$:
-$$\left(\begin{array}{cc|cc} 1 & 3 & 1 & 0 \\ 0 & 1 & -2 & 1 \end{array}\right)$$
-
-$Z_1 - 3Z_2$:
-$$\left(\begin{array}{cc|cc} 1 & 0 & 7 & -3 \\ 0 & 1 & -2 & 1 \end{array}\right)$$
-
-$\Rightarrow \mathbf{A}^{-1} = \begin{pmatrix} 7 & -3 \\ -2 & 1 \end{pmatrix}$
-\end{subbox}
-
-\begin{mainbox}{Determinante: Definition}
-Die \textbf{Determinante} ist ein Skalar, der jeder quadratischen Matrix zugeordnet wird.
-
-\textbf{Schreibweisen:} $\det(\mathbf{A})$, $\det\mathbf{A}$, $|\mathbf{A}|$
-
-\textbf{Bedeutung:}
 \begin{itemize}
-    \item $\det(\mathbf{A}) \neq 0$: $\mathbf{A}$ \textbf{regulär} (invertierbar)
-    \item $\det(\mathbf{A}) = 0$: $\mathbf{A}$ \textbf{singulär} (nicht invertierbar)
+    \item $|\mathbf{a}|, |\mathbf{b}|$: Längen (Beträge) der Vektoren
+    \item $\varphi$: Winkel zwischen $\mathbf{a}$ und $\mathbf{b}$
+    \item Symbol: $\bullet$ (Skalarprodukt) vs. $\cdot$ (Multiplikation)
 \end{itemize}
 
-\textbf{Geometrisch:}
+\textbf{In kartesischen Koordinaten (2D):}
+$$\mathbf{a} \bullet \mathbf{b} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \bullet \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} = a_1 b_1 + a_2 b_2$$
+
+\textbf{Allgemein (nD):}
+$$\mathbf{a} \bullet \mathbf{b} = \sum_{i=1}^{n} a_i b_i$$
+
+\textbf{Achtung:} Formel gilt nur in kartesischen Koordinaten!
+\end{mainbox}
+
+\begin{mainbox}{Betrag (Länge) eines Vektors}
+$$|\mathbf{a}| = \sqrt{\mathbf{a} \bullet \mathbf{a}} = \sqrt{a_1^2 + a_2^2 + \cdots + a_n^2}$$
+
+\textbf{2D:} $|\mathbf{a}| = \sqrt{a_1^2 + a_2^2}$ (Pythagoras)
+
+\textbf{3D:} $|\mathbf{a}| = \sqrt{a_1^2 + a_2^2 + a_3^2}$
+
+\textbf{Quadrat:} $|\mathbf{a}|^2 = \mathbf{a} \bullet \mathbf{a}$
+\end{mainbox}
+
+\begin{mainbox}{Winkel zwischen zwei Vektoren}
+$$\cos \varphi = \frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}| \cdot |\mathbf{b}|}$$
+
+$$\varphi = \arccos \left( \frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}| \cdot |\mathbf{b}|} \right)$$
+
+\textbf{Wertebereich:} $0° \leq \varphi \leq 180°$ bzw. $0 \leq \varphi \leq \pi$
+\end{mainbox}
+
+\begin{mainbox}{Einheitsvektor (Normierung)}
+Vektor mit Länge 1:
+$$\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|} = \frac{1}{|\mathbf{a}|} \mathbf{a}$$
+
+\textbf{Eigenschaften:} $|\hat{\mathbf{a}}| = 1$, gleiche Richtung wie $\mathbf{a}$
+\end{mainbox}
+
+\begin{mainbox}{Orthogonalität}
+Zwei Vektoren sind orthogonal (senkrecht), falls:
+$$\mathbf{a} \bullet \mathbf{b} = 0 \quad \Leftrightarrow \quad \mathbf{a} \perp \mathbf{b}$$
+
+\textbf{Nullvektor:} Steht zu jedem Vektor senkrecht.
+\end{mainbox}
+
+\begin{subbox}{Rechenregeln Skalarprodukt}
+Für Vektoren $\mathbf{a}, \mathbf{b}, \mathbf{c}$ und Skalar $\lambda \in \R$:
+
 \begin{itemize}
-    \item 2D: Fläche des aufgespannten Parallelogramms
-    \item 3D: Volumen des aufgespannten Spats
+    \item $\mathbf{a} \bullet \mathbf{b} = \mathbf{b} \bullet \mathbf{a}$ (Kommutativ)
+    \item $\mathbf{a} \bullet (\mathbf{b} + \mathbf{c}) = \mathbf{a} \bullet \mathbf{b} + \mathbf{a} \bullet \mathbf{c}$ (Distributiv)
+    \item $\lambda(\mathbf{a} \bullet \mathbf{b}) = (\lambda\mathbf{a}) \bullet \mathbf{b} = \mathbf{a} \bullet (\lambda\mathbf{b})$
 \end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Determinante $2 \times 2$}
-$$\mathbf{A} = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$$
-
-$$\det(\mathbf{A}) = ad - bc$$
-
-\textbf{Inverse (falls $\det \neq 0$):}
-$$\mathbf{A}^{-1} = \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$$
-
-\textbf{Merkregel:} Hauptdiagonale minus Nebendiagonale
-\end{mainbox}
-
-\begin{mainbox}{Determinante $3 \times 3$: Sarrus}
-$$\mathbf{A} = \begin{pmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{pmatrix}$$
-
-\textbf{Regel von Sarrus:}
-\begin{align*}
-\det(\mathbf{A}) &= a_1b_2c_3 + b_1c_2a_3 + c_1a_2b_3 \\
-&\quad - c_1b_2a_3 - a_1c_2b_3 - b_1a_2c_3
-\end{align*}
-
-\textbf{Merkregel:} Matrix um 2 Spalten erweitern, Diagonalen bilden
-
-\textbf{Achtung:} Sarrus gilt \textbf{nur} für $3 \times 3$!
-\end{mainbox}
-
-\begin{mainbox}{Determinanten-Rechenregeln}
-\textbf{Zeilenoperationen:}
-\begin{itemize}
-    \item Zeilen vertauschen: $\det \rightarrow -\det$
-    \item Zeile $\cdot \lambda$: $\det \rightarrow \lambda \cdot \det$
-    \item Vielfaches addieren: $\det$ unverändert
-\end{itemize}
-
-\textbf{Weitere Regeln:}
-\begin{itemize}
-    \item $\det(\mathbf{A}^T) = \det(\mathbf{A})$
-    \item $\det(\mathbf{AB}) = \det(\mathbf{A}) \cdot \det(\mathbf{B})$
-    \item $\det(\mathbf{A}^{-1}) = \frac{1}{\det(\mathbf{A})}$
-    \item $\det(\lambda\mathbf{A}) = \lambda^n \det(\mathbf{A})$ für $n \times n$
-\end{itemize}
-
-\textbf{Dreiecksmatrix:} $\det$ = Produkt der Diagonalelemente
-$$\det\begin{pmatrix} 2 & 3 & 1 \\ 0 & 1 & 2 \\ 0 & 0 & 5 \end{pmatrix} = 2 \cdot 1 \cdot 5 = 10$$
-\end{mainbox}
-
-\begin{mainbox}{Determinante: Einheitsmatrix}
-$$\det(\mathbf{I}_n) = 1$$
-
-Da $\mathbf{I}$ eine Dreiecksmatrix mit Diagonale = 1 ist.
-\end{mainbox}
-
-\begin{mainbox}{Cramersche Regel}
-Für $\mathbf{Ax} = \mathbf{b}$ mit $\det(\mathbf{A}) \neq 0$:
-
-$$x_i = \frac{\det(\mathbf{A}_i)}{\det(\mathbf{A})}$$
-
-wobei $\mathbf{A}_i$ = $\mathbf{A}$ mit $i$-ter Spalte durch $\mathbf{b}$ ersetzt.
-
-\textbf{Für $2 \times 2$:}
-$$x = \frac{\det(\mathbf{b}, \mathbf{a}_2)}{\det(\mathbf{A})}, \quad y = \frac{\det(\mathbf{a}_1, \mathbf{b})}{\det(\mathbf{A})}$$
-
-\textbf{Für $3 \times 3$:}
-$$x = \frac{D_x}{D}, \quad y = \frac{D_y}{D}, \quad z = \frac{D_z}{D}$$
-
-$D = \det(\mathbf{A})$, $D_x = \det(\mathbf{d}, \mathbf{b}, \mathbf{c})$, etc.
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Cramersche Regel}
-$\begin{cases} 2x + 3y = 8 \\ x - y = 1 \end{cases}$
-
-$D = \det\begin{pmatrix} 2 & 3 \\ 1 & -1 \end{pmatrix} = -2 - 3 = -5$
-
-$D_x = \det\begin{pmatrix} 8 & 3 \\ 1 & -1 \end{pmatrix} = -8 - 3 = -11$
-
-$D_y = \det\begin{pmatrix} 2 & 8 \\ 1 & 1 \end{pmatrix} = 2 - 8 = -6$
-
-$x = \frac{-11}{-5} = \frac{11}{5}, \quad y = \frac{-6}{-5} = \frac{6}{5}$
-\end{subbox}
-
-\begin{mainbox}{Äquivalente Aussagen}
-Für quadratische $n \times n$-Matrix $\mathbf{A}$:
-
-\textbf{Folgende Aussagen sind äquivalent:}
-\begin{itemize}
-    \item $\mathbf{A}$ ist regulär (invertierbar)
-    \item $\mathbf{A}^T$ ist regulär
-    \item $\det(\mathbf{A}) \neq 0$
-    \item $\mathbf{Ax} = \mathbf{0}$ hat nur Lösung $\mathbf{x} = \mathbf{0}$
-    \item $\text{Rang}(\mathbf{A}) = n$
-    \item Alle Pivotelemente $\neq 0$ in ZSF
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Gauss-Jordan: Vorteile}
-\begin{itemize}
-    \item \textbf{Simultane Lösung:} Mehrere rechte Seiten gleichzeitig
-    \item \textbf{Inverse berechnen:} $(\mathbf{A}|\mathbf{I}) \rightarrow (\mathbf{I}|\mathbf{A}^{-1})$
-    \item \textbf{Direkte Lösung:} Kein Rückwärtseinsetzen
-    \item \textbf{Überprüfung:} Invertierbarkeit direkt erkennbar
-\end{itemize}
-
-\textbf{Nachteil:} Mehr Rechenaufwand als reines Gauss-Verfahren
-\end{mainbox}
-
-% ============================================================================
-% SECTION 5: VEKTORPRODUKT
-% ============================================================================
-\section{Vektorprodukt}
-
-\begin{mainbox}{Vektorprodukt (Kreuzprodukt)}
-Das \textbf{Vektorprodukt} $\mathbf{u} \times \mathbf{v}$ liefert einen Vektor, der \textbf{senkrecht} auf $\mathbf{u}$ und $\mathbf{v}$ steht.
-
-$$\mathbf{u} \times \mathbf{v} = \begin{pmatrix} u_1 \\ u_2 \\ u_3 \end{pmatrix} \times \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} = \begin{pmatrix} u_2v_3 - u_3v_2 \\ u_3v_1 - u_1v_3 \\ u_1v_2 - u_2v_1 \end{pmatrix}$$
-
-\textbf{Länge:} $|\mathbf{u} \times \mathbf{v}| = |\mathbf{u}| \cdot |\mathbf{v}| \cdot \sin\varphi$
-
-\textbf{Geometrisch:} Fläche des aufgespannten Parallelogramms
-\end{mainbox}
-
-\begin{mainbox}{Vektorprodukt: Merkregel Sarrus}
-$$\mathbf{a} \times \mathbf{b} = \begin{vmatrix} \mathbf{e}_1 & \mathbf{e}_2 & \mathbf{e}_3 \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix}$$
-
-Entwicklung nach Sarrus mit Einheitsvektoren:
-\begin{align*}
-&= (a_2b_3 - a_3b_2)\mathbf{e}_1 + (a_3b_1 - a_1b_3)\mathbf{e}_2 \\
-&\quad + (a_1b_2 - a_2b_1)\mathbf{e}_3
-\end{align*}
-\end{mainbox}
-
-\begin{mainbox}{Eigenschaften Vektorprodukt}
-\textbf{Bilinearität:}
-\begin{itemize}
-    \item $(\mathbf{a} + \mathbf{b}) \times \mathbf{c} = \mathbf{a} \times \mathbf{c} + \mathbf{b} \times \mathbf{c}$
-    \item $\mathbf{a} \times (\mathbf{b} + \mathbf{c}) = \mathbf{a} \times \mathbf{b} + \mathbf{a} \times \mathbf{c}$
-    \item $(\lambda\mathbf{a}) \times \mathbf{b} = \lambda(\mathbf{a} \times \mathbf{b}) = \mathbf{a} \times (\lambda\mathbf{b})$
-\end{itemize}
-
-\textbf{Antikommutativität:}
-$$\mathbf{a} \times \mathbf{b} = -(\mathbf{b} \times \mathbf{a})$$
-$$\mathbf{a} \times \mathbf{a} = \mathbf{0}$$
-
-\textbf{Spatprodukt} (Determinante):
-$$(\mathbf{a} \times \mathbf{b}) \cdot \mathbf{c} = \det(\mathbf{a}, \mathbf{b}, \mathbf{c})$$
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Vektorprodukt}
-$\mathbf{u} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$, $\mathbf{v} = \begin{pmatrix} 4 \\ 5 \\ 6 \end{pmatrix}$
-
-$\mathbf{u} \times \mathbf{v} = \begin{pmatrix} 2 \cdot 6 - 3 \cdot 5 \\ 3 \cdot 4 - 1 \cdot 6 \\ 1 \cdot 5 - 2 \cdot 4 \end{pmatrix} = \begin{pmatrix} -3 \\ 6 \\ -3 \end{pmatrix}$
-
-\textbf{Probe:} $\mathbf{u} \cdot (\mathbf{u} \times \mathbf{v}) = -3 + 12 - 9 = 0$ \checkmark
 \end{subbox}
 
 % ============================================================================
-% SECTION 6: LINEARE ABBILDUNGEN
+% QUICK REFERENCE
 % ============================================================================
-\section{Lineare Abbildungen}
+\section{Kurzreferenz}
 
-\begin{mainbox}{Definition: Lineare Abbildung}
-$A: D \rightarrow W$ heisst \textbf{linear}, wenn:
-$$A(\mathbf{u} + \mathbf{v}) = A(\mathbf{u}) + A(\mathbf{v}) \quad \forall \mathbf{u}, \mathbf{v} \in D$$
-$$A(s \cdot \mathbf{u}) = s \cdot A(\mathbf{u}) \quad \forall s \in \R, \forall \mathbf{u} \in D$$
-
-\textbf{Matrix-Vektor-Multiplikation} ist eine lineare Abbildung!
-
-\textbf{Spalten der Matrix} = Bilder der Einheitsvektoren
-$$\mathbf{A} = \begin{pmatrix} | & | \\ A(\mathbf{e}_1) & A(\mathbf{e}_2) \\ | & | \end{pmatrix}$$
+\begin{mainbox}{Wichtige Formeln auf einen Blick}
+\renewcommand*{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{lX}
+\textbf{Vektoraddition} & $\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \end{pmatrix}$ \\[2mm]
+\textbf{Skalarmultiplikation} & $\lambda \mathbf{a} = \begin{pmatrix} \lambda a_1 \\ \lambda a_2 \end{pmatrix}$ \\[2mm]
+\textbf{Gerade} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u}$ \\[2mm]
+\textbf{Ebene} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u} + \mu \mathbf{v}$ \\[2mm]
+\textbf{Matrix-Vektor} & $(\mathbf{A}\mathbf{x})_i = \sum_{j} a_{i,j} x_j$ \\[2mm]
+\textbf{Skalarprodukt} & $\mathbf{a} \bullet \mathbf{b} = \sum_i a_i b_i = |\mathbf{a}||\mathbf{b}|\cos\varphi$ \\[2mm]
+\textbf{Betrag} & $|\mathbf{a}| = \sqrt{\mathbf{a} \bullet \mathbf{a}} = \sqrt{\sum_i a_i^2}$ \\[2mm]
+\textbf{Winkel} & $\varphi = \arccos\left(\frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\right)$ \\[2mm]
+\textbf{Orthogonal} & $\mathbf{a} \perp \mathbf{b} \Leftrightarrow \mathbf{a} \bullet \mathbf{b} = 0$ \\[2mm]
+\textbf{Einheitsvektor} & $\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}$ \\[2mm]
+\textbf{LGS} & $\mathbf{A}\mathbf{x} = \mathbf{b}$
+\end{tabularx}
 \end{mainbox}
 
-\begin{mainbox}{Basis und Einheitsvektoren}
-\textbf{Einheitsvektoren} im $\R^n$:
-$$\mathbf{e}_1 = \begin{pmatrix} 1 \\ 0 \\ \vdots \end{pmatrix}, \; \mathbf{e}_2 = \begin{pmatrix} 0 \\ 1 \\ \vdots \end{pmatrix}, \; \ldots$$
-
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item Länge 1: $|\mathbf{e}_k| = 1$
-    \item Paarweise orthogonal: $\mathbf{e}_i \cdot \mathbf{e}_j = 0$ für $i \neq j$
-    \item Bilden die Einheitsmatrix $\mathbf{I}_n$
-\end{itemize}
-
-\textbf{Jeder Vektor} als Linearkombination:
-$$\mathbf{v} = v_1\mathbf{e}_1 + v_2\mathbf{e}_2 + \cdots + v_n\mathbf{e}_n$$
-\end{mainbox}
-
-\begin{mainbox}{Skalierung}
-$$\mathbf{S} = \begin{pmatrix} s_x & 0 \\ 0 & s_y \end{pmatrix}$$
-
-\textbf{Gleichmässig:} $s_x = s_y = s$
-$$\mathbf{S} = \begin{pmatrix} s & 0 \\ 0 & s \end{pmatrix} = s \cdot \mathbf{I}$$
-
-Vergrösserung: $s > 1$, Verkleinerung: $0 < s < 1$
-\end{mainbox}
-
-\begin{mainbox}{Drehung (Rotation)}
-Drehung um Winkel $\varphi$ (gegen Uhrzeigersinn):
-$$\mathbf{R}_\varphi = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix}$$
-
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item $\det(\mathbf{R}_\varphi) = 1$
-    \item $\mathbf{R}_\varphi^{-1} = \mathbf{R}_{-\varphi} = \mathbf{R}_\varphi^T$
-    \item Längenerhaltend (orthogonal)
-\end{itemize}
-
-\textbf{Drehstreckung:} $r \cdot \mathbf{R}_\varphi$ (Drehung + Skalierung)
-\end{mainbox}
-
-\begin{mainbox}{Spiegelungen}
-\textbf{An $x$-Achse:}
-$$\mathbf{S}_x = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$$
-
-\textbf{An $y$-Achse:}
-$$\mathbf{S}_y = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$$
-
-\textbf{An Gerade durch Ursprung} (Winkel $\varphi$ zur $x$-Achse):
-$$\mathbf{S}_\varphi = \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
-
-\textbf{Eigenschaft:} $\det(\mathbf{S}) = -1$ (Orientierung wechselt)
-\end{mainbox}
-
-\begin{mainbox}{Scherung}
-\textbf{Horizontale Scherung:}
-$$\mathbf{H}_k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$$
-
-\textbf{Vertikale Scherung:}
-$$\mathbf{V}_k = \begin{pmatrix} 1 & 0 \\ k & 1 \end{pmatrix}$$
-
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item $\det = 1$ (flächenerhaltend)
-    \item Parallele Linien bleiben parallel
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Zusammensetzung von Abbildungen}
-Hintereinanderausführung von $A$ dann $B$:
-$$\mathbf{x} \xrightarrow{A} \mathbf{y} \xrightarrow{B} \mathbf{z}$$
-
-\textbf{Resultierende Matrix:}
-$$\mathbf{C} = \mathbf{B} \cdot \mathbf{A}$$
-
-\textbf{Achtung:} Reihenfolge! Erste Abbildung \textbf{rechts}.
-
-$$\mathbf{z} = \mathbf{B}(\mathbf{A}\mathbf{x}) = (\mathbf{BA})\mathbf{x} = \mathbf{Cx}$$
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Spiegelung an beliebiger Achse}
-Spiegelung an Achse mit Winkel $\varphi$:
-\begin{enumerate}
-    \item Drehe um $-\varphi$ (Achse $\rightarrow$ $x$-Achse)
-    \item Spiegle an $x$-Achse
-    \item Drehe um $+\varphi$ (zurück)
-\end{enumerate}
-
-$$\mathbf{S}_\varphi = \mathbf{R}_\varphi \cdot \mathbf{S}_x \cdot \mathbf{R}_{-\varphi}$$
-
-$$= \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} \cos\varphi & \sin\varphi \\ -\sin\varphi & \cos\varphi \end{pmatrix}$$
-
-$$= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
+\begin{subbox}{Wichtige Symbole}
+\renewcommand*{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{lX}
+$\R$ & Reelle Zahlen \\
+$\mathbf{0}$ & Nullvektor \\
+$|\mathbf{a}|$ & Betrag/Länge von $\mathbf{a}$ \\
+$\mathbf{a} \bullet \mathbf{b}$ & Skalarprodukt \\
+$\mathbf{a} \perp \mathbf{b}$ & $\mathbf{a}$ orthogonal zu $\mathbf{b}$ \\
+$\hat{\mathbf{a}}$ & Einheitsvektor in Richtung $\mathbf{a}$ \\
+$(m \times n)$ & Matrix mit $m$ Zeilen, $n$ Spalten \\
+$a_{i,j}$ & Element in Zeile $i$, Spalte $j$ \\
+$(\mathbf{A}|\mathbf{b})$ & Erweiterte Koeffizientenmatrix
+\end{tabularx}
 \end{subbox}
-
-\begin{mainbox}{Übersicht: 2D-Transformationsmatrizen}
-\small
-\begin{tabular}{ll}
-\textbf{Identität} & $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ \\[8pt]
-\textbf{Skalierung} & $\begin{pmatrix} s_x & 0 \\ 0 & s_y \end{pmatrix}$ \\[8pt]
-\textbf{Drehung} & $\begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix}$ \\[8pt]
-\textbf{Spieg. $x$} & $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$ \\[8pt]
-\textbf{Spieg. $y$} & $\begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$ \\[8pt]
-\textbf{Scherung} & $\begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$
-\end{tabular}
-\end{mainbox}
-
-% ============================================================================
-% SECTION 7: ORTHOGONALE ABBILDUNGEN, HOMOGENE KOORDINATEN
-% ============================================================================
-\section{Orthogonale Abb., Homogene Koord.}
-
-\begin{mainbox}{Orthogonale Abbildungen}
-\textbf{Definition:} Eine Abbildung $\mathbf{A}$ ist \textbf{orthogonal}, wenn sie \textbf{längen- und winkeltreu} ist.
-
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item Erhält Skalarprodukt: $\mathbf{x} \cdot \mathbf{y} = (\mathbf{Ax}) \cdot (\mathbf{Ay})$
-    \item Inverse = Transponierte: $\mathbf{A}^{-1} = \mathbf{A}^T$
-    \item $\det(\mathbf{A}) = \pm 1$
-    \item Spalten (und Zeilen) sind normiert: $|\mathbf{a}_i| = 1$
-    \item Spalten stehen paarweise senkrecht
-\end{itemize}
-
-\textbf{Beispiele:}
-\begin{itemize}
-    \item Drehung: $\det = +1$ (orientierungserhaltend)
-    \item Spiegelung: $\det = -1$ (orientierungsumkehrend)
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Homogene Koordinaten: Idee}
-\textbf{Problem:} Translation ist \textbf{nicht linear} ($\mathbf{0}$ wird verschoben).
-
-\textbf{Lösung:} Dimension erhöhen $\rightarrow$ \textbf{homogene Koordinaten}
-
-\textbf{2D $\rightarrow$ 3D:}
-$$\begin{pmatrix} x \\ y \end{pmatrix} \rightarrow \begin{pmatrix} x \\ y \\ 1 \end{pmatrix}$$
-
-\textbf{3D $\rightarrow$ 4D:}
-$$\begin{pmatrix} x \\ y \\ z \end{pmatrix} \rightarrow \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}$$
-
-$\Rightarrow$ Rotation \textbf{und} Translation als Matrixmultiplikation!
-\end{mainbox}
-
-\begin{mainbox}{2D-Rotation (homogen)}
-Rotation um Winkel $\varphi$ um den Ursprung:
-$$\mathbf{R}_\varphi = \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 \\ \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
-
-$$\mathbf{R}_\varphi \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} = \begin{pmatrix} x\cos\varphi - y\sin\varphi \\ x\sin\varphi + y\cos\varphi \\ 1 \end{pmatrix}$$
-\end{mainbox}
-
-\begin{mainbox}{2D-Translation (homogen)}
-Verschiebung um $(u, v)^T$:
-$$\mathbf{T}_{u,v} = \begin{pmatrix} 1 & 0 & u \\ 0 & 1 & v \\ 0 & 0 & 1 \end{pmatrix}$$
-
-$$\mathbf{T}_{u,v} \begin{pmatrix} x \\ y \\ 1 \end{pmatrix} = \begin{pmatrix} x + u \\ y + v \\ 1 \end{pmatrix}$$
-
-\textbf{Inverse:} $\mathbf{T}_{u,v}^{-1} = \mathbf{T}_{-u,-v}$
-\end{mainbox}
-
-\begin{mainbox}{Verkettung: Nicht kommutativ!}
-\textbf{Zuerst $\mathbf{A}$, dann $\mathbf{B}$:} $\mathbf{C} = \mathbf{B} \cdot \mathbf{A}$
-
-\textbf{Rotation, dann Translation:}
-$$\mathbf{T} \cdot \mathbf{R} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u \\ \sin\varphi & \cos\varphi & v \\ 0 & 0 & 1 \end{pmatrix}$$
-
-\textbf{Translation, dann Rotation:}
-$$\mathbf{R} \cdot \mathbf{T} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u\cos\varphi - v\sin\varphi \\ \sin\varphi & \cos\varphi & u\sin\varphi + v\cos\varphi \\ 0 & 0 & 1 \end{pmatrix}$$
-
-$\mathbf{T} \cdot \mathbf{R} \neq \mathbf{R} \cdot \mathbf{T}$ im Allgemeinen!
-\end{mainbox}
-
-\begin{subbox}{Drehung um beliebiges Zentrum}
-Drehung um Punkt $\mathbf{c} = (c_x, c_y)^T$:
-\begin{enumerate}
-    \item Translation: $\mathbf{c} \rightarrow \mathbf{0}$
-    \item Rotation um Ursprung
-    \item Translation: $\mathbf{0} \rightarrow \mathbf{c}$
-\end{enumerate}
-
-$$\mathbf{M} = \mathbf{T}_{c_x, c_y} \cdot \mathbf{R}_\varphi \cdot \mathbf{T}_{-c_x, -c_y}$$
-\end{subbox}
-
-\begin{mainbox}{3D-Rotationen (homogen)}
-\textbf{Um $x$-Achse:}
-$$\mathbf{R}_x(\varphi) = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & \cos\varphi & -\sin\varphi & 0 \\ 0 & \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
-
-\textbf{Um $y$-Achse:}
-$$\mathbf{R}_y(\varphi) = \begin{pmatrix} \cos\varphi & 0 & \sin\varphi & 0 \\ 0 & 1 & 0 & 0 \\ -\sin\varphi & 0 & \cos\varphi & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
-
-\textbf{Um $z$-Achse:}
-$$\mathbf{R}_z(\varphi) = \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 & 0 \\ \sin\varphi & \cos\varphi & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
-\end{mainbox}
-
-\begin{mainbox}{3D-Translation (homogen)}
-Verschiebung um $(u, v, w)^T$:
-$$\mathbf{T}_{u,v,w} = \begin{pmatrix} 1 & 0 & 0 & u \\ 0 & 1 & 0 & v \\ 0 & 0 & 1 & w \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
-
-$$\mathbf{T} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x + u \\ y + v \\ z + w \\ 1 \end{pmatrix}$$
-\end{mainbox}
-
-\begin{mainbox}{Struktur homogener Matrizen}
-\textbf{Allgemeine Form (2D):}
-$$\begin{pmatrix} \mathbf{A}_{2\times 2} & \mathbf{t} \\ \mathbf{0}^T & 1 \end{pmatrix} = \begin{pmatrix} a & b & t_x \\ c & d & t_y \\ 0 & 0 & 1 \end{pmatrix}$$
-
-\textbf{Allgemeine Form (3D):}
-$$\begin{pmatrix} \mathbf{A}_{3\times 3} & \mathbf{t} \\ \mathbf{0}^T & 1 \end{pmatrix}$$
-
-$\mathbf{A}$: Lineare Transformation (Rotation, Skalierung, ...)\\
-$\mathbf{t}$: Translationsvektor
-\end{mainbox}
-
-\begin{mainbox}{Zusammenfassung: Homogene Koord.}
-\textbf{Vorteile:}
-\begin{itemize}
-    \item Einheitliche Behandlung von linearen Abb. und Translation
-    \item Verkettung durch Matrixmultiplikation
-    \item Wichtig für Computergrafik
-\end{itemize}
-
-\textbf{Merke:}
-\begin{itemize}
-    \item Letzte Zeile: $(0 \; \cdots \; 0 \; 1)$
-    \item Letzte Koordinate des Vektors: $1$
-    \item Erste Abbildung steht \textbf{rechts}
-\end{itemize}
-\end{mainbox}
-
-% ============================================================================
-% SECTION 8: LINEARE REGRESSION
-% ============================================================================
-\section{Lineare Regression}
-
-\begin{mainbox}{Problem: Überbestimmtes LGS}
-Gegeben: $m$ Datenpunkte $(t_1, b_1), \ldots, (t_m, b_m)$
-
-Gesucht: Gerade $b = C + Dt$ durch alle Punkte
-
-\textbf{Gleichungssystem:}
-$$\underbrace{\begin{pmatrix} 1 & t_1 \\ 1 & t_2 \\ \vdots & \vdots \\ 1 & t_m \end{pmatrix}}_{\mathbf{A}} \underbrace{\begin{pmatrix} C \\ D \end{pmatrix}}_{\mathbf{x}} = \underbrace{\begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{pmatrix}}_{\mathbf{b}}$$
-
-\textbf{Problem:} $m > 2$ $\Rightarrow$ i.A. \textbf{keine exakte Lösung}!
-
-$\mathbf{b}$ liegt nicht im Spaltenraum $C(\mathbf{A})$.
-\end{mainbox}
-
-\begin{mainbox}{Methode der kleinsten Quadrate}
-\textbf{Ziel:} Minimiere den Fehler $\mathbf{e} = \mathbf{b} - \mathbf{A}\mathbf{x}$
-
-\textbf{Lösung:} Finde $\hat{\mathbf{x}}$, das $\|\mathbf{e}\|^2$ minimiert.
-
-\textbf{Geometrisch:} Projiziere $\mathbf{b}$ orthogonal auf $C(\mathbf{A})$
-
-$$\mathbf{p} = \mathbf{A}\hat{\mathbf{x}}$$
-
-Der Fehlervektor $\mathbf{e} = \mathbf{b} - \mathbf{p}$ steht \textbf{senkrecht} auf $C(\mathbf{A})$.
-\end{mainbox}
-
-\begin{mainbox}{Normalengleichung}
-$\mathbf{e} \perp C(\mathbf{A})$ bedeutet: $\mathbf{A}^T\mathbf{e} = \mathbf{0}$
-
-$$\mathbf{A}^T(\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}) = \mathbf{0}$$
-
-\textbf{Normalengleichung:}
-$$\boxed{\mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}}$$
-
-\textbf{Lösung} (falls $\mathbf{A}$ linear unabh. Spalten hat):
-$$\boxed{\hat{\mathbf{x}} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}}$$
-\end{mainbox}
-
-\begin{mainbox}{Projektion auf Vektor}
-Projektion von $\mathbf{b}$ auf Vektor $\mathbf{a}$:
-
-$$\mathbf{p} = \frac{\mathbf{a}^T\mathbf{b}}{\mathbf{a}^T\mathbf{a}}\mathbf{a} = \frac{\mathbf{a}\mathbf{a}^T}{\mathbf{a}^T\mathbf{a}}\mathbf{b}$$
-
-\textbf{Projektionsmatrix:}
-$$\mathbf{P} = \frac{\mathbf{a}\mathbf{a}^T}{\mathbf{a}^T\mathbf{a}}$$
-
-\textbf{Skalarfaktor:} $\hat{x} = \frac{\mathbf{a}^T\mathbf{b}}{\mathbf{a}^T\mathbf{a}} = \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}|^2}$
-\end{mainbox}
-
-\begin{mainbox}{Projektion auf Spaltenraum}
-Projektion von $\mathbf{b}$ auf $C(\mathbf{A})$:
-
-$$\mathbf{p} = \mathbf{A}\hat{\mathbf{x}} = \mathbf{A}(\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}$$
-
-\textbf{Projektionsmatrix:}
-$$\boxed{\mathbf{P} = \mathbf{A}(\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T}$$
-
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item $\mathbf{P}^2 = \mathbf{P}$ (idempotent)
-    \item $\mathbf{P}^T = \mathbf{P}$ (symmetrisch)
-    \item $\mathbf{Pb} = \mathbf{b}$ falls $\mathbf{b} \in C(\mathbf{A})$
-    \item $\mathbf{Pb} = \mathbf{0}$ falls $\mathbf{b} \perp C(\mathbf{A})$
-\end{itemize}
-\end{mainbox}
-
-\begin{mainbox}{Wann existiert die Lösung?}
-\textbf{Theorem:} $\mathbf{A}^T\mathbf{A}$ ist invertierbar $\Leftrightarrow$ $\mathbf{A}$ hat linear unabhängige Spalten.
-
-\textbf{Beweis-Idee:} $N(\mathbf{A}^T\mathbf{A}) = N(\mathbf{A})$
-
-Falls Spalten von $\mathbf{A}$ linear unabhängig:\\
-$N(\mathbf{A}) = \{\mathbf{0}\}$ $\Rightarrow$ $N(\mathbf{A}^T\mathbf{A}) = \{\mathbf{0}\}$\\
-$\Rightarrow$ $\mathbf{A}^T\mathbf{A}$ invertierbar
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Regressionsgerade}
-Datenpunkte: $(0, 6)$, $(1, 0)$, $(2, 0)$
-
-$\mathbf{A} = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}$, $\mathbf{b} = \begin{pmatrix} 6 \\ 0 \\ 0 \end{pmatrix}$
-
-$\mathbf{A}^T\mathbf{A} = \begin{pmatrix} 3 & 3 \\ 3 & 5 \end{pmatrix}$, $\mathbf{A}^T\mathbf{b} = \begin{pmatrix} 6 \\ 0 \end{pmatrix}$
-
-$\hat{\mathbf{x}} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b} = \begin{pmatrix} 5 \\ -3 \end{pmatrix}$
-
-\textbf{Regressionsgerade:} $b = 5 - 3t$
-\end{subbox}
-
-\begin{mainbox}{Regressionsmodell}
-\textbf{Modell:} $b = C + Dt + \varepsilon$ \quad ($\varepsilon$ = Fehler/Rauschen)
-
-\textbf{Datenmatrix und Zielvektor:}
-$$\mathbf{A} = \begin{pmatrix} 1 & t_1 \\ 1 & t_2 \\ \vdots & \vdots \\ 1 & t_m \end{pmatrix}, \quad \mathbf{b} = \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{pmatrix}$$
-
-\textbf{Beste Schätzung:}
-$$\begin{pmatrix} \hat{C} \\ \hat{D} \end{pmatrix} = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\mathbf{b}$$
-
-\textbf{Vorhersage:} $\hat{b} = \hat{C} + \hat{D}t$
-
-\textbf{Residuen:} $\mathbf{e} = \mathbf{b} - \mathbf{A}\hat{\mathbf{x}}$
-
-\textbf{Summe der Quadrate:} $SQR = \|\mathbf{e}\|^2$
-\end{mainbox}
-
-\begin{mainbox}{Zusammenfassung: Lineare Regression}
-\textbf{Gegeben:} Überbestimmtes System $\mathbf{Ax} = \mathbf{b}$
-
-\textbf{Gesucht:} Beste Näherungslösung $\hat{\mathbf{x}}$
-
-\textbf{Vorgehen:}
-\begin{enumerate}
-    \item Berechne $\mathbf{A}^T\mathbf{A}$ und $\mathbf{A}^T\mathbf{b}$
-    \item Löse $\mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}$
-    \item Projektion: $\mathbf{p} = \mathbf{A}\hat{\mathbf{x}}$
-    \item Fehler: $\mathbf{e} = \mathbf{b} - \mathbf{p}$
-\end{enumerate}
-
-\textbf{Interpretation:}\\
-$\hat{\mathbf{x}}$ minimiert $\|\mathbf{b} - \mathbf{Ax}\|^2$ (kleinste Quadrate)
-\end{mainbox}
 
 \end{document}

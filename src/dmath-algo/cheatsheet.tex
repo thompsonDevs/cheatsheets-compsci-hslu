@@ -1053,4 +1053,94 @@ $$\sum_{i=0}^{n-1} q^i = \frac{q^n - 1}{q - 1} \quad (q \neq 1)$$
 $$2^n > n^2 \quad \text{f¨ur } n \geq 5$$
 \end{mainbox}
 
+% ============================================================================
+% SECTION 12: GRUNDLEGENDE ZÄHLTECHNIKEN (FUNDAMENTAL COUNTING TECHNIQUES)
+% ============================================================================
+\section{Grundlegende Z¨ahltechniken}
+
+\begin{mainbox}{Kardinalit¨at}
+\textbf{Z¨ahlen:} Berechne bei einer Menge $S$ die Anzahl $|S|$ ihrer Elemente.
+
+Die Anzahl $|S|$ wird auch \textbf{Kardinalit¨at} der Menge $S$ genannt.
+\end{mainbox}
+
+\begin{mainbox}{Z¨ahlprinzip 1: Die Summenregel}
+Zwei Mengen $A$ und $B$ sind \textbf{disjunkt}, wenn ihr Durchschnitt leer ist: $A \cap B = \emptyset$.
+
+Wenn zwei endliche Mengen $A$ und $B$ disjunkt sind, dann gilt:
+$$|A \cup B| = |A| + |B|$$
+
+\textbf{Partition:} F¨ur paarweise disjunkte Mengen $S_1, S_2, \ldots, S_n$ mit
+$$S = S_1 \cup S_2 \cup \ldots \cup S_n$$
+gilt:
+$$|S| = |S_1| + |S_2| + \ldots + |S_n|$$
+\end{mainbox}
+
+\begin{mainbox}{Z¨ahlprinzip 2: Die Produktregel}
+Das \textbf{kartesische Produkt} $A \times B$ ist die Menge aller Listen $[x, y]$, wobei $x \in A$ und $y \in B$.
+
+F¨ur zwei endliche Mengen $A$ und $B$ gilt:
+$$|A \times B| = |A| \cdot |B|$$
+
+\textbf{Allgemein:} F¨ur $n$ Mengen $S_1, S_2, \ldots, S_n$ gilt:
+$$|S_1 \times S_2 \times \ldots \times S_n| = |S_1| \cdot |S_2| \cdot \ldots \cdot |S_n|$$
+
+\textbf{Spezialfall:} F¨ur $S_1 = S_2 = \ldots = S_n = S$ gilt:
+$$|S^n| = |S|^n$$
+\end{mainbox}
+
+\begin{mainbox}{Z¨ahlprinzip 3: Die Zuordnungsregel}
+Eine Abbildung $f: A \to B$ heisst:
+\begin{itemize}
+    \item \textbf{injektiv}: Jedes Element in $B$ h¨ochstens einmal als Output
+    \item \textbf{surjektiv}: Jedes Element in $B$ mindestens einmal als Output
+    \item \textbf{bijektiv}: Jedes Element in $B$ genau einmal als Output
+\end{itemize}
+
+Wenn es von $A$ nach $B$ eine surjektive Abbildung $f$ gibt, so dass jedes Element von $B$ genau $k$-mal als Output vorkommt, dann gilt:
+$$|B| = \frac{|A|}{k}$$
+
+\textbf{Spezialfall bijektiv} ($k=1$): $|B| = |A|$
+\end{mainbox}
+
+\begin{mainbox}{Sechs fundamentale Z¨ahlprobleme}
+Aus $n$ \textbf{paarweise verschiedenen} Objekten:
+
+\textbf{1. Permutationen (alle $n$ Objekte, geordnet):}
+$$n! = n \cdot (n-1) \cdot (n-2) \cdot \ldots \cdot 3 \cdot 2 \cdot 1$$
+
+\textbf{2. Permutationen mit Wiederholungen:}
+$$\frac{n!}{s_1! \cdot s_2! \cdot \ldots \cdot s_k!}$$
+wobei $s_1, s_2, \ldots, s_k$ die Wiederholungen angeben.
+
+\textbf{3. Variationen ohne Wdh. ($k$ von $n$, geordnet):}
+$$\frac{n!}{(n-k)!} = n \cdot (n-1) \cdot \ldots \cdot (n-k+1)$$
+
+\textbf{4. Variationen mit Wdh. ($k$ von $n$, geordnet):}
+$$n^k$$
+
+\textbf{5. Kombinationen ohne Wdh. ($k$ von $n$, ungeordnet):}
+$$\binom{n}{k} = \frac{n!}{k! \cdot (n-k)!}$$
+
+\textbf{6. Kombinationen mit Wdh. ($k$ von $n$, ungeordnet):}
+$$\binom{n+k-1}{k} = \frac{(n+k-1)!}{k! \cdot (n-1)!}$$
+\end{mainbox}
+
+\begin{subbox}{Entscheidungsbaum f¨ur Z¨ahlprobleme}
+\textbf{Fragen zur Problemklassifikation:}
+\begin{enumerate}
+    \item Alle $n$ Objekte oder nur $k$ von $n$?
+    \item Geordnet (Liste) oder ungeordnet (Menge)?
+    \item Mit oder ohne Wiederholungen?
+    \item Objekte paarweise verschieden?
+\end{enumerate}
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item Datenworte der L¨ange $n$: $2^n$ (Variation mit Wdh.)
+    \item Potenzmenge von $A$: $|P(A)| = 2^{|A|}$
+    \item Handshakes in Netzwerk: $\binom{n}{2}$ (Kombination ohne Wdh.)
+\end{itemize}
+\end{subbox}
+
 \end{document}

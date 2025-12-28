@@ -413,4 +413,176 @@ $$x \mapsto y \quad \text{oder} \quad f(x) = y$$
 Ein \textbf{Algorithmus} ist eine pr¨azise, schrittweise Angabe, die fur jeden Input ¨ $x \in D$ beschreibt, wie der zugeh¨orige Output $y = f(x)$ bestimmt wird.
 \end{subbox}
 
+% ============================================================================
+% SECTION 6: AUSSAGENLOGIK (PROPOSITIONAL LOGIC)
+% ============================================================================
+\section{Aussagenlogik}
+
+\begin{mainbox}{Definition: Aussage}
+Eine \textbf{Aussage} ist ein Satz, der entweder wahr oder falsch ist.
+
+\textbf{Codierung:}
+\begin{itemize}
+    \item 1 fur wahr ¨
+    \item 0 fur falsch ¨
+\end{itemize}
+
+\textbf{Atomar:} Eine Aussage ist atomar, wenn sie nicht in kurzere Aussagen aufgeteilt werden kann. ¨
+\end{mainbox}
+
+\begin{mainbox}{Aussagenlogische Operatoren}
+\textbf{Negation} $\neg A$ (nicht):
+\begin{center}
+\begin{tabular}{c|c}
+$A$ & $\neg A$ \\
+\hline
+1 & 0 \\
+0 & 1
+\end{tabular}
+\end{center}
+
+\textbf{Konjunktion} $B \land C$ (und):
+\begin{center}
+\begin{tabular}{cc|c}
+$B$ & $C$ & $B \land C$ \\
+\hline
+1 & 1 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{tabular}
+\end{center}
+
+\textbf{Disjunktion} $A \lor B$ (oder):
+\begin{center}
+\begin{tabular}{cc|c}
+$A$ & $B$ & $A \lor B$ \\
+\hline
+1 & 1 & 1 \\
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+0 & 0 & 0
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\begin{mainbox}{Weitere Operatoren}
+\textbf{Kontravalenz} $C \oplus D$ (entweder oder):
+\begin{center}
+\begin{tabular}{cc|c}
+$C$ & $D$ & $C \oplus D$ \\
+\hline
+1 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+0 & 0 & 0
+\end{tabular}
+\end{center}
+
+\textbf{Implikation} $D \Rightarrow A$ (wenn dann):
+\begin{center}
+\begin{tabular}{cc|c}
+$D$ & $A$ & $D \Rightarrow A$ \\
+\hline
+1 & 1 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{tabular}
+\end{center}
+Linke Aussage: \textbf{Pr¨amisse} (Annahme)\\
+Rechte Aussage: \textbf{Konklusion} (Folgerung)
+
+\textbf{Aquivalenz} ¨ $D \Leftrightarrow A$ (genau dann, wenn):
+\begin{center}
+\begin{tabular}{cc|c}
+$D$ & $A$ & $D \Leftrightarrow A$ \\
+\hline
+1 & 1 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\begin{mainbox}{Aussagenlogischer Term}
+Ein \textbf{aussagenlogischer Term} ist rekursiv definiert:
+\begin{itemize}
+    \item Eine atomare Aussage ist ein Term
+    \item Wenn $A$ ein Term ist, dann ist $\neg A$ ein Term
+    \item Wenn $A$ und $B$ Terme sind, dann sind $A \land B$, $A \lor B$, $A \oplus B$, $A \Rightarrow B$ und $A \Leftrightarrow B$ Terme
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Begriffe}
+\textbf{Signatur:} Menge aller atomaren Aussagen in einem Term
+
+\textbf{Interpretation:} Belegung aller atomaren Aussagen mit Wahrheitswerten
+
+Ein aussagenlogischer Term heisst:
+\begin{itemize}
+    \item \textbf{erfullbar}: wahr f ¨ ur mind. eine Interpretation ¨
+    \item \textbf{allgemeingultig} ¨ (Tautologie $T$): wahr fur alle Interpretationen ¨
+    \item \textbf{unerfullbar} ¨ (Kontradiktion $F$): wahr fur keine Interpretation ¨
+\end{itemize}
+
+\textbf{Aquivalenz} ¨ $T_1 \equiv T_2$: beide Terme haben fur alle Interpretationen denselben Wahrheitswert ¨
+\end{mainbox}
+
+\begin{subbox}{SAT Problem}
+Das \textbf{Erfullbarkeitsproblem} ¨ (SAT) ist NP-vollst¨andig.
+
+Bei $n$ atomaren Aussagen: $2^n$ Zeilen in der Wahrheitstabelle
+
+SAT-Solver: Praktische L¨osungen fur viele Anwendungen ¨
+\end{subbox}
+
+\begin{mainbox}{Umformung von Operatoren}
+\textbf{Implikation:}
+$$A \Rightarrow B \equiv \neg A \lor B$$
+
+\textbf{Aquivalenz:} ¨
+$$A \Leftrightarrow B \equiv (A \Rightarrow B) \land (B \Rightarrow A)$$
+\end{mainbox}
+
+\begin{mainbox}{Rechengesetze: Negation}
+\textbf{Doppelnegation:}
+$$\neg(\neg A) \equiv A$$
+\end{mainbox}
+
+\begin{mainbox}{Rechengesetze: Disjunktion \& Konjunktion}
+\textbf{Idempotenz:}
+$$A \lor A \equiv A \quad \text{und} \quad A \land A \equiv A$$
+
+\textbf{Dominanz:}
+$$A \lor T \equiv T \quad \text{und} \quad A \land F \equiv F$$
+
+\textbf{Identit¨at:}
+$$A \lor F \equiv A \quad \text{und} \quad A \land T \equiv A$$
+
+\textbf{Invers:}
+$$A \lor \neg A \equiv T \quad \text{und} \quad A \land \neg A \equiv F$$
+
+\textbf{Kommutativit¨at:}
+$$A \lor B \equiv B \lor A \quad \text{und} \quad A \land B \equiv B \land A$$
+
+\textbf{Absorption:}
+$$A \lor (A \land B) \equiv A \quad \text{und} \quad A \land (A \lor B) \equiv A$$
+\end{mainbox}
+
+\begin{mainbox}{Weitere Rechengesetze}
+\textbf{Assoziativit¨at:}
+$$(A \lor B) \lor C \equiv A \lor (B \lor C)$$
+$$(A \land B) \land C \equiv A \land (B \land C)$$
+
+\textbf{Distributivit¨at:}
+$$A \lor (B \land C) \equiv (A \lor B) \land (A \lor C)$$
+$$A \land (B \lor C) \equiv (A \land B) \lor (A \land C)$$
+
+\textbf{De Morgan'sche Gesetze:}
+$$\neg(A \lor B) \equiv \neg A \land \neg B$$
+$$\neg(A \land B) \equiv \neg A \lor \neg B$$
+\end{mainbox}
+
 \end{document}

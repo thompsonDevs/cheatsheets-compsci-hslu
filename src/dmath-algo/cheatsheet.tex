@@ -1,0 +1,416 @@
+% ============================================================================
+% CHEATSHEET TEMPLATE
+% ============================================================================
+% Based on the ANA-G cheatsheet style
+%
+% Features:
+% - 4-column landscape layout on A4
+% - Colored boxes for main concepts and sub-concepts
+% - Compact formatting optimized for information density
+% - Mathematical typesetting support
+%
+% Usage:
+% 1. Replace metadata (title, author, date)
+% 2. Adjust number of columns if needed (see \Ncolumn)
+% 3. Add your content using mainbox and subbox environments
+% 4. Compile with pdflatex (run twice for proper layout)
+% ============================================================================
+
+\documentclass[a4paper, fontsize=7pt]{scrartcl}
+
+% ============================================================================
+% ENCODING & LANGUAGE
+% ============================================================================
+\usepackage[utf8]{inputenc}
+% \usepackage[german]{babel}    % Uncomment for German hyphenation
+% \usepackage[english]{babel}   % Uncomment for English hyphenation
+
+% ============================================================================
+% PAGE LAYOUT
+% ============================================================================
+% 4-column landscape layout with minimal margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+
+% Number of columns (adjust as needed: 3-4 recommended for A4)
+\Ncolumn{4}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0cm}
+
+% ============================================================================
+% COLORS & BOXES
+% ============================================================================
+\usepackage[most]{tcolorbox}
+
+% Base style for all boxes
+\tcbset{
+  base/.style={
+    boxrule=0.3mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!10!white,
+    coltitle=black,
+    toptitle=0.75mm,
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+% Main concept box (green accent)
+% Use for: definitions, theorems, important formulas
+\definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}  % Nice green
+\newtcolorbox{mainbox}[1]{
+  colframe=maincolor,
+  base={#1}
+}
+
+% Sub concept box (gray accent)
+% Use for: examples, remarks, minor concepts
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Alternative colors (uncomment to use)
+% \definecolor{maincolor}{rgb}{0.2, 0.4, 0.8}   % Blue
+% \definecolor{maincolor}{rgb}{0.8, 0.2, 0.2}   % Red
+% \definecolor{maincolor}{rgb}{0.5, 0.2, 0.6}   % Purple
+
+% ============================================================================
+% MATHEMATICS
+% ============================================================================
+\usepackage{amsmath, amsthm, mathtools, amssymb}
+\usepackage{amsfonts, amstext}
+\allowdisplaybreaks  % Allow page breaks in equations
+
+% Common math shortcuts (customize as needed)
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+
+% Number sets
+\def\N{\mathbb{N}}  % Natural numbers
+\def\Z{\mathbb{Z}}  % Integers
+\def\Q{\mathbb{Q}}  % Rationals
+\def\R{\mathbb{R}}  % Reals
+\def\C{\mathbb{C}}  % Complex
+
+% Calculus
+\def\dx{\,dx}
+\def\dt{\,dt}
+\def\dy{\,dy}
+\newcommand{\ddx}[1]{\frac{d#1}{dx}}
+\newcommand{\ddn}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdn}[2]{\frac{\partial #1}{\partial #2}}
+
+% Big O notation
+\def\oof{\mathcal{O}}
+
+% ============================================================================
+% TABLES
+% ============================================================================
+\usepackage{tabularx, multirow, booktabs}
+\renewcommand*{\arraystretch}{1.5}  % More spacing in tables
+
+% ============================================================================
+% LISTS
+% ============================================================================
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt, topsep=2pt}
+\setenumerate{itemsep=0.75pt, topsep=2pt}
+
+% ============================================================================
+% GRAPHICS & TIKZ
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  fit,
+  matrix,
+  decorations,
+  angles,
+  quotes,
+  babel,
+  3d,
+  arrows.meta,
+  shadings,
+  shapes.geometric
+}
+
+\tikzset{
+  >=stealth,
+  % Add custom TikZ styles here
+}
+
+% ============================================================================
+% HYPERLINKS
+% ============================================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}   % For \centernot command
+\usepackage{marvosym}    % Additional symbols
+\usepackage{wasysym}     % Additional symbols
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{DMATH-ALGO Cheatsheet}
+\author{Discrete Mathematics \& Algorithms}
+\date{Version 2024}
+
+% Table of contents depth
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% SECTION 1: BOOLEAN
+% ============================================================================
+\section{Boolean}
+
+\begin{mainbox}{Definition: Boolean}
+Ein boolescher Wert ist entweder \texttt{True} oder \texttt{False}.
+
+\textbf{Darstellung:}
+\begin{itemize}
+    \item 1 fur \texttt{True}, 0 f ¨ ur \texttt{False} ¨
+    \item Bit: grundlegendste Einheit von Daten
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Boolesche Operatoren}
+\textbf{Einstelliger Operator not:}
+\begin{center}
+\begin{tabular}{c|c}
+$x$ & $\neg x$ \\
+\hline
+True & False \\
+False & True
+\end{tabular}
+\end{center}
+
+\textbf{Zweistelliger Operator and:}
+\begin{center}
+\begin{tabular}{cc|c}
+$x$ & $y$ & $x \land y$ \\
+\hline
+True & True & True \\
+True & False & False \\
+False & True & False \\
+False & False & False
+\end{tabular}
+\end{center}
+
+\textbf{Zweistelliger Operator or:}
+\begin{center}
+\begin{tabular}{cc|c}
+$x$ & $y$ & $x \lor y$ \\
+\hline
+True & True & True \\
+True & False & True \\
+False & True & True \\
+False & False & False
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\begin{subbox}{Priorit¨at \& Assoziativit¨at}
+\textbf{Priorit¨at:} not $>$ and $>$ or
+
+\textbf{Assoziativit¨at:} Links nach rechts
+\end{subbox}
+
+% ============================================================================
+% SECTION 2: INTEGER
+% ============================================================================
+\section{Integer}
+
+\begin{mainbox}{Definition: Integer}
+Ein integer Wert ist eine ganze Zahl:
+$$\Z = \{\ldots, -4, -3, -2, -1, 0, 1, 2, 3, 4, \ldots\}$$
+
+\textbf{Operatoren:}
+\begin{itemize}
+    \item Einstellig: $-$ (Negation)
+    \item Zweistellig: $+, -, \ast$ (Addition, Subtraktion, Multiplikation)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Division bei Integer}
+\textbf{Ganzzahldivision //}
+$$a \mathbin{//} b = \lfloor a/b \rfloor \quad \text{(abgerundet)}$$
+
+\textbf{Rest-Operator \%}
+$$a \bmod b = a - b \cdot (a \mathbin{//} b)$$
+\end{mainbox}
+
+\begin{mainbox}{Bin¨ardarstellung}
+Jede Zahl $n \in \N$ kann als Summe von Zweierpotenzen dargestellt werden:
+$$n = \sum_{i=0}^{k} b_i \cdot 2^i \quad \text{mit } b_i \in \{0,1\}$$
+
+\textbf{Algorithmus:}
+\begin{align*}
+n &= q_0 \cdot 2 + r_0 \quad \text{mit } r_0 \in \{0,1\} \\
+q_0 &= q_1 \cdot 2 + r_1 \quad \text{mit } r_1 \in \{0,1\} \\
+&\vdots \\
+q_{k-1} &= 0 \cdot 2 + r_k \quad \text{mit } r_k \in \{0,1\}
+\end{align*}
+
+Bin¨ardarstellung: $(n)_2 = r_k r_{k-1} \ldots r_1 r_0$
+\end{mainbox}
+
+% ============================================================================
+% SECTION 3: FLOAT
+% ============================================================================
+\section{Float}
+
+\begin{mainbox}{Definition: Float}
+Ein float Wert ist eine Kommazahl mit endlich vielen Nachkommastellen.
+
+\textbf{Zahlenmengen:}
+\begin{itemize}
+    \item $\Q$: rationale Zahlen (als Bruche darstellbar) ¨
+    \item $\R$: reelle Zahlen
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Bin¨ardarstellung von Kommazahlen}
+Fur Nachkommastellen: ¨
+$$x = \sum_{i=1}^{k} b_{-i} \cdot 2^{-i} \quad \text{mit } b_{-i} \in \{0,1\}$$
+
+\textbf{Algorithmus:}
+\begin{align*}
+x \cdot 2 &= b_1 + r_1 \quad \text{mit } b_1 \in \{0,1\}, r_1 < 1 \\
+r_1 \cdot 2 &= b_2 + r_2 \quad \text{mit } b_2 \in \{0,1\}, r_2 < 1 \\
+&\vdots
+\end{align*}
+
+Bin¨ardarstellung: $(x)_2 = 0.b_1 b_2 b_3 \ldots$
+
+Bei periodischer Wiederholung: $(x)_2 = 0.b_1 b_2 \overline{b_3 b_4}$
+\end{mainbox}
+
+\begin{subbox}{IEEE 754 Standard}
+\textbf{Fliesskommazahl:} Standard fur float-Darstellung ¨
+\begin{itemize}
+    \item 32-bit (float in Java)
+    \item 64-bit (double in Java)
+\end{itemize}
+
+\textbf{Wichtig:} Float-Arithmetik kann unerwartete Ergebnisse haben!
+\end{subbox}
+
+% ============================================================================
+% SECTION 4: SET, LIST, MATRIX
+% ============================================================================
+\section{Sammlungen}
+
+\begin{mainbox}{Definition: Menge (Set)}
+Eine Menge ist eine \textbf{ungeordnete} Sammlung von Objekten ohne Rucksicht auf Wiederholung. ¨
+
+\textbf{Notation:}
+\begin{itemize}
+    \item Aufz¨ahlung: $M = \{1, 2, 3, 4\}$
+    \item Beschreibung: $M = \{x : x \text{ ist eine Ziffer}\}$
+\end{itemize}
+
+\textbf{Elementbeziehung:}
+$$x \in M \quad \text{bzw.} \quad x \notin M$$
+\end{mainbox}
+
+\begin{mainbox}{Mengenoperationen}
+\textbf{Gleichheit:}
+$$A = B \iff \forall x: (x \in A \leftrightarrow x \in B)$$
+
+\textbf{Teilmenge:}
+$$A \subset B \iff \forall x: (x \in A \rightarrow x \in B)$$
+
+\textbf{Durchschnitt:}
+$$A \cap B = \{x : x \in A \land x \in B\}$$
+
+\textbf{Vereinigung:}
+$$A \cup B = \{x : x \in A \lor x \in B\}$$
+
+\textbf{Differenz:}
+$$A \setminus B = \{x : x \in A \land x \notin B\}$$
+
+\textbf{Komplement:}
+$$\overline{A} = \{x : x \notin A\}$$
+\end{mainbox}
+
+\begin{mainbox}{Definition: Liste (List)}
+Eine Liste ist eine \textbf{geordnete} Sammlung von Objekten mit Rucksicht auf Wiederholung. ¨
+
+\textbf{Notation:}
+$$a = (a_1, a_2, \ldots, a_n)$$
+
+\textbf{Indexierung:}
+$$a_i \quad \text{oder} \quad a[i] \quad \text{(i-te Komponente)}$$
+
+\textbf{Komponentenweise Operationen:}
+$$(a_1, a_2, \ldots, a_n) + (b_1, b_2, \ldots, b_n) = (a_1+b_1, a_2+b_2, \ldots, a_n+b_n)$$
+
+\textbf{Broadcasting:}
+$$c \cdot (a_1, a_2, \ldots, a_n) = (c \cdot a_1, c \cdot a_2, \ldots, c \cdot a_n)$$
+\end{mainbox}
+
+\begin{mainbox}{Definition: Matrix}
+Eine Matrix ist eine \textbf{zweidimensionale}, rechteckig geordnete Sammlung von Objekten.
+
+\textbf{Notation:}
+$$A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{pmatrix}$$
+
+\textbf{Dimension:} $m \times n$ (m Zeilen, n Spalten)
+
+\textbf{Indexierung:}
+$$a_{ij} \quad \text{oder} \quad A[i,j] \quad \text{oder} \quad A[i][j]$$
+
+\textbf{Komponentenweise Operationen:}
+Matrizen gleicher Dimension werden komponentenweise verrechnet.
+
+\textbf{Broadcasting:}
+$m \times n$ Matrix mit $1 \times 1$, $m \times 1$ oder $1 \times n$ Matrix.
+\end{mainbox}
+
+% ============================================================================
+% SECTION 5: FUNCTION
+% ============================================================================
+\section{Funktionen}
+
+\begin{mainbox}{Definition: Funktion}
+Seien $D$ (Definitionsbereich) und $W$ (Wertevorrat) Mengen. Eine Funktion $f$ ordnet jedem Element in $D$ \textbf{genau ein} Element in $W$ zu.
+
+\textbf{Notation:}
+$$f : D \longrightarrow W$$
+$$x \mapsto y \quad \text{oder} \quad f(x) = y$$
+\end{mainbox}
+
+\begin{subbox}{Algorithmus}
+Ein \textbf{Algorithmus} ist eine pr¨azise, schrittweise Angabe, die fur jeden Input ¨ $x \in D$ beschreibt, wie der zugeh¨orige Output $y = f(x)$ bestimmt wird.
+\end{subbox}
+
+\end{document}

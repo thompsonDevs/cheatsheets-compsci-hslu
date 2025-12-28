@@ -585,4 +585,72 @@ $$\neg(A \lor B) \equiv \neg A \land \neg B$$
 $$\neg(A \land B) \equiv \neg A \lor \neg B$$
 \end{mainbox}
 
+% ============================================================================
+% SECTION 7: PRÄDIKATENLOGIK (PREDICATE LOGIC)
+% ============================================================================
+\section{Pr¨adikatenlogik}
+
+\begin{mainbox}{Definition: Pr¨adikat}
+Ein \textbf{Pr¨adikat} ist ein Satz mit Variablen. Wenn diese Variablen mit Werten aus einem gegebenen Vorrat (dem \textbf{Universum}) ersetzt werden, entsteht eine Aussage.
+
+\textbf{Notation:} $P(x, y, \ldots)$
+
+Ein Pr¨adikat ist \textbf{nicht} wahrheitsdefinit, erst nach Einsetzen von Werten entsteht eine Aussage mit Wahrheitswert.
+\end{mainbox}
+
+\begin{mainbox}{Quantoren}
+Sei $P(x)$ ein Pr¨adikat mit $x$ aus Universum $U$.
+
+\textbf{Allquantor} $\forall$ (Generalisierung):
+$$\forall x \in U: P(x) \text{ ist } \begin{cases}
+\text{wahr} & \text{wenn } P(x) \text{ fur alle } x \text{ wahr ist} ¨ \\
+\text{falsch} & \text{sonst}
+\end{cases}$$
+
+\textbf{Existenzquantor} $\exists$ (Spezialisierung):
+$$\exists x \in U: P(x) \text{ ist } \begin{cases}
+\text{falsch} & \text{wenn } P(x) \text{ fur alle } x \text{ falsch ist} ¨ \\
+\text{wahr} & \text{sonst}
+\end{cases}$$
+\end{mainbox}
+
+\begin{mainbox}{Aquivalenz bei endlichem Universum} ¨
+Fur ¨ $U = \{x_1, x_2, \ldots, x_n\}$ gilt:
+
+$$\forall x \in U: P(x) \equiv P(x_1) \land P(x_2) \land \cdots \land P(x_n)$$
+
+$$\exists x \in U: P(x) \equiv P(x_1) \lor P(x_2) \lor \cdots \lor P(x_n)$$
+\end{mainbox}
+
+\begin{subbox}{Verschachtelte Quantoren}
+Bei verschachtelten Quantoren ist die \textbf{Reihenfolge} im Allgemeinen relevant!
+
+$$\forall x \in U: \left(\exists y \in U: P(x,y)\right) \not\equiv \exists y \in U: \left(\forall x \in U: P(x,y)\right)$$
+\end{subbox}
+
+\begin{mainbox}{Negation von Quantoren}
+\textbf{Negation des Allquantors:}
+$$\neg\left(\forall x \in U: P(x)\right) \equiv \exists x \in U: \neg P(x)$$
+
+\textbf{Negation des Existenzquantors:}
+$$\neg\left(\exists x \in U: P(x)\right) \equiv \forall x \in U: \neg P(x)$$
+
+\textbf{Regel:} Negation kehrt Quantoren um und negiert das Pr¨adikat.
+\end{mainbox}
+
+\begin{mainbox}{Negation verschachtelter Quantoren}
+Die Negation wird schrittweise nach innen geschoben:
+
+$$\neg\left(\forall x \in U: \left(\exists y \in V: P(x,y)\right)\right)$$
+$$\equiv \exists x \in U: \neg\left(\exists y \in V: P(x,y)\right)$$
+$$\equiv \exists x \in U: \left(\forall y \in V: \neg P(x,y)\right)$$
+
+\textbf{Allgemeine Regel:}
+\begin{itemize}
+    \item Jeder $\forall$ wird zu $\exists$
+    \item Jeder $\exists$ wird zu $\forall$
+    \item Das innerste Pr¨adikat wird negiert
+\end{itemize}
+\end{mainbox}
+
 \end{document}

@@ -1470,4 +1470,224 @@ Aus dem Hasse-Diagramm kann die Ordnungsrelation entlang der Verbindungen \"uber
 \end{center}
 \end{subbox}
 
+% ============================================================================
+% SECTION 15: GRAPHEN ALS DATENSTRUKTUR (GRAPHS AS DATA STRUCTURES)
+% ============================================================================
+\section{Graphen als Datenstruktur}
+
+\begin{mainbox}{Definition: Graph}
+Ein Graph $(V, E)$ besteht aus zwei Teilen:
+
+\textbf{Knotenmenge $V$:}
+Endliche Menge von Objekten, die als \textbf{Knoten} (engl. \textit{vertex}) bezeichnet werden.
+
+\textbf{Kantenmenge $E$:}
+Endliche Menge von Verbindungen zwischen zwei Objekten, die als \textbf{Kanten} (engl. \textit{edge}) bezeichnet werden.
+
+\textbf{Zwei Sorten von Kanten:}
+\begin{itemize}
+    \item \textbf{Gerichtete Kante} $[X, Y]$ von $X$ zu $Y$:\\
+          $X$ heisst \textbf{Startknoten}, $Y$ heisst \textbf{Endknoten}
+    \item \textbf{Ungerichtete Kante} $\{X, Y\}$ zwischen $X$ und $Y$:\\
+          $X$ und $Y$ heissen \textbf{Endknoten}
+\end{itemize}
+
+\textbf{Graphenarten:}
+\begin{itemize}
+    \item \textbf{Gerichtet:} Alle Kanten sind gerichtet
+    \item \textbf{Ungerichtet:} Alle Kanten sind ungerichtet
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Schleifen und parallele Kanten}
+\textbf{Schleife:}
+Eine Kante in $E$ heisst \textbf{Schleife}, wenn sie einen Knoten in $V$ mit sich selbst verbindet.
+
+\textbf{Parallele Kanten:}
+Zwei Kanten in $E$ heissen \textbf{parallel}, wenn sie die selben Startknoten und Endknoten in $V$ haben.
+
+\textbf{Einfacher Graph:}
+Der Graph heisst \textbf{einfach}, wenn er keine Schleifen und parallele Kanten hat.
+\end{mainbox}
+
+\begin{mainbox}{Adjazenz und Inzidenz}
+\textbf{Bei ungerichteten Kanten $e = \{X, Y\}$:}
+\begin{itemize}
+    \item Die Knoten $X$ und $Y$ sind \textbf{benachbart} (adjazent)
+    \item Der Knoten $X$ bzw. $Y$ ist mit der Kante $e$ \textbf{verbunden} (inzident)
+\end{itemize}
+
+\textbf{Bei gerichteten Kanten $e = [X, Y]$:}
+\begin{itemize}
+    \item Der Knoten $X$ ist ein \textbf{Vorg\"anger} von $Y$ (predecessor)
+    \item Der Knoten $Y$ ist ein \textbf{Nachfolger} von $X$ (successor)
+    \item Der Knoten $X$ ist mit der Kante $e$ \textbf{start-verbunden} (positiv inzident)
+    \item Der Knoten $Y$ ist mit der Kante $e$ \textbf{end-verbunden} (negativ inzident)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Nachbarschaft und Grad}
+Sei $X$ ein Knoten in einem Graphen.
+
+\textbf{Bei ungerichteten Graphen:}
+\begin{itemize}
+    \item $N(X)$: \textbf{Nachbarschaft} von $X$\\
+          Menge aller Knoten, die mit $X$ benachbart sind
+    \item $g(X)$: \textbf{Grad} von $X$\\
+          Anzahl Knoten in der Nachbarschaft von $X$
+\end{itemize}
+
+\textbf{Bei gerichteten Graphen:}
+\begin{itemize}
+    \item $N_{out}(X)$: \textbf{Ausgangsmenge} von $X$\\
+          Menge aller Nachfolger von $X$
+    \item $N_{in}(X)$: \textbf{Eingangsmenge} von $X$\\
+          Menge aller Vorg\"anger von $X$
+    \item $g_{out}(X)$: \textbf{Ausgangsgrad} von $X$\\
+          Anzahl Knoten in der Ausgangsmenge von $X$
+    \item $g_{in}(X)$: \textbf{Eingangsgrad} von $X$\\
+          Anzahl Knoten in der Eingangsmenge von $X$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Handshaking Lemma}
+Wenn ein Graph $(V, E)$ ungerichtet ist, dann stimmt die Summe aller Knotengrade mit der doppelten Anzahl der Kanten im Graphen \"uberein:
+
+$$\sum_{X \in V} g(X) = 2 \cdot |E|$$
+
+\textbf{Folgerung:}
+Ein ungerichteter Graph hat immer eine \textbf{gerade Anzahl} Knoten mit ungeradem Knotengrad.
+
+\textbf{Anwendung:}
+Durchschnittlicher Grad in einem Netzwerk mit $|V|$ Knoten und $|E|$ Kanten:
+$$\text{Durchschnitt} = \frac{2 \cdot |E|}{|V|}$$
+\end{mainbox}
+
+\begin{mainbox}{Speicherung: Adjazenzliste}
+In einer Liste $L$ speichern wir f\"ur jeden Knoten die Nachbarschaft bzw. die Ausgangsmenge.
+
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Effizient f\"ur d\"unne Graphen (wenige Kanten)
+    \item Schnelles Finden der Nachbarschaft: $\mathcal{O}(1)$
+\end{itemize}
+
+\textbf{Nachteile:}
+\begin{itemize}
+    \item Pr\"ufen ob $Y$ Nachbar von $X$ ist: $\mathcal{O}(|V|)$
+\end{itemize}
+
+\textbf{Beispiel:}
+\begin{center}
+\begin{tabular}{ll}
+A: & B \\
+B: & C, D \\
+C: & E, A \\
+D: & -- \\
+E: & C
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\begin{mainbox}{Speicherung: Adjazenzmatrix}
+In einer Matrix $A$ mit $|V|$ Zeilen und $|V|$ Spalten codieren wir mit einer 1 an der Stelle $a_{ij}$, ob der Knoten Nummer $j$ ein Nachbar bzw. ein Nachfolger vom Knoten Nummer $i$ ist. Wenn nicht: $a_{ij} = 0$.
+
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Pr\"ufen ob $Y$ Nachbar von $X$ ist: $\mathcal{O}(1)$
+    \item Effizient f\"ur dichte Graphen (viele Kanten)
+\end{itemize}
+
+\textbf{Nachteile:}
+\begin{itemize}
+    \item Speicherplatz: $\mathcal{O}(|V|^2)$
+    \item Finden der Nachbarschaft: $\mathcal{O}(|V|)$
+\end{itemize}
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Bei ungerichteten Graphen: Matrix ist symmetrisch
+    \item Grad eines Knotens: Zeilensumme bzw. Spaltensumme
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Speicherung: Inzidenzmatrix}
+In einer Matrix $I$ mit $|V|$ Zeilen und $|E|$ Spalten codieren wir in der Spalte $j$ die Endpunkte der Kante Nummer $j$:
+
+\textbf{Bei ungerichteten Graphen:}
+\begin{itemize}
+    \item Endpunkte mit 1 markieren
+\end{itemize}
+
+\textbf{Bei gerichteten Graphen:}
+\begin{itemize}
+    \item Startpunkte mit 1 markieren
+    \item Endpunkte mit $-1$ markieren
+\end{itemize}
+
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item Speicherplatz: $\mathcal{O}(|V| \cdot |E|)$
+    \item Grad eines Knotens: Zeilensumme (Absolutwerte)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Vergleich der Speicherarten}
+\textbf{Adjazenzliste:}
+\begin{itemize}
+    \item Am besten f\"ur: Nachbarschaft finden
+    \item Speicher: $\mathcal{O}(|V| + |E|)$
+\end{itemize}
+
+\textbf{Adjazenzmatrix:}
+\begin{itemize}
+    \item Am besten f\"ur: Pr\"ufen ob Kante existiert
+    \item Speicher: $\mathcal{O}(|V|^2)$
+\end{itemize}
+
+\textbf{Inzidenzmatrix:}
+\begin{itemize}
+    \item Am besten f\"ur: Kanten-zentrierte Operationen
+    \item Speicher: $\mathcal{O}(|V| \cdot |E|)$
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Graphen Isomorphie}
+Zwei Graphen $(V, E)$ und $(V', E')$ sind \textbf{isomorph} (haben gleiche Gestalt), wenn:
+
+\textbf{1. Bedingung:}
+Es gibt eine bijektive Abbildung $f: V \to V'$
+
+\textbf{2. Bedingung bei ungerichteten Graphen:}
+Es gibt zwischen zwei Knoten $X$ und $Y$ genau dann eine Kante in $E$, wenn es eine Kante zwischen $f(X)$ und $f(Y)$ in $E'$ gibt.
+
+\textbf{2. Bedingung bei gerichteten Graphen:}
+Es gibt vom Knoten $X$ zum Knoten $Y$ genau dann eine Kante in $E$, wenn es eine Kante vom Knoten $f(X)$ zum Knoten $f(Y)$ in $E'$ gibt.
+
+\textbf{Wichtig:}
+Die Geometrie des Graphen ist irrelevant. Nur die Nachbarschaftsbeziehung z\"ahlt.
+\end{mainbox}
+
+\begin{subbox}{Isomorphie-Problem}
+Zu pr\"ufen, ob zwei Graphen isomorph sind, ist ein \textbf{extrem schwieriges Problem}!
+
+\textbf{Schwierigkeit:}
+Das Finden der passenden bijektiven Abbildung (erste Bedingung).
+
+\textbf{Worst-Case:}
+F\"ur Graphen mit $n$ Knoten gibt es $n!$ m\"ogliche bijektive Abbildungen.
+
+\textbf{Beispiel:}
+F\"ur $n = 200$ Knoten und 0.001 Sekunden pro Test:\\
+Zeit $\approx 200! \times 0.001$ Sekunden $\approx 10^{372}$ Sekunden
+
+\textbf{Strategie:}
+Nutze notwendige Bedingungen wie:
+\begin{itemize}
+    \item Gleiche Anzahl Knoten
+    \item Gleiche Anzahl Kanten
+    \item Gleiche Gradverteilung
+\end{itemize}
+\end{subbox}
+
 \end{document}

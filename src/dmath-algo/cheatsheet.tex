@@ -1143,4 +1143,110 @@ $$\binom{n+k-1}{k} = \frac{(n+k-1)!}{k! \cdot (n-1)!}$$
 \end{itemize}
 \end{subbox}
 
+% ============================================================================
+% SECTION 13: KOMPLEXERE ZÄHLTECHNIKEN (MORE COMPLEX COUNTING TECHNIQUES)
+% ============================================================================
+\section{Komplexere Z¨ahltechniken}
+
+\begin{mainbox}{Prinzip von Inklusion und Exklusion}
+\textbf{Problem:} Summenregel gilt nur f¨ur paarweise disjunkte Mengen.
+
+\textbf{F¨ur zwei Mengen:}
+$$|S_1 \cup S_2| = |S_1| + |S_2| - |S_1 \cap S_2|$$
+
+\textbf{F¨ur drei Mengen:}
+$$|S_1 \cup S_2 \cup S_3| = |S_1| + |S_2| + |S_3|$$
+$$- |S_1 \cap S_2| - |S_1 \cap S_3| - |S_2 \cap S_3|$$
+$$+ |S_1 \cap S_2 \cap S_3|$$
+
+\textbf{Allgemein f¨ur $n$ Mengen:}
+
+Die Kardinalit¨at $|S| = |S_1 \cup S_2 \cup \ldots \cup S_n|$ wird berechnet:
+\begin{enumerate}
+    \item \textbf{Summe:} Z¨ahle $|S_1| + |S_2| + \ldots + |S_n|$
+    \item \textbf{Inklusion:} Addiere ¨Uberschneidungen einer \textbf{geraden} Anzahl von Mengen
+    \item \textbf{Exklusion:} Subtrahiere ¨Uberschneidungen einer \textbf{ungeraden} Anzahl von Mengen
+\end{enumerate}
+
+$$|S| = \text{Summe} + \text{Inklusion} - \text{Exklusion}$$
+
+\textbf{Prinzip:} Erst mit Inklusion z¨ahlen, dann mit Exklusion korrigieren.
+\end{mainbox}
+
+\begin{subbox}{Anwendungen Inklusion-Exklusion}
+\begin{itemize}
+    \item Teilbarkeit durch mehrere Primzahlen
+    \item Permutationen mit mindestens einem Fixpunkt
+    \item Verteilungen mit mindestens einer leeren Kategorie
+    \item Programme mit bestimmten Eigenschaften
+\end{itemize}
+
+\textbf{Spezialfall:} Die Summenregel ist Inklusion-Exklusion f¨ur paarweise disjunkte Mengen (Inklusion = Exklusion = 0).
+\end{subbox}
+
+\begin{mainbox}{Z¨ahlen mit Rekursion (Divide and Conquer)}
+Wenn Elemente einer Menge $S$ von ganzzahligem Parameter $n_0$ abh¨angen:
+
+\textbf{Strategie:}
+\begin{enumerate}
+    \item Bezeichne mit $s(n)$ die Kardinalit¨at von $S$ f¨ur beliebiges $n$
+    \item Bestimme Rekursionsbeziehung f¨ur $s(n)$
+    \item L¨ose Rekursionsbeziehung auf
+    \item Bestimme gesuchte L¨osung $|S| = s(n_0)$
+\end{enumerate}
+
+\textbf{H¨aufig:} Parameter $n$ beschreibt L¨ange oder Anzahl der Objekte.
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item Datenworte ohne aufeinanderfolgende Nullen
+    \item Passw¨orter mit gerader Anzahl bestimmter Zeichen
+    \item Datenworte ohne bestimmte Muster
+    \item Treppensteigen mit verschiedenen Schrittgr¨o{\ss}en
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Z¨ahlen mit erzeugenden Funktionen}
+\textbf{Idee:} Z¨ahlproblem in algebraisches Problem ¨uberf¨uhren.
+
+Wenn Elemente von $S$ mit Summen beschreibbar sind:
+
+\textbf{Strategie:}
+\begin{enumerate}
+    \item Beschreibe alle Elemente von $S$ mit Gleichung
+    \item Bestimme erzeugende Funktion f¨ur L¨osungen
+    \item Multipliziere Produkte aus und fasse gleiche Potenzen zusammen
+\end{enumerate}
+
+\textbf{Beispiel:} F¨ur Gleichung $x_1 + x_2 + x_3 = 11$ mit\\
+$x_1 \in \{2,3,4\}$, $x_2 \in \{3,4\}$, $x_3 \in \{4,5\}$:
+
+\textbf{Erzeugende Funktion:}
+$$(x^2 + x^3 + x^4) \cdot (x^3 + x^4) \cdot (x^4 + x^5)$$
+
+Ausmultiplizieren ergibt:
+$$x^9 + 3x^{10} + 4x^{11} + 3x^{12} + x^{13}$$
+
+Der Koeffizient 4 bei $x^{11}$ zeigt: Es gibt 4 L¨osungen.
+
+\textbf{Die Kardinalit¨at $|S|$ entspricht dem Koeffizienten des entsprechenden Potenzterms.}
+\end{mainbox}
+
+\begin{subbox}{Anwendungen erzeugende Funktionen}
+\begin{itemize}
+    \item W¨urfelw¨urfe mit bestimmter Augensumme
+    \item Verteilung von Jobs auf Server mit Constraints
+    \item M¨unzproblem: Betrag mit bestimmten M¨unzen bezahlen
+    \item Kombinationen mit Einschr¨ankungen
+\end{itemize}
+
+\textbf{Unterscheidung:}
+\begin{itemize}
+    \item Reihenfolge relevant (geordnet): Variationen
+    \item Reihenfolge irrelevant (ungeordnet): Kombinationen
+\end{itemize}
+
+\textbf{Vorteil:} Systematisches Vorgehen mit effizienten Algorithmen zum Ausmultiplizieren und Zusammenfassen.
+\end{subbox}
+
 \end{document}

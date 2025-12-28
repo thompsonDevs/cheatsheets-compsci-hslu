@@ -1249,4 +1249,225 @@ Der Koeffizient 4 bei $x^{11}$ zeigt: Es gibt 4 L¨osungen.
 \textbf{Vorteil:} Systematisches Vorgehen mit effizienten Algorithmen zum Ausmultiplizieren und Zusammenfassen.
 \end{subbox}
 
+% ============================================================================
+% SECTION 14: RELATIONEN (RELATIONS)
+% ============================================================================
+\section{Relationen}
+
+\begin{mainbox}{Definition: n-stellige Relationen}
+Seien $A_1, A_2, \ldots, A_n$ beliebige Mengen.
+
+\textbf{n-stellige Relation:}
+Jede Teilmenge $R \subset A_1 \times A_2 \times \ldots \times A_n$ ist eine \textbf{n-stellige Relation}.
+
+Die Objekte $x_1, \ldots, x_n$ stehen in Relation, wenn $[x_1, \ldots, x_n] \in R$.
+
+\textbf{Bin\"are Relationen} (2-stellig):
+\begin{itemize}
+    \item Infixnotation: Statt $[x_1, x_2] \in R$ schreiben wir $x_1 R x_2$
+    \item Beispiele: $<, \leq, =$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Operationen auf Relationen}
+Sei $R \subset A \times B$ eine 2-stellige Relation.
+
+\textbf{Komplement\"arrelation $\overline{R}$:}
+$$\overline{R} = A \times B \setminus R$$
+Zwei Objekte stehen in $\overline{R}$ in Relation, wenn sie es in $R$ nicht sind.
+
+\textbf{Umkehrrelation $R^{-1} \subset B \times A$:}
+$$[y, x] \in R^{-1} \text{ genau dann, wenn } [x, y] \in R$$
+
+\textbf{Verkettung $R \circ S \subset A \times C$:}
+
+Seien $R \subset A \times B$ und $S \subset B \times C$.
+
+In $R \circ S$ sind alle Paare $[x, z] \in A \times C$, f\"ur die es ein $y \in B$ gibt mit:
+$$[x, y] \in R \text{ und } [y, z] \in S$$
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften von Relationen}
+Eine Relation $R \subset A^2$ heisst:
+
+\textbf{Reflexiv:}
+$$\text{f\"ur alle } x \in A \text{ gilt } [x, x] \in R$$
+
+\textbf{Irreflexiv:}
+$$\text{f\"ur alle } x \in A \text{ gilt } [x, x] \notin R$$
+
+\textbf{Symmetrisch:}
+$$\text{wenn } [x, y] \in R, \text{ dann auch } [y, x] \in R$$
+
+\textbf{Antisymmetrisch:}
+$$\text{wenn } [x, y] \in R \text{ und } x \neq y, \text{ dann } [y, x] \notin R$$
+
+\textbf{Asymmetrisch:}
+$$\text{wenn } [x, y] \in R, \text{ dann } [y, x] \notin R$$
+
+\textbf{Transitiv:}
+$$\text{wenn } [x, y] \in R \text{ und } [y, z] \in R, \text{ dann } [x, z] \in R$$
+\end{mainbox}
+
+\begin{subbox}{Beispiele f\"ur Eigenschaften}
+\textbf{Gleichheitsrelation $=$:}
+\begin{itemize}
+    \item Reflexiv, symmetrisch, transitiv
+\end{itemize}
+
+\textbf{Kleinerrelation $<$:}
+\begin{itemize}
+    \item Irreflexiv, asymmetrisch, transitiv
+\end{itemize}
+
+\textbf{Kleinergleichrelation $\leq$:}
+\begin{itemize}
+    \item Reflexiv, antisymmetrisch, transitiv
+\end{itemize}
+
+\textbf{TeilervonRelation auf $\N$:}
+\begin{itemize}
+    \item Reflexiv, antisymmetrisch, transitiv
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{H\"ullen-Operationen}
+Sei $R \subset A \times A$ eine Relation. Die \textbf{kleinste} Menge $H$ mit $R \subset H \subset A \times A$ heisst:
+
+\textbf{Reflexive H\"ulle:} wenn $H$ reflexiv ist
+
+\textbf{Symmetrische H\"ulle:} wenn $H$ symmetrisch ist
+
+\textbf{Transitive H\"ulle:} wenn $H$ transitiv ist
+
+\textbf{Berechnung:}
+Erg\"anze sukzessiv Paare $[x, y]$ zu $R$, bis die gew\"unschte Eigenschaft vorhanden ist.
+
+\textbf{Wichtig bei transitiver H\"ulle:}
+Nach jedem neu hinzugef\"ugten Paar $[x, y]$ die Transitivit\"at mit allen anderen Paaren pr\"ufen.
+\end{mainbox}
+
+\begin{mainbox}{\"Aquivalenzrelationen}
+Eine Relation $R \subset A \times A$ heisst \textbf{\"Aquivalenz}, wenn sie:
+\begin{itemize}
+    \item reflexiv
+    \item symmetrisch
+    \item transitiv
+\end{itemize}
+ist.
+
+\textbf{Symbol:} H\"aufig wird $\equiv$ verwendet.
+
+\textbf{\"Aquivalenzklassen:}
+Jede \"Aquivalenzrelation $\equiv$ auf einer Menge $A$ zerlegt diese in eine Partition von \"Aquivalenzklassen. In den \"Aquivalenzklassen stehen alle Elemente in Relation.
+
+Die \"Aquivalenzklasse von $x$ ist:
+$$[x] = \{y \in A : x \equiv y\}$$
+
+\textbf{Beispiel:} $x \equiv y$ auf $\Z$, wenn $x - y$ durch 3 teilbar ist
+\begin{itemize}
+    \item $[0] = \{\ldots, -6, -3, 0, 3, 6, 9, \ldots\}$
+    \item $[1] = \{\ldots, -5, -2, 1, 4, 7, 10, \ldots\}$
+    \item $[2] = \{\ldots, -4, -1, 2, 5, 8, 11, \ldots\}$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Ordnungsrelationen}
+Eine Relation $R \subset A \times A$ heisst:
+
+\textbf{Teilordnung}, wenn sie:
+\begin{itemize}
+    \item reflexiv
+    \item antisymmetrisch
+    \item transitiv
+\end{itemize}
+ist.
+
+\textbf{Strenge Teilordnung}, wenn sie:
+\begin{itemize}
+    \item irreflexiv
+    \item antisymmetrisch
+    \item transitiv
+\end{itemize}
+ist.
+
+\textbf{Totalordnung:}
+Eine Teilordnung wird zur Totalordnung, wenn f\"ur alle $x$ und $y$ in $A$ gilt:
+$$[x, y] \in R \text{ oder } [y, x] \in R$$
+
+\textbf{Symbol:} H\"aufig wird $\preceq$ verwendet.
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item Teilmengenrelation $\subseteq$ auf $\mathcal{P}(\{1, 2, 3\})$: Teilordnung
+    \item Kleinergleichrelation $\leq$ auf $\{1, 2, 3\}$: Totalordnung
+    \item Kleinerrelation $<$ auf $\{1, 2, 3\}$: strikte Totalordnung
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Ketten und Kreise}
+\textbf{Kette:}
+In einer Menge $A$ bilden $n$ Elemente $x_1, x_2, \ldots, x_n$ eine Kette bez\"uglich $R \subset A^2$, wenn:
+$$x_1 R x_2, \, x_2 R x_3, \, x_3 R x_4, \, \ldots, \, x_{n-1} R x_n$$
+
+\textbf{Kreis:}
+Eine Kette heisst Kreis, wenn das letzte Element $x_n$ mit dem ersten Element $x_1$ \"ubereinstimmt.
+
+\textbf{Wichtig:}
+Bei einer Ordnungsrelation sind Ketten aus mindestens zwei verschiedenen Elementen nie Kreise.
+
+\textbf{Vorg\"anger und Nachfolger:}
+Wir sagen $x$ ist ein Vorg\"anger von $y$ beziehungsweise $y$ ist ein Nachfolger von $x$, wenn $x \preceq y$ gilt.
+\end{mainbox}
+
+\begin{mainbox}{Minimale und maximale Elemente}
+Bei einer Ordnungsrelation auf einer \textbf{endlichen} Menge $A$ gibt es immer mindestens ein:
+
+\textbf{Minimales Element:}
+Ein $x \in A$, das keinen Vorg\"anger hat.
+
+\textbf{Maximales Element:}
+Ein $x \in A$, das keinen Nachfolger hat.
+\end{mainbox}
+
+\begin{subbox}{Hasse-Diagramme}
+Ordnungsrelationen auf endlichen Mengen k\"onnen in einem \textbf{Hasse-Diagramm} dargestellt werden:
+
+\textbf{Konstruktion:}
+\begin{enumerate}
+    \item Schreibe alle minimalen Elemente auf gleicher H\"ohe auf
+    \item Schreibe von unten nach oben die direkten Nachfolger auf
+    \item Verbinde sie mit ihren direkten Vorg\"angern
+\end{enumerate}
+
+\textbf{Ablesen:}
+Aus dem Hasse-Diagramm kann die Ordnungsrelation entlang der Verbindungen \"ubersichtlich herausgelesen werden.
+
+\textbf{Beispiel:} Teilmengenrelation auf $\mathcal{P}(\{1, 2, 3\})$
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\node (empty) at (0,0) {$\emptyset$};
+\node (1) at (-2,1.5) {$\{1\}$};
+\node (2) at (0,1.5) {$\{2\}$};
+\node (3) at (2,1.5) {$\{3\}$};
+\node (12) at (-2,3) {$\{1,2\}$};
+\node (13) at (0,3) {$\{1,3\}$};
+\node (23) at (2,3) {$\{2,3\}$};
+\node (123) at (0,4.5) {$\{1,2,3\}$};
+\draw (empty) -- (1);
+\draw (empty) -- (2);
+\draw (empty) -- (3);
+\draw (1) -- (12);
+\draw (1) -- (13);
+\draw (2) -- (12);
+\draw (2) -- (23);
+\draw (3) -- (13);
+\draw (3) -- (23);
+\draw (12) -- (123);
+\draw (13) -- (123);
+\draw (23) -- (123);
+\end{tikzpicture}
+\end{center}
+\end{subbox}
+
 \end{document}

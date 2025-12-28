@@ -653,4 +653,117 @@ $$\equiv \exists x \in U: \left(\forall y \in V: \neg P(x,y)\right)$$
 \end{itemize}
 \end{mainbox}
 
+% ============================================================================
+% SECTION 8: BEWEISKALKÜLE (PROOF CALCULI)
+% ============================================================================
+\section{Beweiskalk¨ule}
+
+\begin{mainbox}{Semantische Folgerung}
+Ein logischer Term $Q$ \textbf{folgt} aus einer Wissensbasis $WB$, wenn fur alle Interpretationen der Signatur, f ¨ ur die ¨ $WB$ wahr ist, auch $Q$ wahr ist.
+
+\textbf{Notation:} $WB \models Q$
+
+(semantische Folgerung, semantic entailment)
+\end{mainbox}
+
+\begin{mainbox}{Deduktionstheorem}
+Eine Aussage $Q$ folgt genau dann semantisch aus einer Wissensbasis $WB$, wenn $WB \Rightarrow Q$ allgemeingultig ist. ¨
+
+$$WB \models Q \iff WB \Rightarrow Q \text{ ist Tautologie}$$
+\end{mainbox}
+
+\begin{mainbox}{Widerspruchsbeweis}
+Eine Aussage $Q$ folgt genau dann semantisch aus einer Wissensbasis $WB$, wenn $WB \land \neg Q$ eine Kontradiktion ist.
+
+$$WB \models Q \iff WB \land \neg Q \text{ ist unerfullbar} ¨$$
+
+\textbf{Herleitung:}
+$$\neg(WB \Rightarrow Q) \equiv \neg(\neg WB \lor Q) \equiv WB \land \neg Q$$
+\end{mainbox}
+
+\begin{mainbox}{Syntaktische Ableitung}
+Ein logischer Term $Q$ ist eine \textbf{Ableitung} aus einer Wissensbasis $WB$, wenn er nach Regeln eines Beweiskalkuls hergeleitet werden kann. ¨
+
+\textbf{Notation:} $WB \vdash Q$
+
+(syntaktische Ableitung, syntactic derivation)
+
+Die Gesamtheit der erlaubten Regeln heisst ein \textbf{Beweiskalkul}. ¨
+\end{mainbox}
+
+\begin{mainbox}{Resolutionsregel}
+\textbf{Allgemeine Form:}
+$$(A_1 \lor \ldots \lor A_m \lor B) \land (\neg B \lor C_1 \lor \ldots \lor C_n)$$
+$$\vdash (A_1 \lor \ldots \lor A_m \lor C_1 \lor \ldots \lor C_n)$$
+
+\textbf{Einfache Form:}
+$$(A \lor B) \land (\neg B \lor C) \vdash (A \lor C)$$
+
+\textbf{Aquivalent:} ¨
+$$(A \lor B) \land (B \Rightarrow C) \vdash (A \lor C)$$
+\end{mainbox}
+
+\begin{mainbox}{Konjunktive Normalform (KNF)}
+Ein aussagenlogischer Term $WB$ ist in KNF, wenn:
+
+\textbf{1. WB} ist UND-Verbindung von \textbf{Klauseln} $K_i$:
+$$WB \equiv K_1 \land K_2 \land \ldots \land K_m$$
+
+\textbf{2. Klausel K} ist ODER-Verbindung von \textbf{Literalen} $L_i$:
+$$K \equiv L_1 \lor L_2 \lor \ldots \lor L_n$$
+
+\textbf{3. Literal L} ist eine Variable oder deren Negation:
+$$L \equiv A \quad \text{oder} \quad L \equiv \neg A$$
+\end{mainbox}
+
+\begin{mainbox}{Resolutionskalkul} ¨
+Um zu zeigen, dass $Q$ aus $WB$ abgeleitet werden kann:
+
+\textbf{Vorgehen:}
+\begin{enumerate}
+    \item Bringe $WB \land \neg Q$ in KNF
+    \item Leite mit der Resolutionsregel neue Klauseln ab
+    \item Wiederhole, bis Kontradiktion $F$ entsteht
+\end{enumerate}
+
+$$WB \vdash Q \iff WB \land \neg Q \vdash F$$
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften von Beweiskalk¨ulen}
+Ein Beweiskalkul heisst: ¨
+
+\textbf{Korrekt:} Jede syntaktisch ableitbare Aussage folgt auch semantisch.
+$$\text{wenn } WB \vdash Q \text{ dann } WB \models Q$$
+
+\textbf{Vollst¨andig:} Alle semantischen Folgerungen lassen sich syntaktisch ableiten.
+$$\text{wenn } WB \models Q \text{ dann } WB \vdash Q$$
+\end{mainbox}
+
+\begin{mainbox}{G¨odelscher Vollst¨andigkeitssatz}
+Fur die ¨ \textbf{Pr¨adikatenlogik erster Stufe} gibt es vollst¨andige und korrekte Beweiskalkule. ¨
+
+Der Resolutionskalkul f ¨ ur Pr ¨ ¨adikatenlogik erster Stufe (1965) ist vollst¨andig und korrekt.
+\end{mainbox}
+
+\begin{subbox}{Entscheidbarkeit}
+\textbf{Aussagenlogik:} Beweiser sind \textbf{entscheidbar} (stoppen immer nach endlicher Zeit)
+
+\textbf{Pr¨adikatenlogik 1. Stufe:} Beweiser sind \textbf{halbentscheidbar} (k¨onnen in Endlosschleife laufen, wenn Aussage nicht allgemeingultig) ¨
+\end{subbox}
+
+\begin{mainbox}{G¨odelscher Unvollst¨andigkeitssatz}
+Fur die ¨ \textbf{Pr¨adikatenlogik zweiter Stufe} gibt es wahre Aussagen, die kein Beweiskalkul ableiten kann. ¨
+
+Die Pr¨adikatenlogik ab zweiter Stufe ist \textbf{nicht vollst¨andig}.
+\end{mainbox}
+
+\begin{subbox}{PROLOG}
+\textbf{Formel von Robert Kowalski:}
+$$\text{Algorithm} = \text{Logic} + \text{Control}$$
+
+PROLOG: Deklarative Programmiersprache fur logische Programmierung ¨
+
+\textbf{Anwendungen:} KI, Computerlinguistik, automatische Beweiser
+\end{subbox}
+
 \end{document}

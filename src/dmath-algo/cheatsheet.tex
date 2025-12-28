@@ -1690,4 +1690,182 @@ Nutze notwendige Bedingungen wie:
 \end{itemize}
 \end{subbox}
 
+% ============================================================================
+% SECTION 16: SPEZIELLE GRAPHEN (SPECIAL GRAPHS)
+% ============================================================================
+\section{Spezielle Graphen}
+
+\begin{mainbox}{k-regul\"are Graphen}
+Ein einfacher ungerichteter Graph mit $n$ Knoten heisst:
+
+\textbf{$k$-regul\"ar:}
+Wenn jeder Knoten $k$ Nachbarn hat.
+
+In einem $k$-regul\"aren Graphen haben also alle Knoten Grad $k$.
+
+\textbf{Vollst\"andig:}
+Wenn er $(n-1)$-regul\"ar ist.
+
+In einem vollst\"andigen Graphen ist also jeder Knoten mit jedem anderen Knoten verbunden.
+
+\textbf{Notation:} Ein vollst\"andiger Graph mit $n$ Knoten wird mit $K_n$ bezeichnet.
+
+\textbf{Anzahl Kanten:}
+\begin{itemize}
+    \item $k$-regul\"arer Graph mit $n$ Knoten: $|E| = \frac{n \cdot k}{2}$
+    \item Vollst\"andiger Graph $K_n$: $|E| = \binom{n}{2} = \frac{n(n-1)}{2}$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Cliquen und Cliquenzahl}
+\textbf{Clique:}
+In einem ungerichteten Graphen bezeichnen wir eine Teilmenge von Knoten als \textbf{Clique}, wenn all ihre Knoten mit einer Kante verbunden sind.
+
+Cliquen sind also Teile eines Graphen, die vollst\"andig sind.
+
+\textbf{Cliquenzahl:}
+Die Anzahl Knoten in einer gr\"ossten Clique heisst \textbf{Cliquenzahl}.
+
+\textbf{Anwendung:}
+In einem Netzwerk von Kollaborationen werden Knoten (die Teilnehmer) mit einer Kante verbunden, wenn sie mindestens in einem Team zusammen arbeiten. Alle Projektteams bilden dann in diesem Graphen eine Clique.
+\end{mainbox}
+
+\begin{mainbox}{Matching}
+\textbf{Perfektes Matching:}
+Eine Teilmenge von Kanten eines Graphen heisst \textbf{perfektes Matching}, wenn der Graph mit nur diesen Kanten 1-regul\"ar ist.
+
+Ein perfektes Matching ist also eine Paarung aller Knoten.
+
+\textbf{Matching (allgemein):}
+Eine Teilmenge von Kanten in einem Graphen heisst \textbf{Matching}, wenn der Graph mit nur diesen Kanten und den zugeh\"origen verbundenen Knoten 1-regul\"ar ist. Es d\"urfen also Knoten des urspr\"unglichen Graphen bei der Paarung ausgelassen werden.
+
+\textbf{Anwendung:}
+In einem Netzwerk zur Kompatibilit\"at werden Knoten (die Teilnehmer) mit einer Kante verbunden, wenn sie bez\"uglich einer Anforderung zusammenpassen. Eine m\"ogliche Einteilung in Zweiergruppen wird durch ein perfektes Matching beschrieben.
+\end{mainbox}
+
+\begin{mainbox}{Bipartite Graphen}
+Ein einfacher ungerichteter Graph heisst \textbf{bipartit}, wenn:
+
+\begin{itemize}
+    \item die Knoten in eine Partition $V = L \cup R$ unterteilt werden k\"onnen,
+    \item so dass die Kanten nur Knoten in $L$ mit Knoten in $R$ verbinden.
+\end{itemize}
+
+\textbf{Vollst\"andig bipartit:}
+Ein bipartiter Graph heisst \textbf{vollst\"andig}, wenn alle Knoten in $L$ mit allen Knoten in $R$ verbunden sind.
+
+\textbf{Notation:} Ein vollst\"andiger bipartiter Graph mit $n$ Knoten in $L$ und $m$ Knoten in $R$ wird mit $K_{n,m}$ bezeichnet.
+
+\textbf{Eigenschaften bipartiter Graphen mit $|L| = |R|$:}
+\begin{itemize}
+    \item Die Summe der Knotengrade in $L$ und in $R$ ist identisch
+    \item Die Summe der Knotengrade in $L$ und $R$ ist gerade
+\end{itemize}
+
+\textbf{Maximale Anzahl Kanten:}
+Ein vollst\"andiger bipartiter Graph mit total $n$ Knoten hat maximal $\lfloor \frac{n}{2} \rfloor \cdot \lceil \frac{n}{2} \rceil$ Kanten.
+\end{mainbox}
+
+\begin{mainbox}{Planare Graphen}
+Ein einfacher ungerichteter Graph heisst \textbf{planar}, wenn:
+
+\begin{itemize}
+    \item er zu einem Graphen isomorph ist, bei dem sich alle Kanten nicht schneiden.
+\end{itemize}
+
+Ein planarer Graph kann also immer so gezeichnet werden, dass seine Kanten keine Kreuzungen haben.
+
+\textbf{Zusammenh\"angend:}
+Ein Graph heisst \textbf{zusammenh\"angend}, wenn alle Paare von zwei Knoten \"uber eine Kantenfolge verbunden sind.
+
+\textbf{Theorem von Euler:}
+In jedem zusammenh\"angenden planaren Graphen gilt:
+$$|V| - |E| + |F| = 2$$
+wobei $|V|$ die Anzahl Knoten, $|E|$ die Anzahl Kanten und $|F|$ die Anzahl Fl\"achen bezeichnet.
+
+\textbf{Wichtige Folgerung:}
+F\"ur zusammenh\"angende planare Graphen mit mehr als einer Kante gilt:
+$$|E| \leq 3 \cdot |V| - 6$$
+
+Dies bedeutet: Der durchschnittliche Knotengrad bei einem planaren Graphen muss kleiner als 6 sein.
+\end{mainbox}
+
+\begin{subbox}{Eigenschaften planarer Graphen}
+\textbf{Begr\"undung f\"ur $|E| \leq 3 \cdot |V| - 6$:}
+
+Bei zusammenh\"angenden planaren Graphen mit mehr als einer Kante gilt:
+$$2 \cdot |E| \geq 3 \cdot |F|$$
+(Jede Fl\"ache wird von mindestens 3 Kanten begrenzt)
+
+Mit dem Theorem von Euler folgt dann:
+$$|E| \leq 3 \cdot |V| - 6$$
+
+\textbf{Anwendung:}
+Das \textit{Utilities Problem} (3 H\"auser mit Gas, Strom und Wasser ohne Kreuzungen verbinden) hat keine L\"osung, da der Graph $K_{3,3}$ nicht planar ist.
+
+\textbf{Spezialfall:}
+Alle 2-regul\"aren Graphen sind planar.
+\end{subbox}
+
+\begin{mainbox}{B\"aume}
+Ein einfacher ungerichteter Graph heisst \textbf{Baum}, wenn er:
+
+\begin{itemize}
+    \item zusammenh\"angend ist und
+    \item keine Kreise enth\"alt.
+\end{itemize}
+
+In einem Baum gibt es also von keinem Knoten aus eine Kantenfolge, die zur\"uck zum Knoten f\"uhrt.
+
+\textbf{Anzahl Kanten:}
+Ein Baum mit $n$ Knoten hat genau $n-1$ Kanten.
+
+\textbf{Wichtige Eigenschaft:}
+Wenn wir von einem Baum eine Kante wegnehmen oder hinzuf\"ugen, dann ist er kein Baum mehr.
+\end{mainbox}
+
+\begin{mainbox}{Terminologie bei B\"aumen}
+In einem Baum bezeichnen wir oft einen Knoten als \textbf{Wurzelknoten} und unterscheiden dann ausgehend von diesem Knoten:
+
+\textbf{Innere Knoten:}
+Knoten mit mindestens einem Kind.
+
+\textbf{Blattknoten:}
+Knoten ohne Kinder.
+
+\textbf{Verwandtschaftsbeziehungen:}
+\begin{itemize}
+    \item \textbf{Elternknoten}: Direkter Vorg\"anger
+    \item \textbf{Kindknoten}: Direkte Nachfolger
+    \item \textbf{Geschwisterknoten}: Knoten mit gleichem Elternknoten
+\end{itemize}
+
+\textbf{Tiefe:}
+Ausgehend von der Wurzel gibt die Anzahl Kanten bis zu einem Knoten deren \textbf{Tiefe} an.
+
+\textbf{$k$-facher Baum:}
+Ein Baum heisst \textbf{$k$-fach}, wenn alle inneren Knoten h\"ochstens $k$ Kinder haben.
+
+\textbf{Maximale Knotenzahl:}
+Ein $k$-facher Baum mit maximaler Tiefe $d$ hat h\"ochstens:
+$$\sum_{i=0}^{d} k^i = \frac{k^{d+1} - 1}{k - 1}$$
+Knoten.
+\end{mainbox}
+
+\begin{subbox}{Spezielle Baumarten}
+\textbf{Bin\"arbaum:}
+Ein 2-facher Baum (jeder innere Knoten hat h\"ochstens 2 Kinder).
+
+\textbf{Vollst\"andiger Bin\"arbaum:}
+Ein Bin\"arbaum, bei dem alle inneren Knoten genau 2 Kinder haben und alle Blattknoten die gleiche Tiefe haben.
+
+\textbf{Anwendungen:}
+\begin{itemize}
+    \item Suchb\"aume in Datenstrukturen
+    \item Entscheidungsb\"aume in Algorithmen
+    \item Hierarchische Strukturen
+    \item Dateisysteme
+\end{itemize}
+\end{subbox}
+
 \end{document}

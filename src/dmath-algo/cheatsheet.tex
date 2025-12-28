@@ -853,4 +853,102 @@ Um zu zeigen, dass $f(x)$ in $O(g(x))$, $\Omega(g(x))$ oder $\Theta(g(x))$ ist, 
 \textbf{F¨ur Big-$\Theta$:} Beide Nachweise f¨ur $O$ und $\Omega$
 \end{subbox}
 
+% ============================================================================
+% SECTION 10: REKURSIVE ALGORITHMEN (RECURSIVE ALGORITHMS)
+% ============================================================================
+\section{Rekursive Algorithmen}
+
+\begin{mainbox}{Definition: Rekursiver Algorithmus}
+Ein \textbf{rekursiver Algorithmus} ist eine Methode zur Probleml¨osung, bei der eine Funktion sich selbst aufruft, um kleinere Instanzen desselben Problems zu bearbeiten.
+
+\textbf{Prinzip:}
+\begin{itemize}
+    \item Funktion kann f¨ur kleinen Input (z.B. $n=1$) direkt berechnet werden
+    \item F¨ur grossen Input $n$: Teile Problem in gleiche Probleme mit kleinerem Input
+    \item Rekonstruiere L¨osung f¨ur $n$ aus den Teil枚sungen
+\end{itemize}
+
+Solche Verfahren heissen \textbf{divide-and-conquer} Algorithmen.
+\end{mainbox}
+
+\begin{mainbox}{Master-Theorem f¨ur Divide-and-Conquer}
+Rekursive Beziehung der Form:
+$$T(n) = a \cdot T\left(\frac{n}{b}\right) + c \cdot n^k \quad \text{und} \quad T(1) = c$$
+
+\textbf{Parameter:}
+\begin{itemize}
+    \item $a$: Anzahl rekursiver Aufrufe
+    \item $b$: Teilungsfaktor der Eingabegr¨osse
+    \item $c \cdot n^k$: Aufwand f¨ur Teilen und Kombinieren
+\end{itemize}
+
+\textbf{F¨ur konstante Zahlen} $a \geq 1, b > 1, c > 0, k \geq 0$ gilt:
+
+\textbf{Fall 1:} Wenn $b^k < a$, dann ist $T(n)$ in $\Theta(n^{\log_b(a)})$
+
+\textbf{Fall 2:} Wenn $b^k = a$, dann ist $T(n)$ in $\Theta(n^k \log(n))$
+
+\textbf{Fall 3:} Wenn $b^k > a$, dann ist $T(n)$ in $\Theta(n^k)$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: MergeSort}
+\textbf{Rekursionsbeziehung:}
+$$T(n) = T\left(\left\lfloor\frac{n}{2}\right\rfloor\right) + T\left(\left\lceil\frac{n}{2}\right\rceil\right) + \text{Aufwand f¨ur merge}$$
+
+F¨ur $n = 2^k$: $T(n) = 2 \cdot T\left(\frac{n}{2}\right) + n$
+
+\textbf{Mit Master-Theorem:} $a=2, b=2, k=1$
+$$b^k = 2^1 = 2 = a \quad \Rightarrow \quad T(n) \text{ in } \Theta(n \log(n))$$
+\end{subbox}
+
+\begin{mainbox}{Lineare Rekursionsbeziehungen}
+\textbf{Definition:} Eine Rekursionsbeziehung der Form
+$$T(n) = c_1 \cdot T(n-1) + c_2 \cdot T(n-2) + \ldots + c_k \cdot T(n-k) + F(n)$$
+
+heisst \textbf{linear vom Grad} $k$ mit \textbf{konstanten Koeffizienten} $c_1, c_2, \ldots, c_k$.
+
+\textbf{Homogen:} wenn $F(n) = 0$
+
+\textbf{Inhomogen:} wenn $F(n) \neq 0$
+\end{mainbox}
+
+\begin{mainbox}{L¨osung homogener Rekursionsbeziehungen}
+\textbf{Grad k = 1:}
+$$T(n) = c_1 \cdot T(n-1) \quad \Rightarrow \quad T(n) = a \cdot c_1^n$$
+
+\textbf{Grad k = 2:}
+
+Bestimme L¨osungen $r_1, r_2$ der charakteristischen Gleichung:
+$$r^2 = c_1 \cdot r + c_2$$
+
+\textbf{Fall 1:} Wenn $r_1 \neq r_2$, dann gilt $T(n) = a \cdot r_1^n + b \cdot r_2^n$
+
+\textbf{Fall 2:} Wenn $r_1 = r_2$, dann gilt $T(n) = a \cdot r_1^n + b \cdot n \cdot r_1^n$
+
+Die Konstanten $a$ und $b$ werden aus den Anfangsbedingungen bestimmt.
+\end{mainbox}
+
+\begin{mainbox}{L¨osung inhomogener Rekursionsbeziehungen}
+$$T(n) = c_1 \cdot T(n-1) + c_2 \cdot T(n-2) + \ldots + c_k \cdot T(n-k) + F(n)$$
+
+\textbf{Vorgehen:}
+\begin{enumerate}
+    \item Bestimme allgemeine L¨osung $T_h(n)$ der homogenen Rekursionsbeziehung (ohne $F(n)$)
+    \item Finde eine partikul¨are L¨osung $T_p(n)$ der inhomogenen Beziehung durch passenden Ansatz
+    \item Die allgemeine L¨osung ist: $T(n) = T_h(n) + T_p(n)$
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Rekursionsbaum}
+Ein \textbf{Rekursionsbaum} visualisiert die rekursiven Aufrufe eines Algorithmus:
+\begin{itemize}
+    \item Jeder Knoten repr¨asentiert einen rekursiven Aufruf
+    \item Kinder eines Knotens sind die direkten rekursiven Aufrufe
+    \item Bl¨atter repr¨asentieren Basisf¨alle
+    \item Tiefe des Baums: Anzahl rekursiver Ebenen
+\end{itemize}
+
+N¨utzlich zur Analyse der Komplexit¨at!
+\end{subbox}
+
 \end{document}

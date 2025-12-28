@@ -766,4 +766,91 @@ PROLOG: Deklarative Programmiersprache fur logische Programmierung ¨
 \textbf{Anwendungen:} KI, Computerlinguistik, automatische Beweiser
 \end{subbox}
 
+% ============================================================================
+% SECTION 9: ANALYSE VON ALGORITHMEN (ALGORITHM ANALYSIS)
+% ============================================================================
+\section{Analyse von Algorithmen}
+
+\begin{mainbox}{Worst-Case-Analyse}
+Bei einer \textbf{Worst-Case-Analyse} wird in Abh¨angigkeit von der Gr¨osse $n$ des Inputs die \textbf{maximale} Anzahl Rechnungsschritte angegeben, die zur Berechnung n¨otig sein k¨onnen.
+
+\textbf{Ziel:} Vergleich der Wachstumsrate der Laufzeit bei zunehmender Eingabegr¨osse
+\end{mainbox}
+
+\begin{mainbox}{Asymptotische Notation: Big-O}
+Seien $f$ und $g$ zwei Funktionen, welche die Rechnungsschritte zweier Algorithmen angeben.
+
+$f(x)$ \textbf{w¨achst nicht st¨arker} als $g(x)$, wenn fur alle Input-Werte ¨ $x$ gr¨osser als ein Startwert $x_0$ gilt:
+
+$$f(x) \leq C \cdot g(x) \quad \text{fur eine feste Konstante } C ¨$$
+
+\textbf{Notation:} $f(x)$ ist in $O(g(x))$ (Big-O)
+
+$f$ w¨achst \textbf{h¨ochstens so schnell} wie $g$.
+\end{mainbox}
+
+\begin{mainbox}{Asymptotische Notation: Big-Ω}
+$f(x)$ \textbf{w¨achst nicht langsamer} als $g(x)$, wenn fur alle Input-Werte ¨ $x$ gr¨osser als ein Startwert $x_0$ gilt:
+
+$$f(x) \geq c \cdot g(x) \quad \text{fur eine feste Konstante } c ¨$$
+
+\textbf{Notation:} $f(x)$ ist in $\Omega(g(x))$ (Big-Omega)
+
+$f$ w¨achst \textbf{mindestens so schnell} wie $g$.
+\end{mainbox}
+
+\begin{mainbox}{Asymptotische Notation: Big-Θ}
+$f(x)$ \textbf{w¨achst asymptotisch gleich} wie $g(x)$, wenn:
+
+$$f(x) \text{ in } O(g(x)) \text{ und } f(x) \text{ in } \Omega(g(x))$$
+
+\textbf{Notation:} $f(x)$ ist in $\Theta(g(x))$ (Big-Theta)
+
+$f$ und $g$ haben \textbf{dieselbe Wachstumsrate}.
+
+\textbf{Aquivalent:} ¨ Es existieren Konstanten $c, C$ und $x_0$, sodass:
+$$c \cdot g(x) \leq f(x) \leq C \cdot g(x) \quad \forall x \geq x_0$$
+\end{mainbox}
+
+\begin{mainbox}{Komplexit¨atsklassen: Polynomiell}
+\textbf{Polynomielles Wachstum:}
+$$O(1) \subset O(\log(n)) \subset O(n) \subset O(n \log(n))$$
+$$\subset O(n^2) \subset \ldots \subset O(n^k) \subset \ldots$$
+
+Probleme mit polynomieller Komplexit¨at heissen \textbf{real l¨osbar}.
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item $O(1)$: Speicherzugriff
+    \item $O(\log(n))$: Bin¨are Suche
+    \item $O(n)$: Lineare Suche
+    \item $O(n \log(n))$: Mergesort
+    \item $O(n^2)$: Klassische Sortierverfahren
+    \item $O(n^3)$: Naive Matrizenmultiplikation
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Komplexit¨atsklassen: Exponentiell}
+\textbf{Exponentielles Wachstum:}
+$$O(2^n) \subset O(3^n) \subset O(4^n) \subset \ldots \subset O(a^n) \subset \ldots$$
+
+Probleme, die nur mit exponentiellem Algorithmus gel¨ost werden k¨onnen, heissen \textbf{real unl¨osbar}.
+
+\textbf{Beispiel:}
+\begin{itemize}
+    \item $O(2^n)$: SAT Problem (naive L¨osung)
+    \item $O(n!)$: Travelling Salesman (naive L¨osung)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Nachweis der Komplexit¨at}
+Um zu zeigen, dass $f(x)$ in $O(g(x))$, $\Omega(g(x))$ oder $\Theta(g(x))$ ist, muss man \textbf{Zeugen} angeben:
+
+\textbf{F¨ur Big-O:} Startwert $x_0$ und Konstante $C$
+
+\textbf{F¨ur Big-$\Omega$:} Startwert $x_0$ und Konstante $c$
+
+\textbf{F¨ur Big-$\Theta$:} Beide Nachweise f¨ur $O$ und $\Omega$
+\end{subbox}
+
 \end{document}

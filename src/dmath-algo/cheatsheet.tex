@@ -951,4 +951,106 @@ Ein \textbf{Rekursionsbaum} visualisiert die rekursiven Aufrufe eines Algorithmu
 N¨utzlich zur Analyse der Komplexit¨at!
 \end{subbox}
 
+% ============================================================================
+% SECTION 11: MATHEMATISCHE INDUKTION (MATHEMATICAL INDUCTION)
+% ============================================================================
+\section{Mathematische Induktion}
+
+\begin{mainbox}{Ziel der mathematischen Induktion}
+F¨ur ein Pr¨adikat $P(n)$ mit einer nat¨urlichen Zahl $n$ als Variable zu beweisen, dass die Aussage
+
+$$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : P(n)$$
+
+wahr ist. Das Pr¨adikat $P(n)$ ist f¨ur alle nat¨urlichen Zahlen $n$ gr¨osser einer Startzahl $n_0$ wahr.
+\end{mainbox}
+
+\begin{mainbox}{Schwache Induktion}
+\textbf{Induktionsverankerung:}
+
+Wir weisen nach, dass das Pr¨adikat $P(n_0)$ f¨ur die Startzahl $n_0$ wahr ist:
+$$P(n_0) \equiv \text{True}$$
+
+\textbf{Induktionsschritt:}
+
+Wir weisen nach, dass f¨ur alle nat¨urlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
+$$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : (P(n) \Rightarrow P(n+1)) \equiv \text{True}$$
+
+\textbf{Prinzip:} Von $P(n_0)$ folgt $P(n_0+1)$, daraus folgt $P(n_0+2)$, usw.
+\end{mainbox}
+
+\begin{subbox}{Anwendung: Korrektheit von Algorithmen}
+Mathematische Induktion kann verwendet werden, um die Korrektheit von Algorithmen zu beweisen, deren Input mit nat¨urlichen Zahlen parametrisiert ist.
+
+\textbf{Beispiele:}
+\begin{itemize}
+    \item Summenformeln
+    \item Geometrische Reihen
+    \item Quadratzahlen
+    \item Terminierung von Schleifen
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Starke Induktion}
+Im Unterschied zur schwachen Induktion k¨onnen wir bei der starken Induktion \textbf{alle} bereits gezeigten Pr¨adikate $P(k)$ beim Induktionsschritt verwenden.
+
+\textbf{Induktionsverankerung:}
+
+Wir weisen nach, dass das Pr¨adikat $P(n_0)$ f¨ur die Startzahl $n_0$ wahr ist:
+$$P(n_0) \equiv \text{True}$$
+
+\textbf{Induktionsschritt:}
+
+Wir weisen nach, dass f¨ur alle nat¨urlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n_0), P(n_0+1), \ldots, P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
+$$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : (P(n_0) \land \ldots \land P(n) \Rightarrow P(n+1)) \equiv \text{True}$$
+\end{mainbox}
+
+\begin{mainbox}{Vergleich: Schwache vs. Starke Induktion}
+\textbf{Schwache Induktion:}
+\begin{itemize}
+    \item Induktionsschritt: $P(n) \Rightarrow P(n+1)$
+    \item Verwendet nur den \textbf{unmittelbaren Vorg¨anger}
+\end{itemize}
+
+\textbf{Starke Induktion:}
+\begin{itemize}
+    \item Induktionsschritt: $P(n_0) \land \ldots \land P(n) \Rightarrow P(n+1)$
+    \item Verwendet \textbf{alle vorherigen F¨alle}
+\end{itemize}
+
+\textbf{Wann starke Induktion verwenden?}
+\begin{itemize}
+    \item Wenn $P(n+1)$ von mehreren vorherigen Werten abh¨angt
+    \item Bei rekursiven Algorithmen mit mehreren Aufrufen
+    \item Beispiele: QuickSort, M¨unzproblem
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Verbindung zur Rekursion}
+Mathematische Induktion ist direkt vergleichbar mit Rekursion:
+
+\textbf{Rekursion:}
+\begin{itemize}
+    \item L¨osung f¨ur $n$ beruht auf L¨osung f¨ur kleinere Instanzen
+    \item Basisfall entspricht kleinster Instanz
+\end{itemize}
+
+\textbf{Induktion:}
+\begin{itemize}
+    \item Beweis f¨ur $n$ beruht auf Beweis f¨ur kleinere Instanzen
+    \item Induktionsverankerung entspricht Basisfall
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Typische Induktionsbeweise}
+\textbf{Summenformeln:}
+$$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$$
+$$\sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}$$
+
+\textbf{Geometrische Reihe:}
+$$\sum_{i=0}^{n-1} q^i = \frac{q^n - 1}{q - 1} \quad (q \neq 1)$$
+
+\textbf{Ungleichungen:}
+$$2^n > n^2 \quad \text{f¨ur } n \geq 5$$
+\end{mainbox}
+
 \end{document}

@@ -197,7 +197,7 @@ Ein boolescher Wert ist entweder \texttt{True} oder \texttt{False}.
 
 \textbf{Darstellung:}
 \begin{itemize}
-    \item 1 fur \texttt{True}, 0 f ¨ ur \texttt{False} ¨
+    \item 1 für \texttt{True}, 0 für \texttt{False}
     \item Bit: grundlegendste Einheit von Daten
 \end{itemize}
 \end{mainbox}
@@ -238,10 +238,10 @@ False & False & False
 \end{center}
 \end{mainbox}
 
-\begin{subbox}{Priorit¨at \& Assoziativit¨at}
-\textbf{Priorit¨at:} not $>$ and $>$ or
+\begin{subbox}{Priorität \& Assoziativität}
+\textbf{Priorität:} not $>$ and $>$ or
 
-\textbf{Assoziativit¨at:} Links nach rechts
+\textbf{Assoziativität:} Links nach rechts
 \end{subbox}
 
 % ============================================================================
@@ -268,7 +268,7 @@ $$a \mathbin{//} b = \lfloor a/b \rfloor \quad \text{(abgerundet)}$$
 $$a \bmod b = a - b \cdot (a \mathbin{//} b)$$
 \end{mainbox}
 
-\begin{mainbox}{Bin¨ardarstellung}
+\begin{mainbox}{Binärdarstellung}
 Jede Zahl $n \in \N$ kann als Summe von Zweierpotenzen dargestellt werden:
 $$n = \sum_{i=0}^{k} b_i \cdot 2^i \quad \text{mit } b_i \in \{0,1\}$$
 
@@ -280,7 +280,7 @@ q_0 &= q_1 \cdot 2 + r_1 \quad \text{mit } r_1 \in \{0,1\} \\
 q_{k-1} &= 0 \cdot 2 + r_k \quad \text{mit } r_k \in \{0,1\}
 \end{align*}
 
-Bin¨ardarstellung: $(n)_2 = r_k r_{k-1} \ldots r_1 r_0$
+Binärdarstellung: $(n)_2 = r_k r_{k-1} \ldots r_1 r_0$
 \end{mainbox}
 
 % ============================================================================
@@ -293,13 +293,13 @@ Ein float Wert ist eine Kommazahl mit endlich vielen Nachkommastellen.
 
 \textbf{Zahlenmengen:}
 \begin{itemize}
-    \item $\Q$: rationale Zahlen (als Bruche darstellbar) ¨
+    \item $\Q$: rationale Zahlen (als Brüche darstellbar)
     \item $\R$: reelle Zahlen
 \end{itemize}
 \end{mainbox}
 
-\begin{mainbox}{Bin¨ardarstellung von Kommazahlen}
-Fur Nachkommastellen: ¨
+\begin{mainbox}{Binärdarstellung von Kommazahlen}
+Für Nachkommastellen:
 $$x = \sum_{i=1}^{k} b_{-i} \cdot 2^{-i} \quad \text{mit } b_{-i} \in \{0,1\}$$
 
 \textbf{Algorithmus:}
@@ -309,13 +309,13 @@ r_1 \cdot 2 &= b_2 + r_2 \quad \text{mit } b_2 \in \{0,1\}, r_2 < 1 \\
 &\vdots
 \end{align*}
 
-Bin¨ardarstellung: $(x)_2 = 0.b_1 b_2 b_3 \ldots$
+Binärdarstellung: $(x)_2 = 0.b_1 b_2 b_3 \ldots$
 
 Bei periodischer Wiederholung: $(x)_2 = 0.b_1 b_2 \overline{b_3 b_4}$
 \end{mainbox}
 
 \begin{subbox}{IEEE 754 Standard}
-\textbf{Fliesskommazahl:} Standard fur float-Darstellung ¨
+\textbf{Fliesskommazahl:} Standard für float-Darstellung
 \begin{itemize}
     \item 32-bit (float in Java)
     \item 64-bit (double in Java)
@@ -330,11 +330,11 @@ Bei periodischer Wiederholung: $(x)_2 = 0.b_1 b_2 \overline{b_3 b_4}$
 \section{Sammlungen}
 
 \begin{mainbox}{Definition: Menge (Set)}
-Eine Menge ist eine \textbf{ungeordnete} Sammlung von Objekten ohne Rucksicht auf Wiederholung. ¨
+Eine Menge ist eine \textbf{ungeordnete} Sammlung von Objekten ohne Rücksicht auf Wiederholung.
 
 \textbf{Notation:}
 \begin{itemize}
-    \item Aufz¨ahlung: $M = \{1, 2, 3, 4\}$
+    \item Aufzählung: $M = \{1, 2, 3, 4\}$
     \item Beschreibung: $M = \{x : x \text{ ist eine Ziffer}\}$
 \end{itemize}
 
@@ -363,7 +363,7 @@ $$\overline{A} = \{x : x \notin A\}$$
 \end{mainbox}
 
 \begin{mainbox}{Definition: Liste (List)}
-Eine Liste ist eine \textbf{geordnete} Sammlung von Objekten mit Rucksicht auf Wiederholung. ¨
+Eine Liste ist eine \textbf{geordnete} Sammlung von Objekten mit Rücksicht auf Wiederholung.
 
 \textbf{Notation:}
 $$a = (a_1, a_2, \ldots, a_n)$$
@@ -410,7 +410,7 @@ $$x \mapsto y \quad \text{oder} \quad f(x) = y$$
 \end{mainbox}
 
 \begin{subbox}{Algorithmus}
-Ein \textbf{Algorithmus} ist eine pr¨azise, schrittweise Angabe, die fur jeden Input ¨ $x \in D$ beschreibt, wie der zugeh¨orige Output $y = f(x)$ bestimmt wird.
+Ein \textbf{Algorithmus} ist eine präzise, schrittweise Angabe, die für jeden Input $x \in D$ beschreibt, wie der zugehörige Output $y = f(x)$ bestimmt wird.
 \end{subbox}
 
 % ============================================================================
@@ -423,11 +423,11 @@ Eine \textbf{Aussage} ist ein Satz, der entweder wahr oder falsch ist.
 
 \textbf{Codierung:}
 \begin{itemize}
-    \item 1 fur wahr ¨
-    \item 0 fur falsch ¨
+    \item 1 für wahr
+    \item 0 für falsch
 \end{itemize}
 
-\textbf{Atomar:} Eine Aussage ist atomar, wenn sie nicht in kurzere Aussagen aufgeteilt werden kann. ¨
+\textbf{Atomar:} Eine Aussage ist atomar, wenn sie nicht in kürzere Aussagen aufgeteilt werden kann.
 \end{mainbox}
 
 \begin{mainbox}{Aussagenlogische Operatoren}
@@ -490,10 +490,10 @@ $D$ & $A$ & $D \Rightarrow A$ \\
 0 & 0 & 1
 \end{tabular}
 \end{center}
-Linke Aussage: \textbf{Pr¨amisse} (Annahme)\\
+Linke Aussage: \textbf{Prämisse} (Annahme)\\
 Rechte Aussage: \textbf{Konklusion} (Folgerung)
 
-\textbf{Aquivalenz} ¨ $D \Leftrightarrow A$ (genau dann, wenn):
+\textbf{Äquivalenz} $D \Leftrightarrow A$ (genau dann, wenn):
 \begin{center}
 \begin{tabular}{cc|c}
 $D$ & $A$ & $D \Leftrightarrow A$ \\
@@ -522,27 +522,27 @@ Ein \textbf{aussagenlogischer Term} ist rekursiv definiert:
 
 Ein aussagenlogischer Term heisst:
 \begin{itemize}
-    \item \textbf{erfullbar}: wahr f ¨ ur mind. eine Interpretation ¨
-    \item \textbf{allgemeingultig} ¨ (Tautologie $T$): wahr fur alle Interpretationen ¨
-    \item \textbf{unerfullbar} ¨ (Kontradiktion $F$): wahr fur keine Interpretation ¨
+    \item \textbf{erfüllbar}: wahr für mind. eine Interpretation
+    \item \textbf{allgemeingültig} (Tautologie $T$): wahr für alle Interpretationen
+    \item \textbf{unerfüllbar} (Kontradiktion $F$): wahr für keine Interpretation
 \end{itemize}
 
-\textbf{Aquivalenz} ¨ $T_1 \equiv T_2$: beide Terme haben fur alle Interpretationen denselben Wahrheitswert ¨
+\textbf{Äquivalenz} $T_1 \equiv T_2$: beide Terme haben für alle Interpretationen denselben Wahrheitswert
 \end{mainbox}
 
 \begin{subbox}{SAT Problem}
-Das \textbf{Erfullbarkeitsproblem} ¨ (SAT) ist NP-vollst¨andig.
+Das \textbf{Erfüllbarkeitsproblem} (SAT) ist NP-vollständig.
 
 Bei $n$ atomaren Aussagen: $2^n$ Zeilen in der Wahrheitstabelle
 
-SAT-Solver: Praktische L¨osungen fur viele Anwendungen ¨
+SAT-Solver: Praktische Lösungen für viele Anwendungen
 \end{subbox}
 
 \begin{mainbox}{Umformung von Operatoren}
 \textbf{Implikation:}
 $$A \Rightarrow B \equiv \neg A \lor B$$
 
-\textbf{Aquivalenz:} ¨
+\textbf{Äquivalenz:}
 $$A \Leftrightarrow B \equiv (A \Rightarrow B) \land (B \Rightarrow A)$$
 \end{mainbox}
 
@@ -558,13 +558,13 @@ $$A \lor A \equiv A \quad \text{und} \quad A \land A \equiv A$$
 \textbf{Dominanz:}
 $$A \lor T \equiv T \quad \text{und} \quad A \land F \equiv F$$
 
-\textbf{Identit¨at:}
+\textbf{Identität:}
 $$A \lor F \equiv A \quad \text{und} \quad A \land T \equiv A$$
 
 \textbf{Invers:}
 $$A \lor \neg A \equiv T \quad \text{und} \quad A \land \neg A \equiv F$$
 
-\textbf{Kommutativit¨at:}
+\textbf{Kommutativität:}
 $$A \lor B \equiv B \lor A \quad \text{und} \quad A \land B \equiv B \land A$$
 
 \textbf{Absorption:}
@@ -572,11 +572,11 @@ $$A \lor (A \land B) \equiv A \quad \text{und} \quad A \land (A \lor B) \equiv A
 \end{mainbox}
 
 \begin{mainbox}{Weitere Rechengesetze}
-\textbf{Assoziativit¨at:}
+\textbf{Assoziativität:}
 $$(A \lor B) \lor C \equiv A \lor (B \lor C)$$
 $$(A \land B) \land C \equiv A \land (B \land C)$$
 
-\textbf{Distributivit¨at:}
+\textbf{Distributivität:}
 $$A \lor (B \land C) \equiv (A \lor B) \land (A \lor C)$$
 $$A \land (B \lor C) \equiv (A \land B) \lor (A \land C)$$
 
@@ -588,34 +588,34 @@ $$\neg(A \land B) \equiv \neg A \lor \neg B$$
 % ============================================================================
 % SECTION 7: PRÄDIKATENLOGIK (PREDICATE LOGIC)
 % ============================================================================
-\section{Pr¨adikatenlogik}
+\section{Prädikatenlogik}
 
-\begin{mainbox}{Definition: Pr¨adikat}
-Ein \textbf{Pr¨adikat} ist ein Satz mit Variablen. Wenn diese Variablen mit Werten aus einem gegebenen Vorrat (dem \textbf{Universum}) ersetzt werden, entsteht eine Aussage.
+\begin{mainbox}{Definition: Prädikat}
+Ein \textbf{Prädikat} ist ein Satz mit Variablen. Wenn diese Variablen mit Werten aus einem gegebenen Vorrat (dem \textbf{Universum}) ersetzt werden, entsteht eine Aussage.
 
 \textbf{Notation:} $P(x, y, \ldots)$
 
-Ein Pr¨adikat ist \textbf{nicht} wahrheitsdefinit, erst nach Einsetzen von Werten entsteht eine Aussage mit Wahrheitswert.
+Ein Prädikat ist \textbf{nicht} wahrheitsdefinit, erst nach Einsetzen von Werten entsteht eine Aussage mit Wahrheitswert.
 \end{mainbox}
 
 \begin{mainbox}{Quantoren}
-Sei $P(x)$ ein Pr¨adikat mit $x$ aus Universum $U$.
+Sei $P(x)$ ein Prädikat mit $x$ aus Universum $U$.
 
 \textbf{Allquantor} $\forall$ (Generalisierung):
 $$\forall x \in U: P(x) \text{ ist } \begin{cases}
-\text{wahr} & \text{wenn } P(x) \text{ fur alle } x \text{ wahr ist} ¨ \\
+\text{wahr} & \text{wenn } P(x) \text{ für alle } x \text{ wahr ist} \\
 \text{falsch} & \text{sonst}
 \end{cases}$$
 
 \textbf{Existenzquantor} $\exists$ (Spezialisierung):
 $$\exists x \in U: P(x) \text{ ist } \begin{cases}
-\text{falsch} & \text{wenn } P(x) \text{ fur alle } x \text{ falsch ist} ¨ \\
+\text{falsch} & \text{wenn } P(x) \text{ für alle } x \text{ falsch ist} \\
 \text{wahr} & \text{sonst}
 \end{cases}$$
 \end{mainbox}
 
-\begin{mainbox}{Aquivalenz bei endlichem Universum} ¨
-Fur ¨ $U = \{x_1, x_2, \ldots, x_n\}$ gilt:
+\begin{mainbox}{Äquivalenz bei endlichem Universum}
+Für $U = \{x_1, x_2, \ldots, x_n\}$ gilt:
 
 $$\forall x \in U: P(x) \equiv P(x_1) \land P(x_2) \land \cdots \land P(x_n)$$
 
@@ -635,7 +635,7 @@ $$\neg\left(\forall x \in U: P(x)\right) \equiv \exists x \in U: \neg P(x)$$
 \textbf{Negation des Existenzquantors:}
 $$\neg\left(\exists x \in U: P(x)\right) \equiv \forall x \in U: \neg P(x)$$
 
-\textbf{Regel:} Negation kehrt Quantoren um und negiert das Pr¨adikat.
+\textbf{Regel:} Negation kehrt Quantoren um und negiert das Prädikat.
 \end{mainbox}
 
 \begin{mainbox}{Negation verschachtelter Quantoren}
@@ -649,17 +649,17 @@ $$\equiv \exists x \in U: \left(\forall y \in V: \neg P(x,y)\right)$$
 \begin{itemize}
     \item Jeder $\forall$ wird zu $\exists$
     \item Jeder $\exists$ wird zu $\forall$
-    \item Das innerste Pr¨adikat wird negiert
+    \item Das innerste Prädikat wird negiert
 \end{itemize}
 \end{mainbox}
 
 % ============================================================================
 % SECTION 8: BEWEISKALKÜLE (PROOF CALCULI)
 % ============================================================================
-\section{Beweiskalk¨ule}
+\section{Beweiskalküle}
 
 \begin{mainbox}{Semantische Folgerung}
-Ein logischer Term $Q$ \textbf{folgt} aus einer Wissensbasis $WB$, wenn fur alle Interpretationen der Signatur, f ¨ ur die ¨ $WB$ wahr ist, auch $Q$ wahr ist.
+Ein logischer Term $Q$ \textbf{folgt} aus einer Wissensbasis $WB$, wenn für alle Interpretationen der Signatur, für die $WB$ wahr ist, auch $Q$ wahr ist.
 
 \textbf{Notation:} $WB \models Q$
 
@@ -667,7 +667,7 @@ Ein logischer Term $Q$ \textbf{folgt} aus einer Wissensbasis $WB$, wenn fur alle
 \end{mainbox}
 
 \begin{mainbox}{Deduktionstheorem}
-Eine Aussage $Q$ folgt genau dann semantisch aus einer Wissensbasis $WB$, wenn $WB \Rightarrow Q$ allgemeingultig ist. ¨
+Eine Aussage $Q$ folgt genau dann semantisch aus einer Wissensbasis $WB$, wenn $WB \Rightarrow Q$ allgemeingültig ist.
 
 $$WB \models Q \iff WB \Rightarrow Q \text{ ist Tautologie}$$
 \end{mainbox}
@@ -675,20 +675,20 @@ $$WB \models Q \iff WB \Rightarrow Q \text{ ist Tautologie}$$
 \begin{mainbox}{Widerspruchsbeweis}
 Eine Aussage $Q$ folgt genau dann semantisch aus einer Wissensbasis $WB$, wenn $WB \land \neg Q$ eine Kontradiktion ist.
 
-$$WB \models Q \iff WB \land \neg Q \text{ ist unerfullbar} ¨$$
+$$WB \models Q \iff WB \land \neg Q \text{ ist unerfüllbar}$$
 
 \textbf{Herleitung:}
 $$\neg(WB \Rightarrow Q) \equiv \neg(\neg WB \lor Q) \equiv WB \land \neg Q$$
 \end{mainbox}
 
 \begin{mainbox}{Syntaktische Ableitung}
-Ein logischer Term $Q$ ist eine \textbf{Ableitung} aus einer Wissensbasis $WB$, wenn er nach Regeln eines Beweiskalkuls hergeleitet werden kann. ¨
+Ein logischer Term $Q$ ist eine \textbf{Ableitung} aus einer Wissensbasis $WB$, wenn er nach Regeln eines Beweiskalküls hergeleitet werden kann.
 
 \textbf{Notation:} $WB \vdash Q$
 
 (syntaktische Ableitung, syntactic derivation)
 
-Die Gesamtheit der erlaubten Regeln heisst ein \textbf{Beweiskalkul}. ¨
+Die Gesamtheit der erlaubten Regeln heisst ein \textbf{Beweiskalkul}.
 \end{mainbox}
 
 \begin{mainbox}{Resolutionsregel}
@@ -699,7 +699,7 @@ $$\vdash (A_1 \lor \ldots \lor A_m \lor C_1 \lor \ldots \lor C_n)$$
 \textbf{Einfache Form:}
 $$(A \lor B) \land (\neg B \lor C) \vdash (A \lor C)$$
 
-\textbf{Aquivalent:} ¨
+\textbf{Äquivalent:}
 $$(A \lor B) \land (B \Rightarrow C) \vdash (A \lor C)$$
 \end{mainbox}
 
@@ -716,7 +716,7 @@ $$K \equiv L_1 \lor L_2 \lor \ldots \lor L_n$$
 $$L \equiv A \quad \text{oder} \quad L \equiv \neg A$$
 \end{mainbox}
 
-\begin{mainbox}{Resolutionskalkul} ¨
+\begin{mainbox}{Resolutionskalkül}
 Um zu zeigen, dass $Q$ aus $WB$ abgeleitet werden kann:
 
 \textbf{Vorgehen:}
@@ -729,39 +729,39 @@ Um zu zeigen, dass $Q$ aus $WB$ abgeleitet werden kann:
 $$WB \vdash Q \iff WB \land \neg Q \vdash F$$
 \end{mainbox}
 
-\begin{mainbox}{Eigenschaften von Beweiskalk¨ulen}
-Ein Beweiskalkul heisst: ¨
+\begin{mainbox}{Eigenschaften von Beweiskalkülen}
+Ein Beweiskalkül heisst:
 
 \textbf{Korrekt:} Jede syntaktisch ableitbare Aussage folgt auch semantisch.
 $$\text{wenn } WB \vdash Q \text{ dann } WB \models Q$$
 
-\textbf{Vollst¨andig:} Alle semantischen Folgerungen lassen sich syntaktisch ableiten.
+\textbf{Vollständig:} Alle semantischen Folgerungen lassen sich syntaktisch ableiten.
 $$\text{wenn } WB \models Q \text{ dann } WB \vdash Q$$
 \end{mainbox}
 
-\begin{mainbox}{G¨odelscher Vollst¨andigkeitssatz}
-Fur die ¨ \textbf{Pr¨adikatenlogik erster Stufe} gibt es vollst¨andige und korrekte Beweiskalkule. ¨
+\begin{mainbox}{Gödelscher Vollständigkeitssatz}
+Für die \textbf{Prädikatenlogik erster Stufe} gibt es vollständige und korrekte Beweiskalküle.
 
-Der Resolutionskalkul f ¨ ur Pr ¨ ¨adikatenlogik erster Stufe (1965) ist vollst¨andig und korrekt.
+Der Resolutionskalkül für Prädikatenlogik erster Stufe (1965) ist vollständig und korrekt.
 \end{mainbox}
 
 \begin{subbox}{Entscheidbarkeit}
 \textbf{Aussagenlogik:} Beweiser sind \textbf{entscheidbar} (stoppen immer nach endlicher Zeit)
 
-\textbf{Pr¨adikatenlogik 1. Stufe:} Beweiser sind \textbf{halbentscheidbar} (k¨onnen in Endlosschleife laufen, wenn Aussage nicht allgemeingultig) ¨
+\textbf{Prädikatenlogik 1. Stufe:} Beweiser sind \textbf{halbentscheidbar} (können in Endlosschleife laufen, wenn Aussage nicht allgemeingültig)
 \end{subbox}
 
-\begin{mainbox}{G¨odelscher Unvollst¨andigkeitssatz}
-Fur die ¨ \textbf{Pr¨adikatenlogik zweiter Stufe} gibt es wahre Aussagen, die kein Beweiskalkul ableiten kann. ¨
+\begin{mainbox}{Gödelscher Unvollständigkeitssatz}
+Für die \textbf{Prädikatenlogik zweiter Stufe} gibt es wahre Aussagen, die kein Beweiskalkül ableiten kann.
 
-Die Pr¨adikatenlogik ab zweiter Stufe ist \textbf{nicht vollst¨andig}.
+Die Prädikatenlogik ab zweiter Stufe ist \textbf{nicht vollständig}.
 \end{mainbox}
 
 \begin{subbox}{PROLOG}
 \textbf{Formel von Robert Kowalski:}
 $$\text{Algorithm} = \text{Logic} + \text{Control}$$
 
-PROLOG: Deklarative Programmiersprache fur logische Programmierung ¨
+PROLOG: Deklarative Programmiersprache für logische Programmierung
 
 \textbf{Anwendungen:} KI, Computerlinguistik, automatische Beweiser
 \end{subbox}
@@ -772,27 +772,27 @@ PROLOG: Deklarative Programmiersprache fur logische Programmierung ¨
 \section{Analyse von Algorithmen}
 
 \begin{mainbox}{Worst-Case-Analyse}
-Bei einer \textbf{Worst-Case-Analyse} wird in Abh¨angigkeit von der Gr¨osse $n$ des Inputs die \textbf{maximale} Anzahl Rechnungsschritte angegeben, die zur Berechnung n¨otig sein k¨onnen.
+Bei einer \textbf{Worst-Case-Analyse} wird in Abhängigkeit von der Grösse $n$ des Inputs die \textbf{maximale} Anzahl Rechnungsschritte angegeben, die zur Berechnung nötig sein können.
 
-\textbf{Ziel:} Vergleich der Wachstumsrate der Laufzeit bei zunehmender Eingabegr¨osse
+\textbf{Ziel:} Vergleich der Wachstumsrate der Laufzeit bei zunehmender Eingabegrösse
 \end{mainbox}
 
 \begin{mainbox}{Asymptotische Notation: Big-O}
 Seien $f$ und $g$ zwei Funktionen, welche die Rechnungsschritte zweier Algorithmen angeben.
 
-$f(x)$ \textbf{wächst nicht stärker} als $g(x)$, wenn fur alle Input-Werte ¨ $x$ gr¨osser als ein Startwert $x_0$ gilt:
+$f(x)$ \textbf{wächst nicht stärker} als $g(x)$, wenn für alle Input-Werte $x$ grösser als ein Startwert $x_0$ gilt:
 
-\[f(x) \leq C \cdot g(x) \quad \text{fur eine feste Konstante } C ¨\]
+\[f(x) \leq C \cdot g(x) \quad \text{für eine feste Konstante } C\]
 
 \textbf{Notation:} $f(x)$ ist in $O(g(x))$ (Big-O)
 
-$f$ wächst \textbf{h¨ochstens so schnell} wie $g$.
+$f$ wächst \textbf{höchstens so schnell} wie $g$.
 \end{mainbox}
 
 \begin{mainbox}{Asymptotische Notation: Big-$\Omega$}
 $f(x)$ \textbf{wächst nicht langsamer} als $g(x)$, wenn für alle Input-Werte $x$ grösser als ein Startwert $x_0$ gilt:
 
-\[f(x) \geq c \cdot g(x) \quad \text{für eine feste Konstante } c ¨\]
+\[f(x) \geq c \cdot g(x) \quad \text{für eine feste Konstante } c\]
 
 \textbf{Notation:} $f(x)$ ist in $\Omega(g(x))$ (Big-Omega)
 
@@ -808,21 +808,21 @@ $$f(x) \text{ in } O(g(x)) \text{ und } f(x) \text{ in } \Omega(g(x))$$
 
 $f$ und $g$ haben \textbf{dieselbe Wachstumsrate}.
 
-\textbf{Aquivalent:} ¨ Es existieren Konstanten $c, C$ und $x_0$, sodass:
+\textbf{Äquivalent:} Es existieren Konstanten $c, C$ und $x_0$, sodass:
 $$c \cdot g(x) \leq f(x) \leq C \cdot g(x) \quad \forall x \geq x_0$$
 \end{mainbox}
 
-\begin{mainbox}{Komplexit¨atsklassen: Polynomiell}
+\begin{mainbox}{Komplexitätsklassen: Polynomiell}
 \textbf{Polynomielles Wachstum:}
 $$O(1) \subset O(\log(n)) \subset O(n) \subset O(n \log(n))$$
 $$\subset O(n^2) \subset \ldots \subset O(n^k) \subset \ldots$$
 
-Probleme mit polynomieller Komplexit¨at heissen \textbf{real l¨osbar}.
+Probleme mit polynomieller Komplexität heissen \textbf{real lösbar}.
 
 \textbf{Beispiele:}
 \begin{itemize}
     \item $O(1)$: Speicherzugriff
-    \item $O(\log(n))$: Bin¨are Suche
+    \item $O(\log(n))$: Binäre Suche
     \item $O(n)$: Lineare Suche
     \item $O(n \log(n))$: Mergesort
     \item $O(n^2)$: Klassische Sortierverfahren
@@ -830,27 +830,27 @@ Probleme mit polynomieller Komplexit¨at heissen \textbf{real l¨osbar}.
 \end{itemize}
 \end{mainbox}
 
-\begin{mainbox}{Komplexit¨atsklassen: Exponentiell}
+\begin{mainbox}{Komplexitätsklassen: Exponentiell}
 \textbf{Exponentielles Wachstum:}
 $$O(2^n) \subset O(3^n) \subset O(4^n) \subset \ldots \subset O(a^n) \subset \ldots$$
 
-Probleme, die nur mit exponentiellem Algorithmus gel¨ost werden k¨onnen, heissen \textbf{real unl¨osbar}.
+Probleme, die nur mit exponentiellem Algorithmus gelöst werden können, heissen \textbf{real unlösbar}.
 
 \textbf{Beispiel:}
 \begin{itemize}
-    \item $O(2^n)$: SAT Problem (naive L¨osung)
-    \item $O(n!)$: Travelling Salesman (naive L¨osung)
+    \item $O(2^n)$: SAT Problem (naive Lösung)
+    \item $O(n!)$: Travelling Salesman (naive Lösung)
 \end{itemize}
 \end{mainbox}
 
-\begin{subbox}{Nachweis der Komplexit¨at}
+\begin{subbox}{Nachweis der Komplexität}
 Um zu zeigen, dass $f(x)$ in $O(g(x))$, $\Omega(g(x))$ oder $\Theta(g(x))$ ist, muss man \textbf{Zeugen} angeben:
 
-\textbf{F¨ur Big-O:} Startwert $x_0$ und Konstante $C$
+\textbf{Für Big-O:} Startwert $x_0$ und Konstante $C$
 
-\textbf{F¨ur Big-$\Omega$:} Startwert $x_0$ und Konstante $c$
+\textbf{Für Big-$\Omega$:} Startwert $x_0$ und Konstante $c$
 
-\textbf{F¨ur Big-$\Theta$:} Beide Nachweise f¨ur $O$ und $\Omega$
+\textbf{Für Big-$\Theta$:} Beide Nachweise für $O$ und $\Omega$
 \end{subbox}
 
 % ============================================================================
@@ -859,30 +859,30 @@ Um zu zeigen, dass $f(x)$ in $O(g(x))$, $\Omega(g(x))$ oder $\Theta(g(x))$ ist, 
 \section{Rekursive Algorithmen}
 
 \begin{mainbox}{Definition: Rekursiver Algorithmus}
-Ein \textbf{rekursiver Algorithmus} ist eine Methode zur Probleml¨osung, bei der eine Funktion sich selbst aufruft, um kleinere Instanzen desselben Problems zu bearbeiten.
+Ein \textbf{rekursiver Algorithmus} ist eine Methode zur Problemlösung, bei der eine Funktion sich selbst aufruft, um kleinere Instanzen desselben Problems zu bearbeiten.
 
 \textbf{Prinzip:}
 \begin{itemize}
-    \item Funktion kann f¨ur kleinen Input (z.B. $n=1$) direkt berechnet werden
-    \item F¨ur grossen Input $n$: Teile Problem in gleiche Probleme mit kleinerem Input
+    \item Funktion kann für kleinen Input (z.B. $n=1$) direkt berechnet werden
+    \item Für grossen Input $n$: Teile Problem in gleiche Probleme mit kleinerem Input
     \item Rekonstruiere Lösung für $n$ aus den Teillösungen
 \end{itemize}
 
 Solche Verfahren heissen \textbf{divide-and-conquer} Algorithmen.
 \end{mainbox}
 
-\begin{mainbox}{Master-Theorem f¨ur Divide-and-Conquer}
+\begin{mainbox}{Master-Theorem für Divide-and-Conquer}
 Rekursive Beziehung der Form:
 $$T(n) = a \cdot T\left(\frac{n}{b}\right) + c \cdot n^k \quad \text{und} \quad T(1) = c$$
 
 \textbf{Parameter:}
 \begin{itemize}
     \item $a$: Anzahl rekursiver Aufrufe
-    \item $b$: Teilungsfaktor der Eingabegr¨osse
-    \item $c \cdot n^k$: Aufwand f¨ur Teilen und Kombinieren
+    \item $b$: Teilungsfaktor der Eingabegrösse
+    \item $c \cdot n^k$: Aufwand für Teilen und Kombinieren
 \end{itemize}
 
-\textbf{F¨ur konstante Zahlen} $a \geq 1, b > 1, c > 0, k \geq 0$ gilt:
+\textbf{Für konstante Zahlen} $a \geq 1, b > 1, c > 0, k \geq 0$ gilt:
 
 \textbf{Fall 1:} Wenn $b^k < a$, dann ist $T(n)$ in $\Theta(n^{\log_b(a)})$
 
@@ -893,9 +893,9 @@ $$T(n) = a \cdot T\left(\frac{n}{b}\right) + c \cdot n^k \quad \text{und} \quad 
 
 \begin{subbox}{Beispiel: MergeSort}
 \textbf{Rekursionsbeziehung:}
-$$T(n) = T\left(\left\lfloor\frac{n}{2}\right\rfloor\right) + T\left(\left\lceil\frac{n}{2}\right\rceil\right) + \text{Aufwand f¨ur merge}$$
+$$T(n) = T\left(\left\lfloor\frac{n}{2}\right\rfloor\right) + T\left(\left\lceil\frac{n}{2}\right\rceil\right) + \text{Aufwand für merge}$$
 
-F¨ur $n = 2^k$: $T(n) = 2 \cdot T\left(\frac{n}{2}\right) + n$
+Für $n = 2^k$: $T(n) = 2 \cdot T\left(\frac{n}{2}\right) + n$
 
 \textbf{Mit Master-Theorem:} $a=2, b=2, k=1$
 $$b^k = 2^1 = 2 = a \quad \Rightarrow \quad T(n) \text{ in } \Theta(n \log(n))$$
@@ -912,13 +912,13 @@ heisst \textbf{linear vom Grad} $k$ mit \textbf{konstanten Koeffizienten} $c_1, 
 \textbf{Inhomogen:} wenn $F(n) \neq 0$
 \end{mainbox}
 
-\begin{mainbox}{L¨osung homogener Rekursionsbeziehungen}
+\begin{mainbox}{Lösung homogener Rekursionsbeziehungen}
 \textbf{Grad k = 1:}
 $$T(n) = c_1 \cdot T(n-1) \quad \Rightarrow \quad T(n) = a \cdot c_1^n$$
 
 \textbf{Grad k = 2:}
 
-Bestimme L¨osungen $r_1, r_2$ der charakteristischen Gleichung:
+Bestimme Lösungen $r_1, r_2$ der charakteristischen Gleichung:
 $$r^2 = c_1 \cdot r + c_2$$
 
 \textbf{Fall 1:} Wenn $r_1 \neq r_2$, dann gilt $T(n) = a \cdot r_1^n + b \cdot r_2^n$
@@ -928,27 +928,27 @@ $$r^2 = c_1 \cdot r + c_2$$
 Die Konstanten $a$ und $b$ werden aus den Anfangsbedingungen bestimmt.
 \end{mainbox}
 
-\begin{mainbox}{L¨osung inhomogener Rekursionsbeziehungen}
+\begin{mainbox}{Lösung inhomogener Rekursionsbeziehungen}
 $$T(n) = c_1 \cdot T(n-1) + c_2 \cdot T(n-2) + \ldots + c_k \cdot T(n-k) + F(n)$$
 
 \textbf{Vorgehen:}
 \begin{enumerate}
-    \item Bestimme allgemeine L¨osung $T_h(n)$ der homogenen Rekursionsbeziehung (ohne $F(n)$)
-    \item Finde eine partikul¨are L¨osung $T_p(n)$ der inhomogenen Beziehung durch passenden Ansatz
-    \item Die allgemeine L¨osung ist: $T(n) = T_h(n) + T_p(n)$
+    \item Bestimme allgemeine Lösung $T_h(n)$ der homogenen Rekursionsbeziehung (ohne $F(n)$)
+    \item Finde eine partikuläre Lösung $T_p(n)$ der inhomogenen Beziehung durch passenden Ansatz
+    \item Die allgemeine Lösung ist: $T(n) = T_h(n) + T_p(n)$
 \end{enumerate}
 \end{mainbox}
 
 \begin{subbox}{Rekursionsbaum}
 Ein \textbf{Rekursionsbaum} visualisiert die rekursiven Aufrufe eines Algorithmus:
 \begin{itemize}
-    \item Jeder Knoten repr¨asentiert einen rekursiven Aufruf
+    \item Jeder Knoten repräsentiert einen rekursiven Aufruf
     \item Kinder eines Knotens sind die direkten rekursiven Aufrufe
-    \item Bl¨atter repr¨asentieren Basisf¨alle
+    \item Blätter repräsentieren Basisfälle
     \item Tiefe des Baums: Anzahl rekursiver Ebenen
 \end{itemize}
 
-N¨utzlich zur Analyse der Komplexit¨at!
+Nützlich zur Analyse der Komplexität!
 \end{subbox}
 
 % ============================================================================
@@ -957,29 +957,29 @@ N¨utzlich zur Analyse der Komplexit¨at!
 \section{Mathematische Induktion}
 
 \begin{mainbox}{Ziel der mathematischen Induktion}
-F¨ur ein Pr¨adikat $P(n)$ mit einer nat¨urlichen Zahl $n$ als Variable zu beweisen, dass die Aussage
+Für ein Prädikat $P(n)$ mit einer natürlichen Zahl $n$ als Variable zu beweisen, dass die Aussage
 
 $$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : P(n)$$
 
-wahr ist. Das Pr¨adikat $P(n)$ ist f¨ur alle nat¨urlichen Zahlen $n$ gr¨osser einer Startzahl $n_0$ wahr.
+wahr ist. Das Prädikat $P(n)$ ist für alle natürlichen Zahlen $n$ grösser einer Startzahl $n_0$ wahr.
 \end{mainbox}
 
 \begin{mainbox}{Schwache Induktion}
 \textbf{Induktionsverankerung:}
 
-Wir weisen nach, dass das Pr¨adikat $P(n_0)$ f¨ur die Startzahl $n_0$ wahr ist:
+Wir weisen nach, dass das Prädikat $P(n_0)$ für die Startzahl $n_0$ wahr ist:
 $$P(n_0) \equiv \text{True}$$
 
 \textbf{Induktionsschritt:}
 
-Wir weisen nach, dass f¨ur alle nat¨urlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
+Wir weisen nach, dass für alle natürlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
 $$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : (P(n) \Rightarrow P(n+1)) \equiv \text{True}$$
 
 \textbf{Prinzip:} Von $P(n_0)$ folgt $P(n_0+1)$, daraus folgt $P(n_0+2)$, usw.
 \end{mainbox}
 
 \begin{subbox}{Anwendung: Korrektheit von Algorithmen}
-Mathematische Induktion kann verwendet werden, um die Korrektheit von Algorithmen zu beweisen, deren Input mit nat¨urlichen Zahlen parametrisiert ist.
+Mathematische Induktion kann verwendet werden, um die Korrektheit von Algorithmen zu beweisen, deren Input mit natürlichen Zahlen parametrisiert ist.
 
 \textbf{Beispiele:}
 \begin{itemize}
@@ -991,16 +991,16 @@ Mathematische Induktion kann verwendet werden, um die Korrektheit von Algorithme
 \end{subbox}
 
 \begin{mainbox}{Starke Induktion}
-Im Unterschied zur schwachen Induktion k¨onnen wir bei der starken Induktion \textbf{alle} bereits gezeigten Pr¨adikate $P(k)$ beim Induktionsschritt verwenden.
+Im Unterschied zur schwachen Induktion können wir bei der starken Induktion \textbf{alle} bereits gezeigten Prädikate $P(k)$ beim Induktionsschritt verwenden.
 
 \textbf{Induktionsverankerung:}
 
-Wir weisen nach, dass das Pr¨adikat $P(n_0)$ f¨ur die Startzahl $n_0$ wahr ist:
+Wir weisen nach, dass das Prädikat $P(n_0)$ für die Startzahl $n_0$ wahr ist:
 $$P(n_0) \equiv \text{True}$$
 
 \textbf{Induktionsschritt:}
 
-Wir weisen nach, dass f¨ur alle nat¨urlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n_0), P(n_0+1), \ldots, P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
+Wir weisen nach, dass für alle natürlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n_0), P(n_0+1), \ldots, P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
 $$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : (P(n_0) \land \ldots \land P(n) \Rightarrow P(n+1)) \equiv \text{True}$$
 \end{mainbox}
 
@@ -1008,20 +1008,20 @@ $$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : (P(n_0) \land \ldots \land P
 \textbf{Schwache Induktion:}
 \begin{itemize}
     \item Induktionsschritt: $P(n) \Rightarrow P(n+1)$
-    \item Verwendet nur den \textbf{unmittelbaren Vorg¨anger}
+    \item Verwendet nur den \textbf{unmittelbaren Vorgänger}
 \end{itemize}
 
 \textbf{Starke Induktion:}
 \begin{itemize}
     \item Induktionsschritt: $P(n_0) \land \ldots \land P(n) \Rightarrow P(n+1)$
-    \item Verwendet \textbf{alle vorherigen F¨alle}
+    \item Verwendet \textbf{alle vorherigen Fälle}
 \end{itemize}
 
 \textbf{Wann starke Induktion verwenden?}
 \begin{itemize}
-    \item Wenn $P(n+1)$ von mehreren vorherigen Werten abh¨angt
+    \item Wenn $P(n+1)$ von mehreren vorherigen Werten abhängt
     \item Bei rekursiven Algorithmen mit mehreren Aufrufen
-    \item Beispiele: QuickSort, M¨unzproblem
+    \item Beispiele: QuickSort, Münzproblem
 \end{itemize}
 \end{mainbox}
 
@@ -1030,13 +1030,13 @@ Mathematische Induktion ist direkt vergleichbar mit Rekursion:
 
 \textbf{Rekursion:}
 \begin{itemize}
-    \item L¨osung f¨ur $n$ beruht auf L¨osung f¨ur kleinere Instanzen
+    \item Lösung für $n$ beruht auf Lösung für kleinere Instanzen
     \item Basisfall entspricht kleinster Instanz
 \end{itemize}
 
 \textbf{Induktion:}
 \begin{itemize}
-    \item Beweis f¨ur $n$ beruht auf Beweis f¨ur kleinere Instanzen
+    \item Beweis für $n$ beruht auf Beweis für kleinere Instanzen
     \item Induktionsverankerung entspricht Basisfall
 \end{itemize}
 \end{subbox}
@@ -1050,49 +1050,49 @@ $$\sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}$$
 $$\sum_{i=0}^{n-1} q^i = \frac{q^n - 1}{q - 1} \quad (q \neq 1)$$
 
 \textbf{Ungleichungen:}
-$$2^n > n^2 \quad \text{f¨ur } n \geq 5$$
+$$2^n > n^2 \quad \text{für } n \geq 5$$
 \end{mainbox}
 
 % ============================================================================
 % SECTION 12: GRUNDLEGENDE ZÄHLTECHNIKEN (FUNDAMENTAL COUNTING TECHNIQUES)
 % ============================================================================
-\section{Grundlegende Z¨ahltechniken}
+\section{Grundlegende Zähltechniken}
 
-\begin{mainbox}{Kardinalit¨at}
-\textbf{Z¨ahlen:} Berechne bei einer Menge $S$ die Anzahl $|S|$ ihrer Elemente.
+\begin{mainbox}{Kardinalität}
+\textbf{Zählen:} Berechne bei einer Menge $S$ die Anzahl $|S|$ ihrer Elemente.
 
-Die Anzahl $|S|$ wird auch \textbf{Kardinalit¨at} der Menge $S$ genannt.
+Die Anzahl $|S|$ wird auch \textbf{Kardinalität} der Menge $S$ genannt.
 \end{mainbox}
 
-\begin{mainbox}{Z¨ahlprinzip 1: Die Summenregel}
+\begin{mainbox}{Zählprinzip 1: Die Summenregel}
 Zwei Mengen $A$ und $B$ sind \textbf{disjunkt}, wenn ihr Durchschnitt leer ist: $A \cap B = \emptyset$.
 
 Wenn zwei endliche Mengen $A$ und $B$ disjunkt sind, dann gilt:
 $$|A \cup B| = |A| + |B|$$
 
-\textbf{Partition:} F¨ur paarweise disjunkte Mengen $S_1, S_2, \ldots, S_n$ mit
+\textbf{Partition:} Für paarweise disjunkte Mengen $S_1, S_2, \ldots, S_n$ mit
 $$S = S_1 \cup S_2 \cup \ldots \cup S_n$$
 gilt:
 $$|S| = |S_1| + |S_2| + \ldots + |S_n|$$
 \end{mainbox}
 
-\begin{mainbox}{Z¨ahlprinzip 2: Die Produktregel}
+\begin{mainbox}{Zählprinzip 2: Die Produktregel}
 Das \textbf{kartesische Produkt} $A \times B$ ist die Menge aller Listen $[x, y]$, wobei $x \in A$ und $y \in B$.
 
-F¨ur zwei endliche Mengen $A$ und $B$ gilt:
+Für zwei endliche Mengen $A$ und $B$ gilt:
 $$|A \times B| = |A| \cdot |B|$$
 
-\textbf{Allgemein:} F¨ur $n$ Mengen $S_1, S_2, \ldots, S_n$ gilt:
+\textbf{Allgemein:} Für $n$ Mengen $S_1, S_2, \ldots, S_n$ gilt:
 $$|S_1 \times S_2 \times \ldots \times S_n| = |S_1| \cdot |S_2| \cdot \ldots \cdot |S_n|$$
 
-\textbf{Spezialfall:} F¨ur $S_1 = S_2 = \ldots = S_n = S$ gilt:
+\textbf{Spezialfall:} Für $S_1 = S_2 = \ldots = S_n = S$ gilt:
 $$|S^n| = |S|^n$$
 \end{mainbox}
 
-\begin{mainbox}{Z¨ahlprinzip 3: Die Zuordnungsregel}
+\begin{mainbox}{Zählprinzip 3: Die Zuordnungsregel}
 Eine Abbildung $f: A \to B$ heisst:
 \begin{itemize}
-    \item \textbf{injektiv}: Jedes Element in $B$ h¨ochstens einmal als Output
+    \item \textbf{injektiv}: Jedes Element in $B$ höchstens einmal als Output
     \item \textbf{surjektiv}: Jedes Element in $B$ mindestens einmal als Output
     \item \textbf{bijektiv}: Jedes Element in $B$ genau einmal als Output
 \end{itemize}
@@ -1103,7 +1103,7 @@ $$|B| = \frac{|A|}{k}$$
 \textbf{Spezialfall bijektiv} ($k=1$): $|B| = |A|$
 \end{mainbox}
 
-\begin{mainbox}{Sechs fundamentale Z¨ahlprobleme}
+\begin{mainbox}{Sechs fundamentale Zählprobleme}
 Aus $n$ \textbf{paarweise verschiedenen} Objekten:
 
 \textbf{1. Permutationen (alle $n$ Objekte, geordnet):}
@@ -1126,7 +1126,7 @@ $$\binom{n}{k} = \frac{n!}{k! \cdot (n-k)!}$$
 $$\binom{n+k-1}{k} = \frac{(n+k-1)!}{k! \cdot (n-1)!}$$
 \end{mainbox}
 
-\begin{subbox}{Entscheidungsbaum f¨ur Z¨ahlprobleme}
+\begin{subbox}{Entscheidungsbaum für Zählprobleme}
 \textbf{Fragen zur Problemklassifikation:}
 \begin{enumerate}
     \item Alle $n$ Objekte oder nur $k$ von $n$?
@@ -1137,7 +1137,7 @@ $$\binom{n+k-1}{k} = \frac{(n+k-1)!}{k! \cdot (n-1)!}$$
 
 \textbf{Beispiele:}
 \begin{itemize}
-    \item Datenworte der L¨ange $n$: $2^n$ (Variation mit Wdh.)
+    \item Datenworte der Länge $n$: $2^n$ (Variation mit Wdh.)
     \item Potenzmenge von $A$: $|P(A)| = 2^{|A|}$
     \item Handshakes in Netzwerk: $\binom{n}{2}$ (Kombination ohne Wdh.)
 \end{itemize}
@@ -1146,31 +1146,31 @@ $$\binom{n+k-1}{k} = \frac{(n+k-1)!}{k! \cdot (n-1)!}$$
 % ============================================================================
 % SECTION 13: KOMPLEXERE ZÄHLTECHNIKEN (MORE COMPLEX COUNTING TECHNIQUES)
 % ============================================================================
-\section{Komplexere Z¨ahltechniken}
+\section{Komplexere Zähltechniken}
 
 \begin{mainbox}{Prinzip von Inklusion und Exklusion}
-\textbf{Problem:} Summenregel gilt nur f¨ur paarweise disjunkte Mengen.
+\textbf{Problem:} Summenregel gilt nur für paarweise disjunkte Mengen.
 
-\textbf{F¨ur zwei Mengen:}
+\textbf{Für zwei Mengen:}
 $$|S_1 \cup S_2| = |S_1| + |S_2| - |S_1 \cap S_2|$$
 
-\textbf{F¨ur drei Mengen:}
+\textbf{Für drei Mengen:}
 $$|S_1 \cup S_2 \cup S_3| = |S_1| + |S_2| + |S_3|$$
 $$- |S_1 \cap S_2| - |S_1 \cap S_3| - |S_2 \cap S_3|$$
 $$+ |S_1 \cap S_2 \cap S_3|$$
 
-\textbf{Allgemein f¨ur $n$ Mengen:}
+\textbf{Allgemein für $n$ Mengen:}
 
-Die Kardinalit¨at $|S| = |S_1 \cup S_2 \cup \ldots \cup S_n|$ wird berechnet:
+Die Kardinalität $|S| = |S_1 \cup S_2 \cup \ldots \cup S_n|$ wird berechnet:
 \begin{enumerate}
-    \item \textbf{Summe:} Z¨ahle $|S_1| + |S_2| + \ldots + |S_n|$
-    \item \textbf{Inklusion:} Addiere ¨Uberschneidungen einer \textbf{geraden} Anzahl von Mengen
-    \item \textbf{Exklusion:} Subtrahiere ¨Uberschneidungen einer \textbf{ungeraden} Anzahl von Mengen
+    \item \textbf{Summe:} Zähle $|S_1| + |S_2| + \ldots + |S_n|$
+    \item \textbf{Inklusion:} Addiere Überschneidungen einer \textbf{geraden} Anzahl von Mengen
+    \item \textbf{Exklusion:} Subtrahiere Überschneidungen einer \textbf{ungeraden} Anzahl von Mengen
 \end{enumerate}
 
 $$|S| = \text{Summe} + \text{Inklusion} - \text{Exklusion}$$
 
-\textbf{Prinzip:} Erst mit Inklusion z¨ahlen, dann mit Exklusion korrigieren.
+\textbf{Prinzip:} Erst mit Inklusion zählen, dann mit Exklusion korrigieren.
 \end{mainbox}
 
 \begin{subbox}{Anwendungen Inklusion-Exklusion}
@@ -1181,44 +1181,44 @@ $$|S| = \text{Summe} + \text{Inklusion} - \text{Exklusion}$$
     \item Programme mit bestimmten Eigenschaften
 \end{itemize}
 
-\textbf{Spezialfall:} Die Summenregel ist Inklusion-Exklusion f¨ur paarweise disjunkte Mengen (Inklusion = Exklusion = 0).
+\textbf{Spezialfall:} Die Summenregel ist Inklusion-Exklusion für paarweise disjunkte Mengen (Inklusion = Exklusion = 0).
 \end{subbox}
 
-\begin{mainbox}{Z¨ahlen mit Rekursion (Divide and Conquer)}
-Wenn Elemente einer Menge $S$ von ganzzahligem Parameter $n_0$ abh¨angen:
+\begin{mainbox}{Zählen mit Rekursion (Divide and Conquer)}
+Wenn Elemente einer Menge $S$ von ganzzahligem Parameter $n_0$ abhängen:
 
 \textbf{Strategie:}
 \begin{enumerate}
-    \item Bezeichne mit $s(n)$ die Kardinalit¨at von $S$ f¨ur beliebiges $n$
-    \item Bestimme Rekursionsbeziehung f¨ur $s(n)$
-    \item L¨ose Rekursionsbeziehung auf
-    \item Bestimme gesuchte L¨osung $|S| = s(n_0)$
+    \item Bezeichne mit $s(n)$ die Kardinalität von $S$ für beliebiges $n$
+    \item Bestimme Rekursionsbeziehung für $s(n)$
+    \item Löse Rekursionsbeziehung auf
+    \item Bestimme gesuchte Lösung $|S| = s(n_0)$
 \end{enumerate}
 
-\textbf{H¨aufig:} Parameter $n$ beschreibt L¨ange oder Anzahl der Objekte.
+\textbf{Häufig:} Parameter $n$ beschreibt Länge oder Anzahl der Objekte.
 
 \textbf{Beispiele:}
 \begin{itemize}
     \item Datenworte ohne aufeinanderfolgende Nullen
-    \item Passw¨orter mit gerader Anzahl bestimmter Zeichen
+    \item Passwörter mit gerader Anzahl bestimmter Zeichen
     \item Datenworte ohne bestimmte Muster
-    \item Treppensteigen mit verschiedenen Schrittgr¨o{\ss}en
+    \item Treppensteigen mit verschiedenen Schrittgrössen
 \end{itemize}
 \end{mainbox}
 
-\begin{mainbox}{Z¨ahlen mit erzeugenden Funktionen}
-\textbf{Idee:} Z¨ahlproblem in algebraisches Problem ¨uberf¨uhren.
+\begin{mainbox}{Zählen mit erzeugenden Funktionen}
+\textbf{Idee:} Zählproblem in algebraisches Problem überführen.
 
 Wenn Elemente von $S$ mit Summen beschreibbar sind:
 
 \textbf{Strategie:}
 \begin{enumerate}
     \item Beschreibe alle Elemente von $S$ mit Gleichung
-    \item Bestimme erzeugende Funktion f¨ur L¨osungen
+    \item Bestimme erzeugende Funktion für Lösungen
     \item Multipliziere Produkte aus und fasse gleiche Potenzen zusammen
 \end{enumerate}
 
-\textbf{Beispiel:} F¨ur Gleichung $x_1 + x_2 + x_3 = 11$ mit\\
+\textbf{Beispiel:} Für Gleichung $x_1 + x_2 + x_3 = 11$ mit\\
 $x_1 \in \{2,3,4\}$, $x_2 \in \{3,4\}$, $x_3 \in \{4,5\}$:
 
 \textbf{Erzeugende Funktion:}
@@ -1227,17 +1227,17 @@ $$(x^2 + x^3 + x^4) \cdot (x^3 + x^4) \cdot (x^4 + x^5)$$
 Ausmultiplizieren ergibt:
 $$x^9 + 3x^{10} + 4x^{11} + 3x^{12} + x^{13}$$
 
-Der Koeffizient 4 bei $x^{11}$ zeigt: Es gibt 4 L¨osungen.
+Der Koeffizient 4 bei $x^{11}$ zeigt: Es gibt 4 Lösungen.
 
-\textbf{Die Kardinalit¨at $|S|$ entspricht dem Koeffizienten des entsprechenden Potenzterms.}
+\textbf{Die Kardinalität $|S|$ entspricht dem Koeffizienten des entsprechenden Potenzterms.}
 \end{mainbox}
 
 \begin{subbox}{Anwendungen erzeugende Funktionen}
 \begin{itemize}
-    \item W¨urfelw¨urfe mit bestimmter Augensumme
+    \item Würfelwürfe mit bestimmter Augensumme
     \item Verteilung von Jobs auf Server mit Constraints
-    \item M¨unzproblem: Betrag mit bestimmten M¨unzen bezahlen
-    \item Kombinationen mit Einschr¨ankungen
+    \item Münzproblem: Betrag mit bestimmten Münzen bezahlen
+    \item Kombinationen mit Einschränkungen
 \end{itemize}
 
 \textbf{Unterscheidung:}

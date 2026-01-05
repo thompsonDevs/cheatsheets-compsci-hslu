@@ -267,29 +267,21 @@ a_{m,1} & a_{m,2} & \cdots & a_{m,n}
 \begin{mainbox}{Matrix-Vektor-Multiplikation}
 $(m \times n)$-Matrix $\mathbf{A}$ mal $n$-Vektor $\mathbf{x}$ ergibt $m$-Vektor:
 
-$$\mathbf{A}\mathbf{x} = \begin{pmatrix}
+\[\mathbf{A}\mathbf{x} = \begin{pmatrix}
 a_{1,1} & \cdots & a_{1,n} \\
 \vdots & \ddots & \vdots \\
 a_{m,1} & \cdots & a_{m,n}
-\end{pmatrix} \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} = \begin{pmatrix}
+\end{pmatrix} \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \]
+\[= \begin{pmatrix}
 a_{1,1}x_1 + \cdots + a_{1,n}x_n \\
 \vdots \\
 a_{m,1}x_1 + \cdots + a_{m,n}x_n
-\end{pmatrix}$$
+\end{pmatrix}\]
 
 \textbf{Merkregel:} $i$-te Komponente = Skalarprodukt von $i$-ter Zeile mit $\mathbf{x}$
 
 $$(\mathbf{A}\mathbf{x})_i = \sum_{j=1}^{n} a_{i,j} x_j$$
 \end{mainbox}
-
-\begin{subbox}{Anwendung: Gleichungssystem als Matrix}
-$$\begin{array}{rcl}
-x + 2y + 4z &=& 1 \\
-3x + y - z &=& -1
-\end{array} \quad \Leftrightarrow \quad \begin{pmatrix} 1 & 2 & 4 \\ 3 & 1 & -1 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 1 \\ -1 \end{pmatrix}$$
-
-$$\mathbf{A}\mathbf{x} = \mathbf{b}$$
-\end{subbox}
 
 % ============================================================================
 % LINEARE GLEICHUNGSSYSTEME
@@ -349,24 +341,6 @@ a_{m,1} & \cdots & a_{m,n} & b_m
 \textbf{3. Gleichsetzungsmethode:} Löse zwei Gleichungen nach derselben Variable auf, setze gleich.
 
 \textbf{Matrixform:} Zeilenoperationen auf erweiterte Koeffizientenmatrix, dann Rückwärtseinsetzen.
-\end{subbox}
-
-\begin{subbox}{Beispiel: Gauss-Elimination}
-$$\begin{array}{rcl}
-s - 160t &=& 0 \\
-s - 120t &=& 100
-\end{array} \quad \Rightarrow \quad \left(\begin{array}{cc|c}
-1 & -160 & 0 \\
-1 & -120 & 100
-\end{array}\right)$$
-
-Subtrahiere Zeile 1 von Zeile 2:
-$$\left(\begin{array}{cc|c}
-1 & -160 & 0 \\
-0 & 40 & 100
-\end{array}\right)$$
-
-\textbf{Rückwärtseinsetzen:} $40t = 100 \Rightarrow t = 2.5$, dann $s = 160 \cdot 2.5 = 400$
 \end{subbox}
 
 % ============================================================================
@@ -1247,12 +1221,13 @@ $$\Rightarrow \mathbf{CBA}$$
 Rotation $\mathbf{R}$, Translation $\mathbf{T}$:
 
 \textbf{Zuerst Rotation, dann Translation:}
-$$\mathbf{TR} = \begin{pmatrix} 1 & 0 & u \\ 0 & 1 & v \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 \\ \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u \\ \sin\varphi & \cos\varphi & v \\ 0 & 0 & 1 \end{pmatrix}$$
+\[\mathbf{TR} = \begin{pmatrix} 1 & 0 & u \\ 0 & 1 & v \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} \cos\varphi & -\sin\varphi & 0 \\ \sin\varphi & \cos\varphi & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+\[= \begin{pmatrix} \cos\varphi & -\sin\varphi & u \\ \sin\varphi & \cos\varphi & v \\ 0 & 0 & 1 \end{pmatrix}\]
 
 \textbf{Zuerst Translation, dann Rotation:}
-$$\mathbf{RT} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u\cos\varphi - v\sin\varphi \\ \sin\varphi & \cos\varphi & u\sin\varphi + v\cos\varphi \\ 0 & 0 & 1 \end{pmatrix}$$
+\[\mathbf{RT} = \begin{pmatrix} \cos\varphi & -\sin\varphi & u\cos\varphi - v\sin\varphi \\ \sin\varphi & \cos\varphi & u\sin\varphi + v\cos\varphi \\ 0 & 0 & 1 \end{pmatrix}\]
 
-$$\mathbf{TR} \neq \mathbf{RT}$$
+\[\mathbf{TR} \neq \mathbf{RT}\]
 \end{subbox}
 
 \begin{subbox}{Beispiel: Drehung um beliebiges Zentrum}
@@ -1277,23 +1252,25 @@ $$= \begin{pmatrix} 1 & 0 & c_x \\ 0 & 1 & c_y \\ 0 & 0 & 1 \end{pmatrix} \begin
 \section{Homogene Koordinaten in 3D}
 
 \begin{mainbox}{3D-Rotation um x-Achse}
-$$\begin{pmatrix}
+\[\begin{pmatrix}
 1 & 0 & 0 & 0 \\
 0 & \cos\varphi & -\sin\varphi & 0 \\
 0 & \sin\varphi & \cos\varphi & 0 \\
 0 & 0 & 0 & 1
-\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x \\ y\cos\varphi - z\sin\varphi \\ y\sin\varphi + z\cos\varphi \\ 1 \end{pmatrix}$$
+\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}\]
+\[= \begin{pmatrix} x \\ y\cos\varphi - z\sin\varphi \\ y\sin\varphi + z\cos\varphi \\ 1 \end{pmatrix}\]
 
 \textbf{Merke:} x-Koordinate bleibt unverändert, Rotation in yz-Ebene
 \end{mainbox}
 
 \begin{mainbox}{3D-Rotation um y-Achse}
-$$\begin{pmatrix}
+\[\begin{pmatrix}
 \cos\varphi & 0 & \sin\varphi & 0 \\
 0 & 1 & 0 & 0 \\
 -\sin\varphi & 0 & \cos\varphi & 0 \\
 0 & 0 & 0 & 1
-\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x\cos\varphi + z\sin\varphi \\ y \\ -x\sin\varphi + z\cos\varphi \\ 1 \end{pmatrix}$$
+\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}\]
+\[= \begin{pmatrix} x\cos\varphi + z\sin\varphi \\ y \\ -x\sin\varphi + z\cos\varphi \\ 1 \end{pmatrix}\]
 
 \textbf{Merke:} y-Koordinate bleibt unverändert, Rotation in xz-Ebene
 
@@ -1301,12 +1278,13 @@ $$\begin{pmatrix}
 \end{mainbox}
 
 \begin{mainbox}{3D-Rotation um z-Achse}
-$$\begin{pmatrix}
+\[\begin{pmatrix}
 \cos\varphi & -\sin\varphi & 0 & 0 \\
 \sin\varphi & \cos\varphi & 0 & 0 \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1
-\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} = \begin{pmatrix} x\cos\varphi - y\sin\varphi \\ x\sin\varphi + y\cos\varphi \\ z \\ 1 \end{pmatrix}$$
+\end{pmatrix} \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} \]
+\[= \begin{pmatrix} x\cos\varphi - y\sin\varphi \\ x\sin\varphi + y\cos\varphi \\ z \\ 1 \end{pmatrix}\]
 
 \textbf{Merke:} z-Koordinate bleibt unverändert, Rotation in xy-Ebene
 
@@ -1403,13 +1381,21 @@ $$\mathbf{C} = \mathbf{AB} \quad \text{(bezüglich lokalem System)}$$
 \textbf{Gesucht:} Gerade $b = C + Dt$, die "am besten" durch die Punkte geht
 
 \textbf{Gleichungssystem:}
-$$\begin{array}{rcl}
+\[
+\begin{array}{rcl}
 C &=& b_1 \\
 C + D &=& b_2 \\
 C + 2D &=& b_3
-\end{array} \quad \Leftrightarrow \quad \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix} \begin{pmatrix} C \\ D \end{pmatrix} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$$
+\end{array}
+\]
 
-$$\mathbf{Ax} = \mathbf{b}$$
+\[
+\Leftrightarrow \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}
+\begin{pmatrix} C \\ D \end{pmatrix} =
+\begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}
+\]
+
+\[\mathbf{Ax} = \mathbf{b}\]
 
 \textbf{Problem:} Im Allgemeinen keine exakte Lösung (überbestimmt)
 
@@ -1447,7 +1433,8 @@ $$b_a = |\mathbf{b}| \cos\varphi$$
 $$\mathbf{p} = b_a \frac{\mathbf{a}}{\|\mathbf{a}\|} = \frac{\mathbf{a}^T\mathbf{b}}{\mathbf{a}^T\mathbf{a}} \mathbf{a}$$
 
 \textbf{Projektionsmatrix:}
-$$\mathbf{P} = \frac{1}{\mathbf{a}^T\mathbf{a}} \mathbf{aa}^T = \frac{1}{a_1^2 + a_2^2 + a_3^2} \begin{pmatrix} a_1^2 & a_1a_2 & a_1a_3 \\ a_2a_1 & a_2^2 & a_2a_3 \\ a_3a_1 & a_3a_2 & a_3^2 \end{pmatrix}$$
+$$\mathbf{P} = \frac{1}{\mathbf{a}^T\mathbf{a}} \mathbf{aa}^T$$ \\
+$$= \frac{1}{a_1^2 + a_2^2 + a_3^2} \begin{pmatrix} a_1^2 & a_1a_2 & a_1a_3 \\ a_2a_1 & a_2^2 & a_2a_3 \\ a_3a_1 & a_3a_2 & a_3^2 \end{pmatrix}$$
 
 $$\mathbf{p} = \mathbf{Pb}$$
 \end{mainbox}

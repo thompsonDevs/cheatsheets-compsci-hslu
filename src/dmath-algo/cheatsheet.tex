@@ -409,10 +409,6 @@ $$f : D \longrightarrow W$$
 $$x \mapsto y \quad \text{oder} \quad f(x) = y$$
 \end{mainbox}
 
-\begin{subbox}{Algorithmus}
-Ein \textbf{Algorithmus} ist eine präzise, schrittweise Angabe, die für jeden Input $x \in D$ beschreibt, wie der zugehörige Output $y = f(x)$ bestimmt wird.
-\end{subbox}
-
 % ============================================================================
 % SECTION 6: AUSSAGENLOGIK (PROPOSITIONAL LOGIC)
 % ============================================================================
@@ -516,9 +512,10 @@ Ein \textbf{aussagenlogischer Term} ist rekursiv definiert:
 \end{mainbox}
 
 \begin{mainbox}{Begriffe}
-\textbf{Signatur:} Menge aller atomaren Aussagen in einem Term
+\textbf{Signatur:} Menge aller atomaren Aussagen in einem Term. Berechnung:
+\[S = 2^x \text{, } x = \text{Anzahl atomarer Symbole}\]
 
-\textbf{Interpretation:} Belegung aller atomaren Aussagen mit Wahrheitswerten
+\textbf{Interpretation:} Belegung aller atomaren Aussagen mit Wahrheitswerten.
 
 Ein aussagenlogischer Term heisst:
 \begin{itemize}
@@ -540,15 +537,13 @@ SAT-Solver: Praktische Lösungen für viele Anwendungen
 
 \begin{mainbox}{Umformung von Operatoren}
 \textbf{Implikation:}
-$$A \Rightarrow B \equiv \neg A \lor B$$
+\[A \Rightarrow B \equiv \neg A \lor B\]
 
 \textbf{Äquivalenz:}
-$$A \Leftrightarrow B \equiv (A \Rightarrow B) \land (B \Rightarrow A)$$
-\end{mainbox}
+\[A \Leftrightarrow B \equiv (A \Rightarrow B) \land (B \Rightarrow A)\]
 
-\begin{mainbox}{Rechengesetze: Negation}
 \textbf{Doppelnegation:}
-$$\neg(\neg A) \equiv A$$
+\[\neg(\neg A) \equiv A\]
 \end{mainbox}
 
 \begin{mainbox}{Rechengesetze: Disjunktion \& Konjunktion}

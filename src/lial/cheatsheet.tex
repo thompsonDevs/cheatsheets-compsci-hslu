@@ -2017,61 +2017,6 @@ $$= \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} - \begin{pmatrix} 1 & -1 \\ -1 
 \end{subbox}
 
 % ============================================================================
-% QUICK REFERENCE
-% ============================================================================
-\section{Kurzreferenz}
-
-\begin{mainbox}{Wichtige Formeln auf einen Blick}
-\renewcommand*{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{lX}
-\textbf{Vektoraddition} & $\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \end{pmatrix}$ \\[2mm]
-\textbf{Skalarmultiplikation} & $\lambda \mathbf{a} = \begin{pmatrix} \lambda a_1 \\ \lambda a_2 \end{pmatrix}$ \\[2mm]
-\textbf{Gerade} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u}$ \\[2mm]
-\textbf{Ebene} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u} + \mu \mathbf{v}$ \\[2mm]
-\textbf{Matrix-Vektor} & $(\mathbf{A}\mathbf{x})_i = \sum_{j} a_{i,j} x_j$ \\[2mm]
-\textbf{Matrix-Matrix} & $c_{ik} = \sum_{j} a_{ij}b_{jk}$ \\[2mm]
-\textbf{Transponierte} & $(\mathbf{AB})^T = \mathbf{B}^T\mathbf{A}^T$ \\[2mm]
-\textbf{Inverse} & $(\mathbf{AB})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}$ \\[2mm]
-\textbf{LU-Zerlegung} & $\mathbf{A} = \mathbf{LU}$ oder $\mathbf{PA} = \mathbf{LU}$ \\[2mm]
-\textbf{Skalarprodukt} & $\mathbf{a} \bullet \mathbf{b} = \sum_i a_i b_i = |\mathbf{a}||\mathbf{b}|\cos\varphi$ \\[2mm]
-\textbf{Betrag} & $|\mathbf{a}| = \sqrt{\mathbf{a} \bullet \mathbf{a}} = \sqrt{\sum_i a_i^2}$ \\[2mm]
-\textbf{Winkel} & $\varphi = \arccos\left(\frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\right)$ \\[2mm]
-\textbf{Orthogonal} & $\mathbf{a} \perp \mathbf{b} \Leftrightarrow \mathbf{a} \bullet \mathbf{b} = 0$ \\[2mm]
-\textbf{Einheitsvektor} & $\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}$ \\[2mm]
-\textbf{LGS} & $\mathbf{A}\mathbf{x} = \mathbf{b}$ \\[2mm]
-\textbf{Zeilenumf. I} & Zeile $\times \lambda$ ($\lambda \neq 0$) \\[2mm]
-\textbf{Zeilenumf. II} & Zeilen vertauschen \\[2mm]
-\textbf{Zeilenumf. III} & Zeile $+ \lambda \times$ andere Zeile
-\end{tabularx}
-\end{mainbox}
-
-\begin{subbox}{Wichtige Symbole \& Begriffe}
-\renewcommand*{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{lX}
-$\R$ & Reelle Zahlen \\
-$\mathbf{0}$ & Nullvektor \\
-$|\mathbf{a}|$ & Betrag/Länge von $\mathbf{a}$ \\
-$\mathbf{a} \bullet \mathbf{b}$ & Skalarprodukt \\
-$\mathbf{a} \perp \mathbf{b}$ & $\mathbf{a}$ orthogonal zu $\mathbf{b}$ \\
-$\hat{\mathbf{a}}$ & Einheitsvektor in Richtung $\mathbf{a}$ \\
-$(m \times n)$ & Matrix mit $m$ Zeilen, $n$ Spalten \\
-$a_{i,j}$ & Element in Zeile $i$, Spalte $j$ \\
-$\mathbf{A}^T$ & Transponierte Matrix \\
-$\mathbf{A}^{-1}$ & Inverse Matrix \\
-$\mathbf{E}, \mathbf{I}$ & Einheitsmatrix \\
-$\mathbf{P}$ & Permutationsmatrix \\
-$(\mathbf{A}|\mathbf{b})$ & Erweiterte Koeffizientenmatrix \\
-Leitkoeffizient & Erster Eintrag $\neq 0$ in Zeile \\
-Pivotelement & Leitkoeffizient in Zeilenstufenform \\
-Zeilenstufenform & Leitkoeff. nach rechts versetzt, Nullzeilen unten \\
-$\mathbf{L}$ & Untere Dreiecksmatrix (Lower) \\
-$\mathbf{U}$ & Obere Dreiecksmatrix (Upper) \\
-Vorwärtseinsetzen & Lösung von $\mathbf{Ly} = \mathbf{b}$ (oben nach unten) \\
-Rückwärtseinsetzen & Lösung von $\mathbf{Ux} = \mathbf{y}$ (unten nach oben)
-\end{tabularx}
-\end{subbox}
-
-% ============================================================================
 % SINGULÄRWERTZERLEGUNG (SVD)
 % ============================================================================
 \section{Singulärwertzerlegung (SVD)}
@@ -2387,60 +2332,5 @@ wobei $(\mathbf{X}^T\mathbf{X})^+ = \mathbf{V\Sigma}^+\mathbf{U}^T$ aus der SVD 
 \textbf{$\mathbf{\Sigma}^+$} & $\sigma_i^+ = 1/\sigma_i$ für $\sigma_i \neq 0$
 \end{tabularx}
 \end{mainbox}
-
-% ============================================================================
-% QUICK REFERENCE
-% ============================================================================
-\section{Kurzreferenz}
-
-\begin{mainbox}{Wichtige Formeln auf einen Blick}
-\renewcommand*{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{lX}
-\textbf{Vektoraddition} & $\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \end{pmatrix}$ \\[2mm]
-\textbf{Skalarmultiplikation} & $\lambda \mathbf{a} = \begin{pmatrix} \lambda a_1 \\ \lambda a_2 \end{pmatrix}$ \\[2mm]
-\textbf{Gerade} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u}$ \\[2mm]
-\textbf{Ebene} & $\mathbf{r} = \mathbf{p} + \lambda \mathbf{u} + \mu \mathbf{v}$ \\[2mm]
-\textbf{Matrix-Vektor} & $(\mathbf{A}\mathbf{x})_i = \sum_{j} a_{i,j} x_j$ \\[2mm]
-\textbf{Matrix-Matrix} & $c_{ik} = \sum_{j} a_{ij}b_{jk}$ \\[2mm]
-\textbf{Transponierte} & $(\mathbf{AB})^T = \mathbf{B}^T\mathbf{A}^T$ \\[2mm]
-\textbf{Inverse} & $(\mathbf{AB})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}$ \\[2mm]
-\textbf{LU-Zerlegung} & $\mathbf{A} = \mathbf{LU}$ oder $\mathbf{PA} = \mathbf{LU}$ \\[2mm]
-\textbf{Skalarprodukt} & $\mathbf{a} \bullet \mathbf{b} = \sum_i a_i b_i = |\mathbf{a}||\mathbf{b}|\cos\varphi$ \\[2mm]
-\textbf{Betrag} & $|\mathbf{a}| = \sqrt{\mathbf{a} \bullet \mathbf{a}} = \sqrt{\sum_i a_i^2}$ \\[2mm]
-\textbf{Winkel} & $\varphi = \arccos\left(\frac{\mathbf{a} \bullet \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\right)$ \\[2mm]
-\textbf{Orthogonal} & $\mathbf{a} \perp \mathbf{b} \Leftrightarrow \mathbf{a} \bullet \mathbf{b} = 0$ \\[2mm]
-\textbf{Einheitsvektor} & $\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}$ \\[2mm]
-\textbf{LGS} & $\mathbf{A}\mathbf{x} = \mathbf{b}$ \\[2mm]
-\textbf{Zeilenumf. I} & Zeile $\times \lambda$ ($\lambda \neq 0$) \\[2mm]
-\textbf{Zeilenumf. II} & Zeilen vertauschen \\[2mm]
-\textbf{Zeilenumf. III} & Zeile $+ \lambda \times$ andere Zeile
-\end{tabularx}
-\end{mainbox}
-
-\begin{subbox}{Wichtige Symbole \& Begriffe}
-\renewcommand*{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{lX}
-$\R$ & Reelle Zahlen \\
-$\mathbf{0}$ & Nullvektor \\
-$|\mathbf{a}|$ & Betrag/Länge von $\mathbf{a}$ \\
-$\mathbf{a} \bullet \mathbf{b}$ & Skalarprodukt \\
-$\mathbf{a} \perp \mathbf{b}$ & $\mathbf{a}$ orthogonal zu $\mathbf{b}$ \\
-$\hat{\mathbf{a}}$ & Einheitsvektor in Richtung $\mathbf{a}$ \\
-$(m \times n)$ & Matrix mit $m$ Zeilen, $n$ Spalten \\
-$a_{i,j}$ & Element in Zeile $i$, Spalte $j$ \\
-$\mathbf{A}^T$ & Transponierte Matrix \\
-$\mathbf{A}^{-1}$ & Inverse Matrix \\
-$\mathbf{E}, \mathbf{I}$ & Einheitsmatrix \\
-$\mathbf{P}$ & Permutationsmatrix \\
-$(\mathbf{A}|\mathbf{b})$ & Erweiterte Koeffizientenmatrix \\
-Leitkoeffizient & Erster Eintrag $\neq 0$ in Zeile \\
-Pivotelement & Leitkoeffizient in Zeilenstufenform \\
-Zeilenstufenform & Leitkoeff. nach rechts versetzt, Nullzeilen unten \\
-$\mathbf{L}$ & Untere Dreiecksmatrix (Lower) \\
-$\mathbf{U}$ & Obere Dreiecksmatrix (Upper) \\
-Vorwärtseinsetzen & Lösung von $\mathbf{Ly} = \mathbf{b}$ (oben nach unten) \\
-Rückwärtseinsetzen & Lösung von $\mathbf{Ux} = \mathbf{y}$ (unten nach oben)
-\end{tabularx}
-\end{subbox}
 
 \end{document}

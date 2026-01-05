@@ -780,7 +780,7 @@ Bei einer \textbf{Worst-Case-Analyse} wird in Abh¨angigkeit von der Gr¨osse $n
 \begin{mainbox}{Asymptotische Notation: Big-O}
 Seien $f$ und $g$ zwei Funktionen, welche die Rechnungsschritte zweier Algorithmen angeben.
 
-$f(x)$ \textbf{w¨achst nicht st¨arker} als $g(x)$, wenn fur alle Input-Werte ¨ $x$ gr¨osser als ein Startwert $x_0$ gilt:
+$f(x)$ \textbf{wächst nicht stärker} als $g(x)$, wenn fur alle Input-Werte ¨ $x$ gr¨osser als ein Startwert $x_0$ gilt:
 
 \[f(x) \leq C \cdot g(x) \quad \text{fur eine feste Konstante } C ¨\]
 
@@ -789,18 +789,18 @@ $f(x)$ \textbf{w¨achst nicht st¨arker} als $g(x)$, wenn fur alle Input-Werte �
 $f$ wächst \textbf{h¨ochstens so schnell} wie $g$.
 \end{mainbox}
 
-\begin{mainbox}{Asymptotische Notation: Big-Ω}
-$f(x)$ \textbf{wächst nicht langsamer} als $g(x)$, wenn fur alle Input-Werte ¨ $x$ grösser als ein Startwert $x_0$ gilt:
+\begin{mainbox}{Asymptotische Notation: Big-$\Omega$}
+$f(x)$ \textbf{wächst nicht langsamer} als $g(x)$, wenn für alle Input-Werte $x$ grösser als ein Startwert $x_0$ gilt:
 
 \[f(x) \geq c \cdot g(x) \quad \text{für eine feste Konstante } c ¨\]
 
 \textbf{Notation:} $f(x)$ ist in $\Omega(g(x))$ (Big-Omega)
 
-$f$ w¨achst \textbf{mindestens so schnell} wie $g$.
+$f$ wächst \textbf{mindestens so schnell} wie $g$.
 \end{mainbox}
 
-\begin{mainbox}{Asymptotische Notation: Big-Θ}
-$f(x)$ \textbf{w¨achst asymptotisch gleich} wie $g(x)$, wenn:
+\begin{mainbox}{Asymptotische Notation: Big-$O$}
+$f(x)$ \textbf{wächst asymptotisch gleich} wie $g(x)$, wenn:
 
 $$f(x) \text{ in } O(g(x)) \text{ und } f(x) \text{ in } \Omega(g(x))$$
 
@@ -865,7 +865,7 @@ Ein \textbf{rekursiver Algorithmus} ist eine Methode zur Probleml¨osung, bei de
 \begin{itemize}
     \item Funktion kann f¨ur kleinen Input (z.B. $n=1$) direkt berechnet werden
     \item F¨ur grossen Input $n$: Teile Problem in gleiche Probleme mit kleinerem Input
-    \item Rekonstruiere L¨osung f¨ur $n$ aus den Teil枚sungen
+    \item Rekonstruiere Lösung für $n$ aus den Teillösungen
 \end{itemize}
 
 Solche Verfahren heissen \textbf{divide-and-conquer} Algorithmen.

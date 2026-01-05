@@ -333,13 +333,12 @@ Bei periodischer Wiederholung: $(x)_2 = 0.b_1 b_2 \overline{b_3 b_4}$
 Eine Menge ist eine \textbf{ungeordnete} Sammlung von Objekten ohne Rücksicht auf Wiederholung.
 
 \textbf{Notation:}
-\begin{itemize}
-    \item Aufzählung: $M = \{1, 2, 3, 4\}$
-    \item Beschreibung: $M = \{x : x \text{ ist eine Ziffer}\}$
-\end{itemize}
-
+\textbf{Aufzählung:}
+\[M = \{1, 2, 3, 4\}\]
+\textbf{Beschreibung:}
+\[M = \{x : x \text{ ist eine Ziffer}\}\]
 \textbf{Elementbeziehung:}
-$$x \in M \quad \text{bzw.} \quad x \notin M$$
+\[x \in M \quad \text{bzw.} \quad x \notin M\]
 \end{mainbox}
 
 \begin{mainbox}{Mengenoperationen}
@@ -372,7 +371,8 @@ $$a = (a_1, a_2, \ldots, a_n)$$
 $$a_i \quad \text{oder} \quad a[i] \quad \text{(i-te Komponente)}$$
 
 \textbf{Komponentenweise Operationen:}
-$$(a_1, a_2, \ldots, a_n) + (b_1, b_2, \ldots, b_n) = (a_1+b_1, a_2+b_2, \ldots, a_n+b_n)$$
+\[(a_1, a_2, \ldots, a_n) + (b_1, b_2, \ldots, b_n) = \]
+\[(a_1+b_1, a_2+b_2, \ldots, a_n+b_n)\]
 
 \textbf{Broadcasting:}
 $$c \cdot (a_1, a_2, \ldots, a_n) = (c \cdot a_1, c \cdot a_2, \ldots, c \cdot a_n)$$
@@ -973,7 +973,10 @@ $$P(n_0) \equiv \text{True}$$
 \textbf{Induktionsschritt:}
 
 Wir weisen nach, dass für alle natürlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
-$$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : (P(n) \Rightarrow P(n+1)) \equiv \text{True}$$
+\begin{gather*}
+    \forall n \in \{n \in \mathbb{N} : n \geq n_0\} :\\
+    (P(n) \Rightarrow P(n+1)) \equiv \text{True}\\
+\end{gather*}
 
 \textbf{Prinzip:} Von $P(n_0)$ folgt $P(n_0+1)$, daraus folgt $P(n_0+2)$, usw.
 \end{mainbox}
@@ -1001,7 +1004,10 @@ $$P(n_0) \equiv \text{True}$$
 \textbf{Induktionsschritt:}
 
 Wir weisen nach, dass für alle natürlichen Zahlen $n \geq n_0$ aus der Wahrheit von $P(n_0), P(n_0+1), \ldots, P(n)$ die Wahrheit von $P(n+1)$ folgen muss:
-$$\forall n \in \{n \in \mathbb{N} : n \geq n_0\} : (P(n_0) \land \ldots \land P(n) \Rightarrow P(n+1)) \equiv \text{True}$$
+\begin{gather*}
+    \forall n \in \{n \in \mathbb{N} : n \geq n_0\} :\\
+    (P(n_0) \land \ldots \land P(n) \Rightarrow P(n+1)) \equiv \text{True}\\
+\end{gather*}
 \end{mainbox}
 
 \begin{mainbox}{Vergleich: Schwache vs. Starke Induktion}

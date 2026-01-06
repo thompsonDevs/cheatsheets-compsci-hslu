@@ -1137,9 +1137,10 @@ Spiegelachse schließt Winkel $\varphi$ mit x-Achse ein
     \item Drehe um $+\varphi$ zurück
 \end{enumerate}
 
-$$\mathbf{A} = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} \cos(-\varphi) & -\sin(-\varphi) \\ \sin(-\varphi) & \cos(-\varphi) \end{pmatrix}$$
+\[\mathbf{A} = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \]
+\[\begin{pmatrix} \cos(-\varphi) & -\sin(-\varphi) \\ \sin(-\varphi) & \cos(-\varphi) \end{pmatrix}\]
 
-$$= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
+\[= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}\]
 \end{subbox}
 
 % ============================================================================
@@ -2189,13 +2190,6 @@ Die Datenmatrix $\tilde{\mathbf{X}}$ hat:
 \begin{itemize}
     \item $m$ Zeilen: Samples (Beobachtungen, Messungen)
     \item $n$ Spalten: Variablen (Features, Merkmale)
-\end{itemize}
-
-\textbf{Beispiel - IRIS-Datensatz:}
-\begin{itemize}
-    \item 150 Schwertlilien ($m = 150$)
-    \item 3 Typen: Setosa, Virginica, Versicolor (je 50)
-    \item 4 Merkmale ($n = 4$): Kelchblatt-Länge/-Breite (sepal length/width), Kronblatt-Länge/-Breite (petal length/width)
 \end{itemize}
 
 \textbf{Zentrierung der Datenmatrix:}

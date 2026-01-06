@@ -343,6 +343,32 @@ a_{m,1} & \cdots & a_{m,n} & b_m
 \textbf{Matrixform:} Zeilenoperationen auf erweiterte Koeffizientenmatrix, dann Rückwärtseinsetzen.
 \end{subbox}
 
+\begin{subbox}{Parametrisierte Lösungen}
+Wenn die Echelon-Form \textbf{Nullzeilen} enthält, gibt es \textbf{unendlich viele Lösungen}.
+
+\textbf{Vorgehen:}
+\begin{itemize}
+    \item \textbf{Freie Variablen:} Variablen ohne Pivot-Element werden zu Parametern ($t, s, \lambda$, etc.)
+    \item \textbf{Gebundene Variablen:} Durch Rückwärtseinsetzen in Abhängigkeit der Parameter ausdrücken
+\end{itemize}
+
+\textbf{Beispiel:} Echelon-Form
+$$\left(\begin{array}{ccc|c}
+1 & 2 & 3 & 4 \\
+0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)$$
+
+$x_2$ ist frei $\Rightarrow$ setze $x_2 = t \in \mathbb{R}$
+
+Aus Zeile 2: $x_3 = 2$
+
+Aus Zeile 1: $x_1 = 4 - 2x_2 - 3x_3 = 4 - 2t - 6 = -2 - 2t$
+
+\textbf{Lösung:}
+$$\mathbf{x} = \begin{pmatrix} -2 - 2t \\ t \\ 2 \end{pmatrix} = \begin{pmatrix} -2 \\ 0 \\ 2 \end{pmatrix} + t \begin{pmatrix} -2 \\ 1 \\ 0 \end{pmatrix}, \quad t \in \mathbb{R}$$
+\end{subbox}
+
 % ============================================================================
 % SKALARPRODUKT
 % ============================================================================

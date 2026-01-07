@@ -377,160 +377,81 @@ $$\left.\frac{df^{-1}}{dx}\right|_{x=x_0} = \left(\left.\frac{df}{dx}\right|_{x=
 
 \section{Kurvendiskussion}
 
-\subsection{Definitionsbereich}
+\subsection{Definitionsbereich und Symmetrie}
 
-\begin{mainbox}{$\mathbb{D}$ bestimmen}
-	Zuerst muss der Definitionsbereich festgelegt werden. Setze dazu $f(x) = 0$,
-	bestimme ${x_1,x_2,\dots}$
-	und notiere ihn folgendermassen:
-	$\mathbb{D} = \mathbb{R}\setminus\{x_1,x_2,\dots\}$
+\begin{mainbox}{Definitionsbereich $\mathbb{D}$ bestimmen}
+	Setze Nenner $= 0$ und Argumente von Wurzeln/Logarithmen auf zulässige Werte.
+	Notation: $\mathbb{D} = \mathbb{R}\setminus\{x_1,x_2,\dots\}$
 \end{mainbox}
+
+\begin{subbox}{Symmetrie prüfen}
+	\begin{itemize}
+		\item $f(-x) = f(x)$ für alle $x$ $\Rightarrow$ \textbf{gerade Funktion} (achsensymmetrisch zur $y$-Achse)
+		\item $f(-x) = -f(x)$ für alle $x$ $\Rightarrow$ \textbf{ungerade Funktion} (punktsymmetrisch zum Ursprung)
+	\end{itemize}
+\end{subbox}
 
 \subsection{Erste Ableitung und Monotonie}
 
-\begin{mainbox}{Monotonie und erste Ableitung}
-Die erste Ableitung $f'(x)$ gibt Auskunft über das Monotonieverhalten einer Funktion:
+\begin{mainbox}{Monotonie}
+	\begin{itemize}
+		\item $f'(x) > 0$ auf $I$ $\Rightarrow$ $f$ \textbf{streng monoton wachsend} auf $I$
+		\item $f'(x) < 0$ auf $I$ $\Rightarrow$ $f$ \textbf{streng monoton fallend} auf $I$
+	\end{itemize}
 
-\begin{itemize}
-	\item $f'(x) > 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{streng monoton wachsend} auf $I$
-	\item $f'(x) \geq 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{monoton wachsend} auf $I$
-	\item $f'(x) < 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{streng monoton fallend} auf $I$
-	\item $f'(x) \leq 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{monoton fallend} auf $I$
-\end{itemize}
+	\textbf{Vorgehen:} $f'(x)$ berechnen, Nullstellen finden, Vorzeichen zwischen Nullstellen prüfen.
 \end{mainbox}
 
-\begin{subbox}{Vorgehen: Monotoniebereiche bestimmen}
-	\begin{enumerate}
-		\item Erste Ableitung $f'(x)$ berechnen
-		\item Nullstellen von $f'(x)$ bestimmen (kritische Stellen)
-		\item Vorzeichen von $f'(x)$ in den Intervallen zwischen den Nullstellen prüfen
-		\item Monotonieverhalten ablesen
-	\end{enumerate}
-\end{subbox}
+\begin{mainbox}{Kritische Stellen}
+	Eine Stelle $x_0$ mit $f'(x_0) = 0$ heisst \textbf{kritische Stelle}.
 
-\subsection{Kritische Punkte}
-
-\begin{mainbox}{Kritische Stellen und Punkte}
-\textbf{Definition:} Eine Stelle $x_0$ heisst \textbf{kritische Stelle} von $f$, falls:
-$$f'(x_0) = 0$$
-
-Der zugehörige Punkt $(x_0, f(x_0))$ heisst \textbf{kritischer Punkt}.
-
-\textbf{Arten von kritischen Punkten:}
-\begin{itemize}
-	\item \textbf{Relatives (lokales) Minimum}
-	\item \textbf{Relatives (lokales) Maximum}
-	\item \textbf{Sattelpunkt} (Wendepunkt mit horizontaler Tangente)
-\end{itemize}
+	Der Punkt $(x_0, f(x_0))$ ist ein kritischer Punkt (mögliches Extremum oder Sattelpunkt).
 \end{mainbox}
-
-\begin{subbox}{Vorgehen: Kritische Punkte finden}
-	\begin{enumerate}
-		\item Erste Ableitung $f'(x)$ berechnen
-		\item Gleichung $f'(x) = 0$ lösen $\Rightarrow$ kritische Stellen $x_0$
-		\item Funktionswerte $f(x_0)$ berechnen $\Rightarrow$ kritische Punkte $(x_0, f(x_0))$
-	\end{enumerate}
-\end{subbox}
-
-\subsection{Zweite Ableitung und Krümmungsverhalten}
-
-\begin{mainbox}{Krümmung und zweite Ableitung}
-Die zweite Ableitung $f''(x)$ gibt Auskunft über das Krümmungsverhalten:
-
-\begin{itemize}
-	\item $f''(x) > 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{linksgekrümmt} (konvex) auf $I$
-	\item $f''(x) < 0$ auf Intervall $I$ $\Rightarrow$ $f$ ist \textbf{rechtsgekrümmt} (konkav) auf $I$
-\end{itemize}
-
-\textbf{Anschauung:}
-\begin{itemize}
-	\item Linksgekrümmt: Graph liegt oberhalb seiner Tangenten (``Tal''-Form)
-	\item Rechtsgekrümmt: Graph liegt unterhalb seiner Tangenten (``Berg''-Form)
-\end{itemize}
-\end{mainbox}
-
-\begin{subbox}{Wendepunkte}
-Ein \textbf{Wendepunkt} liegt vor, wenn sich das Krümmungsverhalten ändert.
-
-\textbf{Notwendige Bedingung:} $f''(x_0) = 0$
-
-\textbf{Hinreichende Bedingung:}
-\begin{itemize}
-    \item $f''(x_0) = 0$ und Vorzeichenwechsel von $f''(x)$ bei $x_0$
-    \item Alternativ (oft einfacher): $f''(x_0) = 0$ und $f'''(x_0) \neq 0$
-\end{itemize}
-\end{subbox}
 
 \subsection{Lokale Extrema}
 
-\begin{mainbox}{Kriterien für lokale Extrema}
-Sei $x_0$ eine kritische Stelle, d.h.\ $f'(x_0) = 0$.
+\begin{mainbox}{Kriterien für Extrema}
+	Sei $f'(x_0) = 0$. Dann gilt:
 
-\textbf{Kriterium mit zweiter Ableitung:}
-\begin{itemize}
-	\item $f'(x_0) = 0$ und $f''(x_0) > 0$ $\Rightarrow$ \textbf{relatives Minimum} bei $x_0$
-	\item $f'(x_0) = 0$ und $f''(x_0) < 0$ $\Rightarrow$ \textbf{relatives Maximum} bei $x_0$
-	\item $f'(x_0) = 0$ und $f''(x_0) = 0$ $\Rightarrow$ \textbf{keine Aussage möglich}
-\end{itemize}
-
-\textbf{Bei $f''(x_0) = 0$:} Vorzeichenwechsel von $f'(x)$ prüfen oder höhere Ableitungen betrachten.
-\end{mainbox}
-
-\begin{mainbox}{Vorzeichenwechsel-Kriterium}
-Sei $x_0$ eine kritische Stelle ($f'(x_0) = 0$).
-
-\begin{itemize}
-	\item $f'(x)$ wechselt von $+$ nach $-$ bei $x_0$ $\Rightarrow$ \textbf{relatives Maximum}
-	\item $f'(x)$ wechselt von $-$ nach $+$ bei $x_0$ $\Rightarrow$ \textbf{relatives Minimum}
-	\item $f'(x)$ wechselt das Vorzeichen nicht $\Rightarrow$ \textbf{Sattelpunkt}
-\end{itemize}
-\end{mainbox}
-
-\begin{subbox}{Beispiel: Kurvendiskussion}
-	$f(x) = x^3 - 3x$
-
-	\textbf{1. Ableitungen:}
-	$f'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x-1)(x+1)$
-
-	$f''(x) = 6x$
-
-	\textbf{2. Kritische Stellen:} $f'(x) = 0 \Rightarrow x_1 = -1, x_2 = 1$
-
-	\textbf{3. Klassifikation:}
+	\textbf{Kriterium mit zweiter Ableitung:}
 	\begin{itemize}
-		\item $f''(-1) = -6 < 0 \Rightarrow$ Maximum bei $x = -1$
-		\item $f''(1) = 6 > 0 \Rightarrow$ Minimum bei $x = 1$
+		\item $f''(x_0) > 0$ $\Rightarrow$ \textbf{relatives Minimum}
+		\item $f''(x_0) < 0$ $\Rightarrow$ \textbf{relatives Maximum}
+		\item $f''(x_0) = 0$ $\Rightarrow$ keine Aussage, Vorzeichenwechsel prüfen
 	\end{itemize}
 
-	\textbf{4. Extremwerte:} $f(-1) = 2$ (Max), $f(1) = -2$ (Min)
-\end{subbox}
-
-\begin{mainbox}{Schema: Vollständige Kurvendiskussion}
-\begin{enumerate}
-	\item \textbf{Definitionsbereich} bestimmen
-	\item \textbf{Symmetrie} prüfen (gerade/ungerade Funktion)
-	\item \textbf{Nullstellen:} $f(x) = 0$ lösen
-	\item \textbf{Pole und Asymptoten} bestimmen
-	\item \textbf{Erste Ableitung} $f'(x)$ berechnen
-	\item \textbf{Kritische Stellen:} $f'(x) = 0$ lösen
-	\item \textbf{Zweite Ableitung} $f''(x)$ berechnen
-	\item \textbf{Art der Extrema} bestimmen (mit $f''$ oder Vorzeichenwechsel)
-	\item \textbf{Wendepunkte:} $f''(x) = 0$ lösen, Vorzeichenwechsel prüfen
-	\item \textbf{Verhalten für} $x \to \pm\infty$
-	\item \textbf{Graph skizzieren}
-\end{enumerate}
+	\textbf{Vorzeichenwechsel-Kriterium:}
+	\begin{itemize}
+		\item $f'$ wechselt von $+$ nach $-$ $\Rightarrow$ \textbf{Maximum}
+		\item $f'$ wechselt von $-$ nach $+$ $\Rightarrow$ \textbf{Minimum}
+		\item Kein Vorzeichenwechsel $\Rightarrow$ \textbf{Sattelpunkt}
+	\end{itemize}
 \end{mainbox}
 
-\begin{mainbox}{Sonderfälle: Höhere Ableitungen}
-Ist $f^{(k)}(x_0)$ die \textbf{erste nichtverschwindende Ableitung} an der Stelle $x_0$ (d.h.\ $f'(x_0) = f''(x_0) = \ldots = f^{(k-1)}(x_0) = 0$), so gilt:
+\subsection{Krümmung und Wendepunkte}
 
-\begin{itemize}
-	\item $k$ \textbf{gerade} und $f^{(k)}(x_0) > 0$ $\Rightarrow$ \textbf{Minimum} bei $x_0$
-	\item $k$ \textbf{gerade} und $f^{(k)}(x_0) < 0$ $\Rightarrow$ \textbf{Maximum} bei $x_0$
-	\item $k$ \textbf{ungerade} $\Rightarrow$ \textbf{Wendepunkt} bei $x_0$
-\end{itemize}
+\begin{mainbox}{Krümmungsverhalten}
+	\begin{itemize}
+		\item $f''(x) > 0$ auf $I$ $\Rightarrow$ $f$ \textbf{linksgekrümmt} (konvex, ``Tal''-Form)
+		\item $f''(x) < 0$ auf $I$ $\Rightarrow$ $f$ \textbf{rechtsgekrümmt} (konkav, ``Berg''-Form)
+	\end{itemize}
+\end{mainbox}
 
-\textbf{Sattelpunkt:} Ein Wendepunkt mit waagerechter Tangente ($f'(x_0) = 0$).
+\begin{subbox}{Wendepunkte}
+	\textbf{Notwendig:} $f''(x_0) = 0$
+
+	\textbf{Hinreichend:} $f''(x_0) = 0$ und $f'''(x_0) \neq 0$ oder Vorzeichenwechsel von $f''(x)$
+
+	\textbf{Sattelpunkt:} Wendepunkt mit $f'(x_0) = 0$ (horizontale Tangente)
+\end{subbox}
+
+\begin{mainbox}{Höhere Ableitungen}
+	Ist $f^{(k)}(x_0)$ die erste nichtverschwindende Ableitung an $x_0$:
+	\begin{itemize}
+		\item $k$ gerade, $f^{(k)}(x_0) > 0$ $\Rightarrow$ \textbf{Minimum}
+		\item $k$ gerade, $f^{(k)}(x_0) < 0$ $\Rightarrow$ \textbf{Maximum}
+		\item $k$ ungerade $\Rightarrow$ \textbf{Wendepunkt}
+	\end{itemize}
 \end{mainbox}
 
 \section{Taylor- und MacLaurin-Reihen}

@@ -343,6 +343,32 @@ a_{m,1} & \cdots & a_{m,n} & b_m
 \textbf{Matrixform:} Zeilenoperationen auf erweiterte Koeffizientenmatrix, dann Rückwärtseinsetzen.
 \end{subbox}
 
+\begin{subbox}{Parametrisierte Lösungen}
+Wenn die Echelon-Form \textbf{Nullzeilen} enthält, gibt es \textbf{unendlich viele Lösungen}.
+
+\textbf{Vorgehen:}
+\begin{itemize}
+    \item \textbf{Freie Variablen:} Variablen ohne Pivot-Element werden zu Parametern ($t, s, \lambda$, etc.)
+    \item \textbf{Gebundene Variablen:} Durch Rückwärtseinsetzen in Abhängigkeit der Parameter ausdrücken
+\end{itemize}
+
+\textbf{Beispiel:} Echelon-Form
+$$\left(\begin{array}{ccc|c}
+1 & 2 & 3 & 4 \\
+0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)$$
+
+$x_2$ ist frei $\Rightarrow$ setze $x_2 = t \in \mathbb{R}$
+
+Aus Zeile 2: $x_3 = 2$
+
+Aus Zeile 1: $x_1 = 4 - 2x_2 - 3x_3 = 4 - 2t - 6 = -2 - 2t$
+
+\textbf{Lösung:}
+$$\mathbf{x} = \begin{pmatrix} -2 - 2t \\ t \\ 2 \end{pmatrix} = \begin{pmatrix} -2 \\ 0 \\ 2 \end{pmatrix} + t \begin{pmatrix} -2 \\ 1 \\ 0 \end{pmatrix}, \quad t \in \mathbb{R}$$
+\end{subbox}
+
 % ============================================================================
 % SKALARPRODUKT
 % ============================================================================
@@ -1111,9 +1137,10 @@ Spiegelachse schließt Winkel $\varphi$ mit x-Achse ein
     \item Drehe um $+\varphi$ zurück
 \end{enumerate}
 
-$$\mathbf{A} = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} \cos(-\varphi) & -\sin(-\varphi) \\ \sin(-\varphi) & \cos(-\varphi) \end{pmatrix}$$
+\[\mathbf{A} = \begin{pmatrix} \cos\varphi & -\sin\varphi \\ \sin\varphi & \cos\varphi \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \]
+\[\begin{pmatrix} \cos(-\varphi) & -\sin(-\varphi) \\ \sin(-\varphi) & \cos(-\varphi) \end{pmatrix}\]
 
-$$= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}$$
+\[= \begin{pmatrix} \cos(2\varphi) & \sin(2\varphi) \\ \sin(2\varphi) & -\cos(2\varphi) \end{pmatrix}\]
 \end{subbox}
 
 % ============================================================================
@@ -1567,227 +1594,94 @@ Für neues $t$: $\hat{b} = \hat{C} + \hat{D}t$
 % ============================================================================
 \section{Multiple Lineare Regression}
 
-\begin{mainbox}{Multiple lineare Regression - Modell}
+\begin{mainbox}{Modell und Zielsetzung}
 \textbf{Lineares Regressionsmodell:}
-$$y = b_0 + b_1x_1 + b_2x_2 + \cdots + b_nx_n + e$$
+\[y = b_0 + b_1x_1 + b_2x_2 + \cdots + b_nx_n + e\]
 
-\textbf{Parameter:}
-\begin{itemize}
-    \item $y$: Zielgrösse (abhängige Variable)
-    \item $x_1, x_2, \ldots, x_n$: Einflussgrössen (unabhängige Variablen)
-    \item $b_0, b_1, \ldots, b_n$: Regressionskoeffizienten
-    \item $e$: Fehler (Residuum)
-\end{itemize}
+\textbf{Matrixschreibweise:} $\mathbf{y} = \mathbf{Xb} + \mathbf{e}$
 
-\textbf{Parametervektor:} $\mathbf{b} = [b_0, b_1, b_2, \ldots, b_n]^T$
+\textbf{Ziel:} Finde Parametervektor $\hat{\mathbf{b}}$, der die Summe der quadratischen Fehler minimiert:
+\[\min_{\mathbf{b}} \|\mathbf{e}\|^2 = \min_{\mathbf{b}} \|\mathbf{y} - \mathbf{Xb}\|^2\]
 \end{mainbox}
 
-\begin{mainbox}{Datenmatrix und Gleichungssystem}
-\textbf{Gegeben:} $m$ Beobachtungen, $n$ Einflussgrössen
+\begin{mainbox}{Schritt 1: Datenmatrix aufstellen}
+\textbf{Gegeben:} $m$ Beobachtungen mit $n$ Einflussgrössen
 
 \textbf{Datenmatrix $\mathbf{X}$:} $(m \times (n+1))$-Matrix
-$$\mathbf{X} = \begin{pmatrix}
+\[\mathbf{X} = \begin{pmatrix}
 1 & x_{1,1} & x_{1,2} & \cdots & x_{1,n} \\
 1 & x_{2,1} & x_{2,2} & \cdots & x_{2,n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 1 & x_{m,1} & x_{m,2} & \cdots & x_{m,n}
-\end{pmatrix}$$
+\end{pmatrix}, \quad \]
+\[\mathbf{y} = \begin{pmatrix}
+y_1 \\ y_2 \\ \vdots \\ y_m
+\end{pmatrix}\]
 
-\textbf{Matrixschreibweise:} $\mathbf{y} = \mathbf{Xb} + \mathbf{e}$
-
-\textbf{Ziel:} Minimiere Fehlervektor $\mathbf{e} = \mathbf{y} - \mathbf{Xb}$
+\textbf{Erste Spalte:} Einsen für Achsenabschnitt $b_0$
 \end{mainbox}
 
-\begin{mainbox}{Normalgleichung}
-\textbf{Bedingung:} Fehlervektor $\mathbf{e}$ orthogonal zum Spaltenraum $C(\mathbf{X})$
-
-$$\mathbf{0} = \mathbf{X}^T\mathbf{e} = \mathbf{X}^T(\mathbf{y} - \mathbf{X}\hat{\mathbf{b}})$$
+\begin{mainbox}{Schritt 2: Normalgleichung aufstellen}
+\textbf{Herleitung:} Minimierungsbedingung führt auf orthogonale Projektion
+\[\mathbf{X}^T(\mathbf{y} - \mathbf{X}\hat{\mathbf{b}}) = \mathbf{0}\]
 
 \textbf{Normalgleichung:}
-$$\mathbf{X}^T\mathbf{X}\hat{\mathbf{b}} = \mathbf{X}^T\mathbf{y}$$
+\[\mathbf{X}^T\mathbf{X}\hat{\mathbf{b}} = \mathbf{X}^T\mathbf{y}\]
 
-\textbf{Lösung (falls Spalten von $\mathbf{X}$ linear unabhängig):}
-$$\hat{\mathbf{b}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
+Dies ist ein lineares Gleichungssystem für $\hat{\mathbf{b}}$.
 
-\textbf{Voraussetzung:} Einflussgrössen nicht korreliert (Spalten linear unabhängig)
+\textbf{Bedeutung:} Fehlervektor $\mathbf{e}$ steht senkrecht auf Spaltenraum von $\mathbf{X}$
 \end{mainbox}
 
-\begin{mainbox}{Regressionshyperebene}
-\textbf{Durch Regression erklärte Zielgrösse:}
-$$\hat{\mathbf{y}} = \mathbf{X}\hat{\mathbf{b}} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y} = \mathbf{Py}$$
+\begin{mainbox}{Schritt 3: Regressionskoeffizienten berechnen}
+\textbf{Lösung der Normalgleichung (falls $\mathbf{X}^T\mathbf{X}$ invertierbar):}
+\[\hat{\mathbf{b}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}\]
 
-\textbf{Vorhersage für neuen Punkt $\mathbf{x}$:}
-$$\hat{y} = b_0 + b_1x_1 + b_2x_2 + \cdots + b_nx_n = \mathbf{x}^T\hat{\mathbf{b}}$$
+\textbf{Voraussetzung:} Spalten von $\mathbf{X}$ linear unabhängig (Einflussgrössen nicht korreliert)
 
-mit $\mathbf{x} = [1, x_1, x_2, \ldots, x_n]^T$
+\textbf{Praktische Berechnung:}
+\begin{enumerate}
+    \item Berechne $\mathbf{X}^T\mathbf{X}$ (symmetrische $(n+1) \times (n+1)$-Matrix)
+    \item Berechne $\mathbf{X}^T\mathbf{y}$ (Vektor mit $n+1$ Elementen)
+    \item Löse LGS oder invertiere: $\hat{\mathbf{b}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$
+\end{enumerate}
 \end{mainbox}
 
-% ============================================================================
-% PROJEKTIONSMATRIZEN
-% ============================================================================
-\section{Projektions- und Residualmatrix}
+\begin{mainbox}{Schritt 4: Vorhersage und Fehler}
+\textbf{Vorhersagewerte:}
+\[\hat{\mathbf{y}} = \mathbf{X}\hat{\mathbf{b}}\]
 
-\begin{mainbox}{Projektionsmatrix (Hut-Matrix)}
-\textbf{Definition:}
-$$\mathbf{P} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$$
+\textbf{Für neuen Datenpunkt $\mathbf{x} = [1, x_1, x_2, \ldots, x_n]^T$:}
+\[\hat{y} = \mathbf{x}^T\hat{\mathbf{b}} = b_0 + b_1x_1 + b_2x_2 + \cdots + b_nx_n\]
 
-\textbf{Wirkung:} Projiziert $\mathbf{y} \in \R^m$ orthogonal auf Spaltenraum $C(\mathbf{X})$
-
-$$\hat{\mathbf{y}} = \mathbf{Py}$$
-
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item $\mathbf{P}^T = \mathbf{P}$ (symmetrisch)
-    \item $\mathbf{P}^2 = \mathbf{P}$ (idempotent)
-\end{itemize}
-
-\textbf{Name:} "Hut-Matrix" weil $\mathbf{P}$ aus $\mathbf{y}$ den "Hut" $\hat{\mathbf{y}}$ macht
-
-Auch: Prädiktionsmatrix
+\textbf{Residuen (Fehler):}
+\[\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}}\]
 \end{mainbox}
 
-\begin{mainbox}{Residualmatrix}
-\textbf{Definition:}
-$$\mathbf{Q} = \mathbf{I} - \mathbf{P} = \mathbf{I} - \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$$
+\begin{mainbox}{Schritt 5: Güte der Anpassung prüfen}
+\textbf{Bestimmtheitsmass $R^2$:}
+\[R^2 = 1 - \frac{\text{SQR}}{\text{SQT}} = 1 - \frac{\sum_{i=1}^{m}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{m}(y_i - \bar{y})^2}\]
 
-\textbf{Wirkung:} Projiziert $\mathbf{y}$ orthogonal auf Nullraum $N(\mathbf{X}^T)$ (senkrecht zu $C(\mathbf{X})$)
-
-$$\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}} = \mathbf{Qy}$$
-
-\textbf{Eigenschaften:}
-\begin{itemize}
-    \item $\mathbf{Q}^T = \mathbf{Q}$ (symmetrisch)
-    \item $\mathbf{Q}^2 = \mathbf{Q}$ (idempotent)
-    \item $\mathbf{PQ} = \mathbf{0}$ (orthogonal)
-\end{itemize}
-\end{mainbox}
-
-\begin{subbox}{Geometrische Interpretation}
-\textbf{Spaltenraum $C(\mathbf{X})$:} Von Spalten $\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_n$ aufgespannter Unterraum in $\R^m$
-
-\textbf{Beste Approximation:} $\hat{\mathbf{y}}$ ist orthogonale Projektion von $\mathbf{y}$ auf $C(\mathbf{X})$
-
-\textbf{Fehlervektor:} $\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}}$ steht senkrecht auf $C(\mathbf{X})$
-
-\textbf{Minimierung:} Methode der kleinsten Quadrate minimiert
-$$\|\mathbf{e}\|^2 = \mathbf{e}^T\mathbf{e} = \sum_{i=1}^{m} e_i^2$$
-\end{subbox}
-
-% ============================================================================
-% BESTIMMTHEITSMASS
-% ============================================================================
-\section{Bestimmtheitsmass $R^2$}
-
-\begin{mainbox}{Fehlerquadrate}
-\textbf{Arithmetischer Mittelwert:}
-$$\bar{y} = \frac{1}{m}\sum_{i=1}^{m} y_i$$
-
-\textbf{SQT - Summe der Quadrate der Totalen Abweichungen:}
-$$\text{SQT} = \sum_{i=1}^{m} (y_i - \bar{y})^2 = (\mathbf{y} - \bar{y})^T(\mathbf{y} - \bar{y})$$
-
-\textbf{SQE - Summe der Quadrate der Erklärten Abweichungen:}
-$$\text{SQE} = \sum_{i=1}^{m} (\hat{y}_i - \bar{y})^2 = (\hat{\mathbf{y}} - \bar{y})^T(\hat{\mathbf{y}} - \bar{y})$$
-
-\textbf{SQR - Summe der Quadrate der Restabweichungen:}
-$$\text{SQR} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 = (\mathbf{y} - \hat{\mathbf{y}})^T(\mathbf{y} - \hat{\mathbf{y}})$$
-\end{mainbox}
-
-\begin{mainbox}{Bestimmtheitsmass $R^2$}
-\textbf{Beziehung:} $\text{SQT} = \text{SQE} + \text{SQR}$
-
-\textbf{Definition:}
-$$R^2 = \frac{\text{SQE}}{\text{SQT}} = \frac{\text{SQT} - \text{SQR}}{\text{SQT}} = 1 - \frac{\text{SQR}}{\text{SQT}}$$
-
-\textbf{Wertebereich:} $0 \leq R^2 \leq 1$
+wobei $\bar{y} = \frac{1}{m}\sum_{i=1}^{m} y_i$ (Mittelwert)
 
 \textbf{Interpretation:}
 \begin{itemize}
-    \item $R^2 = 1$: Perfekte lineare Anpassung
-    \item $R^2 = 0$: Keine lineare Beziehung
-    \item $R^2 \approx 1$: Gute lineare Regression
-    \item $R^2 \approx 0$: Schlechte lineare Regression
+    \item $R^2 \approx 1$: Gute lineare Anpassung ($\geq 0.8$ oft als gut betrachtet)
+    \item $R^2 \approx 0$: Schlechte lineare Anpassung
+    \item $R^2 = $ Anteil der erklärten Varianz
 \end{itemize}
-
-\textbf{Bedeutung:} Anteil der Varianz von $\mathbf{y}$, der durch das lineare Modell erklärt wird
 \end{mainbox}
 
-\begin{mainbox}{Zentrierende Matrix}
-\textbf{Definition:}
-$$\mathbf{M} = \mathbf{I} - \frac{1}{m}\mathbf{11}^T$$
+\begin{subbox}{Projektions- und Residualmatrix}
+\textbf{Projektionsmatrix (Hut-Matrix):}
+\[\mathbf{P} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\]
+Projiziert $\mathbf{y}$ auf Spaltenraum von $\mathbf{X}$: $\hat{\mathbf{y}} = \mathbf{Py}$
 
-wobei $\mathbf{1} = [1, 1, \ldots, 1]^T \in \R^m$
+\textbf{Residualmatrix:}
+\[\mathbf{Q} = \mathbf{I} - \mathbf{P}\]
+Berechnet Fehlervektor: $\mathbf{e} = \mathbf{Qy}$
 
-\textbf{Wirkung:} Zentriert Vektor (subtrahiert Mittelwert)
-$$\mathbf{My} = \mathbf{y} - \bar{y}$$
-
-\textbf{Mit zentrierender Matrix:}
-$$\text{SQT} = (\mathbf{y} - \bar{y})^T(\mathbf{y} - \bar{y}) = \mathbf{y}^T\mathbf{My}$$
-
-$$R^2 = 1 - \frac{\text{SQR}}{\text{SQT}} = 1 - \frac{\mathbf{y}^T\mathbf{Qy}}{\mathbf{y}^T\mathbf{My}}$$
-\end{mainbox}
-
-\begin{subbox}{Eigenschaften der Matrizen}
-\textbf{Projektionsmatrix $\mathbf{P}$:}
-\begin{itemize}
-    \item Symmetrisch: $\mathbf{P}^T = \mathbf{P}$
-    \item Idempotent: $\mathbf{P}^2 = \mathbf{P}$
-\end{itemize}
-
-\textbf{Residualmatrix $\mathbf{Q}$:}
-\begin{itemize}
-    \item Symmetrisch: $\mathbf{Q}^T = \mathbf{Q}$
-    \item Idempotent: $\mathbf{Q}^2 = \mathbf{Q}$
-\end{itemize}
-
-\textbf{Zentrierende Matrix $\mathbf{M}$:}
-\begin{itemize}
-    \item Symmetrisch: $\mathbf{M}^T = \mathbf{M}$
-    \item Idempotent: $\mathbf{M}^2 = \mathbf{M}$
-\end{itemize}
-\end{subbox}
-
-% ============================================================================
-% ZUSAMMENFASSUNG REGRESSION
-% ============================================================================
-\section{Multiple Regression - Zusammenfassung}
-
-\begin{mainbox}{Vorgehen bei multipler linearer Regression}
-\textbf{Schritt 1: Datenmatrix aufstellen}
-
-$m$ Beobachtungen mit $n$ Einflussgrössen:
-$$\mathbf{X} = \begin{pmatrix}
-1 & x_{1,1} & \cdots & x_{1,n} \\
-\vdots & \vdots & \ddots & \vdots \\
-1 & x_{m,1} & \cdots & x_{m,n}
-\end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix}
-y_1 \\ \vdots \\ y_m
-\end{pmatrix}$$
-
-\textbf{Schritt 2: Regressionskoeffizienten berechnen}
-$$\hat{\mathbf{b}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
-
-\textbf{Schritt 3: Vorhersage}
-Für neuen Punkt $\mathbf{x} = [1, x_1, \ldots, x_n]^T$:
-$$\hat{y} = \mathbf{x}^T\hat{\mathbf{b}} = b_0 + b_1x_1 + \cdots + b_nx_n$$
-
-\textbf{Schritt 4: Güte prüfen}
-Berechne $R^2 = 1 - \frac{\text{SQR}}{\text{SQT}}$
-\end{mainbox}
-
-\begin{subbox}{Wichtige Formeln - Kurzreferenz}
-\renewcommand*{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{lX}
-\textbf{Normalgleichung} & $\mathbf{X}^T\mathbf{X}\hat{\mathbf{b}} = \mathbf{X}^T\mathbf{y}$ \\[2mm]
-\textbf{Parametervektor} & $\hat{\mathbf{b}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$ \\[2mm]
-\textbf{Vorhersage} & $\hat{\mathbf{y}} = \mathbf{X}\hat{\mathbf{b}} = \mathbf{Py}$ \\[2mm]
-\textbf{Fehlervektor} & $\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}} = \mathbf{Qy}$ \\[2mm]
-\textbf{Projektionsmatrix} & $\mathbf{P} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$ \\[2mm]
-\textbf{Residualmatrix} & $\mathbf{Q} = \mathbf{I} - \mathbf{P}$ \\[2mm]
-\textbf{Zentrierende Matrix} & $\mathbf{M} = \mathbf{I} - \frac{1}{m}\mathbf{11}^T$ \\[2mm]
-\textbf{Bestimmtheitsmass} & $R^2 = 1 - \frac{\text{SQR}}{\text{SQT}}$ \\[2mm]
-\textbf{SQR} & $\text{SQR} = \mathbf{y}^T\mathbf{Qy} = \|\mathbf{e}\|^2$ \\[2mm]
-\textbf{SQT} & $\text{SQT} = \mathbf{y}^T\mathbf{My}$
-\end{tabularx}
+\textbf{Eigenschaften:} Beide symmetrisch und idempotent ($\mathbf{P}^2 = \mathbf{P}$, $\mathbf{Q}^2 = \mathbf{Q}$)
 \end{subbox}
 
 % ============================================================================
@@ -2163,13 +2057,6 @@ Die Datenmatrix $\tilde{\mathbf{X}}$ hat:
 \begin{itemize}
     \item $m$ Zeilen: Samples (Beobachtungen, Messungen)
     \item $n$ Spalten: Variablen (Features, Merkmale)
-\end{itemize}
-
-\textbf{Beispiel - IRIS-Datensatz:}
-\begin{itemize}
-    \item 150 Schwertlilien ($m = 150$)
-    \item 3 Typen: Setosa, Virginica, Versicolor (je 50)
-    \item 4 Merkmale ($n = 4$): Kelchblatt-Länge/-Breite (sepal length/width), Kronblatt-Länge/-Breite (petal length/width)
 \end{itemize}
 
 \textbf{Zentrierung der Datenmatrix:}

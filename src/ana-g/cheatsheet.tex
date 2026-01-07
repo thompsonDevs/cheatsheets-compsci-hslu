@@ -178,10 +178,10 @@ $$y(x) = m \cdot (x - x_0) + y_0 = m \cdot x + (y_0 - m \cdot x_0)$$
 \subsection{Grenzwertberechnung}
 
 \begin{mainbox}{Allgemeines Vorgehen}
-	\begin{itemize}
-    	\item Höchste Potenz bestimmen
-    	\item Grenzwerte einsetzen
-	\end{itemize}
+    \begin{itemize}
+        \item Höchste Potenz bestimmen
+        \item Grenzwerte einsetzen
+    \end{itemize}
 \end{mainbox}
 
 \begin{mainbox}{Grundlegende Limesregeln}
@@ -193,6 +193,27 @@ $$y(x) = m \cdot (x - x_0) + y_0 = m \cdot x + (y_0 - m \cdot x_0)$$
         \item $\lim [c \cdot f(x)] = c \cdot L$ (für konstantes $c$)
     \end{itemize}
 \end{mainbox}
+
+\begin{subbox}{Stetigkeit}
+    Eine Funktion $f$ ist an der Stelle $x_0$ \textbf{stetig}, wenn:
+    $$\lim_{x \to x_0} f(x) = f(x_0)$$
+
+    \textbf{Drei Bedingungen für Stetigkeit:}
+    \begin{enumerate}
+        \item $f(x_0)$ ist definiert
+        \item $\lim_{x \to x_0} f(x)$ existiert
+        \item $\lim_{x \to x_0} f(x) = f(x_0)$
+    \end{enumerate}
+
+    \textbf{Unstetig} ist $f$ an $x_0$, wenn mindestens eine dieser Bedingungen verletzt ist.
+
+    \textbf{Beispiele:}
+    \begin{itemize}
+        \item Stetig: $f(x) = x^2$ überall
+        \item Unstetig: $f(x) = \frac{1}{x}$ bei $x = 0$ (nicht definiert)
+        \item Unstetig: $f(x) = \begin{cases} x & x < 0 \\ x+1 & x \geq 0 \end{cases}$ bei $x = 0$ (Sprung)
+    \end{itemize}
+\end{subbox}
 
 \begin{mainbox}{Regel von L'Hopital}
     Anwendbar bei unbestimmten Ausdrücken der Form $\frac{0}{0}$ oder $\frac{\infty}{\infty}$:

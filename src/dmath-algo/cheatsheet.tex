@@ -1994,5 +1994,186 @@ Gesucht: $5^{10} - |A_1 \cup A_2 \cup A_3 \cup A_4 \cup A_5|$
 \textbf{Intuition:} Ohne Inklusion-Exklusion würden Überlappungen mehrfach gezählt. Das Prinzip korrigiert systematisch durch abwechselndes Add/Sub.
 \end{subbox}
 
+\subsection{Induktionsbeweise}
+    % ============================================================================
+% VOLLSTÄNDIGE INDUKTION: STRATEGIEN & DENKPROZESS
+% ============================================================================
 
+\begin{mainbox}{Vollständige Induktion: Grundprinzip}
+\textbf{Ziel:} Aussage $A(n)$ für alle $n \geq n_0$ beweisen.
+
+\textbf{Struktur:}
+\begin{enumerate}
+  \item \textbf{Induktionsanfang (IA):} Zeige $A(n_0)$ gilt
+  \item \textbf{Induktionsvoraussetzung (IV):} Nehme an, $A(n)$ gilt für ein beliebiges, aber festes $n \geq n_0$
+  \item \textbf{Induktionsschritt (IS):} Zeige $A(n) \Rightarrow A(n+1)$
+\end{enumerate}
+
+\textbf{Warum funktioniert das?}\\
+Domino-Effekt: Wenn der erste Stein fällt (IA) und jeder Stein den nächsten umwirft (IS), fallen alle Steine.
+
+\textbf{Varianten:}
+\begin{itemize}
+  \item \textbf{Starke Induktion:} IV nimmt an, $A(k)$ gilt für alle $k \leq n$
+  \item \textbf{Strukturelle Induktion:} Für rekursive Strukturen (Bäume, Listen)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Strategien: Wie finde ich den Beweis?}
+\textbf{Schritt 1: Behauptung verstehen}
+\begin{itemize}
+  \item Was ist $A(n)$? Welche Formel/Eigenschaft soll gelten?
+  \item Was ist die Startwert $n_0$? (oft $n_0 = 0$ oder $n_0 = 1$)
+  \item Teste für kleine Werte: $A(1), A(2), A(3), \ldots$ (Muster erkennen!)
+\end{itemize}
+
+\textbf{Schritt 2: Induktionsschritt planen}
+\begin{itemize}
+  \item Schreibe $A(n+1)$ explizit auf
+  \item Versuche $A(n+1)$ so umzuformen, dass $A(n)$ auftaucht
+  \item \textbf{Trick:} Oft muss man einen Term abspalten/hinzufügen
+\end{itemize}
+
+\textbf{Schritt 3: Induktionsanfang nicht vergessen!}
+\begin{itemize}
+  \item Meist trivial, aber essentiell
+  \item Explizit ausrechnen, nicht "offensichtlich" schreiben
+\end{itemize}
+
+\textbf{Typische Umformungen im IS:}
+\begin{itemize}
+  \item Summen: Letzten Term abspalten
+  \item Produkte: Letzten Faktor ausklammern
+  \item Ungleichungen: Abschätzen mit IV
+  \item Rekursion: Rekursionsformel anwenden
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Beispiel 1: Summenformel (einfach)}
+\textbf{Behauptung:} $\displaystyle \sum_{k=1}^{n} k = \frac{n(n+1)}{2}$ für alle $n \in \N$
+
+\textbf{Denkprozess:} Teste erst kleine Werte!
+\begin{itemize}
+  \item $n=1$: $1 = \frac{1 \cdot 2}{2} = 1$ \checkmark
+  \item $n=2$: $1+2 = 3 = \frac{2 \cdot 3}{2}$ \checkmark
+  \item $n=3$: $1+2+3 = 6 = \frac{3 \cdot 4}{2}$ \checkmark
+\end{itemize}
+Formel scheint zu stimmen! Jetzt Beweis.
+
+\textbf{Beweis:}\\
+\textbf{IA:} $n=1$: $\sum_{k=1}^{1} k = 1 = \frac{1(1+1)}{2} = 1$ \checkmark
+
+\textbf{IV:} Sei $n \in \N$ beliebig. Angenommen, $\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$
+
+\textbf{IS:} $n \to n+1$: Zeige $\sum_{k=1}^{n+1} k = \frac{(n+1)(n+2)}{2}$
+\begin{align*}
+\sum_{k=1}^{n+1} k &= \underbrace{\sum_{k=1}^{n} k}_{\text{IV: } \frac{n(n+1)}{2}} + (n+1)\\
+&= \frac{n(n+1)}{2} + (n+1)\\
+&= \frac{n(n+1) + 2(n+1)}{2}\\
+&= \frac{(n+1)(n+2)}{2} \quad \checkmark
+\end{align*}
+\textbf{Schlüsselidee:} Letzten Term abspalten, dann IV einsetzen!
+\end{mainbox}
+
+\begin{subbox}{Beispiel 2: Ungleichung}
+\textbf{Behauptung:} $2^n > n^2$ für alle $n \geq 5$
+
+\textbf{Denkprozess:} Warum $n \geq 5$? Teste kleine Werte!
+\begin{itemize}
+  \item $n=1$: $2^1 = 2 \not> 1$ \quad FALSCH
+  \item $n=2$: $2^2 = 4 \not> 4$ \quad FALSCH
+  \item $n=3$: $2^3 = 8 \not> 9$ \quad FALSCH
+  \item $n=4$: $2^4 = 16 = 16$ \quad FALSCH
+  \item $n=5$: $2^5 = 32 > 25$ \quad \checkmark
+\end{itemize}
+Also $n_0 = 5$!
+
+\textbf{Beweis:}\\
+\textbf{IA:} $n=5$: $2^5 = 32 > 25 = 5^2$ \checkmark
+
+\textbf{IV:} Sei $n \geq 5$. Angenommen, $2^n > n^2$
+
+\textbf{IS:} $n \to n+1$: Zeige $2^{n+1} > (n+1)^2$
+\begin{align*}
+2^{n+1} &= 2 \cdot 2^n\\
+&\stackrel{\text{IV}}{>} 2 \cdot n^2\\
+&= n^2 + n^2\\
+&\geq n^2 + 5n \quad (\text{da } n \geq 5 \Rightarrow n^2 \geq 5n)\\
+&> n^2 + 2n + 1 \quad (\text{da } 5n > 2n+1 \text{ für } n \geq 5)\\
+&= (n+1)^2 \quad \checkmark
+\end{align*}
+\textbf{Schlüsselidee:} Nach IV einsetzen geschickt abschätzen!
+\end{subbox}
+
+\begin{mainbox}{Beispiel 3: Teilbarkeit}
+\textbf{Behauptung:} $6 \mid (n^3 - n)$ für alle $n \in \N$ (d.h. $n^3 - n$ ist durch 6 teilbar)
+
+\textbf{Denkprozess:} Teste Werte und faktorisiere!
+\begin{itemize}
+  \item $n=1$: $1^3 - 1 = 0 = 6 \cdot 0$ \checkmark
+  \item $n=2$: $8 - 2 = 6 = 6 \cdot 1$ \checkmark
+  \item $n=3$: $27 - 3 = 24 = 6 \cdot 4$ \checkmark
+\end{itemize}
+Faktorisierung: $n^3 - n = n(n^2-1) = n(n-1)(n+1)$ \\
+$\to$ Produkt von 3 aufeinanderfolgenden Zahlen!
+
+\textbf{Beweis:}\\
+\textbf{IA:} $n=1$: $1^3 - 1 = 0 = 6 \cdot 0$ \checkmark
+
+\textbf{IV:} Sei $n \in \N$. Angenommen, $6 \mid (n^3 - n)$, d.h. $n^3 - n = 6k$ für ein $k \in \Z$
+
+\textbf{IS:} $n \to n+1$: Zeige $6 \mid ((n+1)^3 - (n+1))$
+\begin{align*}
+(n+1)^3 - (n+1) &= n^3 + 3n^2 + 3n + 1 - n - 1\\
+&= n^3 - n + 3n^2 + 3n\\
+&= \underbrace{(n^3 - n)}_{\text{IV: } = 6k} + 3n(n+1)\\
+&= 6k + 3n(n+1)
+\end{align*}
+Da $n(n+1)$ gerade ist (Produkt aufeinanderfolgender Zahlen), gilt $3n(n+1) = 6m$ für ein $m \in \Z$.\\
+Also: $(n+1)^3 - (n+1) = 6k + 6m = 6(k+m)$ \checkmark
+
+\textbf{Schlüsselidee:} Umformen, bis IV-Term erscheint, Rest separat teilen!
+\end{mainbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\textbf{Fehler 1: IV nicht benutzen}\\
+Im IS darf/muss man $A(n)$ verwenden! Sonst ist es kein Induktionsbeweis.
+
+\textbf{Fehler 2: Zirkelschluss}\\
+Nicht einfach $A(n+1)$ voraussetzen und zurück zu $A(n)$ folgern!\\
+Richtung: $A(n) \Rightarrow A(n+1)$, nicht umgekehrt.
+
+\textbf{Fehler 3: IA vergessen}\\
+Ohne IA ist der Beweis unvollständig! Auch wenn trivial.
+
+\textbf{Fehler 4: Falscher Startwert}\\
+Prüfe, ab welchem $n_0$ die Aussage wirklich gilt!
+
+\textbf{Tipp 1: Rückwärts denken}\\
+Schreibe $A(n+1)$ auf und überlege, wie man $A(n)$ "hineinbekommt".
+
+\textbf{Tipp 2: Hilfsaussagen}\\
+Manchmal muss man eine stärkere Aussage beweisen, die leichter induktiv ist.
+
+\textbf{Tipp 3: Starke Induktion}\\
+Bei komplexen Rekursionen (z.B. Fibonacci) alle vorherigen Fälle annehmen.
+
+\textbf{Tipp 4: Algebraische Tricks}\\
+Binomische Formeln, Faktorisierung, Teleskopsummen oft nützlich!
+\end{subbox}
+
+\begin{mainbox}{Zusammenfassung: Induktions-Checkliste}
+\begin{enumerate}
+  \item[\textbf{-}] Behauptung $A(n)$ klar formulieren
+  \item[\textbf{-}] Startwert $n_0$ bestimmen (teste kleine Werte!)
+  \item[\textbf{-}] \textbf{IA:} $A(n_0)$ explizit nachrechnen
+  \item[\textbf{-}] \textbf{IV:} Klar hinschreiben, was angenommen wird
+  \item[\textbf{-}] \textbf{IS:} $A(n+1)$ aufschreiben und zu $A(n)$ umformen
+  \item[\textbf{-}] IV explizit verwenden (markieren!)
+  \item[\textbf{-}] Rechnung sauber durchführen
+  \item[\textbf{-}] Fazit: $A(n+1)$ gilt \checkmark
+\end{enumerate}
+
+\textbf{Merkregel:} \textit{"Erst der Anfang (IA), dann die Annahme (IV), zuletzt der Schritt (IS)"}
+\end{mainbox}
 \end{document}

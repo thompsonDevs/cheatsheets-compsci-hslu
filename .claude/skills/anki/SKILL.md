@@ -27,10 +27,10 @@ new course, ask rather than guessing.
 
 ## Output format: `src/<subject>/anki.tsv`
 
-One TSV file per subject, appended to over time — not regenerated from scratch. It mixes `Basic`
-and `Cloze` notes in a single file using Anki's text-import header directives (supported by the
-installed Anki version). If the file doesn't exist yet, create it with this exact header before
-any card rows:
+One TSV file per subject, appended to over time — not regenerated from scratch. It mixes
+`Standard` (Anki's Basic notetype) and `Lückentext` (Anki's Cloze notetype) notes in a single file
+using Anki's text-import header directives (supported by the installed Anki version). If the file
+doesn't exist yet, create it with this exact header before any card rows:
 
 ```
 #separator:tab
@@ -44,15 +44,23 @@ any card rows:
 Each subsequent line is one card:
 
 ```
-Basic	<subject>	<question>	<answer>	<subject>::<chapter-slug>
-Cloze	<subject>	<text with {{c1::hidden part}}>		<subject>::<chapter-slug>
+Standard	<subject>	<question>	<answer>	<subject>::<chapter-slug>
+Lückentext	<subject>	<text with {{c1::hidden part}}>		<subject>::<chapter-slug>
 ```
 
-- Column 1: `Basic` or `Cloze`.
+- Column 1: `Standard` (Basic-style) or `Lückentext` (Cloze-style). **This must exactly match an
+  existing notetype name in the target Anki collection** — Anki's `#notetype column` import
+  directive resolves by literal string match, and this user's Anki runs in German, where the
+  built-in notetypes are named "Standard"/"Lückentext" rather than the English "Basic"/"Cloze".
+  Getting this wrong doesn't error loudly: the file parses fine and every row silently comes back
+  `Skipped` in Anki's import log (real incident — see commit `70074cf`, `git log --oneline
+  src/ugdm/anki.tsv`). If a future session is unsure which names apply, ask the user to check
+  Tools → Manage Note Types before writing the file.
 - Column 2 (deck): always the bare subject name, e.g. `dmath-algo` — one flat deck per subject.
-- Column 3: Basic → the front/question; Cloze → the full cloze text (with `{{c1::...}}` markup).
-- Column 4: Basic → the back/answer; Cloze → leave empty (or use for "Back Extra" context, e.g.
-  a source reference), since Cloze notes don't use a separate back field the same way.
+- Column 3: Standard → the front/question; Lückentext → the full cloze text (with `{{c1::...}}`
+  markup).
+- Column 4: Standard → the back/answer; Lückentext → leave empty (or use for "Back Extra" context,
+  e.g. a source reference), since Cloze-style notes don't use a separate back field the same way.
 - Column 5 (tags): `<subject>::<chapter-slug>`, space-separated if more than one tag. This is what
   gives chapter-level granularity — decks stay flat per subject, tags carry the chapter filter.
   Slugify the chapter/topic name (lowercase, hyphens) consistently with how it's named in the
@@ -96,10 +104,11 @@ slide content accordingly, don't just port over what a cheatsheet `mainbox` woul
 
 - **Minimum information principle**: one fact per card. Split compound statements into multiple
   cards rather than cramming a multi-part answer into one back field.
-- Prefer **Basic** for definitions, "what is X"/"why does X hold"/procedural steps, comparisons.
-- Prefer **Cloze** for formulas, fixed terminology, and structured sequences (e.g. proof steps,
-  the IA/IV/IS layout from Induktion) where blanking out one part of a fixed structure is more
-  natural than a question/answer pair.
+- Prefer **Standard** (Basic-style) for definitions, "what is X"/"why does X hold"/procedural
+  steps, comparisons.
+- Prefer **Lückentext** (Cloze-style) for formulas, fixed terminology, and structured sequences
+  (e.g. proof steps, the IA/IV/IS layout from Induktion) where blanking out one part of a fixed
+  structure is more natural than a question/answer pair.
 - Cards must be self-contained — understandable without having the slides open. No "as shown
   above", no unexplained abbreviations.
 - Write in German, matching the course material. Use direct UTF-8 Umlauts (`ü`, `ö`, `ä`, `ß`) —
@@ -117,8 +126,10 @@ reorder or touch existing rows.
 
 - Every row has exactly 5 tab-separated columns.
 - No literal tabs inside a field's text (that would silently shift columns).
-- `Cloze` rows actually contain `{{c1::...}}` (or `c2`, etc.) syntax in column 3.
+- `Lückentext` rows actually contain `{{c1::...}}` (or `c2`, etc.) syntax in column 3.
 - No accidental duplicate header lines partway through the file.
+- Column 1 values are exactly `Standard` or `Lückentext` (not `Basic`/`Cloze`) — see the notetype
+  note above.
 
 ### 7. Commit (do not push)
 
@@ -130,7 +141,7 @@ Do **not** push. Tell the user the commit is local and ask if they'd like it pus
 
 ### 8. Report back, and remind about import
 
-State how many `Basic` and `Cloze` cards were added and under which chapter tag. Remind the user
-this is a source file, not a live Anki deck: they import/re-import it into Anki via
+State how many `Standard` and `Lückentext` cards were added and under which chapter tag. Remind
+the user this is a source file, not a live Anki deck: they import/re-import it into Anki via
 **File → Import** and pick "Update" for existing notes if re-importing after edits (AnkiConnect
 isn't set up in this environment, so there's no automatic sync to a running Anki instance).

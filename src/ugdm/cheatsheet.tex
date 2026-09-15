@@ -1,0 +1,393 @@
+% ============================================================================
+% CHEATSHEET TEMPLATE
+% ============================================================================
+% Based on the ANA-G cheatsheet style
+%
+% Features:
+% - 4-column landscape layout on A4
+% - Colored boxes for main concepts and sub-concepts
+% - Compact formatting optimized for information density
+% - Mathematical typesetting support
+%
+% Usage:
+% 1. Replace metadata (title, author, date)
+% 2. Adjust number of columns if needed (see \Ncolumn)
+% 3. Add your content using mainbox and subbox environments
+% 4. Compile with pdflatex (run twice for proper layout)
+% ============================================================================
+
+\documentclass[a4paper, fontsize=7pt]{scrartcl}
+
+% ============================================================================
+% ENCODING & LANGUAGE
+% ============================================================================
+\usepackage[utf8]{inputenc}
+% \usepackage[german]{babel}    % Uncomment for German hyphenation
+% \usepackage[english]{babel}   % Uncomment for English hyphenation
+
+% ============================================================================
+% PAGE LAYOUT
+% ============================================================================
+% 4-column landscape layout with minimal margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+
+% Number of columns (adjust as needed: 3-4 recommended for A4)
+\Ncolumn{4}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0cm}
+
+% ============================================================================
+% COLORS & BOXES
+% ============================================================================
+\usepackage[most]{tcolorbox}
+
+% Base style for all boxes
+\tcbset{
+  base/.style={
+    boxrule=0.3mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!10!white,
+    coltitle=black,
+    toptitle=0.75mm,
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+% Main concept box (green accent)
+% Use for: definitions, theorems, important formulas
+\definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}  % Nice green
+\newtcolorbox{mainbox}[1]{
+  colframe=maincolor,
+  base={#1}
+}
+
+% Sub concept box (gray accent)
+% Use for: examples, remarks, minor concepts
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Alternative colors (uncomment to use)
+% \definecolor{maincolor}{rgb}{0.2, 0.4, 0.8}   % Blue
+% \definecolor{maincolor}{rgb}{0.8, 0.2, 0.2}   % Red
+% \definecolor{maincolor}{rgb}{0.5, 0.2, 0.6}   % Purple
+
+% ============================================================================
+% MATHEMATICS
+% ============================================================================
+\usepackage{amsmath, amsthm, mathtools, amssymb}
+\usepackage{amsfonts, amstext}
+\allowdisplaybreaks  % Allow page breaks in equations
+
+% Common math shortcuts (customize as needed)
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+
+% Number sets
+\def\N{\mathbb{N}}  % Natural numbers
+\def\Z{\mathbb{Z}}  % Integers
+\def\Q{\mathbb{Q}}  % Rationals
+\def\R{\mathbb{R}}  % Reals
+\def\C{\mathbb{C}}  % Complex
+
+% Calculus
+\def\dx{\,dx}
+\def\dt{\,dt}
+\def\dy{\,dy}
+\newcommand{\ddx}[1]{\frac{d#1}{dx}}
+\newcommand{\ddn}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdn}[2]{\frac{\partial #1}{\partial #2}}
+
+% Big O notation
+\def\oof{\mathcal{O}}
+
+% ============================================================================
+% TABLES
+% ============================================================================
+\usepackage{tabularx, multirow, booktabs}
+\renewcommand*{\arraystretch}{1.5}  % More spacing in tables
+
+% ============================================================================
+% LISTS
+% ============================================================================
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt, topsep=2pt}
+\setenumerate{itemsep=0.75pt, topsep=2pt}
+
+% ============================================================================
+% GRAPHICS & TIKZ
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  fit,
+  matrix,
+  decorations,
+  angles,
+  quotes,
+  babel,
+  3d,
+  arrows.meta,
+  shadings,
+  shapes.geometric
+}
+
+\tikzset{
+  >=stealth,
+  % Add custom TikZ styles here
+}
+
+% ============================================================================
+% HYPERLINKS
+% ============================================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}   % For \centernot command
+\usepackage{marvosym}    % Additional symbols
+\usepackage{wasysym}     % Additional symbols
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{Cheatsheet UGDM}
+\author{Thomas Schnyder}
+\date{September 2026}
+
+% Table of contents depth
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% SECTION 1: PERSÖNLICHKEIT UND FIRMENGRÜNDUNG
+% ============================================================================
+\section{Persönlichkeit und Firmengründung}
+
+\begin{mainbox}{Unternehmerpersönlichkeit}
+Typische Merkmale (Persönlichkeitstest "Bin ich ein Unternehmer-Typ?"):
+\begin{itemize}
+    \item Kontakteigenschaften, Begeisterungsfähigkeit
+    \item Kontrolle (Impulse beherrschen), Risikobereitschaft
+    \item Durchsetzungsvermögen, Selbstvertrauen/-sicherheit
+    \item Selbstständigkeit, Schaffenskraft
+    \item Führungseigenschaften, Neugierde
+\end{itemize}
+\textbf{Auswertung:} $\geq$10$\times$ Spalte 1/2 $\to$ ideale Unternehmerpersönlichkeit;
+7--9$\times$ $\to$ Eigenschaften zu wenig ausgeprägt, intensive Arbeit nötig;
+$<$6$\times$ $\to$ Eigenschaften fehlen, kaum entwickelbar.
+\end{mainbox}
+
+\begin{subbox}{Mariotti-Studie (ca. 400 Firmengründungen)}
+Nützliche Charaktereigenschaften: Mut, Kreativität, Neugier, Entschlossenheit,
+Disziplin, Flexibilität, Verantwortungsbewusstsein, Geduld, Enthusiasmus,
+Einfühlungsvermögen.
+
+\textbf{Am wichtigsten:} Fähigkeit, eine positive Grundeinstellung zu kultivieren.
+\end{subbox}
+
+\begin{subbox}{Goebel-Studie zu Jungunternehmern}
+Erfolgreiche Jungunternehmer bringen eine Idee zum Reifen, indem sie beharrlich
+und mit ungewöhnlicher Hartnäckigkeit immer wieder dasselbe Problem lösen wollen.
+\end{subbox}
+
+% ============================================================================
+% SECTION 2: GRÜNDEN MIT KOMPONENTEN (I) – SMARTE GESCHÄFTSIDEEN
+% ============================================================================
+\section{Gründen mit Komponenten (I): Smarte Geschäftsideen}
+
+\begin{mainbox}{Digitale Neukombination}
+\textbf{Kernprinzip:} Digitalisierung ermöglicht, durch neuartige Kombination von
+Bestehendem etwas Neues zu schaffen und am Markt zu verkaufen -- statt eine
+komplett neue Erfindung zu machen.
+
+\textbf{Typische Formen:}
+\begin{itemize}
+    \item Vorhandene Programmierleistung für neue, ursprünglich nicht vorgesehene
+    Bereiche rekombinieren
+    \item Physische Produkte mit digitalen Ressourcen koppeln
+    \item Vorhandene Hardware + angepasste Software $\to$ höhere Leistungsfähigkeit
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Muster der Ideenentstehung (Studie Uni St. Gallen)}
+Geschäftsideen unterscheiden sich oft nur gering von bekannten Geschäftsmodellen:
+\begin{enumerate}
+    \item \textbf{Übertragen:} alte Idee auf neuen Bereich (sehr häufig)
+    \item \textbf{Kombinieren:} zwei alte Ideen neu kombiniert
+    \item \textbf{Wiederholen:} erfolgreiches Vorgehen anderswo wiederholen
+    \item Wirklich neue Ideen schaffen (sehr selten)
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Woraus ergibt sich die Neuartigkeit?}
+Entweder aus dem Produkt/der Dienstleistung selbst, oder aus der \textbf{Art des
+Verkaufs} (z.B. online statt offline). Das Zusammenwirken mehrerer Elemente
+bietet das grösste Innovationspotenzial.
+\end{subbox}
+
+\begin{subbox}{Beispiele}
+\textbf{Abo-Commerce (MyCouchbox):} Abo-Modell (Zeitschriftenwesen) + digitales
+Kaufverhalten (E-Commerce) $\to$ monatliche Box mit wechselndem Inhalt.
+
+\textbf{Teekampagne (Faltin):} statt vieler Sorten/Kleinpackungen/Zwischenhandel
+$\to$ eine Sorte, Grosspackungen, Direktverkauf per Internet $\to$ tiefe Kosten,
+hohe Margen.
+
+\textbf{Hasenfarm:} übersättigter Markt (T-Shirts), eigene Marke, aber fremde
+Technik (Webshop, Herstellung, Warenbewirtschaftung).
+\end{subbox}
+
+% ============================================================================
+% SECTION 3: GRÜNDEN MIT KOMPONENTEN (II) – SMARTE LEISTUNGSERSTELLUNG
+% ============================================================================
+\section{Gründen mit Komponenten (II): Smarte Leistungserstellung}
+
+\begin{mainbox}{Gründen in Komponenten}
+\textbf{Definition:} Konzentration auf die eigentliche Geschäftsidee; für die
+übrigen Arbeitsabläufe (Prozesse) werden Fähigkeiten/Techniken \textbf{anderer}
+genutzt (Shop-Betreiber, Produktionsspezialist, Logistikanbieter,
+Bürodienstleister, Einkauf über standardisierte Märkte/Börsen/Auftragsproduktion).
+
+Traditionell bräuchte ein Gründer selbst Wissen in Rechnungswesen, Recht,
+Personalführung, Marketing usw. -- smart gegründet wird dies fremdvergeben.
+\end{mainbox}
+
+\begin{mainbox}{Kostenvorteile}
+\begin{itemize}
+    \item Fast keine eigenen Investitionen nötig
+    \item Fast keine Fixkosten
+    \item Variable Kosten nur bei tatsächlichen eigenen Umsätzen
+\end{itemize}
+$\to$ hohe Kosteneinsparungen gegenüber etablierten Konkurrenten.
+\end{mainbox}
+
+\begin{mainbox}{Kostenbasis als Scheiterursache (ZHAW-Studie)}
+\textbf{Wichtigster Grund} für das Scheitern von Start-ups: ungenügende Anpassung
+der Kostenbasis (Fixkosten werden nicht schnell genug abgebaut).
+
+\textbf{Kurzfristige Starrheit von Kosten:}
+\begin{itemize}
+    \item Rechtlich: z.B. Kündigungsfristen von Verträgen
+    \item Betrieblich: Personalabbau stört eingespielte Teams, Demotivation,
+    Reputationsverlust, Wiedereinstellungskosten
+    \item Technisch: nötige Mindestkapazität
+\end{itemize}
+
+\textbf{Langfristige Starrheit -- spezifische Investitionen:} Investitionen in
+Wissen, Informatik, Maschinen etc., die auf einen bestimmten Firmenzweck
+ausgerichtet sind. Nicht firmenintern alternativ nutzbar, nicht firmenextern
+verkaufbar $\to$ schränken Kostenanpassung stark ein.
+\end{mainbox}
+
+\begin{subbox}{Fixkosten vs. variable Kosten}
+\renewcommand*{\arraystretch}{1.3}
+\begin{center}
+\begin{tabularx}{\linewidth}{lX}
+\textbf{Fixkosten} & fallen unabhängig von Produktionsmenge an (Miete,
+Kreditzinsen, Abschreibungen, Löhne) \\
+\textbf{Variable Kosten} & steigen mit Produktionsmenge (Rohstoffverbrauch,
+temporäre Arbeitskräfte) \\
+\end{tabularx}
+\end{center}
+\textbf{Quasi-fixe Kosten} (z.B. Software-Personalkosten): formal variabel, aber
+Fachpersonal lässt sich kaum kurzfristig ab-/aufbauen $\to$ verhalten sich wie
+Fixkosten.
+\end{subbox}
+
+\begin{mainbox}{Ressourcenbegriff für Neukombination}
+Sehr weit gefasst:
+\begin{itemize}
+    \item Elemente physischer Art (Rohstoffe, Materialien, Werkzeuge)
+    \item Elemente der Biografie des Gründers (Erfahrungen, Qualifikationen,
+    Fähigkeiten)
+    \item Netzwerk des Entrepreneurs
+    \item Ideen des Entrepreneurs
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Yamo (natürliche Babynahrung)}
+Auftragsproduktion (HPP-Anlage), Verpackungshersteller, Informatikdienstleister
+(Webshop), Buchhaltungsdienstleister, Logistiker -- Gründer koordinieren und
+kontrollieren nur.
+\end{subbox}
+
+% ============================================================================
+% SECTION 4: SMARTE IDEENFINDUNG
+% ============================================================================
+\section{Smarte Ideenfindung}
+
+\begin{mainbox}{Drei Ansatzpunkte der Ideenfindung}
+\begin{enumerate}
+    \item \textbf{Problemlösen:} Kundenperspektive einnehmen, Unzulänglichkeiten/
+    ungedeckte Bedürfnisse erkennen
+    \item \textbf{Trending:} Trends erkennen und nutzen (z.B. Ökologie,
+    Individualität, Digitalisierung)
+    \item \textbf{Neue Technologie/Erfindung kommerzialisieren} (oft zeit- und
+    kostenintensiv)
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Ansatz Problemlösen -- 2 Schritte}
+\begin{enumerate}
+    \item Welche Probleme würde man gerne lösen?
+    \item Welche Geschäftsideen würden diese Probleme beseitigen?
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Merkregel}
+Wirklich neue Ideen sind selten -- meist reicht es, eine bewährte Idee auf einen
+neuen Bereich zu \textbf{übertragen} oder zwei bekannte Ideen zu
+\textbf{kombinieren}. Der Erfolg entsteht oft durch \textbf{Neukombination
+bestehender Komponenten}, nicht durch Neuerfindung.
+\end{subbox}
+
+% ============================================================================
+% TIPS FOR AVOIDING OVERFULL BOXES
+% ============================================================================
+%
+% 1. Keep formulas concise - split long equations over multiple lines
+% 2. Use shorter variable names in inline math
+% 3. Abbreviate table headers
+% 4. Use align* environment for multi-line equations
+% 5. Test compile frequently to catch overflow early
+%
+% Example of splitting a long formula:
+% Instead of: $$a + b + c + d + e = f + g + h + i + j$$
+% Use:
+% \begin{align*}
+% a + b + c + d + e &= f + g + h \\
+%                   &\quad + i + j
+% \end{align*}
+%
+% ============================================================================
+
+\end{document}

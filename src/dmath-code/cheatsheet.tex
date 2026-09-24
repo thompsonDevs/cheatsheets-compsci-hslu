@@ -1,0 +1,361 @@
+% ============================================================================
+% CHEATSHEET TEMPLATE
+% ============================================================================
+% Based on the ANA-G cheatsheet style
+%
+% Features:
+% - 4-column landscape layout on A4
+% - Colored boxes for main concepts and sub-concepts
+% - Compact formatting optimized for information density
+% - Mathematical typesetting support
+%
+% Usage:
+% 1. Replace metadata (title, author, date)
+% 2. Adjust number of columns if needed (see \Ncolumn)
+% 3. Add your content using mainbox and subbox environments
+% 4. Compile with pdflatex (run twice for proper layout)
+% ============================================================================
+
+\documentclass[a4paper, fontsize=7pt]{scrartcl}
+
+% ============================================================================
+% ENCODING & LANGUAGE
+% ============================================================================
+\usepackage[utf8]{inputenc}
+% \usepackage[german]{babel}    % Uncomment for German hyphenation
+% \usepackage[english]{babel}   % Uncomment for English hyphenation
+
+% ============================================================================
+% PAGE LAYOUT
+% ============================================================================
+% 4-column landscape layout with minimal margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+
+% Number of columns (adjust as needed: 3-4 recommended for A4)
+\Ncolumn{4}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0cm}
+
+% ============================================================================
+% COLORS & BOXES
+% ============================================================================
+\usepackage[most]{tcolorbox}
+
+% Base style for all boxes
+\tcbset{
+  base/.style={
+    boxrule=0.3mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!10!white,
+    coltitle=black,
+    toptitle=0.75mm,
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+% Main concept box (green accent)
+% Use for: definitions, theorems, important formulas
+\definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}  % Nice green
+\newtcolorbox{mainbox}[1]{
+  colframe=maincolor,
+  base={#1}
+}
+
+% Sub concept box (gray accent)
+% Use for: examples, remarks, minor concepts
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Alternative colors (uncomment to use)
+% \definecolor{maincolor}{rgb}{0.2, 0.4, 0.8}   % Blue
+% \definecolor{maincolor}{rgb}{0.8, 0.2, 0.2}   % Red
+% \definecolor{maincolor}{rgb}{0.5, 0.2, 0.6}   % Purple
+
+% ============================================================================
+% MATHEMATICS
+% ============================================================================
+\usepackage{amsmath, amsthm, mathtools, amssymb}
+\usepackage{amsfonts, amstext}
+\allowdisplaybreaks  % Allow page breaks in equations
+
+% Common math shortcuts (customize as needed)
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+
+% Number sets
+\def\N{\mathbb{N}}  % Natural numbers
+\def\Z{\mathbb{Z}}  % Integers
+\def\Q{\mathbb{Q}}  % Rationals
+\def\R{\mathbb{R}}  % Reals
+\def\C{\mathbb{C}}  % Complex
+
+% Calculus
+\def\dx{\,dx}
+\def\dt{\,dt}
+\def\dy{\,dy}
+\newcommand{\ddx}[1]{\frac{d#1}{dx}}
+\newcommand{\ddn}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdn}[2]{\frac{\partial #1}{\partial #2}}
+
+% Big O notation
+\def\oof{\mathcal{O}}
+
+% ============================================================================
+% TABLES
+% ============================================================================
+\usepackage{tabularx, multirow, booktabs}
+\renewcommand*{\arraystretch}{1.5}  % More spacing in tables
+
+% ============================================================================
+% LISTS
+% ============================================================================
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt, topsep=2pt}
+\setenumerate{itemsep=0.75pt, topsep=2pt}
+
+% ============================================================================
+% GRAPHICS & TIKZ
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  fit,
+  matrix,
+  decorations,
+  angles,
+  quotes,
+  babel,
+  3d,
+  arrows.meta,
+  shadings,
+  shapes.geometric
+}
+
+\tikzset{
+  >=stealth,
+  % Add custom TikZ styles here
+}
+
+% ============================================================================
+% HYPERLINKS
+% ============================================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}   % For \centernot command
+\usepackage{marvosym}    % Additional symbols
+\usepackage{wasysym}     % Additional symbols
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{Cheatsheet DMATH-CODE}
+\author{Thomas Schnyder}
+\date{September 2026}
+
+% Table of contents depth
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% SECTION 1: WAHRSCHEINLICHKEIT
+% ============================================================================
+\section{Wahrscheinlichkeit}
+
+\subsection{Zufallsexperiment \& Ergebnismenge}
+
+\begin{mainbox}{Zufallsexperiment}
+Ein Vorgang, der
+\begin{itemize}
+    \item beliebig oft unter gleichen Bedingungen wiederholt werden kann und
+    \item dessen Ergebnis nicht mit Sicherheit vorhergesagt werden kann.
+\end{itemize}
+\textbf{Ergebnismenge} $\Omega$: Menge \emph{aller} möglichen Ergebnisse
+(bekannt!).\\
+Mehrere Teilexperimente $\Rightarrow$ kartesisches Produkt, z.B.
+$\Omega = \{0,1\}^n$, $|\Omega| = 2^n$.
+\end{mainbox}
+
+\begin{subbox}{Beispiele Ergebnismenge}
+\begin{itemize}
+    \item 1 Würfel: $\Omega = \{1,\ldots,6\}$
+    \item 2 Würfel: $\Omega = \{1,\ldots,6\}^2 = \{11, 12, \ldots, 66\}$,
+          $|\Omega| = 36$
+    \item 3 Münzen (CHF, \$, £): $\{K,Z\}^3$, $|\Omega| = 8$
+    \item Tennis (Sieger: zuerst 2 in Folge oder 3 total): $\Omega = \{$AA,
+          BB, ABB, BAA, ABAA, BABB, ABABA, ABABB, BABAB, BABAA$\}$,
+          $|\Omega| = 10$
+\end{itemize}
+\end{subbox}
+
+\subsection{Wahrscheinlichkeitsfunktion}
+
+\begin{mainbox}{Wahrscheinlichkeitsfunktion $P$}
+$P$ ordnet jedem Ergebnis $\omega \in \Omega = \{\omega_1, \ldots, \omega_n\}$
+eine reelle Zahl $P(\omega) \in [0,1]$ zu, sodass
+$$\boxed{\sum_{\omega \in \Omega} P(\omega) = P(\omega_1) + \ldots + P(\omega_n) = 1}$$
+\textbf{Uniform:} alle Ergebnisse gleich wahrscheinlich:
+$$P(\omega_1) = \ldots = P(\omega_n) = \frac{1}{|\Omega|}$$
+\end{mainbox}
+
+\begin{subbox}{Beispiele}
+\begin{itemize}
+    \item Fairer Würfel: $P(k) = \frac{1}{6}$; 2 Würfel: $P(\omega) = \frac{1}{36}$
+    \item Münze mit $P(K) = 0.3$ $\Rightarrow$ $P(Z) = 1 - 0.3 = 0.7$
+    \item Würfel, jede Augenzahl 10\,\% wahrscheinlicher als die vorherige:
+          $P(1) = x$, $\sum_{k=0}^{5} 1.1^k x = 7.71561\,x = 1$
+          $\Rightarrow P(1) \approx 0.1296$, \ldots, $P(6) \approx 0.2087$
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Beispiel: Zufallsgenerator 0--7 aus Bit-Generator}
+\textbf{Var. 1:} 3 Bits als Binärzahl: $\Omega = \{0,1\}^3$, uniform
+$P(k) = \frac{1}{8}$.\\
+\textbf{Var. 2:} Anzahl Nullen unter 7 Bits: $|\Omega| = 2^7$,
+$$P(k) = \binom{7}{k} \cdot \frac{1}{2^7} \quad \text{(nicht uniform!)}$$
+$P(0) = P(7) \approx 0.0078$, $P(1) = P(6) \approx 0.0547$,\\
+$P(2) = P(5) \approx 0.1641$, $P(3) = P(4) \approx 0.2734$.
+\end{subbox}
+
+\subsection{Ereignisse}
+
+\begin{mainbox}{Ereignis}
+Jede Teilmenge $E = \{\omega_1, \ldots, \omega_k\} \subseteq \Omega$ heisst
+\textbf{Ereignis}.
+$$\boxed{P(E) = \sum_{\omega \in E} P(\omega)}$$
+\textbf{Uniform (Laplace):} \ $P(E) = \dfrac{|E|}{|\Omega|}$
+\ (günstige / mögliche)
+\end{mainbox}
+
+\begin{mainbox}{Rechenregeln (Satz 1)}
+\begin{itemize}
+    \item Sicheres Ereignis: $P(\Omega) = 1$ (trifft immer zu)
+    \item Unmögliches Ereignis: $P(\{\}) = 0$ (trifft nie zu)
+    \item Gegenereignis: $P(\overline{A}) = 1 - P(A)$
+    \item Vereinigung:
+          $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Roulette (38 Felder)}
+$P(\overline{\text{odd}}) = 1 - \frac{18}{38} = \frac{20}{38}$ \ (0 und 00!)\\
+$P(\text{odd} \cup \text{red}) = \frac{18}{38} + \frac{18}{38} - \frac{10}{38}
+= \frac{26}{38}$
+\end{subbox}
+
+\begin{subbox}{Denkprozess: ``mindestens ein\ldots''}
+\begin{enumerate}
+    \item Direkt zählen ist mühsam (viele Fälle).
+    \item Gegenereignis ``kein \ldots'' ist \emph{ein} einfacher Fall.
+    \item $P(\text{mind. ein}) = 1 - P(\text{kein})$
+\end{enumerate}
+\textbf{8-Bit-Wort mit mind. einer 1:} $1 - \frac{1}{2^8} \approx 0.9961$
+\end{subbox}
+
+\subsection{Typische Aufgaben}
+
+\begin{subbox}{Chevalier de Méré}
+\textbf{Spiel 1:} 4 Würfe, mind. eine Sechs:
+$$1 - \left(\tfrac{5}{6}\right)^4 \approx 0.5177$$
+\textbf{Spiel 2:} 24 Würfe mit 2 Würfeln, mind. eine Doppelsechs:
+$$1 - \left(\tfrac{35}{36}\right)^{24} \approx 0.4914$$
+$\Rightarrow$ Die Chancen sind \emph{nicht} gleich, obwohl $\frac{1}{6} \cdot 4 =
+\frac{1}{36} \cdot 24$.
+\end{subbox}
+
+\begin{subbox}{Teilbarkeit (Inklusion--Exklusion)}
+Zahl uniform aus $1..100$, teilbar durch 2 oder 5:
+$$\tfrac{50}{100} + \tfrac{20}{100} - \tfrac{10}{100} = 0.6$$
+(Schnitt = durch 10 teilbar)
+\end{subbox}
+
+\begin{subbox}{Kein Index-Treffer}
+5 Zufallszahlen aus $\{0,\ldots,4\}$ in Liste; kein Element $=$ Index:
+jede Stelle hat 4 erlaubte Werte $\Rightarrow$
+$$P = \frac{4^5}{5^5} = 0.32768$$
+\end{subbox}
+
+\begin{subbox}{Gruppen gleich gemischt}
+6 Frauen, 6 Männer in 2 gleich grosse Gruppen:
+$|\Omega| = \binom{12}{6} = 924$
+$$P = \binom{6}{3}\binom{6}{3} \cdot \frac{1}{924} \approx 0.4329$$
+\end{subbox}
+
+\begin{subbox}{Geburtstagsproblem-Typ}
+5 Personen merken sich je eine Ziffer 0--9; mind. 2 gleich:
+$$1 - \frac{10 \cdot 9 \cdot 8 \cdot 7 \cdot 6}{10^5} = 0.6976$$
+15 Jobs auf 20 Server, alle auf verschiedenen Servern:
+$$\frac{20!}{5!} \cdot \frac{1}{20^{15}} \approx 0.00062$$
+\end{subbox}
+
+\begin{subbox}{Linear Probing (Array Länge 6)}
+2 Elemente uniform; Kollision $\to$ nächste freie Stelle (zyklisch).
+Benachbart, falls 2.\ Element auf $i-1$, $i+1$ \emph{oder} $i$ (dann $\to i+1$)
+fällt:
+$$P = \frac{3}{6} = \frac{1}{2}$$
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item ``mindestens eins'' $\Rightarrow$ fast immer Gegenereignis.
+    \item Bei Vereinigung den Schnitt abziehen (Doppelzählung).
+    \item Nicht jedes Experiment ist uniform (z.B. Anzahl Nullen, Summe von
+          Würfeln) $\Rightarrow$ Laplace nur, wenn alle $\omega$ gleich
+          wahrscheinlich.
+    \item Wahrscheinlichkeit $\cdot$ Anzahl Versuche ist \emph{keine}
+          Wahrscheinlichkeit (de Méré).
+    \item Ordnung in $\Omega$ beachten: $(1,2) \neq (2,1)$ bei 2 Würfeln.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
+% TIPS FOR AVOIDING OVERFULL BOXES
+% ============================================================================
+%
+% 1. Keep formulas concise - split long equations over multiple lines
+% 2. Use shorter variable names in inline math
+% 3. Abbreviate table headers
+% 4. Use align* environment for multi-line equations
+% 5. Test compile frequently to catch overflow early
+%
+% Example of splitting a long formula:
+% Instead of: $$a + b + c + d + e = f + g + h + i + j$$
+% Use:
+% \begin{align*}
+% a + b + c + d + e &= f + g + h \\
+%                   &\quad + i + j
+% \end{align*}
+%
+% ============================================================================
+
+\end{document}

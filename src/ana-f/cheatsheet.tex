@@ -1,0 +1,391 @@
+% ============================================================================
+% CHEATSHEET TEMPLATE
+% ============================================================================
+% Based on the ANA-G cheatsheet style
+%
+% Features:
+% - 4-column landscape layout on A4
+% - Colored boxes for main concepts and sub-concepts
+% - Compact formatting optimized for information density
+% - Mathematical typesetting support
+%
+% Usage:
+% 1. Replace metadata (title, author, date)
+% 2. Adjust number of columns if needed (see \Ncolumn)
+% 3. Add your content using mainbox and subbox environments
+% 4. Compile with pdflatex (run twice for proper layout)
+% ============================================================================
+
+\documentclass[a4paper, fontsize=7pt]{scrartcl}
+
+% ============================================================================
+% ENCODING & LANGUAGE
+% ============================================================================
+\usepackage[utf8]{inputenc}
+% \usepackage[german]{babel}    % Uncomment for German hyphenation
+% \usepackage[english]{babel}   % Uncomment for English hyphenation
+
+% ============================================================================
+% PAGE LAYOUT
+% ============================================================================
+% 4-column landscape layout with minimal margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+
+% Number of columns (adjust as needed: 3-4 recommended for A4)
+\Ncolumn{4}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0cm}
+
+% ============================================================================
+% COLORS & BOXES
+% ============================================================================
+\usepackage[most]{tcolorbox}
+
+% Base style for all boxes
+\tcbset{
+  base/.style={
+    boxrule=0.3mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!10!white,
+    coltitle=black,
+    toptitle=0.75mm,
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+% Main concept box (green accent)
+% Use for: definitions, theorems, important formulas
+\definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}  % Nice green
+\newtcolorbox{mainbox}[1]{
+  colframe=maincolor,
+  base={#1}
+}
+
+% Sub concept box (gray accent)
+% Use for: examples, remarks, minor concepts
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Alternative colors (uncomment to use)
+% \definecolor{maincolor}{rgb}{0.2, 0.4, 0.8}   % Blue
+% \definecolor{maincolor}{rgb}{0.8, 0.2, 0.2}   % Red
+% \definecolor{maincolor}{rgb}{0.5, 0.2, 0.6}   % Purple
+
+% ============================================================================
+% MATHEMATICS
+% ============================================================================
+\usepackage{amsmath, amsthm, mathtools, amssymb}
+\usepackage{amsfonts, amstext}
+\allowdisplaybreaks  % Allow page breaks in equations
+
+% Common math shortcuts (customize as needed)
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+
+% Number sets
+\def\N{\mathbb{N}}  % Natural numbers
+\def\Z{\mathbb{Z}}  % Integers
+\def\Q{\mathbb{Q}}  % Rationals
+\def\R{\mathbb{R}}  % Reals
+\def\C{\mathbb{C}}  % Complex
+
+% Calculus
+\def\dx{\,dx}
+\def\dt{\,dt}
+\def\dy{\,dy}
+\newcommand{\ddx}[1]{\frac{d#1}{dx}}
+\newcommand{\ddn}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdn}[2]{\frac{\partial #1}{\partial #2}}
+
+% Big O notation
+\def\oof{\mathcal{O}}
+
+% ============================================================================
+% TABLES
+% ============================================================================
+\usepackage{tabularx, multirow, booktabs}
+\renewcommand*{\arraystretch}{1.5}  % More spacing in tables
+
+% ============================================================================
+% LISTS
+% ============================================================================
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt, topsep=2pt}
+\setenumerate{itemsep=0.75pt, topsep=2pt}
+
+% ============================================================================
+% GRAPHICS & TIKZ
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  fit,
+  matrix,
+  decorations,
+  angles,
+  quotes,
+  babel,
+  3d,
+  arrows.meta,
+  shadings,
+  shapes.geometric
+}
+
+\tikzset{
+  >=stealth,
+  % Add custom TikZ styles here
+}
+
+% ============================================================================
+% HYPERLINKS
+% ============================================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}   % For \centernot command
+\usepackage{marvosym}    % Additional symbols
+\usepackage{wasysym}     % Additional symbols
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{Cheatsheet ANA-F}
+\author{Thomas Schnyder}
+\date{September 2026}
+
+% Table of contents depth
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% SECTION 1: TRIGONOMETRISCHE FUNKTIONEN
+% ============================================================================
+\section{Trigonometrische Funktionen}
+
+\begin{mainbox}{Definition am Einheitskreis}
+Punkt $P$ auf dem Einheitskreis mit Winkel $x$ (zur pos. $x$-Achse):
+$$P = (\cos x,\ \sin x)$$
+$$\tan x = \frac{\sin x}{\cos x}, \qquad \cot x = \frac{\cos x}{\sin x} = \frac{1}{\tan x}$$
+\textbf{Bogenmass:} $x = \dfrac{\pi}{180^\circ} \cdot \alpha$ \quad ($360^\circ = 2\pi$)
+\end{mainbox}
+
+\begin{mainbox}{Wichtige Werte}
+\renewcommand*{\arraystretch}{1.6}
+\setlength{\tabcolsep}{4pt}
+\begin{center}
+\begin{tabular}{c|ccccc}
+$x$ & $0$ & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$ \\
+\hline
+$\sin x$ & $0$ & $\frac{1}{2}$ & $\frac{\sqrt2}{2}$ & $\frac{\sqrt3}{2}$ & $1$ \\
+$\cos x$ & $1$ & $\frac{\sqrt3}{2}$ & $\frac{\sqrt2}{2}$ & $\frac{1}{2}$ & $0$ \\
+$\tan x$ & $0$ & $\frac{\sqrt3}{3}$ & $1$ & $\sqrt3$ & -- \\
+\end{tabular}
+\end{center}
+\textbf{Merkregel:} $\sin x = \frac{\sqrt{n}}{2}$ für $n = 0,1,2,3,4$; $\cos$ rückwärts.
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften}
+\renewcommand*{\arraystretch}{1.5}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l|cccc}
+ & $\sin$ & $\cos$ & $\tan$ & $\cot$ \\
+\hline
+$W$ & $[-1,1]$ & $[-1,1]$ & $\R$ & $\R$ \\
+Periode & $2\pi$ & $2\pi$ & $\pi$ & $\pi$ \\
+Symm. & ung. & ger. & ung. & ung. \\
+Nullst. & $k\pi$ & $\frac{\pi}{2} + k\pi$ & $k\pi$ & $\frac{\pi}{2} + k\pi$ \\
+\end{tabular}
+$D_{\sin} = D_{\cos} = \R$, \ $D_{\tan} = \R \setminus \{\frac{\pi}{2} + k\pi\}$,
+$D_{\cot} = \R \setminus \{k\pi\}$ ($k \in \Z$). Polstellen von $\tan$/$\cot$ = Nullstellen von $\cos$/$\sin$.
+\end{mainbox}
+
+\begin{mainbox}{Wichtige Formeln}
+\textbf{Trigonometrischer Pythagoras:}
+$$\boxed{\sin^2 x + \cos^2 x = 1}$$
+\textbf{Additionstheoreme:}
+\begin{align*}
+\sin(x \pm y) &= \sin x \cos y \pm \cos x \sin y \\
+\cos(x \pm y) &= \cos x \cos y \mp \sin x \sin y \\
+\tan(x \pm y) &= \frac{\tan x \pm \tan y}{1 \mp \tan x \tan y}
+\end{align*}
+\textbf{Doppelwinkel} ($y = x$):
+\begin{align*}
+\sin(2x) &= 2 \sin x \cos x \\
+\cos(2x) &= \cos^2 x - \sin^2 x \\
+         &= 1 - 2\sin^2 x = 2\cos^2 x - 1
+\end{align*}
+\end{mainbox}
+
+\begin{subbox}{Symmetrien \& Verschiebungen}
+\begin{align*}
+\sin(-x) &= -\sin x & \cos(-x) &= \cos x \\
+\sin(\pi - x) &= \sin x & \cos(\pi - x) &= -\cos x
+\end{align*}
+\begin{align*}
+\sin\!\left(x + \tfrac{\pi}{2}\right) &= \cos x \\
+\cos\!\left(x + \tfrac{\pi}{2}\right) &= -\sin x
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Allgemeine Sinusfunktion}
+$$y = A \cdot \sin(\omega x + \varphi)$$
+Amplitude $|A|$, Periode $p = \frac{2\pi}{\omega}$, Verschiebung um
+$-\frac{\varphi}{\omega}$ (nach links, falls $\varphi > 0$).
+\end{subbox}
+
+\begin{mainbox}{Ableitungen}
+\begin{align*}
+(\sin x)' &= \cos x \\
+(\cos x)' &= -\sin x \\
+(\tan x)' &= \frac{1}{\cos^2 x} = 1 + \tan^2 x \\
+(\cot x)' &= -\frac{1}{\sin^2 x} = -(1 + \cot^2 x)
+\end{align*}
+$\tan'$ via Quotientenregel: $\frac{\cos x \cos x - \sin x (-\sin x)}{\cos^2 x}
+= \frac{1}{\cos^2 x}$.
+\end{mainbox}
+
+\subsection{Arkusfunktionen}
+
+\begin{mainbox}{Umkehrfunktionen (Hauptwerte)}
+Nur auf einem \textbf{Monotonieintervall} umkehrbar $\Rightarrow$ eingeschränkter
+Wertebereich:
+\renewcommand*{\arraystretch}{1.5}
+\setlength{\tabcolsep}{4pt}
+\begin{center}
+\begin{tabular}{l|c|c}
+ & $D$ & $W$ \\
+\hline
+$\arcsin x$ & $[-1, 1]$ & $[-\frac{\pi}{2}, \frac{\pi}{2}]$ \\
+$\arccos x$ & $[-1, 1]$ & $[0, \pi]$ \\
+$\arctan x$ & $\R$ & $(-\frac{\pi}{2}, \frac{\pi}{2})$ \\
+$\operatorname{arccot} x$ & $\R$ & $(0, \pi)$ \\
+\end{tabular}
+\end{center}
+$y = \arcsin x \iff x = \sin y$ (mit $y \in W$).\\
+$\arcsin x + \arccos x = \frac{\pi}{2}$, \ $\arctan x + \operatorname{arccot} x = \frac{\pi}{2}$
+\end{mainbox}
+
+\begin{mainbox}{Ableitungen der Arkusfunktionen}
+\begin{align*}
+(\arcsin x)' &= \frac{1}{\sqrt{1 - x^2}} \\
+(\arccos x)' &= -\frac{1}{\sqrt{1 - x^2}} \\
+(\arctan x)' &= \frac{1}{1 + x^2} \\
+(\operatorname{arccot} x)' &= -\frac{1}{1 + x^2}
+\end{align*}
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: Herleitung $(\arcsin x)'$}
+\begin{enumerate}
+    \item $y = \arcsin x \iff \sin y = x$
+    \item Implizit ableiten: $\cos y \cdot y' = 1 \Rightarrow y' = \frac{1}{\cos y}$
+    \item $\cos y = \sqrt{1 - \sin^2 y}$ (da $\cos y \geq 0$ auf $[-\frac{\pi}{2}, \frac{\pi}{2}]$)
+    \item $\Rightarrow y' = \frac{1}{\sqrt{1 - x^2}}$
+\end{enumerate}
+Analog $\arctan$: $\tan y = x \Rightarrow (1 + \tan^2 y)\,y' = 1 \Rightarrow y' = \frac{1}{1 + x^2}$.
+\end{subbox}
+
+\begin{subbox}{Beispiel mit Kettenregel}
+$$\left(\arctan(x^2)\right)' = \frac{1}{1 + x^4} \cdot 2x = \frac{2x}{1 + x^4}$$
+\end{subbox}
+
+\subsection{Trigonometrische Gleichungen}
+
+\begin{mainbox}{Alle Lösungen ($k \in \Z$)}
+\renewcommand*{\arraystretch}{1.5}
+\begin{itemize}
+    \item $\sin z = a$: \ $z = \arcsin a + 2k\pi$ \ oder \ $z = \pi - \arcsin a + 2k\pi$
+    \item $\cos z = a$: \ $z = \pm \arccos a + 2k\pi$
+    \item $\tan z = a$: \ $z = \arctan a + k\pi$
+\end{itemize}
+(für $\sin$/$\cos$ nur lösbar, falls $|a| \leq 1$)
+\end{mainbox}
+
+\begin{subbox}{Vorgehen}
+\begin{enumerate}
+    \item Mit Formeln (Pythagoras, Doppelwinkel) auf \emph{eine} Funktion bringen.
+    \item Ggf. substituieren ($u = \sin x$) und algebraisch lösen.
+    \item Grundlösung(en) mit Arkusfunktion, dann \emph{alle} Lösungen über
+          Symmetrie + Periode.
+    \item Zurücksubstituieren, nach $x$ auflösen, ggf. auf Intervall einschränken.
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Beispiel: $\sin(2x) = \frac{1}{2}$}
+$2x = \frac{\pi}{6} + 2k\pi$ \ oder \ $2x = \frac{5\pi}{6} + 2k\pi$\\
+$\Rightarrow x = \frac{\pi}{12} + k\pi$ \ oder \ $x = \frac{5\pi}{12} + k\pi$
+\end{subbox}
+
+\begin{subbox}{Beispiel: $2\sin^2 x - \sin x - 1 = 0$}
+$u = \sin x$: $2u^2 - u - 1 = 0 \Rightarrow u_1 = 1$, $u_2 = -\frac{1}{2}$
+\begin{itemize}
+    \item $\sin x = 1 \Rightarrow x = \frac{\pi}{2} + 2k\pi$
+    \item $\sin x = -\frac{1}{2} \Rightarrow x = -\frac{\pi}{6} + 2k\pi$ \ oder \
+          $x = \frac{7\pi}{6} + 2k\pi$
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Taschenrechner auf \textbf{RAD} stellen.
+    \item Arkusfunktion liefert nur \emph{eine} Lösung -- zweite Lösung
+          (Symmetrie) und Periode nicht vergessen.
+    \item Nicht durch $\sin x$ oder $\cos x$ dividieren (Lösungen gehen verloren)
+          -- stattdessen ausklammern.
+    \item $\sin^2 x = (\sin x)^2 \neq \sin(x^2)$.
+    \item $\arcsin x \neq \frac{1}{\sin x}$ (Umkehrfunktion, nicht Kehrwert).
+    \item Periode von $\sin(\omega x)$ ist $\frac{2\pi}{\omega}$ $\Rightarrow$
+          bei $\sin(2x)$: $+k\pi$.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
+% TIPS FOR AVOIDING OVERFULL BOXES
+% ============================================================================
+%
+% 1. Keep formulas concise - split long equations over multiple lines
+% 2. Use shorter variable names in inline math
+% 3. Abbreviate table headers
+% 4. Use align* environment for multi-line equations
+% 5. Test compile frequently to catch overflow early
+%
+% Example of splitting a long formula:
+% Instead of: $$a + b + c + d + e = f + g + h + i + j$$
+% Use:
+% \begin{align*}
+% a + b + c + d + e &= f + g + h \\
+%                   &\quad + i + j
+% \end{align*}
+%
+% ============================================================================
+
+\end{document}

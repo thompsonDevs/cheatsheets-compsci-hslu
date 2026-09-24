@@ -144,3 +144,59 @@ Lückentext	iteo	IT-Pyramide von oben nach unten: {{c1::Geschäftsstrategie}} �
 Lückentext	iteo	Planungsebenen: {{c1::IT-Vision}} (mehr als 5 Jahre) → {{c2::IT-Strategie}} (3–5 Jahre) → {{c3::IT-Roadmap}} (ca. 2 Jahre).		iteo::it-strategie
 Lückentext	iteo	Die drei Phasen der IT-Strategie-Entwicklung: {{c1::Standortbestimmung}} → {{c2::Strategie-Entwurf}} → {{c3::Strategie-Umsetzung}}.		iteo::it-strategie
 Lückentext	iteo	IT-Governance umfasst u.a. {{c1::Risk Management}}, {{c2::Performance Management}} und {{c3::Ressourcen Management}}.		iteo::it-strategie
+Standard	iteo	Was ist das Ziel der IT-Governance?	Den Geschäftswert der IT-Investitionen sicherzustellen und die mit IT-Projekten verbundenen Risiken zu mindern.	iteo::it-governance
+Standard	iteo	Welche drei Begriffe bilden den Kern der IT-Governance?	Wert, Risiko und Kontrolle.	iteo::it-governance
+Standard	iteo	Warum ist «Wert» ein Kernthema der IT-Governance?	Die Investitionen in IT (Infrastruktur, Systeme, Personal) sind stark gestiegen – es muss sich zeigen, ob sie dem Unternehmen etwas bringen (z.B. Return on Investment, ROI).	iteo::it-governance
+Standard	iteo	Warum ist «Risiko» ein Kernthema der IT-Governance?	Geschäftsprozesse sind digitalisiert und hängen von IT-Systemen ab – Sicherheitsvorfälle (Viren, Malware) und Systemausfälle werden zu kritischen Geschäftsrisiken.	iteo::it-governance
+Standard	iteo	Warum ist «Kontrolle» ein Kernthema der IT-Governance?	Neue staatliche Vorschriften verlangen, dass Unternehmen die Kontrolle über ihre Unternehmensdaten haben.	iteo::it-governance
+Standard	iteo	Wie läuft der IT-Governance-Lebenszyklus ab?	Kontinuierlicher Zyklus, jederzeit startbar: meist Beginn mit der Strategie, dann Umsetzung (Wert liefern, Risiken angehen), danach laufende Überwachung – Ergebnisse werden gemessen, gemeldet und umgesetzt.	iteo::it-governance
+Standard	iteo	Wie oft muss die IT-Strategie im Rahmen der IT-Governance neu bewertet werden?	Jährlich.	iteo::it-governance
+Standard	iteo	Welche Faktoren beeinflussen den IT-Governance-Lebenszyklus?	Stakeholder, Mission und Vision, Ethik und Kultur, Community, Gesetze und Vorschriften, Branchenpraktiken.	iteo::it-governance
+Standard	iteo	Welche zwei der fünf ITGI-Schwerpunktbereiche werden vor allem über Best Practice Frameworks abgedeckt?	Strategische Ausrichtung und Wertschöpfung.	iteo::it-governance
+Standard	iteo	Was ist IT-Ressourcenmanagement?	Sicherstellen, dass ein Unternehmen über die richtigen Technologieressourcen verfügt, um seine Anforderungen zu erfüllen – mit dem Ziel, Kosten, Leistung und Risiko auszugleichen.	iteo::it-governance
+Standard	iteo	Welche Ressourcenarten verwaltet das IT-Ressourcenmanagement?	Hardware, Software, Personal, Daten, Prozesse.	iteo::it-governance
+Standard	iteo	Welche Phasen umfasst das IT-Ressourcenmanagement über den Lebenszyklus?	Planung, Beschaffung, Betrieb und Optimierung.	iteo::it-governance
+Standard	iteo	Was geschieht bei der Ressourcenzuweisung im Resource-Management-Zyklus?	Ressourcen werden Projekten oder Aktivitäten zugewiesen – nach Qualifikationsbedarf, Verfügbarkeit und Priorität.	iteo::it-governance
+Standard	iteo	Was geschieht bei der Leistungsüberwachung im Resource-Management-Zyklus?	Es wird verfolgt, wie Ressourcen genutzt werden und wie gut sie im Vergleich zu vorgegebenen Zielen und Benchmarks abschneiden.	iteo::it-governance
+Standard	iteo	Für welche Periode wird ein IT-Budget erstellt?	Für ein Jahr – alle Kosten und Einnahmen werden auf ein Jahr heruntergebrochen.	iteo::it-governance
+Standard	iteo	Welche zwei Kostenarten unterscheidet die IT-Budgetierung?	Laufende Kosten und Investitionskosten.	iteo::it-governance
+Standard	iteo	Wie fliessen laufende Kosten ins IT-Jahresbudget ein? Nenne Beispiele.	Direkt – z.B. Löhne, Mieten.	iteo::it-governance
+Standard	iteo	Wie fliessen Investitionskosten ins IT-Jahresbudget ein? Nenne Beispiele.	Indirekt über Abschreibungen – z.B. Kauf eines Servers, kostenintensive Software.	iteo::it-governance
+Standard	iteo	Wie werden IT-Investitionen abgeschrieben?	Linear über 3 bis 5 Jahre (Anschaffungskosten / Nutzungsdauer pro Jahr).	iteo::it-governance
+Standard	iteo	Was sind die wichtigsten Kostenposten eines IT-Budgets?	Personalkosten (intern und extern), Abschreibungen (HW, SW), Software-Wartungslizenzen, Hardware-Wartung, Servicekosten, Stromkosten, Miete (Büro und Serverraum).	iteo::it-governance
+Standard	iteo	Ein Server kostet CHF 12'000 und wird über 4 Jahre abgeschrieben. Mit welchem Betrag erscheint er im Jahresbudget?	CHF 3'000 pro Jahr (linear: 12'000 / 4).	iteo::it-governance
+Standard	iteo	Was ist ein Risiko?	Ein potenzielles Problem – es kann eintreten, muss aber nicht.	iteo::it-governance
+Standard	iteo	Welche Fragen helfen bei der Risikoidentifizierung?	Welche Probleme haben wir? Was kann schiefgehen? Wie hoch ist die Wahrscheinlichkeit? Wie hoch wird der Schaden sein? Was können wir dagegen tun?	iteo::it-governance
+Standard	iteo	Welches Ergebnis aus der IT-Strategie-Entwicklung dient als Quelle für die Risikoidentifizierung?	Die SWOT-Analyse (v.a. Schwächen und Bedrohungen).	iteo::it-governance
+Standard	iteo	Nach welchen zwei Dimensionen werden Risiken am einfachsten priorisiert?	Nach Auswirkung (Folgen für den Geschäftsbetrieb) und Eintrittswahrscheinlichkeit.	iteo::it-governance
+Standard	iteo	Was bedeutet ein tolerierbares Risiko?	Akzeptabel: geringe oder keine Auswirkung auf den Geschäftsbetrieb, geringe Wahrscheinlichkeit.	iteo::it-governance
+Standard	iteo	Was bedeutet ein hohes Risiko?	Auf lange Sicht nicht akzeptabel: kann den Geschäftsbetrieb schädigen, hohe Wahrscheinlichkeit.	iteo::it-governance
+Standard	iteo	Was bedeutet ein kritisches Risiko?	Erfordert sofortige Lösung: erheblicher Schaden, hohe Wahrscheinlichkeit.	iteo::it-governance
+Standard	iteo	Nach welchen weiteren Kriterien (neben Auswirkung und Wahrscheinlichkeit) können Risiken priorisiert werden?	Nach Verwaltbarkeit, Ressourcenverfügbarkeit, Kosten, Sensibilität.	iteo::it-governance
+Standard	iteo	Was umfasst die Risikoreaktion (Schritt «Behandeln») im Risk Management?	Einen Aktionsplan zur Risikominimierung erstellen und die definierten Änderungen implementieren.	iteo::it-governance
+Standard	iteo	Warum muss das Risk Management kontinuierlich überwacht werden?	Risiken ändern sich über die Zeit: nach umgesetzten Massnahmen werden manche Risiken weniger kritisch, andere können kritischer werden – der Aktionsplan muss aktualisiert werden.	iteo::it-governance
+Standard	iteo	Nenne Kategorien von IT-Risiken (Best Practice).	Cybersecurity, operationelle, Compliance-, Daten-, Third-Party-, Emerging-Technology-, Human-Factor-, finanzielle, rechtliche (Legal/Litigation) und Umwelt-Risiken.	iteo::it-governance
+Standard	iteo	Was ist GRC-Software? Nenne Beispiele.	Software für Governance, Risk and Compliance (Risk-Management-Dashboards) – z.B. ServiceNow GRC, Archer, LogicManager, IBM OpenPages.	iteo::it-governance
+Standard	iteo	Was ist IT-Performance-Management?	Überwachung der IT-Infrastruktur, damit KPIs, Service-Levels und Budgets mit den Unternehmenszielen übereinstimmen.	iteo::it-governance
+Standard	iteo	Was umfasst IT-Performance-Management neben der Überwachung von KPIs noch?	Kaufentscheidungen, Standardisierung der IT-Ausrüstung, Steuerung von Kapital- und Personalressourcen – und eine Klasse von Software-Tools zur Überwachung der Infrastruktur-Stacks.	iteo::it-governance
+Standard	iteo	Wann findet im Performance-Management-Zyklus die Feedbackphase statt?	Parallel zur Überwachungs- und zur Lern-/Entwicklungsphase.	iteo::it-governance
+Standard	iteo	Wann findet im Performance-Management-Zyklus die Belohnungsphase statt?	Nach Abschluss des Projekts – unabhängig davon, ob es erfolgreich war oder nicht.	iteo::it-governance
+Standard	iteo	Welche drei Best Practice Frameworks bzw. Standards werden in der IT-Governance verwendet?	COBIT, ITIL und ISO 20000.	iteo::it-governance
+Standard	iteo	Was ist COBIT?	Ein direkt als IT-Governance-Modell konzipiertes Framework (WAS): verknüpft Anforderungen, technische Probleme und Geschäftsrisiken; Audit ist zentral.	iteo::it-governance
+Standard	iteo	Was ist ITIL?	Ein Service-Management-Framework (WIE): Empfehlungen und Best Practices, wie man die IT als Dienstanbieter organisiert und Dienste bereitstellt.	iteo::it-governance
+Standard	iteo	Was unterscheidet ISO 20000 von COBIT und ITIL?	ISO 20000 ist ein Standard, COBIT und ITIL sind Frameworks.	iteo::it-governance
+Standard	iteo	Warum wird COBIT als «Umbrella Framework» bezeichnet?	Es bildet das übergeordnete Governance-Dach – die Implementierung von COBIT macht die Einführung von ITIL reibungsloser.	iteo::it-governance
+Standard	iteo	Welche Rolle spielt Audit in COBIT?	Das Unternehmen kann kontrollieren, ob die Ziele erreicht werden und ob die Praktiken (wie Prozesse funktionieren sollen) eingehalten werden.	iteo::it-governance
+Standard	iteo	Nach welchen Parametern wählt eine Organisation zwischen COBIT, ITIL und ISO 20000?	Art des Geschäfts (IT oder Nicht-IT), Grösse, Komplexität der Organisation, Ressourcen, IT-Nutzung.	iteo::it-governance
+Standard	iteo	Welches Framework passt in einem Pharmaunternehmen zu welchem Bereich?	Forschung und Entwicklung, Datenschutz → COBIT; Regulierung und Gesetze (klinische Studien, Produktion) → ISO 20000; interne Organisation → ITIL.	iteo::it-governance
+Standard	iteo	Welche KPIs sind für ein Inventory-Management-System im Detailhandel (Rabatt-Fall) typisch?	Lagerbestandsquote, Lagerumschlag, Lagerraumnutzung.	iteo::it-governance
+Standard	iteo	Welche Schritte führen im Rabatt-Fall von der IT-Strategie zur IT-Governance?	IT-Ziele und -Initiativen → Aktionsplan (wie, wer, was) → Ressourcen/Budget definieren → Priorisierung mit Risikobewertung → Umsetzung und Überwachung (KPIs) → kontinuierliche Verbesserung.	iteo::it-governance
+Lückentext	iteo	Die fünf Schwerpunktbereiche der IT-Governance laut ITGI: {{c1::Strategische Ausrichtung}}, {{c2::Wertschöpfung}}, {{c3::Ressourcenmanagement}}, {{c4::Risikomanagement}}, {{c5::Performance Management}}.		iteo::it-governance
+Lückentext	iteo	Resource-Management-Zyklus: {{c1::Ressourcenidentifikation}} → {{c2::Ressourcenplanung}} → {{c3::Ressourcenzuweisung}} → {{c4::Leistungsüberwachung}} → {{c5::Interaktion und Kooperation}}.		iteo::it-governance
+Lückentext	iteo	Risk-Management-Lebenszyklus: 1. {{c1::Identifizieren}} → 2. {{c2::Analysieren (Wahrscheinlichkeit, Auswirkung)}} → 3. {{c3::Priorisieren}} → 4. {{c4::Behandeln/Reagieren}} → 5. {{c5::Überwachen und Verbessern}}.		iteo::it-governance
+Lückentext	iteo	Risiko-Score = {{c1::Auswirkung (Impact)}} × {{c2::Wahrscheinlichkeit (Probability)}}; bei Skalen von 1–4 liegt der Score zwischen {{c3::1 und 16}}.		iteo::it-governance
+Lückentext	iteo	Risikomatrix (Impact × Probability, 1–16): 1–2 {{c1::tolerierbar}}, 3–4 {{c2::mittel}}, 6–8 {{c3::hoch}}, 9–16 {{c4::kritisch}}.		iteo::it-governance
+Lückentext	iteo	Performance-Management-Zyklus: {{c1::Planung}} → {{c2::Überwachung}} → {{c3::Lernen und Entwicklung}} → {{c4::Feedback}} → {{c5::Belohnung}}.		iteo::it-governance
+Lückentext	iteo	Lineare Abschreibung in der IT (Folienwerte): PC {{c1::3}} Jahre, Server {{c2::4}} Jahre, Software {{c3::4}} Jahre, Laptop {{c4::5}} Jahre.		iteo::it-governance
+Lückentext	iteo	Software-Wartungslizenzen kosten jährlich ca. {{c1::16–20 %}} der Einmallizenzkosten.		iteo::it-governance
+Lückentext	iteo	COBIT beantwortet in der IT-Governance das {{c1::WAS}}, ITIL das {{c2::WIE}}; beide werden meist {{c3::gemeinsam}} implementiert.		iteo::it-governance

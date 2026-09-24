@@ -1,0 +1,370 @@
+% ============================================================================
+% CHEATSHEET TEMPLATE
+% ============================================================================
+% Based on the ANA-G cheatsheet style
+%
+% Features:
+% - 4-column landscape layout on A4
+% - Colored boxes for main concepts and sub-concepts
+% - Compact formatting optimized for information density
+% - Mathematical typesetting support
+%
+% Usage:
+% 1. Replace metadata (title, author, date)
+% 2. Adjust number of columns if needed (see \Ncolumn)
+% 3. Add your content using mainbox and subbox environments
+% 4. Compile with pdflatex (run twice for proper layout)
+% ============================================================================
+
+\documentclass[a4paper, fontsize=7pt]{scrartcl}
+
+% ============================================================================
+% ENCODING & LANGUAGE
+% ============================================================================
+\usepackage[utf8]{inputenc}
+% \usepackage[german]{babel}    % Uncomment for German hyphenation
+% \usepackage[english]{babel}   % Uncomment for English hyphenation
+
+% ============================================================================
+% PAGE LAYOUT
+% ============================================================================
+% 4-column landscape layout with minimal margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+
+% Number of columns (adjust as needed: 3-4 recommended for A4)
+\Ncolumn{4}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0cm}
+
+% ============================================================================
+% COLORS & BOXES
+% ============================================================================
+\usepackage[most]{tcolorbox}
+
+% Base style for all boxes
+\tcbset{
+  base/.style={
+    boxrule=0.3mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!10!white,
+    coltitle=black,
+    toptitle=0.75mm,
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+% Main concept box (green accent)
+% Use for: definitions, theorems, important formulas
+\definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}  % Nice green
+\newtcolorbox{mainbox}[1]{
+  colframe=maincolor,
+  base={#1}
+}
+
+% Sub concept box (gray accent)
+% Use for: examples, remarks, minor concepts
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Alternative colors (uncomment to use)
+% \definecolor{maincolor}{rgb}{0.2, 0.4, 0.8}   % Blue
+% \definecolor{maincolor}{rgb}{0.8, 0.2, 0.2}   % Red
+% \definecolor{maincolor}{rgb}{0.5, 0.2, 0.6}   % Purple
+
+% ============================================================================
+% MATHEMATICS
+% ============================================================================
+\usepackage{amsmath, amsthm, mathtools, amssymb}
+\usepackage{amsfonts, amstext}
+\allowdisplaybreaks  % Allow page breaks in equations
+
+% Common math shortcuts (customize as needed)
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+
+% Number sets
+\def\N{\mathbb{N}}  % Natural numbers
+\def\Z{\mathbb{Z}}  % Integers
+\def\Q{\mathbb{Q}}  % Rationals
+\def\R{\mathbb{R}}  % Reals
+\def\C{\mathbb{C}}  % Complex
+
+% Calculus
+\def\dx{\,dx}
+\def\dt{\,dt}
+\def\dy{\,dy}
+\newcommand{\ddx}[1]{\frac{d#1}{dx}}
+\newcommand{\ddn}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdn}[2]{\frac{\partial #1}{\partial #2}}
+
+% Big O notation
+\def\oof{\mathcal{O}}
+
+% ============================================================================
+% TABLES
+% ============================================================================
+\usepackage{tabularx, multirow, booktabs}
+\renewcommand*{\arraystretch}{1.5}  % More spacing in tables
+
+% ============================================================================
+% LISTS
+% ============================================================================
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt, topsep=2pt}
+\setenumerate{itemsep=0.75pt, topsep=2pt}
+
+% ============================================================================
+% GRAPHICS & TIKZ
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  fit,
+  matrix,
+  decorations,
+  angles,
+  quotes,
+  babel,
+  3d,
+  arrows.meta,
+  shadings,
+  shapes.geometric
+}
+
+\tikzset{
+  >=stealth,
+  % Add custom TikZ styles here
+}
+
+% ============================================================================
+% HYPERLINKS
+% ============================================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}   % For \centernot command
+\usepackage{marvosym}    % Additional symbols
+\usepackage{wasysym}     % Additional symbols
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{Cheatsheet ITEO}
+\author{Thomas Schnyder}
+\date{September 2026}
+
+% Table of contents depth
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% SECTION 1: DAS DATA CENTER
+% ============================================================================
+\section{Das Data Center}
+
+\subsection{Building Blocks}
+
+\begin{mainbox}{Building Blocks eines RZ}
+\begin{itemize}
+    \item \textbf{Gebäude} (Standort, bauliche Massnahmen)
+    \item \textbf{Zutrittskontrolle}
+    \item \textbf{Brandschutz / Hochwasserschutz}
+    \item \textbf{Klimatisierung} (Kühlung, Feuchte, Luftreinheit)
+    \item \textbf{Serverracks} mit Rechnern
+    \item \textbf{Stromversorgung} (USV, Generator, Verteilung)
+    \item \textbf{Datenleitungen / Netzwerk}
+    \item \textbf{Administration \& Überwachung}
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Klimatisierung}
+\textbf{Zweck:} Abfuhr von Wärme -- \emph{jeder} Betrieb elektronischer
+Komponenten erzeugt Abwärme.
+
+\textbf{Konstante Luftparameter:}
+\begin{itemize}
+    \item Temperatur: ca. \textbf{26\,°C} als Optimum empfohlen
+    \item Rel. Luftfeuchte: \textbf{40--50\,\%}
+    \begin{itemize}
+        \item zu feucht $\Rightarrow$ Kondenswasser
+        \item zu trocken $\Rightarrow$ ESD (elektrostat. Entladungen)
+    \end{itemize}
+    \item Reine Luft (Staub, Pollen, Insekten): verstopfte Lüfter/Kühlkörper
+          $\Rightarrow$ reduzierte Kühlleistung $\Rightarrow$ Ausfall
+\end{itemize}
+\textbf{Probleme:} Redundanz einplanen, Kondenswasser am Kühlaggregat
+(Abläufe, Pumpen), Filterkontrolle via \emph{Differenzdruckmessung}, hoher
+Energiebedarf, Luftverteilung sicherstellen, Überwachung 7$\times$24\,h.
+
+\textbf{Kühlleistung} oft in BTU/h:
+$$\boxed{1000\ \text{BTU/h} \approx 293\ \text{W}}$$
+BTU = Energie, um 1 lb Wasser um 1\,°F zu erwärmen.
+\end{mainbox}
+
+\begin{subbox}{Kühlluftverteilung}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}X|X@{}}
+\textbf{Free Flow} & \textbf{Gang-Einhausung} \\
+\hline
++ einfacher Aufbau & + Trennung Kalt-/Warmluft \\
++ keine zus. Hindernisse & + geringere Energiekosten \\
+-- Kalt-/Warmluft mischt sich & + kleine vertikale Temp.-Diff. \\
+-- ungleiche Temperaturen & -- Mehrkosten im Aufbau \\
+ & -- erhöhter Abschottungsbedarf \\
+\end{tabularx}
+\end{subbox}
+
+\begin{subbox}{Alternative Kühlung}
+\begin{itemize}
+    \item \textbf{Wasserkühlung:} nur im Geräteinnern (AIO) oder Wärmetransport
+          per Wasser für ganze Racks (Wasseranschluss am Server)
+    \item \textbf{Tauchkühlung} (Immersion Cooling, z.B. 3M): Hardware in
+          nicht-leitender Flüssigkeit
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{USV (UPS) -- unterbrechungsfreie Stromversorgung}
+Überbrückt kurze Versorgungsunterbrüche bis zum Einspringen des Generators.
+\begin{itemize}
+    \item \textbf{Online-USV:} Dauerbetrieb, \emph{kein} Unterbruch, aber höhere
+          Verluste
+    \item \textbf{Standby-USV:} sehr kurzer Unterbruch (1--20\,ms)
+\end{itemize}
+\begin{itemize}
+    \item Deckt oft nur \emph{einen} der redundanten Strompfade ab
+          $\Rightarrow$ Geräte mit 2 Netzteilen
+    \item Dauer abhängig von Batteriegrösse (V, Ah)
+    \item Ohne Generator: nach definierter Zeit \emph{kontrolliertes Herunterfahren}
+    \item Kleine Anlagen: Batterien stark beansprucht $\Rightarrow$ Ersatz nach
+          langem Ausfall
+    \item Batterielebensdauer: \textbf{7--12 Jahre}
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Notstrom-Generator}
+Für längere Überbrückung, meist \textbf{Diesel}motor-Generator.
+\begin{itemize}
+    \item Startzeit \textbf{5\,s bis wenige Minuten} (kalt/warm/betriebswarm)
+    \item Dieseltank meist für $>$24\,h bis mehrere Tage
+    \item Braucht Luftzufuhr, Abgasanlage; Lärm; Platz \& Raumkühlung
+    \item Aufwändige Integration mit USV \& Netz, Serviceintervalle
+\end{itemize}
+\textbf{Kette:} Netz $\to$ USV (überbrückt Sekunden) $\to$ Generator (Stunden/Tage)
+\end{mainbox}
+
+\begin{mainbox}{EDV-Einbau: Serverracks}
+\begin{itemize}
+    \item Standard \textbf{19''} (48.26\,cm) Breite der Einbauten
+    \item $\boxed{1\ \text{HE} = 1\ \text{U} = 1.75'' = 44.45\ \text{mm}}$
+    \item Rack: Höhe 21--49\,U, Tiefe 0.8--1.2\,m, Breite 0.6--1\,m
+    \item Integrierte Kühlung möglich; Zuleitungen oben/unten/seitlich
+\end{itemize}
+Dazu: Netzwerk (Kupfer, Glas), Stromverteilung (Hohlboden oder Deckentrasse),
+Klimageräte, USV, Batterieschränke, Kühlleitungen, Überwachungsgeräte.
+\end{mainbox}
+
+\subsection{Kritische Punkte}
+
+\begin{mainbox}{Gefährdungen und Abhilfe}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Gefährdung} & \textbf{Abhilfe} \\
+\hline
+Einbruch, Diebstahl, Vandalismus, Sturm, Trümmer & bauliche Massnahmen \\
+Fremdzugriff & Zutrittskontrolle, Abhörsicherheit, Firewall \\
+Feuer / Rauch & Brandfrüherkennung, Löschung, Abschottung \\
+Netzausfälle/-störungen & Netzfilter, USV, Generatoren \\
+EM-Störfelder & Abschirmung \\
+Staub, Schmutz, Wasser & Filter, Schleusen, Standortwahl, Abschottung, Pumpen \\
+\end{tabularx}
+\textbf{Achtung:} Klimaanlage verteilt Brandgase im ganzen RZ!
+\end{mainbox}
+
+\begin{subbox}{Überwachungsgebiete}
+\begin{itemize}
+    \item \textbf{Gebäude:} Türen offen/zu/verschlossen, Kameras,
+          Bewegungsmelder, Zutritte
+    \item \textbf{Räume:} Temperatur, Feuchte, Bewegung, Rauch, Brand, Leckage
+    \item \textbf{Energie:} Netzausfall, Strom, Spannung, Leistung (kW),
+          Leistungsfaktor ($\cos\varphi$)
+    \item \textbf{Einzelgeräte:} Schalterstellungen, Verbrauch pro Bereich,
+          Sicherungsausfall, Kurzschluss, Überlast
+    \item \textbf{Generator:} Kraftstoff, Bereitschaft, Temperatur, Überlast
+    \item \textbf{Klimageräte:} Temperatur, Feuchte, Filterwiderstand, Störungen
+    \item \textbf{USV:} Normal-/Batterie-/Bypass-Betrieb, Ladezustand,
+          Batterietemperatur
+    \item \textbf{Brandmelde-/Löschanlage:} ausgelöst, Übertragung aus,
+          Störung, Service
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{PUE -- Power Usage Effectiveness}
+Massstab für die Energieeffizienz eines RZ (``Green IT''):
+$$\boxed{\text{PUE} = \frac{\text{Gesamtenergie RZ}}{\text{Energie IT-Geräte}}}$$
+\begin{itemize}
+    \item \textbf{1.0:} optimal -- keine Energie für Kühlung etc.
+          (theoretisches Minimum)
+    \item \textbf{1.2:} guter Wert, normale moderne RZ
+    \item \textbf{$>$1.4:} Optimierungsbedarf
+\end{itemize}
+Annähernd 1 z.B. durch freie Kühlung in kaltem Klima oder Unterwasser-RZ
+(MS Project Natick).
+\end{mainbox}
+
+\begin{subbox}{Beispiel PUE}
+IT-Last 500\,kW, Gesamtverbrauch 650\,kW
+$\Rightarrow$ PUE $= 650/500 = 1.3$
+$\Rightarrow$ 150\,kW (30\,\% der IT-Last) für Kühlung, USV-Verluste, Licht.
+\end{subbox}
+
+% ============================================================================
+% TIPS FOR AVOIDING OVERFULL BOXES
+% ============================================================================
+%
+% 1. Keep formulas concise - split long equations over multiple lines
+% 2. Use shorter variable names in inline math
+% 3. Abbreviate table headers
+% 4. Use align* environment for multi-line equations
+% 5. Test compile frequently to catch overflow early
+%
+% Example of splitting a long formula:
+% Instead of: $$a + b + c + d + e = f + g + h + i + j$$
+% Use:
+% \begin{align*}
+% a + b + c + d + e &= f + g + h \\
+%                   &\quad + i + j
+% \end{align*}
+%
+% ============================================================================
+
+\end{document}

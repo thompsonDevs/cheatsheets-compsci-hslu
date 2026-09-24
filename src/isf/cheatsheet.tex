@@ -1,0 +1,455 @@
+% ============================================================================
+% CHEATSHEET TEMPLATE
+% ============================================================================
+% Based on the ANA-G cheatsheet style
+%
+% Features:
+% - 4-column landscape layout on A4
+% - Colored boxes for main concepts and sub-concepts
+% - Compact formatting optimized for information density
+% - Mathematical typesetting support
+%
+% Usage:
+% 1. Replace metadata (title, author, date)
+% 2. Adjust number of columns if needed (see \Ncolumn)
+% 3. Add your content using mainbox and subbox environments
+% 4. Compile with pdflatex (run twice for proper layout)
+% ============================================================================
+
+\documentclass[a4paper, fontsize=7pt]{scrartcl}
+
+% ============================================================================
+% ENCODING & LANGUAGE
+% ============================================================================
+\usepackage[utf8]{inputenc}
+% \usepackage[german]{babel}    % Uncomment for German hyphenation
+% \usepackage[english]{babel}   % Uncomment for English hyphenation
+
+% ============================================================================
+% PAGE LAYOUT
+% ============================================================================
+% 4-column landscape layout with minimal margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=5pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+
+% Number of columns (adjust as needed: 3-4 recommended for A4)
+\Ncolumn{4}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0cm}
+
+% ============================================================================
+% COLORS & BOXES
+% ============================================================================
+\usepackage[most]{tcolorbox}
+
+% Base style for all boxes
+\tcbset{
+  base/.style={
+    boxrule=0.3mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm,
+    fonttitle=\bfseries,
+    colbacktitle=black!10!white,
+    coltitle=black,
+    toptitle=0.75mm,
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+% Main concept box (green accent)
+% Use for: definitions, theorems, important formulas
+\definecolor{maincolor}{rgb}{0.004, 0.5, 0.35}  % Nice green
+\newtcolorbox{mainbox}[1]{
+  colframe=maincolor,
+  base={#1}
+}
+
+% Sub concept box (gray accent)
+% Use for: examples, remarks, minor concepts
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Alternative colors (uncomment to use)
+% \definecolor{maincolor}{rgb}{0.2, 0.4, 0.8}   % Blue
+% \definecolor{maincolor}{rgb}{0.8, 0.2, 0.2}   % Red
+% \definecolor{maincolor}{rgb}{0.5, 0.2, 0.6}   % Purple
+
+% ============================================================================
+% MATHEMATICS
+% ============================================================================
+\usepackage{amsmath, amsthm, mathtools, amssymb}
+\usepackage{amsfonts, amstext}
+\allowdisplaybreaks  % Allow page breaks in equations
+
+% Common math shortcuts (customize as needed)
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+
+% Number sets
+\def\N{\mathbb{N}}  % Natural numbers
+\def\Z{\mathbb{Z}}  % Integers
+\def\Q{\mathbb{Q}}  % Rationals
+\def\R{\mathbb{R}}  % Reals
+\def\C{\mathbb{C}}  % Complex
+
+% Calculus
+\def\dx{\,dx}
+\def\dt{\,dt}
+\def\dy{\,dy}
+\newcommand{\ddx}[1]{\frac{d#1}{dx}}
+\newcommand{\ddn}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdn}[2]{\frac{\partial #1}{\partial #2}}
+
+% Big O notation
+\def\oof{\mathcal{O}}
+
+% ============================================================================
+% TABLES
+% ============================================================================
+\usepackage{tabularx, multirow, booktabs}
+\renewcommand*{\arraystretch}{1.5}  % More spacing in tables
+
+% ============================================================================
+% LISTS
+% ============================================================================
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt, topsep=2pt}
+\setenumerate{itemsep=0.75pt, topsep=2pt}
+
+% ============================================================================
+% GRAPHICS & TIKZ
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  positioning,
+  calc,
+  fit,
+  matrix,
+  decorations,
+  angles,
+  quotes,
+  babel,
+  3d,
+  arrows.meta,
+  shadings,
+  shapes.geometric
+}
+
+\tikzset{
+  >=stealth,
+  % Add custom TikZ styles here
+}
+
+% ============================================================================
+% HYPERLINKS
+% ============================================================================
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=maincolor
+}
+
+% ============================================================================
+% ADDITIONAL PACKAGES
+% ============================================================================
+\usepackage{centernot}   % For \centernot command
+\usepackage{marvosym}    % Additional symbols
+\usepackage{wasysym}     % Additional symbols
+
+% ============================================================================
+% DOCUMENT METADATA
+% ============================================================================
+\title{Cheatsheet ISF}
+\author{Thomas Schnyder}
+\date{September 2026}
+
+% Table of contents depth
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% ============================================================================
+% SECTION 1: BEGRIFFE – COMMON GROUND
+% ============================================================================
+\section{Begriffe -- Common Ground}
+
+\begin{mainbox}{Zeichen -- Daten -- Information -- Wissen}
+\begin{itemize}
+    \item \textbf{Daten} = Zeichen + Syntax (Form)
+    \item \textbf{Information} = Daten + Semantik (Bedeutung)
+    \item \textbf{Wissen} = Information + Vernetzung
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Temperatur}
+``C2°2'' $\to$ ``22 °C'' $\to$ ``Es ist die aktuelle Aussentemperatur''
+$\to$ ``Ich muss eine Jacke anziehen.''
+\end{subbox}
+
+\begin{mainbox}{Bedrohungen für Daten \& Informationen}
+\begin{itemize}
+    \item \textbf{Menschliches Fehlverhalten:} Fahrlässigkeit, Gleichgültigkeit,
+          Unwissenheit, Leichtgläubigkeit
+    \item \textbf{Organisatorische Schwachstellen:} fehlendes Sicherheitsverständnis
+          des Managements, unklare Verantwortlichkeiten, fehlende Prozesse/Strategie/
+          Konzepte, mangelhafte Richtlinien \& Awareness, fehlende Kontrollen
+    \item \textbf{Technisches Versagen:} ungenügende Wartung, defekte Überwachung (IDS),
+          falsch dimensionierte Systeme, Fehlkonfiguration, fehlerhafte
+          Software/Firmware/Treiber
+    \item \textbf{Höhere Gewalt:} Unwetter, Erdbeben, Feuer, Wasser, Krieg,
+          Ausschreitungen
+    \item \textbf{Vorsätzliche Angriffe (Internet):} unerlaubter Zugriff, Abhören \&
+          Modifizieren, Angriffe auf Verfügbarkeit (DDoS), Systemmissbrauch,
+          Viren/Würmer/Trojaner, Drive-by-Infections
+\end{itemize}
+\textbf{Zufällig} (Naturgewalt, Strom-/TK-Ausfall, Pannen, Bedienerfehler) vs.
+\textbf{vorsätzlich} (Malware, Diebstahl, Skript-Kiddies/Hacker,
+Wirtschaftsspionage, Missbrauch).
+\end{mainbox}
+
+\begin{subbox}{Spektakuläre Cybervorfälle}
+\begin{itemize}
+    \item \textbf{Stuxnet} (2010): erster Angriff auf SCADA (Supervisory Control And
+          Data Acquisition), Siemens-SPS S7, via USB-Stick, Zero-Days.
+          $\Rightarrow$ Infrastruktur ist verwundbar, alles ist ``hackbar''.
+    \item \textbf{XZ-Utils}: Supply-Chain-Attacke auf OSS (1 Maintainer), Ziel openSSH
+          auf Linux; entdeckt von Andres Freund, vermutlich APT29.
+          $\Rightarrow$ Lieferketten verwundbar -- weakest link!
+    \item \textbf{AI als Hacker} $\Rightarrow$ Automatisierung von Angriffen.
+\end{itemize}
+Häufiger sind aber alltägliche Fälle: Datendiebstahl, Erpressung, Spionage.
+\end{subbox}
+
+\begin{mainbox}{3 Säulen der Informationssicherheit}
+\begin{itemize}
+    \item \textbf{Technik:} kaufen, konfigurieren
+    \item \textbf{Prozesse:} definieren, kontrollieren
+    \item \textbf{Mitarbeitende:} sensibilisieren, ausbilden
+\end{itemize}
+\end{mainbox}
+
+\subsection{Sicherheit \& Risiko}
+
+\begin{mainbox}{Sicherheit}
+Zustand, der frei von unvertretbaren Risiken der Beeinträchtigung ist oder als
+gefahrenfrei angesehen wird.
+
+\textbf{Absolute Sicherheit ist weder erreichbar noch bezahlbar!}
+\end{mainbox}
+
+\begin{mainbox}{Safety vs. Security}
+\begin{itemize}
+    \item \textbf{Safety} (funktionale Sicherheit, IEC 61508): schützt
+          \emph{Menschen} vor Maschinen; Gefahr \emph{zufällig}.
+    \item \textbf{Security} (Informationssicherheit, ISO/IEC 27001): schützt
+          \emph{Maschinen/Info} vor Menschen; Angriff \emph{willentlich}.
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Informations-, IT-, Cyber-Sicherheit}
+\begin{itemize}
+    \item \textbf{Informationssicherheit:} Schutz der Information als solche,
+          unabhängig vom Medium (Datenträger, Papier, Köpfe).
+    \item \textbf{IT-Sicherheit:} Schutz von IKT-Systemen gegen vielfältige Gefahren.
+    \item \textbf{Cyber-/Internet-Sicherheit:} Schutz von Internet-basierten bzw.
+          -verbundenen Systemen (z.B. Browser) gegen Gefahren aus Netzwerken.
+\end{itemize}
+\textbf{Abgrenzung} (von Solms): Infosec schützt Information \emph{mit und ohne}
+IKT-Mittel; Cybersecurity schützt zusätzlich \emph{Nicht-Informationen} mit IKT
+(Akteure im Cyberspace und deren darüber erreichbare Assets).
+\end{mainbox}
+
+\begin{mainbox}{Informationssicherheit vs. Datenschutz}
+\begin{itemize}
+    \item \textbf{Informationssicherheit:} Schutz \emph{aller} Daten \& Infos durch
+          Massnahmen; Regeln: ISO/IEC 27001. Schutzobjekt: Geschäftsdaten;
+          Angreifer will \$\$\$.
+    \item \textbf{Datenschutz:} Schutz \emph{personenbezogener} Daten; basiert auf
+          informationeller Selbstbestimmung; Regeln: DSG (CH), Branchenvorgaben.
+          Schutzobjekt: PII, PHI; Angreifer will \emph{dich}.
+\end{itemize}
+
+\textbf{Ziel Infosec:} Bedrohungen \& Schwachstellen identifizieren, bewerten und
+Eintrittswahrscheinlichkeit \& Auswirkung von Vorfällen minimieren.
+\end{mainbox}
+
+\begin{subbox}{Integrale Sicherheit}
+Umfassende Betrachtung \emph{aller} Sicherheitsaspekte einer Organisation --
+Informationssicherheit ist nur ein Teil davon.
+\end{subbox}
+
+\begin{mainbox}{Risiko}
+Möglicher negativer Ausgang eines Vorhabens, verbunden mit Nachteil, Verlust, Schaden.
+$$\boxed{\begin{aligned}\text{Risiko} = {} & \text{Eintrittswahrsch.}\\ & \times \text{Schadensausmass}\end{aligned}}$$
+Sicherheit und Risiko sind voneinander abhängig: mehr Sicherheit $\Rightarrow$ weniger
+Risiko.
+\end{mainbox}
+
+\subsection{Schutzziele}
+
+\begin{mainbox}{Grundschutzziele: CIA}
+\begin{itemize}
+    \item \textbf{Vertraulichkeit} (Confidentiality): Informationen können nicht durch
+          unautorisierte Personen, Instanzen oder Prozesse eingesehen werden.
+    \item \textbf{Integrität} (Integrity): Daten/Systeme können nicht unautorisiert
+          oder zufällig manipuliert bzw. verändert werden.
+    \item \textbf{Verfügbarkeit} (Availability): Zugriff auf Dienste/Informationen ist
+          in der vom Benutzer gewünschten Zeit möglich.
+\end{itemize}
+Sicherheitsbetrachtungen müssen sich \emph{mindestens} auf CIA beziehen.
+\end{mainbox}
+
+\begin{mainbox}{Wann wird eine Verletzung entdeckt?}
+\renewcommand*{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{l|l}
+Verfügbarkeit & unmittelbar \\
+Integrität, Authentiz. & bald \\
+Vertraulichkeit & spät oder nie \\
+\end{tabular}
+\end{center}
+\textbf{``Harvest now, decrypt later''} (Y2Q): heute verschlüsselte Daten
+speichern, später (Quantencomputer) entschlüsseln.
+\end{mainbox}
+
+\begin{mainbox}{Prüfsumme bis Signatur}
+\renewcommand*{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{l|c|c|c|c}
+ & \textbf{F} & \textbf{I} & \textbf{A} & \textbf{N} \\
+\hline
+Prüfsumme & X & & & \\
+Hash & X & X & & \\
+MAC & X & X & X & \\
+Dig. Signatur & X & X & X & X \\
+\end{tabular}
+\end{center}
+F = Fehlererkennung, I = Integrität, A = Authentizität,
+N = Nicht-Abstreitbarkeit.
+Prüfsumme/Hash nur gegen \emph{zufällige} Fehler; MAC/Signatur auch gegen
+\emph{böswillige} Akteure.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: ISBN-13 Prüfziffer}
+Ziffern 1--12 abwechselnd $\times 1$, $\times 3$ gewichten und summieren; Prüfziffer
+= Differenz zum nächsten Zehner.
+
+978-3-3-19-9044-2-?: Summe $= 101 \Rightarrow$ Prüfziffer $= 110 - 101 = 9$.
+\end{subbox}
+
+\begin{mainbox}{Privatsphäre vs. Datenschutz}
+\textbf{Privatsphäre} = Schutz des persönlichen, nicht öffentlichen Lebensbereichs
+(vor Beobachtung, Einmischung, Veröffentlichung). Bsp.: Brief-/Kommunikationsgeheimnis,
+Schutz vor Überwachung.
+
+\textbf{Datenschutz} = Kontrolle über die eigenen personenbezogenen Daten
+(informationelle Selbstbestimmung).
+\end{mainbox}
+
+\begin{mainbox}{Anonymität, Anonymisierung, Pseudonymisierung}
+\textbf{Anonymität:} Handlung ist beobachtbar, aber keiner bestimmten Person
+zuordenbar (Bsp.: Barzahlung, TOR, I2P).
+
+\textbf{Anonymisierung:} Personenbezug \emph{dauerhaft} entfernt; Zuordnung nicht
+oder nur mit unverhältnismässigem Aufwand möglich.
+
+\textbf{Pseudonymisierung:} Personenbezug durch Pseudonym ersetzt; Zuordnung mit
+getrennt aufbewahrter Zusatzinfo möglich.
+
+\textbf{Anonymität $>$ Pseudonymität}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Blutdruck}
+\begin{itemize}
+    \item Personenbezogen: ``Reto Meier hat 132/85''
+    \item Pseudonymisiert: ``Patient 13267 hat 132/85'' (+ Tabelle
+          Reto Meier $\leftrightarrow$ 13267)
+    \item Anonymisiert: ``Ein Patient hat 132/85''
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Weitere Sicherheitsziele}
+\begin{itemize}
+    \item \textbf{Authentizität:} Echtheit, Überprüfbarkeit, Vertrauenswürdigkeit;
+          \emph{Authentifikation} = Prüfung einer behaupteten Eigenschaft.
+    \item \textbf{Autorisierung:} Berechtigungszuweisung; nach Identifizierung \&
+          Authentisierung Zugriff auf Ressourcen erlauben.
+    \item \textbf{Zugriffskontrolle} (accountability): Prüfung der Berechtigung nach
+          Authentifikation (Haftung, Verantwortung).
+    \item \textbf{Zugreifbarkeit} (accessibility): Fähigkeit zum Zugriff, v.a.
+          Barrierefreiheit $\neq$ Benutzerfreundlichkeit.
+    \item \textbf{Zuverlässigkeit} (reliability): System funktioniert unter
+          bestimmten Bedingungen wie definiert; nahe an Verfügbarkeit \& Qualität.
+    \item \textbf{Verbindlichkeit / Nicht-Abstreitbarkeit} (non-repudiation):
+          rechtsverbindlicher Zusammenhang zwischen integritätsgeprüftem Inhalt und
+          authentisierter Identität (z.B. Onlinebestellung).
+    \item \textbf{Vollständigkeit:} Teilaspekt der Integrität.
+    \item \textbf{Unbeobachtbarkeit:} Verdeckung eines Kommunikationsvorgangs.
+    \item \textbf{Wirksamkeit:} gewünschtes Ergebnis erzielen;
+          \textbf{Effektivität:} Genauigkeit \& Vollständigkeit davon.
+    \item \textbf{Kopierschutz:} nur autorisierte Nutzer dürfen kopieren
+          (z.B. Wasserzeichen).
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Zielkonflikte \& offene Netze}
+Ziele können sich widersprechen bzw. ausschliessen:
+\begin{itemize}
+    \item Authentifikation vs. Anonymität (Kartenzahlung)
+    \item Anonymität vs. Verbindlichkeit (rechtl. Nachweis braucht Identität)
+\end{itemize}
+\textbf{Internet-Kommunikation} braucht: unveränderte Sender-Identität, Integrität,
+Vertraulichkeit, Verbindlichkeit (gesendet/empfangen).
+Gewichtung je nach Anwendung (Krypto-Geld, E-Voting, KI \& Privatsphäre).
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Hash $\neq$ Authentizität: Angreifer kann Hash einfach neu berechnen.
+    \item MAC $\neq$ Nicht-Abstreitbarkeit: gemeinsamer Schlüssel, beide Seiten
+          könnten die Nachricht erzeugt haben.
+    \item Pseudonymisierte Daten sind \emph{noch} personenbezogen.
+    \item Safety $\neq$ Security; Datenschutz $\neq$ Privatsphäre.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
+% TIPS FOR AVOIDING OVERFULL BOXES
+% ============================================================================
+%
+% 1. Keep formulas concise - split long equations over multiple lines
+% 2. Use shorter variable names in inline math
+% 3. Abbreviate table headers
+% 4. Use align* environment for multi-line equations
+% 5. Test compile frequently to catch overflow early
+%
+% Example of splitting a long formula:
+% Instead of: $$a + b + c + d + e = f + g + h + i + j$$
+% Use:
+% \begin{align*}
+% a + b + c + d + e &= f + g + h \\
+%                   &\quad + i + j
+% \end{align*}
+%
+% ============================================================================
+
+\end{document}

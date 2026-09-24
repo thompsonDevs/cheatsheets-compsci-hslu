@@ -1,0 +1,95 @@
+#separator:tab
+#html:true
+#columns:notetype	deck	front	back	tags
+#notetype column:1
+#deck column:2
+#tags column:5
+Standard	iteo	Nenne die Building Blocks eines Rechenzentrums.	Gebäude, Zutrittskontrolle, Brand-/Hochwasserschutz, Klimatisierung, Serverracks mit Rechnern, Stromversorgung, Datenleitungen/Netzwerk, Administration und Überwachung.	iteo::das-data-center
+Standard	iteo	Was ist der Hauptzweck der Klimatisierung im RZ?	Abfuhr von Wärme – jeder Betrieb elektronischer Komponenten erzeugt Abwärme.	iteo::das-data-center
+Standard	iteo	Welche Probleme entstehen bei zu hoher bzw. zu tiefer Luftfeuchtigkeit im RZ?	Zu feucht: Kondenswasser. Zu trocken: elektrostatische Entladungen (ESD).	iteo::das-data-center
+Standard	iteo	Warum braucht ein RZ reine Luft?	Staub, Pollen und Insekten verstopfen Ventilatoren, Kühlkörper und Luftkanäle → reduzierte Kühlleistung → Geräteausfall.	iteo::das-data-center
+Standard	iteo	Wie werden die Filter einer RZ-Klimaanlage kontrolliert?	Durch Differenzdruckmessung (verstopfter Filter → höherer Druckabfall).	iteo::das-data-center
+Standard	iteo	Nenne typische Probleme/Aufwände der RZ-Klimatisierung.	Redundanz einkalkulieren, Kondenswasser am Kühlaggregat (Abläufe, Pumpen), Filterkontrolle, hoher zusätzlicher Energiebedarf, Luftverteilung sicherstellen, Überwachung 7×24 h.	iteo::das-data-center
+Standard	iteo	Was ist ein BTU?	British thermal unit: Wärmeenergie, um ein britisches Pfund Wasser um 1 °F zu erwärmen. Kühlleistung wird oft in BTU/h angegeben.	iteo::das-data-center
+Standard	iteo	Vor- und Nachteile von Free-Flow-Kühlluftverteilung?	+ einfacher Aufbau, keine zusätzlichen Hindernisse. – Kalt- und Warmluft vermischen sich, ungleiche Temperaturen.	iteo::das-data-center
+Standard	iteo	Vor- und Nachteile einer Kalt- oder Warmgang-Einhausung?	+ Trennung von Kalt-/Warmluft → energieoptimiert, geringere Energiekosten, kleine vertikale Temperaturdifferenzen. – Mehrkosten im Aufbau, erhöhter Abschottungsbedarf.	iteo::das-data-center
+Standard	iteo	Welche Arten von Flüssigkeitskühlung für Server gibt es?	Wasserkühlung nur im Geräteinnern (Einzelgerät), Wasserkühlung ganzer Racks mit Wasseranschluss am Server, Tauchkühlung (Immersion Cooling, Hardware in nicht-leitender Flüssigkeit).	iteo::das-data-center
+Standard	iteo	Was ist eine USV und wofür wird sie im RZ eingesetzt?	Unterbrechungsfreie Stromversorgung (engl. UPS): überbrückt kurze Stromunterbrüche bis ein Generator einspringt oder das RZ kontrolliert heruntergefahren ist.	iteo::das-data-center
+Standard	iteo	Unterschied Online-USV vs. Standby-USV?	Online-USV: dauernd im Betrieb, kein Unterbruch, aber höhere Verluste. Standby-USV: springt erst bei Ausfall ein, sehr kurzer Unterbruch (1–20 ms).	iteo::das-data-center
+Standard	iteo	Warum haben Server im RZ oft zwei Netzteile?	Die USV deckt oft nur einen der redundanten Stromversorgungspfade ab; über das zweite Netzteil hängt das Gerät am anderen Pfad.	iteo::das-data-center
+Standard	iteo	Wovon hängt die Überbrückungsdauer einer USV ab?	Von der Batteriegrösse (Spannung V und Kapazität Ah) und der angeschlossenen Last.	iteo::das-data-center
+Standard	iteo	Was passiert in einem RZ mit USV aber ohne Generator bei einem längeren Stromausfall?	Kehrt der Strom nach einer vorher bestimmten Zeit nicht zurück, wird das RZ kontrolliert heruntergefahren.	iteo::das-data-center
+Standard	iteo	Welche Anforderungen/Nachteile bringt ein Diesel-Notstromgenerator mit sich?	Luftzufuhr und Abgasanlage, Lärm, Platzbedarf und Raumkühlung, Serviceintervalle und Überwachung, aufwändige Integration mit USV und Netzinfrastruktur.	iteo::das-data-center
+Standard	iteo	Wovon hängt die Startzeit eines Notstromgenerators ab?	Vom Grundzustand (kalt, warm, betriebswarm) – 5 Sekunden bis wenige Minuten.	iteo::das-data-center
+Standard	iteo	Wie wird ein RZ gegen Einbruch, Diebstahl, Vandalismus und Sturmschäden geschützt?	Durch bauliche Massnahmen.	iteo::das-data-center
+Standard	iteo	Wie wird ein RZ gegen Fremdzugriff geschützt?	Zutrittskontrolle, Abhörsicherheit, Firewall.	iteo::das-data-center
+Standard	iteo	Welche Massnahmen schützen ein RZ vor Feuer/Rauch – und welches besondere Problem gibt es?	Brandfrüherkennung, Löschung, Abschottung. Problem: die Klimaanlage verteilt Brandgase im ganzen RZ.	iteo::das-data-center
+Standard	iteo	Wie wird ein RZ gegen Netzausfälle und -störungen geschützt?	Netzfilter, USV mit Batterien, Generatoren.	iteo::das-data-center
+Standard	iteo	Wie wird ein RZ gegen Staub, Schmutz und Wasser geschützt?	Filteranlagen, Schleusen, Standortwahl, Abschottungen, Pumpenanlagen.	iteo::das-data-center
+Standard	iteo	Was wird bei der USV-Anlage überwacht?	Normalbetrieb, Batteriebetrieb, Bypass-Betrieb, Ladezustand, Batterietemperatur.	iteo::das-data-center
+Standard	iteo	Was wird beim Notstromgenerator überwacht?	Kraftstoffmangel, Funktionsbereitschaft, Temperatur, Überlast.	iteo::das-data-center
+Standard	iteo	Was wird in den RZ-Räumen überwacht?	Temperatur, Luftfeuchte, Bewegung, Rauch, Brand, Leckage/Wasser.	iteo::das-data-center
+Standard	iteo	Was wird bei der Energieversorgung eines RZ überwacht?	Netzausfall, Strom, Spannung, Leistung (kW), Leistungsfaktor (cos φ).	iteo::das-data-center
+Standard	iteo	Was misst der PUE-Wert?	Power Usage Effectiveness: Energieeffizienz eines RZ – Verhältnis der gesamten RZ-Energie zur Energie der IT-Geräte.	iteo::das-data-center
+Standard	iteo	Wie sind PUE-Werte von 1.0, 1.2 und über 1.4 einzuordnen?	1.0: optimal (keine Energie für Kühlung etc., theoretisches Minimum). 1.2: guter Wert, normale RZ. Über 1.4: Optimierungsbedarf.	iteo::das-data-center
+Standard	iteo	Wie kann ein PUE von fast 1 erreicht werden?	Durch Kühlung ohne zusätzlichen Energieaufwand, z.B. freie Kühlung in kaltem Klima oder Unterwasser-RZ (Microsoft Project Natick).	iteo::das-data-center
+Standard	iteo	Warum ist Downtime der IT für Banken, Kreditkartenverarbeiter und Broker besonders kritisch?	Die Kosten pro Stunde Ausfall liegen dort in Millionenhöhe (Bank ca. 2.5 Mio $, Broker ca. 6.5 Mio $) – gegenüber z.B. ca. 28'000 $ in der Fertigung.	iteo::das-data-center
+Standard	iteo	Wie viele Betriebsstunden pro Jahr hat ein 5×9-Service (Bürozeit)?	261 Arbeitstage × 9 h = 2349 h.	iteo::das-data-center
+Standard	iteo	Welche Verfügbarkeit muss im SLA stehen, wenn höchstens 1 h Ausfall pro Jahr während der Bürozeit (5×9) erlaubt ist?	1 − 1/2349 ≈ 99.96 %.	iteo::das-data-center
+Standard	iteo	Um welchen Faktor sinkt die erlaubte Downtime mit jeder zusätzlichen «9» Verfügbarkeit?	Um Faktor 10 – die Kosten steigen dabei stark an.	iteo::das-data-center
+Standard	iteo	Warum kostet das Spiegeln eines SAN mehr als 100 % zusätzlich?	Neben dem doppelten Speicher braucht es Replikationsleitungen, zusätzliche Ports, Failover-Switches, Lizenzen, Platz, Strom und Betriebsaufwand.	iteo::das-data-center
+Standard	iteo	Was ist ein Failover-Cluster?	Mehrere Hosts, bei denen ein Service (DB, Mail, Fileshare, Druck …) samt virtueller IP-Adresse bei Ausfall eines Hosts automatisch auf einen anderen Host verschoben wird. Auch mit >2 Servern und Lastausgleich möglich.	iteo::das-data-center
+Standard	iteo	Wie greifen Clients bei einem Failover-Cluster auf den Service zu, damit ein Hostwechsel transparent ist?	Über eine virtuelle IP-Adresse, die mit dem Service auf den anderen Host wandert.	iteo::das-data-center
+Standard	iteo	Welche Verbindungen werden für synchrone bzw. asynchrone Replikation zwischen Datacentern typischerweise verwendet?	Synchron: Fibre Channel, 10G Ethernet (kurze Distanz). Asynchron: Internet (TCP/IP), grössere Distanz.	iteo::das-data-center
+Standard	iteo	Vor- und Nachteil synchroner Replikation?	+ kein Datenverlust (Schreiben erst bestätigt, wenn Kopie geschrieben). – Latenz bremst die primäre DB, nur kurze Distanzen.	iteo::das-data-center
+Standard	iteo	Vor- und Nachteil asynchroner Replikation?	+ schnell, primäres System nicht gebremst, weite Distanzen möglich. – beim Ausfall können noch nicht übertragene Daten verloren gehen.	iteo::das-data-center
+Standard	iteo	Wie werden synchrone und asynchrone Replikation in der Praxis kombiniert?	Schnell synchron auf eine lokale, physisch getrennte Instanz spiegeln; von dort asynchron ins entfernte Standby-RZ übertragen. Failover erst nach 100 % abgeschlossenem Sync.	iteo::das-data-center
+Standard	iteo	Wer hat die Availability Environment Classification (AEC) definiert und wie viele Klassen hat sie?	Die Harvard Research Group (HRG); sechs Klassen AEC-0 bis AEC-5.	iteo::das-data-center
+Standard	iteo	Was bedeutet Redundanz N bei Data Center Tiers?	Für einen Bedarf von N stehen genau N Ressourcen zur Verfügung – keine Reserve.	iteo::das-data-center
+Standard	iteo	Was bedeutet Redundanz N+1?	Eine Einheit Reserve: werden N benötigt, stehen N+1 bereit – der Ausfall einer Einheit wird ohne Leistungseinbusse verkraftet.	iteo::das-data-center
+Standard	iteo	Wer definiert die Data Center Tiers I–IV und worauf beziehen sie sich?	Das Uptime Institute; sie betreffen die RZ-Infrastruktur (Strom, Kühlung …), nicht Server, Storage oder Netzwerk.	iteo::das-data-center
+Standard	iteo	Welche Anforderungen kommen bei Tier IV im Vergleich zu Tier III hinzu?	UPS 2N, Chiller N+2, keine Single Points of Failure, Concurrent Maintenance auch der elektrischen Systeme (Wartung im laufenden Betrieb).	iteo::das-data-center
+Standard	iteo	Was ist Information Lifecycle Management (ILM)?	Speicherstrategie: Informationen entsprechend ihrem Wert auf dem jeweils günstigsten geeigneten Medium speichern – inkl. Regeln und Prozessen, wie sie zwischen Medien verschoben werden.	iteo::das-data-center
+Standard	iteo	Worauf basiert die Automatisierung im ILM?	Auf einer Klassifizierung von Daten, Quellen und Speichersystemen innerhalb einer Speicherhierarchie.	iteo::das-data-center
+Standard	iteo	Durch welche Anforderungen wird ILM getrieben?	Storage Management, Document Lifecycle Management, Content Lifecycle Management, Records Management.	iteo::das-data-center
+Standard	iteo	Nach welchen Kriterien legen ILM-Regeln fest, wo Daten gespeichert werden?	Änderungshäufigkeit, Zugriffsgeschwindigkeit, Zugriffshäufigkeit, Kosten, ökonomischer Wert, gesetzliche Bestimmungen.	iteo::das-data-center
+Standard	iteo	Was geschieht mit Daten am Ende des ILM-Zyklus?	Sie werden gelöscht.	iteo::das-data-center
+Standard	iteo	Warum sind inaktive Daten ein Kostenproblem?	Sie belegen teuren Speicher, werden gepflegt, gesichert und repliziert, unterliegen Aufbewahrungspflichten und müssen im Katastrophenfall wiederhergestellt werden.	iteo::das-data-center
+Standard	iteo	Welche Norm regelt Records Management?	ISO 15489.	iteo::das-data-center
+Standard	iteo	Was steuert Records Management?	Das Datenvolumen: Aufbewahrungszeiten (gesetzlich/Branche/intern), Ablageordnung, Namensgebung, Versionen, automatische Löschroutinen.	iteo::das-data-center
+Standard	iteo	Wer soll Records Management anordnen und durchsetzen?	Die Geschäftsleitung (unterstützt durch die Rechtsabteilung) – nicht Administratoren oder Abteilungsleiter.	iteo::das-data-center
+Standard	iteo	Was bedeutet Tiered Storage?	Verschiedene Datenklassen werden auf verschiedenen Speicherklassen gespeichert – die Klassifizierung senkt die Kosten.	iteo::das-data-center
+Standard	iteo	Welche vier Datencharakteristiken unterscheidet Tiered Storage?	Mission Critical, Business Critical, Nearline/Historical, Offline Data.	iteo::das-data-center
+Standard	iteo	Was bedeutet WORM und wofür wird es eingesetzt?	Write Once Read Many – einmal beschreibbar, danach unveränderlich; für Compliance-Daten und Archivierung (z.B. Offsite-Tape).	iteo::das-data-center
+Standard	iteo	Was ist MAID?	Massive Array of Idle Disks: sehr viele Disks, stromsparend bzw. offline, nur bei Bedarf aktiv – Zugriff ms bis Sekunden, niedrige Energie und Kosten.	iteo::das-data-center
+Standard	iteo	Welche Speichertypen gibt es in der Storage-Hierarchie, von schnell/teuer zu langsam/günstig?	SSD → FC/SAS → SATA → MAID → Tape.	iteo::das-data-center
+Standard	iteo	Welcher Speichertyp hat die tiefsten Kosten und den tiefsten Energieverbrauch, aber die längsten Zugriffszeiten?	Tape (Zugriff Sekunden bis Stunden, je nach Aufbewahrungsort).	iteo::das-data-center
+Standard	iteo	Was ist RTO?	Recovery Time Objective: maximal tolerierte Dauer bis ein Service nach einem Ausfall wiederhergestellt ist.	iteo::das-data-center
+Standard	iteo	Was ist RPO?	Recovery Point Objective: maximal tolerierter Datenverlust, gemessen als Zeit seit der letzten Sicherung.	iteo::das-data-center
+Standard	iteo	Was ist COPQ im Kontext von Speicher?	Cost of Poor Quality: Kosten für Speicher, der bezahlt, aber nicht genutzt wird (Spiegelung, RAID-Verlust, Allokationsreserven, ungenutzter Platz).	iteo::das-data-center
+Standard	iteo	Wie werden mehrere Effizienzverluste (Spiegelung, RAID, Reserve, Nutzung) zum Gesamt-Yield verrechnet?	Die Effizienzfaktoren werden multipliziert, nicht addiert.	iteo::das-data-center
+Standard	iteo	96 Platten à 8 TB (CHF 700), gespiegelt, 20 % RAID-Verlust, 20 % Reserve, 85 % Nutzung: Yield und COPQ?	Yield = 0.5 · 0.8 · 0.8 · 0.85 = 27.2 % (ca. 209 von 768 TB). COPQ = 67'200 · 0.728 ≈ CHF 48'922.	iteo::das-data-center
+Lückentext	iteo	Downtime = (1 − {{c1::Verfügbarkeit}}) · {{c2::Betriebszeit}}		iteo::das-data-center
+Lückentext	iteo	Ein 7×24-Service hat {{c1::8760}} Betriebsstunden pro Jahr.		iteo::das-data-center
+Lückentext	iteo	Bei 7×24-Betrieb: 99 % Verfügbarkeit ≈ {{c1::87.6 h (3.65 Tage)}} Downtime/Jahr; 99.9 % ≈ {{c2::8.76 h}}; 99.99 % ≈ {{c3::52.56 min}}; 99.999 % ≈ {{c4::5.26 min}}.		iteo::das-data-center
+Lückentext	iteo	AEC-0 {{c1::Conventional}}: Funktion darf unterbrochen werden, Datenintegrität ist {{c2::nicht essentiell}}.		iteo::das-data-center
+Lückentext	iteo	AEC-1 {{c1::Highly Reliable}}: Funktion darf unterbrochen werden, aber {{c2::Datenintegrität muss gewährleistet}} sein.		iteo::das-data-center
+Lückentext	iteo	AEC-2 {{c1::High Availability}}: Funktion darf innerhalb festgelegter Zeiten nur {{c2::minimal unterbrochen}} werden.		iteo::das-data-center
+Lückentext	iteo	AEC-3 {{c1::Fault Resilient}}: Funktion muss innerhalb festgelegter Zeiten {{c2::ununterbrochen}} aufrechterhalten werden.		iteo::das-data-center
+Lückentext	iteo	AEC-4 {{c1::Fault Tolerant}}: Funktion muss ununterbrochen aufrechterhalten werden, {{c2::24/7-Betrieb}}.		iteo::das-data-center
+Lückentext	iteo	AEC-5 {{c1::Disaster Tolerant}}: Funktion muss {{c2::unter allen Umständen}} verfügbar sein.		iteo::das-data-center
+Lückentext	iteo	Tier I: Redundanz {{c1::N}}, ca. {{c2::28.8 h}} Ausfall/Jahr, {{c3::99.67 %}} Verfügbarkeit.		iteo::das-data-center
+Lückentext	iteo	Tier II: Redundanz {{c1::N+1}}, ca. {{c2::22 h}} Ausfall/Jahr, {{c3::99.75 %}} Verfügbarkeit.		iteo::das-data-center
+Lückentext	iteo	Tier III: Redundanz {{c1::N+1}}, ca. {{c2::1.6 h}} Ausfall/Jahr, {{c3::99.98 %}} Verfügbarkeit.		iteo::das-data-center
+Lückentext	iteo	Tier IV: Redundanz {{c1::2 × (N+1)}}, ca. {{c2::0.8 h}} Ausfall/Jahr, {{c3::99.99 %}} Verfügbarkeit.		iteo::das-data-center
+Lückentext	iteo	Speicher-Tiers: Tier 1 für {{c1::Produktionsdaten}}, Tier 2 für {{c2::Referenzdaten}}, Compliance-Speicher (WORM) für {{c3::gesetzlich vorgeschriebene Daten}}, Tape Vault für {{c4::Offsite Disaster Recovery}}.		iteo::das-data-center
+Lückentext	iteo	Geschätzte Datenanteile: Tier 1 {{c1::20 %}}, Tier 2 {{c2::35 %}}, Compliance {{c3::30 %}}, Tape Vault {{c4::15 % (plus Backups)}}.		iteo::das-data-center
+Lückentext	iteo	Storage-SLA Mission Critical (Beispiel): Verfügbarkeit {{c1::99.99 %}}, RTO {{c2::15 min}}, RPO {{c3::1 h}}.		iteo::das-data-center
+Lückentext	iteo	Storage-SLA Development (Beispiel): Verfügbarkeit {{c1::97 %}}, RTO {{c2::24 h}}, RPO {{c3::96 h}}.		iteo::das-data-center
+Lückentext	iteo	COPQ = Kosten · (1 − {{c1::Yield}})		iteo::das-data-center
+Lückentext	iteo	PUE = {{c1::gesamte im RZ verbrauchte Energie}} / {{c2::Energieverbrauch der IT-Geräte}}		iteo::das-data-center
+Lückentext	iteo	Optimale RZ-Temperatur: ca. {{c1::26 °C}}; relative Luftfeuchte: {{c2::40–50 %}}.		iteo::das-data-center
+Lückentext	iteo	1000 BTU/h ≈ {{c1::293 W}}		iteo::das-data-center
+Lückentext	iteo	Rackeinheit: 1 HE = 1 U = {{c1::1.75 Zoll}} = {{c2::44.45 mm}}; Standard-Rackbreite: {{c3::19 Zoll}} (48.26 cm).		iteo::das-data-center
+Lückentext	iteo	Batterielebensdauer einer USV: ca. {{c1::7–12 Jahre}}.		iteo::das-data-center
+Lückentext	iteo	Ein Diesel-Notstromgenerator startet in {{c1::5 Sekunden bis wenigen Minuten}}; der Tank reicht meist für {{c2::mehr als 24 h bis mehrere Tage}}.		iteo::das-data-center

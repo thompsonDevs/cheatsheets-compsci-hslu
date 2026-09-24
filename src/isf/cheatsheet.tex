@@ -433,6 +433,148 @@ Gewichtung je nach Anwendung (Krypto-Geld, E-Voting, KI \& Privatsphäre).
 \end{subbox}
 
 % ============================================================================
+% SECTION 2: INTERCEPTING PROXIES
+% ============================================================================
+\section{Intercepting Proxies}
+
+\subsection{HTTP Grundlagen}
+
+\begin{mainbox}{HTTP Verbindungsablauf}
+User gibt URL ein $\to$ Browser (Client) sendet \textbf{HTTP Request} $\to$
+Webserver sendet \textbf{HTTP Response} $\to$ Browser zeigt Webseite an.
+\end{mainbox}
+
+\begin{mainbox}{HTTP Request (Client $\to$ Server)}
+\begin{itemize}
+    \item \textbf{Request Line:} Methode, Pfad, HTTP-Version
+    \item \textbf{Headers:} Host, Content-Type, Cookie, \ldots
+    \item \textbf{Body} (optional): Formulardaten, JSON, \ldots
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Request}
+\texttt{POST /login HTTP/1.1}\\
+\texttt{Host: www.example.com}\\
+\texttt{Content-Type: application/}\\
+\texttt{\ \ x-www-form-urlencoded}\\
+\texttt{Cookie: session=abc123}\\[2pt]
+\texttt{username=admin\&password=1234}
+\end{subbox}
+
+\begin{mainbox}{HTTP Response (Server $\to$ Client)}
+\begin{itemize}
+    \item \textbf{Status Line:} HTTP-Version, Status Code, Reason
+    \item \textbf{Headers:} Content-Type, Set-Cookie, \ldots
+    \item \textbf{Body:} HTML, JSON, Bild, \ldots
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Response}
+\texttt{HTTP/1.1 200 OK}\\
+\texttt{Content-Type: text/html}\\
+\texttt{Set-Cookie: session=xyz789}\\[2pt]
+\texttt{<html><body>Login OK</body></html>}
+\end{subbox}
+
+\subsection{Forward, Reverse \& Intercepting Proxy}
+
+\begin{mainbox}{Forward Proxy}
+Client (intern) $\to$ Forward Proxy $\to$ Server (extern).\\
+\textbf{Schützt den Client, nicht den Server.}
+\begin{itemize}
+    \item Inhaltsfilter/-kontrolle (z.B. Social Media blockieren)
+    \item Überwachung \& Logging (Nachvollziehbarkeit, Detektion)
+    \item Caching \& Performance
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Reverse Proxy}
+Client (extern) $\to$ Reverse Proxy $\to$ Server (intern).\\
+\textbf{Schützt den Server, nicht den Client.}
+\begin{itemize}
+    \item Schutz vor Cyberangriffen (verdächtige Requests blockieren)
+    \item Load Balancing (Requests auf Server verteilen)
+    \item Caching \& Performance
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Intercepting Proxy}
+Ein \textbf{Forward Proxy}, der den Datenverkehr \textbf{pausieren, mitlesen und
+verändern} kann. Arbeitet nach dem Man-in-the-Middle-Prinzip.
+\end{mainbox}
+
+\subsection{Man-in-the-Middle \& TLS}
+
+\begin{mainbox}{MitM-Ablauf mit Intercepting Proxy}
+\begin{enumerate}
+    \item Browser sendet Request an den Proxy statt direkt an den Server.
+    \item Proxy empfängt den Request und zeigt ihn dem Tester an.
+    \item Tester kann ihn lesen, verändern oder verwerfen.
+    \item Proxy leitet den (ggf. veränderten) Request an den Server weiter.
+    \item Response läuft ebenfalls durch den Proxy.
+    \item Auch die Response kann inspiziert/verändert werden.
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{HTTPS: normal vs. TLS Interception}
+\textbf{Normales HTTPS} (TLS Ende-zu-Ende): Proxy sieht nur
+\begin{itemize}
+    \item \checkmark\ Hostname (via SNI, unverschlüsselt im Handshake)
+    \item $\times$ Pfad, Headers, Body
+\end{itemize}
+\textbf{TLS Interception:} Proxy bricht TLS auf, sieht alles:
+\begin{enumerate}
+    \item Client $\leftrightarrow$ Proxy: eigene TLS-Verbindung (Proxy-Zertifikat)
+    \item Proxy $\leftrightarrow$ Server: eigene TLS-Verbindung (echtes
+          Server-Zertifikat)
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{CA-Zertifikat des Proxys}
+Browser muss dem \textbf{Root-CA-Zertifikat des Proxys} vertrauen:
+\begin{enumerate}
+    \item ZAP generiert beim ersten Start eine eigene CA + Zertifikat.
+    \item CA im Browser als \emph{vertrauenswürdige Zertifizierungsstelle}
+          importieren.
+    \item ZAP erzeugt dynamisch pro besuchter Domain ein Zertifikat, signiert von
+          der eigenen CA.
+\end{enumerate}
+\end{mainbox}
+
+\subsection{OWASP ZAP}
+
+\begin{mainbox}{OWASP Zed Attack Proxy (ZAP)}
+Open-Source Intercepting Proxy (\url{www.zaproxy.org}). Funktionen:
+\begin{itemize}
+    \item HTTP Requests/Responses abfangen
+    \item Manuelles Testen (Break/Intercept)
+    \item Automatisierte Scans, Fuzzing, Spidering
+\end{itemize}
+Alternative: \textbf{Burp Suite Community Edition} (PortSwigger).
+\end{mainbox}
+
+\begin{subbox}{Setup}
+\begin{enumerate}
+    \item ZAP installieren
+    \item Browser-Proxy auf \texttt{localhost:8080} setzen
+    \item ZAP-CA-Zertifikat exportieren
+    \item CA-Zertifikat im Browser importieren
+    \item Intercepten
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Forward $\leftrightarrow$ Reverse nicht verwechseln: Forward schützt
+          den \emph{Client}, Reverse den \emph{Server}.
+    \item Intercepting Proxy = Forward Proxy (auf der Client-Seite).
+    \item Ohne importierte Proxy-CA: Zertifikatswarnungen im Browser, kein
+          HTTPS-Intercept.
+    \item Auch bei HTTPS ist der Hostname via SNI sichtbar.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

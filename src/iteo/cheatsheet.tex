@@ -347,6 +347,305 @@ $\Rightarrow$ PUE $= 650/500 = 1.3$
 $\Rightarrow$ 150\,kW (30\,\% der IT-Last) für Kühlung, USV-Verluste, Licht.
 \end{subbox}
 
+\subsection{Verfügbarkeitsverbesserungen}
+
+\begin{subbox}{Kosten für Downtime (pro Stunde, Richtwerte)}
+\renewcommand*{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}X r@{}}
+Fertigung & \$28'000 \\
+Logistik, Einzelhandel & \$90'000 \\
+Home-Shopping & \$113'000 \\
+Medien (pay per view) & \$1.1\,Mio \\
+Bank (RZ), Kreditkarten & \$2.5--2.6\,Mio \\
+Broker & \$6.5\,Mio \\
+\end{tabularx}
+\end{subbox}
+
+\begin{mainbox}{Das Rätsel der Neunen}
+$$\boxed{\text{Downtime} = (1 - A) \cdot \text{Betriebszeit}}$$
+Betriebszeit/Jahr: \textbf{7$\times$24:} $365 \cdot 24 = 8760$\,h \quad
+\textbf{5$\times$9:} $261 \cdot 9 = 2349$\,h
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{r|r|r}
+\textbf{Uptime} & \textbf{7$\times$24} & \textbf{5$\times$9} \\
+\hline
+90\,\% & 876\,h (36.5\,d) & 234.9\,h \\
+95\,\% & 438\,h (18.25\,d) & 117.5\,h \\
+99\,\% & 87.6\,h (3.65\,d) & 23.5\,h \\
+99.9\,\% & 8.76\,h & 2.35\,h \\
+99.99\,\% & 52.56\,min & 14.1\,min \\
+99.999\,\% & 5.26\,min & 1.41\,min \\
+99.9999\,\% & 31.5\,s & 8.5\,s \\
+\end{tabular}
+\end{center}
+\textbf{Merkregel:} jede zusätzliche 9 $\Rightarrow$ Downtime $/10$
+(und Kosten steigen stark).
+\end{mainbox}
+
+\begin{subbox}{Beispiel: max. 1\,h Ausfall/Jahr in Bürozeit}
+Bürozeit 5$\times$9 = 2349\,h/Jahr:
+$$A \geq 1 - \frac{1}{2349} = 99.957\,\% \approx \textbf{99.96\,\%}$$
+Bei 7$\times$24: $1 - 1/8760 = 99.989\,\%$.
+\end{subbox}
+
+\begin{mainbox}{Massnahmen für höhere Verfügbarkeit}
+\textbf{SAN spiegeln:} kostet \textbf{mehr als 100\,\%} zusätzlich -- neben dem
+doppelten Speicher braucht es Replikationsleitungen, zusätzliche Ports,
+Failover-Switches, Lizenzen, Platz, Strom, Betrieb.
+
+\textbf{Failover Cluster:} Zugriff über eine \textbf{virtuelle IP}, die zusammen
+mit dem Service (DB, Mail, Fileshare, Print, \dots) bei Ausfall eines Hosts
+\emph{automatisch} auf den zweiten Host verschoben wird. Auch $>$2 Server mit
+automatischem Lastausgleich möglich.
+
+\textbf{Failover Datacenter:} zweites, räumlich getrenntes RZ.
+\begin{itemize}
+    \item \textbf{synchron:} Fibre Channel, 10G Ethernet (kurze Distanz)
+    \item \textbf{asynchron:} über Internet (TCP/IP), weite Distanz
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Synchrone vs. asynchrone Replikation}
+\begin{itemize}
+    \item \textbf{Synchron:} Schreibvorgang erst bestätigt, wenn auch Kopie
+          geschrieben $\Rightarrow$ kein Datenverlust, aber Latenz bremst
+          primäre DB
+    \item \textbf{Asynchron:} Kopie wird nachgeliefert $\Rightarrow$ schnell,
+          weite Distanz möglich, aber Datenverlust beim Ausfall möglich
+\end{itemize}
+\textbf{Praxis -- Kombination:} schnell \emph{synchron} auf lokale Instanz
+(physisch getrennt), danach \emph{asynchron} ins entfernte RZ (Standby).
+Failover erst möglich, wenn Sync zu 100\,\% abgeschlossen.
+\end{mainbox}
+
+\begin{mainbox}{Availability Environment Classification (HRG)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+\textbf{AEC-0} Conventional & Unterbruch ok, Datenintegrität nicht essentiell \\
+\textbf{AEC-1} Highly Reliable & Unterbruch ok, Datenintegrität muss gewährleistet sein \\
+\textbf{AEC-2} High Availab. & in festgelegten Zeiten nur minimal unterbrochen \\
+\textbf{AEC-3} Fault Resilient & in festgelegten Zeiten \emph{ununterbrochen} \\
+\textbf{AEC-4} Fault Tolerant & ununterbrochen, 24/7 \\
+\textbf{AEC-5} Disaster Tol. & unter \emph{allen} Umständen verfügbar \\
+\end{tabularx}
+\end{mainbox}
+
+\subsection{Tier Levels im Datacenter}
+
+\begin{mainbox}{Data Center Tiers (Uptime Institute)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{c|l|r|r}
+\textbf{Tier} & \textbf{Redund.} & \textbf{h/Jahr} & \textbf{Verf.} \\
+\hline
+I & N & 28.8\,h & 99.67\,\% \\
+II & N+1 & 22\,h & 99.75\,\% \\
+III & N+1 & 1.6\,h & 99.98\,\% \\
+IV & 2$\times$(N+1) & 0.8\,h & 99.99\,\% \\
+\end{tabular}
+\end{center}
+\begin{itemize}
+    \item \textbf{N:} für Bedarf N stehen genau N Ressourcen bereit
+    \item \textbf{N+1:} eine Reserve -- Ausfall einer Einheit ohne
+          Leistungseinbusse
+    \item \textbf{2N:} alles doppelt (vollständig redundant)
+\end{itemize}
+Betrifft nur die RZ-\emph{Infrastruktur} (ohne Server, Storage, Netzwerk).
+\end{mainbox}
+
+\begin{subbox}{Tiers im Detail (Auszug)}
+\begin{itemize}
+    \item \textbf{ab II:} Dual Utility Feed, UPS N, Chiller N+1,
+          Automation \& Monitoring
+    \item \textbf{ab III:} UPS N+1, Generatoren, Dual Feed CAC,
+          Dual Power Path für Dual-Cord-Lasten, 7$\times$24 Operators
+    \item \textbf{ab 3+:} Dual Power Path zur PDU, Generatoren N+1
+    \item \textbf{IV:} UPS \textbf{2N}, Chiller N+2,
+          \textbf{keine Single Points of Failure}, Concurrent Maintenance
+          (Wartung im laufenden Betrieb) mech. \& elektr.
+\end{itemize}
+PDU = Power Distribution Unit, CAC = Central Air Conditioner.
+``Tier 5'' ist kein Uptime-Standard (Marketing-Begriff einzelner Anbieter).
+\end{subbox}
+
+\subsection{Information Lifecycle Management}
+
+\begin{mainbox}{ILM -- Information Lifecycle Management}
+\textbf{Speicherstrategie:} Informationen entsprechend ihrem \textbf{Wert} auf
+dem jeweils \textbf{günstigsten} geeigneten Speichermedium ablegen -- inkl.
+Regeln und Prozessen, wie sie zwischen Medien verschoben werden.
+
+Steuerung nach Wichtigkeit, Wertigkeit, Kosten. Basis: Klassifizierung von
+Daten, Quellen und Speichersystemen $\Rightarrow$ automatisierte Bereitstellung
+in einer Speicherhierarchie.
+
+\textbf{Getrieben durch:} Storage Mgmt, Document Lifecycle Mgmt, Content
+Lifecycle Mgmt, \textbf{Records Management}.
+\end{mainbox}
+
+\begin{mainbox}{ILM-Regeln: wo/wie wird gespeichert?}
+Änderungshäufigkeit, Zugriffsgeschwindigkeit, Zugriffshäufigkeit, Kosten,
+ökonomischer Wert, gesetzliche Bestimmungen.
+
+$\Rightarrow$ Daten auf passende Medien verschieben und am Ende des Zyklus
+\textbf{löschen}.
+\end{mainbox}
+
+\begin{subbox}{Aktive vs. inaktive Daten}
+Datenmenge wächst exponentiell -- der Grossteil ist \textbf{inaktiv}.
+Inaktive Daten trotzdem:
+\begin{itemize}
+    \item konsumieren teuren Speicherplatz
+    \item werden gepflegt, gesichert, repliziert
+    \item unterliegen Rechts- \& Aufbewahrungspflichten
+    \item müssen im Katastrophenfall wiederhergestellt werden
+\end{itemize}
+$\Rightarrow$ auf günstigere Tiers verschieben / archivieren / löschen.
+\end{subbox}
+
+\begin{mainbox}{Records Management (ISO 15489)}
+Steuert das Datenvolumen:
+\begin{itemize}
+    \item \textbf{Aufbewahrungszeiten} (gesetzlich / Branche / intern)
+    \item Ablageordnung, Namensgebung, Versionen
+    \item automatische Löschroutinen
+\end{itemize}
+Anordnen \& durchsetzen: \textbf{Geschäftsleitung} (mit Rechtsabteilung),
+nicht Admins.
+\end{mainbox}
+
+\subsection{Tiered Storage}
+
+\begin{mainbox}{Tiered Storage}
+``Verschiedene Datenklassen auf verschiedenen Speicherklassen.''
+Klassifizierung + passendes Medium \textbf{senkt die Kosten}.
+
+\textbf{Datencharakteristik:}
+\begin{enumerate}
+    \item Mission Critical Data
+    \item Business Critical Data
+    \item Nearline / Historical Data
+    \item Offline Data
+\end{enumerate}
+\textbf{Speicherhierarchie:}
+\begin{itemize}
+    \item \textbf{Tier 1:} höchster Speed, sehr zuverlässig, skalierbar,
+          sehr teuer
+    \item \textbf{Tier 2:} mittlerer Speed, Zuverlässigkeit ok, Skalierung
+          limitiert, weniger teuer
+    \item \textbf{Tier n:} hohe Kapazität, tiefer Speed, sehr geringe
+          Kosten/TB
+    \item \textbf{Offsite Tape:} Archivierung, WORM (einmal beschreibbar)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Klassifizierung der Speicher-Tiers}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X r@{}}
+\textbf{Tier} & \textbf{Charakteristik / Gebrauch} & \textbf{Anteil} \\
+\hline
+Tier 1 & schnell, hochverfügbar; Produktionsdaten & 20\,\% \\
+Tier 2 & mittel, hohe Dichte; Referenzdaten & 35\,\% \\
+Compliance & WORM, unveränderlich; gesetzl. Daten & 30\,\% \\
+Tape Vault & langsam, entfernbar; Offsite DR & 15\,\%$^*$ \\
+\end{tabularx}
+$^*$ plus Backups
+\end{mainbox}
+
+\begin{subbox}{Vergleich der Speichertypen}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|l|X|l@{}}
+\textbf{Typ} & \textbf{Zugriff} & \textbf{Rate} & \textbf{Kosten} \\
+\hline
+SSD & 0.2/0.4\,ms & 300--500\,MB/s, 20--100k IOPS & s.\,hoch \\
+FC/SAS & $\sim$4\,ms & 160\,MB/s, 140 IOPS & hoch \\
+SATA & $\sim$12\,ms & 100\,MB/s, 90 IOPS & moderat \\
+MAID & ms--s & -- & niedrig \\
+Tape & s--h & seq. steigend, rand. gering & s.\,niedrig \\
+\end{tabularx}
+\textbf{Dichte:} SSD/FC/SATA moderat(--hoch), MAID/Tape hoch.
+\textbf{Zuverlässigkeit:} SSD (sehr) hoch, FC hoch, SATA moderat, Tape
+niedrig--moderat. \textbf{Energie:} SSD/FC hoch $\to$ Tape sehr niedrig.
+
+\textbf{MAID} = Massive Array of Idle Disks: viele Disks, stromsparend/offline,
+nur bei Bedarf aktiv.
+\end{subbox}
+
+\begin{subbox}{Storage-SLA Beispiel (CS intern)}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{center}
+\begin{tabular}{c|r|r|r|l}
+\textbf{SLA} & \textbf{Verf.} & \textbf{RTO} & \textbf{RPO} & \textbf{Kosten} \\
+\hline
+1 & 99.99\,\% & 15\,min & 1\,h & hoch \\
+2 & 99.9\,\% & 1\,h & 12\,h & mittel \\
+3 & 99\,\% & 8\,h & 48\,h & niedrig \\
+4 & 97\,\% & 24\,h & 96\,h & gering \\
+\end{tabular}
+\end{center}
+1 = Mission Critical, 2 = Business Critical, 3 = Business Important,
+4 = Development.
+Weitere SLA-Punkte (SLA 1$\to$4): Backup-Erfolgsrate 97/95/90/90\,\%;
+Archivierung nach 90/30/90/180 Tagen ohne Zugriff; Archivzugriff Sekunden
+bis 24--48\,h; Kapazitätsprognose monatlich bis jährlich; Threshold-basiertes
+automatisches Nachladen von Speicher.
+
+\textbf{RTO} (Recovery Time Objective): max. Dauer bis Wiederherstellung.
+\textbf{RPO} (Recovery Point Objective): max. tolerierter Datenverlust (Zeit
+seit letzter Sicherung).
+\end{subbox}
+
+\subsection{Allocation Efficiency}
+
+\begin{mainbox}{Utilization \& Yield -- COPQ}
+\textbf{COPQ} = Cost of Poor Quality: Kosten für Speicher, der bezahlt, aber
+nicht genutzt wird (Reserven, RAID, Spiegelung).
+\begin{align*}
+\text{Yield} &= \prod \text{Effizienzfaktoren} \\
+\text{COPQ} &= \text{Kosten} \cdot (1 - \text{Yield}) \\
+\text{CHF/TB}_{\text{genutzt}} &= \frac{\text{Kosten}}{\text{Kap.} \cdot \text{Yield}}
+\end{align*}
+\textbf{Beispiel Tier 1:} 1000\,GB à \$0.05/MB $= \$51'200$;
+alloziert 80\,\%, genutzt 75\,\% $\Rightarrow$ Yield $0.8 \cdot 0.75 = 60\,\%$
+$\Rightarrow$ COPQ $= \$20'480$ (2.05\,\% von \$1\,Mio Einnahmen).
+\end{mainbox}
+
+\begin{subbox}{Übung: 96 Platten à 8\,TB, CHF 700.--}
+\textbf{Kosten:} $96 \cdot 700 = \text{CHF } 67'200$, roh $768$\,TB.
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{l|r|r}
+\textbf{Schritt} & \textbf{Faktor} & \textbf{TB} \\
+\hline
+Roh & & 768.0 \\
+Spiegelung & 0.50 & 384.0 \\
+RAID-5 20\,\% & 0.80 & 307.2 \\
+Reserve 20\,\% & 0.80 & 245.8 \\
+Nutzung 85\,\% & 0.85 & 208.9 \\
+\end{tabular}
+\end{center}
+\begin{align*}
+\text{Yield} &= 0.5 \cdot 0.8 \cdot 0.8 \cdot 0.85 = 27.2\,\% \\
+\text{COPQ} &= 67'200 \cdot 0.728 \approx \textbf{CHF 48'922} \\
+\text{CHF/TB} &: 87.5 \text{ (roh)} \to 321.7
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Downtime immer auf die \textbf{vereinbarte Servicezeit} (7$\times$24
+          vs. 5$\times$9) beziehen, nicht blind auf 8760\,h.
+    \item Spiegelung $\neq$ +100\,\% Kosten -- Infrastruktur kommt dazu.
+    \item Tier I--IV (RZ-Infrastruktur) $\neq$ Storage-Tiers (Speicherklassen)
+          $\neq$ AEC-Klassen (Verfügbarkeit).
+    \item Effizienzfaktoren \textbf{multiplizieren}, nicht addieren.
+\end{itemize}
+\end{subbox}
+
 % ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================

@@ -369,6 +369,171 @@ $u = \sin x$: $2u^2 - u - 1 = 0 \Rightarrow u_1 = 1$, $u_2 = -\frac{1}{2}$
 \end{subbox}
 
 % ============================================================================
+% SECTION 2: FOLGEN, REIHEN UND GRENZWERTE
+% ============================================================================
+\section{Folgen, Reihen und Grenzwerte}
+
+\subsection{Folgen}
+
+\begin{mainbox}{Folge}
+Abbildung von den natürlichen in die reellen Zahlen:
+$$a\colon \N \to \R, \quad n \mapsto a_n$$
+\textbf{Bildungsgesetz} erkennen: Differenz konstant $\Rightarrow$ linear,
+Quotient konstant $\Rightarrow$ Potenz, Vorzeichenwechsel $\Rightarrow
+(-1)^n$.
+\end{mainbox}
+
+\begin{subbox}{Beispiele Bildungsgesetz}
+\renewcommand*{\arraystretch}{1.4}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{l|l|l}
+Folge & $a_n$ & $n\to\infty$ \\
+\hline
+$1, 3, 5, 7, \ldots$ & $2n+1$ ($\N_0$) & $\to \infty$ \\
+$1, 2, 4, 8, \ldots$ & $2^n$ ($\N_0$) & $\to \infty$ \\
+$1, \frac12, \frac14, \frac18, \ldots$ & $\frac{1}{2^n}$ ($\N_0$) & $\to 0$ \\
+$\frac12, \frac23, \frac34, \ldots$ & $\frac{n}{n+1}$ ($\N$) & $\to 1$ \\
+$1, \frac12, \frac13, \ldots$ & $\frac1n$ ($\N$) & $\to 0$ \\
+$1, -\frac12, \frac13, \ldots$ & $\frac{(-1)^{n+1}}{n}$ ($\N$) & $\to 0$ \\
+$1, -2, 4, -8, \ldots$ & $(-2)^n$ ($\N_0$) & weder noch \\
+\end{tabular}
+\end{subbox}
+
+\begin{mainbox}{Konvergenz \& Divergenz}
+$a_n$ \textbf{konvergiert} gegen den Grenzwert $a$:
+\begin{align*}
+\lim_{n\to\infty} a_n = a \iff\ & \forall \varepsilon > 0\ \exists n_0 \in \N\\
+& \forall n > n_0\colon |a_n - a| < \varepsilon
+\end{align*}
+$|a_n - a| < \varepsilon \iff a - \varepsilon < a_n < a + \varepsilon$
+(ab $n_0$ liegen \emph{alle} Glieder im $\varepsilon$-Schlauch).\\[2pt]
+\textbf{Divergenz} gegen $\infty$ (uneigentlicher Grenzwert):
+\begin{align*}
+\lim_{n\to\infty} a_n = \infty \iff\ & \forall M \in \R\ \exists n_0 \in \N\\
+& \forall n > n_0\colon a_n > M
+\end{align*}
+$\lim a_n = -\infty \iff \lim (-a_n) = \infty$. \ Es gibt Folgen, die weder
+konvergieren noch divergieren, z.B.\ $(-2)^n$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel $a_n = \frac{n}{n+1} \to 1$}
+Umformen: $\dfrac{n}{n+1} = \dfrac{n+1-1}{n+1} = 1 - \dfrac{1}{n+1}$\\
+$|a_n - 1| = \frac{1}{n+1} < \varepsilon \iff n > \frac{1}{\varepsilon} - 1$
+$\Rightarrow n_0 = \lceil \frac{1}{\varepsilon} \rceil$ genügt.
+\end{subbox}
+
+\begin{subbox}{Grenzwerte von Funktionen}
+Vor dem Grenzübergang vereinfachen (kürzen, Identitäten):
+\begin{align*}
+\lim_{x\to0} \frac{\sin 2x}{\sin x}
+&= \lim_{x\to0} \frac{2\sin x\cos x}{\sin x}\\
+&= \lim_{x\to0} 2\cos x = 2
+\end{align*}
+($\sin 2x = 2\sin x \cos x$ aus Additionstheorem mit $x = y$)
+\end{subbox}
+
+\subsection{Reihen}
+
+\begin{mainbox}{Reihe \& Partialsumme}
+Summe der Glieder einer Folge:
+$$S = a_0 + a_1 + a_2 + \ldots = \sum_{k=0}^{\infty} a_k$$
+\textbf{Partialsumme:} $S_n = \sum_{k=0}^{n} a_k$ \ (nach endlich vielen
+Summanden abgebrochen).\\
+Reihe \textbf{konvergiert}, wenn die Folge der Partialsummen konvergiert:
+$$\boxed{S = \lim_{n\to\infty} S_n}$$
+\end{mainbox}
+
+\begin{mainbox}{Arithmetische Reihe}
+Differenz aufeinanderfolgender Glieder konstant:
+$$a_{k+1} - a_k = d \ \Rightarrow\ a_k = a_1 + (k-1)d$$
+$$\boxed{S_n = \sum_{k=1}^{n} a_k = \frac{n\,(a_1 + a_n)}{2}}$$
+Spezialfall: $\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$. \ Unendliche Reihe
+divergiert (ausser alle $a_k = 0$).
+\end{mainbox}
+
+\begin{subbox}{Gauss-Trick: $1 + 2 + \ldots + 100$}
+Vorwärts und rückwärts addieren:
+\begin{align*}
+S &= 1 + 2 + \ldots + 99 + 100\\
+S &= 100 + 99 + \ldots + 2 + 1\\
+2S &= 101 + 101 + \ldots + 101 = 100 \cdot 101
+\end{align*}
+$\Rightarrow S = \frac{100 \cdot 101}{2} = 5050$
+\end{subbox}
+
+\begin{mainbox}{Geometrische Reihe}
+Quotient aufeinanderfolgender Glieder konstant:
+$$\frac{a_{k+1}}{a_k} = q \ \Rightarrow\ a_k = a_1 q^{k-1}$$
+\textbf{Partialsumme} ($S_n - qS_n$, Teleskop):
+$$\boxed{S_n = \sum_{k=1}^{n} a_1 q^{k-1} = a_1 \cdot \frac{1 - q^n}{1 - q}}
+\quad (q \neq 1)$$
+\textbf{Summe} (nur für $|q| < 1$, da dann $q^n \to 0$):
+$$\boxed{S = \lim_{n\to\infty} S_n = \frac{a_1}{1 - q}}$$
+Für $|q| \ge 1$ divergiert die Reihe.
+\end{mainbox}
+
+\begin{subbox}{Beispiel $\frac12 + \frac14 + \frac18 + \ldots$}
+$a_1 = \frac12$, $q = \frac12$:
+$S_n = \frac12 \cdot \frac{1 - (1/2)^n}{1/2} = 1 - \frac{1}{2^n}$\\
+$\Rightarrow S = \frac{1/2}{1 - 1/2} = 1$ \ (Quadrat immer weiter halbieren)
+\end{subbox}
+
+\begin{mainbox}{Harmonische Reihe}
+$a_k \to 0$ ist \textbf{notwendig}, aber \textbf{nicht hinreichend} für
+Konvergenz:
+$$H = \sum_{k=1}^{\infty} \frac1k = 1 + \frac12 + \frac13 + \ldots = \infty$$
+Beweis durch Gruppieren:
+\begin{align*}
+H &= 1 + \tfrac12 + \underbrace{\tfrac13 + \tfrac14}_{\ge 2\cdot\frac14}
+     + \underbrace{\tfrac15 + \ldots + \tfrac18}_{\ge 4\cdot\frac18} + \ldots\\
+  &\ge 1 + \tfrac12 + \tfrac12 + \tfrac12 + \ldots = \infty
+\end{align*}
+\textbf{Alternierend} konvergiert:
+$$\sum_{k=1}^{\infty} \frac{(-1)^{k+1}}{k} = 1 - \frac12 + \frac13 - \ldots
+= \ln 2$$
+\end{mainbox}
+
+\begin{mainbox}{Konvergenzkriterien für $S = \sum a_k$}
+\textbf{Quotientenkriterium:}
+$$q = \lim_{k\to\infty} \left|\frac{a_{k+1}}{a_k}\right|
+\begin{cases} < 1 & \Rightarrow \text{konvergent} \\
+> 1 & \Rightarrow \text{divergent} \end{cases}$$
+\textbf{Wurzelkriterium:}
+$$q = \lim_{k\to\infty} \sqrt[k]{|a_k|}
+\begin{cases} < 1 & \Rightarrow \text{konvergent} \\
+> 1 & \Rightarrow \text{divergent} \end{cases}$$
+Bei $q = 1$ jeweils \emph{keine Aussage}.\\[2pt]
+\textbf{Leibnizkriterium:} Alternierende Reihe
+$\sum (-1)^k a_k = a_0 - a_1 + a_2 - \ldots$ konvergiert, wenn $a_k$ eine
+\emph{monoton fallende Nullfolge} ist.
+\end{mainbox}
+
+\begin{subbox}{Beispiele Quotientenkriterium}
+$a_k = \frac{1}{2^k}$: \
+$\frac{a_{k+1}}{a_k} = \frac{2^k}{2^{k+1}} = \frac12 < 1$ $\Rightarrow$
+konvergent\\
+$a_k = 2^k$: \
+$\frac{a_{k+1}}{a_k} = \frac{2^{k+1}}{2^k} = 2 > 1$ $\Rightarrow$ divergent\\
+$a_k = \frac1k$: \ $\frac{k}{k+1} \to 1$ $\Rightarrow$ keine Aussage
+(harmonisch, divergent)\\
+$1 - \frac12 + \frac13 - \ldots$: \ $\frac1k$ monoton fallende Nullfolge
+$\Rightarrow$ konvergent (Leibniz)
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Folge $\neq$ Reihe: $\frac{1}{2^n} \to 0$, aber
+          $\sum \frac{1}{2^n} = 1$ (bzw.\ 2 ab $n=0$).
+    \item $a_k \to 0$ reicht nicht (harmonische Reihe!); $a_k \not\to 0$
+          $\Rightarrow$ sicher divergent.
+    \item Geometrische Summenformel nur für $|q| < 1$; Startindex beachten
+          ($a_1$ = erstes Glied).
+    \item Quotienten-/Wurzelkriterium mit $q = 1$: anderes Argument nötig.
+    \item Indexbereich ($\N$ vs.\ $\N_0$) beim Bildungsgesetz angeben.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

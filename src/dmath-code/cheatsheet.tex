@@ -339,6 +339,152 @@ $$P = \frac{3}{6} = \frac{1}{2}$$
 \end{subbox}
 
 % ============================================================================
+% SECTION 2: BEDINGTE WAHRSCHEINLICHKEIT
+% ============================================================================
+\section{Bedingte Wahrscheinlichkeit}
+
+\subsection{Definition \& Produktregel}
+
+\begin{mainbox}{Bedingte Wahrscheinlichkeit}
+Ist bekannt, dass nur noch Ergebnisse aus $E \subseteq \Omega$ vorkommen
+($P(E) > 0$):
+$$\boxed{P(A \mid E) = \frac{P(A \cap E)}{P(E)}}$$
+\begin{itemize}
+    \item $P(\cdot \mid E)$ gibt nur $\omega \in E$ positive W'keit;
+          $\sum_{\omega \in E} P(\omega \mid E) = 1$.
+    \item \textbf{Produktregel:} $P(A \cap E) = P(E) \cdot P(A \mid E)$
+    \item Uniform: $P(A \mid E) = \dfrac{|A \cap E|}{|E|}$ \ ($E$ wird
+          neues $\Omega$)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Zufallszahl 1--10, $E = $ gerade}
+$P(2) = P(E) \cdot P(2 \mid E) = \frac{5}{10} \cdot \frac{1}{5}$
+$\Rightarrow P(2 \mid E) = \frac{1}{5}$\\
+$P(\text{3er-Zahl}) = \frac{3}{10}$, \ $P(\text{3er-Zahl} \mid E) =
+\frac{1}{5}$ \ (verändert)\\
+$P(\text{5er-Zahl}) = \frac{2}{10}$, \ $P(\text{5er-Zahl} \mid E) =
+\frac{1}{5}$ \ (\emph{gleich!})
+\end{subbox}
+
+\begin{mainbox}{Unabhängigkeit}
+$A$ und $E$ heissen \textbf{unabhängig}, wenn
+$$P(A \mid E) = P(A)$$
+(Information $E$ ändert nichts an $A$). Äquivalent:
+$$\boxed{P(A \cap E) = P(A) \cdot P(E)}$$
+Symmetrisch: $P(E \mid A) = \frac{P(A \cap E)}{P(A)} =
+\frac{P(A)P(E)}{P(A)} = P(E)$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel 3 Würfel: Wette auf $A$ oder $B$?}
+$A$: Summe $\le 9$; \ $B$: mind.\ 2 gleiche Augenzahlen.\\
+$P(A) = \frac{81}{216} = 0.375$, \
+$P(B) = 1 - \frac{6 \cdot 5 \cdot 4}{216} = \frac{96}{216} \approx 0.444$
+$\Rightarrow$ auf $B$ setzen.\\
+\textbf{Mit Info} $E$: mind.\ eine Eins, $|E| = 216 - 5^3 = 91$:\\
+$|A \cap E| = 81 - 20 = 61$ (20: Summe $\le 9$ ohne Eins),\\
+$|B \cap E| = 91 - 3 \cdot 5 \cdot 4 = 31$\\
+$P(A \mid E) = \frac{61}{91} \approx 0.670$, \
+$P(B \mid E) = \frac{31}{91} \approx 0.341$ $\Rightarrow$ \textbf{auf $A$
+wechseln!}
+\end{subbox}
+
+\begin{subbox}{Beispiel Unabhängigkeit: roter \& blauer Würfel}
+$A$: rot ungerade, $B$: Summe ungerade.
+$P(A) = P(B) = \frac{1}{2}$,\\
+$A \cap B$ = rot ungerade \& blau gerade: $\frac{9}{36} = \frac{1}{4} =
+P(A)P(B)$ $\Rightarrow$ \textbf{unabhängig}.
+\end{subbox}
+
+\begin{subbox}{Beispiel 10 Münzwürfe, $H$: mind.\ 9 Mal Kopf}
+$P(H) = \frac{\binom{10}{9} + \binom{10}{10}}{2^{10}} = \frac{11}{1024}$
+\begin{itemize}
+    \item 1.\ Wurf Kopf: Rest 9 mit $\ge 8$ K: $\frac{10}{2^9} \approx 0.0195$
+    \item 1.\ Wurf Zahl: Rest 9 alle K: $\frac{1}{2^9} \approx 0.00195$
+    \item ersten 3 Kopf: Rest 7 mit $\ge 6$ K: $\frac{8}{2^7} = \frac{1}{16}$
+    \item mind.\ 8 Köpfe: $\frac{11}{45 + 10 + 1} = \frac{11}{56} \approx
+          0.196$
+\end{itemize}
+\end{subbox}
+
+\subsection{Mehrstufige Zufallsexperimente}
+
+\begin{mainbox}{Wahrscheinlichkeitsbaum}
+Zufallsexperiment aus mehreren gekoppelten Stufen.
+\begin{itemize}
+    \item \textbf{Knoten}: Zwischenstände; \textbf{Blätter}: Ergebnisse
+    \item \textbf{Kanten}: bedingte W'keiten $P(\text{Knoten } B \mid
+          \text{Knoten } A)$; Kanten aus einem Knoten summieren zu 1
+    \item \textbf{Pfadregel}: $P(\text{Blatt})$ = Produkt der Kanten
+          entlang des Pfads (Produktregel)
+    \item \textbf{Summenregel}: $P(\text{Ereignis})$ = Summe der
+          zugehörigen Pfade
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Tennis, $P(\text{A gewinnt Spiel}) = p = 0.6$}
+\begin{center}
+\begin{tikzpicture}[level distance=7mm,
+  level 1/.style={sibling distance=18mm},
+  level 2/.style={sibling distance=9mm},
+  every node/.style={font=\scriptsize, inner sep=1pt},
+  edge from parent/.style={draw, ->}]
+\node {start}
+  child {node {A}
+    child {node {AA} edge from parent node[left] {$p$}}
+    child {node {AB\ldots} edge from parent node[right] {$q$}}
+    edge from parent node[left] {$p$}}
+  child {node {B}
+    child {node {BA\ldots} edge from parent node[left] {$p$}}
+    child {node {BB} edge from parent node[right] {$q$}}
+    edge from parent node[right] {$q$}};
+\end{tikzpicture}
+\end{center}
+A gewinnt: AA, BAA, ABAA, ABABA, BABAA ($q = 0.4$):
+\begin{align*}
+P &= p^2 + qp^2 + pqp^2 + 2p^3q^2\\
+  &= 0.36 + 0.144 + 0.0864 + 0.06912\\
+  &\approx 0.6595
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Beispiel Wetterregel (So.\ trocken)}
+T$\to$T $\frac{5}{6}$, T$\to$N $\frac{1}{6}$; \ N$\to$N $\frac{2}{3}$,
+N$\to$T $\frac{1}{3}$. Stufenweise (Summenregel):\\
+Mo: $T = \frac{5}{6}$, $N = \frac{1}{6}$\\
+Di: $T = \frac{5}{6}\cdot\frac{5}{6} + \frac{1}{6}\cdot\frac{1}{3} =
+\frac{3}{4}$\\
+Mi: $T = \frac{3}{4}\cdot\frac{5}{6} + \frac{1}{4}\cdot\frac{1}{3} =
+\frac{17}{24} \approx 0.708$\\
+Mind.\ einmal nass bis Mi: $1 - \left(\frac{5}{6}\right)^3 =
+\frac{91}{216} \approx 0.421$
+\end{subbox}
+
+\begin{subbox}{Weitere typische Aufgaben}
+\textbf{Geburtstagsproblem:} kleinstes $n$ mit $P(\text{2 gleich}) \ge 50\%$:
+$$1 - \prod_{i=0}^{n-1} \frac{365 - i}{365} \ge 0.5 \Rightarrow
+\boxed{n = 23}\ (0.507)$$
+\textbf{$n$ Dateien auf $n$ Server}, jeder passend:
+$P = \frac{n!}{n^n}$\\
+\textbf{Best-of-five}, $p = 0.45$ (3 Siege vor 3 Niederlagen):
+$$P = p^3\left(1 + 3q + 6q^2\right) \approx 0.407$$
+($\binom{2+k}{k}$ Reihenfolgen mit $k$ Niederlagen vor dem 3.\ Sieg)
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item $P(A \mid E) \neq P(E \mid A)$ -- Reihenfolge beachten!
+    \item Unabhängig $\neq$ disjunkt: disjunkte $A, E$ mit $P > 0$ sind
+          \emph{abhängig} ($P(A \cap E) = 0$).
+    \item Unabhängigkeit immer \emph{nachrechnen}
+          ($P(A\cap E) = P(A)P(E)$), nicht raten.
+    \item Im Baum: Kanten sind \emph{bedingte} W'keiten; multiplizieren
+          entlang Pfad, addieren über Pfade.
+    \item Bei Bedingung $E$: einfach $E$ als neues $\Omega$ behandeln.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

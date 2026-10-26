@@ -485,6 +485,166 @@ $$P = p^3\left(1 + 3q + 6q^2\right) \approx 0.407$$
 \end{subbox}
 
 % ============================================================================
+% SECTION 3: SATZ VON BAYES
+% ============================================================================
+\section{Satz von Bayes}
+
+\subsection{Satz von Bayes \& totale Wahrscheinlichkeit}
+
+\begin{mainbox}{Satz von Bayes}
+Für beliebige Ereignisse $A, B$ mit $P(B) > 0$:
+$$\boxed{P(A \mid B) = \frac{P(A) \cdot P(B \mid A)}{P(B)}}$$
+Dreht die Bedingung um: aus $P(B \mid A)$ (oft bekannt, z.B.\
+Testgüte) wird $P(A \mid B)$ (gesucht, z.B.\ ``krank, wenn positiv'').\\
+Herleitung: Definition + Produktregel im Zähler,
+$P(A \cap B) = P(A) \cdot P(B \mid A)$.
+\end{mainbox}
+
+\begin{mainbox}{Totale Wahrscheinlichkeit (Partition)}
+Ist $\Omega = \Omega_1 \cup \ldots \cup \Omega_n$ eine \textbf{Partition}
+(paarweise disjunkt, decken $\Omega$ ab):
+$$\boxed{P(B) = \sum_{i=1}^{n} P(\Omega_i) \cdot P(B \mid \Omega_i)}$$
+Meist $\Omega_1 = A$, $\Omega_2 = \overline{A}$:
+$$P(A|B) = \frac{P(A)P(B|A)}{P(A)P(B|A) + P(\bar{A})P(B|\bar{A})}$$
+Im Baum: Zähler = \emph{ein} Pfad, Nenner = \emph{alle} Pfade zu $B$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Zufallszahl 1--10, $G$ = gerade, $U$ = ungerade}
+$P(\text{3er}) = P(G)P(\text{3er} \mid G) + P(U)P(\text{3er} \mid U)$\\
+$\phantom{P(\text{3er})} = \frac{5}{10}\cdot\frac{1}{5} +
+\frac{5}{10}\cdot\frac{2}{5} = \frac{3}{10}$\\
+$P(G \mid \text{3er}) = \dfrac{\frac{5}{10} \cdot \frac{1}{5}}{\frac{3}{10}}
+= \frac{1}{3}$
+\end{subbox}
+
+\begin{mainbox}{Subjektive Interpretation}
+\textbf{a-priori}-Überzeugung $P(A)$ wird durch Beobachtung $B$ zur
+\textbf{a-posteriori}-Überzeugung $P(A \mid B)$ aktualisiert.
+Iterativ: Posterior wird neuer Prior für nächste Beobachtung.\\
+Anwendungen: Bayes-Klassifikatoren (Spam), Diagnostik, Fehlersuche,
+Spracherkennung, Robotik.
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: Bayes-Aufgabe}
+\begin{enumerate}
+    \item Ereignisse benennen: Ursache $A$ (verborgen), Beobachtung $B$.
+    \item Gegeben sortieren: Prior $P(A)$, Likelihoods $P(B \mid A)$,
+          $P(B \mid \overline{A})$.
+    \item Baum zeichnen: 1.\ Stufe Ursache, 2.\ Stufe Beobachtung.
+    \item $P(B)$ via Partition (alle Pfade zu $B$).
+    \item Bayes: $P(A \mid B) = \frac{\text{Pfad } A \to B}{P(B)}$.
+\end{enumerate}
+\end{subbox}
+
+\subsection{Typische Aufgaben}
+
+\begin{subbox}{Ziegenproblem (Let's Make a Deal)}
+Wahl Tor 1, Moderator öffnet Tor 3. $G_i$: Gewinn hinter $i$,
+$M_j$: öffnet $j$. $P(M_3 \mid G_1) = \frac{1}{2}$,
+$P(M_3 \mid G_2) = 1$, $P(M_3 \mid G_3) = 0$:
+$$P(G_2 \mid M_3) = \frac{\frac{1}{3} \cdot 1}{\frac{1}{3}\cdot\frac{1}{2}
++ \frac{1}{3} \cdot 1 + \frac{1}{3} \cdot 0} = \frac{2}{3}$$
+$\Rightarrow$ \textbf{Wechseln} verdoppelt die Gewinnchance.
+\end{subbox}
+
+\begin{subbox}{Urnen: woher stammt die Kugel?}
+Urne $A$: Nr.\ 1--9, Urne $B$: Nr.\ 1--5; Urne uniform, gerade Nr.\ $G$:
+$$P(A \mid G) = \frac{\frac{1}{2}\cdot\frac{4}{9}}{\frac{1}{2}\cdot\frac{4}{9}
++ \frac{1}{2}\cdot\frac{2}{5}} = \frac{10}{19} \approx 52.6\%$$
+\end{subbox}
+
+\begin{subbox}{Wetterprognose (a-priori $\to$ a-posteriori)}
+$R$: Prognose schlecht, $S$: schön. $P(R \mid S) = \frac{1}{4}$,
+$P(R \mid \overline{S}) = \frac{4}{5}$, Prior $P(S) = \frac{2}{3}$:
+$$P(S \mid R) = \frac{\frac{2}{3}\cdot\frac{1}{4}}{\frac{2}{3}\cdot\frac{1}{4}
++ \frac{1}{3}\cdot\frac{4}{5}} = \frac{5}{13} \approx 38.5\%$$
+\end{subbox}
+
+\begin{subbox}{Spam-Filter (Bayes-Klassifikator)}
+\textbf{1 Wort:} \emph{Rolex} in 250/2000 Spam, 5/1000 Ham,
+$P(S) = P(\overline{S}) = \frac{1}{2}$:
+$$P(S \mid R) = \frac{0.125}{0.125 + 0.005} = \frac{25}{26} \approx 96.2\%$$
+$> 0.9 \Rightarrow$ ablehnen.\\
+\textbf{2 Wörter} (Annahme: unabhängig gegeben $S$ bzw.\ $\overline{S}$):
+$P(A \cap U \mid S) = P(A \mid S) \cdot P(U \mid S)$.
+\emph{Aktie} 400/2000 | 60/1000, \emph{unterbewertet} 200/2000 | 25/1000:
+\begin{align*}
+P(S \mid A \cap U) &= \frac{0.2 \cdot 0.1}{0.2 \cdot 0.1 + 0.06 \cdot 0.025}\\
+&= \frac{40}{43} \approx 93\%
+\end{align*}
+(Prior $\frac{1}{2}$ kürzt sich weg.)
+\end{subbox}
+
+\begin{subbox}{Medizinischer Test (Basisrate!)}
+TBC-Rate $0.1\%$, Sensitivität $P(D \mid T) = 0.9$,
+Fehlalarm $P(D \mid \overline{T}) = 0.01$:
+\begin{align*}
+P(T \mid D) &= \frac{0.001 \cdot 0.9}{0.001 \cdot 0.9 + 0.999 \cdot 0.01}\\
+&\approx 8.26\%
+\end{align*}
+Mit Rate $0.19\%$, $P(D \mid T) = 0.98$, Fehlalarm $< 13\cdot10^{-6}$:
+$P(T \mid D) > 99.3\%$ (Nenner mit oberer Schranke $\Rightarrow$ untere
+Schranke).
+\end{subbox}
+
+\begin{subbox}{Verrauschter Kanal mit Paritätsbit}
+0110 gesendet, jedes Bit kippt unabhängig mit $p$, $q = 1-p$.
+$G$: gerade Anzahl Einsen empfangen ($\Leftrightarrow$ 0, 2 oder 4 Bits
+gekippt):
+$$P(\text{korrekt} \mid G) = \frac{q^4}{q^4 + \binom{4}{2}q^2p^2 + p^4}$$
+$p = 1\%$: $\approx 99.94\%$; \ $p = 10\%$: $\approx 93.09\%$
+\end{subbox}
+
+\begin{subbox}{Gestörte Signale}
+$0 : 1$ im Verhältnis $5:3$, gestört: $\frac{2}{5}$ der Nullen,
+$\frac{1}{3}$ der Einsen. $S_i$: gesendet, $E_i$: empfangen:
+$$P(S_0 \mid E_0) = \frac{\frac{5}{8}\cdot\frac{3}{5}}
+{\frac{5}{8}\cdot\frac{3}{5} + \frac{3}{8}\cdot\frac{1}{3}} = 75\%$$
+$$P(S_1 \mid E_1) = \frac{\frac{3}{8}\cdot\frac{2}{3}}
+{\frac{3}{8}\cdot\frac{2}{3} + \frac{5}{8}\cdot\frac{2}{5}} = 50\%$$
+\end{subbox}
+
+\begin{subbox}{Faire vs.\ $p$-gefälschte Münze (uniform gezogen)}
+$P(G \mid W) = \frac{P(W \mid G)}{P(W \mid G) + P(W \mid F)}$
+(Prior $\frac{1}{2}$ kürzt sich):
+\begin{itemize}
+    \item $p = \frac{2}{3}$, K: $\frac{2/3}{2/3 + 1/2} = \frac{4}{7}
+          \approx 57.1\%$
+    \item $p = \frac{3}{4}$, KKKZ: $\frac{27/256}{27/256 + 16/256} =
+          \frac{27}{43} \approx 62.8\%$
+    \item $p = \frac{3}{4}$, KZZZKZ: $\frac{9}{9 + 64} = \frac{9}{73}
+          \approx 12.3\%$
+\end{itemize}
+Nur Anzahl K/Z zählt, nicht die Reihenfolge.
+\end{subbox}
+
+\begin{subbox}{Urne raten (2 Kugeln ohne Zurücklegen)}
+I: 2 grün, 1 rot; \ II: 4 grün, 1 rot; Urne uniform.\\
+I: $P(GG) = P(GR) = P(RG) = \frac{1}{3}$, $P(RR) = 0$\\
+II: $P(GG) = \frac{3}{5}$, $P(GR) = P(RG) = \frac{1}{5}$, $P(RR) = 0$\\
+\textbf{Plan} (grössere Likelihood raten): GG$\to$II, GR/RG$\to$I:
+$$P(\text{richtig}) = \tfrac{1}{2}\left(\tfrac{1}{3} + \tfrac{1}{3}\right)
++ \tfrac{1}{2} \cdot \tfrac{3}{5} = \tfrac{19}{30} \approx 63.3\%$$
+$$P(\text{II} \mid GG) = \frac{\frac{1}{2}\cdot\frac{3}{5}}
+{\frac{1}{2}\cdot\frac{3}{5} + \frac{1}{2}\cdot\frac{1}{3}} = \frac{9}{14}
+\approx 64.3\%$$
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item $P(A \mid B)$ mit $P(B \mid A)$ verwechseln -- genau das
+          korrigiert Bayes.
+    \item \textbf{Basisrate} ignorieren: guter Test + seltene Krankheit
+          $\Rightarrow$ $P(\text{krank} \mid +)$ trotzdem klein.
+    \item Nenner $P(B)$ über \emph{alle} Partitionsteile summieren, auch
+          die mit kleinem $P(B \mid \Omega_i)$.
+    \item ``x\,\% bleiben unerkannt'' $= P(\overline{D} \mid T)$
+          $\Rightarrow$ $P(D \mid T) = 1 - x$.
+    \item Uniformer Prior kürzt sich: dann nur Likelihoods vergleichen.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

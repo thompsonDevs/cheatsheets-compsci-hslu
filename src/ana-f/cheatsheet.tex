@@ -534,6 +534,169 @@ $\Rightarrow$ konvergent (Leibniz)
 \end{subbox}
 
 % ============================================================================
+% SECTION 3: POTENZREIHEN
+% ============================================================================
+\section{Potenzreihen}
+
+\subsection{Definition \& Konvergenz}
+
+\begin{mainbox}{Potenzreihe}
+Zu einer Folge $(a_k)$ (\textbf{Koeffizienten}) heisst
+$$p(x) = \sum_{k=0}^{\infty} a_k x^k = a_0 + a_1 x + a_2 x^2 + \ldots$$
+\textbf{Potenzreihe}. Allgemein um Entwicklungspunkt $x_0$:
+$\sum a_k (x - x_0)^k$.
+\end{mainbox}
+
+\begin{mainbox}{Konvergenzradius $r$}
+Quotientenkriterium auf $a_k x^k$:
+$\lim \left|\frac{a_{k+1}x^{k+1}}{a_k x^k}\right| = |x| \cdot
+\lim \left|\frac{a_{k+1}}{a_k}\right| < 1$
+$$\boxed{r = \lim_{k\to\infty} \left|\frac{a_k}{a_{k+1}}\right|}$$
+\begin{itemize}
+    \item $|x - x_0| < r$: konvergent
+    \item $|x - x_0| > r$: divergent
+    \item $|x - x_0| = r$: \emph{keine Aussage} (Rand separat prüfen)
+\end{itemize}
+Im Konvergenzbereich darf \textbf{gliedweise} differenziert und integriert
+werden ($r$ bleibt gleich).
+\end{mainbox}
+
+\begin{mainbox}{MacLaurin- \& Taylor-Reihe}
+\textbf{MacLaurin} (Entwicklung um $0$):
+$$f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(0)}{k!}\, x^k$$
+\textbf{Taylor} (Entwicklung um $x_0$):
+$$f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(x_0)}{k!}\, (x - x_0)^k$$
+Abbruch nach $n$ Gliedern $=$ Näherungspolynom.
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: Taylor-/MacLaurin-Reihe aufstellen}
+\begin{enumerate}
+    \item Tabelle: $k \mid f^{(k)}(x) \mid f^{(k)}(x_0) \mid
+          \frac{f^{(k)}(x_0)}{k!}$
+    \item Muster in $f^{(k)}$ erkennen $\Rightarrow$ allg.\ Formel für $a_k$.
+    \item In $\sum a_k (x - x_0)^k$ einsetzen.
+    \item $r = \lim |a_k / a_{k+1}|$, Rand $|x - x_0| = r$ prüfen.
+\end{enumerate}
+\end{subbox}
+
+\subsection{Binomialreihe}
+
+\begin{mainbox}{Verallgemeinerter Binomialkoeffizient}
+Für $n \in \N$: $\binom{n}{k} = \frac{n!}{k!\,(n-k)!} =
+\prod_{j=1}^{k} \frac{n + j - k}{j}$\\
+Produktform gilt auch für $\alpha \in \R$:
+$$\boxed{\binom{\alpha}{k} = \prod_{j=1}^{k} \frac{\alpha + j - k}{j}},
+\quad \binom{\alpha}{0} = 1$$
+(Zähler: $\alpha(\alpha-1)\cdots(\alpha-k+1)$, Nenner: $k!$)
+\end{mainbox}
+
+\begin{mainbox}{Binomialreihe}
+Verallgemeinert den binomischen Satz
+$(1+x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k$ auf $\alpha \in \R$:
+$$\boxed{(1 + x)^\alpha = \sum_{k=0}^{\infty} \binom{\alpha}{k} x^k}
+\quad (|x| < 1)$$
+Für $\alpha \in \N$ bricht die Reihe ab (Polynom).
+\end{mainbox}
+
+\begin{subbox}{Beispiel $\sqrt{1+x}$, $\alpha = \frac12$}
+$\binom{1/2}{1} = \frac12$, \
+$\binom{1/2}{2} = \frac{\frac12 + 1 - 2}{1}\cdot\frac{\frac12 + 2 - 2}{2} = -\frac18$,
+$\binom{1/2}{3} = \frac{1}{16}$, \ $\binom{1/2}{4} = -\frac{5}{128}$
+$$\sqrt{1+x} = 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16}
+- \frac{5x^4}{128} + \ldots$$
+\end{subbox}
+
+\begin{subbox}{Beispiel $\frac{1}{\sqrt{1 - x^3}}$ (Papula S.\ 635, A3)}
+$\alpha = -\frac12$, $x \to -x^3$:
+$\binom{-1/2}{1} = -\frac12$, $\binom{-1/2}{2} = \frac38$,
+$\binom{-1/2}{3} = -\frac{5}{16}$
+$$(1 - x^3)^{-1/2} = 1 + \tfrac12 x^3 + \tfrac38 x^6 + \tfrac{5}{16} x^9
++ \ldots$$
+$x = 0.2$ (3 Glieder): $1 + 0.004 + 0.000024 = 1.004024$;\\
+Fehler $\approx$ nächstes Glied $\frac{5}{16}\cdot 0.2^9 \approx 1.6
+\cdot 10^{-7}$.\\
+Vorzeichen: $(-x^3)^k$ und $\binom{-1/2}{k}$ wechseln beide $\Rightarrow$
+alle $+$.
+\end{subbox}
+
+\subsection{Wichtige Reihen \& Beispiele}
+
+\begin{mainbox}{Wichtige Potenzreihen}
+\renewcommand*{\arraystretch}{1.6}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{l|l|l}
+$f(x)$ & Reihe & Konv. \\
+\hline
+$\frac{1}{1-x}$ & $1 + x + x^2 + x^3 + \ldots$ & $|x| < 1$ \\
+$e^x$ & $1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \ldots$ & $\R$ \\
+$\ln(1+x)$ & $x - \frac{x^2}{2} + \frac{x^3}{3} - \ldots$ & $(-1, 1]$ \\
+$\sqrt{1+x}$ & $1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} - \ldots$
+& $|x| < 1$ \\
+$\sin x$ & $x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots$ & $\R$ \\
+$\cos x$ & $1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \ldots$ & $\R$ \\
+$\arctan x$ & $x - \frac{x^3}{3} + \frac{x^5}{5} - \ldots$ & $[-1, 1]$ \\
+\end{tabular}\\
+$e^x = \sum \frac{x^k}{k!}$, \ $\ln(1+x) = \sum_{k \ge 1}
+\frac{(-1)^{k+1}}{k} x^k$
+\end{mainbox}
+
+\begin{subbox}{Bsp.\ 1: Geometrische Reihe}
+$G(x) = \sum x^k$: $a_1 = 1$, $q = \frac{x^{k+1}}{x^k} = x$
+$\Rightarrow G(x) = \frac{1}{1 - x}$\\
+Konvergent für $|q| = |x| < 1 = r$, d.h.\ $x \in (-1, 1)$.
+\end{subbox}
+
+\begin{subbox}{Bsp.\ 2: MacLaurin von $e^x$}
+$f^{(k)}(x) = e^x \Rightarrow f^{(k)}(0) = 1 \Rightarrow a_k = \frac{1}{k!}$
+\begin{align*}
+r &= \lim \frac{1/k!}{1/(k+1)!} = \lim \frac{(k+1)!}{k!}\\
+&= \lim (k+1) = \infty
+\end{align*}
+$\Rightarrow$ konvergent für alle $x \in \R$.
+\end{subbox}
+
+\begin{subbox}{Bsp.\ 3: Taylor von $\ln x$ um $x_0 = 1$}
+$f^{(k)}(x) = (-1)^{k+1}\frac{(k-1)!}{x^k}$ ($k \ge 1$), $f(1) = 0$\\
+$\Rightarrow a_k = \frac{(-1)^{k+1}(k-1)!}{k!} = \frac{(-1)^{k+1}}{k}$
+$$\ln x = (x-1) - \tfrac{(x-1)^2}{2} + \tfrac{(x-1)^3}{3} - \ldots$$
+$r = \lim \frac{k+1}{k} = 1$ $\Rightarrow$ konvergent für $0 < x \le 2$.\\
+\textbf{Alternativ} via $G(-t) = \frac{1}{1+t} = 1 - t + t^2 - \ldots$:
+\begin{align*}
+\ln(1+x) &= \int_0^x \frac{dt}{1+t}\\
+&= \int_0^x (1 - t + t^2 - \ldots)\,dt\\
+&= x - \tfrac{x^2}{2} + \tfrac{x^3}{3} - \ldots
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Anwendungen (gliedweise integrieren)}
+\textbf{Arkustangens} aus geom.\ Reihe mit $x \to -t^2$:
+$$\arctan x = \int_0^x \frac{dt}{1+t^2} = \sum_{k=0}^{\infty}
+\frac{(-1)^k x^{2k+1}}{2k+1}$$
+\textbf{Fehlerfunktion} aus $e^{-t^2} = \sum \frac{(-1)^k t^{2k}}{k!}$:
+\begin{align*}
+\text{erf}(x) &= \tfrac{2}{\sqrt\pi}\int_0^x e^{-t^2} dt\\
+&= \tfrac{2}{\sqrt\pi} \sum_{k=0}^{\infty} \frac{(-1)^k x^{2k+1}}{k!\,(2k+1)}
+\end{align*}
+\textbf{Arkussinus} aus Binomialreihe ($\alpha = -\frac12$, $x \to -t^2$):
+$$\arcsin x = \int_0^x \frac{dt}{\sqrt{1-t^2}}
+= x + \tfrac{x^3}{6} + \tfrac{3x^5}{40} + \ldots$$
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item $r$ ist $\lim |a_k / a_{k+1}|$ (\emph{nicht} $a_{k+1}/a_k$ wie
+          beim Quotientenkriterium).
+    \item Konvergenzbereich um $x_0$ zentriert: $(x_0 - r, x_0 + r)$;
+          Randpunkte einzeln prüfen.
+    \item Bei Taylor um $x_0$: $(x - x_0)^k$, nicht $x^k$.
+    \item Substitution ($x \to -x^3$) spart Ableiten; Potenzen und
+          Vorzeichen sauber mitführen.
+    \item $(k+1)! = (k+1) \cdot k!$ zum Kürzen nutzen.
+    \item Fehlerabschätzung: erstes weggelassenes Glied.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

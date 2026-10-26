@@ -697,6 +697,172 @@ $$\arcsin x = \int_0^x \frac{dt}{\sqrt{1-t^2}}
 \end{subbox}
 
 % ============================================================================
+% SECTION 4: KOMPLEXE ZAHLEN
+% ============================================================================
+\section{Komplexe Zahlen}
+
+\subsection{Definition \& kartesische Form}
+
+\begin{subbox}{Motivation: $x^2 - 4x + 5 = 0$}
+$$x_{1/2} = \frac{4 \pm \sqrt{16 - 20}}{2} = \frac{4 \pm \sqrt{-1}\sqrt{4}}{2}
+= 2 \pm i$$
+Probe: $\big((x-2) - i\big)\big((x-2) + i\big) = (x-2)^2 - i^2$\\
+$\phantom{\text{Probe: }} = x^2 - 4x + 4 + 1 = x^2 - 4x + 5$ \checkmark\\
+Zahlbereiche: $\N \subset \Z \subset \Q \subset \R \subset \C$ -- jede
+Erweiterung macht eine Operation abgeschlossen ($-$, $:$, $\sqrt{\ }$,
+$\sqrt{\text{neg.}}$).
+\end{subbox}
+
+\begin{mainbox}{Komplexe Zahlen}
+$$\boxed{\C = \{x + iy \mid x, y \in \R,\ i^2 = -1\}}$$
+\begin{itemize}
+    \item $x = \operatorname{Re}(z)$ Realteil, $y = \operatorname{Im}(z)$
+          Imaginärteil (reell!)
+    \item Gauss'sche Zahlenebene ($\C \cong \R^2$): $x$-Achse reell,
+          $y$-Achse imaginär
+    \item \textbf{Betrag}: $|z| = \sqrt{x^2 + y^2}$ (Abstand zum Ursprung)
+    \item \textbf{Konjugiert}: $\bar{z} = x - iy$ (Spiegelung an reeller
+          Achse)
+\end{itemize}
+$$\boxed{z\bar{z} = x^2 + y^2 = |z|^2}$$
+\textbf{Potenzen von $i$} (Periode 4): $i^0 = 1$, $i^1 = i$, $i^2 = -1$,
+$i^3 = -i$, $i^4 = 1$
+\end{mainbox}
+
+\begin{subbox}{Beispiel $z = 2 + i$}
+$\operatorname{Re}(z) = 2$, $\operatorname{Im}(z) = 1$, $\bar{z} = 2 - i$\\
+$|z| = \sqrt{2^2 + 1^2} = \sqrt5$, \ $z\bar{z} = (2+i)(2-i) = 4 - i^2 = 5$
+\end{subbox}
+
+\begin{mainbox}{Grundrechenarten (rechnen wie in $\R$, $i^2 = -1$)}
+\textbf{Addition} (komponentenweise wie Vektoren):
+$$z_1 \pm z_2 = (x_1 \pm x_2) + i(y_1 \pm y_2)$$
+\textbf{Multiplikation} (ausmultiplizieren):
+$$z_1 z_2 = (x_1x_2 - y_1y_2) + i(x_1y_2 + x_2y_1)$$
+\textbf{Division} (mit $\bar{z}_2$ erweitern $\Rightarrow$ Nenner reell):
+\begin{align*}
+\frac{z_1}{z_2} = \frac{z_1\bar{z}_2}{|z_2|^2}
+&= \frac{x_1x_2 + y_1y_2}{x_2^2 + y_2^2}\\
+&\quad + i\,\frac{x_2y_1 - x_1y_2}{x_2^2 + y_2^2}
+\end{align*}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Division}
+\begin{align*}
+\frac{3 + 2i}{1 - i} &= \frac{(3+2i)(1+i)}{(1-i)(1+i)}\\
+&= \frac{3 + 5i + 2i^2}{2} = \frac12 + \frac52 i
+\end{align*}
+\end{subbox}
+
+\subsection{Polar- \& Exponentialform}
+
+\begin{mainbox}{Polarkoordinaten}
+$z$ durch Betrag $r = |z|$ und Winkel (\textbf{Argument})
+$\varphi = \arg(z) \in (-\pi, \pi]$ zur pos.\ reellen Achse.
+Polar $\to$ kart.: \ $x = r\cos\varphi$, \ $y = r\sin\varphi$\\
+Kart.\ $\to$ polar: \ $r = \sqrt{x^2 + y^2}$, \ $\tan\varphi = \frac{y}{x}$\\
+\textbf{Quadrant prüfen!} ($\arctan$ liefert nur $(-\frac\pi2, \frac\pi2)$):
+\renewcommand*{\arraystretch}{1.4}
+\setlength{\tabcolsep}{3pt}
+\begin{center}
+\begin{tabular}{l|l}
+$x > 0$ & $\varphi = \arctan\frac{y}{x}$ \\
+$x < 0,\ y \ge 0$ & $\varphi = \arctan\frac{y}{x} + \pi$ \\
+$x < 0,\ y < 0$ & $\varphi = \arctan\frac{y}{x} - \pi$ \\
+$x = 0$ & $\varphi = \pm\frac{\pi}{2}$ (Vorz.\ von $y$) \\
+\end{tabular}
+\end{center}
+(entspricht $\operatorname{atan2}(y, x)$)
+\end{mainbox}
+
+\begin{subbox}{Beispiel $z = -1 + i\sqrt3$}
+$r = \sqrt{1 + 3} = 2$, \ $\arctan\frac{\sqrt3}{-1} = -\frac\pi3$, aber
+$x < 0, y > 0$ (2.\ Quadrant) $\Rightarrow \varphi = -\frac\pi3 + \pi =
+\frac{2\pi}{3}$\\
+$\Rightarrow z = 2\left(\cos\frac{2\pi}{3} + i\sin\frac{2\pi}{3}\right) =
+2e^{i\,2\pi/3}$
+\end{subbox}
+
+\begin{mainbox}{Eulersche Formel}
+$$\boxed{e^{i\varphi} = \cos\varphi + i\sin\varphi}$$
+Herleitung: $ix$ in $e^x$-Reihe einsetzen, $i^k$ zyklisch, nach
+Real-/Imaginärteil sortieren:
+\begin{align*}
+e^{ix} &= 1 + ix - \tfrac{x^2}{2!} - i\tfrac{x^3}{3!} + \tfrac{x^4}{4!}
++ \ldots\\
+&= \underbrace{\left(1 - \tfrac{x^2}{2!} + \ldots\right)}_{\cos x}
++ i\underbrace{\left(x - \tfrac{x^3}{3!} + \ldots\right)}_{\sin x}
+\end{align*}
+\textbf{Darstellungsformen:}
+$$z = \underbrace{x + iy}_{\text{kart.}}
+= \underbrace{r(\cos\varphi + i\sin\varphi)}_{\text{trigonometrisch}}
+= \underbrace{re^{i\varphi}}_{\text{exp.}}$$
+$\bar{z} = re^{-i\varphi}$, \ $|e^{i\varphi}| = 1$, \
+$e^{i\pi} + 1 = 0$
+\end{mainbox}
+
+\begin{mainbox}{Rechnen in Exponentialform}
+\begin{align*}
+z_1 z_2 &= r_1 r_2\, e^{i(\varphi_1 + \varphi_2)}\\
+\frac{z_1}{z_2} &= \frac{r_1}{r_2}\, e^{i(\varphi_1 - \varphi_2)}\\
+z^n &= r^n\, e^{in\varphi}
+\end{align*}
+Beträge multiplizieren, Winkel addieren.\\
+\textbf{De Moivre} ($r = 1$):
+$$(\cos\varphi + i\sin\varphi)^n = \cos(n\varphi) + i\sin(n\varphi)$$
+\end{mainbox}
+
+\begin{subbox}{Beispiel $(1 + i)^8$}
+$r = \sqrt2$, $\varphi = \frac\pi4$ $\Rightarrow$
+$(1+i)^8 = (\sqrt2)^8 e^{i\,8\pi/4} = 16\,e^{i2\pi} = 16$
+\end{subbox}
+
+\begin{mainbox}{Radizieren: $n$-te Wurzeln}
+Löse $w^n = z$ mit $w = re^{i\varphi}$, $z = |z|e^{i\arg(z)}$:
+$r^n e^{in\varphi} = |z| e^{i\arg(z)}$
+$$\boxed{r = \sqrt[n]{|z|}, \quad \varphi_k = \frac{\arg(z)}{n}
++ k\cdot\frac{2\pi}{n}}$$
+$k = 0, 1, \ldots, n-1$ $\Rightarrow$ genau \textbf{$n$ verschiedene}
+Wurzeln, Ecken eines regelmässigen $n$-Ecks auf dem Kreis mit Radius
+$\sqrt[n]{|z|}$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel $w^3 = 8i$}
+$|z| = 8$, $\arg(z) = \frac\pi2$ $\Rightarrow$ $r = 2$,
+$\varphi_k = \frac\pi6 + k\frac{2\pi}{3}$:
+\begin{itemize}
+    \item $k = 0$: $2e^{i\pi/6} = \sqrt3 + i$
+    \item $k = 1$: $2e^{i5\pi/6} = -\sqrt3 + i$
+    \item $k = 2$: $2e^{i3\pi/2} = -2i$
+\end{itemize}
+(gleichseitiges Dreieck, Winkelabstand $120^\circ$)
+\end{subbox}
+
+\begin{subbox}{Denkprozess: welche Form wählen?}
+\begin{itemize}
+    \item $+$, $-$: kartesisch
+    \item $\cdot$, $:$: beides; Division kart.\ via $\bar{z}_2$
+    \item Potenzen, Wurzeln: \textbf{exponentiell}
+          (vorher umrechnen, Quadrant!)
+    \item Ergebnis ggf.\ mit $x = r\cos\varphi$, $y = r\sin\varphi$
+          zurückrechnen
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item $\operatorname{Im}(z) = y$, nicht $iy$.
+    \item $\arg$ nur mit $\arctan\frac{y}{x}$ $\Rightarrow$ falscher
+          Quadrant bei $x < 0$.
+    \item Winkel in \textbf{RAD}; Hauptwert in $(-\pi, \pi]$.
+    \item $n$-te Wurzel hat $n$ Lösungen, nicht nur $k = 0$.
+    \item $\sqrt{a}\sqrt{b} = \sqrt{ab}$ gilt in $\C$ nicht allgemein
+          ($\sqrt{-1}\sqrt{-1} = -1 \ne 1$).
+    \item Division: mit Konjugiertem des \emph{Nenners} erweitern.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

@@ -645,6 +645,226 @@ $$P(\text{II} \mid GG) = \frac{\frac{1}{2}\cdot\frac{3}{5}}
 \end{subbox}
 
 % ============================================================================
+% SECTION 4: ZUFALLSVARIABLEN
+% ============================================================================
+\section{Zufallsvariablen}
+
+\subsection{Zufallsvariable \& Verteilung}
+
+\begin{mainbox}{Zufallsvariable}
+Eine Funktion $X : \Omega \to \R$ heisst \textbf{Zufallsvariable}
+(keine Variable, sondern \emph{Funktion}: Ergebnis $\mapsto$ Zahl).
+\begin{itemize}
+    \item \textbf{Wertemenge:} $W_X = \{X(\omega) : \omega \in \Omega\}
+          = \{x_1, \ldots, x_k\}$
+    \item \textbf{Realisierung} von $x \in W_X$: Ereignis\\
+          $\{X = x\} = \{\omega : X(\omega) = x\} \subseteq \Omega$
+    \item \textbf{W'keitsverteilung:} Tabelle aller $P(X = x_i)$,
+          $\sum_i P(X = x_i) = 1$
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel 3 Münzwürfe}
+$X_1$: Anzahl Kopf, $X_2$: Anzahl K am Anfang (in Folge).
+\begin{center}
+\begin{tabular}{@{}c|cccc@{}}
+$x$ & 0 & 1 & 2 & 3 \\ \hline
+$P(X_1 = x)$ & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ \\
+$P(X_2 = x)$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $\frac{1}{8}$
+\end{tabular}
+\end{center}
+$P(X_1 = 2) = P(KKZ) + P(KZK) + P(ZKK) = \frac{3}{8}$\\
+$P(X_2 \le 1) = \frac{1}{2} + \frac{1}{4} = \frac{3}{4}$, \
+$P(X_1 \ge 1) = 1 - P(X_1 = 0) = \frac{7}{8}$
+\end{subbox}
+
+\begin{subbox}{Beispiel Wörter, $P \propto$ Anzahl Buchstaben}
+$\Omega = \{$Now, is, the, winter, of, our, discontent$\}$, total 29
+Buchstaben $\Rightarrow P(\text{winter}) = \frac{6}{29}$ etc.\\
+$X_2$ = Vokale: $P(1) = \frac{10}{29}$, $P(2) = \frac{9}{29}$,
+$P(3) = \frac{10}{29}$\\
+$X_3$ = Konsonanten: $P(1, 2, 4, 7) = \frac{7}{29}, \frac{6}{29},
+\frac{6}{29}, \frac{10}{29}$\\
+(gleiche $x$-Werte zusammenfassen: Summe der $P(\omega)$)
+\end{subbox}
+
+\subsection{Erwartungswert}
+
+\begin{mainbox}{Erwartungswert $E(X)$}
+Mittlerer Wert von $X$ (gewichtetes Mittel):
+\begin{align*}
+E(X) &= \sum_{\omega \in \Omega} X(\omega) \cdot P(\omega)\\
+     &= \sum_{i} x_i \cdot P(X = x_i)
+\end{align*}
+\textbf{Linearität (Satz 1):}
+$$\boxed{E(X + Y) = E(X) + E(Y)}$$
+(gilt \emph{immer}, auch ohne Unabhängigkeit)
+\end{mainbox}
+
+\begin{subbox}{Schlüsselidee: Zerlegen in Indikatoren}
+Komplizierte Zählgrösse $X$ als Summe einfacher $X_i$ schreiben
+(z.B.\ $X_i \in \{0,1\}$ für ``$i$-tes Bit/Wurf''), dann
+$E(X) = \sum E(X_i)$.\\
+\textbf{3 Münzen:} $E(\text{Kopf}) = 0 \cdot \frac{1}{2} + 1 \cdot
+\frac{1}{2} = 0.5$ $\Rightarrow$ $E(X_1) = 3 \cdot 0.5 = 1.5$\\
+\textbf{$n$ Würfel:} $E(X_i) = \frac{1 + \ldots + 6}{6} = 3.5$
+$\Rightarrow$ $E(\text{Summe}) = 3.5\,n$\\
+\textbf{Wörter:} $E(X_2) = \frac{58}{29} = 2$, $E(X_3) = \frac{113}{29}$,
+$E(X_1) = E(X_2) + E(X_3) = \frac{171}{29} \approx 5.90$
+\end{subbox}
+
+\subsection{Typische Verteilungen}
+
+\begin{mainbox}{Bernoulli- \& Binomialverteilung $B(n, p)$}
+$X$ = Anzahl 1-Bits unter $n$ unabhängigen Bits, $P(1) = p$.\\
+\textbf{Bernoulli} ($n = 1$): $P(X{=}1) = p$, $P(X{=}0) = 1-p$, $E = p$\\
+\textbf{Binomial} ($n > 1$):
+$$\boxed{P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}}$$
+$$\boxed{E(X) = n \cdot p}$$
+$\binom{n}{k}$ = Anzahl Bitfolgen mit $k$ Einsen (alle gleich
+wahrscheinlich).
+\end{mainbox}
+
+\begin{mainbox}{Geometrische Verteilung}
+$X$ = Anzahl 0-Bits \emph{vor} dem ersten 1-Bit:
+$$\boxed{P(X = k) = (1-p)^k \cdot p}$$
+$$\boxed{E(X) = \frac{1-p}{p}}$$
+Anzahl \textbf{Versuche} bis inkl.\ erstem Erfolg $= X + 1$:\\
+$P(\text{Erfolg im } k\text{-ten Versuch}) = (1-p)^{k-1} p$,
+\ $E(X + 1) = \frac{1}{p}$
+\end{mainbox}
+
+\begin{subbox}{Herleitung $E$ geometrisch (Rekursion)}
+1.\ Bit ist 1 (W'keit $p$) $\Rightarrow X = 0$; sonst eine Null mehr
+und Neustart:
+\begin{align*}
+E(X) &= p \cdot 0 + (1-p)(1 + E(X))\\
+p\,E(X) &= 1 - p \ \Rightarrow \ E(X) = \tfrac{1-p}{p}
+\end{align*}
+\end{subbox}
+
+\begin{mainbox}{Hypergeometrische Verteilung}
+Ziehen \emph{ohne Zurücklegen}: $n$ aus $M$ 0-Bits und $N$ 1-Bits,
+$X$ = Anzahl gezogener 1-Bits:
+$$\boxed{P(X = x) = \frac{\binom{N}{x}\binom{M}{n-x}}{\binom{M+N}{n}}}$$
+$$\boxed{E(X) = n \cdot \frac{N}{M+N}}$$
+(gleich wie Binomial mit $p = \frac{N}{M+N}$; $P = 0$, falls zu wenige
+0- oder 1-Bits)
+\end{mainbox}
+
+\begin{mainbox}{Poissonverteilung $\text{Poi}(\mu)$}
+Seltene Ereignisse mit \textbf{konstanter Rate} $\mu$ pro fester
+Zeit/Menge:
+$$\boxed{P(X = x) = \frac{\mu^x}{x!} e^{-\mu}}, \quad
+\boxed{E(X) = \mu}$$
+Grenzfall der Binomialverteilung: Zeit in $n$ Abschnitte,
+$p = \frac{\mu}{n}$, $n \to \infty$ (nutzt
+$(1 - \frac{\mu}{n})^n \to e^{-\mu}$).\\
+Anderes Intervall $\Rightarrow$ Rate skalieren (2 Monate: $2\mu$).
+\end{mainbox}
+
+\begin{subbox}{Welche Verteilung? (Denkprozess)}
+\begin{enumerate}
+    \item Feste Anzahl $n$ unabh.\ Versuche, zähle Erfolge
+          $\to$ \textbf{Binomial}
+    \item Wiederholen \emph{bis} erster Erfolg $\to$ \textbf{Geometrisch}
+    \item Stichprobe aus endlicher Menge, ohne Zurücklegen
+          $\to$ \textbf{Hypergeometrisch}
+    \item Nur mittlere Rate pro Zeit/Intervall gegeben
+          $\to$ \textbf{Poisson}
+\end{enumerate}
+\end{subbox}
+
+\subsection{Typische Aufgaben}
+
+\begin{subbox}{Binomial: Spam-Filter ($n = 10$, $p = 0.8$)}
+$P(X = 8) = \binom{10}{8} 0.8^8\, 0.2^2 \approx 30.2\%$\\
+$P(X \ge 9) = \binom{10}{9} 0.8^9\, 0.2 + 0.8^{10} \approx 37.6\%$\\
+$E(X) = 10 \cdot 0.8 = 8$
+\end{subbox}
+
+\begin{subbox}{Binomial: weitere}
+\textbf{50 Server}, Ausfall $0.02$:
+$P(X{=}2) = \binom{50}{2} 0.02^2\, 0.98^{48} \approx 18.6\%$,\\
+$P(X \le 1) = 0.98^{50} + 50 \cdot 0.02 \cdot 0.98^{49} \approx 73.6\%$,
+$E = 1$\\
+\textbf{20 Pakete}, Erfolg $0.95$: $P(X{=}18) \approx 18.9\%$,
+$P(X \ge 19) \approx 73.6\%$, $E = 19$\\
+\textbf{Brute-Force} $n = 10^4$, $p = 10^{-4}$:
+$P(X{=}2) = \binom{10^4}{2} p^2 (1-p)^{9998} \approx 18.4\%$,\\
+$P(X \ge 1) = 1 - 0.9999^{10^4} \approx 63.2\%$, $E = 1$
+\end{subbox}
+
+\begin{subbox}{Geometrisch: ``erst beim $k$-ten Versuch''}
+$\Rightarrow$ $X = k - 1$ Misserfolge vorher!
+\begin{itemize}
+    \item Paketfehler $0.1$, 3.\ Versuch:
+          $0.1^2 \cdot 0.9 = 0.9\%$; \ $E = \frac{1}{0.9} \approx 1.11$
+    \item Passwort $p = 0.02$, 5.\ Versuch:
+          $0.98^4 \cdot 0.02 \approx 1.85\%$; \ $E = 50$
+    \item Bugfix $p = 0.3$, Erfolg \emph{nach} 4 Fehlversuchen:
+          $0.7^4 \cdot 0.3 \approx 7.2\%$; \ $E \approx 3.33$
+    \item Pentest $p = 0.05$, 7.\ Versuch:
+          $0.95^6 \cdot 0.05 \approx 3.7\%$; \ $E = 20$
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Hypergeometrisch}
+\textbf{1000 Zeilen, 50 fehlerhaft, 20 geprüft:}
+$$P(X{=}3) = \frac{\binom{50}{3}\binom{950}{17}}{\binom{1000}{20}}
+\approx 5.9\%$$
+$P(X \ge 1) = 1 - \binom{950}{20} / \binom{1000}{20} \approx 64.5\%$\\
+\textbf{5000 Zellen, 200 defekt, 50 getestet:}
+$P(X{=}5) \approx 3.4\%$, $P(X{=}0) \approx 12.9\%$\\
+\textbf{10\,000 PW, 500 schwach, 100 gewählt:}
+$$P(X \ge 10) = 1 - \sum_{i=0}^{9}
+\frac{\binom{500}{i}\binom{9500}{100-i}}{\binom{10000}{100}} \approx 2.8\%$$
+$P(X{=}5) \approx 18.1\%$\\
+\textbf{500 Tests, 100 kritisch, 50 gewählt:}
+$P(X \ge 20) \approx 0.05\%$, $P(X{=}15) \approx 2.7\%$
+\end{subbox}
+
+\begin{subbox}{Poisson}
+\textbf{Webserver} $\mu = 5$/s:
+$P(X{=}7) = \frac{5^7}{7!} e^{-5} \approx 10.4\%$,\\
+$P(X \le 3) = \sum_{i=0}^{3} \frac{5^i}{i!} e^{-5} \approx 26.5\%$\\
+\textbf{CPU} $\mu = 2$/Tag: $P(X{=}0) = e^{-2} \approx 13.5\%$,
+$P(X > 3) = 1 - P(X \le 3) \approx 14.3\%$\\
+\textbf{Router} $\mu = 1.5$/h: $P(X{=}2) \approx 25.1\%$,
+$P(X{=}0) \approx 22.3\%$\\
+\textbf{DDoS} $\mu = 3$/Monat: $P(X{=}5) \approx 10.1\%$;\\
+2 Monate $\Rightarrow \mu = 6$:
+$P(X \le 4) = \sum_{i=0}^{4} \frac{6^i}{i!} e^{-6} \approx 28.5\%$
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Geometrisch: $X$ zählt \emph{Misserfolge}, nicht Versuche
+          $\Rightarrow$ ``$k$-ter Versuch'' heisst $P(X = k-1)$;
+          mittlere Versuche $= \frac{1}{p}$, nicht $\frac{1-p}{p}$.
+    \item ``mindestens'' $\Rightarrow$ Gegenereignis
+          $1 - P(X < k)$ (weniger Terme).
+    \item Mit vs.\ ohne Zurücklegen: Binomial vs.\ Hypergeometrisch
+          (bei grosser Menge fast gleich).
+    \item Poisson: $\mu$ an Intervalllänge anpassen.
+    \item $E(X)$ muss kein möglicher Wert sein ($1.5$ Köpfe).
+    \item $E(X + Y) = E(X) + E(Y)$ braucht \emph{keine} Unabhängigkeit.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung Verteilungen}
+\renewcommand*{\arraystretch}{1.6}
+\begin{tabular}{@{}lll@{}}
+\textbf{Vert.} & $P(X = k)$ & $E(X)$ \\ \hline
+Binomial & $\binom{n}{k} p^k q^{n-k}$ & $np$ \\
+Geom. & $q^k p$ & $\frac{q}{p}$ \\
+Hypergeo. & $\binom{N}{k}\binom{M}{n-k} / \binom{M+N}{n}$ & $\frac{nN}{M+N}$ \\
+Poisson & $\frac{\mu^k}{k!} e^{-\mu}$ & $\mu$
+\end{tabular}\\
+($q = 1 - p$)
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

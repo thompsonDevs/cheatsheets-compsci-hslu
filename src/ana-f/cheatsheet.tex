@@ -1223,6 +1223,167 @@ $10^{-3}$ & $9.2 \cdot 10^{-4}$ & $\approx 10^{-13}$ \\
 \end{subbox}
 
 % ============================================================================
+% SECTION 7: GEWÖHNLICHE DIFFERENTIALGLEICHUNGEN II
+% ============================================================================
+\section{Gewöhnliche Differentialgleichungen II}
+
+\subsection{Homogene DGL 2.\ Ordnung, konstante Koeffizienten}
+
+\begin{mainbox}{Form \& charakteristische Gleichung}
+$$\boxed{ay''(x) + by'(x) + cy(x) = 0}, \quad a, b, c \in \R$$
+Anwendung: freie (un)gedämpfte Schwingung, $a > 0$ Masse, $b > 0$
+Dämpfung ($b = 0$: ungedämpft), $c > 0$ Federkonstante.\\
+\textbf{Ansatz} $y = e^{\lambda x}$, $y' = \lambda e^{\lambda x}$,
+$y'' = \lambda^2 e^{\lambda x}$ einsetzen, durch $e^{\lambda x} \ne 0$
+teilen:
+$$\boxed{a\lambda^2 + b\lambda + c = 0}$$
+$$\lambda_{1/2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+\end{mainbox}
+
+\begin{mainbox}{Fallunterscheidung (Diskriminante $D = b^2 - 4ac$)}
+\textbf{$D > 0$: Kriechfall} \ ($\lambda_1 \ne \lambda_2 \in \R$)
+$$y(x) = C_1 e^{\lambda_1 x} + C_2 e^{\lambda_2 x}$$
+\textbf{$D = 0$: aperiodischer Grenzfall} \ ($\lambda_1 = \lambda_2 =
+\lambda$)
+$$y(x) = (C_1 x + C_2)\, e^{\lambda x}$$
+\textbf{$D < 0$: Schwingfall} \ ($\lambda_{1/2} = \alpha \pm i\omega$)
+$$y(x) = e^{\alpha x}\big(C_1\cos(\omega x) + C_2\sin(\omega x)\big)$$
+mit $\alpha = -\frac{b}{2a}$, $\omega = \frac{\sqrt{4ac - b^2}}{2a}$.
+\end{mainbox}
+
+\begin{subbox}{Merkregel}
+$e^{\alpha x}$ = Abklingen (Dämpfung), $\cos/\sin(\omega x)$ = Schwingen
+mit Kreisfrequenz $\omega$.\\
+\textbf{Fundamentalbasis:} 2 linear unabhängige Lösungen, z.B.\
+$\{e^{\lambda_1 x}, e^{\lambda_2 x}\}$, $\{e^{\lambda x}, xe^{\lambda
+x}\}$, $\{e^{\alpha x}\cos\omega x, e^{\alpha x}\sin\omega x\}$;
+allgemeine Lösung = Linearkombination.\\
+Ungedämpft ($b = 0$): $\alpha = 0$ $\Rightarrow$ reine Schwingung.
+\end{subbox}
+
+\begin{subbox}{Schwingfall: von komplex zu reell}
+$C_1 e^{(\alpha + i\omega)x} + C_2 e^{(\alpha - i\omega)x}
+= e^{\alpha x}\big(C_1 e^{i\omega x} + C_2 e^{-i\omega x}\big)$.
+Mit $C_{1/2} = \frac{C_3 \mp iC_4}{2}$ und Euler
+($\cos = \frac{e^{i\cdot} + e^{-i\cdot}}{2}$,
+$\sin = \frac{e^{i\cdot} - e^{-i\cdot}}{2i}$):
+$$= e^{\alpha x}\big(C_3\cos(\omega x) + C_4\sin(\omega x)\big)$$
+\end{subbox}
+
+\begin{mainbox}{AWP: spezielle Lösung}
+Zwei Bedingungen, meist $y(0) = y_0$, $y'(0) = v_0$:
+\begin{enumerate}
+    \item $\lambda_{1/2}$ bestimmen $\to$ Fall $\to$ allgemeine Lösung
+    \item $y'(x)$ bilden (Produktregel!)
+    \item $x = 0$ in $y$ und $y'$ einsetzen $\to$ LGS für $C_1, C_2$
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Kriechfall: $2y'' + 52y' + 50y = 0$}
+$y(0) = 24$, $y'(0) = 0$.
+$\lambda_{1/2} = \frac{-52 \pm \sqrt{2304}}{4} = -13 \pm 12$
+$\Rightarrow$ $\lambda_1 = -1$, $\lambda_2 = -25$
+\begin{align*}
+y &= C_1e^{-x} + C_2e^{-25x}\\
+y(0) &= C_1 + C_2 = 24\\
+y'(0) &= -C_1 - 25C_2 = 0
+\end{align*}
+$\Rightarrow -24C_2 = 24$, $C_2 = -1$, $C_1 = 25$:
+$$y(x) = 25e^{-x} - e^{-25x}$$
+\end{subbox}
+
+\begin{subbox}{Schwingfall: $2y'' + 12y' + 50y = 0$}
+$y(0) = 24$, $y'(0) = 0$.
+$\lambda_{1/2} = \frac{-12 \pm \sqrt{-256}}{4} = -3 \pm 4i$
+\begin{align*}
+y &= e^{-3x}(C_1\cos 4x + C_2\sin 4x)\\
+y' &= -3e^{-3x}(C_1\cos 4x + C_2\sin 4x)\\
+&\quad + e^{-3x}(-4C_1\sin 4x + 4C_2\cos 4x)\\
+y(0) &= C_1 = 24\\
+y'(0) &= -3C_1 + 4C_2 = 0 \Rightarrow C_2 = 18
+\end{align*}
+$$y(x) = e^{-3x}\big(24\cos 4x + 18\sin 4x\big)$$
+\end{subbox}
+
+\begin{subbox}{Grenzfall: $2y'' + 20y' + 50y = 0$}
+$y(0) = 24$, $y'(0) = 0$.
+$\lambda_{1/2} = \frac{-20 \pm \sqrt{0}}{4} = -5$ (doppelt)\\
+Herleitung $xe^{\lambda x}$: Variation der Konstanten, $y = k(x)e^{\lambda
+x}$.
+\begin{align*}
+y &= (C_1x + C_2)e^{-5x}\\
+y' &= C_1e^{-5x} - 5(C_1x + C_2)e^{-5x}\\
+y(0) &= C_2 = 24\\
+y'(0) &= C_1 - 5C_2 = 0 \Rightarrow C_1 = 120
+\end{align*}
+$$y(x) = (120x + 24)e^{-5x}$$
+\end{subbox}
+
+\begin{subbox}{Vergleich der drei Fälle}
+Gleiche Anfangswerte ($y(0) = 24$, $y'(0) = 0$), nur Dämpfung $b$
+variiert:
+\begin{itemize}
+    \item \textbf{Schwingfall} ($b = 12$): schwingt um 0, Amplitude
+          klingt mit $e^{-3x}$ ab
+    \item \textbf{Grenzfall} ($b = 20$): kehrt am \emph{schnellsten}
+          ohne Überschwingen zurück
+    \item \textbf{Kriechfall} ($b = 52$): starke Dämpfung, kriecht
+          langsam gegen 0
+\end{itemize}
+\end{subbox}
+
+\subsection{Fadenpendel \& DGL-Systeme}
+
+\begin{mainbox}{Fadenpendel}
+Auslenkwinkel $\varphi(t)$, Fadenlänge $L$, Erdbeschleunigung $g$:
+$$\ddot{\varphi}(t) + \frac{g}{L}\sin\big(\varphi(t)\big) = 0$$
+(nicht linear $\Rightarrow$ kein Exponentialansatz).\\
+\textbf{Kleine Amplituden}, $\sin\varphi \approx \varphi$:
+$$\ddot{\varphi} + \frac{g}{L}\varphi = 0$$
+$\Rightarrow$ ungedämpfter Schwingfall, $\omega = \sqrt{g/L}$; mit
+$\dot{\varphi}(0) = 0$: $\varphi(t) = \varphi_0\cos(\omega t)$,
+Periode $T = 2\pi\sqrt{L/g}$.
+\end{mainbox}
+
+\begin{mainbox}{DGL 2.\ Ordnung $\to$ System 1.\ Ordnung}
+Für numerische Verfahren: Zustandsvektor aus Funktion und Ableitung:
+$$z = \begin{pmatrix} z_0 \\ z_1 \end{pmatrix}
+= \begin{pmatrix} \varphi \\ \dot{\varphi} \end{pmatrix},
+\quad
+\dot{z} = \begin{pmatrix} z_1 \\ -\frac{g}{L}\sin z_0 \end{pmatrix}$$
+Euler/RK4 wie bisher, aber mit \textbf{Vektoren}:
+$z_{k+1} = z_k + h \cdot f(t_k, z_k)$, Startwert
+$z(0) = (\varphi(0), \dot{\varphi}(0))^T$.
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: lineare homogene DGL 2.\ Ordnung}
+\begin{enumerate}
+    \item $a, b, c$ ablesen (Form $ay'' + by' + cy = 0$).
+    \item Charakteristische Gleichung $a\lambda^2 + b\lambda + c = 0$
+          lösen.
+    \item Vorzeichen von $D$ $\to$ Kriech-, Grenz- oder Schwingfall.
+    \item Passende allgemeine Lösung hinschreiben.
+    \item AWP: $y'$ bilden, $x = 0$ einsetzen, LGS lösen.
+    \item Probe: $y(0)$, $y'(0)$ prüfen.
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Grenzfall: Faktor $x$ bei $C_1$ nicht vergessen -- sonst nur
+          \emph{eine} Lösung statt Fundamentalbasis.
+    \item Schwingfall: $\omega$ ist der Imaginärteil \emph{ohne} $i$;
+          $\alpha$ (Realteil) gehört in $e^{\alpha x}$.
+    \item $\lambda$ durch $2a$ teilen, nicht durch 2 (hier $a = 2$!).
+    \item $y'$ mit Produktregel ableiten, bevor $x = 0$ eingesetzt wird.
+    \item Fadenpendel: $\sin\varphi \approx \varphi$ nur für kleine
+          Winkel; sonst numerisch lösen.
+    \item Euler bei ungedämpfter Schwingung: Amplitude wächst
+          künstlich $\Rightarrow$ kleines $h$ oder RK4.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

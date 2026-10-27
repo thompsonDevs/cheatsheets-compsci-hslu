@@ -259,3 +259,72 @@ Lückentext	iteo	Wirtschaftlichkeit im ITSM: {{c1::Effektivität}} = Lieferung d
 Lückentext	iteo	Ein IT-{{c1::Service}} ist der Wert für den Kunden; ein IT-{{c2::Prozess}} ist die strukturierte, wiederholbare Abfolge von Aktivitäten, die ihn erstellt oder unterstützt.		iteo::it-service-management
 Lückentext	iteo	{{c1::Incident Management}} stellt nach einem Vorfall den Normalbetrieb wieder her; {{c2::Problem Management}} beseitigt die Ursache und verhindert zukünftige Vorfälle.		iteo::it-service-management
 Lückentext	iteo	Prozesslandkarte – drei Ebenen: {{c1::Managementprozesse}}, {{c2::Kernprozesse}}, {{c3::Supportprozesse}}.		iteo::it-service-management
+Standard	iteo	Nenne die 4 Zonen eines RZ-Netzwerks von aussen nach innen.	Provider → Grenze → DMZ → lokales Netzwerk (LAN).	iteo::netzwerke-im-rz
+Standard	iteo	Welche Komponenten gehören zur «Grenze» eines RZ-Netzwerks?	Router, Firewall, IDP (IDS + IPS) sowie deren Redundanzen.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Provider-Kriterien sind schwer zu erfassen und oft in AGBs versteckt?	Vertrauen, Geschichte/Reputation, Verträge, Support, Verfügbarkeiten, Netzwerk-Management.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist der Unterschied zwischen ADSL/VDSL und SDSL?	ADSL/VDSL sind asymmetrisch (Uplink typ. ca. 10 % vom Downstream), SDSL ist symmetrisch (Upstream = Downstream).	iteo::netzwerke-im-rz
+Standard	iteo	Warum ist SDSL für ein RZ interessanter als ADSL/VDSL?	Weil ein RZ Daten anbietet und daher viel Upload braucht – SDSL hat Upstream = Downstream.	iteo::netzwerke-im-rz
+Standard	iteo	Wovon hängt die Leistung von Kupfer-Anschlüssen (xDSL) und Richtfunk ab?	Von der Leitungslänge bzw. Distanz.	iteo::netzwerke-im-rz
+Standard	iteo	Wofür wird Richtfunk als Provider-Anschluss eingesetzt?	Für abgelegene, unerschlossene Gebiete (bis ca. 1–200 Mbit/s, distanzabhängig).	iteo::netzwerke-im-rz
+Standard	iteo	Welche Adressumsetzung macht ein Router an der Grenze und wie heisst sie?	Umsetzung öffentlicher in private IP-Adressen: NAT/PAT (Network/Port Address Translation).	iteo::netzwerke-im-rz
+Standard	iteo	Nenne Aufgaben eines Routers an der RZ-Grenze.	IP-Pakete weiterleiten, NAT/PAT, Netze bzw. mehrere Provider verbinden, optimale Weiterleitung bei redundanten Leitungen / Fallback starten, QoS durch protokollspezifische Weiterleitung, VPN-Endpunkt, Anpassung an versch. Netztechniken.	iteo::netzwerke-im-rz
+Standard	iteo	Wo ist ein Router im RZ oft integriert?	In der Firewall oder in Layer-3-Switches.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Filterarten kann eine Firewall einsetzen?	Paketfilter, Stateful Inspection, Proxy- und Content-Filter.	iteo::netzwerke-im-rz
+Standard	iteo	Auf welchen OSI-Schichten kann eine Firewall arbeiten?	Auf allen OSI-Schichten.	iteo::netzwerke-im-rz
+Standard	iteo	Warum ist eine Firewall allein kein vollständiger Schutz?	Sie ist nur ein Baustein des Sicherheitskonzepts und muss mit Endpoint-Management und Threat-Analyse zusammenarbeiten.	iteo::netzwerke-im-rz
+Standard	iteo	Wie kann sich ein VPN-Benutzer an einer Firewall authentifizieren?	Lokal, über RADIUS oder über Active Directory (AD).	iteo::netzwerke-im-rz
+Standard	iteo	Was ist der Unterschied zwischen IDS und IPS?	IDS (Intrusion Detection System) erkennt Eindringversuche, IPS (Intrusion Prevention System) verhindert sie aktiv.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Angriffe soll ein IDP erkennen?	Mustererkennung bekannter Angriffe, DoS, Fakes, Portscans, IP-Spoofing.	iteo::netzwerke-im-rz
+Standard	iteo	Warum ist ein IDP oft ein separates Gerät?	Weil die Funktion sehr rechenintensiv ist.	iteo::netzwerke-im-rz
+Standard	iteo	Welches Problem haben IDP-Systeme bei Netzwerken ≥ 10 Gbit/s?	Sie sind an der Leistungsgrenze: Pakete müssen ev. verworfen werden, die Überprüfung wird lückenhaft (AI ist hier Forschungsfokus).	iteo::netzwerke-im-rz
+Standard	iteo	Was ist eine DMZ?	Demilitarized Zone: geschützter Netzbereich, in dem bestimmte Zugriffe von aussen erlaubt werden (z.B. WWW, Mail, FTP), getrennt vom internen LAN.	iteo::netzwerke-im-rz
+Standard	iteo	Warum ist eine DMZ mit 2 Firewalls (DMZ Model 2) sicherer?	Man kann verschiedene Hersteller/Gerätetypen einsetzen → 2 versch. Betriebssysteme und Angriffsvektoren in Serie; ein Angreifer muss beide überwinden.	iteo::netzwerke-im-rz
+Standard	iteo	Welche zwei Varianten der Provider-Redundanz gibt es?	1 Provider mit 2 Zugängen oder 2 Provider mit je 1 Zugang.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist bei redundanten Provider-Anschlüssen physisch zu beachten?	Getrennte Wege/Trassen (2 Hauseinführungen), ev. verschiedene Medien – sonst fallen beide Leitungen gemeinsam aus (z.B. Bagger).	iteo::netzwerke-im-rz
+Standard	iteo	Was braucht es neben zwei Leitungen zusätzlich für eine funktionierende Anschluss-Redundanz?	Eine Ausfallüberwachung (verbundene Router), die bei Ausfall umschaltet; optional Loadbalancing.	iteo::netzwerke-im-rz
+Standard	iteo	Was bedeutet TOR (Top Of Rack)?	Jedes Rack hat eigene Switches, die Server werden im Rack angeschlossen.	iteo::netzwerke-im-rz
+Standard	iteo	Was bedeutet EOR (End Of Row)?	Die Switches stehen am Ende der Rack-Reihe, die Racks sind nur über Patchpanels damit verbunden.	iteo::netzwerke-im-rz
+Standard	iteo	Vor- und Nachteile von TOR gegenüber EOR?	TOR: kurze Verkabelung im Rack, einfach rackweise erweiterbar; aber viele Geräte, oft ungenutzte freie Ports, Switch-Höheneinheiten in jedem Rack.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Funktion hat die Peering-/Peripherie-Ebene im RZ-LAN?	Anschluss nach aussen: externe Verbindungen, ISP, VPN-Endpunkte, Firewalls, Router.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Funktion hat die Backbone-/Spine-/Core-Ebene?	Rückgrat des RZ: zentrale Verbindungen innerhalb des RZ, auch RZ-zu-RZ.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Funktion hat der Aggregation Layer in grösseren RZ?	Direkte Verbindungen von Serverfarmen und Verbindungen innerhalb von Rackreihen.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Funktion hat die Leaf-/Access-Ebene?	Zugangspunkt für physische Server und Peripherie, Abgänge aufs Gebäude-LAN.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Ziele verfolgt das Facebook Data Center Fabric?	Hoher Datenverkehr zwischen Servern, einfache/flexible Erweiterbarkeit, hohe Redundanz (auch im Aggregation Layer).	iteo::netzwerke-im-rz
+Standard	iteo	Wie ist ein Server-Pod im Facebook DC Fabric aufgebaut?	24 Racks mit je 2 Switches.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Vorteile hat ein Chassis-Core-Switch?	Einschübe mit Backplane-Verbindungen, vereinfachtes Management, zentrale Netzteile, nach-/umrüstbar, diverse Technologien (Glas/Kupfer).	iteo::netzwerke-im-rz
+Standard	iteo	Welcher Kostenblock ist im RZ (ca. 1000 Server) der grösste?	Die Server mit ca. 51 %.	iteo::netzwerke-im-rz
+Standard	iteo	Was fällt bei Transceiver-Modulen (SFP/QSFP) preislich auf?	Original-Herstellermodule sind sehr teuer (100G-LR4 ca. 30k USD), kompatible Drittanbieter-Module kosten nur einen Bruchteil (ca. 100–800 CHF).	iteo::netzwerke-im-rz
+Standard	iteo	Was ist ein VLAN?	Virtual LAN: Bildung logisch getrennter Netze auf gemeinsamer Hardware.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist ein Access Port (VLAN)?	Ein Switch-Port, der normalerweise genau 1 VLAN führt (untagged, für Endgeräte).	iteo::netzwerke-im-rz
+Standard	iteo	Was ist ein Trunk (VLAN)?	Eine Verbindung, die mehrere VLANs parallel überträgt – immer tagged.	iteo::netzwerke-im-rz
+Standard	iteo	Wie werden Frames bei VLAN-Trunks unterschieden?	Durch einen VLAN-Tag im Ethernet-Frame (tagged).	iteo::netzwerke-im-rz
+Standard	iteo	Was macht DNS?	Domain Name System: Zuordnung von DNS-Namen zu IP-Adressen.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist IPAM?	IP Address Management: Verwaltung der IP-Adressen (MS-Service oder separate Tools).	iteo::netzwerke-im-rz
+Standard	iteo	Was macht DHCP?	Dynamic Host Configuration Protocol: dynamische oder reservierte Zuweisung von IP-Adressen und weiteren Eigenschaften an TCP/IP-Clients.	iteo::netzwerke-im-rz
+Standard	iteo	Was macht NAC/NAP?	Network Access Control/Protection: qualifiziert Clients anhand von User, OS, Version, Virenschutz usw. und weist sie den erlaubten Netzen oder einer Quarantäne-Zone zu.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist MPLS?	Multiprotocol Label Switching: VPN-ähnliche Verbindung zusammengehöriger Netze über weite Strecken, unabhängig von IP-Segmenten; der Provider vermittelt Pakete anhand von Labels.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Grössen beschreibt QoS (Quality of Service)?	Latenz, Jitter, Paketverlust, Durchsatz.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist CoS (Class of Service)?	Einteilung des Verkehrs in Klassen mit reservierten Bandbreiten.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist ein Management-Netzwerk?	Ein vom restlichen Netz physisch getrenntes LAN, das nur für das Management der Geräte genutzt wird.	iteo::netzwerke-im-rz
+Standard	iteo	Wie wird der Zugriff auf ein Management-Netzwerk geschützt?	Beschränkter Zugriff (dedizierte Stationen und Benutzer), oft nur via Jump-Host mit starkem Login und Logging.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist Systemmanagement (im Gegensatz zum Netzwerkmanagement)?	Monitoring aller Betriebsparameter und der Konfiguration der Systeme (siehe ITIL).	iteo::netzwerke-im-rz
+Standard	iteo	Welche Nachteile haben klassische (nicht-SDN) Netzwerke?	Statisch (Änderungen via Change-Management, auch bei virtuellen Devices), Management komplex und proprietär, versch. Hersteller pro Layer.	iteo::netzwerke-im-rz
+Standard	iteo	Aus welchen zwei Teilen besteht ein klassisches Netzwerk-Device (z.B. Router)?	Software Control (Management: CLI, SNMP; Routing-Protokolle: OSPF, BGP, RIP) und Hardware Datapath (pro Paket: Lookup, Switch, Buffer).	iteo::netzwerke-im-rz
+Standard	iteo	Wie behandelt ein Netzwerk-Device die Pakete eines Datenflusses?	Nur das erste Paket einer Kommunikation wird analysiert und konfiguriert; gleiche Folgepakete leitet der Hardware Datapath direkt an dieselben Ports weiter.	iteo::netzwerke-im-rz
+Standard	iteo	Wozu dienen Buffer in Netzwerk-Devices?	Um zeitliche Aspekte (Timing, Lastspitzen) so weit als möglich zu lösen.	iteo::netzwerke-im-rz
+Standard	iteo	Was ist die Kernidee von SDN?	Software Defined Networking: Entkopplung von Control Plane und Data Plane – ein zentraler Controller steuert einfache Forwarder.	iteo::netzwerke-im-rz
+Standard	iteo	Nenne die 3 Schichten der SDN-Grundstruktur.	Application (Devices, Bandbreite, Services, Netzstruktur) → Controller (Software/Serverdienst) → Forwarders (Hardware Datapath mit einfacher lokaler SW).	iteo::netzwerke-im-rz
+Standard	iteo	Nenne Protokolle zwischen SDN-Controller und Forwardern.	OpenFlow, ForCES, PCEP, SNMP, NETCONF.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Vorteile bietet SDN?	Netzwerkeigenschaften dynamisch anpassbar (an Protokolle/QoS und Applikationen), höhere Bandbreiten (≥ 100 Gbit).	iteo::netzwerke-im-rz
+Standard	iteo	Was bestimmt im SDN-Flowspace die Aktion des Forwarders?	Der Header des Datenpakets.	iteo::netzwerke-im-rz
+Standard	iteo	Nenne die wenigen möglichen Aktionen eines SDN-Forwarders.	Plumbing (forward to port(s)), Control (forward to controller), Routing zwischen Flowspaces (Header umschreiben), Bandwidth Isolation.	iteo::netzwerke-im-rz
+Standard	iteo	Was hat bei OpenFlow jeder Forwarder?	Eine Flow Table, deren Einträge Header-Felder auf Aktionen abbilden.	iteo::netzwerke-im-rz
+Lückentext	iteo	IDS + IPS = {{c1::IDP}}		iteo::netzwerke-im-rz
+Lückentext	iteo	FCAPS (ISO-Netzwerkmanagement): {{c1::Fault}}, {{c2::Configuration}}, {{c3::Accounting}}, {{c4::Performance}}, {{c5::Security}} Management		iteo::netzwerke-im-rz
+Lückentext	iteo	OAM&amp;P = {{c1::Operation}}, {{c2::Administration}}, {{c3::Maintenance}} &amp; {{c4::Provisioning}}		iteo::netzwerke-im-rz
+Lückentext	iteo	Kostenverteilung RZ (ca. 1000 Server): Server {{c1::51 %}}, Power Distribution &amp; Cooling {{c2::19 %}}, Power {{c3::15 %}}, Networking Equipment {{c4::11 %}}, Other Infrastructure {{c5::4 %}}		iteo::netzwerke-im-rz
+Lückentext	iteo	In der RZ-Kostenrechnung werden Server über {{c1::3}} Jahre und Infrastruktur über {{c2::10}} Jahre amortisiert.		iteo::netzwerke-im-rz
+Lückentext	iteo	Speed-Bereiche: ADSL {{c1::2–16 Mbit/s}}, VDSL {{c2::20–300 Mbit/s}}, SDSL {{c3::2–200 Mbit/s}}, Glasfaser {{c4::10 Mbit/s – 100 Gbit/s}}		iteo::netzwerke-im-rz
+Lückentext	iteo	Klassische RZ-LAN-Ebenen von aussen nach innen: {{c1::Peering}} → {{c2::Core/Spine}} → {{c3::Aggregation}} → {{c4::Access/Leaf}}		iteo::netzwerke-im-rz
+Lückentext	iteo	Bei ADSL/VDSL beträgt der Uplink typischerweise ca. {{c1::10 %}} des Downstreams.		iteo::netzwerke-im-rz
+Lückentext	iteo	Ein Glasfaser-Hausanschluss (FTTH) endet in der {{c1::OTO}}-Dose.		iteo::netzwerke-im-rz

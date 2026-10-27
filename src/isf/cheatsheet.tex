@@ -1328,6 +1328,337 @@ Akzeptieren) $\to$ Restrisiko bewerten $\to$ iterieren.
 \end{subbox}
 
 % ============================================================================
+% SECTION 5: VULNERABILITIES
+% ============================================================================
+\section{Vulnerabilities}
+
+\subsection{Bug, Weakness, Vulnerability}
+
+\begin{mainbox}{Bug vs.\ Vulnerability}
+\textbf{Bug:} System verhält sich nicht so, wie es soll.
+\begin{itemize}
+    \item \emph{Compile-Zeit:} lexikalische \& Syntax-Fehler (fehlendes
+          \texttt{;}) -- vom Compiler entdeckt.
+    \item \emph{Laufzeit:} semantische, logische, Design-Fehler
+          (\texttt{"Hello wolrd!"}) -- \emph{nicht} entdeckt.
+\end{itemize}
+\textbf{Vulnerability:} ein oder mehrere Bugs, die einem Angreifer die
+Gelegenheit geben, die Software zu missbrauchen, um
+\textbf{Sicherheitsziele zu verletzen}. Ohne \textbf{Exploit} kein
+Fehlverhalten.\\
+Typisch: Entwicklung $\sim$30 Bugs/1000 LOC, Produktion $<$1/1000 LOC
+(OS: Mio.\ LOC!).
+\end{mainbox}
+
+\begin{mainbox}{Weakness}
+Fehler (meist \emph{nicht-funktional}) in Architektur, Design,
+Programmierung oder Auslieferung, der Verhalten/Funktionalität verändert.
+Ursprung oft: Standards \& Abmachungen nicht befolgt.\\
+Einordnung (vgl.\ Risiko-Management): Threat $\to$ \textbf{Exploit}
+nutzt \textbf{Vulnerability} = ausnutzbare, exponierte
+\textbf{Weakness} eines Assets.
+\end{mainbox}
+
+\begin{mainbox}{Vulnerability \& Zero-Day}
+\textbf{Vulnerability:} Schwachstelle in Informationssystem,
+Sicherheitsverfahren, internen Kontrollen oder Implementierung, die ein
+Angreifer ausnutzen oder auslösen könnte.\\
+\textbf{Zero-Day-Vulnerability:} dem Hersteller bislang
+\emph{unbekannt}; bis zur Behebung ausnutzbar.
+\textbf{Zero-Day-Exploit:} Exploit, der einen Zero-Day ausnutzt.
+\end{mainbox}
+
+\begin{subbox}{Typen \& Ursachen}
+\textbf{Typen:} Hardware, Software (Overflow, Memory Corruption,
+SQL-Injection, XSS, Directory Traversal), Zero-Day, veraltet/ungepatcht,
+Network, Misconfiguration, Human, schwache/gestohlene Credentials,
+Access Control, unsichere API.\\
+\textbf{Ursachen:} Programmier- \& Designfehler, veraltete Software,
+unbeabsichtigte Interaktion von Komponenten, unzureichende Validierung,
+mangelhafte Fehlerbehandlung, Technologiewandel.\\
+Fast die Hälfte aller Vulnerabilities in \textbf{C-Code}.
+Bug-Behebung wird über den Lebenszyklus immer teurer.
+\end{subbox}
+
+\subsection{Kataloge: CVE, CWE, CVSS, KEV}
+
+\begin{mainbox}{CVE -- CWE -- CVSS -- KEV}
+\begin{itemize}
+    \item \textbf{CVE} (Common Vulnerabilities \& Exposures): öffentliches
+          Verzeichnis \emph{einzelner} Lücken, eindeutige Nr.\
+          \texttt{CVE-Jahr-Nr}.
+    \item \textbf{CWE} (Common Weakness Enumeration): Klassifikation
+          \emph{typischer} Schwachstellen-\emph{Arten} (Top 25).
+    \item \textbf{CVSS} (Common Vuln.\ Scoring System): Schweregrad
+          0--10.
+    \item \textbf{KEV} (Known Exploited Vulnerabilities, CISA): Lücken,
+          die \emph{aktiv} ausgenutzt werden.
+\end{itemize}
+Merkregel: CWE = Fehler\emph{klasse}, CVE = konkrete
+\emph{Instanz}.
+\end{mainbox}
+
+\begin{subbox}{Beispiele CWE / CVE}
+\begin{itemize}
+    \item CWE-20: Improper Input Validation
+    \item CWE-22: Path Traversal
+    \item CWE-1204: Weak Initialization Vector (WEP)
+    \item CVE-2001-0161: WEP; CVE-2017-13077: WPA/WPA2 (KRACK)
+    \item CVE-2017-5754: Meltdown
+\end{itemize}
+Quellen: cve.org, nvd.nist.gov, cwe.mitre.org, vuldb.com, cvedetails.com.
+\end{subbox}
+
+\begin{mainbox}{CVSS v3.1 Base Metrics}
+Gibt das \textbf{Schadenspotenzial} an (first.org, Rechner).\\
+\textbf{Exploitability:}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}l|X@{}}
+AV Attack Vector & Network / Adjacent / Local / Physical \\
+AC Attack Compl. & Low / High \\
+PR Privileges Req. & None / Low / High \\
+UI User Interaction & None / Required \\
+\end{tabularx}
+\textbf{Impact:}
+\begin{tabularx}{\linewidth}{@{}l|X@{}}
+S Scope & Unchanged / Changed \\
+C, I, A & None / Low / High \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{CVSS Skala}
+\renewcommand*{\arraystretch}{1.2}
+\begin{center}
+\begin{tabular}{l|l}
+None & 0.0 \\
+Low & 0.1--3.9 \\
+Medium & 4.0--6.9 \\
+High & 7.0--8.9 \\
+Critical & 9.0--10.0 \\
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\begin{subbox}{Beispiel CVE-2017-13077 (KRACK)}
+WPA/WPA2: Reinstallation des PTK-TK im 4-Way-Handshake; Angreifer in
+Funkreichweite kann Frames replayen/entschlüsseln/fälschen.\\
+\texttt{AV:A/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N}\\
+Exploitability 1.6, Impact 5.2 $\Rightarrow$ \textbf{6.8 Medium}\\
+(Adjacent: Funkreichweite nötig; AC High: Timing schwierig.)
+\end{subbox}
+
+\subsection{Life-Cycle \& Disclosure}
+
+\begin{mainbox}{Zeitachse einer Vulnerability}
+\begin{enumerate}
+    \item Erzeugung (Creation) -- \emph{Exposure beginnt}
+    \item Entdeckung (Discovery)
+    \item Exploit verfügbar -- \emph{Zero-Day Attack}
+    \item Hersteller entdeckt Vul
+    \item \textbf{Veröffentlichung (Disclosure)} -- ab hier
+          \emph{Follow-on Attacks}
+    \item Patch verfügbar (vom Hersteller)
+    \item Patch installiert -- \emph{Exposure endet}
+\end{enumerate}
+Phasen: \textbf{Pre-disclosure} (1--4) $\to$ \textbf{Post-disclosure}
+(5--6) $\to$ \textbf{Post-patch} (7).
+\end{mainbox}
+
+\begin{mainbox}{Evolution (OECD)}
+Vulnerability vorhanden (niemandem bekannt) $\to$ \textbf{Zero-Day}
+(jemandem bekannt, ohne Mitigation) $\to$
+\begin{itemize}
+    \item Mitigation möglich: \textbf{N-Day} -- Risiko reduziert
+    \item Mitigation unmöglich: \textbf{Forever-Day} -- Risiko bleibt
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Google Project Zero (GPZ)}
+Untersucht Zero-Days. Zeit von Bug-Report an Hersteller bis Patch
+öffentlich: \textbf{Mittelwert 61 Tage}. Danach Disclosure durch GPZ.
+\end{subbox}
+
+\begin{mainbox}{Disclosure-Möglichkeiten}
+Kritische Lücke entdeckt (z.B.\ iOS) -- Optionen:
+\begin{itemize}
+    \item keine Veröffentlichung / geheim halten
+    \item nur dem Hersteller mitteilen
+    \item an den Meistbietenden verkaufen
+    \item allen mitteilen (Full Disclosure)
+\end{itemize}
+\textbf{CVD} (Coordinated, früher \emph{Responsible} Disclosure):
+Veröffentlichung erst, wenn Verantwortliche \textbf{ausreichend Zeit
+zum Patchen} hatten.
+\end{mainbox}
+
+\begin{subbox}{Ethik \& Interessenkonflikte}
+Verantwortung bei Entdeckung \& Offenlegung; Privatsphäre \& Sicherheit;
+kommerzielle Interessen vs.\ öffentliche Sicherheit; Ausbeutung durch
+Angreifer; Umgang mit Zero-Days $\Rightarrow$ Gleichgewicht + klare
+Kommunikation.
+\begin{itemize}
+    \item \textbf{VW vs.\ Garcia:} RKE-Lücke (2012), VW verbietet
+          Publikation per Gericht (2013).
+    \item \textbf{Staaten} (VEP, Grayshift): Zero-Days zurückhalten für
+          Nachrichtendienst vs.\ offenlegen.
+\end{itemize}
+\end{subbox}
+
+\subsection{Priorisierung}
+
+\begin{mainbox}{Warum priorisieren?}
+\begin{itemize}
+    \item Firmen beheben monatlich nur \textbf{5--20\,\%} der bekannten
+          Vulnerabilities.
+    \item Nur \textbf{2--7\,\%} der veröffentlichten werden je
+          \emph{exploited}.
+\end{itemize}
+$\Rightarrow$ Nicht alles sofort fixbar \emph{und nötig}. CVSS $>$ 7
+allein trifft die tatsächlich ausgenutzten Lücken schlecht (Mengen
+überlappen nur teilweise).
+\end{mainbox}
+
+\begin{mainbox}{EPSS (Exploit Prediction Scoring System)}
+FIRST; ML-Modell sagt aus allen verfügbaren Infos die
+\textbf{Wahrscheinlichkeit} voraus, dass eine Vulnerability in den
+\textbf{nächsten 30 Tagen} exploited wird.\\
+CVSS = \emph{Schwere}, EPSS = \emph{Ausnutzungs-WSK}, KEV =
+\emph{tatsächlich} ausgenutzt.
+\end{mainbox}
+
+\begin{mainbox}{SSVC (Stakeholder-Specific Vuln.\ Categorization)}
+Pragmatischer \textbf{Entscheidungsbaum} (CISA):
+\begin{enumerate}
+    \item \textbf{Exploitation:} none / PoC / active
+    \item \textbf{Automatable:} no / yes
+    \item \textbf{Technical Impact:} partial / total
+    \item \textbf{Mission \& Well-being:} low / medium / high
+\end{enumerate}
+Ergebnis: \textbf{Track} (normaler Zyklus) $\to$ \textbf{Track*}
+(genauer beobachten) $\to$ \textbf{Attend} (priorisiert) $\to$
+\textbf{Act} (sofort). Act nur bei \emph{active} Exploitation.
+\end{mainbox}
+
+\begin{mainbox}{Vulnerabilities finden}
+\begin{itemize}
+    \item \textbf{SAST:} Quellcode ohne Ausführung (Semgrep, SonarQube,
+          CodeQL)
+    \item \textbf{DAST:} Angriffe auf laufende App (OWASP ZAP, Burp)
+    \item \textbf{SCA:} Libraries \& Dependencies (Snyk, Dependabot,
+          Trivy)
+    \item \textbf{Fuzzing:} zufällige Inputs $\to$ Crashes/Memory-Bugs
+          (AFL++, libFuzzer)
+    \item \textbf{Pentest / Ethical Hacking:} manuell, Bug-Bounty, Red
+          Team
+    \item \textbf{Vuln.-Scanner:} bekannte CVEs in Systemen/Netz (Nessus,
+          OpenVAS, Qualys)
+    \item \textbf{Code Review \& Threat Modelling:} Logik- \&
+          Designfehler (STRIDE, PASTA)
+\end{itemize}
+Hersteller-Rhythmus: z.B.\ Microsoft \textbf{Patch Tuesday}.
+\end{mainbox}
+
+\subsection{Kommunikation}
+
+\begin{mainbox}{ISO/IEC 29147 \& 30111}
+\textbf{29147} = Vulnerability \emph{Disclosure} (extern),
+\textbf{30111} = Vulnerability \emph{Handling} (intern).
+\begin{enumerate}
+    \item \textbf{VDP} Disclosure Policy entwickeln (+ Fähigkeit,
+          Infos zu empfangen/publizieren)
+    \item \textbf{Report} von externer Quelle empfangen
+          $\to$ Eingang bestätigen
+    \item (30111) verifizieren; nein $\to$ Reporter informieren
+    \item ja $\to$ Remediation entwickeln \& ausrollen $\to$
+          \textbf{Advisory} publizieren $\to$ Post-Remediation
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Report (VDR) \& Advisory (VDA): Pflichtinhalt}
+\textbf{VDR:}
+\begin{enumerate}
+    \item bevorzugter Kontakt-Mechanismus
+    \item sichere Kommunikation (Vertraulichkeit \& Authentizität)
+    \item Eingangsbestätigung innert \textbf{7 Kalendertagen}
+\end{enumerate}
+\textbf{VDA:}
+\begin{enumerate}
+    \item eindeutiger Identifier des Advisory
+    \item eindeutige Identifier der Vulnerabilities (CVE)
+    \item Datum Erstpublikation (+ Revision-History)
+    \item genug Info, damit Nutzer erkennt, ob betroffen
+    \item Authentizität des Advisory prüfbar
+    \item Authentizität nötiger Massnahmen prüfbar
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{security.txt (RFC 9116)}
+Standardisierte Kontaktinfos für Sicherheitsmeldungen, analog
+\texttt{robots.txt}, menschen- \& maschinenlesbar (IETF, 2022).\\
+Ort: \texttt{/.well-known/security.txt}\\
+Felder: \texttt{Contact}, \texttt{Encryption}, \texttt{Policy},
+\texttt{Acknowledgments}, \texttt{Hiring}, \texttt{Expires}.\\
+Bsp.: Google, SBB, Post, Threema, Siemens (CERT), ABB (Advisories).
+\end{mainbox}
+
+\begin{subbox}{Lieferketten}
+Sichtbarkeit in Lieferketten ist tief: eigene Produkte erben
+Vulnerabilities der Komponenten $\Rightarrow$ Cybersecurity ist auch
+\textbf{Kommunikation} (Advisories, SBOM, CVD mit Zulieferern).
+\end{subbox}
+
+\subsection{Übungen}
+
+\begin{subbox}{CVE-2017-5638 @ Equifax}
+\textbf{Lücke:} Apache Struts, öffentlich bekannt \& Alert verschickt --
+Equifax patchte das Kundensystem nicht.\\
+\textbf{Dauer:} \textbf{76 Tage} unentdeckt; unverschlüsselte
+Credentials gefunden, $\sim$48 DBs, massiv PII exfiltriert.\\
+\textbf{Kernproblem:} schwache IT-/Security-\textbf{Governance}: unklare
+Verantwortlichkeiten, abgelaufene Zertifikate im Monitoring, Legacy ohne
+Patch-Mgmt., IT \& Security in \textbf{Silos}.
+\end{subbox}
+
+\begin{subbox}{CVE-2024-3094 (xz / liblzma)}
+\textbf{Lücke:} Angreifer erschlich sich über Jahre Vertrauen,
+übernahm Maintainer-Rolle, Backdoor eingeschleust (Supply Chain).\\
+\textbf{xz:} Kompressions-Tool + Bibliothek liblzma, v.a.\ Linux.\\
+\textbf{Betroffen:} potenziell Millionen Linux-Systeme (via openSSH).
+\end{subbox}
+
+\begin{subbox}{CVE-2025-32711 (EchoLeak, M365 Copilot)}
+\textbf{Lücke:} \textbf{AI Zero-Click} -- Prompt-/Command-Injection:
+bösartige Prompts in Dokumenten/E-Mails, Copilot führt sie ohne
+Benutzerinteraktion aus.\\
+\textbf{Speziell:} keine Malware, kein Link, kein Klick; AV/Firewall
+versagen (natürliche Sprache statt Code); Vertrauensgrenzen falsch
+(versteckter Text \& Metadaten verarbeitet $\to$ Exfiltration); trotz
+Patch gefährdet, da Copilot default aktiv.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Bug $\neq$ Vulnerability: erst ausnutzbar + Sicherheitsziel
+          verletzt.
+    \item CWE (Klasse) $\neq$ CVE (Instanz).
+    \item CVSS misst \emph{Schwere}, nicht Ausnutzungs-WSK (EPSS) oder
+          tatsächliche Ausnutzung (KEV).
+    \item Zero-Day = Hersteller kennt sie nicht; N-Day = Mitigation
+          verfügbar.
+    \item Patch verfügbar $\neq$ installiert -- Exposure endet erst nach
+          Installation.
+    \item CVD $\neq$ Geheimhalten: Veröffentlichung kommt, nur verzögert.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+Bug $\to$ Weakness (CWE) $\to$ Vulnerability (CVE) $\to$ Exploit.
+Schwere per CVSS, WSK per EPSS, Realität per KEV; Priorisierung mit SSVC.
+Disclosure koordiniert (CVD) nach ISO 29147/30111, Kontakt via
+security.txt.
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

@@ -1141,6 +1141,217 @@ kontinuierliche Verbesserung (z.B. ML-Prognosen).
 \end{subbox}
 
 % ============================================================================
+% SECTION: IT SERVICE MANAGEMENT
+% ============================================================================
+\section{IT Service Management}
+
+\subsection{IT-Service}
+
+\begin{mainbox}{IT-Service}
+Dienstleistungen, die es Unternehmen ermöglichen, \textbf{technische Werkzeuge
+und Informationen} für betriebliche Prozesse und alltägliche Aufgaben zu nutzen.
+
+Besteht aus einem oder mehreren \textbf{Elementen}, die einen
+\textbf{Geschäftsprozess unterstützen}.\\
+Elemente = \textbf{Hardware, Software, Prozesse, Personen, Einrichtungen}.
+\end{mainbox}
+
+\begin{mainbox}{Eisberg-Modell}
+\begin{itemize}
+    \item \textbf{Spitze -- Kundensicht:} der IT-Service, ausgedrückt in
+          Kunden-Terminologie und \textbf{SLAs}
+    \item \textbf{Unter Wasser -- interne, technische Sicht:} Mittel \&
+          Mechanismen zur Erbringung: Desktop, Applikations-SW,
+          Betriebssystem/Plattform, IT-Infrastruktur, Netzwerk, Hardware
+\end{itemize}
+Bei Ausfall sieht der Kunde nur: ``Service geht nicht'' -- die IT sieht das
+komplexe, verteilte System dahinter.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Swisscom}
+Service-Portfolio aus Paketen \& Kombinationen: Handy-, Kinder-/Jugend-,
+Prepaid-, Internet-, TV-, Internet\,\&\,TV-, Festnetz-, Security-Abo.
+Optionen z.B.\ TV-Senderliste, Internet-Geschwindigkeit.
+\end{subbox}
+
+\begin{mainbox}{IT-Entwicklung vs.\ IT-Betrieb}
+\begin{itemize}
+    \item \textbf{Entwicklung:} Erstellen, Testen, Bereitstellen neuer
+          Lösungen/Funktionen gemäss Geschäftsanforderungen; arbeitet mit
+          Stakeholdern \& Testern. Heute oft nicht selbst entwickelt, sondern
+          \textbf{SaaS} oder \textbf{Open Source}.
+    \item \textbf{Betrieb (Operations):} Wartung, Überwachung, Support der
+          Infrastruktur; arbeitet mit Endbenutzern. Aufgaben: Sysadmin,
+          Automatisierung, Updates, Backup \& Restore, Netzwerk,
+          IT-Budgetierung.
+\end{itemize}
+\textbf{DevOps} schliesst die \emph{Effizienzlücke}: Zusammenarbeit,
+Kommunikation \& Integration von Dev und Ops.
+\end{mainbox}
+
+\begin{mainbox}{Wandel des IT-Fokus}
+\textbf{Früher:} technik-orientiert, feature-minded.\\
+\textbf{Heute:} kunden-orientiert, IT-Service-orientiert.\\
+\textbf{Treiber:} hohe Kundenanforderungen, Kostendruck, Outsourcing,
+Nachweis der Leistung.
+\end{mainbox}
+
+\begin{mainbox}{IT-Abteilung als Dienstleister}
+Neue Anforderungen:
+\begin{itemize}
+    \item Geschäftsanforderungen kontinuierlich erfassen \& auswerten
+    \item Services danach entwickeln, mit \textbf{messbarem Mehrwert}
+    \item im Problemfall schnell reagieren
+    \item flexibel auf Kundenwünsche reagieren
+    \item Kunden (MA) als \textbf{Partner}, nicht als Bittsteller
+\end{itemize}
+\textbf{Gemessen an:} Servicequalität; Leistung, Zuverlässigkeit,
+Funktionalität; Anpassungsfähigkeit \& Reaktionszeit bei neuen Services.
+\end{mainbox}
+
+\subsection{ITSM}
+
+\begin{mainbox}{IT Service Management (ITSM)}
+\textbf{Kernkonzept:} Die IT-Abteilung funktioniert als
+\textbf{Dienstleister}. Idee: strukturiertes Zusammenführen von
+IT-Dienstleistungen und Business-Prozessen.
+
+\textbf{Definition:} Aktivitäten einer Organisation zum
+\textbf{Entwerfen, Erstellen, Bereitstellen, Betreiben und Kontrollieren}
+der den Kunden angebotenen IT-Services -- d.h.\ Qualität \& Quantität der
+Services \textbf{planen, überwachen, steuern}. Dazu definiert ITSM eine Reihe
+von (Management-)Prozessen.
+\end{mainbox}
+
+\begin{mainbox}{4 Gestaltungskriterien für ITSM}
+\begin{itemize}
+    \item \textbf{Zielgerichtet:} an definierten Zielen ausgerichtet \& daran
+          gemessen
+    \item \textbf{Geschäftsprozessorientiert:} bestmögliche Unterstützung der
+          Geschäftsprozesse des Kunden
+    \item \textbf{Benutzerfreundlich:} neben objektiver Qualität zählt die
+          \emph{Wahrnehmung} -- Services müssen akzeptiert sein
+    \item \textbf{Wirtschaftlich:} Effektivität (vereinbarte Ergebnisse)
+          \emph{und} Effizienz (angemessener Aufwand)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{IT-Service vs.\ IT-Prozess}
+\begin{itemize}
+    \item \textbf{IT-Service:} der \textbf{Wert}, der Kunden bereitgestellt
+          wird (z.B.\ E-Mail, Cloud-Speicher, Helpdesk).
+    \item \textbf{IT-Prozess:} strukturierte, \textbf{wiederholbare Abfolge
+          von Aktivitäten} zur Erstellung, Verwaltung oder Unterstützung des
+          Services.
+\end{itemize}
+IT-Prozesse helfen, IT-Services zu verwalten.\\
+\textbf{Bsp.:} Service \emph{Helpdesk} $\leftarrow$ Prozesse
+\emph{Incident-} \& \emph{Problem-Management}.
+\end{mainbox}
+
+\subsection{ITSM-Prozesse}
+
+\begin{mainbox}{ITSM Core-Prozesse}
+\begin{itemize}
+    \item \textbf{Service Catalog:} Liste aller angebotenen IT-Services
+    \item \textbf{Service Request Mgmt.:} \emph{Standard}anforderungen
+          zeitnah \& effizient bearbeiten
+    \item \textbf{Service Level Mgmt.:} Services auf gefordertem,
+          akzeptablem Niveau bereitstellen
+    \item \textbf{Service Desk (Helpdesk):} Anlaufstelle (SPOC), um Probleme
+          zu melden, Fragen zu stellen, Infos zu erhalten
+    \item \textbf{Change Mgmt.:} kontrolliert Änderungen an Infrastruktur
+          oder Services
+    \item \textbf{Incident Mgmt.:} bringt den Betrieb nach einem Vorfall
+          \textbf{schnell wieder in den Normalzustand}
+    \item \textbf{Problem Mgmt.:} findet \& behebt die \textbf{Grundursache}
+          (Root Cause), verhindert zukünftige Vorfälle; geht mit Incident
+          Mgmt.\ einher
+    \item \textbf{Continual Improvement:} kontinuierliche Aktualisierung \&
+          Verbesserung der Services
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Weitere ITSM-Prozesse}
+\begin{itemize}
+    \item \textbf{Configuration Mgmt.:} Konfigurationselemente (CIs) aktuell
+          halten
+    \item \textbf{Asset Mgmt.:} SW, HW, Ressourcen organisiert \& aktuell
+    \item \textbf{Release Mgmt.:} Planung, Koordination \& Kontrolle von
+          \emph{Build und Test} neuer/aktualisierter Versionen
+    \item \textbf{Deployment Mgmt.:} \emph{vollständig getestete} Releases
+          implementieren, inkl.\ Doku \& Schulung
+    \item \textbf{Workflow-/Talentmgmt.:} MA haben nötige Skills \& Schulung
+    \item \textbf{Knowledge Mgmt.}, \textbf{Capacity Mgmt.}
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Merkregel: Incident vs.\ Problem}
+\textbf{Incident} = Symptom bekämpfen, Service \emph{sofort} wiederherstellen
+(einmaliger Ausfall).\\
+\textbf{Problem} = Ursache finden \& beseitigen (wiederkehrend / dauerhaft
+schlecht).\\
+\textbf{Release} = bauen \& testen; \textbf{Deployment} = Getestetes ausrollen.
+\end{subbox}
+
+\begin{subbox}{Übung: HSLU-Services $\to$ ITSM-Prozess}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X|l@{}}
+\textbf{Fall} & \textbf{Prozess} \\
+\hline
+HSLU MyCampus & Service Catalog \\
+On-Boarding (E-Mail neue Stud.) & Service Request \\
+E-Mail-Passwort geht nicht & Help Desk \\
+ILIAS-Update & Change \\
+Internet Rotkreuz ausgefallen & Incident \\
+Internet 10.\ Stock dauerhaft schlecht & Problem \\
+Neue ILIAS-Plattform (Aug.) & Cont.\ Improvement \\
+\end{tabularx}
+\end{subbox}
+
+\subsection{Prozesslandkarte}
+
+\begin{mainbox}{Prozesslandkarte}
+Dient der \textbf{Übersicht über Prozesse}. Zeigt entweder \emph{alle}
+Prozesse eines Unternehmens oder nur die für ein IT-System/-Projekt
+relevanten. Prozesse als \textbf{Rechtecke}, dazwischen (falls sinnvoll)
+\textbf{Informationsflüsse}. Gruppierung hängt von Art \& Grösse des
+Unternehmens ab.
+
+\textbf{Typische 3 Ebenen:}
+\begin{itemize}
+    \item \textbf{Managementprozesse:} Strategie \& Planung, Controlling /
+          interne Audits, Qualitätsmgmt.
+    \item \textbf{Kernprozesse:} wertschöpfend, vom Lieferanten zum Kunden
+    \item \textbf{Supportprozesse:} Finanzen/Controlling, Personal,
+          \textbf{IT}, Facility Mgmt.
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel iCompany (Musikhandel)}
+\textbf{Kern:} Lieferanten $\to$ \emph{Beschaffung} (Einkauf, Disposition,
+Wareneingang, Rechnungsprüfung, Kreditoren) $\to$ \emph{Lager}
+(Stammdaten, Umlagerung, Inventur, Lagersteuerung) $\to$ \emph{Vertrieb
+inkl.\ Service \& Reparatur} (Marketing, Verkauf, Warenausgang,
+Fakturierung, Debitoren) $\to$ Kunden.\\
+Aus Sicht der Firma ist \textbf{IT ein Supportprozess}; für die
+IT-Organisation selbst sind die ITSM-Prozesse die Kernprozesse.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Service $\neq$ Prozess: Service = Wert für Kunden, Prozess = Weg
+          dorthin.
+    \item Incident $\neq$ Problem (Symptom vs.\ Ursache).
+    \item Service Request = Standardanforderung (kein Fehler!) $\neq$
+          Incident.
+    \item Change = Änderung am Bestehenden; neue Plattform/Verbesserung
+          $\to$ Continual Improvement.
+    \item Kunde sieht nur die Eisberg-Spitze (Service + SLA).
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

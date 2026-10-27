@@ -1644,6 +1644,197 @@ Muskeln (Forwarder) via OpenFlow.
 \end{itemize}
 \end{subbox}
 
+\section{Servicekatalog \& Service Request Mgmt.}
+
+\subsection{Servicekatalog \& Request Management}
+
+\begin{subbox}{Warum? -- Komplexe IT-Umgebungen}
+\textbf{Kunden} und \textbf{Mitarbeitende} müssen wissen, welche IT-Services
+verfügbar sind; das \textbf{Finanzteam} muss Technologiekosten effektiv
+verwalten können.
+\end{subbox}
+
+\begin{mainbox}{Servicekatalog}
+\textbf{Def.\ 1:} hält alle IT-Services fest \& beschreibt sie, die der
+IT-Betrieb anbietet und betreibt.\\
+\textbf{Def.\ 2:} \textbf{Datenbank} der verfügbaren IT-Ressourcen, um
+Bedürfnisse der Nutzer effizient \& effektiv zu erfüllen.\\
+Wie eine \textbf{Speisekarte}: klar strukturiert, benutzerfreundlich.
+Für alle Stakeholder (Kunden bis Mitarbeitende).
+\end{mainbox}
+
+\begin{mainbox}{Service Request Management (SRM)}
+Prozesse, die \textbf{Standardanforderungen} (Workflows, Genehmigungen,
+Abwicklung) zeitnah \& effizient bearbeiten. Umfasst den
+\textbf{ganzen Lebenszyklus} einer Anfrage: Auswahl im Katalog
+$\to$ Genehmigung $\to$ Aufgabenerstellung $\to$ Auslieferung $\to$
+Abschluss.\\
+\textbf{Service Level Mgmt.:} Services auf gefordertem, akzeptablem
+Niveau bereitstellen.
+\end{mainbox}
+
+\begin{mainbox}{Zusammenspiel Katalog $\leftrightarrow$ SRM}
+Katalog = \textbf{zentrale Komponente} des SRM (Liste, Beschreibungen,
+Optionen, \textbf{Benutzeroberfläche}); ermöglicht
+\textbf{Standardisierung \& Automatisierung}.
+\begin{itemize}
+    \item \textbf{Zentrales Angebot:} Benutzer durchsuchen Katalog,
+          wählen Artikel $\to$ Anfrage
+    \item \textbf{Automatisierte Workflows:} Bestellung startet SRM,
+          löst Genehmigungen \& Aufgabenzuweisung aus
+    \item \textbf{Standardisierung:} Katalog definiert das
+          \emph{Angebot}, SRM die \emph{Bereitstellung}
+\end{itemize}
+\textbf{Ohne Katalog:} SRM unstrukturiert $\to$ ineffiziente
+\textbf{Schatten-IT}, manuelle Ad-hoc-Prozesse.
+\end{mainbox}
+
+\begin{mainbox}{Serviceportfolio vs.\ -katalog vs.\ Request-Katalog}
+\begin{itemize}
+    \item \textbf{Serviceportfolio:} vollständige Doku
+          \textbf{vergangener, gegenwärtiger \& zukünftiger} Services;
+          ganzer Lebenszyklus:\\
+          \textbf{Pipeline} (geplant) + \textbf{Service Catalog} (laufend)
+          + \textbf{Retired} (eingestellt)
+    \item \textbf{Servicekatalog:} detaillierte Beschreibung aller
+          \textbf{aktuell} für Kunden verfügbaren Services
+    \item \textbf{Service Request Catalog:} alle \textbf{Anfragen}, die
+          ein Nutzer an den Anbieter stellen kann (Abonnent eines Service
+          $\to$ Bestellformulare \& Katalogelemente)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Fragen pro Service \& Arten von Anfragen}
+\textbf{Servicekatalog} beantwortet: Was ist enthalten? Wer ist
+Eigentümer/Verwalter? Wie \& in welcher Zeit bereitgestellt?
+Preismodell/Kosten? Wer nutzt ihn, was braucht es zur Bereitstellung?\\
+\textbf{Serviceanfragekatalog -- 3 Arten:}
+\begin{itemize}
+    \item \textbf{Informationsanfrage:} ``Wo finde ich Anleitung X?''
+    \item \textbf{Warenanfrage:} neuen Laptop bestellen
+    \item \textbf{Handlungsanfrage:} Passwort zurücksetzen,
+          Kontaktdaten ändern
+\end{itemize}
+\end{mainbox}
+
+\subsection{Struktur des Servicekatalogs}
+
+\begin{mainbox}{Business- vs.\ Technischer Servicekatalog}
+\textbf{Business-Servicekatalog:} \textbf{kundenorientierte} Sicht, einfache
+geschäftsorientierte Sprache; geordnete Liste der angebotenen Services.
+Enthält \textbf{kundenorientierte Services} (customer-facing): für Kunden
+sichtbar, unterstützen deren Geschäftsprozesse direkt. Dokumentiert neben
+Kurzbeschreibung v.a.\ Organisationsinfos (\textbf{Service Owner, Service
+Manager}).\\
+\emph{Bsp.:} Web Store, Self-Service Portal, E-Mail, Payroll, Sales Force
+Automation.
+
+\textbf{Technischer Servicekatalog:} \textbf{interne} Sicht für
+IT-Mitarbeitende; Repository der technischen Komponenten, Infrastruktur,
+Prozesse \& Konfigurationen hinter den Business-Services. Enthält
+\textbf{technische Services} (supporting): für Kunden unsichtbar,
+``untermauern'' die kundenorientierten Services.
+\end{mainbox}
+
+\begin{mainbox}{3 Typen technischer Services}
+\begin{itemize}
+    \item \textbf{Application Services:} E-Mail, Active Directory
+    \item \textbf{System Services:} Self-Service Portal, Storage
+    \item \textbf{Network Services:} WLAN, IP-Telefonie
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Service Packages}
+Kundenorientierter Service wird in einem oder mehreren \textbf{Service
+Packages} (Ausprägungen) beschrieben = klar \textbf{abgrenzbare
+Leistungspakete}; ein Service kann mehrere Packages haben.
+\begin{itemize}
+    \item Name \textbf{aussagekräftig für Kunden}, z.B.\ Arbeitsplatz
+          Standard / Mobile / CAD
+    \item \textbf{keine technischen Aspekte} in der Beschreibung --
+          \textbf{Mehrwert \& Nutzen} hervorheben
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel Swisscom: Service $\to$ Packages}
+Service \emph{Internet} $\to$ Packages nach Geschwindigkeit; \emph{TV}
+$\to$ nach Senderliste; \emph{Handy-Abo} $\to$ nach Datenvolumen,
+Roaming, Zielgruppe (Kinder/Jugend, Prepaid).\\
+\textbf{Parameter} für Packages: Leistungsumfang/Menge, Qualität
+(Speed, SLA), Zielgruppe, Preis.
+\end{subbox}
+
+\begin{subbox}{Katalogeintrag: typische Spalten}
+\textbf{Sector, Service Category, Service Name, Description, Eligibility}
+(wer darf?), \textbf{Request Procedure, SLA, Pricing}.\\
+\emph{Bsp.:} Universität / Infrastructure / Desktop Support / Support für
+Desktops, SW-Installation, Reparatur / Dozierende, Personal,
+Studierende / Helpdesk-Ticket / 24\,h Reaktion, 48\,h Lösung / gratis.
+\end{subbox}
+
+\subsection{Katalog erstellen \& Nutzen}
+
+\begin{mainbox}{Servicekatalog erstellen -- 12 Schritte}
+\begin{enumerate}
+    \item Umfang \& Zweck festlegen
+    \item Informationen sammeln \& organisieren
+    \item Dienste strukturieren \& kategorisieren
+    \item klare, prägnante Dienstbeschreibungen
+    \item \textbf{SLAs} definieren
+    \item Dienstpreise festlegen (falls zutreffend)
+    \item Serviceanforderungsprozess entwickeln
+    \item Self-Service-Portal in Betracht ziehen
+    \item gründlich testen \& verfeinern
+    \item Benutzerschulung \& -sensibilisierung
+    \item Einführung \& Werbung
+    \item kontinuierliche Überwachung \& Wartung
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Vorteile eines Servicekatalogs}
+\begin{itemize}
+    \item \textbf{Verbesserter Self-Service:} vollständige Datenbank
+          verfügbarer Services
+    \item \textbf{Betriebseffizienz:} Verfügbarkeit, Routing,
+          Prozessinfos zentral $\to$ weniger Verwaltungsaufwand
+    \item \textbf{Benutzerfreundlichkeit:} Services selbst auswählen \&
+          anfordern
+    \item \textbf{Produktivität:} Automatisierung $\to$ Anfragen ohne
+          manuelle Eingriffe
+    \item \textbf{Transparenz:} Echtzeit-Einblick in Anfragen \&
+          Bestellungen $\to$ fundierte Entscheide
+    \item \textbf{Benutzerzufriedenheit:} mehr Ergebnis mit weniger
+          Zeitaufwand
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Servicekatalog vs.\ Self-Service-Portal}
+\textbf{Servicekatalog} = \textbf{Datenbank} verfügbarer Services +
+unterstützender Infos.\\
+\textbf{Self-Service-Portal} = \textbf{Schnittstelle}: Wissensdatenbank
+durchsuchen, Tickets erstellen, mit der IT in Kontakt treten.\\
+Oft \textbf{enthält} das Portal den Katalog (``Einkaufserlebnis'').
+\end{mainbox}
+
+\begin{subbox}{Merkregel}
+\textbf{Portfolio} = Vergangenheit + Gegenwart + Zukunft;
+\textbf{Katalog} = nur Gegenwart (Speisekarte);
+\textbf{Request-Katalog} = was ich bestellen/anfragen kann;
+\textbf{Portal} = das Restaurant, in dem die Speisekarte aufliegt.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Katalog $\neq$ Portfolio: Pipeline \& Retired gehören nur ins
+          Portfolio.
+    \item Katalog $\neq$ Portal: Datenbank vs.\ Schnittstelle.
+    \item Business-Katalog = Kundensprache, kein Technik-Jargon;
+          Technik steht im technischen Katalog.
+    \item Package-Beschreibung: Nutzen statt Technik.
+    \item Anfragearten: Information, Ware, Handlung.
+\end{itemize}
+\end{subbox}
+
 % ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================

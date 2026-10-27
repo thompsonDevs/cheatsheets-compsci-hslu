@@ -863,6 +863,178 @@ $\varphi_k = \frac\pi6 + k\frac{2\pi}{3}$:
 \end{subbox}
 
 % ============================================================================
+% SECTION 5: ANWENDUNGEN KOMPLEXER ZAHLEN
+% ============================================================================
+\section{Anwendungen komplexer Zahlen}
+
+\subsection{Newton-Verfahren im Komplexen}
+
+\begin{mainbox}{Newton-Verfahren}
+Funktion an der Stelle $x_n$ durch ihre \textbf{Tangente} ersetzen;
+deren Nullstelle ist der nächste Wert:
+Tangentensteigung: $f'(x_n) = \frac{f(x_n)}{x_n - x_{n+1}}$
+$$\boxed{x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}}$$
+Folge $(x_n)$ konvergiert unter günstigen Bedingungen gegen eine
+Nullstelle.\\
+\textbf{Im Komplexen:} identische Formel mit $z_n \in \C$, $f$ z.B.\
+Polynom, $f'$ wie im Reellen ableiten:
+$$z_{n+1} = z_n - \frac{p(z_n)}{p'(z_n)}$$
+Abbruch: $|z_n - Z_j| < \varepsilon$ (Konvergenz) oder
+$|p'(z_n)| < \varepsilon$ (Division durch 0).
+\end{mainbox}
+
+\begin{subbox}{Beispiel $Z_{1,3} = 1 \pm i$, $Z_2 = -1$}
+Polynom aus Linearfaktoren:
+\begin{align*}
+p(z) &= (z - 1 - i)(z - 1 + i)(z + 1)\\
+&= \big((z-1)^2 - i^2\big)(z + 1)\\
+&= (z^2 - 2z + 2)(z + 1) = z^3 - z^2 + 2
+\end{align*}
+$p'(z) = 3z^2 - 2z$ \ $\Rightarrow$
+$$z_{n+1} = z_n - \frac{z_n^3 - z_n^2 + 2}{3z_n^2 - 2z_n}$$
+\begin{itemize}
+    \item $z_0 = 3 + 2i \to Z_1$, \ $z_0 = -2 + i \to Z_2$,
+          \ $z_0 = 2 - i \to Z_3$ (jeweils nächste NS)
+    \item \textbf{Überraschung:} $z_0 = -1 + 2i \to Z_3$ (am
+          \emph{weitesten} entfernt!)
+    \item $z_0 = 0$: $p'(0) = 0$ $\Rightarrow$ Abbruch
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Einzugsgebiete \& Julia-Menge}
+Jeden Startwert $z_0$ der Ebene nach der Nullstelle einfärben, gegen
+die Newton konvergiert (schwarz: keine Konvergenz).
+\begin{itemize}
+    \item Einzugsgebiete sind \emph{nicht} einfach ``nächste Nullstelle''
+          (keine Voronoi-Zellen).
+    \item Grenzen dazwischen sind \textbf{fraktal} (Julia-Menge):
+          beliebig nahe Startwerte landen bei verschiedenen Nullstellen.
+\end{itemize}
+\textbf{Einheitswurzeln} $z^n - 1 = 0$: Nullstellen
+$Z_k = e^{i 2\pi k/n}$, $k = 0, \ldots, n{-}1$:
+$$z_{m+1} = z_m - \frac{z_m^n - 1}{n z_m^{n-1}}$$
+(z.B.\ $z^4 - 1$: $\pm 1$, $\pm i$; Bild $n$-fach rotationssymmetrisch)
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: Bild der Einzugsgebiete}
+\begin{enumerate}
+    \item Nullstellen $Z_j$ und $p$, $p'$ aufstellen.
+    \item Raster über $[x_{\min}, x_{\max}] \times [y_{\min}, y_{\max}]$,
+          Pixel $\to z_0 = x + iy$.
+    \item Max.\ $N$ Iterationen; nach jedem Schritt
+          $|z - Z_j| < \varepsilon$ prüfen $\Rightarrow$ Farbe $j$.
+    \item $|p'(z)| < \varepsilon$ oder $N$ erreicht $\Rightarrow$ schwarz.
+\end{enumerate}
+Komplexe Arithmetik ohne \texttt{complex} (z.B.\ Shader, $z = (x, y)$):
+Mul $(x_1x_2 - y_1y_2,\ x_1y_2 + x_2y_1)$,
+Div $= z_1\bar{z}_2 / |z_2|^2$.
+\end{subbox}
+
+\begin{mainbox}{Mandelbrot-Menge}
+Einfachere Iteration für jedes $c \in \C$ (Pixel):
+$$\boxed{z_{n+1} = z_n^2 + c, \quad z_0 = 0}$$
+$c \in M \iff (z_n)$ bleibt beschränkt.\\
+Sobald $|z_n| > 2$: Folge divergiert sicher $\Rightarrow$ $c \notin M$.\\
+Färbung: $c \in M$ schwarz, sonst nach Anzahl Iterationen bis
+$|z_n| > 2$.
+\end{mainbox}
+
+\subsection{Fourier-Analyse}
+
+\begin{mainbox}{Reelle Fourier-Reihe ($2\pi$-periodisch)}
+Funktion als Mischung von Schwingungen verschiedener Frequenzen:
+$$\boxed{f(x) = \frac{a_0}{2} + \sumk \big(a_k\cos kx + b_k\sin kx\big)}$$
+\textbf{Koeffizienten:}
+\begin{align*}
+a_0 &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\dx\\
+a_k &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(kx)\dx\\
+b_k &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(kx)\dx
+\end{align*}
+$\frac{a_0}{2}$ = Mittelwert von $f$ über eine Periode.
+\end{mainbox}
+
+\begin{subbox}{Herleitung: Orthogonalität}
+Reihe mit $\cos(jx)$ bzw.\ $\sin(jx)$ multiplizieren und über
+$[-\pi, \pi]$ integrieren -- fast alle Terme fallen weg:
+\begin{align*}
+\int_{-\pi}^{\pi} \cos(jx)\cos(kx)\dx &= \delta_{jk}\pi\\
+\int_{-\pi}^{\pi} \sin(jx)\sin(kx)\dx &= \delta_{jk}\pi\\
+\int_{-\pi}^{\pi} \sin(jx)\cos(kx)\dx &= 0
+\end{align*}
+($j, k \ge 1$; $\int \cos(kx) = \int \sin(kx) = 0$, $\int 1 = 2\pi$)
+$\Rightarrow \int f\cos(jx)\dx = \pi a_j$ usw.
+\end{subbox}
+
+\begin{mainbox}{Symmetrie spart Arbeit}
+\begin{itemize}
+    \item $f$ \textbf{gerade} ($f(-x) = f(x)$): $b_k = 0$, reine
+          Kosinusreihe, $a_k = \frac{2}{\pi}\int_0^\pi f\cos(kx)\dx$
+    \item $f$ \textbf{ungerade} ($f(-x) = -f(x)$): $a_k = 0$ (inkl.\
+          $a_0$), reine Sinusreihe, $b_k = \frac{2}{\pi}\int_0^\pi
+          f\sin(kx)\dx$
+    \item allgemein: beides (z.B.\ $x^2 - x$)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiele auf $[-\pi, \pi]$}
+\textbf{$f(x) = x^2$} (gerade): $a_0 = \frac{2\pi^2}{3}$,
+$a_k = \frac{4(-1)^k}{k^2}$:
+$$x^2 = \frac{\pi^2}{3} - 4\cos x + \cos 2x - \tfrac{4}{9}\cos 3x
++ \ldots$$
+\textbf{$f(x) = x$} (ungerade): $b_k = \frac{2(-1)^{k+1}}{k}$:
+$$x = 2\left(\sin x - \tfrac{1}{2}\sin 2x + \tfrac{1}{3}\sin 3x
+- \ldots\right)$$
+Periodische Fortsetzung von $x$ springt bei $\pm\pi$ $\Rightarrow$
+Reihe konvergiert dort gegen Mittelwert $0$ (Überschwinger nahe
+Sprung).
+\end{subbox}
+
+\begin{mainbox}{Komplexe Fourier-Reihe}
+$$\boxed{f(x) = \sum_{k \in \Z} c_k e^{ikx}}$$
+$$\boxed{c_k = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)e^{-ikx}\dx}$$
+Herleitung: mit $e^{-ijx}$ multiplizieren, integrieren:
+$$\int_{-\pi}^{\pi} e^{i(k-j)x}\dx =
+\begin{cases} 2\pi & j = k\\ 0 & j \ne k \end{cases}$$
+$\Rightarrow \int f e^{-ijx}\dx = 2\pi c_j$.
+\textbf{Ein} Integral statt zwei, $k$ läuft über ganz $\Z$.
+\end{mainbox}
+
+\begin{mainbox}{Umrechnung reell $\leftrightarrow$ komplex}
+Mit $e^{-ikx} = \cos(kx) - i\sin(kx)$:
+$$c_k = \frac{a_k - ib_k}{2}, \quad c_{-k} = \frac{a_k + ib_k}{2}$$
+$c_0 = \frac{a_0}{2}$
+$$\boxed{a_k = c_k + c_{-k}, \quad b_k = i(c_k - c_{-k})}$$
+$f$ reell $\Rightarrow$ $c_{-k} = \overline{c_k}$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel komplex: $f(x) = x$}
+$a_k = 0$, $b_k = \frac{2(-1)^{k+1}}{k}$ $\Rightarrow$
+$c_k = -\frac{i b_k}{2} = \frac{i(-1)^k}{k}$ ($k \ne 0$), $c_0 = 0$\\
+Probe: $b_1 = i(c_1 - c_{-1}) = i(-i - i) = 2$ \checkmark
+\end{subbox}
+
+\begin{subbox}{Numerisch (Python-Demo)}
+Integrale mit Trapezregel über $[-\pi, \pi]$ (z.B.\ 1000 Teilintervalle),
+Reihe bei $m$ Termen abbrechen. \textbf{Spektrum}: Balkendiagramm der
+$a_k$, $b_k$ (bzw.\ $|c_k|$) über $k$ -- zeigt, welche Frequenzen
+enthalten sind.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Konstanter Term ist $\frac{a_0}{2}$, nicht $a_0$ (damit $a_0$
+          dieselbe Formel wie $a_k$ hat).
+    \item Vorfaktor: reell $\frac{1}{\pi}$, komplex $\frac{1}{2\pi}$.
+    \item Komplex: Minus im Exponenten bei $c_k$ ($e^{-ikx}$), Plus in
+          der Reihe.
+    \item Erst Symmetrie prüfen, dann integrieren.
+    \item $\cos(k\pi) = (-1)^k$, $\sin(k\pi) = 0$ für $k \in \Z$.
+    \item Newton: Konvergenz nicht zwingend zur nächsten Nullstelle;
+          Startwert mit $p'(z_0) = 0$ unbrauchbar.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

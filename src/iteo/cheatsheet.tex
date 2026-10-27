@@ -1351,6 +1351,299 @@ IT-Organisation selbst sind die ITSM-Prozesse die Kernprozesse.
 \end{itemize}
 \end{subbox}
 
+\section{Netzwerke im RZ}
+
+\subsection{Topologie: Provider -- Grenze -- DMZ -- LAN}
+
+\begin{mainbox}{Die 4 Zonen (von aussen nach innen)}
+\begin{itemize}
+    \item \textbf{Provider:} Angebote, Standorte, Speed, Technik
+    \item \textbf{Grenze:} Router, Firewall, IDP, Redundanzen
+    \item \textbf{DMZ:} Web-Services, Authentifizierung, Dienste
+    \item \textbf{LAN:} Topologien, Speed, Trennungen (VLAN), Services,
+          Micro-Services, ev.\ SDN, Redundanzen
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Provider wählen}
+Angebot schwer zu überblicken (z.B.\ providerliste.ch): global, regional,
+lokal; Bundles (Zugang, Hosting, Housing, Services).\\
+Schwer erfassbar, oft in AGBs versteckt: \textbf{Vertrauen, Reputation,
+Verträge, Support, Verfügbarkeit, NW-Management}.
+\end{subbox}
+
+\begin{mainbox}{Provider-Technik \& Speed}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}X|l@{}}
+\textbf{Medium} & \textbf{Speed} \\
+\hline
+ADSL (Kupfer, asymm.) & 2--16\,Mbit/s \\
+VDSL(2) (Kupfer, asymm.) & 20--300\,Mbit/s \\
+SDSL (Kupfer, \textbf{symm.}) & 2--200\,Mbit/s \\
+Antennenkabel (mit TV) & 2--1000\,Mbit/s \\
+Glasfaser (FTTH, OTO) & 10\,M--100\,Gbit/s \\
+Richtfunk (abgelegen) & 1--200\,Mbit/s \\
+\end{tabularx}
+Asymm.: Uplink $\approx$ 10\,\% vom Downstream. Kupfer \& Richtfunk:
+Leistung \textbf{längen-/distanzabhängig}.
+\end{mainbox}
+
+\begin{mainbox}{Grenze: Router}
+\begin{itemize}
+    \item oft in \textbf{Firewall} oder \textbf{L3-Switch} integriert
+    \item arbeitet mit \textbf{IP-Paketen}; öffentl.\ $\leftrightarrow$
+          private Adressen (\textbf{NAT/PAT})
+    \item verbindet versch.\ Netze / mehrere Provider
+    \item optimale Weiterleitung bei redundanten Leitungen, startet
+          \textbf{Fallback}-Szenarien
+    \item \textbf{QoS} durch protokollspezifische Weiterleitung
+    \item kann \textbf{VPN-Endpunkt} sein
+    \item adaptiert Netztechniken (Ethernet, xDSL, PPPoE, ATM, \ldots)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Grenze: Firewall}
+\begin{itemize}
+    \item \textbf{Sicherheitsbaustein}, Teil des Sicherheitskonzepts --
+          kein Allheilmittel (braucht Endpoint-Mgmt.\ \& Threat-Analyse)
+    \item übernimmt meist auch Routing
+    \item \textbf{regelbasiertes} Sperren/Weiterleiten von Paketen:
+          Paketfilter, Stateful Inspection, Proxy-/Content-Filter
+    \item VPN-Endpunkt mit Auth.\ (lokal, RADIUS, AD)
+    \item kann auf \textbf{allen OSI-Schichten} arbeiten
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Grenze: IDP = IDS + IPS}
+\textbf{Intrusion Detection/Prevention:} Eindringversuche erkennen
+(Mustererkennung, DoS, Fakes, Portscan, IP-Spoofing).
+\begin{itemize}
+    \item \textbf{rechenintensiv} $\to$ oft separates Device
+    \item ab $\geq$ 10\,Gbit/s an der Leistungsgrenze: Pakete verwerfen,
+          lückenhafte Prüfung (AI im Forschungsfokus)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{DMZ (Demilitarized Zone)}
+Geschützter Bereich, in dem \textbf{bestimmte Zugriffe} von aussen erlaubt
+sind (WWW, Mail, FTP). Mit \textbf{1 oder 2 Firewalls}.\\
+\textbf{DMZ Model 2} (2 FW in Serie): versch.\ Hersteller/Gerätetypen
+$\Rightarrow$ 2 versch.\ OS \& Angriffsvektoren hintereinander
+$\Rightarrow$ \textbf{höhere Sicherheit}.
+\end{mainbox}
+
+\begin{mainbox}{Redundanz des Anschlusses}
+\begin{itemize}
+    \item \textbf{1 Provider / 2 Zugänge} oder \textbf{2 Provider / je 1
+          Zugang}
+    \item \textbf{Ausfallüberwachung} nötig (Router verbunden)
+    \item \textbf{getrennte Wege/Trassen} (2 Hauseinführungen)
+    \item ev.\ verschiedene Medien; \textbf{Loadbalancing} möglich
+\end{itemize}
+\end{mainbox}
+
+\subsection{RZ-LAN-Strukturen}
+
+\begin{mainbox}{Physikalisch: TOR vs.\ EOR}
+\begin{itemize}
+    \item \textbf{TOR (Top Of Rack):} jedes Rack hat \textbf{eigene
+          Switches}
+    \item \textbf{EOR (End Of Row):} Switches am Reihenende, Racks nur über
+          \textbf{Patchpanels} verbunden
+\end{itemize}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{TOR} & \textbf{EOR} \\
+\hline
+Geräte & viele Switches & wenige, grosse \\
+Verkabelung & kurz, im Rack & lang, viele Kabel \\
+Freie Ports & oft ungenutzt & besser ausgelastet \\
+Erweiterung & rackweise, einfach & Patchen nötig \\
+Platz & Switch-HE pro Rack & Rack(s) am Reihenende \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Logische Ebenen (klassisch)}
+\begin{itemize}
+    \item \textbf{Peering / Peripherie:} Anschluss nach aussen, zentrale
+          Knoten, Firewalls, Router, VPN-Endpunkte, ISP
+    \item \textbf{Backbone / Spine / Core:} Rückgrat, Verbindungen
+          innerhalb des RZ, auch \textbf{RZ zu RZ}
+    \item \textbf{Aggregation Layer(s)} (grössere RZ): Serverfarmen,
+          Verbindungen innerhalb von Rackreihen
+    \item \textbf{Leaf / Access:} Anschlüsse für Server \& Peripherie,
+          Abgänge aufs Gebäude-LAN
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{High Performance: Facebook DC Fabric}
+\textbf{Step 1:} Server-\textbf{Pods} à 24 Racks mit je 2 Switches --
+hoher Server-zu-Server-Verkehr, einfach erweiterbar, hohe Redundanz.\\
+\textbf{Step 2:} Redundanz auch im \textbf{Aggregation Layer}, flexible
+Erweiterbarkeit, Core Layer mit \textbf{Edge-Switches} für Uplinks.
+\end{subbox}
+
+\begin{subbox}{Beispiel-Produkte \& Kosten}
+\textbf{Core Switch (Chassis):} Einschübe, Backplane, zentrale Netzteile,
+vereinfachtes Mgmt., nachrüstbar, Glas/Kupfer. Huawei S7700 (bis 100\,GE):
+10--50k CHF.\\
+\textbf{Cisco Nexus} (2019/22): 36180YC-R (48$\times$SFP, 3.6\,Tbps)
+$\approx$ 40--46k USD; 3636C-R (36$\times$QSFP28, 7.2\,Tbps)
+$\approx$ 84--102k USD.\\
+\textbf{Transceiver:} SFP 10G-SR ab 175\,USD; QSFP 100G-SR4 (100\,m, MMF)
+$\approx$ 2k; 100G-LR4 (10\,km, SMF) $\approx$ 30k USD -- kompatible
+Drittanbieter-Module nur $\approx$ 100--800 CHF!
+\end{subbox}
+
+\begin{mainbox}{Kostenverteilung RZ ($\approx$ 1000 Server)}
+Amortisation: Server 3 J., Infrastruktur 10 J.\par
+\renewcommand*{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}X|r@{}}
+\textbf{Servers} & \textbf{51\,\%} \\
+Power Distribution \& Cooling & 19\,\% \\
+Power & 15\,\% \\
+Networking Equipment & 11\,\% \\
+Other Infrastructure & 4\,\% \\
+\end{tabularx}
+\end{mainbox}
+
+\subsection{Technikbegriffe \& Services}
+
+\begin{mainbox}{VLAN (Virtual LAN)}
+Getrennte (logische) Netze auf \textbf{gemeinsamer Hardware}. Frames
+\textbf{tagged} (VLAN-Tag im Ethernet-Frame) oder \textbf{untagged}.
+\begin{itemize}
+    \item \textbf{Access Port:} normalerweise \textbf{1 VLAN}, untagged
+          (Endgerät)
+    \item \textbf{Trunk:} \textbf{immer tagged}, mehrere VLANs parallel
+          (Switch $\leftrightarrow$ Switch)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Netzwerk-Dienste}
+\begin{itemize}
+    \item \textbf{DNS:} Zuordnung DNS-Name $\leftrightarrow$ IP-Adresse
+    \item \textbf{IPAM} (IP Address Mgmt.): MS-Service oder separate Tools
+    \item \textbf{DHCP:} dynamische/reservierte Zuweisung von IP + weiteren
+          Eigenschaften an Clients
+    \item \textbf{NAP/NAC} (Network Access Protection/Control):
+          Client qualifizieren (User, OS, Version, AntiVir) $\to$ erlaubte
+          Netze oder \textbf{Quarantäne-Zone}
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{MPLS, QoS, CoS}
+\textbf{MPLS} (Multiprotocol Label Switching): VPN-ähnliche Verbindung
+zusammengehöriger Netze über weite Strecken, \textbf{unabhängig von
+IP-Segmenten}; Provider vermittelt anhand von \textbf{Labels} im Paket.\\
+\textbf{QoS} (Quality of Service): Latenz, Jitter, Verlust, Durchsatz.\\
+\textbf{CoS} (Class of Service): reservierte ``Bandbreiten'' pro Klasse.
+\end{mainbox}
+
+\subsection{Management}
+
+\begin{mainbox}{Netzwerk- \& Systemmanagement}
+\textbf{Netzwerkmanagement:} Verwaltung, Betrieb \& Überwachung von
+IT-/TK-Netzen.
+\begin{itemize}
+    \item \textbf{OAM(\&P):} Operation, Administration, Maintenance
+          (\& Provisioning)
+    \item \textbf{FCAPS} (ISO): \textbf{F}ault, \textbf{C}onfiguration,
+          \textbf{A}ccounting, \textbf{P}erformance, \textbf{S}ecurity
+\end{itemize}
+\textbf{Systemmanagement:} Monitoring aller Betriebsparameter \&
+Konfiguration (siehe ITIL).
+\end{mainbox}
+
+\begin{mainbox}{Management-Netzwerk}
+\begin{itemize}
+    \item vom restlichen Netz \textbf{physikalisch getrenntes} LAN, nur
+          fürs Management
+    \item beschränkter Zugriff (dedizierte Stationen \& Benutzer)
+    \item oft nur via \textbf{Jump-Host} mit starkem Login \& Logging
+\end{itemize}
+\end{mainbox}
+
+\subsection{SDN -- Software Defined Networking}
+
+\begin{mainbox}{Klassische Netzwerke}
+\begin{itemize}
+    \item HW-Devices: Switches, Router, Firewalls, Patch-Panels
+    \item \textbf{statisch}: Änderungen via Change-Mgmt.\ (auch virtuelle
+          Devices wie vSwitch, pfSense)
+    \item Mgmt.\ \textbf{komplex \& proprietär}, versch.\ Hersteller pro
+          Layer
+\end{itemize}
+\textbf{Aufbau eines Devices:} \textbf{Software Control} (Mgmt.: CLI,
+SNMP; Routing-Protokolle: OSPF, BGP, RIP) + \textbf{Hardware Datapath}
+(pro Paket: Lookup, Switch, Buffer) -- beides \emph{im selben Gerät}.\\
+Paket rein an 1 Port, raus an 0..n Ports (= \textbf{Datenfluss}). Nur das
+\textbf{erste Paket} eines Flows wird analysiert; gleiche Folgepakete
+leitet der Datapath direkt weiter; Buffer lösen Timing-Probleme.
+\end{mainbox}
+
+\begin{mainbox}{SDN-Grundstruktur (3 Schichten)}
+\begin{itemize}
+    \item \textbf{Application:} Devices, Bandwidth, Services,
+          Netzstruktur
+    \item \textbf{Controller} (Software/Serverdienst): Service-, Netz-,
+          Device-Control. Southbound: \textbf{OpenFlow}, ForCES, PCEP,
+          SNMP, NETCONF
+    \item \textbf{Forwarders:} HW-Datapath mit einfacher, lokaler SW
+\end{itemize}
+\textbf{Eigenschaften:}
+\begin{itemize}
+    \item \textbf{Entkopplung von Control Plane \& Data Plane}
+    \item Netz-Eigenschaften \textbf{dynamisch} anpassbar (an
+          Protokolle/QoS \& Applikationen)
+    \item höhere Bandbreiten ($\geq$ 100\,Gbit)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Flowspace \& OpenFlow}
+Der \textbf{Header} eines Pakets bestimmt die Aktion des Forwarders. Nur
+wenige Aktionen:
+\begin{itemize}
+    \item \textbf{Plumbing:} forward to port(s)
+    \item \textbf{Control:} forward to controller
+    \item \textbf{Routing zw.\ Flowspaces:} Header umschreiben
+    \item \textbf{Bandwidth Isolation}
+\end{itemize}
+\textbf{OpenFlow:} jeder Forwarder hat eine \textbf{Flow Table}
+(Match-Felder aus Header $\to$ Aktion + Zähler). Unbekannter Flow $\to$
+an Controller, der neuen Eintrag installiert.
+\end{mainbox}
+
+\begin{subbox}{Merkregel: Klassisch vs.\ SDN}
+\textbf{Klassisch:} Hirn (Control) + Muskeln (Datapath) in \emph{jedem}
+Gerät, einzeln konfiguriert.\\
+\textbf{SDN:} \emph{ein} zentrales Hirn (Controller) steuert viele dumme
+Muskeln (Forwarder) via OpenFlow.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item IDS \emph{erkennt}, IPS \emph{verhindert} -- zusammen IDP.
+    \item DMZ $\neq$ LAN: von aussen erreichbar, aber vom LAN getrennt.
+    \item Trunk = mehrere VLANs, \emph{immer} tagged; Access = 1 VLAN.
+    \item Redundanz nur echt mit \textbf{getrennten Trassen} -- 2 Provider
+          im selben Kabelschacht helfen nicht beim Bagger.
+    \item ADSL/VDSL asymmetrisch, SDSL symmetrisch (wichtig für RZ-Uplink).
+    \item Netzwerk $\approx$ 11\,\% der RZ-Kosten, Server $\approx$ die
+          Hälfte.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Zonen: Provider $\to$ Grenze (Router/FW/IDP) $\to$ DMZ $\to$ LAN
+    \item LAN: TOR/EOR physisch; Peering--Core--Aggregation--Access logisch
+    \item Begriffe: VLAN, DNS, IPAM, DHCP, NAC, MPLS, QoS/CoS
+    \item Mgmt.: FCAPS, OAM, getrenntes Mgmt.-Netz mit Jump-Host
+    \item SDN: Control/Data Plane getrennt, Controller + OpenFlow
+\end{itemize}
+\end{subbox}
+
 % ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================

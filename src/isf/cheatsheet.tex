@@ -911,6 +911,423 @@ $\to$ Vendor $\to$ downstream: Distributor $\to$ Retailer $\to$ Consumer.
 \end{subbox}
 
 % ============================================================================
+% SECTION 4: RISIKO-MANAGEMENT
+% ============================================================================
+\section{Risiko-Management}
+
+\subsection{Kontext \& Prozess}
+
+\begin{mainbox}{Risiko-Kontext (Wissen vs.\ Unwissen)}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}l|X|X@{}}
+& \textbf{Wissen} & \textbf{Unwissen} \\
+\hline
+\textbf{Bekannt} & Ursache-Wirkung, tägl.\ Umgang $\to$ \textbf{Risiko-Mgmt.}
+& bekannte Wissenslücke $\to$ Forschung \\
+\hline
+\textbf{Unbek.} & ungenutztes/verdrängtes Wissen $\to$ Wissensvermittlung
+& Dunkelziffer, nicht identifizierbar $\to$ \textbf{Resilienz, Agilität} \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Risiko-Management vs.\ Resilienz}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}l|X|X@{}}
+& \textbf{Risiko-Mgmt.} & \textbf{Resilienz} \\
+\hline
+Ziel & kurzfristig Verluste vermeiden & langfristiges Überleben \\
+Ansatz & Mgmt.-Ansatz, jährl.\ Audit-Zyklus & kontinuierlich, evolutionär,
+systemisch \\
+Massn. & reaktiv, delegiert & antizipieren, Zukunft gestalten \\
+Fokus & Schaden bekannter Risiken begrenzen & auf jeden \emph{unbekannten}
+Unterbruch vorbereiten, lernen \\
+Verantw. & Risiko-Manager, Risk-Owner & in Org.\ eingebettet, Kultur \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Risiko-Management-Prozess (zyklisch)}
+Normen: \textbf{ISO 31000/31010} (allgemein), \textbf{ISO/IEC 27005:2022}
+(Informationssicherheit).
+\begin{enumerate}
+    \item \textbf{Risiken beurteilen:}
+    \begin{itemize}
+        \item identifizieren (Assets, Bedrohungen)
+        \item analysieren (quantitativ / qualitativ)
+        \item bewerten (gegen Akzeptanzlinie)
+    \end{itemize}
+    \item \textbf{Risiken behandeln} (Strategien)
+\end{enumerate}
+Begleitend: \textbf{Kommunikation \& Konsultation}, \textbf{Überwachung \&
+Review}. Iterativ, da sich Geschäftsgang (innen) und Bedrohungen (aussen) ändern.
+\end{mainbox}
+
+\subsection{Begriffe}
+
+\begin{mainbox}{Threat -- Vulnerability -- Exposure}
+\begin{itemize}
+    \item \textbf{Bedrohung / Angreifer} (Threat): \emph{nicht kontrollierbar}.
+          Bsp.: neuer Exploit gegen Win10.
+    \item \textbf{Schwachstelle} (Weakness): \emph{kontrollierbar}.
+          Bsp.: Win10-Rechner nicht gepatcht.
+    \item \textbf{Exposition} (Exposure): \emph{kontrollierbar}.
+          Bsp.: Win10-Rechner überall in der Firma.
+    \item \textbf{Verletzlichkeit} (Vulnerability): ausnutzbare Schwachstelle.
+          NIST: ``weakness in an information system, security procedures,
+          internal controls or implementation that could be exploited by a
+          threat source.''
+    \item \textbf{Schützenswertes Gut} (Asset), geschützt durch
+          \textbf{Massnahmen} (Controls), Ziel: CIA.
+\end{itemize}
+\textbf{Risiko} entsteht, wenn Bedrohung auf exponierte Schwachstelle eines
+Assets trifft. Nur Schwachstelle \& Exposition sind beeinflussbar!
+\end{mainbox}
+
+\begin{subbox}{Beispiel Safety vs.\ Cybersecurity}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|X|X@{}}
+& \textbf{Safety} & \textbf{Cyber} \\
+\hline
+Bedrohung & eisige Talabfahrt & Hacker \\
+Exposition & viele Skifahrer auf eisiger Stelle & offener Port 21 \\
+Schwachst. & abgenutzte Skikanten & ungepatchter FTP-Dienst \\
+Asset & körperl.\ Unversehrtheit & C \& I der Daten \\
+Massnahme & Warnschild, Präparation & Port schliessen / SFTP + Auth. \\
+\end{tabularx}
+\end{subbox}
+
+\subsection{Risiken identifizieren}
+
+\begin{mainbox}{Assets (Kategorien)}
+\textbf{Daten}, \textbf{IT-Systeme}, \textbf{Einrichtungen},
+\textbf{Mitarbeitende}.
+\end{mainbox}
+
+\begin{mainbox}{Angreifer-Typen}
+Von \textbf{zielgerichtet} (oben) bis \textbf{zufällig} (unten):
+\begin{itemize}
+    \item \textbf{Staatliche Org.:} Informationsbeschaffung; resultat-, nicht
+          kostengetrieben; versteckt, Supply-Chain-Angriffe.
+          \emph{Gegenm.:} dedizierte, abgetrennte Infrastruktur.
+    \item \textbf{Terroristen:} Schaden, Unsicherheit, Zweifel; beträchtl.\
+          Mittel, grosses Netzwerk; Know-how vom Schwarzmarkt, physische
+          Angriffe. \emph{Gegenm.:} KRITIS-Schutz, OSINT-Früherkennung.
+    \item \textbf{Organisierte Kriminalität:} finanziell, Geschäftsmodell,
+          Kosten/Nutzen; Bestechung, Spezialisten.
+          \emph{Gegenm.:} IR, BCM, Forensic Readiness.
+    \item \textbf{Hacker/Cracker:} Aufmerksamkeit, Schwachstellen
+          anprangern; wenig Geld; schwer vorhersagbar.
+          \emph{Gegenm.:} Awareness, Berechtigungsmgmt.
+    \item \textbf{Script Kiddies:} Reputation; minimale Mittel \& Know-how;
+          verfügbare Tools. \emph{Gegenm.:} IT-Grundschutz.
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Szenario-Formulierung (FAIR)}
+``\textbf{[Threat]} impacts \textbf{[asset]} via \textbf{[method]}, causing
+\textbf{[effect(s)]}.''
+\end{mainbox}
+
+\subsection{Risiken analysieren}
+
+\begin{mainbox}{Quantitativ vs.\ qualitativ}
+\textbf{Quantitativ:} Grössen numerisch exakt; monetärer Asset-Wert \&
+Eintrittswahrscheinlichkeit genau bekannt (Tabellen nur für
+Naturkatastrophen, sonst schwierig).\\
+\textbf{Qualitativ:} Einschätzung auf mehrstufiger Skala (3--5 Stufen),
+z.B.\ Schaden ``4'' von 5.
+\end{mainbox}
+
+\begin{mainbox}{Risiko messen}
+$$\boxed{\begin{aligned}\text{Risiko} = {} & \text{Eintrittshäufigkeit}\\ & \times \text{Schadensausmass}\end{aligned}}$$
+\vspace{-6pt}
+\begin{center}
+[CHF/Jahr] = [\#/Jahr] $\times$ [CHF/Fall]
+\end{center}
+\textbf{Cyber:} Eintrittshäufigkeit eines Incidents ist Funktion von
+Threats, Exposures, Vulnerabilities, Security Controls.
+\end{mainbox}
+
+\begin{mainbox}{FAIR (Factor Analysis of Information Risk)}
+\begin{align*}
+\text{Risiko} &= \text{LEF} \times \text{LM} \\
+\text{LEF} &= \text{TEF} \times \text{V} \\
+\text{TEF} &= \text{CF} \times \text{PoA} \\
+\text{V} &= f(\text{TC}, \text{RS}) \\
+\text{LM} &= \text{Primary} + \text{Secondary Loss}
+\end{align*}
+\renewcommand*{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}l|X@{}}
+LEF & Loss Event Freq.\ [\#/J.] \\
+LM & Loss Magnitude [CHF/Fall] \\
+TEF & Threat Event Freq.\ [\#/J.] \\
+V & Vulnerability [\%] (Event $\to$ Incident) \\
+CF / PoA & Contact Freq.\ / Prob.\ of Action \\
+TC / RS & Threat Capability / Resistance Strength \\
+\end{tabularx}
+TEF $\leftrightarrow$ Threat Actor/Exposure; V $\leftrightarrow$ Controls.
+\end{mainbox}
+
+\begin{subbox}{Beispiel LEF}
+Vertrauliche Infos gelangen an Unbefugte:
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{l|c|c}
+& \textbf{Laptop weg} & \textbf{Insider} \\
+\hline
+TEF [\#/J.] & 10 & 0.1 \\
+V [\%] & 1\,\% & 25\,\% \\
+\hline
+LEF [\#/J.] & \textbf{0.1} & \textbf{0.025} \\
+\end{tabular}
+\end{center}
+\end{subbox}
+
+\begin{mainbox}{Weg zu einem ``guten'' Risiko}
+\textbf{1} Szenarien $\to$ \textbf{2} FAIR-Faktoren $\to$ \textbf{3}
+Experten-Schätzung (\textbf{PERT}: [Min, Most-Likely, Max]) $\to$ \textbf{4}
+\textbf{Monte-Carlo-Simulation}:
+\begin{enumerate}
+    \item Zufallswerte für LEF, PL, SL generieren
+    \item PL \& SL kombinieren $\to$ LM
+    \item LEF $\times$ LM $\to$ Risiko
+    \item Risiko-Verteilung analysieren
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Kritik klassische Risikoanalyse}
+\begin{itemize}
+    \item Einzelbetrachtung jedes Assets $\Rightarrow$ hoher Aufwand.
+    \item Eintrittswahrsch.\ \& Schadenshöhe schwer/ungenau ermittelbar.
+    \item Neue Angriffe existieren beim Erstellen noch gar nicht
+          $\Rightarrow$ kostspielig, wenig effektiv.
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Qualitative Skalen (Bsp.\ 5-stufig)}
+\textbf{Schadensausmass:}
+\begin{enumerate}
+    \item \textbf{Vernachlässigbar:} im normalen Betrieb, keine Zusatzkosten
+    \item \textbf{Marginal:} kleine Störung, minimale Kosten
+    \item \textbf{Mittel:} sofortige Umverteilung Zeit/Ressourcen
+    \item \textbf{Kritisch:} Betrieb stark gestört, Teilausfall möglich
+    \item \textbf{Katastrophal:} Fortbestand gefährdet
+\end{enumerate}
+\textbf{Eintrittshäufigkeit} (WSK):
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\begin{tabular}{l|l}
+1 sehr selten & $<10\,\%$ \\
+2 selten & $10$--$35\,\%$ \\
+3 möglich & $36$--$64\,\%$ \\
+4 oft & $65$--$90\,\%$ \\
+5 sehr oft & $>90\,\%$ \\
+\end{tabular}
+\end{center}
+\end{mainbox}
+
+\begin{mainbox}{Risikomatrix / Risk-Map}
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+\foreach \x in {1,...,5} {
+  \foreach \y in {1,...,5} {
+    \pgfmathtruncatemacro{\r}{\x*\y}
+    \ifnum\r<5 \def\c{green!35}\else
+      \ifnum\r<10 \def\c{yellow!50}\else
+        \ifnum\r<15 \def\c{orange!50}\else \def\c{red!45}\fi\fi\fi
+    \fill[\c] (\x-1,\y-1) rectangle (\x,\y);
+    \node[font=\tiny] at (\x-0.5,\y-0.5) {\r};
+  }
+  \node[font=\tiny] at (\x-0.5,-0.4) {\x};
+  \node[font=\tiny] at (-0.4,\x-0.5) {\x};
+}
+\draw[gray] (0,0) grid (5,5);
+\draw[ultra thick] (0,5)--(1,5)--(1,4)--(2,4)--(2,3)--(3,3)--(3,2)--(4,2)
+  --(4,1)--(5,1);
+\node[font=\scriptsize] at (2.5,-1.1) {Eintrittshäufigkeit};
+\node[font=\scriptsize,rotate=90] at (-1.1,2.5) {Schadensausmass};
+\node[font=\tiny,align=left,anchor=west] at (5.2,2.5)
+  {dicke Linie:\\Akzeptanzlinie\\(hier $R\le 9$)};
+\end{tikzpicture}
+\end{center}
+\textbf{Risiko-Portfolio:} Menge der identifizierten Risiken (oft pro
+Geschäftsfeld), mit Risk-Owner \& Warnsignalen.
+\textbf{Risk-Map:} Portfolio eingetragen in der Risikomatrix.
+\end{mainbox}
+
+\begin{subbox}{Qualitative Analyse: Pro/Contra}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}X|X@{}}
+\textbf{Pro} & \textbf{Contra} \\
+\hline
+übersichtlich & Tendenz zu ``alles gelb'' \\
+schnell machbar & Best Practice statt krit.\ Denken \\
+gut für erste Einschätzung \& Mgmt.-Kommunikation & stark abhängig von
+Erfahrung der Bewertenden \\
+geringer Datenbedarf & keine quantitativen Aussagen \\
+hilft bei Priorisierung & schwer nachvollziehbar/wiederholbar \\
+\end{tabularx}
+\end{subbox}
+
+\begin{subbox}{Vorlage ISDS-Risikoanalyse (VBS)}
+Pro Risiko: Szenario, Eintrittswahrsch.\ $E$ (1--6), Auswirkung $A$ (1--6)
+je Dimension \textbf{Vt, Vf, I, N} (Vertraulichkeit, Verfügbarkeit,
+Integrität, Nachvollziehbarkeit); $R = E \cdot A$ je Dimension,
+\textbf{Gesamt} $= \max(R_{Vt}, R_{Vf}, R_I, R_N)$.
+\begin{itemize}
+    \item \textbf{Credible worst case} bewerten.
+    \item \textbf{Nettobewertung:} umgesetzte Massnahmen berücksichtigen.
+\end{itemize}
+Danach: Sicherheitsanforderungen $\to$ Restrisikobewertung $\to$
+Restrisikomatrix.
+\end{subbox}
+
+\subsection{Risiken bewerten}
+
+\begin{mainbox}{Schutzziel \& Akzeptanzlinie}
+\textbf{Schutzziel:} angestrebter Sicherheitszustand = Grenze zwischen
+akzeptierbaren und nicht akzeptierbaren Risiken.
+Optisch dargestellt durch die \textbf{Akzeptanzlinie} in der Risikomatrix.
+Risiken darüber $\Rightarrow$ behandeln.
+\end{mainbox}
+
+\subsection{Risiken behandeln}
+
+\begin{mainbox}{4 Risiko-Strategien}
+\begin{itemize}
+    \item \textbf{Vermeiden} (Avoid): Geschäftsentscheid -- Projekt stoppen,
+          Markt meiden. Risiken vermeiden, die man nicht versteht.
+    \item \textbf{Reduzieren} (Reduce): Technik \& Prozesse -- Firewall,
+          Sicherheitsarchitektur, ISMS; senkt \textbf{WSK oder Impact}.
+    \item \textbf{Verschieben} (Transfer): Versicherung, Outsourcing.
+    \item \textbf{Akzeptieren} (Accept): wenn Chancen grösser sind.
+\end{itemize}
+\textbf{Achtung: Accountability $\neq$ Responsibility} -- Aufgabe
+(Responsibility) lässt sich delegieren/transferieren, die
+Rechenschaftspflicht (Accountability) bleibt beim Management.
+\end{mainbox}
+
+\begin{mainbox}{Wirkung auf Threat/Vuln./Exposure}
+\textbf{Vermeiden:} Asset bzw.\ Exposition entfernen $\Rightarrow$ Risiko
+weg.\\
+\textbf{Reduzieren:} Schwachstelle/Exposition verkleinern (kontrollierbare
+Teile), Bedrohung bleibt.
+\end{mainbox}
+
+\begin{mainbox}{Restrisiko (Residual Risk)}
+Das verbleibende Risiko, nachdem alle Massnahmen angewandt wurden.
+Ablauf: Assessment $\to$ Vermeiden $\to$ Reduzieren $\to$ Verschieben $\to$
+Rest akzeptieren. Restrisiko muss \emph{nicht} akzeptiert werden, wenn zu
+gross (dann weitere Iteration).
+\end{mainbox}
+
+\begin{mainbox}{Controls (ISO 27002): Wirkung $\times$ Art}
+Art: physisch / prozessual / technisch / legal.
+\begin{itemize}
+    \item \textbf{Präventiv:} Türen / ISMS / Firewall / DSGVO
+    \item \textbf{Detektiv:} Kamera / Audits / Alarm, Logging
+    \item \textbf{Korrektiv:} Backups einspielen / BCM, Playbooks /
+          redundante Backups / Versicherung
+\end{itemize}
+Siehe auch ISO 27k \& NIST-CSF.
+\end{mainbox}
+
+\begin{subbox}{Kriterien für Versicherbarkeit}
+\begin{enumerate}
+    \item Viele ähnliche Ereignisse (Gesetz der grossen Zahlen)
+    \item Bestimmbarer Verlust (Ort, Zeit, Ursache; gerichtsfest)
+    \item Zufälliger Verlust (Auslöser nicht kontrollierbar)
+    \item Grosser Verlust (Economy of Scale)
+    \item Bezahlbare Prämie (tiefe Eintrittshäufigkeit)
+    \item Quantifizierbarer Verlust
+    \item Begrenztes Risiko katastrophaler Schäden (unabhängige Ereignisse)
+\end{enumerate}
+\end{subbox}
+
+\begin{mainbox}{Essenz}
+Risiken bestimmen, Risikoniveau \emph{transparent} bewerten, Massnahmen
+ergreifen bis \textbf{akzeptables Niveau}. Ziel ist nicht Risiken zu
+vermeiden, sondern \textbf{Risikobewusstsein} \& Möglichkeiten zur
+Minimierung zu schaffen.
+\end{mainbox}
+
+\subsection{Übungen}
+
+\begin{subbox}{Aufgabe HochTief AG}
+Baufirma, 10 Mio.\ CHF Umsatz. Ransomware 4$\times$ in 5 J.\ à 20k CHF;
+Angriff via Fernwartung legt Betonproduktion lahm: alle 10 J., 15 Mio.\ CHF.
+
+\textbf{a) Gesamtrisiko} (unabhängig $\Rightarrow$ addieren):
+\begin{align*}
+R_1 &= 0.8 \cdot 20\,000 = 16\,000 \\
+R_2 &= 0.1 \cdot 15\,000\,000 = 1\,500\,000 \\
+R &= \mathbf{1\,516\,000\ \textbf{CHF/J.}}
+\end{align*}
+\textbf{b)} Mit Produktion beginnen ($R_2 \gg R_1$): IT/OT-Segmentierung,
+VPN + Jump-Host + MFA, zeitlich begrenzte Fernwartung, Härtung, OT-Monitoring.
+Ransomware: MFA, EDR, Least Privilege, Patching, \textbf{3-2-1-Backups}
+(immutable/offline, Restore-Tests, RPO/RTO).\\
+\textbf{c)} Beton zukaufen = \textbf{Vermeiden} (Asset entfernt) +
+\textbf{Transfer} an Lieferanten (SLA, Haftung regeln). Restrisiko:
+Lieferantenausfall, Abhängigkeit.\\
+\textbf{d)} Awareness senkt \textbf{TEF} (Eintrittswahrsch.), nicht
+Schaden. Wöchentl.\ Backup senkt \textbf{LM} (Schaden), nicht WSK --
+aber RPO 7 Tage zu grob, besser täglich inkrementell.
+\end{subbox}
+
+\begin{subbox}{Fallstudie Home-Office: Vorgehen}
+\begin{enumerate}
+    \item 10 Risiken identifizieren
+    \item je $E$ \& $S$ (1--5) \textbf{begründet} schätzen, $R = E \cdot S$
+    \item Risk-Map mit Akzeptanzlinie, Prioritäten (rot/gelb/grün)
+    \item 10 Massnahmen definieren \& begründen
+    \item erneut $E$, $S$ schätzen $\to$ 2.\ Risk-Map (vorher/nachher)
+    \item Spinnendiagramm: Risiken vorher vs.\ nachher
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Fallstudie Home-Office: Lösungsbsp.}
+\renewcommand*{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}X|c|c|c@{}}
+\textbf{Risiko} & $E$ & $S$ & $R$ \\
+\hline
+WLAN mit WEP & 5 & 4 & 20 \\
+Software vom Onkel (Malware, Lizenzen) & 4 & 4 & 16 \\
+kein Patch-Management & 3 & 4 & 16 \\
+NAS: SPOF, Ransomware & 3 & 5 & 15 \\
+kein Jugendschutz & 4 & 3 & 12 \\
+kein sep.\ Arbeitsnetz (Bank!) & 2 & 5 & 10 \\
+E-Banking auf Kinder-Gerät & 2 & 5 & 10 \\
+unsichere IoT-Geräte & 3 & 3 & 9 \\
+geteilte Benutzerkonten & 3 & 2 & 6 \\
+Fax unverschlüsselt & 2 & 2 & 4 \\
+\end{tabularx}
+Massnahmen z.B.: WPA3, Software nur aus vertrauensw.\ Quellen, Auto-Updates,
+3-2-1-Backup, Netzsegmentierung (VLAN Arbeit/IoT/Gäste), getrennte Konten,
+Verschlüsselung.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Bedrohung ist \emph{nicht} kontrollierbar -- nur Schwachstelle \&
+          Exposition.
+    \item Häufigkeit in \#/Jahr umrechnen: ``4$\times$ in 5 J.'' $= 0.8$/J.,
+          ``alle 10 J.'' $= 0.1$/J.
+    \item Unabhängige Risiken: Erwartungswerte \emph{addieren}.
+    \item Awareness wirkt auf Eintrittswahrsch., Backup auf Schadenshöhe.
+    \item Outsourcing transferiert Responsibility, nicht Accountability.
+    \item Schätzungen \emph{immer begründen}; Vorher-/Nachher-Vergleich.
+    \item Restrisiko $\neq$ automatisch akzeptiert.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+Assets \& Bedrohungen identifizieren $\to$ Szenarien formulieren $\to$ $E$
+\& $S$ schätzen (qualitativ) bzw.\ FAIR/Monte-Carlo (quantitativ) $\to$ Risk-Map
+mit Akzeptanzlinie $\to$ Strategie (Vermeiden, Reduzieren, Verschieben,
+Akzeptieren) $\to$ Restrisiko bewerten $\to$ iterieren.
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

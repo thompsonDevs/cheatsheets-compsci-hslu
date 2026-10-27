@@ -1035,6 +1035,194 @@ enthalten sind.
 \end{subbox}
 
 % ============================================================================
+% SECTION 6: GEWÖHNLICHE DIFFERENTIALGLEICHUNGEN I
+% ============================================================================
+\section{Gewöhnliche Differentialgleichungen I}
+
+\subsection{Grundbegriffe}
+
+\begin{mainbox}{Differentialgleichung (DGL)}
+Gleichung, die eine gesuchte \textbf{Funktion} und eine oder mehrere ihrer
+\textbf{Ableitungen} enthält.
+\begin{itemize}
+    \item \textbf{Gewöhnlich} (ODE): Funktion hängt von \emph{einer}
+          Variablen ab, z.B.\ $y(x)$, $x(t)$.
+    \item \textbf{Partiell} (PDE): mehrere Variablen, z.B.\
+          Wärmeleitung $\pdn{u}{t} = a\left(\pdn{^2u}{x^2} +
+          \pdn{^2u}{y^2}\right)$
+    \item \textbf{Ordnung} = höchste vorkommende Ableitung
+    \item \textbf{Implizit:} $y' + y - x = 0$; \
+          \textbf{explizit} (nach höchster Ableitung aufgelöst):
+          $y' = x - y$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Allgemeine \& spezielle Lösung}
+\textbf{Allgemeine Lösung:} Schar von Lösungen mit Scharparameter
+$C \in \R$ (bei Ordnung $n$: $n$ Parameter).\\
+\textbf{Anfangswertproblem (AWP)}: DGL + Anfangsbedingung, z.B.\
+$y(x_0) = y_0$ $\Rightarrow$ $C$ bestimmen $\Rightarrow$
+\textbf{spezielle Lösung} durch den Punkt $(x_0, y_0)$.\\
+Ordnung 2 braucht 2 Bedingungen, z.B.\ $y(0)$ und $y'(0)$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel $y' = x - y$}
+Allgemein: $y(x) = Ce^{-x} + x - 1$\\
+$y(0) = 4$: $4 = C - 1 \Rightarrow C = 5$\\
+$y(0) = 3$: $C = 4$; \ $y(0) = 2$: $C = 3$\\
+Probe: $y' = -Ce^{-x} + 1$, \ $x - y = -Ce^{-x} + 1$ \checkmark
+\end{subbox}
+
+\begin{subbox}{Herleitung: Federpendel}
+Hooke: Federkraft $F_1 = -kx$ ($k$: Federkonstante), Newton:
+$F_2 = ma$. Gleichgewicht $F_2 = F_1$, mit $v = \dot{x}$,
+$a = \dot{v} = \ddot{x}$:
+$$\boxed{m\ddot{x}(t) + kx(t) = 0} \quad \text{(DGL 2.\ Ordnung)}$$
+Gedämpft: $m\ddot{x} + d\dot{x} + kx = 0$.
+\end{subbox}
+
+\subsection{Richtungsfeld}
+
+\begin{mainbox}{Richtungsfeld einer DGL 1.\ Ordnung}
+Voraussetzung: explizite DGL $y' = f(x, y)$.
+\begin{enumerate}
+    \item Punkte $(x, y)$ im Gitter wählen.
+    \item In $f$ einsetzen $\Rightarrow$ Steigung $y'$ an diesem Punkt.
+    \item Kurzes \textbf{Linienelement} mit dieser Steigung zeichnen.
+\end{enumerate}
+Lösungskurven verlaufen \emph{tangential} zu den Linienelementen
+$\Rightarrow$ Überblick über die allgemeine Lösung ohne zu rechnen.\\
+\textbf{Isoklinen:} Kurven gleicher Steigung $f(x, y) = m$; bei
+$y' = x - y$ Geraden $y = x - m$ (z.B.\ $m = 1$: $y = x - 1$ ist
+selbst Lösung, $C = 0$).
+\end{mainbox}
+
+\subsection{Analytische Lösung (1.\ Ordnung)}
+
+\begin{mainbox}{Separation der Variablen}
+Für $y' = g(x) \cdot h(y)$ (z.B.\ homogene lineare DGL):
+\begin{enumerate}
+    \item $y' = \frac{dy}{dx}$ schreiben
+    \item Variablen trennen: $\dfrac{dy}{h(y)} = g(x)\dx$
+    \item beidseitig integrieren (Konstanten zu einer $C$ zusammenfassen)
+    \item nach $y$ auflösen
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Beispiel homogen: $y_0' + y_0 = 0$}
+\begin{align*}
+\frac{dy_0}{dx} = -y_0 \ &\Rightarrow\ \int \frac{dy_0}{y_0}
+= \int (-1)\dx\\
+\ln|y_0| &= -x + C_3\\
+|y_0| &= e^{C_3} e^{-x} = C_4 e^{-x}\\
+y_0 &= \pm C_4 e^{-x} = Ce^{-x}
+\end{align*}
+\end{subbox}
+
+\begin{mainbox}{Variation der Konstanten}
+Für die \textbf{inhomogene} lineare DGL $y' + a(x)\,y = s(x)$
+($s$: Störfunktion):
+\begin{enumerate}
+    \item Homogene DGL ($s = 0$) lösen: $y_0 = C \cdot u(x)$
+    \item Konstante \textbf{variieren}: Ansatz $y = k(x) \cdot u(x)$
+    \item $y$, $y'$ (Produktregel!) einsetzen $\Rightarrow$ Terme mit
+          $k$ fallen weg, es bleibt $k' \cdot u = s$
+    \item $k(x) = \int \frac{s(x)}{u(x)}\dx + C$ integrieren
+    \item $y = k(x) \cdot u(x)$
+\end{enumerate}
+Struktur: $y = \underbrace{Cu(x)}_{\text{homogen}} +
+\underbrace{y_p(x)}_{\text{partikulär}}$
+\end{mainbox}
+
+\begin{subbox}{Beispiel inhomogen: $y' + y = x$}
+Homogen: $y_0 = Ce^{-x}$. Ansatz $y = k(x)e^{-x}$:
+\begin{align*}
+y' &= k'e^{-x} - ke^{-x}\\
+y' + y &= k'e^{-x} - ke^{-x} + ke^{-x} = x\\
+k' &= xe^{x}\\
+k &= (x - 1)e^{x} + C \quad \text{(partielle Int.)}\\
+y &= \big((x-1)e^x + C\big)e^{-x}\\
+  &= Ce^{-x} + x - 1
+\end{align*}
+\textbf{AWP} $y(0) = 2$: $C = 3$ $\Rightarrow$ $y = 3e^{-x} + x - 1$
+\end{subbox}
+
+\subsection{Numerische Lösung}
+
+\begin{mainbox}{Euler-Verfahren}
+AWP $y' = f(x, y)$, $y(x_0) = y_0$, Schrittweite $h$. Einen Schritt
+entlang der Tangente (Steigung aus dem Richtungsfeld) gehen:
+$$\frac{\Delta y}{\Delta x} = \frac{y_1 - y_0}{h} = f(x_0, y_0)$$
+$$\boxed{\begin{aligned}x_{k+1} &= x_k + h\\
+y_{k+1} &= y_k + h \cdot f(x_k, y_k)\end{aligned}}$$
+\textbf{Fehler} $\sim h$ (Ordnung 1): $h$ zehnmal kleiner
+$\Rightarrow$ Fehler zehnmal kleiner.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Euler: $y' = x - y$, $y(0) = 2$, $h = 0.5$}
+$y_1 = 2 + 0.5(0 - 2) = 1$ \ (exakt $y(0.5) \approx 1.320$)\\
+$y_2 = 1 + 0.5(0.5 - 1) = 0.75$ \ (exakt $y(1) \approx 1.104$)\\
+Grosses $h$ $\Rightarrow$ deutliche Abweichung.
+\end{subbox}
+
+\begin{mainbox}{Runge-Kutta (klassisch, RK4)}
+Mittelt 4 Steigungen pro Schritt ($h_2 = \frac{h}{2}$):
+\begin{align*}
+k_1 &= f(x_k,\ y_k)\\
+k_2 &= f(x_k + h_2,\ y_k + h_2 k_1)\\
+k_3 &= f(x_k + h_2,\ y_k + h_2 k_2)\\
+k_4 &= f(x_k + h,\ y_k + h k_3)\\
+y_{k+1} &= y_k + \tfrac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\end{align*}
+\textbf{Fehler} $\sim h^4$ (Ordnung 4).
+\end{mainbox}
+
+\begin{subbox}{Fehlervergleich ($y' = x - y$, $y(0) = 4$, $x \le 5$)}
+\renewcommand*{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{c|c|c}
+$h$ & Euler & RK4 \\ \hline
+$10^{-1}$ & $9.6 \cdot 10^{-2}$ & $1.7 \cdot 10^{-6}$ \\
+$10^{-2}$ & $9.2 \cdot 10^{-3}$ & $1.5 \cdot 10^{-10}$ \\
+$10^{-3}$ & $9.2 \cdot 10^{-4}$ & $\approx 10^{-13}$ \\
+\end{tabular}
+\end{center}
+(max.\ Abweichung zur exakten Lösung $5e^{-x} + x - 1$)
+\end{subbox}
+
+\begin{subbox}{Symbolisch mit Maxima}
+\texttt{DGL: 'diff(y,x) + y - x = 0;}\\
+\texttt{ode2(DGL, y, x);} \ $\to$ allgemeine Lösung\\
+\texttt{ic1(\%, x=0, y=2);} \ $\to$ AWP 1.\ Ordnung\\
+\texttt{ic2(Allg, t=0, y=1, 'diff(y,t)=0);} \ $\to$ AWP 2.\ Ordnung
+\end{subbox}
+
+\begin{subbox}{Denkprozess: DGL 1.\ Ordnung lösen}
+\begin{enumerate}
+    \item Explizit machen: $y' = f(x, y)$. Homogen oder inhomogen?
+    \item Homogenen Teil per Separation lösen: $y_0 = Cu(x)$.
+    \item Inhomogen: Variation der Konstanten $\to$ $k(x)$.
+    \item Probe durch Einsetzen.
+    \item AWP: Anfangswert einsetzen $\to$ $C$.
+    \item Nicht geschlossen lösbar $\to$ numerisch (Euler/RK4).
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Integrationskonstante nicht vergessen -- sonst fehlt die
+          ganze Lösungsschar.
+    \item $|y|$ nach $\ln$: $\pm e^{C}$ zu neuem $C$ zusammenfassen
+          (inkl.\ $C = 0$).
+    \item Variation der Konstanten: $y'$ mit \textbf{Produktregel};
+          $k$-Terme müssen sich wegheben (sonst Rechenfehler).
+    \item $C$ erst \emph{nach} dem Aufstellen der allgemeinen Lösung aus
+          dem Anfangswert bestimmen.
+    \item Euler: $f$ am \emph{alten} Punkt $(x_k, y_k)$ auswerten.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

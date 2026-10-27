@@ -88,3 +88,98 @@ Standard	isf	Nenne Funktionen von OWASP ZAP.	HTTP Requests/Responses abfangen, m
 Standard	isf	Welches Tool ist eine verbreitete Alternative zu OWASP ZAP?	Burp Suite (Community Edition) von PortSwigger.	isf::intercepting-proxies
 Standard	isf	Welche Schritte sind nötig, um ZAP als Intercepting Proxy im Browser einzurichten?	1) ZAP installieren. 2) Im Browser den Proxy auf localhost:8080 konfigurieren. 3) ZAP-CA-Zertifikat exportieren. 4) CA-Zertifikat im Browser als vertrauenswürdig importieren. 5) Intercepten.	isf::intercepting-proxies
 Lückentext	isf	Standardmässig lauscht ZAP als Proxy auf {{c1::localhost:8080}}.		isf::intercepting-proxies
+Standard	isf	Was ist ein Managementsystem?	Ein systematisches, geplantes Vorgehen zur Erreichung von Zielen mittels einer Leitlinie bzw. Strategie, das die vorhandenen Elemente einer Organisation durch Prozesse verknüpft.	isf::isms-standards
+Standard	isf	Was umfasst ein Managementsystem gemäss ISO/IEC 27000?	Organisationsstrukturen, Richtlinien, Planungstätigkeiten, Verantwortlichkeiten, Methoden, Verfahren, Prozesse und Ressourcen.	isf::isms-standards
+Standard	isf	Welches Merkmal haben moderne Managementsysteme immer?	Einen Rückkopplungsprozess, d.h. einen ständigen Verbesserungsprozess (z.B. PDCA-Zyklus).	isf::isms-standards
+Lückentext	isf	Der PDCA-Zyklus: {{c1::Plan}} – {{c2::Do}} – {{c3::Check}} – {{c4::Act}}.		isf::isms-standards
+Standard	isf	Was sind die Kernziele der Informationssicherheit, und welche Nebenziele gibt es (ISO/IEC 27000)?	Kernziele: Vertraulichkeit, Integrität, Verfügbarkeit von Informationen. Nebenziele z.B.: Nicht-Abstreitbarkeit, Privatsphäre, Authentizität, Anonymität.	isf::isms-standards
+Standard	isf	Wofür steht ISMS?	Informationssicherheits-Managementsystem (Information Security Management System).	isf::isms-standards
+Standard	isf	Was passiert ohne Management-Support für die Informationssicherheit?	Es gibt keine Ressourcen (Zeit, Geld), keine Kompetenzen (Befehls- und Umsetzungsgewalt) und keine Priorität.	isf::isms-standards
+Standard	isf	Wer trägt im Unternehmen die (Informationssicherheits-)Risiken und entscheidet über die Ressourcen?	Das Management.	isf::isms-standards
+Standard	isf	Was ist die deutsche Entsprechung von «Policy», «Standard/Guideline» und «Procedures»?	Policy = Leitlinie (Überblick), Standard/Guideline = Richtlinie, Procedures = Verfahren (konkret).	isf::isms-standards
+Lückentext	isf	Eine Security Policy heisst auf Deutsch {{c1::Leitlinie}} (nicht Richtlinie).		isf::isms-standards
+Standard	isf	Wofür steht ISIS12?	Informations-Sicherheitsmanagement in 12 Schritten – ein ISMS v.a. für kleinere Organisationen.	isf::isms-standards
+Standard	isf	Was ist der erste Schritt von ISIS12 und was beschreibt er?	Leitlinie erstellen: beschreibt Sicherheitsziele und angestrebtes Sicherheitsniveau, manifestiert die Gesamtverantwortung der Leitung, zeigt Zweck, Mittel und Strukturen auf.	isf::isms-standards
+Standard	isf	Wer gehört gemäss ISIS12 ins IS-Team?	Informationssicherheitsbeauftragter (ISB), Datenschutzbeauftragter (DSB), Mitarbeitende aus der IT, ISIS-Dienstleister, Vertreter der Anwender, evtl. QM-Beauftragter.	isf::isms-standards
+Standard	isf	Was bedeutet MTA im Kontext von ISIS12?	Maximal tolerierbare Ausfallzeit – wird für kritische Anwendungen bzgl. CIA abgeleitet (zusammen mit SLAs).	isf::isms-standards
+Standard	isf	Was passiert im ISIS12-Schritt «IT-Struktur analysieren»?	Anwendungen werden Systemen und Infrastrukturen zugeordnet; Schutzbedarf, MTA und SLA werden auf die Systeme vererbt.	isf::isms-standards
+Standard	isf	Was ist der letzte (12.) Schritt von ISIS12?	Revision: Revisionsplan erstellen, stetige Optimierung durch weitere Zyklen, evtl. Zertifizierung.	isf::isms-standards
+Standard	isf	Was beschreibt der Schutzbedarf (BSI)?	Welcher Schutz für die Geschäftsprozesse, die dabei verarbeiteten Informationen und die eingesetzte Informationstechnik ausreichend und angemessen ist.	isf::isms-standards
+Standard	isf	Für welche Zielgruppe ist das ISMS nach VdS 10000 gedacht?	Für kleine und mittlere Unternehmen (KMU) – es legt Mindestanforderungen an die Informationssicherheit fest.	isf::isms-standards
+Standard	isf	Was ist die Basis eines IT-Grundschutzkonzepts nach BSI?	Der initiale Verzicht auf eine detaillierte Risikoanalyse: Man geht von pauschalen Gefährdungen aus und verzichtet auf die Einteilung nach Schadenshöhe und Eintrittswahrscheinlichkeit.	isf::isms-standards
+Lückentext	isf	Merksatz ISO 27001: «Nur was {{c1::dokumentiert}} ist, ist wirklich passiert.»		isf::isms-standards
+Standard	isf	Welche Vor- und Nachteile haben ISIS12 und VdS 10000?	Pro: einfach, sehr konkret. Contra: gegen Gebühr, nicht international anerkannt, skalieren nicht gut.	isf::isms-standards
+Standard	isf	Welche Vor- und Nachteile hat das ISMS nach BSI 200-1?	Pro: umfassend, skaliert gut, frei zugänglich, für Behörden «de facto» Pflicht. Contra: umständlich, insgesamt ca. 1000 Seiten Normtext.	isf::isms-standards
+Standard	isf	Welche Vor- und Nachteile hat das ISMS nach ISO/IEC 27001?	Pro: umfassend, skaliert gut, Zertifizierung möglich. Contra: gegen Gebühr, erfordert ISMS-Fachwissen.	isf::isms-standards
+Standard	isf	Sind Normen rechtlich verbindlich?	Grundsätzlich nein – Anwendung und Zertifizierung sind freiwillig. Aber: Sie werden rechtlich bindend, wenn sie Vertragsbestandteil sind, und gelten oft als Massstab für «Best Practice» (z.B. bei Produkthaftung).	isf::isms-standards
+Standard	isf	Was ist der Unterschied zwischen einem Standard/einer Norm und einem Framework?	Standards sind spezifisch und als Best Practice akzeptiert; Frameworks sind allgemein und beschreiben allgemein angewandte Praktiken.	isf::isms-standards
+Standard	isf	Was ist die ISO?	Internationale Organisation für Normung: gegründet 1947, Sitz in Genf, 167 Mitgliedsländer; die Schweiz ist Gründungsmitglied.	isf::isms-standards
+Standard	isf	Welche drei Arten von ISO-Standards gibt es? Nenne je ein Beispiel.	Technische (z.B. MP3), klassifikatorische (z.B. Ländercodes wie «DE») und Verfahrensstandards (z.B. Qualitätsmanagement nach ISO 9000).	isf::isms-standards
+Standard	isf	Was ist die IEC?	International Electrotechnical Commission: Normungsorganisation für Elektrotechnik und Elektronik (1906 London gegründet, seit 1948 in Genf), Verein nach Schweizer Recht.	isf::isms-standards
+Standard	isf	Welches Präfix erhalten Normen, die ISO und IEC gemeinsam entwickeln?	ISO/IEC (z.B. ISO/IEC 27001).	isf::isms-standards
+Standard	isf	Was bedeutet die Bezeichnung «DIN EN ISO/IEC 27001»?	Eine deutsche Norm (DIN) auf Grundlage einer Europäischen Norm (EN), die auf einer internationalen Norm (ISO/IEC) beruht – Benennung «aufsteigend».	isf::isms-standards
+Standard	isf	Welche europäischen Komitees sind für Normen zuständig?	CEN (allgemein, technische Bereiche), CENELEC (Elektrotechnik) und ETSI (Telekommunikation).	isf::isms-standards
+Lückentext	isf	ISO-Normungsprozess: 20 {{c1::Working Draft (WD)}} → 30 {{c2::Committee Draft (CD)}} → 40 {{c3::Draft International Standard (DIS)}} → 50 {{c4::Final Draft International Standard (FDIS)}} → 60 {{c5::International Standard (IS)}}.		isf::isms-standards
+Standard	isf	Welche Kritik wird an Normen geäussert?	Sie sind oft von Einzelinteressen geprägt und von schwankender Qualität statt reine Best Practice; viele sind nicht frei zugänglich, was Kontrolle und Wettbewerb behindert.	isf::isms-standards
+Standard	isf	Was ist ITIL?	Information Technology Infrastructure Library – beschreibt Organisation und Prozesse des IT-Service-Managements.	isf::isms-standards
+Standard	isf	Was ist COBIT?	Control Objectives for Information and Related Technology – ein GRC-Framework (Governance, Risk, Compliance) der ISACA; Bindeglied zwischen unternehmensweiter Steuerung und IT-Modellen wie ITIL oder ISO 27001.	isf::isms-standards
+Standard	isf	Was ist PCI DSS?	Payment Card Industry Data Security Standard – Standard zur Sicherheit von Karteninhaberdaten.	isf::isms-standards
+Lückentext	isf	NIST SP 800-{{c1::30}} behandelt Risikomanagement, NIST SP 800-{{c2::53}} ist ein IT-Sicherheits-Massnahmenkatalog.		isf::isms-standards
+Standard	isf	Was sind die Common Criteria (ISO/IEC 15408)?	Internationaler Standard zur Prüfung und Bewertung der Sicherheitseigenschaften von IT-Produkten.	isf::isms-standards
+Standard	isf	Was regelt FIPS 140?	Anforderungen an Kryptographiemodule (Hard- und Software), herausgegeben vom NIST, in 4 Sicherheits-Levels (1 = tiefster).	isf::isms-standards
+Standard	isf	Wofür sind Kryptomodule nach FIPS 140 Level 4 geeignet?	Für den Einsatz in Umgebungen, die sonst nicht physisch geschützt sind.	isf::isms-standards
+Standard	isf	Was definiert ISO/IEC 27001?	Die Anforderungen an ein ISMS: Einführung, Betrieb, Überwachung, Wartung und Verbesserung eines dokumentierten Informationssicherheits-Managementsystems.	isf::isms-standards
+Standard	isf	Aus welchem Standard ist ISO 27001 entstanden und wann wurde sie ISO-Norm?	Aus dem britischen Standard BS 7799-2:2002; als ISO-Norm 2005 veröffentlicht.	isf::isms-standards
+Standard	isf	Was definiert den Umfang einer Zertifizierung nach ISO 27001?	Der «Scope» und das «Statement of Applicability» (SoA).	isf::isms-standards
+Standard	isf	Kann man sich nach ISO 27001 zertifizieren lassen? Und nach ISO 27002?	ISO 27001: ja. ISO 27002: nein, da sie keine harten Forderungen enthält (nur «sollte»-Formulierungen).	isf::isms-standards
+Standard	isf	Was ist ISO/IEC 27002?	Der «Code of Practice» (CoP) für Informationssicherheit: definiert Controls (Massnahmen) mit Umsetzungsanleitungen für den sicheren Umgang mit Informationen.	isf::isms-standards
+Lückentext	isf	ISO 27002 definiert {{c1::93}} Controls in {{c2::4}} Domänen.		isf::isms-standards
+Standard	isf	Wofür eignet sich ISO 27002 besonders gut?	Für die Umsetzung eines Grundschutzes (Mindestanforderungen im Sicherheitsbereich).	isf::isms-standards
+Standard	isf	Was behandelt ISO/IEC 27005?	Information Security Risk Management – eine Anleitung/ein Framework für IS-Risikomanagement, ohne eine bestimmte Risiko-Methode vorzugeben; setzt Kenntnis von 27001 und 27002 voraus.	isf::isms-standards
+Standard	isf	Was behandelt ISO/IEC 27035?	Information Security Incident Management: Erkennung, Reporting, Bewertung und Behandlung von Sicherheitsvorfällen und -schwachstellen sowie kontinuierliche Verbesserung.	isf::isms-standards
+Lückentext	isf	ISO/IEC {{c1::27031}} behandelt Business Continuity.		isf::isms-standards
+Lückentext	isf	ISO/IEC {{c1::27032}} enthält Guidelines for Cybersecurity, ISO/IEC {{c2::27033}} behandelt Netzwerksicherheit, ISO/IEC {{c3::27034}} Applikationssicherheit.		isf::isms-standards
+Lückentext	isf	ISO/IEC {{c1::27017}} enthält Controls für Cloud-Services, ISO/IEC {{c2::27018}} den Schutz personenbezogener Daten (PII) in Public Clouds.		isf::isms-standards
+Lückentext	isf	ISO/IEC {{c1::27004}} behandelt die Messung (Monitoring, Metriken) der Informationssicherheit.		isf::isms-standards
+Standard	isf	Was ist das NIST?	National Institute of Standards and Technology – US-Behörde im Handelsministerium; entwickelt Standards und technische Empfehlungen.	isf::isms-standards
+Standard	isf	Wie entstand das NIST Cybersecurity Framework (CSF)?	Executive Order 13636 «Improving Critical Infrastructure Cybersecurity» (Obama, 2013) beauftragte NIST, ein risikobasiertes Best-Practice-Framework zum Schutz kritischer Infrastrukturen zu entwickeln (v1.0 2014, v2.0 2024).	isf::isms-standards
+Lückentext	isf	Die drei Komponenten des NIST-CSF: {{c1::Core}} (Functions und Controls), {{c2::Tiers}} (Wirksamkeit messen), {{c3::Profiles}} (Implementierungs-Roadmap).		isf::isms-standards
+Lückentext	isf	Die 6 Functions des NIST-CSF 2.0: {{c1::Govern}}, {{c2::Identify}}, {{c3::Protect}}, {{c4::Detect}}, {{c5::Respond}}, {{c6::Recover}}.		isf::isms-standards
+Standard	isf	Welche Function kam im NIST-CSF 2.0 neu dazu und was umfasst sie?	Govern: Aufbau und Überwachung von Cybersecurity-Risikomanagement-Strategie, Policies und Rollen.	isf::isms-standards
+Lückentext	isf	Der NIST-CSF Core umfasst {{c1::23}} Kategorien und {{c2::106}} Subkategorien (Controls).		isf::isms-standards
+Standard	isf	Wozu dienen die Tiers im NIST-CSF?	Als Orientierung, wie gut eine Organisation das CSF befolgt (1 = niedrigste, 4 = höchste Stufe); die Organisation bestimmt die gewünschte Stufe so, dass das Risiko akzeptabel und die Umsetzung finanziell machbar ist.	isf::isms-standards
+Standard	isf	Wozu dienen Profiles im NIST-CSF?	Sie richten Functions/Kategorien an Geschäftsanforderungen, Risikotoleranz und Ressourcen aus: aktuellen Status erfassen, idealen Reifezustand identifizieren, Roadmap dorthin entwickeln.	isf::isms-standards
+Standard	isf	Was ist der IKT-Minimalstandard?	Ein vom Bund (BWL) herausgegebenes, vom NIST-CSF abgeleitetes und auf die Schweiz angepasstes Framework mit 106 konkreten Massnahmen zur Verbesserung der IKT-Resilienz.	isf::isms-standards
+Standard	isf	Wem wird die Umsetzung des IKT-Minimalstandards empfohlen?	Betreibern kritischer Infrastrukturen – er bietet aber jeder interessierten Organisation Hilfestellung.	isf::isms-standards
+Standard	isf	Was ist CSRM?	Die Cybersicherheits- und Resilienzmethode des Bundesamts für Cybersicherheit (BACS), mit der Organisationen ihre Cybersicherheit und Resilienz stärken können.	isf::isms-standards
+Standard	isf	Was ist das BSI?	Bundesamt für Sicherheit in der Informationstechnik – 1991 gegründete deutsche Bundesbehörde für IT-Sicherheit (Sitz Bonn).	isf::isms-standards
+Standard	isf	Was ist der Unterschied zwischen BSI-Standards und IT-Grundschutz-Kompendium?	BSI-Standards beschreiben die Vorgehensweise (ISMS, Risikoanalyse); das Kompendium enthält die Bausteine mit Gefährdungen und Umsetzungshinweisen.	isf::isms-standards
+Lückentext	isf	BSI-Standard {{c1::200-1}}: Managementsysteme für Informationssicherheit (ISMS).		isf::isms-standards
+Lückentext	isf	BSI-Standard {{c1::200-2}}: IT-Grundschutz-Vorgehensweise.		isf::isms-standards
+Lückentext	isf	BSI-Standard {{c1::200-3}}: Risikoanalyse auf Basis von IT-Grundschutz.		isf::isms-standards
+Lückentext	isf	BSI-Standard {{c1::200-4}}: Business Continuity Management (Notfallmanagement).		isf::isms-standards
+Standard	isf	Welche Zielgruppe hat BSI-Standard 200-1 und womit ist er kompatibel?	Zielgruppe ist das Management; er ist kompatibel mit der ISO-2700x-Reihe.	isf::isms-standards
+Standard	isf	Wann ist eine Risikoanalyse nach BSI 200-3 nötig?	Wenn die Standardmassnahmen nicht reichen: bei Objekten mit besonders hohem Schutzbedarf, bei Objekten, die das Kompendium nicht abdeckt, oder bei nicht vorgesehenen Einsatzszenarien.	isf::isms-standards
+Standard	isf	Welchem ISO-Standard entspricht BSI 200-3 thematisch? Und BSI 200-4?	BSI 200-3 (Risikoanalyse) ≈ ISO 27005; BSI 200-4 (Business Continuity) ≈ ISO 27031.	isf::isms-standards
+Standard	isf	Was ist die Grundidee des IT-Grundschutzes?	Abläufe und IT-Komponenten sind überall ähnlich (typische Gefährdungen, Prozesse, Komponenten); darauf lässt sich ein wiederverwendbares, anpassbares und erweiterbares Gerüst für das Sicherheitsmanagement aufbauen.	isf::isms-standards
+Standard	isf	Was ist die Basis-Absicherung im IT-Grundschutz?	Einstiegsvariante: schnell alle relevanten Geschäftsprozesse mit Basismassnahmen absichern; benötigt kein Risikomanagement.	isf::isms-standards
+Standard	isf	Was ist die Kern-Absicherung im IT-Grundschutz?	Fokus der Massnahmen auf die «Kronjuwelen», d.h. besonders wichtige Geschäftsprozesse und Assets – vertiefte Absicherung der kritischsten Bereiche.	isf::isms-standards
+Standard	isf	Was ist die Standard-Absicherung im IT-Grundschutz?	Die empfohlene IT-Grundschutz-Vorgehensweise mit umfassendem Schutz aller Prozesse und Bereiche der Institution.	isf::isms-standards
+Standard	isf	Was bedeuten die Modalverben MUSS, SOLL und KANN in IT-Grundschutz-Anforderungen?	MUSS/DARF NUR: verpflichtend (Basis-Anforderungen). SOLL: Abweichung mit Begründung möglich. KANN: fakultativ, Best Practice.	isf::isms-standards
+Standard	isf	Wie verhalten sich IT-Grundschutz-Anforderungen zu denen der ISO 27001?	Sie sind konkreter ausgestaltet; z.B. entspricht eine ISO-Anforderung zu Backup einem ganzen Grundschutz-Baustein (CON.3) mit 12 Anforderungen (1:n).	isf::isms-standards
+Standard	isf	Was ist der Nutzen des IT-Grundschutz-Kompendiums?	Weniger Aufwand für das Sicherheitskonzept: Meist genügt es, die passenden Bausteine auszuwählen und deren Massnahmen konsequent umzusetzen.	isf::isms-standards
+Standard	isf	Was regelt der Cyber Resilience Act (CRA)?	Cybersicherheit von Produkten mit digitalen Elementen (HW und SW): Hersteller müssen Security by Design/Default, Risikobewertung und SBOM umsetzen und Schwachstellen über den ganzen Lebenszyklus behandeln.	isf::isms-standards
+Standard	isf	Wie lange müssen Hersteller gemäss CRA ihre Produkte überwachen und Updates liefern?	Über den Lebenszyklus, im CRA mit 5 Jahren definiert; Sicherheitsupdates kostenlos.	isf::isms-standards
+Standard	isf	Wem müssen Hersteller gemäss CRA Sicherheitsvorfälle melden?	Der EU-Cybersicherheitsbehörde ENISA.	isf::isms-standards
+Standard	isf	Welche Strafen sieht der CRA vor?	Bis 15 Mio. € oder 2.5 % des globalen Umsatzes.	isf::isms-standards
+Standard	isf	Was ist bezüglich Software und Haftung neu (CRA/Product Liability Directive)?	Software gilt neu als Produkt – Open-Source-Software ist ausgenommen.	isf::isms-standards
+Standard	isf	Was regelt NIS-2?	Die Network and Information Security Directive: sicherer Betrieb wesentlicher und wichtiger Einrichtungen bzw. Infrastrukturen (18 Sektoren) mit strengeren Sicherheitsanforderungen, Meldepflichten und höheren Strafen.	isf::isms-standards
+Standard	isf	Welche Unternehmen sind von NIS-2 betroffen?	Unternehmen in den 18 Sektoren (11 kritische, 7 wichtige) mit mehr als 50 Mitarbeitenden oder über 10 Mio. € Umsatz.	isf::isms-standards
+Lückentext	isf	NIS-2-Meldefristen: Frühwarnung innerhalb von {{c1::24}} Stunden, detaillierte Meldung innerhalb von {{c2::72}} Stunden nach Kenntnisnahme.		isf::isms-standards
+Standard	isf	Was ist der rechtliche Unterschied zwischen NIS-2 und DORA?	NIS-2 ist eine EU-Richtlinie, die national umgesetzt werden muss; DORA ist eine EU-weit direkt geltende, branchenspezifische Verordnung (Finanzsektor).	isf::isms-standards
+Standard	isf	Was ist DORA und welche Anforderungen stellt es?	Digital Operational Resilience Act für Finanzinstitute: IKT-Risikomanagement und Governance, Information Sharing, Digital Operational Resilience Testing, Third-Party-Risikomanagement; Verantwortung beim Vorstand.	isf::isms-standards
+Standard	isf	Was ist das Schweizer Pendant zu DORA?	Das FINMA-Rundschreiben 2023/1 (Operationelle Risiken und Resilienz – Banken).	isf::isms-standards
+Standard	isf	Was regelt der EU Cybersecurity Act (CSA)?	Einen Rahmen für Überprüfung und Zertifizierung von Sicherheitsmassnahmen (z.B. EUCC auf Basis der Common Criteria) und die Stärkung der ENISA.	isf::isms-standards
+Standard	isf	Was unterscheidet den Fokus von CRA und NIS-2?	CRA: sichere Entwicklung von Produkten (Hersteller). NIS-2: sicherer Betrieb wichtiger Infrastrukturen (Betreiber).	isf::isms-standards
+Standard	isf	Was gilt in der Schweiz seit 1. April 2025 bezüglich Cybervorfällen?	Meldepflicht für Betreiber kritischer Infrastrukturen an das BACS: Art, Auswirkungen und ergriffene Massnahmen innert 24 h nach Entdeckung (später ergänzbar); Bussen bis 100'000 CHF.	isf::isms-standards
+Standard	isf	Was bedeuten «upstream» und «downstream» in der Lieferkette?	Upstream: Lieferanten (Tier 1 = Vertragspartner, Tier 2 beliefert Tier 1, Tier 3 = Rohstoff). Downstream: Distributor, Retailer, Consumer.	isf::isms-standards

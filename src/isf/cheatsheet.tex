@@ -1659,6 +1659,469 @@ security.txt.
 \end{subbox}
 
 % ============================================================================
+% SECTION 6: ASYMMETRISCHE KRYPTOLOGIE
+% ============================================================================
+\section{Asymmetrische Kryptologie}
+
+\subsection{Motivation: Schlüsselverteilung}
+
+\begin{mainbox}{Symmetrische Schlüssel im P2P-Netz}
+Jeder der $n$ Benutzer speichert $n-1$ Schlüssel, total
+$$\boxed{\frac{n(n-1)}{2}\ \text{symmetrische Schlüssel}}$$
+Jeder neue Benutzer braucht eine sichere Verbindung zu \emph{allen} anderen.\\
+Bsp.: $n = 4 \Rightarrow 6$, \ $n = 100 \Rightarrow 4950$ Schlüssel.
+\end{mainbox}
+
+\begin{mainbox}{Key Distribution Center (KDC)}
+Jeder Teilnehmer teilt mit dem KDC einen \textbf{Langzeitschlüssel}
+(KEK, Key Encryption Key), eingebaut in einem Trusted Environment bzw.\ in der
+Fertigung. Das KDC erzeugt pro Verbindung einen kurzlebigen \textbf{Session Key}
+$k_{ses}$.\\
+\textbf{Probleme:}
+\begin{itemize}
+    \item \textbf{Performanz:} KDC bei jeder neuen Verbindung nötig
+    \item \textbf{Initialisierung:} neuer Teilnehmer braucht sicheren Kanal
+    \item \textbf{SPOF:} KDC kompromittiert $\Rightarrow$ alle Schlüssel
+          kompromittiert; DoS legt alle lahm
+    \item \textbf{Keine PFS}
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Perfect Forward Secrecy (PFS)}
+\textbf{``Folgenlosigkeit'':} kompromittierte \textbf{Langzeitschlüssel} legen
+\textbf{keine früheren Sitzungsschlüssel} offen.\\
+Beim KDC verletzt: Mit $k_A$ berechnet Oskar alle
+$k_{ses}$ aus $y_A = e_{k_A}(k_{ses})$ und entschlüsselt auch alle zuvor
+gespeicherten Nachrichten.\\
+Mit symmetrischen Schlüsseln nicht erreichbar $\Rightarrow$ asymmetrisch,
+\textbf{Diffie-Hellman}. Vgl.\ \emph{Harvest now, decrypt later} (Kap.\ 1).
+\end{mainbox}
+
+\subsection{Public-Key-Prinzip \& Komplexität}
+
+\begin{mainbox}{Prinzip Public-Key-Verschlüsselung}
+\textbf{ENC} mit dem \emph{öffentlichen} Schlüssel des Empfängers ist einfach zu
+berechnen, die Umkehrung \textbf{DEC} ohne \emph{privaten} Schlüssel (vermutlich)
+schwierig.\\
+Bsp.\ Faktorisierung: $31 \cdot 67 = 2077$ leicht, $2077 = \,?$ schwierig.
+\renewcommand*{\arraystretch}{1.2}
+\begin{center}
+\begin{tabular}{l|l}
+\textbf{Verfahren} & \textbf{Schwieriges Problem} \\
+\hline
+RSA & Integer-Faktorisierung \\
+DH & Diskreter Logarithmus \\
+ECC & Diskreter Logarithmus \\
+\end{tabular}
+\end{center}
+\textbf{Diskreter Log.:} Wenn $a^x \equiv b \bmod n$, ist $x$ der diskrete
+Logarithmus von $b$ zur Basis $a$ modulo $n$.
+\end{mainbox}
+
+\begin{mainbox}{Komplexitätstheorie}
+Berechenbarkeit genügt nicht, Lösungen müssen \textbf{effizient} sein.
+Analysiert Ressourcen: \textbf{Zeit}, \textbf{Speicher} (RAM, Disk),
+\textbf{Netz-/Medienzugriffe}.\\
+Messgrösse unabhängig von Hardware, Programmiersprache, Compiler, Testdaten.\\
+Klassen (Eingabegrösse $n$ = Anzahl Ziffern):
+$$O(1) < O(n) < O(n^2) < O(e^n)$$
+Bsp.: Addition zweier $n$-stelliger Zahlen ist $O(n)$.
+\end{mainbox}
+
+\subsection{Diffie-Hellman}
+
+\begin{mainbox}{Diffie-Hellman-Schlüsselvereinbarung (1976)}
+\textbf{Öffentlich:} grosse Primzahl $p$, $z \in \{2, \ldots, p-2\}$.
+\renewcommand*{\arraystretch}{1.25}
+\begin{center}
+\begin{tabular}{l|l}
+\textbf{Alice} & \textbf{Bob} \\
+\hline
+privat $a \in \{1..p{-}1\}$ & privat $b \in \{1..p{-}1\}$ \\
+$A = z^a \bmod p$ & $B = z^b \bmod p$ \\
+\multicolumn{2}{c}{$A$, $B$ austauschen} \\
+$k = B^a \bmod p$ & $k = A^b \bmod p$ \\
+\end{tabular}
+\end{center}
+Beide erhalten $\boxed{k = z^{ab} \bmod p}$; $k$ wird \emph{nie} übertragen.\\
+Öffentliche Schlüssel: $A, B$; private: $a, b$.\\
+Unabhängig davor: Cocks 1973, Merkle 1974.
+\end{mainbox}
+
+\begin{subbox}{Beispiele DH}
+$p = 29$, $z = 2$, $a = 5$, $b = 4$:
+$A = 2^5 \bmod 29 = 3$, \ $B = 2^4 = 16$,\\
+$k = 16^5 \bmod 29 = 3^4 \bmod 29 = \mathbf{23}$\\[2pt]
+Aufgabe $p = 467$, $z = 2$:
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\begin{tabular}{rr|rr|r}
+$a$ & $b$ & $A$ & $B$ & $k$ \\
+\hline
+3 & 5 & 8 & 32 & 78 \\
+400 & 134 & 137 & 84 & 90 \\
+228 & 57 & 394 & 313 & 206 \\
+\end{tabular}
+\end{center}
+\end{subbox}
+
+\begin{mainbox}{Man-in-the-Middle bei DH}
+Mallory fängt $A$, $B$ ab und ersetzt sie durch eigene öffentliche Schlüssel
+$\Rightarrow$ je ein Schlüssel mit Alice und mit Bob, liest alles mit.\\
+\textbf{Gegenmassnahme:} öffentliche Schlüssel \textbf{authentifizieren}, z.B.\
+digitale Zertifikate, von einer vertrauenswürdigen CA signiert.
+\end{mainbox}
+
+\subsection{RSA}
+
+\begin{mainbox}{RSA (Rivest, Shamir, Adleman, 1977)}
+\textbf{Schlüsselerzeugung:}
+\begin{enumerate}
+    \item ``grosse'' Primzahlen $p$, $q$ wählen
+    \item $n = p \cdot q$, \ $\phi(n) = (p-1)(q-1)$
+    \item öffentl.\ Exponent $e \in \{1, \ldots, \phi(n)-1\}$ mit
+          $\text{ggT}(e, \phi(n)) = 1$
+    \item privater Exponent $d$ mit $e \cdot d \equiv 1 \bmod \phi(n)$
+\end{enumerate}
+\textbf{Öffentlich:} $(n, e)$, \ \textbf{privat:} $(n, d)$
+$$\boxed{y = x^e \bmod n}\quad \boxed{x = y^d \bmod n}$$
+Einwegfunktion: Multiplikation zweier Primzahlen.
+\end{mainbox}
+
+\begin{subbox}{Beispiel RSA (Folie korrigiert)}
+$p = 3$, $q = 11$: $n = 33$, $\phi(n) = 2 \cdot 10 = 20$.\\
+$e = 3$, $d = 7$, da $3 \cdot 7 = 21 \equiv 1 \bmod 20$.\\
+Alice: $x = 4$: $y = 4^3 \bmod 33 = 31$.\\
+Bob: $31^7 \bmod 33 = 4 = x$ $\checkmark$\\
+(Folie 25 schreibt $q = 17$ und ``$\bmod$ 31''; passend zu $n = 33$ sind
+$q = 11$ und $\bmod\ 20$.)
+\end{subbox}
+
+\begin{subbox}{RSA mit openSSL}
+\texttt{openssl genrsa -aes256 \textbackslash}\\
+\texttt{\ \ -out private.pem 4096}\\
+\texttt{openssl rsa -in private.pem \textbackslash}\\
+\texttt{\ \ -pubout -out public.pem}\\
+\texttt{openssl rsa -in private.pem \textbackslash}\\
+\texttt{\ \ -text -noout}\\[2pt]
+Zeigt modulus $n$, publicExponent $e$ (meist $65537$), privateExponent $d$,
+prime1/2 ($p$, $q$), exponent1/2 ($d_p = d \bmod (p-1)$,
+$d_q = d \bmod (q-1)$).\\
+\textbf{PEM} (Privacy Enhanced Mail): Base64 zwischen
+\texttt{-----BEGIN \ldots-----} und \texttt{-----END \ldots-----}.
+\end{subbox}
+
+\begin{mainbox}{Angriffe auf RSA}
+\begin{itemize}
+    \item \textbf{Mathematisch:} Faktorisierung; Rekord RSA-250
+          (829 Bit, 2020)
+    \item \textbf{Seitenkanal:} Hardware/Software: Stromprofil, Fault-Angriffe
+          (Michigan: 1024 Bit durch Spannungsmanipulation), Akustik
+          (Tel Aviv: 4096 Bit in $<$ 1\,h, CVE-2013-4576)
+    \item \textbf{Protokoll:} Bleichenbacher-Attacke
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Schlüsselidee: Seitenkanal per Stromkurve}
+Square-and-Multiply: Bit 0 $\to$ nur \textbf{S}, Bit 1 $\to$ \textbf{SM}.
+Die Stromkurve verrät das Muster und damit den \emph{privaten} Schlüssel:\\
+S SM SM S SM S S SM SM SM S SM $\Rightarrow$ 0 1 1 0 1 0 0 1 1 1 0 1
+\end{subbox}
+
+\begin{mainbox}{ECC (Elliptic Curve Cryptography)}
+Elliptische Kurve: $y^2 = x^3 + ax + b$ mit
+\textbf{Nicht-Singularität} $4a^3 + 27b^2 \neq 0$.\\
+Verbindung zweier Punkte ergibt wieder einen Punkt auf der Kurve.
+Schwieriges Problem: diskreter Logarithmus.\\
+\textbf{Vorteil:} viel kürzere Schlüssel bei gleichem Sicherheitsniveau.
+\end{mainbox}
+
+\begin{mainbox}{Schlüssellängen (Bit) je Sicherheitsniveau}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{center}
+\begin{tabular}{l|r|r|r|r}
+\textbf{Niveau} & \textbf{80} & \textbf{128} & \textbf{192} & \textbf{256} \\
+\hline
+RSA, DH, DSA & 1024 & 3072 & 7680 & 15360 \\
+ECDH, ECDSA & 160 & 256 & 384 & 512 \\
+AES, 3DES & 80 & 128 & 192 & 256 \\
+\end{tabular}
+\end{center}
+\textbf{BSI 2023--2026:} symmetrisch 128, RSA/DH 3000, ECC 250 Bit.
+\end{mainbox}
+
+\subsection{Hybride Verschlüsselung}
+
+\begin{mainbox}{Symmetrisch vs.\ asymmetrisch}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}l|X|X@{}}
+ & \textbf{Symm.} & \textbf{Asymm.} \\
+\hline
+Speed & schnell & langsam \\
+Schlüssel & $n(n-1)/2$ & $n$ (Paare) \\
+Länge & kurz & lang \\
+Einsatz & Verschlüsselung & Schlüsseltausch, Signaturen \\
+\end{tabularx}
+\textbf{Hybrid} = Verknüpfung beider: Nachricht symmetrisch, Session Key
+asymmetrisch verschlüsselt.
+\end{mainbox}
+
+\begin{mainbox}{E-Mail signieren \& verschlüsseln}
+\textbf{Absender:}
+\begin{enumerate}
+    \item \textbf{Signieren} (Hash-then-Sign, SHA-256 + RSA) mit eigenem
+          \textbf{privatem} Schlüssel
+    \item Zufälligen \textbf{Session Key} (256 Bit) erzeugen
+    \item Meldung + Signatur mit Session Key \textbf{symmetrisch} (AES)
+          verschlüsseln
+    \item Session Key mit \textbf{öffentlichem} Schlüssel des \emph{Empfängers}
+          verschlüsseln (RSA, 4096 Bit)
+\end{enumerate}
+\textbf{Empfänger:}
+\begin{enumerate}
+    \item Session Key mit eigenem \textbf{privatem} Schlüssel entschlüsseln
+    \item Meldung + Signatur mit Session Key entschlüsseln (AES)
+    \item Signatur mit \textbf{öffentlichem} Schlüssel des \emph{Absenders}
+          prüfen $\Rightarrow$ authentisch oder nicht
+\end{enumerate}
+\textbf{Reihenfolge:} zuerst signieren, dann verschlüsseln: Die Signatur soll die
+Authentizität des \emph{Klartexts} belegen und durch das Entschlüsseln nicht
+verloren gehen.
+\end{mainbox}
+
+\begin{subbox}{Merkregel: Welcher Schlüssel?}
+\textbf{Verschlüsseln:} öffentlich \emph{Empfänger} $\to$ nur er kann lesen.\\
+\textbf{Signieren:} privat \emph{Absender} $\to$ nur er kann unterschreiben,
+alle können prüfen.
+\end{subbox}
+
+\subsection{Digitale Signaturen}
+
+\begin{mainbox}{Eigenschaften einer Signatur}
+\begin{enumerate}
+    \item \textbf{Integrität:} Dokument nachher nicht unerkannt veränderbar
+    \item \textbf{Authentizität:} zweifelsfrei einer Person zuordenbar
+    \item \textbf{Nicht-Abstreitbarkeit:} Unterzeichner kann es nicht abstreiten
+    \item \textbf{Willenserklärend:} nur willentlich gesetzt
+\end{enumerate}
+\textbf{Algorithmen:} RSA (Faktorisierung), DSA und ECDSA (diskreter Log.).
+\end{mainbox}
+
+\begin{mainbox}{Hash-then-Sign}
+Grosses Dokument direkt signieren dauert zu lange $\Rightarrow$ nur den
+\textbf{Hashwert} signieren. Sicher, solange es \textbf{keine Kollisionen} gibt.\\
+\textbf{SIGN:} Hash(Klartext) mit Private Key verschlüsseln.\\
+\textbf{VER:} Hash(Klartext) $\stackrel{?}{=}$ DEC(Signatur, Public Key)
+$\Rightarrow$ OK / NOK.
+\end{mainbox}
+
+\begin{subbox}{Übung: Unterschrift vs.\ digitale Signatur (eigene Antwort)}
+\textbf{Eigenhändig:} sieht auf jedem Dokument gleich aus, ist nicht an den Inhalt
+gebunden.\\
+\textbf{Digital:} hängt über den Hash vom \emph{Inhalt} ab, jede Änderung macht sie
+ungültig; prüfbar mit dem Public Key.
+\end{subbox}
+
+\begin{subbox}{Beispiele: Signaturen prüfen}
+\textbf{Strafregisterauszug (PDF):} qualifizierte elektronische Signatur nach
+CH-Recht, SHA-256, Zeitstempel (TSA).
+\texttt{pdfsig}: \emph{Signature is Valid}, \emph{Certificate has Expired}, also
+Signatur und Zertifikatsgültigkeit getrennt beurteilen.\\
+\textbf{E-Mail (.msg):} S/MIME, \texttt{multipart/signed}.
+\end{subbox}
+
+\subsection{Digitale Zertifikate}
+
+\begin{mainbox}{Digitales Zertifikat}
+Weist Attribute von Nutzern überprüfbar nach: bindet einen \textbf{öffentlichen
+Schlüssel} an eine Identität, beglaubigt durch die Signatur der CA.\\
+\textbf{Ausstellen:}
+\begin{enumerate}
+    \item Antragsteller identifiziert sich bei der RA (Pass, ID)
+    \item Name, öffentlicher Schlüssel, weitere Infos $\to$ Zertifikatsinhalt
+    \item Inhalt hashen, Hash mit \textbf{privatem CA-Schlüssel} signieren
+          $=$ Zertifikatssignatur
+    \item CA veröffentlicht das Zertifikat
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Aufbau X.509}
+\textbf{Data:} Version, Serial Number, Signature Algorithm ID, Issuer Name,
+Validity (Not Before, Not After), Subject Name, Subject Public Key Info
+(Algorithmus, Key), optional Issuer/Subject Unique ID, Extensions.\\
+\textbf{Dazu:} Certificate Signature Algorithm, Certificate Signature.
+\end{mainbox}
+
+\begin{subbox}{TLS-Zertifikate (Bsp.\ SwissSign)}
+\textbf{Validierung:} \textbf{DV} (Domain, automatisch, Sekunden) $<$ \textbf{OV}
+(+ Organisation) $<$ \textbf{EV} (umfassendste, CA/Browser Forum).\\
+\textbf{Umfang:} Single-Domain, Wildcard (Subdomains), Multi-Domain.
+\end{subbox}
+
+\begin{mainbox}{Revokation (Ungültigkeitserklärung)}
+Zertifikat \emph{vor Ablauf} für ungültig erklären, identifiziert über die
+\textbf{Seriennummer}.\\
+\textbf{Gründe:} privater Schlüssel gebrochen, Besitzer verlässt Unternehmen,
+Personendaten geändert.\\
+\textbf{Prüfung:} \textbf{CRL} (Revokationsliste vom Verzeichnisdienst) oder
+\textbf{OCSP-Responder} (Online-Gültigkeitsabfrage).
+\end{mainbox}
+
+\begin{subbox}{Fragen zu Zertifikaten (eigene Antworten)}
+\begin{itemize}
+    \item \textbf{Fingerprint:} Hash über das ganze Zertifikat; zum Vergleich
+          über einen zweiten Kanal (Echtheit, z.B.\ Trust-Anchor).
+    \item \textbf{Revokation sorgfältig prüfen:} sonst kann ein Angreifer fremde
+          Zertifikate sperren (DoS).
+    \item \textbf{Identität prüfen:} wie beim Antrag, z.B.\ persönlich oder mit
+          vorab vereinbartem Geheimnis.
+    \item \textbf{CRL rasch aktualisieren:} kurzes Zeitfenster für den
+          Missbrauch; daher \textbf{kurze Gültigkeit} der CRL.
+\end{itemize}
+\end{subbox}
+
+\subsection{Vertrauensmodelle}
+
+\begin{mainbox}{Direct -- Web of Trust -- Hierarchical}
+\begin{itemize}
+    \item \textbf{Direct Trust:} direkte Prüfung des Public Key, meist via
+          Fingerprint: persönlich, vorinstalliert (Chrome, Apps, VPN-Clients)
+          oder publiziert. Braucht \textbf{authentischen Kanal}, oft out-of-band.
+    \item \textbf{Web of Trust:} indirekt: Alice vertraut Daves Key, weil Charlie
+          ihn signiert hat und Bob wiederum Charlies Key.
+    \item \textbf{Hierarchical (PKI):} Root CA $\to$ Intermediate CA $\to$
+          Endbenutzer.
+\end{itemize}
+\end{mainbox}
+
+\subsection{Public-Key-Infrastruktur}
+
+\begin{mainbox}{PKI-Bausteine}
+System, das digitale Zertifikate \textbf{ausstellt, verteilt und prüft}.
+\begin{itemize}
+    \item \textbf{RA} (Registration Authority): prüft Identität
+    \item \textbf{CA} (Certification Authority): stellt aus, signiert
+    \item \textbf{PSE} (Personal Security Environment): Ablage privater Schlüssel
+    \item \textbf{DIR / VA} (Directory Service / Verification Authority): Ablage
+          von Zertifikaten \& CRLs, Prüfung
+    \item \textbf{Sicherheitsapplikation}: nutzt die Zertifikate
+\end{itemize}
+\textbf{Ablauf:} 1) Zertifikate beantragen, ausstellen, ausliefern
+2) Zertifikate \& CRL publizieren 3) herunterladen 4) in der Sicherheitstechnologie
+nutzen (z.B.\ E-Mail).
+\end{mainbox}
+
+\begin{mainbox}{PSE-Ausprägungen}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+\textbf{Träger} & \textbf{Bezeichnung} \\
+\hline
+Passwort-geschützte Datei & Soft-Token \\
+Plastikkarte mit Krypto-Prozessor & Smart-Card, Krypto-Token \\
+USB-Stecker mit Krypto-Prozessor & USB-Token, Krypto-Token \\
+Erweiterungskarte für Mainboards & Hardware Security Module (HSM) \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Chain of Trust}
+Intermediate CA signiert das Zertifikat des Endbenutzers; ihr eigenes Zertifikat
+signiert wiederum eine andere CA. Letztes Glied: \textbf{Root Certificate} mit dem Public Key
+der Root CA, normalerweise \textbf{self-signed}.\\
+\textbf{Prüfung:} Kette bis zum \textbf{Trust Anchor} (vertrauenswürdiges
+Root-CA-Zertifikat) verfolgen; jedes Issuer-Zertifikat verifiziert die Signatur des
+nächsten. Root-CA selbst via Fingerprint.
+\end{mainbox}
+
+\begin{mainbox}{Zertifikat prüfen (nicht CA)}
+\begin{itemize}
+    \item Identität des Inhabers
+    \item zeitliche Gültigkeit, nicht auf einer CRL
+    \item Gültigkeit der ausstellenden CA
+    \item Gültigkeit der Signatur
+    \item Verwendungszweck
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Root-CA-Zertifikate}
+OS- und Browser-Hersteller liefern sie vorinstalliert (\textbf{Vertrauensfrage!}),
+weitere sind manuell nachinstallierbar. Die Installation \textbf{attestiert
+Echtheit} und ist heikel: Eine untergeschobene CA kann beliebige Zertifikate
+ausstellen, MitM wird möglich (vgl.\ \emph{CA-Zertifikat des Proxys}, Kap.\ 2).
+\end{subbox}
+
+\subsection{Transport Layer Security (TLS)}
+
+\begin{mainbox}{TLS im Stack}
+TCP/IP entstand ohne Security, sie kam nachträglich. TLS/SSL ist ein
+\textbf{anwendungsunabhängiges} Protokoll für verschlüsselte, integritätsgesicherte
+Client-Server-Kommunikation.\\
+Liegt zwischen \textbf{Anwendung} (HTTP Port 80, SMTP, SIP) und \textbf{Transport}
+(TCP, HTTPS Port 443):
+\begin{itemize}
+    \item oben: CCS-, Alert-, Handshake-, Application-Data-Protokoll
+    \item unten: Record Layer Protocol
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{TLS-Handshake (4 Phasen)}
+\begin{enumerate}
+    \item \textbf{Aushandlung der Parameter:} ClientHello (Zufallswerte,
+          Sitzungsnummer, Liste Cipher Suites), ServerHello (Zufallswerte, gewählte
+          Cipher Suite)
+    \item \textbf{Server-Authentisierung \& Schlüsseltausch:} Certificate
+          (optional, aber meist), ServerKeyExchange (opt.), CertificateRequest
+          (opt., für Client-Auth.), ServerHelloDone
+    \item \textbf{Client-Authentisierung \& Schlüsseltausch:} Certificate (opt.),
+          ClientKeyExchange (verschlüsseltes Pre-Master Secret oder DH),
+          CertificateVerify (opt.)
+    \item \textbf{Aktivierung:} je ChangeCipherSpec + Finished
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{TLS 1.3}
+Nur noch \textbf{Diffie-Hellman} (DHE, ECDHE): für jede Verbindung ein neuer
+Session Key, ohne Langzeitschlüssel $\Rightarrow$ \textbf{PFS}.\\
+Cipher Suites nur noch \textbf{Verschlüsselung + Hash}:
+\begin{itemize}
+    \item \texttt{TLS\_AES\_128\_GCM\_SHA256}
+    \item \texttt{TLS\_AES\_256\_GCM\_SHA384}
+    \item \texttt{TLS\_CHACHA20\_POLY1305\_SHA256}
+    \item \texttt{TLS\_AES\_128\_CCM\_SHA256}
+    \item \texttt{TLS\_AES\_128\_CCM\_8\_SHA256}
+\end{itemize}
+\end{mainbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Schlüsselrichtung: verschlüsseln mit Public Key des \emph{Empfängers},
+          signieren mit Private Key des \emph{Absenders}.
+    \item Erst signieren, dann verschlüsseln.
+    \item DH \emph{ohne} Authentifizierung ist MitM-anfällig; DH vereinbart nur
+          einen Schlüssel, verschlüsselt nichts.
+    \item PFS betrifft \emph{frühere} Sitzungen bei kompromittiertem
+          \emph{Langzeit}schlüssel.
+    \item RSA: $d$ rechnet $\bmod\ \phi(n)$, Ver-/Entschlüsseln $\bmod\ n$.
+    \item ECC-Formel: $y^2 = x^3 + ax + b$ (Folie 35 ist falsch abgedruckt).
+    \item ``Signieren = mit Private Key verschlüsseln'' gilt so nur für RSA,
+          nicht für DSA.
+    \item Abgelaufen $\neq$ revoziert: Revokation gilt \emph{vor} Ablauf.
+    \item RA prüft die Identität, CA signiert.
+    \item TLS 1.3 nutzt das Zertifikat weiterhin zur Authentisierung, nur der
+          Schlüsseltausch hängt nicht daran.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+Symm.\ Schlüsselverteilung skaliert schlecht, KDC hat keine PFS $\to$ Public Key:
+DH (Schlüsseltausch), RSA, ECC $\to$ hybrid in der Praxis $\to$ Signatur
+(Hash-then-Sign) $\to$ Zertifikat bindet Key an Identität $\to$ PKI (RA, CA, PSE,
+DIR/VA), Chain of Trust, CRL/OCSP $\to$ TLS, ab 1.3 mit PFS.
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

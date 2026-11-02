@@ -1836,6 +1836,328 @@ Oft \textbf{enthält} das Portal den Katalog (``Einkaufserlebnis'').
 \end{subbox}
 
 % ============================================================================
+% SECTION: STORAGESYSTEME IM RZ
+% ============================================================================
+\section{Storagesysteme im RZ}
+
+\subsection{Grundlagen \& Speichermedien}
+
+\begin{mainbox}{Storage}
+\textbf{Nicht flüchtiger} Bereich zur Ablage von Daten:
+\begin{itemize}
+    \item \textbf{kurzfristig:} Cache für das OS
+    \item \textbf{mittelfristig:} aktive Daten (Files, DBs)
+    \item \textbf{langfristig:} Archivierung (B2D, WORM, MAID)
+\end{itemize}
+Integriert (lokale HD, SSD, USB-Stick, DVD, Tape) oder eigenständig (NAS,
+Disk-Subsystem, SAN, Enterprise-Storage).
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X@{}}
+\textbf{Primär} & online, hoch verfügbar, direkt erreichbar \\
+\textbf{Sekundär} & nearline, langsamer, bis offline / Wechselmedien \\
+\textbf{Archiv} & offline, nicht mehr aktive Daten, ev.\ ausgelagert \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Speichermedien}
+\begin{itemize}
+    \item \textbf{HD:} magnetisch, erschütterungsempfindlich; rotierende Teile,
+          Verschleiss, Energie rel.\ hoch
+    \item \textbf{SSD:} elektrisch, \textbf{begrenzte Schreibzyklen}; lage- \&
+          erschütterungsunempfindlich, sehr schnell, wenig Strom
+    \item \textbf{Tape:} \textbf{höchste Speicherdichte} (Bytes/cm$^3$), langsam,
+          Abrieb an Leseköpfen
+    \item \textbf{CD/DVD/BluRay:} kleine Einheiten (200\,MB--40\,GB), kein Strom
+          ohne Zugriff, langsam
+\end{itemize}
+Kennzahlen \& Kosten: siehe \emph{Tiered Storage} (Kap.\ 1).
+\end{mainbox}
+
+\begin{subbox}{Geschichte (Kurzfassung)}
+Lochkarte/-streifen $\to$ Magnetkern-, Trommelspeicher $\to$ 1956 erste
+Festplatte \textbf{IBM 350 RAMAC} (7\,Mio.\ Zeichen) $\to$ IBM 2314
+(240\,MB, 1950\,kg, 9.1\,kVA).
+\end{subbox}
+
+\begin{mainbox}{Sichere Entsorgung}
+Defekte HD: Daten \textbf{nicht weg} -- Magnetisierung bleibt.\\
+\textbf{Permanent löschen durch:}
+\begin{itemize}
+    \item mechanisch zerstören (schreddern)
+    \item erhitzen (\textbf{Curie-Temperatur})
+    \item verbrennen (thermisch)
+    \item entmagnetisieren (\textbf{Degausser})
+\end{itemize}
+Formatieren / einfaches Überschreiben reicht nicht 100\,\% $\Rightarrow$
+\textbf{mehrfach überschreiben} (Standards, z.B.\ DoD). Verfahren oft
+kombiniert; Spezialfirmen mit mobilen Schreddern.\\
+\textbf{Achtung:} SSD, USB-Stick \& moderne Disks haben
+\textbf{Reservespeicherbereiche} $\Rightarrow$ grosse Herausforderung.
+\end{mainbox}
+
+\begin{subbox}{Löschen $\neq$ Löschen (eBanking -- aber sicher!)}
+Wiederherstellbar: Papierkorb, aus Papierkorb gelöscht, Schnellformat -- alles,
+was \textbf{noch nicht überschrieben} ist.
+\begin{itemize}
+    \item \textbf{Datei:} Tool überschreibt ihren Bereich (Eraser)
+    \item \textbf{Flash:} sicher nur, wenn das \emph{gesamte Medium} gelöscht
+          wird
+    \item \textbf{Ganze HD:} bootfähiges Tool (DBAN) oder physisch zerstören
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Standards zur Datenvernichtung}
+\begin{itemize}
+    \item \textbf{ISO 27001:} ISMS; Medien vor Weitergabe/Entsorgung prüfen;
+          \emph{Information Classification Policy} (Wert, Gesetz, Sensibilität,
+          Kritikalität)
+    \item \textbf{IT-Grundschutz} (BSI): Richtlinien, Methoden, Geräte, externe
+          Dienstleister, Einweisung der MA
+    \item \textbf{BDSG:} personenbezogene Daten; bei Auftragsverarbeitung
+          haftet der \textbf{Auftraggeber}
+    \item \textbf{DIN 66399:} Teil 1 Grundlagen \& Schutzklassen, Teil 2
+          Anforderungen an Maschinen, Teil 3 Prozesse
+\end{itemize}
+Verfahren hängt von Datenträger \& Schutzbedarf ab; höherer Zerstörungsgrad =
+mehr Aufwand. Gelöscht ist nur, was \emph{de facto unkenntlich} ist.
+\end{subbox}
+
+\begin{subbox}{Dark Data (Veritas, 2020)}
+Im Schnitt kennen Firmen bei \textbf{52\,\%} ihrer Daten weder Inhalt noch Wert
+$\Rightarrow$ Kosten, Energie, CO$_2$. Prognose IDC: 33 $\to$ 175\,ZB bis 2025,
+davon 91\,ZB dunkel.\\
+\textbf{5 Massnahmen:}
+\begin{enumerate}
+    \item Datenquellen identifizieren (Mapping, Discovery)
+    \item Dark Data untersuchen, Wert \& Risiko zuordnen
+    \item automatisch erkennen \& einstufen
+    \item Bestand verkleinern \& kontrollieren (Aufbewahrungsregeln)
+    \item regelkonform handeln (DSGVO-Meldepflichten)
+\end{enumerate}
+Vgl.\ \emph{ILM} \& \emph{Records Management} (Kap.\ 1).
+\end{subbox}
+
+\subsection{Anschlüsse}
+
+\begin{mainbox}{Schnittstellen}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|l|>{\raggedright\arraybackslash}X@{}}
+\textbf{Typ} & \textbf{Speed} & \textbf{Merkmale} \\
+\hline
+IDE/ATA & 10--100\,MB/s & parallel, 40/80 Pin, kurz, 2 Geräte/Bus \\
+SATA & 1.2--4.8\,Gbit/s & seriell, HotPlug, extern eSATA \\
+SCSI & 3.5--320\,MB/s & paralleler Bus, bis 15 Geräte, 8--32 Bit \\
+SAS & 3--12\,Gbit/s & serial SCSI, bis 10\,m, oft doppelt ausgeführt, kompatibel
+  zu SATA \\
+FC & 1--16\,Gbit/s & schnelle serielle SCSI-Schnittstelle, meist Glas (sehr
+  weit), eigene Switches; heute meist \textbf{FCoE} (Speed gem.\ Netzwerk) \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{M.2 \& NVMe}
+\textbf{M.2} (früher NGFF, Intel 2012): \textbf{Formfaktor} für interne
+Erweiterungskarten, Nachfolger von mSATA. Bis zu 4 PCIe-Lanes, SATA 6\,Gb/s
+und/oder USB 3.0 $\Rightarrow$ auch WLAN, Bluetooth, GPS.\\
+\textbf{Grösse} = Breite + Länge in mm: \textbf{2280} = 22 $\times$ 80\,mm
+(üblich: 2242, 2260, 2280; max.\ Länge 110\,mm).\\
+\textbf{NVMe} (Non-Volatile Memory Express): \textbf{Protokoll} für SSDs über
+PCIe.
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l|l}
+\textbf{Key} & \textbf{Signale} (gem.\ Delock) \\
+\hline
+B & SATA \\
+M & PCIe x2/x4 \\
+B+M & SATA oder PCIe \\
+A, E, A+E & PCIe x2 und USB \\
+\end{tabular}
+\end{center}
+Slot \& Modul müssen den \textbf{gleichen Key} unterstützen.
+\end{mainbox}
+
+\begin{subbox}{Beispiele M.2}
+SATA, Key B+M, 2242: 530/210\,MB/s (R/W).\\
+PCIe 3.0 x4 NVMe, 2280: 2000--3500\,MB/s lesen.\\
+\textbf{WD Red SN700} (NVMe als \textbf{Cache im NAS}, 24/7): sequenziell
+Lesen $\approx \times 2$, Random-Zugriffe bis $+$4000\,\% (R) / $+$7000\,\% (W)
+(Herstellerangaben); Ausdauer 500--5100\,\textbf{TBW}.
+\end{subbox}
+
+\subsection{RAID-Level}
+
+\begin{mainbox}{RAID-Level im Vergleich}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{center}
+\begin{tabular}{l|c|c|l|l}
+\textbf{Level} & \textbf{min} & \textbf{Ausf.} & \textbf{Nutz} & \textbf{Prinzip} \\
+\hline
+0 & 2 & 0 & 100\,\% & Striping \\
+1 & 2 & 1 & 50\,\% & Spiegel \\
+5 & 3 & 1 & $\frac{n-1}{n}$ & 1 Parity \\
+6 & 4 & 2 & $\frac{n-2}{n}$ & 2 Parity \\
+10 & 4 & $\ge 1$ & 50\,\% & R1 + R0 \\
+\end{tabular}
+\end{center}
+\textbf{Ausf.} = verkraftete Disk-Ausfälle, $n$ = Anzahl Disks, Parity =
+pro Stripe.\\
+RAID 2/3/4 nicht mehr gebräuchlich. RAID ist in allen Speichersystemen wichtiger
+Schutz vor \textbf{Hardwareausfällen}.
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften der RAID-Level}
+\begin{itemize}
+    \item \textbf{JBOD / RAID 0:} grosse Disks möglich, R/W schneller;
+          \textbf{keine Redundanz}, Ausfallwahrscheinlichkeit steigt!
+    \item \textbf{RAID 1:} R schneller (verteilt), W langsamer (doppelt);
+          redundant, nur 50\,\% nutzbar
+    \item \textbf{RAID 0+1 / 10:} Ausfallsicherheit \& Speed steigen
+    \item \textbf{RAID 5:} Parity-Blocks über \emph{alle} Disks verteilt
+          $\Rightarrow$ kein Write-Engpass; 1 Ausfall: aus restlichen Blocks +
+          Parity pro Stripe wiederherstellbar; 3 bis ca.\ 10--12 Disks;
+          W langsamer (Parity-Update), R schneller als 1 HD
+    \item \textbf{RAID 6 / ADG:} 2 Parity-Blöcke pro Stripe
+          $\Rightarrow$ Doppelausfälle abgedeckt; für grosse RAIDs
+          ($\ge$ 10--12 Disks)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiele Kapazität \& Parity}
+12 Disks à 8\,TB (roh 96\,TB):\\
+RAID 5: 88\,TB; RAID 6: 80\,TB; RAID 1/10: 48\,TB.\\[2pt]
+\textbf{Parity per XOR:} $D_1 = 1010$, $D_2 = 0110$
+$\Rightarrow$ $P = D_1 \oplus D_2 = 1100$.\\
+$D_2$ fällt aus: $D_1 \oplus P = 0110$ $\checkmark$
+\end{subbox}
+
+\subsection{Bauformen \& Enterprise Arrays}
+
+\begin{mainbox}{Bauformen}
+\begin{itemize}
+    \item \textbf{Disk Subsystem:} lokale Speichererweiterung, direkt am
+          Diskkontroller im Server
+    \item \textbf{NAS:} Speicher via \textbf{Netzwerk}; Zugriff über
+          Webinterface, SMB, NFS
+    \item \textbf{SAN} (Storage Area Network): Speicherverbund mehrerer
+          Geräte/Server
+    \item \textbf{Storage Server:} spezialisiertes OS für Speicherverwaltung;
+          via Netzwerk (Share, SMB, NFS)
+    \item \textbf{Storage Arrays} (z.B.\ HP EVA): via SAS, FC, FCoE; interne
+          Intelligenz zur \textbf{Blockverwaltung}; zentrale, redundante
+          Controller mit $X$ Diskshelfs
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Enterprise Array: Conventional vs.\ Compellent}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Conventional} & \textbf{Compellent} \\
+\hline
+Disks & physische Arrays mit passendem RAID-Level & Gesamt-Block-Array \\
+LUN & aus Teilen der Arrays, \textbf{fixe} Plattenzuteilung & virtuelle Disks via
+  lokale Intelligenz, Blöcke über ganzes Array verstreut \\
+RAID & pro Array & direkt innerhalb der Auswahl \\
+Folge & \textbf{ungleiche Auslastung} & \textbf{gleiche Zugriffszeiten} für alle
+  Server \\
+Einsatz & einfache Subsysteme & Enterprise \\
+\end{tabularx}
+LUN = Logical Unit Number (dem Server bereitgestellte logische Disk).
+\end{mainbox}
+
+\begin{subbox}{Markt: externe Enterprise-Storage (IDC, Q3 2020, ca.)}
+Dell (inkl.\ EMC seit 2016) $\approx$ 29\,\% klar führend; HPE $\approx$ 11\,\%,
+NetApp \& Huawei je $\approx$ 9\,\%, Hitachi \& IBM je $\approx$ 5\,\%;
+Andere $\approx$ 32\,\% (aus Grafik abgelesen).
+\end{subbox}
+
+\subsection{Funktionen \& Ausbau}
+
+\begin{mainbox}{Funktionen in Subsystemen}
+\begin{itemize}
+    \item \textbf{HotSpare:} eingebaute Reserve-Disks ersetzen im Fehlerfall
+          ausgefallene Disks, z.T.\ schon davor (\emph{predictive})
+    \item \textbf{Replikation:} im Controller integriert, autonom, meist
+          lizenzgebunden (Diskgrösse), synchron oder asynchron (siehe Kap.\ 1)
+    \item \textbf{SnapShot:} aktueller Zustand wird eingefroren, Änderungen
+          separat verwaltet $\Rightarrow$ mehrere Stufen, \textbf{sehr schnelles
+          Zurückstellen}; bei komplettem SnapShot Kopieren von Daten möglich
+    \item \textbf{AutoService:} Array ruft selbständig um technische Hilfe,
+          oft mit speziellem SLA
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{SnapShot: 2 Varianten}
+\textbf{Im Filesystem:} neuer Snapshot-Root zeigt auf dieselben Blöcke (kein
+Kopieren). Ändert sich Block D, wird D$'$ neu geschrieben: nur der aktuelle Root
+zeigt auf D$'$, der Snapshot behält D.\\
+\textbf{Auf Blocklevel der HD:} Disk-Image ist \emph{read-only}, Writes landen in
+einer eigenen Schicht darüber. Neuer Snapshot = neue Schicht; alte Schichten
+können ins Image eingearbeitet werden.
+\end{subbox}
+
+\begin{mainbox}{Ausbaumöglichkeiten}
+\begin{itemize}
+    \item \textbf{Erweiterung ``on the fly'':} HotPlug-Disks, dynamische Arrays;
+          Controller verteilt Daten selbst neu (RAID bleibt erhalten, Verteilung
+          auf alle Disks)
+    \item \textbf{Neue Technologie:} SAS/FC zu SSD -- LUNs \textbf{im Betrieb}
+          auf schnelleren/langsameren Speicher migrieren
+    \item \textbf{Cache:} grosse RAM-Speicher für oft gebrauchte Bereiche,
+          intelligente Zuordnung zu Speicherbereichen
+    \item \textbf{Mehr Shelfs / Controller}
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Leistungsfaktoren (eigene Ergänzung, Folie leer)}
+Medium (HD-Drehzahl, SSD, NVMe); Anzahl Disks; RAID-Level; Schnittstelle (SATA,
+SAS, FC, PCIe); Controller; Cache; Netzwerkanbindung; Zugriffsmuster
+(sequenziell/random, R/W, Blockgrösse).\\
+Messgrössen: Latenz, Durchsatz (MB/s), IOPS.
+\end{subbox}
+
+\begin{subbox}{Denkprozess: Speicher dimensionieren}
+\begin{enumerate}
+    \item Nutzkapazität \& Datenklassen bestimmen $\to$ passende Tiers
+          (SSD/FC vs.\ SAS/SATA, NAS)
+    \item Rohkapazität: $\text{Roh} = \text{Nutz} / \text{Yield}$ (RAID,
+          Reserve; vgl.\ \emph{Allocation Efficiency})
+    \item Redundanz: N+1 für \emph{alle} Komponenten, HotSpares
+    \item Anbindung an Server (FC, FCoE, SAS/SATA)
+    \item Backup mit Generationen einrechnen (z.B.\ GFS)
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item RAID ersetzt \textbf{kein Backup} -- schützt nur vor HW-Ausfall, nicht
+          vor Löschen oder Ransomware. Dasselbe gilt für SnapShots auf
+          denselben Disks.
+    \item JBOD $\neq$ RAID 0: die Folie fasst beide zusammen, aber JBOD hängt
+          Disks nur aneinander, erst Striping (RAID 0) beschleunigt.
+    \item RAID 0+1 $\neq$ 10: 0+1 spiegelt Stripes, 10 stript Spiegel.
+    \item M.2 ist \emph{Formfaktor}, NVMe \emph{Protokoll}: M.2-SSD mit SATA ist
+          nicht NVMe. mSATA $\leftrightarrow$ M.2 \textbf{nicht kompatibel}.
+    \item Einheiten: MB/s vs.\ Gbit/s (Faktor 8). SATA 1.2--4.8\,Gbit/s sind
+          Nettowerte (brutto 1.5/3/6\,Gbit/s).
+    \item Formatieren $\neq$ löschen; bei SSD hilft Überschreiben wegen
+          Reservebereichen nicht zuverlässig.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Primär / Sekundär / Archiv; HD, SSD, Tape, optisch
+    \item Anschlüsse: IDE, SATA, SCSI, SAS, FC/FCoE, M.2 + NVMe
+    \item RAID 0, 1, 5, 6, 10: Nutzkapazität \& Ausfälle kennen
+    \item Bauformen: Subsystem, NAS, SAN, Storage Server, Array
+    \item Funktionen: HotSpare, Replikation, SnapShot, AutoService
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

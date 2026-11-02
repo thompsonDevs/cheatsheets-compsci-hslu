@@ -114,6 +114,10 @@
 % Big O notation
 \def\oof{\mathcal{O}}
 
+% Modular arithmetic operators
+\newcommand{\Div}{\mskip3mu\mathrm{div}\mskip3mu}
+\newcommand{\Mod}{\mskip3mu\mathrm{mod}\mskip3mu}
+
 % ============================================================================
 % TABLES
 % ============================================================================
@@ -862,6 +866,281 @@ Hypergeo. & $\binom{N}{k}\binom{M}{n-k} / \binom{M+N}{n}$ & $\frac{nN}{M+N}$ \\
 Poisson & $\frac{\mu^k}{k!} e^{-\mu}$ & $\mu$
 \end{tabular}\\
 ($q = 1 - p$)
+\end{subbox}
+
+% ============================================================================
+% SECTION 5: MODULARE ARITHMETIK
+% ============================================================================
+\section{Modulare Arithmetik}
+
+\subsection{Division mit Rest: div \& mod}
+
+\begin{mainbox}{Division mit Rest (Satz 1)}
+Für $m \in \Z$, $m \neq 0$ und alle $a \in \Z$ gibt es \emph{genau einen}
+\begin{itemize}
+    \item \textbf{Quotienten} $Q = (a \Div m) \in \Z$ und
+    \item \textbf{Rest} $R = (a \Mod m) \in \{0, 1, \ldots, |m|-1\}$
+\end{itemize}
+sodass
+$$\boxed{a = Q \cdot m + R}$$
+also $a = (a \Div m) \cdot m + (a \Mod m)$.
+Der Rest ist \textbf{nie negativ} und immer kleiner als $|m|$.
+\end{mainbox}
+
+\begin{mainbox}{Vorzeichenregeln ($a, m > 0$)}
+\begin{align*}
+a \Div {-m} &= -(a \Div m)\\
+{-a} \Div m &= \begin{cases}
+  -(a \Div m) & m \mid a\\
+  -(a \Div m) - 1 & m \nmid a
+\end{cases}\\
+a \Mod {-m} &= a \Mod m\\
+{-a} \Mod m &= \begin{cases}
+  0 & m \mid a\\
+  -(a \Mod m) + m & m \nmid a
+\end{cases}
+\end{align*}
+\end{mainbox}
+
+\begin{subbox}{Beispiele Vorzeichen}
+\begin{center}
+\begin{tabular}{@{}rr|rr|l@{}}
+$a$ & $m$ & $\Div$ & $\Mod$ & Probe \\ \hline
+$14$ & $5$ & $2$ & $4$ & $2 \cdot 5 + 4$ \\
+$14$ & $-5$ & $-2$ & $4$ & $-2 \cdot (-5) + 4$ \\
+$-14$ & $5$ & $-3$ & $1$ & $-3 \cdot 5 + 1$ \\
+$-14$ & $-5$ & $3$ & $1$ & $3 \cdot (-5) + 1$ \\
+$-9$ & $4$ & $-3$ & $3$ & $-3 \cdot 4 + 3$ \\
+$-9$ & $3$ & $-3$ & $0$ & $-3 \cdot 3 + 0$
+\end{tabular}
+\end{center}
+\end{subbox}
+
+\begin{subbox}{Algorithmus \texttt{div\_mod(a,m)} ($a \ge 0$, $m > 0$)}
+\texttt{div, mod = 0, a}\\
+\texttt{while mod >= m:}\\
+\phantom{xx}\texttt{mod = mod - m}\\
+\phantom{xx}\texttt{div = div + 1}\\
+\texttt{return (div, mod)}\\[2pt]
+\texttt{div\_mod(64,5)}: mod $64, 59, \ldots, 9, \mathbf{4}$; div
+$0, 1, \ldots, 11, \mathbf{12}$.\\
+\textbf{Aufwand:} $3 + 5\lfloor\frac{a}{m}\rfloor + 1 = 4 +
+5\lfloor\frac{a}{m}\rfloor$ Schritte. Wegen
+$5\lfloor\frac{a}{m}\rfloor \le 4 + 5\lfloor\frac{a}{m}\rfloor \le
+9\lfloor\frac{a}{m}\rfloor$ (für $\lfloor\frac{a}{m}\rfloor \ge 1$) in
+$\Theta(\lfloor\frac{a}{m}\rfloor)$.\\
+\textbf{Negativ:} mit $|a|, |m|$ rechnen, dann Vorzeichenregeln:
+\begin{itemize}
+    \item $(57, 7)$: $Q = 8$, $R = 1$
+    \item $(-81, 12)$: $81 = 6 \cdot 12 + 9$ $\Rightarrow$ $Q = -6 - 1 = -7$,
+          $R = -9 + 12 = 3$
+    \item $(63, -11)$: $63 = 5 \cdot 11 + 8$ $\Rightarrow$ $Q = -5$, $R = 8$
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Rechengesetze (Satz 2)}
+Für alle $a, b \in \Z$ darf man \textbf{zuerst reduzieren}
+($\bar{a} = a \Mod m$, $\bar{b} = b \Mod m$):
+\begin{align*}
+(a + b) \Mod m &= (\bar{a} + \bar{b}) \Mod m\\
+(a - b) \Mod m &= (\bar{a} - \bar{b}) \Mod m\\
+(a \cdot b) \Mod m &= (\bar{a} \cdot \bar{b}) \Mod m\\
+a^n \Mod m &= \bar{a}^{\,n} \Mod m
+\end{align*}
+Der \textbf{Exponent} $n$ wird dabei \emph{nicht} reduziert!
+\end{mainbox}
+
+\begin{subbox}{Beispiele Rechengesetze (ohne Hilfsmittel)}
+$1023 \equiv 3$, $198371 \equiv 1$ mod 5 (letzte Ziffer genügt):\\
+Summe $\to 4$, Differenz $\to 2$, Produkt $\to 3$,
+$1023^4 \to 3^4 = 81 \to 1$\\[2pt]
+$(1324 + 29 \cdot 768^3) \Mod 5$\\
+$\phantom{(}= (4 + 4 \cdot 3^3) \Mod 5$\\
+$\phantom{(}= (4 + 4 \cdot 2) \Mod 5 = 12 \Mod 5 = 2$\\[2pt]
+$(35 \cdot 13^4 - 11 \cdot 81^{24} - 125^3) \Mod 3$\\
+$\phantom{(}= (2 \cdot 1^4 - 2 \cdot 0^{24} - 2^3) \Mod 3$\\
+$\phantom{(}= (2 - 8) \Mod 3 = 0$\\[2pt]
+$(333^3 - 888^2 + 666^3) \Mod 11$\\
+$\phantom{(}= (3^3 - 8^2 + 6^3) \Mod 11$\\
+$\phantom{(}= (5 - 9 + 3 \cdot 6) \Mod 11 = 14 \Mod 11 = 3$
+\end{subbox}
+
+\subsection{Rechnen im endlichen Bereich}
+
+\begin{mainbox}{Modulare Arithmetik}
+Fester positiver \textbf{Modulus} $m \in \Z$. Alle Ergebnisse werden mit
+$\Mod m$ abgeschlossen, Resultate sind also immer in der
+\textbf{endlichen Menge}
+$$(x \Mod m) \in \{0, 1, \ldots, m-1\}$$
+Modell für endliche Strukturen: Bit-Überlauf, Hashing, Kryptographie (RSA),
+Pseudozufall.
+\end{mainbox}
+
+\begin{subbox}{Wochentag: 15.\ Mai 1955}
+Codierung Mo $= 0$, \ldots, So $= 6$; Starttag Mo 5.5.2025 $= 0$.\\
+Schaltjahre von Jahr 0 bis $n$:
+$$SJ(n) = n \Div 4 - n \Div 100 + n \Div 400$$
+Tage $a$ vom 15.5.1955 bis 5.5.2025:
+\begin{align*}
+a ={}& \underbrace{16 + 3 \cdot 30 + 4 \cdot 31}_{\text{Rest 1955}}
+  + \underbrace{69 \cdot 365 + 18}_{1956..2024}\\
+  &+ \underbrace{28 + 30 + 2 \cdot 31 + 5}_{\text{in 2025}} = 25558
+\end{align*}
+($18 = SJ(2025) - SJ(1954)$). Rückwärts zählen:
+$-a \Mod 7 = 6$ $\Rightarrow$ \textbf{Sonntag}
+\end{subbox}
+
+\begin{mainbox}{ISBN-10: \texttt{a-bcd-efghi-p}}
+Prüfziffer $p$ ($p = 10$: Symbol X) erfüllt
+\begin{align*}
+(&10a + 9b + 8c + 7d + 6e + 5f\\
+ &+ 4g + 3h + 2i + p) \Mod 11 = 0
+\end{align*}
+\textbf{Einzelfehler} erkannt: Unterschied = Gewicht $\cdot$ Ziffern-Differenz
+mit Gewicht $\in \{1, \ldots, 10\}$, Differenz $\in \{\pm 1, \ldots, \pm 10\}$.\\
+\textbf{Drehfehler} erkannt: Unterschied = (Gew.\ $-$ Gew.$'$) $\cdot$
+(Ziffer $-$ Ziffer$'$) mit Faktoren $\in \{\pm 1, \ldots, \pm 10\}$.\\
+Beide Faktoren sind keine Vielfachen der \textbf{Primzahl 11}
+$\Rightarrow$ Produkt $\Mod 11 \neq 0$ $\Rightarrow$ ISBN ungültig.
+\end{mainbox}
+
+\begin{subbox}{Beispiel ISBN \texttt{3-446-19873-p}}
+$30 + 36 + 32 + 42 + 6 + 45 + 32 + 21 + 6 = 250$\\
+$(250 + p) \Mod 11 = (8 + p) \Mod 11 = 0$ $\Rightarrow$ $\boxed{p = 3}$\\
+Vertauscht $d \leftrightarrow c$ (4 und 6):
+$(8 - 7)(4 - 6) = -2$, \ $-2 \Mod 11 = 9 \neq 0$.
+\end{subbox}
+
+\begin{mainbox}{Hashfunktion}
+Ordnet Daten beliebiger Länge Werte fester Länge zu (\textbf{Hashwerte}).
+Datensatz = \textbf{Schlüssel} (gesucht) + \textbf{Wert}. Speicheradresse wird
+aus dem Schlüssel berechnet $\Rightarrow$ kein aufwändiges Suchen.
+$$H(\text{Ortsname}) = \sum_i a_i \Mod m$$
+$a_i$ = Stelle des $i$-ten Buchstabens im Alphabet (A $= 1$, \ldots, Z $= 26$).
+\end{mainbox}
+
+\begin{subbox}{Beispiel Hash, $m = 7$}
+\begin{center}
+\begin{tabular}{@{}lrr@{}}
+Ort & $\sum a_i$ & $H$ \\ \hline
+Lausanne & 87 & 3 \\
+Luzern & 96 & 5 \\
+Thun & 63 & 0 \\
+Rotkreuz & 134 & 1
+\end{tabular}
+\end{center}
+\end{subbox}
+
+\subsection{Square-and-Multiply}
+
+\begin{mainbox}{Square-and-Multiply}
+Effizientes Potenzieren $a^n \Mod m$ (z.B.\ RSA: $c = x^e \Mod M$, 2048 Bit)
+mit den Operationen \textbf{Q} (Quadrieren) und \textbf{M} (Multiplizieren mit
+$a$). Sequenz von hinten aufbauen:
+\begin{itemize}
+    \item $n$ ungerade: $a^n = a^{n-1} \cdot a$ $\Rightarrow$ \textbf{M} vorne
+          anfügen, weiter mit $n - 1$
+    \item $n$ gerade: $a^n = (a^{n/2})^2$ $\Rightarrow$ \textbf{Q} vorne
+          anfügen, weiter mit $n / 2$
+    \item Stopp bei $n = 1$; dann von links nach rechts abarbeiten,
+          nach jedem Schritt $\Mod m$.
+\end{itemize}
+\textbf{Aufwand:}
+$\lfloor\log_2 n\rfloor \le T(a^n) \le 2\lfloor\log_2 n\rfloor$,
+also $\boxed{T(a^n) \in \Theta(\log n)}$ statt $n - 1$ Multiplikationen.
+\end{mainbox}
+
+\begin{subbox}{Schlüsselidee: Binärdarstellung von $n$}
+Führende 1 streichen, dann von links: jede Ziffer $\to$ \textbf{Q}, jede 1
+zusätzlich $\to$ \textbf{M}.\\
+$21 = 10101_2$: $0 \to$ Q, $1 \to$ QM, $0 \to$ Q, $1 \to$ QM $\Rightarrow$
+QQMQQM\\
+\#Q $= \lfloor\log_2 n\rfloor$, \ \#M $=$ (Anzahl Einsen) $- 1$.
+\end{subbox}
+
+\begin{subbox}{Beispiel $5^{21} \Mod 11$}
+Sequenz: $21 \to 20$ M, $\to 10$ Q, $\to 5$ Q, $\to 4$ M, $\to 2$ Q, $\to 1$ Q
+$\Rightarrow$ \textbf{QQMQQM}
+$$5 \xrightarrow{Q} 3 \xrightarrow{Q} 9 \xrightarrow{M} 1 \xrightarrow{Q} 1
+\xrightarrow{Q} 1 \xrightarrow{M} \mathbf{5}$$
+4 Q + 2 M statt 20 Multiplikationen.
+\end{subbox}
+
+\begin{subbox}{Weitere Beispiele}
+$3^{23} \Mod 11$, QQMQMQM:\\
+$3 \to 9 \to 4 \to 1 \to 1 \to 3 \to 9 \to \mathbf{5}$\\
+$7^{28} \Mod 13$, QMQMQQ:\\
+$7 \to 10 \to 5 \to 12 \to 6 \to 10 \to \mathbf{9}$\\
+$6^{43} \Mod 15$, QQMQQMQM: immer $\mathbf{6}$\\
+\textbf{RSA SBB} $e = 65537 = 2^{16} + 1$: $Q^{16}M$, also
+\textbf{16 Q + 1 M}.
+\end{subbox}
+
+\subsection{Modulare Wurzeln \& Logarithmen}
+
+\begin{mainbox}{Wurzel \& Logarithmus (Definition 1)}
+$x \in \{0, 1, \ldots, m-1\}$ heisst
+\begin{itemize}
+    \item \textbf{$n$-te Wurzel} von $a$, wenn $x^n \Mod m = a \Mod m$
+    \item \textbf{Logarithmus zur Basis $b$} von $a$, wenn\\
+          $b^x \Mod m = a \Mod m$
+\end{itemize}
+Existieren \textbf{nicht immer}, sind \textbf{nicht eindeutig}; effizient
+berechnen ist sehr schwierig $\Rightarrow$ Wertetabelle (Probieren).
+\end{mainbox}
+
+\begin{subbox}{Beispiel 2-te Wurzeln}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}l|ccccccc@{}}
+$x$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+$x^2 \Mod 7$ & 0 & 1 & 4 & 2 & 2 & 4 & 1
+\end{tabular}\\[2pt]
+$\sqrt{0} = 0$, $\sqrt{1} = 1, 6$; $\sqrt{2} = 3, 4$; $\sqrt{4} = 2, 5$;\\
+$\sqrt{3}, \sqrt{5}, \sqrt{6}$ existieren nicht.\\[4pt]
+\setlength{\tabcolsep}{1.2pt}
+\begin{tabular}{@{}l|ccccccccccccccc@{}}
+$x$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\ \hline
+$x^2$ & 0 & 1 & 4 & 9 & 1 & 10 & 6 & 4 & 4 & 6 & 10 & 1 & 9 & 4 & 1
+\end{tabular}\\[2pt]
+(mod 15) $\sqrt{1} = 1, 4, 11, 14$; $\sqrt{4} = 2, 7, 8, 13$;\\
+$\sqrt{2}, \sqrt{7}, \sqrt{8}, \sqrt{11}, \sqrt{13}, \sqrt{14}$ existieren
+nicht.
+\end{subbox}
+
+\begin{subbox}{Beispiel Logarithmen}
+\textbf{mod 17, Basis 3, von 7:} $3^n$ für $n = 0, 1, \ldots$:\\
+$1, 3, 9, 10, 13, 5, 15, 11, 16, 14, 8, \mathbf{7}, \ldots$
+$\Rightarrow$ $\log_3(7) = 11$\\
+\textbf{mod 59, Basis 3, von 19:} $3^{17} \Mod 59 = 3^{46} \Mod 59 = 19$
+$\Rightarrow$ $\log_3(19) = 17$ oder $46$
+\end{subbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Rest immer $\ge 0$: $-14 \Mod 5 = 1$, nicht $-4$; Probe
+          $a = Q \cdot m + R$.
+    \item $-a \Div m$: das $-1$ nicht vergessen, wenn $m$ kein Teiler von $a$.
+    \item $-a \Mod m$ mit $m \mid a$ ist $0$, nicht $m$.
+    \item Python: \texttt{\%} und \texttt{//} entsprechen $\Mod$ und $\Div$ nur
+          für $m > 0$ (\texttt{14 \% -5} ergibt $-1$, hier aber $4$).
+    \item Exponent nicht reduzieren: $2^5 \Mod 3 = 2$, aber
+          $2^{5 \Mod 3} \Mod 3 = 1$.
+    \item Square-and-Multiply: \textbf{Reihenfolge ist wesentlich}!
+          $5$QQQQMM ergibt $5^{18}$, nicht $5^{21}$.
+    \item Negative Zwischenresultate am Schluss mit $\Mod m$ abschliessen.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung Vorgehen}
+\begin{enumerate}
+    \item Summe/Produkt/Potenz: zuerst jede Basis $\Mod m$ reduzieren.
+    \item Grosse Potenz: Sequenz Q/M bestimmen, schrittweise reduzieren.
+    \item Wurzel/Logarithmus: Wertetabelle über alle $x \in \{0, \ldots, m-1\}$,
+          \emph{alle} Treffer angeben (oder ``existiert nicht'').
+    \item Prüfziffer: Summe $\Mod m$ berechnen, $p$ ergänzt auf $0$.
+\end{enumerate}
 \end{subbox}
 
 % ============================================================================

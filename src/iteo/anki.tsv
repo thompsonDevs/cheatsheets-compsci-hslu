@@ -369,3 +369,106 @@ Lückentext	iteo	Drei Typen technischer Services: {{c1::Application Services}} (
 Lückentext	iteo	Der {{c1::Business}}-Servicekatalog enthält kundenorientierte Services, der {{c2::technische}} Servicekatalog enthält unterstützende Services.		iteo::servicekatalog-service-request-management
 Lückentext	iteo	Vorteile eines Servicekatalogs: verbesserter {{c1::Self-Service}}, gesteigerte {{c2::Betriebseffizienz}}, optimale {{c3::Benutzerfreundlichkeit}}, gesteigerte {{c4::Produktivität}}, vollständige {{c5::Transparenz}}, gesteigerte {{c6::Benutzerzufriedenheit}}.		iteo::servicekatalog-service-request-management
 Lückentext	iteo	Der Servicekatalog definiert das {{c1::Angebot}}, das Service Request Management die {{c2::Bereitstellung}}.		iteo::servicekatalog-service-request-management
+Standard	iteo	Was ist Storage?	Ein nicht flüchtiger Bereich zur Ablage von Daten.	iteo::storagesysteme-im-rz
+Standard	iteo	Was kennzeichnet primären Storage?	Online, hoch verfügbar, direkt erreichbar.	iteo::storagesysteme-im-rz
+Standard	iteo	Was kennzeichnet sekundären Storage?	Nearline und langsamer, bis hin zu offline oder mit Wechselmedien.	iteo::storagesysteme-im-rz
+Standard	iteo	Was kennzeichnet einen Archiv-Storage?	Offline, enthält nicht mehr aktive Daten, eventuell ausgelagert.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche Nachteile hat eine Festplatte (HD)?	Erschütterungsempfindlich, rotierende Teile mit Verschleiss, relativ hoher Energieverbrauch.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist der wichtigste Nachteil einer SSD?	Begrenzte Schreibzyklen.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche Vorteile hat eine SSD gegenüber einer HD?	Lage- und erschütterungsunempfindlich, sehr schnell, geringer Stromverbrauch.	iteo::storagesysteme-im-rz
+Standard	iteo	Welches Speichermedium hat die höchste Speicherdichte (Bytes/cm³)?	Tape.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche Nachteile hat Tape?	Langsam und Abrieb an den Leseköpfen.	iteo::storagesysteme-im-rz
+Standard	iteo	Welchen Vorteil haben optische Medien (CD/DVD/BluRay) beim Energieverbrauch?	Kein Stromverbrauch, solange nicht zugegriffen wird.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche Nachteile haben optische Medien (CD/DVD/BluRay) als Storage?	Kleine Dateneinheiten (200 MB bis 40 GB) und langsamer Zugriff.	iteo::storagesysteme-im-rz
+Standard	iteo	Sind die Daten auf einer ausgefallenen HD weg?	Nein, die Magnetisierung bleibt erhalten.	iteo::storagesysteme-im-rz
+Standard	iteo	Reicht Formatieren oder einfaches Überschreiben, um eine HD sicher zu löschen?	Nicht zu 100 %. Besser ist mehrfaches Überschreiben nach einem Standard (z.B. DoD).	iteo::storagesysteme-im-rz
+Standard	iteo	Was macht ein Degausser?	Er entmagnetisiert den Datenträger und löscht die Daten so permanent.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum sind SSDs und USB-Sticks schwer sicher zu löschen?	Wegen ihrer Reservespeicherbereiche: Überschreiben erreicht nicht zuverlässig alle Zellen.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie löscht man eine einzelne Datei auf einem USB-Stick sicher?	Gar nicht einzeln: Sicher gelöscht ist sie nur, wenn das gesamte Medium sicher gelöscht wird.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum lässt sich eine aus dem Papierkorb gelöschte Datei wiederherstellen?	Gelöschte Daten bleiben vorhanden, solange sie nicht überschrieben wurden.	iteo::storagesysteme-im-rz
+Standard	iteo	Was regelt die Norm DIN 66399?	Die Vernichtung von Datenträgern.	iteo::storagesysteme-im-rz
+Standard	iteo	Was verlangt ISO 27001 vor der Weitergabe oder Entsorgung von Speichermedien?	Sie müssen darauf geprüft werden, ob alle sensiblen Daten ordnungsgemäss entfernt wurden.	iteo::storagesysteme-im-rz
+Standard	iteo	Wovon hängt das passende Verfahren zur Datenvernichtung ab?	Vom Datenträger bzw. seiner Speichertechnologie und vom Schutzbedarf der Daten.	iteo::storagesysteme-im-rz
+Standard	iteo	Wer ist nach BDSG verantwortlich, wenn personenbezogene Daten im Auftrag verarbeitet werden?	Der Auftraggeber.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist Dark Data?	Gespeicherte Daten, deren Inhalt und Wert das Unternehmen nicht kennt.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum ist Dark Data ein Problem?	Bindet Speicherressourcen und verursacht Kosten, Energieverbrauch und CO2-Emissionen.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie viele Geräte unterstützt ein IDE/ATA-Bus?	2 Geräte pro Bus.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist eSATA?	SATA für den externen Anschluss.	iteo::storagesysteme-im-rz
+Standard	iteo	Welchen Betriebsvorteil bietet SATA gegenüber IDE?	HotPlug ist möglich.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie viele Geräte unterstützt ein SCSI-Bus?	Bis 15 Geräte.	iteo::storagesysteme-im-rz
+Standard	iteo	Wofür steht SAS?	Serial Attached SCSI.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche maximale Kabellänge hat SAS?	Bis 10 m.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche Schnittstelle ist kompatibel zu SATA: SAS oder FC?	SAS.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist Fibre Channel (FC)?	Eine schnelle, mächtige serielle SCSI-Schnittstelle, meist über Glasfaser, mit eigenen FC-Switches.	iteo::storagesysteme-im-rz
+Standard	iteo	Welchen Vorteil hat Fibre Channel über Glasfaser?	Sehr lange Distanzen sind möglich.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist FCoE, und wovon hängt sein Speed ab?	Fibre Channel over Ethernet; der Speed richtet sich nach dem Netzwerk.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist M.2?	Ein Formfaktor bzw. eine Spezifikation für interne Erweiterungskarten, Nachfolger von mSATA.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche Signale kann ein M.2-Anschluss übertragen?	Bis zu 4 PCIe-Lanes, SATA 6 Gb/s und/oder USB 3.0.	iteo::storagesysteme-im-rz
+Standard	iteo	Wofür steht NVMe?	Non-Volatile Memory Express.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist NVMe?	Ein Protokoll für den Zugriff auf SSDs über PCIe.	iteo::storagesysteme-im-rz
+Standard	iteo	Was bedeutet die M.2-Bezeichnung 2280?	22 mm breit und 80 mm lang.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche Bedingung müssen M.2-Slot und -Modul erfüllen, um kompatibel zu sein?	Beide müssen den gleichen Key unterstützen.	iteo::storagesysteme-im-rz
+Standard	iteo	Sind mSATA und M.2 kompatibel?	Nein.	iteo::storagesysteme-im-rz
+Standard	iteo	Ist jede M.2-SSD eine NVMe-SSD?	Nein. M.2 ist nur der Formfaktor, eine M.2-SSD kann auch SATA nutzen.	iteo::storagesysteme-im-rz
+Standard	iteo	Wofür wird eine NVMe-SSD in einem NAS typischerweise eingesetzt?	Als Cache, um Lese- und Schreibzugriffe zu beschleunigen, vor allem Random-Zugriffe.	iteo::storagesysteme-im-rz
+Standard	iteo	Was gibt TBW bei einer SSD an?	Terabytes Written: die Ausdauer, also die garantierte gesamte Schreibmenge.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum ist RAID 0 schneller als eine einzelne Disk?	Die Daten sind auf mehrere Disks verteilt (Striping), Lesen und Schreiben laufen parallel.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist der Hauptnachteil von RAID 0?	Keine Redundanz, und die Ausfallwahrscheinlichkeit steigt mit jeder Disk.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist der Unterschied zwischen JBOD und RAID 0?	JBOD hängt Disks nur aneinander, RAID 0 verteilt die Daten per Striping. Beide haben keine Redundanz. (Die Folie fasst beide zusammen.)	iteo::storagesysteme-im-rz
+Standard	iteo	Nach welchem Prinzip arbeitet RAID 1?	Spiegelung: Alle Daten liegen identisch auf zwei Disks.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie verhalten sich Lesen und Schreiben bei RAID 1?	Lesen wird schneller (verteilter Zugriff), Schreiben langsamer (doppelt).	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist der Unterschied zwischen RAID 0+1 und RAID 10?	RAID 0+1 spiegelt Stripes, RAID 10 verteilt Daten per Striping über Spiegel.	iteo::storagesysteme-im-rz
+Standard	iteo	Was bringt die Kombination von RAID 1 und RAID 0 (RAID 0+1 / 10)?	Ausfallsicherheit und Geschwindigkeit steigen beide.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum werden bei RAID 5 die Parity-Blöcke über alle Disks verteilt?	So entsteht kein Engpass beim Schreiben.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie viele Disk-Ausfälle verkraftet RAID 5?	Einen.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie werden bei RAID 5 die Daten einer ausgefallenen Disk wiederhergestellt?	Aus den restlichen Blöcken plus dem Parity-Block pro Stripe.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum ist Schreiben bei RAID 5 langsamer?	Bei jedem Schreiben muss auch die Parity aktualisiert werden.	iteo::storagesysteme-im-rz
+Standard	iteo	Was unterscheidet RAID 6 von RAID 5?	2 statt 1 Parity-Block pro Stripe, dadurch sind Doppel-Disk-Ausfälle abgedeckt.	iteo::storagesysteme-im-rz
+Standard	iteo	Wann setzt man RAID 6 statt RAID 5 ein?	Bei grossen RAIDs ab etwa 10 bis 12 Disks.	iteo::storagesysteme-im-rz
+Standard	iteo	Wofür steht ADG, und welchem RAID-Level entspricht es?	Advanced Data Guarding, entspricht RAID 6.	iteo::storagesysteme-im-rz
+Standard	iteo	Welche RAID-Level sind nicht mehr gebräuchlich?	RAID 2, 3 und 4.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie viel Nutzkapazität haben 12 Disks à 8 TB in RAID 5?	11 · 8 TB = 88 TB.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie viel Nutzkapazität haben 12 Disks à 8 TB in RAID 6?	10 · 8 TB = 80 TB.	iteo::storagesysteme-im-rz
+Standard	iteo	RAID 5 mit D1 = 1010 und D2 = 0110. Wie lauten die Parity und die Wiederherstellung von D2?	P = D1 XOR D2 = 1100. Wiederherstellung: D1 XOR P = 0110.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum ersetzt RAID kein Backup?	RAID schützt nur vor Hardwareausfällen, nicht vor versehentlichem Löschen oder Ransomware.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist ein Disk Subsystem?	Eine lokale Speichererweiterung für Server, direkt am Diskkontroller im Server angehängt.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist ein NAS?	Speicher, der über das Netzwerk verteilt wird.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist ein SAN?	Storage Area Network: ein Speicherverbund mehrerer Geräte/Server.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist ein Storage Server?	Ein Gerät mit spezialisiertem OS für die Speicherverwaltung, angebunden über das Netzwerk (Share, SMB, NFS).	iteo::storagesysteme-im-rz
+Standard	iteo	Wie ist ein Storage Array (z.B. HP EVA) aufgebaut?	Zentrale, redundante Controller mit mehreren Diskshelfs und interner Intelligenz zur Blockverwaltung.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist eine LUN?	Logical Unit Number: eine logische Disk, die das Storage-System einem Server bereitstellt.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie werden bei einem Conventional Storage Array LUNs bereitgestellt?	Aus Teilen physischer Arrays mit passendem RAID-Level, mit fixer Plattenzuteilung zu LUN/Server.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist der Nachteil eines Conventional Storage Array?	Ungleiche Auslastung wegen der fixen Plattenzuteilung.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie verwaltet ein Compellent Array die Disks?	Als Gesamt-Block-Array: Virtuelle Disks (LUNs) werden per lokaler Intelligenz zusammengestellt, die Blöcke sind über das ganze Array verstreut.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist der Vorteil eines Compellent Array?	Gleiche Zugriffszeiten für alle Server.	iteo::storagesysteme-im-rz
+Standard	iteo	Welcher Hersteller führte Q3 2020 den Markt für externe Enterprise-Speichersysteme an?	Dell (inklusive EMC) mit rund 29 % Umsatzanteil.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist eine HotSpare Disk?	Eine als Reserve eingebaute Disk, die im Fehlerfall eine ausgefallene Disk ersetzt.	iteo::storagesysteme-im-rz
+Standard	iteo	Was bedeutet predictive bei HotSpare Disks?	Die Reserve-Disk springt schon vor dem Komplettausfall der Disk ein.	iteo::storagesysteme-im-rz
+Standard	iteo	Wo läuft die Replikation in einem Storage Array, und was ist kommerziell typisch?	Autonom im Controller integriert, meist lizenzgebunden (nach Diskgrösse).	iteo::storagesysteme-im-rz
+Standard	iteo	Was passiert bei einem SnapShot?	Der aktuelle Zustand wird eingefroren, weitere Änderungen werden separat verwaltet.	iteo::storagesysteme-im-rz
+Standard	iteo	Was ist der Hauptvorteil von SnapShots?	Sehr schnelles Zurückstellen, auch über mehrere Stufen.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie funktioniert ein SnapShot im Filesystem, wenn ein Block geändert wird?	Der Snapshot-Root zeigt weiter auf den alten Block; der geänderte Block wird neu geschrieben und nur vom aktuellen Root referenziert.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie funktioniert ein SnapShot auf Blocklevel der HD?	Das Disk-Image ist read-only, Writes landen in einer eigenen Schicht darüber; jeder Snapshot beginnt eine neue Schicht.	iteo::storagesysteme-im-rz
+Standard	iteo	Warum ersetzt ein SnapShot auf denselben Disks kein Backup?	Fallen die Disks aus, sind Daten und SnapShot gemeinsam verloren.	iteo::storagesysteme-im-rz
+Standard	iteo	Was macht die Funktion AutoService eines Arrays?	Das Array ruft selbständig um technische Hilfe, oft verbunden mit einem speziellen SLA.	iteo::storagesysteme-im-rz
+Standard	iteo	Was bedeutet Speichererweiterung on the fly?	HotPlug-Disks und dynamische Arrays: Der Controller verteilt die Daten selbst neu, RAID und Verteilung auf alle Disks bleiben erhalten.	iteo::storagesysteme-im-rz
+Standard	iteo	Wie lässt sich ein Array im Betrieb auf neue Speichertechnologie umstellen?	LUNs werden während des Betriebs auf schnelleren oder langsameren Speicher migriert (z.B. SAS/FC zu SSD).	iteo::storagesysteme-im-rz
+Standard	iteo	Wozu dient grosser RAM-Cache in einem Array?	Er beschleunigt oft gebrauchte Bereiche, mit intelligenter Zuordnung zu den Speicherbereichen.	iteo::storagesysteme-im-rz
+Lückentext	iteo	Storage nach Zeithorizont: kurzfristig als {{c1::Cache für das OS}}, mittelfristig für {{c2::aktive Daten (Files, DBs)}}, langfristig für {{c3::Archivierung}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Daten permanent vernichten durch {{c1::mechanisches Zerstören (Schreddern)}}, {{c2::Erhitzen über die Curie-Temperatur}}, {{c3::Verbrennen}} oder {{c4::Entmagnetisieren (Degausser)}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	DIN 66399: Teil 1 behandelt {{c1::Grundlagen und Schutzklassen}}, Teil 2 {{c2::Anforderungen an die Vernichtungsmaschinen}}, Teil 3 {{c3::die Prozesse der Datenträgervernichtung}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Im Schnitt kennen Firmen bei {{c1::52 %}} ihrer Daten weder Inhalt noch Wert.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Veritas-Massnahmen gegen Dark Data: {{c1::Datenquellen identifizieren}}, {{c2::Dark Data untersuchen}}, {{c3::automatisch erkennen und einstufen}}, {{c4::Bestand verkleinern und kontrollieren}}, {{c5::regelkonform handeln}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Speed gemäss Folien: IDE/ATA {{c1::10–100 MB/s}}, SCSI {{c2::3.5–320 MB/s}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Speed gemäss Folien: SATA {{c1::1.2–4.8 Gbit/s}}, SAS {{c2::3–12 Gbit/s}}, FC {{c3::1–16 Gbit/s}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	IDE/ATA und SCSI sind {{c1::parallele}} Schnittstellen, SATA, SAS und FC {{c2::serielle}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	M.2 hiess ursprünglich {{c1::NGFF (Next Generation Form Factor)}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	M.2-Keys gemäss Delock: Key B {{c1::SATA}}, Key M {{c2::PCIe x2/x4}}, Key B+M {{c3::SATA oder PCIe}}, Key A und E {{c4::PCIe x2 und USB}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Nutzkapazität bei n Disks: RAID 0 {{c1::100 %}}, RAID 1 {{c2::50 %}}, RAID 5 {{c3::(n−1)/n}}, RAID 6 {{c4::(n−2)/n}}, RAID 10 {{c5::50 %}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Minimale Anzahl Disks: RAID 0 {{c1::2}}, RAID 1 {{c2::2}}, RAID 5 {{c3::3}}, RAID 6 {{c4::4}}, RAID 10 {{c5::4}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	RAID 5 eignet sich für {{c1::3}} bis ca. {{c2::10–12}} Disks.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Zugriff auf ein NAS erfolgt über {{c1::SMB}}, {{c2::NFS}} oder ein Webinterface.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Storage Arrays werden über {{c1::SAS}}, {{c2::FC}} oder {{c3::FCoE}} angeschlossen.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Funktionen in Storage-Subsystemen: {{c1::HotSpare}}, {{c2::Replikation}}, {{c3::SnapShot}}, {{c4::AutoService}}.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Replikation im Array ist {{c1::synchron}} oder {{c2::asynchron}} möglich.		iteo::storagesysteme-im-rz
+Lückentext	iteo	Speicher ausbauen: Erweiterung {{c1::on the fly}}, {{c2::neue Technologie (LUN-Migration)}}, {{c3::Einbau von Cache}}, {{c4::mehr Shelfs/Controller}}.		iteo::storagesysteme-im-rz

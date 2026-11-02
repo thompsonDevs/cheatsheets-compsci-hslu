@@ -1602,6 +1602,188 @@ Start. Sie liefert das Gewicht jeder Seite; berechnen per Matrix-Vektor-Iteratio
 \end{subbox}
 
 % ============================================================================
+% SECTION 8: RANDOMISIERTE ALGORITHMEN
+% ============================================================================
+\section{Randomisierte Algorithmen}
+
+\subsection{Erwartete Berechnungskomplexität}
+
+\begin{mainbox}{Erwartete Berechnungskomplexität}
+Wie lange ein Algorithmus \textbf{im Durchschnitt} für Eingabegrösse $n$ braucht.
+Input-Werte $\Omega$ zufällig (z.B.\ uniform), Zufallsvariable
+$$X : \omega \mapsto \text{Anzahl Rechenschritte bei } \omega$$
+$\boxed{E(X)}$ = durchschnittliche Laufzeit.
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: $E(X)$ eines Algorithmus}
+\begin{enumerate}
+    \item Operationen pro Codezeile zählen (je 1).
+    \item Fälle mit Schrittzahl $x$ und Wahrscheinlichkeit $P(X = x)$ tabellieren;
+          Test: Summe $= 1$.
+    \item $E(X) = \sum x \cdot P(X = x)$.
+    \item Bei Schleifen zerlegen: $X = \sum X_i$, dann
+          $E(X) = \sum E(X_i)$ (Linearität, vgl.\ \emph{Zufallsvariablen}).
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Beispiel \texttt{linearSearch}}
+\texttt{for i in range(len(Liste)):}\\
+\phantom{xx}\texttt{if Liste[i] == Element: return True}\\
+\texttt{return False}\\[2pt]
+Element mit W'keit $p$ in der Liste, dann uniform an Stelle $k$:
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{l|cccc|c}
+$x$ & 3 & 5 & $\ldots$ & $2n + 1$ & $2n + 2$ \\ \hline
+$P$ & $\frac{p}{n}$ & $\frac{p}{n}$ & $\ldots$ & $\frac{p}{n}$ & $1 - p$
+\end{tabular}
+\end{center}
+Mit $1 + 3 + \ldots + (2n + 1) = (n + 1)^2$:
+\begin{align*}
+E(X) &= \tfrac{p}{n}\left((n+1)^2 - 1\right) + (1 - p)(2n + 2)\\
+&= \boxed{(2 - p) \cdot n + 2} \in \Theta(n)
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Beispiel \texttt{insertionSort}, $n = 5$ verschiedene Elemente}
+Pro \texttt{for}-Durchlauf 2 Schritte, dazu $X_i$ im \texttt{while}: Prüfung 2,
+jede Vertauschung 6. Das neue Element landet uniform auf einer der $i + 1$ Positionen:
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{l|l|c}
+ & $x$ & $E(X_i)$ \\ \hline
+$X_1$ & 2, 8 (je $\frac{1}{2}$) & 5 \\
+$X_2$ & 2, 8, 14 (je $\frac{1}{3}$) & 8 \\
+$X_3$ & 2, 8, 14, 20 (je $\frac{1}{4}$) & 11 \\
+$X_4$ & 2, 8, 14, 20, 26 (je $\frac{1}{5}$) & 14
+\end{tabular}
+\end{center}
+$E(X) = (2 + 5) + (2 + 8) + (2 + 11) + (2 + 14) = \boxed{46}$\\[2pt]
+\textbf{Allgemein} (eigene Rechnung): $E(X_i) = 2 + 3i$, also
+\begin{align*}
+E(X) &= \sum_{i=1}^{n-1} (4 + 3i) = \frac{(n - 1)(3n + 8)}{2}\\
+&\in \Theta(n^2)
+\end{align*}
+\end{subbox}
+
+\subsection{Las Vegas \& Monte Carlo}
+
+\begin{mainbox}{Randomisierter Algorithmus}
+Verwendet Zufallszahlen/-entscheidungen während der Berechnung; Laufzeit oder
+Ergebnis können sich je Ausführung unterscheiden.\\
+\textbf{Wozu?} Schwierige Probleme effizienter lösen, Worst-Case-Szenarien vermeiden,
+Approximationen berechnen.
+\end{mainbox}
+
+\begin{mainbox}{Las Vegas vs.\ Monte Carlo}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Las Vegas} & \textbf{Monte Carlo} \\
+\hline
+Ergebnis & \textbf{immer korrekt} & kann mit gewisser W'keit \textbf{falsch} sein \\
+Laufzeit & \textbf{variiert} & \textbf{festgelegt} \\
+Ende & erst bei gültiger Lösung & nach festen Schritten \\
+Fehler & keiner & mehrfach ausführen senkt ihn \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{subbox}{Merkregel}
+\textbf{Las Vegas} = Zufall in der \emph{Zeit}, Antwort sicher.\\
+\textbf{Monte Carlo} = Zufall in der \emph{Antwort}, Zeit sicher.\\
+\textbf{Test:} Kann bei irgendeinem Zufallsverlauf ein falsches oder ungenaues
+Resultat herauskommen? Ja $\Rightarrow$ Monte Carlo.
+\end{subbox}
+
+\begin{mainbox}{Fehler durch Wiederholen senken}
+Korrekt mit W'keit $p$ pro Lauf, $n$ unabhängige Läufe:
+$$P(\text{mind.\ 1 korrekt}) = 1 - (1 - p)^n$$
+Für Zielwert $q$:
+$$\boxed{n \ge \frac{\ln(1 - q)}{\ln(1 - p)}} \quad \text{aufrunden}$$
+\textbf{Beispiel} $p = 40\,\%$, $q = 99.9\,\%$:
+$0.6^n = 0.001 \Rightarrow n = \log_{0.6}(0.001) \approx 13.52$
+$\Rightarrow$ \textbf{14 Läufe}.
+\end{mainbox}
+
+\begin{subbox}{\texttt{randQuicksort}: Las Vegas}
+\texttt{pivot = rd.choice(arr)}\\
+\texttt{L = [x for x in arr if x < pivot]}\\
+\texttt{M = [x for x in arr if x == pivot]}\\
+\texttt{R = [x for x in arr if x > pivot]}\\
+\texttt{return randQuicksort(L) + M}\\
+\phantom{xx}\texttt{+ randQuicksort(R)}\\[2pt]
+Nur die Aufteilung ist zufällig, sortiert wird immer korrekt.
+\end{subbox}
+
+\begin{subbox}{\texttt{randSelect(A, i)}: Las Vegas}
+Gibt das $i$-te Element der \emph{sortierten} Liste zurück ($i$ ab 0). Pivot zufällig,
+$L$: kleiner, $R$: grösser oder gleich:
+\begin{itemize}
+    \item $i < |L|$: in $L$ weitersuchen, mit $i$
+    \item $i = |L|$: Pivot ist das Resultat
+    \item $i > |L|$: in $R$ weitersuchen, mit $i - |L| - 1$
+\end{itemize}
+\textbf{Bsp.} $A = [7,5,1,8,8,7,4,1,2,8]$, $i = 6$:\\
+Pivot 4: $[1,1,2]$, 4, $[7,5,8,8,7,8]$ $\to$ rechts, $i = 2$\\
+Pivot 8: $[7,5,7]$, 8, $[8,8]$ $\to$ links, $i = 2$\\
+Pivot 7: $[5]$, 7, $[7]$ $\to$ rechts, $i = 0$ $\Rightarrow$ \textbf{7}\\[2pt]
+\textbf{$O(n)$ erwartet} (eigene Skizze): Eine Runde kostet $\le cn$. Mit W'keit
+$\frac{1}{2}$ liegt der Pivot im mittleren Bereich, dann bleiben höchstens
+$\frac{3}{4} n$; im Mittel genügen dafür 2 Runden:
+$E(T(n)) \le 2cn + E(T(\frac{3}{4} n)) \le 8cn$.
+\end{subbox}
+
+\begin{subbox}{Minimum Cut (Kontraktion): Monte Carlo}
+\textbf{Minimum Cut:} kleinste Kantenmenge, deren Entfernung den Graphen in zwei
+Komponenten teilt.
+\begin{enumerate}
+    \item Uniform zufällige Kante $\{U, V\}$ wählen
+    \item $U, V$ verschmelzen, Kanten zwischen ihnen entfernen
+    \item Wiederholen, bis 2 Knoten übrig sind
+    \item Anzahl verbleibender Kanten zurückgeben
+\end{enumerate}
+Feste Schrittzahl, aber das Resultat hängt von den gewählten Kanten ab und ist nicht
+immer minimal.
+\end{subbox}
+
+\begin{subbox}{\texttt{monteCarloEstimator(n)}: Monte Carlo}
+\texttt{x = np.random.uniform(0,1,n)}\\
+\texttt{y = np.random.uniform(0,1,n)}\\
+\texttt{test = [1 for i in range(n)}\\
+\phantom{xx}\texttt{if x[i]**2 + y[i]**2 <= 1]}\\
+\texttt{return 4 * sum(test)/n}\\[2pt]
+$n$ Punkte in $[0,1]^2$; Anteil im Viertelkreis (Radius 1) $\approx \frac{\pi}{4}$
+$\Rightarrow$ \textbf{approximiert $\pi$}.
+\end{subbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Erwartete Laufzeit ist nicht Worst Case: \texttt{linearSearch} braucht im
+          Mittel $(2 - p)n + 2$, schlimmstenfalls $2n + 2$ Schritte.
+    \item Zwei Zufallsquellen: zufällige \emph{Eingabe} (\texttt{linearSearch}) vs.\
+          zufällige \emph{Entscheidung} im Algorithmus (\texttt{randQuicksort}).
+    \item Zufall im Code heisst nicht automatisch Monte Carlo: \texttt{randQuicksort}
+          und \texttt{randSelect} sind immer korrekt.
+    \item Läufe: immer \textbf{aufrunden} (13.52 $\to$ 14). Beide Logarithmen sind
+          negativ; beim Umformen dreht sich das Ungleichheitszeichen.
+    \item Wiederholen hilft nur, wenn man aus den Läufen das richtige Resultat erkennt
+          (Min Cut: kleinstes behalten).
+    \item ``Mind.\ 1 korrekt'' über das Gegenereignis ``immer falsch''.
+    \item \texttt{randSelect}: $i$ zählt ab 0; rechts $i - |L| - 1$, nicht $i - |L|$.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung Vorgehen}
+\begin{enumerate}
+    \item Code lesen: Was wird berechnet? Wo ist der Zufall?
+    \item Immer korrekt $\Rightarrow$ Las Vegas, sonst Monte Carlo.
+    \item Erwartete Komplexität: Schritte zählen, Verteilung, $E(X)$, Linearität.
+    \item Monte Carlo: nötige Läufe aus $1 - (1 - p)^n \ge q$.
+\end{enumerate}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

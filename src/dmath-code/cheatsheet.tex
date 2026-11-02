@@ -1395,6 +1395,213 @@ Stress.
 \end{subbox}
 
 % ============================================================================
+% SECTION 7: MARKOV-KETTEN
+% ============================================================================
+\section{Markov-Ketten}
+
+\subsection{Definition \& Übergangsmatrix}
+
+\begin{mainbox}{Markov-Kette (Definition 1)}
+\textbf{Markov-Eigenschaft:} Der zukünftige Zustand hängt \emph{nur vom aktuellen}
+Zustand ab, nicht von der gesamten Vergangenheit.\\
+Gerichteter Graph: Knoten = \textbf{Zustände} ($S \subset \N$), Kanten =
+Zustandsübergänge. Zu jedem Zeitpunkt $t = 0, 1, 2, \ldots$ gibt die Zufallsvariable
+$X_t : \Omega \to S$ den Zustand an. Bedingung:
+\begin{align*}
+&P(X_{t+1} = x \mid X_0 = s_0 \wedge \ldots \wedge X_t = s_t)\\
+&= P(X_{t+1} = x \mid X_t = s_t)
+\end{align*}
+\textbf{Übergangswahrscheinlichkeit:}
+$$p_{s_t, x} = P(X_{t+1} = x \mid X_t = s_t)$$
+\textbf{Homogen:} $p_{s_t, x}$ ist für alle Zeitpunkte gleich.
+\end{mainbox}
+
+\begin{mainbox}{Übergangsmatrix $T$}
+Eintrag Zeile $i$, Spalte $j$ = $p_{i,j}$ = Übergang von $i$ nach $j$.\\
+\textbf{Stochastische Matrix:} jede \textbf{Zeile} summiert zu 1.
+\end{mainbox}
+
+\begin{subbox}{Beispiele Übergangsmatrix}
+\renewcommand*{\arraystretch}{1.05}
+\setlength{\arraycolsep}{3pt}
+\textbf{Graph} (Kanten $1 \to 1$: 0.7, $1 \to 3$: 0.3, $2 \to 1$: 0.4, $2 \to 3$: 0.6,
+$3 \to 1$: 0.2, $3 \to 2$: 0.3, $3 \to 3$: 0.5):
+$$T = \begin{pmatrix} 0.7 & 0 & 0.3\\ 0.4 & 0 & 0.6\\ 0.2 & 0.3 & 0.5 \end{pmatrix}$$
+\textbf{Irrfahrt} (Doppelpyramide): uniform auf die Nachbarn; Spitzen 1, 5 haben je
+3 Nachbarn, Mitte 2, 3, 4 je 4:
+$$T = \frac{1}{12} \begin{pmatrix} 0 & 4 & 4 & 4 & 0\\ 3 & 0 & 3 & 3 & 3\\
+3 & 3 & 0 & 3 & 3\\ 3 & 3 & 3 & 0 & 3\\ 0 & 4 & 4 & 4 & 0 \end{pmatrix}$$
+\end{subbox}
+
+\begin{subbox}{Beispiele Würfelspiele}
+\renewcommand*{\arraystretch}{1.05}
+\setlength{\arraycolsep}{3pt}
+\textbf{Mini-Monopoly:} Ring 1--8, Feld 3 führt direkt auf 7:
+$$T = \frac{1}{6} \begin{pmatrix}
+0 & 1 & 0 & 1 & 1 & 1 & 2 & 0\\
+0 & 0 & 0 & 1 & 1 & 1 & 2 & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & 6 & 0\\
+1 & 1 & 0 & 0 & 1 & 1 & 1 & 1\\
+1 & 1 & 0 & 0 & 0 & 1 & 2 & 1\\
+1 & 1 & 0 & 1 & 0 & 0 & 2 & 1\\
+1 & 1 & 0 & 1 & 1 & 0 & 1 & 1\\
+1 & 1 & 0 & 1 & 1 & 1 & 1 & 0
+\end{pmatrix}$$
+Spalte 3 ist leer, Würfe auf 3 zählen doppelt in Spalte 7.\\
+\textbf{Leiterspiel} (30 Felder, $T = \frac{1}{6}(\ldots)$):
+\begin{itemize}
+    \item Leiter/Schlange: Wurf zählt beim Endfeld; eigene Zeile $= 6$ beim Endfeld
+    \item Ziel nur mit direktem Wurf; Überschuss \textbf{prallt zurück}
+          (ab 29: Wurf 2 $\to$ 29, Wurf 3 $\to$ 28)
+    \item Zielfeld: Zeile $= 6$ auf der Diagonale
+\end{itemize}
+\end{subbox}
+
+\subsection{Verteilung über die Zeit}
+
+\begin{mainbox}{Startverteilung \& Satz 1}
+\textbf{Startverteilung:} Wahrscheinlichkeitsverteilung von $X_0$, oft genau ein
+Knoten mit Wahrscheinlichkeit 1.\\
+Mit Startverteilung und $T$ ist die Verteilung von $X_t$ zu jedem $t$ berechenbar:
+\begin{align*}
+P(X_{t+1} = x) ={}& P(X_t = s_1) \cdot p_{s_1, x} + \ldots\\
+&+ P(X_t = s_n) \cdot p_{s_n, x}
+\end{align*}
+Totale Wahrscheinlichkeit über alle Vorgänger. In Matrixform: $p(t+1) = p(t) \cdot T$
+(Kap.\ 6).
+\end{mainbox}
+
+\begin{subbox}{Beispiel Verteilungen, Start $(0, 0, 1)$}
+$T$ vom Graph oben. Rechnung für $X_2$:\\
+$P(X_2 = s_1) = 0.2 \cdot 0.7 + 0.3 \cdot 0.4 + 0.5 \cdot 0.2 = 0.36$
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\begin{tabular}{l|ccc}
+ & $s_1$ & $s_2$ & $s_3$ \\ \hline
+$X_1$ & 0.2 & 0.3 & 0.5 \\
+$X_2$ & 0.36 & 0.15 & 0.49 \\
+$X_3$ & 0.41 & 0.147 & 0.443 \\
+$X_4$ & 0.4344 & 0.1329 & 0.4327
+\end{tabular}
+\end{center}
+Kontrolle: jede Zeile summiert zu 1.
+\end{subbox}
+
+\subsection{Invariante Verteilung}
+
+\begin{mainbox}{Invariante / stationäre Verteilung (Definition 3)}
+Verteilung bleibt im Laufe der Zeit unverändert:
+$$\boxed{P(X_{t+1} = x) = P(X_t = x)}$$
+für alle Zeitpunkte $t$ und alle Zustände $x \in S$.\\
+\textbf{Satz 2:} Jede Markov-Kette mit \emph{endlich} vielen Zuständen hat
+\textbf{mindestens eine} invariante Verteilung (allgemein auch mehrere).
+\end{mainbox}
+
+\begin{subbox}{Beispiel invariante Verteilung}
+$(x, y, z)$ für $T$ vom Graph oben:
+\begin{align*}
+0.7x + 0.4y + 0.2z &= x\\
+0.3z &= y\\
+0.3x + 0.6y + 0.5z &= z\\
+x + y + z &= 1
+\end{align*}
+Umformen: $10y = 3z$ und $7y + 5z = 3$
+$\Rightarrow$ $y = \frac{9}{71}$, $z = \frac{30}{71}$, $x = \frac{32}{71}$:
+$$\boxed{p = \tfrac{1}{71}(32,\ 9,\ 30)} \approx (0.451,\ 0.127,\ 0.423)$$
+\end{subbox}
+
+\subsection{Irreduzibel \& aperiodisch}
+
+\begin{mainbox}{Irreduzibel \& aperiodisch (Definition 4)}
+\begin{itemize}
+    \item \textbf{Irreduzibel:} für alle zwei Knoten gibt es einen Verbindungspfad
+          \emph{entlang der Kanten}.
+    \item \textbf{Aperiodisch:} für jeden Knoten $s$ ist der ggT aller
+          Rückkehrzeiten gleich 1:
+          $$N_s = \{t : P(X_t = s \mid X_0 = s) > 0\}$$
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Satz 3 (endlich viele Zustände)}
+\begin{itemize}
+    \item \textbf{Irreduzibel} $\Rightarrow$ \textbf{genau eine} invariante
+          Verteilung.
+    \item \textbf{Irreduzibel und aperiodisch} $\Rightarrow$ Kette nimmt im
+          Langzeitverhalten die invariante Verteilung an, \textbf{egal welche
+          Startverteilung}.
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiele Aufgaben}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X|l|l@{}}
+\textbf{Graph} & \textbf{irred.} & \textbf{aperiod.} \\
+\hline
+$T$ von oben; $N_1 = N_3 = \{1, 2, \ldots\}$, $N_2 = \{2, 3, \ldots\}$ & ja & ja \\
+Ring $1 \leftrightarrow 2 \leftrightarrow 3 \leftrightarrow 4 \leftrightarrow 1$;
+$N_1 = \{2, 4, 6, \ldots\}$, ggT 2 & ja & nein \\
+Ring $1 \to 2 \to 3 \to 4 \to 1$, dazu $1 \to 3$, Schleifen bei 2, 4;
+$N_2 = N_4 = \{1, 2, \ldots\}$, $N_1 = N_3 = \{3, 4, \ldots\}$ & ja & ja \\
+$1 \to 2$, $1 \to 3$, $2 \to 3 \to 4 \to 2$; $2 \not\to 1$;
+$N_2 = \{3, 6, \ldots\}$, ggT 3 & nein & nein \\
+\end{tabularx}
+\end{subbox}
+
+\begin{subbox}{Schlüsselidee: schnell prüfen (eigene Ergänzung)}
+\textbf{Irreduzibel:} geschlossenen Weg durch alle Knoten suchen. Knoten ohne
+eingehende Kante $\Rightarrow$ nicht irreduzibel.\\
+\textbf{Aperiodisch:} ist die Kette irreduzibel, genügt eine \textbf{Schleife} oder
+zwei Kreise mit teilerfremden Längen (z.B.\ 3 und 4).
+\end{subbox}
+
+\subsection{PageRank}
+
+\begin{mainbox}{PageRank (Zufallssurfer-Modell)}
+\textbf{Ziel:} Dokumente mit Verknüpfungen (Webseiten, Links) gewichten.\\
+\textbf{Idee:} Der Surfer sieht nur direkte Nachbarn und springt uniform zu einem
+davon. \textbf{Problem:} Seiten ohne eingehende Links werden nie gefunden (Gewicht 0).\\
+\textbf{Abhilfe:} Zahl $d \in (0, 1)$: mit Wahrscheinlichkeit $d$ einem Link folgen,
+mit $1 - d$ zu einer zufälligen Seite springen. Bei $N$ Seiten, $L$ = Matrix der
+Link-Sprünge (Zeile $i$: 1 / Anzahl Nachbarn von $i$), $E$ = lauter Einsen:
+$$\boxed{T = d \cdot L + (1 - d) \cdot \frac{1}{N} \cdot E}$$
+\end{mainbox}
+
+\begin{subbox}{Warum das funktioniert (eigene Ergänzung)}
+Für $d < 1$ sind alle Einträge von $T$ positiv $\Rightarrow$ irreduzibel und
+aperiodisch $\Rightarrow$ nach Satz 3 genau eine invariante Verteilung, unabhängig vom
+Start. Sie liefert das Gewicht jeder Seite; berechnen per Matrix-Vektor-Iteration
+(Kap.\ 6).
+\end{subbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Zeilen, nicht Spalten, summieren zu 1: Zeile = \emph{von}, Spalte = \emph{nach}.
+    \item Fehlende Gleichung nicht vergessen: $x + y + z = 1$. Die Fixpunkt-Gleichungen
+          allein bestimmen $p$ nicht eindeutig.
+    \item Irreduzibel heisst Pfad in \emph{beide} Richtungen: Kantenrichtung beachten.
+    \item Aperiodisch: ggT muss bei \emph{jedem} Knoten 1 sein.
+    \item Irreduzibel allein garantiert keine Konvergenz (Ring mit ggT 2 pendelt);
+          dazu braucht es auch aperiodisch.
+    \item Nicht irreduzibel: invariante Verteilung existiert (Satz 2), evtl.\ mehrere.
+    \item Zwischenfelder (Monopoly 3, Leiter): Wahrscheinlichkeit dem \emph{Endfeld}
+          zuschlagen.
+    \item Kontrolle: Zeilensummen von $T$ und Summe jeder Verteilung $= 1$.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung Vorgehen}
+\begin{enumerate}
+    \item Zustände nummerieren, Graph $\to$ $T$; Zeilensummen prüfen.
+    \item Verteilung zur Zeit $t$: Satz 1 schrittweise.
+    \item Invariant: LGS mit Summe 1 lösen, Probe.
+    \item Irreduzibel? Aperiodisch? $\to$ Satz 3: eindeutig? Konvergenz?
+\end{enumerate}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

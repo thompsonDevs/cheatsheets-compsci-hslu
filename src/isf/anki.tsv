@@ -332,3 +332,139 @@ Lückentext	isf	ISO/IEC 29147 regelt Vulnerability {{c1::Disclosure}}, ISO/IEC 3
 Lückentext	isf	Nach ISO 29147 muss der Eingang eines Vulnerability-Reports innert {{c1::7 Kalendertagen}} bestätigt werden.		isf::vulnerabilities
 Lückentext	isf	security.txt ist in {{c1::RFC 9116}} definiert und liegt unter {{c2::/.well-known/security.txt}}.		isf::vulnerabilities
 Lückentext	isf	EPSS sagt die Wahrscheinlichkeit voraus, dass eine Vulnerability in den nächsten {{c1::30 Tagen}} ausgenutzt wird.		isf::vulnerabilities
+Standard	isf	Wie viele symmetrische Schlüssel muss jeder der n Benutzer in einem Peer-to-Peer-Netz speichern?	n − 1.	isf::asymmetrische-kryptologie
+Standard	isf	Wie viele symmetrische Schlüssel gibt es in einem Peer-to-Peer-Netz mit 100 Benutzern?	100 · 99 / 2 = 4950.	isf::asymmetrische-kryptologie
+Standard	isf	Welches Problem hat ein neuer Benutzer in einem Peer-to-Peer-Netz mit symmetrischen Schlüsseln?	Er muss mit allen anderen Benutzern eine sichere Verbindung aufbauen, um neue Schlüssel zu verteilen.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Key Distribution Center (KDC)?	Eine zentrale Stelle, die mit jedem Teilnehmer einen Langzeitschlüssel teilt und pro Verbindung einen kurzlebigen Session Key erzeugt.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Key Encryption Key (KEK) beim KDC?	Der Langzeitschlüssel zwischen Teilnehmer und KDC, der in einem Trusted Environment bzw. in der Fertigung ins Gerät eingebaut wird.	isf::asymmetrische-kryptologie
+Standard	isf	Welches Performanz-Problem hat ein KDC?	Für jede neue Verbindung muss das KDC kontaktiert werden.	isf::asymmetrische-kryptologie
+Standard	isf	Warum ist ein KDC ein Single Point of Failure?	Ist es kompromittiert, sind alle Verbindungsschlüssel kompromittiert; eine DoS-Attacke legt die Kommunikation aller Beteiligten lahm.	isf::asymmetrische-kryptologie
+Standard	isf	Was braucht ein neuer Teilnehmer bei der Initialisierung im KDC-Modell?	Einen sicheren Kanal zur Übermittlung seines Schlüssels.	isf::asymmetrische-kryptologie
+Standard	isf	Was bedeutet Perfect Forward Secrecy (PFS), deutsch «Folgenlosigkeit»?	Kompromittierte Langzeitschlüssel legen keine früheren Sitzungsschlüssel offen.	isf::asymmetrische-kryptologie
+Standard	isf	Warum bietet ein KDC keine Perfect Forward Secrecy?	Mit dem Langzeitschlüssel kann ein Angreifer alle Session Keys aus den gespeicherten Nachrichten berechnen und so auch alle früheren Nachrichten entschlüsseln.	isf::asymmetrische-kryptologie
+Standard	isf	Womit lässt sich Perfect Forward Secrecy erreichen?	Nur mit asymmetrischer Kryptographie, z.B. Diffie-Hellman; mit symmetrischen Schlüsseln ist es nicht erreichbar.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist das Prinzip der Public-Key-Verschlüsselung?	Verschlüsseln ist einfach zu berechnen, die Umkehrung ist ohne privaten Schlüssel (vermutlich) schwierig.	isf::asymmetrische-kryptologie
+Standard	isf	Mit welchem Schlüssel verschlüsselt Alice eine Nachricht an Bob?	Mit Bobs öffentlichem Schlüssel.	isf::asymmetrische-kryptologie
+Standard	isf	Mit welchem Schlüssel entschlüsselt Bob eine an ihn verschlüsselte Nachricht?	Mit seinem eigenen privaten Schlüssel.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist der diskrete Logarithmus?	Wenn a^x ≡ b mod n gilt, ist x der diskrete Logarithmus von b zur Basis a modulo n.	isf::asymmetrische-kryptologie
+Standard	isf	Warum genügt Berechenbarkeit in der Kryptologie nicht?	Lösungen müssen in der Praxis auch effizient sein; Berechenbarkeit löst nur die Grundsatzfrage.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Ressourcen analysiert die Komplexitätstheorie?	Zeitbedarf, Speicherbedarf (RAM, Disk) und Netz- bzw. Medienzugriffe.	isf::asymmetrische-kryptologie
+Standard	isf	Wovon muss die Messgrösse der Komplexität unabhängig sein?	Von konkreter Hardware, Programmiersprache, Compiler-Optimierung und Testdaten.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Komplexitätsklasse hat die Addition zweier n-stelliger Zahlen?	O(n).	isf::asymmetrische-kryptologie
+Standard	isf	Was tauschen Alice und Bob bei Diffie-Hellman öffentlich aus?	Die öffentlichen Schlüssel A und B.	isf::asymmetrische-kryptologie
+Standard	isf	Was wird bei Diffie-Hellman nie übertragen?	Die privaten Schlüssel a, b und der gemeinsame Schlüssel k.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Parameter werden bei Diffie-Hellman vorab veröffentlicht?	Eine grosse Primzahl p und eine ganze Zahl z aus {2, …, p−2}.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Aufgabe erfüllt Diffie-Hellman, und welche nicht?	Es vereinbart einen gemeinsamen Schlüssel, verschlüsselt aber selbst keine Nachrichten.	isf::asymmetrische-kryptologie
+Standard	isf	Diffie-Hellman mit p = 29, z = 2, a = 5, b = 4: Wie lauten A, B und k?	A = 2^5 mod 29 = 3, B = 2^4 mod 29 = 16, k = 16^5 mod 29 = 3^4 mod 29 = 23.	isf::asymmetrische-kryptologie
+Standard	isf	Diffie-Hellman mit p = 467, z = 2, a = 3, b = 5: Wie lauten A, B und k?	A = 8, B = 32, k = 78.	isf::asymmetrische-kryptologie
+Standard	isf	Wie läuft eine Man-in-the-Middle-Attacke auf Diffie-Hellman ab?	Mallory fängt die öffentlichen Schlüssel ab und ersetzt sie durch eigene; so vereinbart sie je einen Schlüssel mit Alice und mit Bob und liest alles mit.	isf::asymmetrische-kryptologie
+Standard	isf	Wie schützt man Diffie-Hellman vor Man-in-the-Middle?	Durch Authentifizierung der öffentlichen Schlüssel, z.B. mit digitalen Zertifikaten, die eine vertrauenswürdige CA signiert hat.	isf::asymmetrische-kryptologie
+Standard	isf	Auf welcher Einwegfunktion basiert RSA?	Multiplikation zweier grosser Primzahlen (Umkehrung: Faktorisierung).	isf::asymmetrische-kryptologie
+Standard	isf	Wie lautet bei RSA der öffentliche Schlüssel?	(n, e).	isf::asymmetrische-kryptologie
+Standard	isf	Wie lautet bei RSA der private Schlüssel?	(n, d).	isf::asymmetrische-kryptologie
+Standard	isf	Welche Bedingung muss der öffentliche RSA-Exponent e erfüllen?	e aus {1, …, φ(n)−1} und ggT(e, φ(n)) = 1.	isf::asymmetrische-kryptologie
+Standard	isf	Wie wird der private RSA-Exponent d bestimmt?	So, dass e · d ≡ 1 mod φ(n).	isf::asymmetrische-kryptologie
+Standard	isf	RSA mit p = 3, q = 11, e = 3: Wie lauten n, φ(n) und d?	n = 33, φ(n) = 20, d = 7 (3 · 7 = 21 ≡ 1 mod 20).	isf::asymmetrische-kryptologie
+Standard	isf	RSA mit n = 33, e = 3: Wie lautet der Ciphertext von x = 4?	y = 4^3 mod 33 = 31.	isf::asymmetrische-kryptologie
+Standard	isf	RSA mit n = 33, d = 7: Wie lautet der Klartext von y = 31?	31^7 mod 33 = 4.	isf::asymmetrische-kryptologie
+Standard	isf	Welcher öffentliche RSA-Exponent wird in der Praxis meist verwendet?	e = 65537.	isf::asymmetrische-kryptologie
+Standard	isf	Welcher openSSL-Befehl erzeugt einen verschlüsselten privaten 4096-Bit-RSA-Schlüssel?	openssl genrsa -aes256 -out private.pem 4096	isf::asymmetrische-kryptologie
+Standard	isf	Welcher openSSL-Befehl extrahiert den öffentlichen RSA-Schlüssel?	openssl rsa -in private.pem -pubout -out public.pem	isf::asymmetrische-kryptologie
+Standard	isf	Wofür steht PEM, und wie ist das Format aufgebaut?	Privacy Enhanced Mail: Base64-Inhalt zwischen den Zeilen BEGIN und END.	isf::asymmetrische-kryptologie
+Standard	isf	Welche drei Typen von Angriffen auf RSA gibt es?	Mathematische Angriffe, Seitenkanal-Angriffe und Protokoll-Angriffe.	isf::asymmetrische-kryptologie
+Standard	isf	Welcher bekannte Protokoll-Angriff richtet sich gegen RSA?	Die Bleichenbacher-Attacke.	isf::asymmetrische-kryptologie
+Standard	isf	Wie gross ist der Faktorisierungsrekord RSA-250 (2020) ungefähr?	829 Bit.	isf::asymmetrische-kryptologie
+Standard	isf	Worauf zielen Seitenkanal-Angriffe auf RSA?	Auf die Hardware und Software-Komponenten statt auf die Mathematik, z.B. Stromverbrauch, Geräusche oder provozierte Fehler.	isf::asymmetrische-kryptologie
+Standard	isf	Wie verrät die Stromkurve bei Square-and-Multiply den privaten RSA-Schlüssel?	Die Operationen sind sichtbar: Nur S steht für Bit 0, SM für Bit 1.	isf::asymmetrische-kryptologie
+Standard	isf	Welchen Seitenkanal nutzten Forscher aus Tel Aviv, um einen 4096-Bit-RSA-Schlüssel in unter 1 Stunde zu extrahieren?	Die Geräusche des Computers (Akustik).	isf::asymmetrische-kryptologie
+Standard	isf	Welchen Vorteil hat ECC gegenüber RSA?	Viel kürzere Schlüssel bei gleichem Sicherheitsniveau.	isf::asymmetrische-kryptologie
+Standard	isf	Welches Problem macht ECC schwierig?	Der diskrete Logarithmus.	isf::asymmetrische-kryptologie
+Standard	isf	Welche ECC-Eigenschaft nutzt die Gruppenoperation auf einer elliptischen Kurve?	Die Verbindung zweier Punkte ergibt wieder einen Punkt auf der Kurve.	isf::asymmetrische-kryptologie
+Standard	isf	Wie lang muss ein RSA-Schlüssel für 128 Bit Sicherheitsniveau sein?	3072 Bit.	isf::asymmetrische-kryptologie
+Standard	isf	Wie lang muss ein ECC-Schlüssel für 128 Bit Sicherheitsniveau sein?	256 Bit.	isf::asymmetrische-kryptologie
+Standard	isf	Warum verwendet man hybride Verschlüsselung?	Asymmetrisch ist langsam, aber löst den Schlüsseltausch; symmetrisch ist schnell und verschlüsselt die eigentlichen Daten.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist hybride Verschlüsselung?	Die Nachricht wird symmetrisch verschlüsselt, der Session Key asymmetrisch.	isf::asymmetrische-kryptologie
+Standard	isf	Mit welchem Schlüssel wird der Session Key bei hybrider Verschlüsselung verschlüsselt?	Mit dem öffentlichen Schlüssel des Empfängers.	isf::asymmetrische-kryptologie
+Standard	isf	Mit welchem Schlüssel signiert der Absender einer E-Mail?	Mit seinem eigenen privaten Schlüssel.	isf::asymmetrische-kryptologie
+Standard	isf	Mit welchem Schlüssel prüft der Empfänger die Signatur einer E-Mail?	Mit dem öffentlichen Schlüssel des Absenders.	isf::asymmetrische-kryptologie
+Standard	isf	Was wird bei einer signierten und verschlüsselten E-Mail symmetrisch verschlüsselt?	Die Meldung zusammen mit der Signatur.	isf::asymmetrische-kryptologie
+Standard	isf	Warum wird zuerst signiert und dann verschlüsselt?	Die Signatur soll die Authentizität des Klartexts belegen und durch das Entschlüsseln nicht verloren gehen.	isf::asymmetrische-kryptologie
+Standard	isf	Was bedeutet die Signatur-Eigenschaft «willenserklärend»?	Die Unterschrift kann nur willentlich (bewusst) unter das Dokument gesetzt worden sein.	isf::asymmetrische-kryptologie
+Standard	isf	Was bedeutet die Signatur-Eigenschaft Nicht-Abstreitbarkeit?	Der Unterzeichner kann später nicht abstreiten, das Dokument unterschrieben zu haben.	isf::asymmetrische-kryptologie
+Standard	isf	Warum signiert man in der Praxis nur den Hashwert eines Dokuments?	Ein grosses Dokument mit einem Public-Key-Algorithmus zu signieren dauert zu lange.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Voraussetzung macht Hash-then-Sign sicher?	Die Hashfunktion darf keine Kollisionen haben: Es darf kein anderes Dokument mit gleichem Hashwert gefunden werden können.	isf::asymmetrische-kryptologie
+Standard	isf	Wie prüft Bob eine RSA-Signatur?	Er hasht den Klartext selbst, entschlüsselt die Signatur mit dem Public Key und vergleicht beide Hashwerte.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist der Unterschied zwischen eigenhändiger Unterschrift und digitaler Signatur bezüglich des Inhalts?	Die Unterschrift sieht auf jedem Dokument gleich aus; die digitale Signatur hängt über den Hash vom Inhalt ab, jede Änderung macht sie ungültig.	isf::asymmetrische-kryptologie
+Standard	isf	Eine PDF-Prüfung meldet «Signature valid», aber «Certificate expired». Was bedeutet das?	Das Dokument ist unverändert (Signatur korrekt), das Zertifikat ist aber inzwischen abgelaufen; beides wird getrennt beurteilt.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist der Zweck eines digitalen Zertifikats?	Es bindet einen öffentlichen Schlüssel überprüfbar an eine Identität, beglaubigt durch die Signatur der CA.	isf::asymmetrische-kryptologie
+Standard	isf	Womit signiert die CA ein Zertifikat?	Mit ihrem privaten Schlüssel, über den Hashwert des Zertifikatsinhalts.	isf::asymmetrische-kryptologie
+Standard	isf	Bei welcher Stelle identifiziert sich ein Antragsteller für ein Zertifikat, und wie?	Bei der Registration Authority (RA), mit einem Identitätsdokument wie Pass oder ID.	isf::asymmetrische-kryptologie
+Standard	isf	Nach welchem Standard sind digitale Zertifikate meist aufgebaut?	ITU X.509.	isf::asymmetrische-kryptologie
+Standard	isf	Wozu dient der Fingerprint eines Zertifikats?	Er ist ein Hash über das Zertifikat und erlaubt, dessen Echtheit über einen zweiten Kanal zu vergleichen.	isf::asymmetrische-kryptologie
+Standard	isf	Was prüft ein DV-Zertifikat?	Nur die Kontrolle über die Domain (automatisch, innert Sekunden).	isf::asymmetrische-kryptologie
+Standard	isf	Was prüft ein OV-Zertifikat zusätzlich zur Domain?	Die betreibende Organisation.	isf::asymmetrische-kryptologie
+Standard	isf	Welche TLS-Zertifikatsstufe hat die umfassendste Validierung?	EV (Extended Validation).	isf::asymmetrische-kryptologie
+Standard	isf	Was ist Revokation?	Die Ungültigkeitserklärung eines Zertifikats vor Ablauf seines Gültigkeitsdatums.	isf::asymmetrische-kryptologie
+Standard	isf	Woran wird ein revoziertes Zertifikat identifiziert?	An seiner Seriennummer.	isf::asymmetrische-kryptologie
+Standard	isf	Nenne drei Gründe für eine Revokation.	Privater Schlüssel gebrochen, Besitzer verlässt das Unternehmen, Personendaten haben sich geändert.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist eine CRL?	Certificate Revocation List: die vom Verzeichnisdienst bereitgestellte Liste revozierter Zertifikate.	isf::asymmetrische-kryptologie
+Standard	isf	Was bietet ein OCSP-Responder?	Eine Online-Abfrage der Gültigkeit eines Zertifikats.	isf::asymmetrische-kryptologie
+Standard	isf	Warum muss ein Revokationsantrag so sorgfältig geprüft werden wie ein Zertifikatsantrag?	Sonst könnte ein Angreifer fremde Zertifikate sperren lassen (Denial of Service).	isf::asymmetrische-kryptologie
+Standard	isf	Warum muss eine Revokationsliste rasch aktualisiert werden und kurz gültig sein?	Damit ein kompromittiertes Zertifikat nur während eines kurzen Zeitfensters missbraucht werden kann.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist Direct Trust?	Man vertraut einem Public Key durch direktes Überprüfen, meist über den Fingerprint.	isf::asymmetrische-kryptologie
+Standard	isf	Was benötigt Direct Trust zum Etablieren des Vertrauens?	Einen authentischen Kanal, oft out-of-band.	isf::asymmetrische-kryptologie
+Standard	isf	Nenne ein Beispiel für Direct Trust in Software.	Der in Chrome vorinstallierte Public Key von Google-Servern (auch Apps oder VPN-Clients).	isf::asymmetrische-kryptologie
+Standard	isf	Wie funktioniert das Web of Trust?	Indirekt: Alice vertraut Daves Key, weil Charlie ihn signiert hat und Bob, dem sie vertraut, Charlies Key signiert hat.	isf::asymmetrische-kryptologie
+Standard	isf	Wie ist Hierarchical Trust aufgebaut?	Root CA → Intermediate CA → Endbenutzer.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist eine PKI?	Ein System, das digitale Zertifikate ausstellen, verteilen und prüfen kann.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Aufgabe hat die Registration Authority (RA)?	Sie prüft die Identität des Antragstellers.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Aufgabe hat die Certification Authority (CA)?	Sie stellt digitale Zertifikate aus und beglaubigt die Zuordnung von Schlüssel und Identität mit ihrer Signatur.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Personal Security Environment (PSE)?	Das Ablagemedium für Geheimelemente wie private Schlüssel.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Soft-Token?	Eine passwortgeschützte Datei als PSE.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Hardware Security Module (HSM)?	Eine Erweiterungskarte für Computer-Mainboards mit Krypto-Prozessor, die als PSE dient.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Daten legt ein Directory Service in einer PKI ab?	Die ausgestellten Zertifikate und CRLs, teils auch weitere Personendaten.	isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Root Certificate?	Das letzte Zertifikat der Chain of Trust; es enthält den Public Key der Root CA.	isf::asymmetrische-kryptologie
+Standard	isf	Wer signiert ein Root Certificate normalerweise?	Die Root CA selbst (self-signed).	isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Trust Anchor?	Das vertrauenswürdige Root-CA-Zertifikat, bei dem die Prüfung einer Zertifikatskette endet.	isf::asymmetrische-kryptologie
+Standard	isf	Wie prüft Bob die Zertifikatskette von Alice?	Er verfolgt Issuer für Issuer bis zu seinem Trust Anchor; jeder Public Key verifiziert die Signatur des nächsten Zertifikats.	isf::asymmetrische-kryptologie
+Standard	isf	Wie gelangen Root-CA-Zertifikate typischerweise auf einen Rechner?	Vorinstalliert durch Betriebssystem- und Browser-Hersteller, sonst manuell nachinstalliert.	isf::asymmetrische-kryptologie
+Standard	isf	Warum ist die Installation eines Root-CA-Zertifikats heikel?	Sie attestiert ihm Echtheit: Eine untergeschobene CA könnte beliebige Zertifikate ausstellen und Man-in-the-Middle ermöglichen.	isf::asymmetrische-kryptologie
+Standard	isf	Wo liegt TLS im Protokoll-Stack?	Zwischen Anwendungsschicht (z.B. HTTP) und Transportschicht (z.B. TCP).	isf::asymmetrische-kryptologie
+Standard	isf	Warum braucht es TLS?	Der TCP/IP-Stack entstand ohne Cybersecurity; TLS ergänzt verschlüsselte und integritätsgesicherte Kommunikation.	isf::asymmetrische-kryptologie
+Standard	isf	Was bedeutet, dass TLS anwendungsunabhängig ist?	Es lässt sich unter verschiedenen Anwendungsprotokollen wie HTTP, SMTP oder SIP einsetzen.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Daten enthält das ClientHello im TLS-Handshake?	Zufallswerte, Sitzungsnummer und eine Liste von Cipher Suites.	isf::asymmetrische-kryptologie
+Standard	isf	Was teilt das ServerHello dem Client mit?	Zufallswerte und die ausgewählte Cipher Suite.	isf::asymmetrische-kryptologie
+Standard	isf	Was enthält der ClientKeyExchange im TLS-Handshake?	Das verschlüsselte Pre-Master Secret oder den Diffie-Hellman-Wert.	isf::asymmetrische-kryptologie
+Standard	isf	Welche Nachrichten schliessen den TLS-Handshake ab?	ChangeCipherSpec und Finished, von beiden Seiten.	isf::asymmetrische-kryptologie
+Standard	isf	Warum erreicht TLS 1.3 Perfect Forward Secrecy?	Es nutzt nur noch Diffie-Hellman (DHE, ECDHE) und handelt für jede Verbindung einen neuen Session Key ohne Langzeitschlüssel aus.	isf::asymmetrische-kryptologie
+Standard	isf	Was enthält eine Cipher Suite in TLS 1.3 nicht mehr?	Schlüsseltausch und Signatur-Algorithmus.	isf::asymmetrische-kryptologie
+Standard	isf	Was enthält eine Cipher Suite in TLS 1.3 noch?	Verschlüsselungsalgorithmus und Hash-Funktion.	isf::asymmetrische-kryptologie
+Standard	isf	Wofür nutzt TLS 1.3 das Serverzertifikat noch?	Zur Authentisierung des Servers, nicht mehr für den Schlüsseltausch.	isf::asymmetrische-kryptologie
+Lückentext	isf	Anzahl symmetrischer Schlüssel im Peer-to-Peer-Netz mit n Benutzern: {{c1::n(n−1)/2}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	KDC: Der kurzlebige {{c1::Session Key}} wird durch das {{c2::KDC}} erzeugt.		isf::asymmetrische-kryptologie
+Lückentext	isf	Schwierige Probleme: RSA basiert auf {{c1::Integer-Faktorisierung}}, Diffie-Hellman auf dem {{c2::diskreten Logarithmus}}, ECC auf dem {{c3::diskreten Logarithmus}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Komplexitätsklassen von klein nach gross: {{c1::O(1)}}, {{c2::O(n)}}, {{c3::O(n²)}}, {{c4::O(e^n)}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Diffie-Hellman: A = {{c1::z^a mod p}}, B = {{c2::z^b mod p}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Diffie-Hellman, gemeinsamer Schlüssel: Alice berechnet k = {{c1::B^a mod p}}, Bob berechnet k = {{c2::A^b mod p}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	RSA: n = {{c1::p · q}} und φ(n) = {{c2::(p−1)(q−1)}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	RSA: Verschlüsseln y = {{c1::x^e mod n}}, entschlüsseln x = {{c2::y^d mod n}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	RSA wurde {{c1::1977}} von {{c2::Rivest, Shamir und Adleman}} veröffentlicht.		isf::asymmetrische-kryptologie
+Lückentext	isf	Elliptische Kurve: {{c1::y² = x³ + ax + b}} mit Nicht-Singularitätsbedingung {{c2::4a³ + 27b² ≠ 0}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Sicherheitsniveau 128 Bit: AES {{c1::128}} Bit, ECC {{c2::256}} Bit, RSA und DH {{c3::3072}} Bit.		isf::asymmetrische-kryptologie
+Lückentext	isf	Sicherheitsniveau 256 Bit: AES {{c1::256}} Bit, ECC {{c2::512}} Bit, RSA und DH {{c3::15360}} Bit.		isf::asymmetrische-kryptologie
+Lückentext	isf	Symmetrisch: {{c1::schnell}}, Schlüssel {{c2::kurz}}, Anzahl Schlüssel {{c3::n(n−1)/2}}. Asymmetrisch: {{c4::langsam}}, Schlüssel {{c5::lang}}, Anzahl Schlüsselpaare {{c6::n}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Symmetrische Verfahren dienen der {{c1::Verschlüsselung}}, asymmetrische dem {{c2::Schlüsseltausch}} und für {{c3::Signaturen}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	E-Mail senden: 1) {{c1::signieren (Hash-then-Sign)}}, 2) {{c2::Session Key erzeugen}}, 3) {{c3::Meldung und Signatur symmetrisch verschlüsseln}}, 4) {{c4::Session Key asymmetrisch verschlüsseln}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	E-Mail empfangen: 1) {{c1::Session Key mit eigenem Private Key entschlüsseln}}, 2) {{c2::Meldung und Signatur symmetrisch entschlüsseln}}, 3) {{c3::Signatur mit Public Key des Absenders prüfen}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Eigenschaften einer Signatur: {{c1::Integrität}}, {{c2::Authentizität}}, {{c3::Nicht-Abstreitbarkeit}}, {{c4::willenserklärend}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Signatur-Algorithmen: RSA, {{c1::DSA}} und {{c2::elliptischer DSA (ECDSA)}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	X.509-Felder: Version, {{c1::Serial Number}}, Signature Algorithm ID, {{c2::Issuer Name}}, {{c3::Validity Period}}, {{c4::Subject Name}}, {{c5::Subject Public Key Info}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Validierungsstufen von TLS-Zertifikaten, aufsteigend: {{c1::DV}}, {{c2::OV}}, {{c3::EV}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Vertrauensmodelle: {{c1::Direct Trust}}, {{c2::Web of Trust}}, {{c3::Hierarchical Trust (PKI)}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	PKI-Bausteine: {{c1::Registration Authority (RA)}}, {{c2::Certification Authority (CA)}}, {{c3::Personal Security Environment (PSE)}}, {{c4::Directory Service / Verification Authority}}, {{c5::Sicherheitsapplikation}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	PSE-Formen: {{c1::Soft-Token}}, {{c2::Smart-Card}}, {{c3::USB-Token}}, {{c4::Hardware Security Module}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Prüfung eines Zertifikats: {{c1::Identität des Inhabers}}, {{c2::zeitliche Gültigkeit und nicht auf CRL}}, {{c3::Gültigkeit der ausstellenden CA}}, {{c4::Gültigkeit der Signatur}}, {{c5::Verwendungszweck}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	HTTP läuft über Port {{c1::80}}, HTTPS über Port {{c2::443}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	Protokolle über dem TLS Record Layer: {{c1::CCS}}, {{c2::Alert}}, {{c3::Handshake}}, {{c4::Application Data}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	TLS-Handshake-Phasen: 1) {{c1::Aushandlung der Sicherheitsparameter}}, 2) {{c2::Server-Authentisierung und Schlüsseltausch}}, 3) {{c3::Client-Authentisierung und Schlüsseltausch}}, 4) {{c4::Cipher Suite aktivieren und Handshake beenden}}.		isf::asymmetrische-kryptologie
+Lückentext	isf	TLS-1.3-Cipher-Suites: TLS_AES_128_GCM_{{c1::SHA256}}, TLS_AES_256_GCM_{{c2::SHA384}}, TLS_{{c3::CHACHA20_POLY1305}}_SHA256.		isf::asymmetrische-kryptologie

@@ -468,3 +468,70 @@ Lückentext	isf	HTTP läuft über Port {{c1::80}}, HTTPS über Port {{c2::443}}.
 Lückentext	isf	Protokolle über dem TLS Record Layer: {{c1::CCS}}, {{c2::Alert}}, {{c3::Handshake}}, {{c4::Application Data}}.		isf::asymmetrische-kryptologie
 Lückentext	isf	TLS-Handshake-Phasen: 1) {{c1::Aushandlung der Sicherheitsparameter}}, 2) {{c2::Server-Authentisierung und Schlüsseltausch}}, 3) {{c3::Client-Authentisierung und Schlüsseltausch}}, 4) {{c4::Cipher Suite aktivieren und Handshake beenden}}.		isf::asymmetrische-kryptologie
 Lückentext	isf	TLS-1.3-Cipher-Suites: TLS_AES_128_GCM_{{c1::SHA256}}, TLS_AES_256_GCM_{{c2::SHA384}}, TLS_{{c3::CHACHA20_POLY1305}}_SHA256.		isf::asymmetrische-kryptologie
+Standard	isf	Was ist ein Algorithmus?	Eine endliche, wohldefinierte Abfolge von Schritten, die ein bestimmtes Problem löst oder eine Aufgabe ausführt (z.B. SHA-256, AES, RSA).	isf::kryptographische-protokolle
+Standard	isf	Was ist ein Protokoll in der Kryptographie?	Eine Regelmenge für die Kommunikation mehrerer Teilnehmer: welche Nachrichten in welcher Reihenfolge ausgetauscht und welche Algorithmen dabei angewendet werden (z.B. TLS).	isf::kryptographische-protokolle
+Standard	isf	Worin unterscheidet sich der Krypto-Charakter Eve von Mallory?	Eve hört passiv mit; Mallory greift aktiv an (manipuliert, ersetzt, blockiert Nachrichten).	isf::kryptographische-protokolle
+Standard	isf	Welche Rolle hat der Krypto-Charakter Trent?	Vertrauensinstanz, die Identitäten bestätigt (z.B. PKI, Zertifikate).	isf::kryptographische-protokolle
+Standard	isf	Welche Rollen haben Peggy und Victor bei Zero-Knowledge Proofs?	Peggy ist Prover (beweist Wissen), Victor ist Verifier (prüft den Beweis).	isf::kryptographische-protokolle
+Standard	isf	Was tut der Krypto-Charakter Sybil?	Sie erstellt viele Fake-Identitäten (Sybil-Attacke, z.B. in Blockchains).	isf::kryptographische-protokolle
+Standard	isf	Wofür steht der Krypto-Charakter Oscar?	Für einen generischen Angreifer in abstrakten Bedrohungsmodellen.	isf::kryptographische-protokolle
+Standard	isf	Welche kryptographischen Verfahren überleben Quantencomputer?	Symmetrische Verfahren, mit grösseren Schlüsseln.	isf::kryptographische-protokolle
+Standard	isf	Welche kryptographischen Verfahren müssen wegen Quantencomputern ersetzt werden?	Asymmetrische Verfahren (RSA, ECC, Diffie-Hellman, DSA).	isf::kryptographische-protokolle
+Standard	isf	Welches Post-Quantum-Verfahren ersetzt Diffie-Hellman und RSA-Verschlüsselung?	Crystals-Kyber.	isf::kryptographische-protokolle
+Standard	isf	Welche Post-Quantum-Signaturverfahren gibt es?	Dilithium, Falcon und SPHINCS+.	isf::kryptographische-protokolle
+Standard	isf	Wovor schützt eine einfache Checksum, und wovor nicht?	Sie erkennt Übertragungsfehler (Bitfehler), schützt aber nicht vor Manipulation durch Angreifer.	isf::kryptographische-protokolle
+Standard	isf	Wovor schützt ein CRC (Cyclic Redundancy Check), und wovor nicht?	Er erkennt zufällige Fehler (Netzwerk, Storage), schützt aber nicht vor gezielter Manipulation.	isf::kryptographische-protokolle
+Standard	isf	Warum schützt ein Hash nicht vor aktiven Angreifern?	Der Angreifer kann den Hash nach der Manipulation einfach neu berechnen.	isf::kryptographische-protokolle
+Standard	isf	Wogegen schützt ein MAC (z.B. HMAC) nicht?	Gegen Insider, die den Schlüssel besitzen.	isf::kryptographische-protokolle
+Standard	isf	Wogegen schützt eine digitale Signatur nicht?	Gegen einen kompromittierten Private Key.	isf::kryptographische-protokolle
+Standard	isf	Was legt eine TLS-Cipher-Suite (bis TLS 1.2) fest?	Eine Kombination aus Schlüsseltauschverfahren, Authentifizierung, Verschlüsselungsalgorithmus und Hash-Funktion.	isf::kryptographische-protokolle
+Standard	isf	Welche Fragen stellt man bei der Analyse eines kryptographischen Protokolls?	Welche Phasen gibt es? Welche Algorithmen sind Teil des Protokolls? Fehlen Algorithmen?	isf::kryptographische-protokolle
+Standard	isf	Was soll man bei den Anforderungen an ein kryptographisches Protokoll zuerst klären?	Wie sich das System verhalten soll, noch nicht, wie es implementiert wird.	isf::kryptographische-protokolle
+Standard	isf	Was bedeutet Authentifizierung beim E-Voting?	Nur berechtigte Wähler dürfen abstimmen.	isf::kryptographische-protokolle
+Standard	isf	Was bedeutet Vertraulichkeit (Anonymität) beim E-Voting?	Niemand darf sehen, wie jemand gewählt hat.	isf::kryptographische-protokolle
+Standard	isf	Was bedeutet Integrität beim E-Voting?	Stimmen dürfen nicht verändert oder gelöscht werden.	isf::kryptographische-protokolle
+Standard	isf	Was bedeutet Nachvollziehbarkeit (Verifizierbarkeit) beim E-Voting?	Jeder kann das Ergebnis prüfen, ohne das Wahlgeheimnis zu brechen.	isf::kryptographische-protokolle
+Standard	isf	Was bedeutet Unwiederholbarkeit beim E-Voting?	Jede Person darf nur einmal abstimmen.	isf::kryptographische-protokolle
+Standard	isf	Welche zwei Phasen hat das E-Voting-Prinzip?	Registrieren und Abstimmen.	isf::kryptographische-protokolle
+Standard	isf	Welches kryptographische Element ist beim E-Voting zentral?	Die blinde Signatur.	isf::kryptographische-protokolle
+Standard	isf	Was speichert der RFID-Chip des biometrischen Schweizer Passes?	Personendaten, digitales Passfoto, optional biometrische Daten (Fingerabdrücke, Iris) und eine digitale Signatur.	isf::kryptographische-protokolle
+Standard	isf	Was lässt sich mit dem biometrischen Pass überprüfen?	Ob der Pass echt ist, ob die Daten unverändert sind und ob der Inhaber der Passbesitzer ist (biometrischer Vergleich).	isf::kryptographische-protokolle
+Standard	isf	Welches Ziel hat BAC beim biometrischen Pass?	Basic Access Control verhindert unbefugtes Auslesen des Chips.	isf::kryptographische-protokolle
+Standard	isf	Welches Ziel hat PA beim biometrischen Pass?	Passive Authentication überprüft die Echtheit der Chipdaten.	isf::kryptographische-protokolle
+Standard	isf	Welches Ziel hat AA beim biometrischen Pass?	Active Authentication verhindert das Klonen des Chips.	isf::kryptographische-protokolle
+Standard	isf	Welches Ziel hat EAC beim biometrischen Pass?	Extended Access Control schützt die biometrischen Daten (Finger, Iris).	isf::kryptographische-protokolle
+Standard	isf	Welche Kryptographie nutzt BAC beim biometrischen Pass?	Symmetrische Kryptographie (3DES / AES).	isf::kryptographische-protokolle
+Standard	isf	Wie funktioniert AA beim biometrischen Pass kryptographisch?	Mit einem asymmetrischen Challenge-Response-Verfahren.	isf::kryptographische-protokolle
+Standard	isf	Womit erreicht e-Cash Anonymität?	Mit einem Blind-Signature-Schema, typischerweise RSA mit Blindung.	isf::kryptographische-protokolle
+Standard	isf	Womit schützt sich e-Cash vor Double Spending?	Mit Identifikationsprotokollen, typischerweise Zero-Knowledge Proofs.	isf::kryptographische-protokolle
+Standard	isf	Wozu dienen digitale Signaturen bei e-Cash?	Sie sichern Integrität und Echtheit der Coins.	isf::kryptographische-protokolle
+Standard	isf	Wie wird ein E-Book auf dem e-Reader (DRM) verschlüsselt?	Symmetrisch mit AES-128 oder AES-256.	isf::kryptographische-protokolle
+Standard	isf	Wie gelangt der AES-Schlüssel eines E-Books auf den e-Reader?	Über einen asymmetrischen Schlüsselaustausch (RSA-2048 oder ECDH P-256) bei Kauf oder Synchronisierung.	isf::kryptographische-protokolle
+Standard	isf	Wie stellt ein e-Reader sicher, dass nur zugelassene Software läuft?	Firmware-Verifikation: Signaturprüfung mit RSA oder ECDSA und SHA-256.	isf::kryptographische-protokolle
+Standard	isf	Was stellt die Signatur eines Software-Updates sicher?	Dass das Update vom Hersteller stammt und unverändert ist.	isf::kryptographische-protokolle
+Standard	isf	Wozu dient das X.509-Zertifikat bei Software-Updates?	Es authentifiziert den Hersteller.	isf::kryptographische-protokolle
+Standard	isf	Wie kann ein Software-Update an ein bestimmtes Gerät gebunden werden?	Optional über HMAC-SHA256 und die Seriennummer.	isf::kryptographische-protokolle
+Standard	isf	Was ist eine blinde Signatur?	Die unterschreibende Person weiss, dass sie unterschreibt, sieht aber nicht, was sie unterschreibt.	isf::kryptographische-protokolle
+Standard	isf	Wie läuft eine blinde Signatur ab?	Dokument abdecken, an den Signierer senden, Abdeckung signieren lassen, zurückerhalten, Abdeckung entfernen: Die Signatur gilt fürs Dokument.	isf::kryptographische-protokolle
+Standard	isf	Was ist ein Zero-Knowledge Proof?	Ein Protokoll, bei dem eine Partei eine andere überzeugt, ein Geheimnis zu kennen, ohne es preiszugeben.	isf::kryptographische-protokolle
+Standard	isf	Welche Art von Garantie liefert ein Zero-Knowledge Proof?	Nur eine statistische: Er überzeugt, statt absolut zu beweisen.	isf::kryptographische-protokolle
+Standard	isf	Wie zeigt Alice bei «Wo ist Waldo?», dass sie Waldo gefunden hat, ohne seinen Standort zu verraten?	Sie deckt das Bild mit einer grossen Abdeckung ab, durch ein kleines Loch ist nur Waldo sichtbar.	isf::kryptographische-protokolle
+Standard	isf	Wie läuft der interaktive Zero-Knowledge-Beweis mit den zwei Bällen ab?	Die farbenblinde Alice hält einen roten und einen blauen Ball und tauscht sie hinter dem Rücken oder nicht. Bob sagt, ob getauscht wurde. Das wird viele Male wiederholt.	isf::kryptographische-protokolle
+Standard	isf	Wie hoch ist beim Ball-Beispiel die Chance, nach 20 Runden nur durch Glück zu bestehen?	1 zu 1'048'576 (2^-20).	isf::kryptographische-protokolle
+Standard	isf	Was ist das Ziel von Privacy-enhancing Technologies (PET)?	Gesellschaftlichen Nutzen und Schutz der Privatsphäre zugleich erreichen, statt das eine gegen das andere abzuwägen.	isf::kryptographische-protokolle
+Standard	isf	Nenne die kryptographischen PET-Ansätze.	Fully Homomorphic Encryption und (Secure) Multi-Party Computation.	isf::kryptographische-protokolle
+Standard	isf	Welcher PET-Ansatz ist hardwarebasiert?	Confidential Computing.	isf::kryptographische-protokolle
+Standard	isf	Welche Frage stellt das Millionärsproblem?	Wer verdient mehr, ohne dass jemand sein Gehalt verrät?	isf::kryptographische-protokolle
+Standard	isf	Wie berechnen Alice, Bob und Carol per MPC ihr Durchschnittsgehalt?	Alice legt r fest und sendet r + a an Bob, Bob sendet r + a + b an Carol, Carol sendet r + a + b + c an Alice. Alice zieht r ab und teilt durch 3.	isf::kryptographische-protokolle
+Standard	isf	Welche Voraussetzungen hat das einfache MPC-Protokoll für das Durchschnittsgehalt?	Alle müssen ehrlich sein, und keine zwei dürfen zusammenspannen.	isf::kryptographische-protokolle
+Standard	isf	Warum dürfen beim MPC-Durchschnittsgehalt Alice und Carol nicht zusammenspannen?	Alice kennt r + a, Carol kennt r + a + b; die Differenz verrät Bobs Gehalt b.	isf::kryptographische-protokolle
+Standard	isf	Wie funktioniert das Abstimmen mit Zettelchen?	A schreibt eine grosse Zahl auf den Zettel. Reihum addiert jeder bei Ja 1, bei Nein 0. A zieht die Zahl ab und schickt das Resultat an alle.	isf::kryptographische-protokolle
+Standard	isf	Warum schreibt A beim Abstimmen mit Zettelchen eine grosse Zahl auf?	Sie verdeckt den Zwischenstand, sodass die anderen aus der Zahl nicht auf frühere Stimmen schliessen können.	isf::kryptographische-protokolle
+Lückentext	isf	Integritätsmechanismen nach Schutz aufsteigend: {{c1::Checksum}} &lt; {{c2::CRC}} &lt; {{c3::Hash}} &lt; {{c4::MAC}} &lt; {{c5::digitale Signatur}}.		isf::kryptographische-protokolle
+Lückentext	isf	MAC = Hash + {{c1::geheimer Schlüssel}}; digitale Signatur = Hash + {{c2::asymmetrische Kryptographie}}.		isf::kryptographische-protokolle
+Lückentext	isf	Cipher Suite TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256: Schlüsseltausch {{c1::ECDHE}}, Authentifizierung {{c2::RSA}}, Verschlüsselung {{c3::AES-128-GCM}}, Hash {{c4::SHA-256}}.		isf::kryptographische-protokolle
+Lückentext	isf	Fünf Ziele beim E-Voting: {{c1::Authentifizierung}}, {{c2::Vertraulichkeit}}, {{c3::Integrität}}, {{c4::Verifizierbarkeit}}, {{c5::Unwiederholbarkeit}}.		isf::kryptographische-protokolle
+Lückentext	isf	Zugriffsverfahren beim biometrischen Pass: {{c1::BAC}} (Auslesen), {{c2::PA}} (Echtheit der Daten), {{c3::AA}} (Klonen), {{c4::EAC}} (Biometrie).		isf::kryptographische-protokolle
+Lückentext	isf	Betrugschance beim Zero-Knowledge-Beweis nach n Runden mit Zufallsraten: P = {{c1::2^-n}}.		isf::kryptographische-protokolle
+Lückentext	isf	Blind-RSA: blinden m' = {{c1::m · r^e mod n}}, signieren s' = {{c2::(m')^d mod n}}, entblinden s = {{c3::s' · r^-1 mod n}}.		isf::kryptographische-protokolle
+Lückentext	isf	Beim MPC-Durchschnittsgehalt kennt jeder maximal {{c1::3}} von {{c2::4}} Unbekannten (r, a, b, c).		isf::kryptographische-protokolle

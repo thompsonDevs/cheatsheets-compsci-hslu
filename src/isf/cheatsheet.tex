@@ -2372,6 +2372,294 @@ Nein $+0$; A zieht die Zahl ab und schickt das Resultat an alle.\\
 \end{subbox}
 
 % ============================================================================
+% SECTION: SYMMETRISCHE KRYPTOLOGIE
+% ============================================================================
+\section{Symmetrische Kryptologie}
+
+\subsection{Hash-Funktionen}
+
+\begin{mainbox}{Hash-Funktion $h(.)$}
+\textbf{E1 Deterministisch:} gleiche Eingabe $\to$ immer gleiche Ausgabe.\\
+\textbf{E2 Einfach berechenbar:} $y = h(x)$ ist einfach zu berechnen.\\
+\textbf{E3 Kompression:} $x$ beliebiger Länge $\to$ $y$ endlicher Länge $n$.\\[2pt]
+\textbf{Verwendung:} Datei identifizieren (Suche), Fehlererkennung,
+Integritätsprüfung, MAC, Signatur des Hash-Werts, Proof-of-Work (Blockchain).
+\end{mainbox}
+
+\begin{mainbox}{Kryptographische Eigenschaften}
+\begin{enumerate}
+    \item \textbf{Urbildresistenz} (Pre-image): zu $y$ kein $x$ mit $h(x) = y$ findbar
+    \item \textbf{Schwache Urbildresistenz} (Second pre-image): zu \emph{gegebenem}
+          $x_1$ kein $x_2 \neq x_1$ mit $h(x_1) = h(x_2)$ findbar
+    \item \textbf{Kollisionsresistenz:} \emph{irgendein} Paar $x_1 \neq x_2$ mit
+          $h(x_1) = h(x_2)$ nicht findbar
+\end{enumerate}
+\textbf{Lawineneffekt:} kleine Eingabeänderung ändert den Output massiv
+$\Rightarrow$ erschwert Kryptoanalyse.\\
+SHA-256: \texttt{Hallo} $\to$ \texttt{7536\dots}; \texttt{hallo} $\to$
+\texttt{d375\dots}
+\end{mainbox}
+
+\begin{mainbox}{Kategorien}
+\begin{itemize}
+    \item \textbf{unkeyed, MDC} (Modification Detection):
+          \textbf{OWHF} (Urbild + 2.\ Urbild), \textbf{CRHF} (2.\ Urbild +
+          Kollision)
+    \item \textbf{unkeyed, andere:} Perceptual Hashes
+    \item \textbf{keyed:} \textbf{MAC}
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Übung Coca-Cola (eigene Lösung)}
+\textbf{A:} Aus dem Getränk nicht aufs Rezept schliessen $\to$
+\textbf{Urbildresistenz}.\\
+\textbf{B:} Zum Originalrezept kein zweites mit gleichem Geschmack $\to$
+\textbf{schwache Urbildresistenz}.
+\end{subbox}
+
+\begin{mainbox}{Typen (Längen in Bit)}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|r|r|>{\raggedright\arraybackslash}X@{}}
+\textbf{Name} & \textbf{Block} & \textbf{Out} & \textbf{Bemerkung} \\
+\hline
+MD4, MD5 & 512 & 128 & gebrochen \\
+SHA-1 & 512 & 160 & gebrochen (SHAttered) \\
+SHA2-256 & 512 & 256 & PoW in Bitcoin \\
+SHA2-384 & 1024 & 384 & \\
+SHA2-512 & 1024 & 512 & \\
+SHA3-256 & 1088 & 256 & \\
+SHA3-384 & 832 & 384 & \\
+\end{tabularx}
+\textbf{Hex-Länge} = Out/4: MD5 32, SHA-1 40, SHA-256 64 Zeichen.\\
+\textbf{MD5-Kollisionen:} 12 PDFs mit gleichem Hash ``sagen'' die US-Wahl 2008
+voraus.\\
+\textbf{Laufzeit:} steigt etwa linear mit der Dateigrösse.
+\end{mainbox}
+
+\subsection{Passwörter speichern}
+
+\begin{mainbox}{Passwörter in der Datenbank}
+\begin{itemize}
+    \item \textbf{Schlecht:} Klartext
+    \item \textbf{Kompliziert:} verschlüsselt (z.B.\ AES)
+    \item \textbf{Gut:} Hash-Werte
+    \item \textbf{Besser:} Salt \& Pepper mit \textbf{Argon2}
+\end{itemize}
+\textbf{Rainbow Table:} vorberechnete Passwort-Hash-Paare, schneller als Brute
+Force. Setzt Hash ohne Salt voraus $\Rightarrow$ \textbf{Gegenmassnahme: Salt}.
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Salt} & \textbf{Pepper} \\
+\hline
+Wert & zufällig & geheim \\
+Ablage & Klartext in DB & \textbf{nicht} in DB \\
+Gültig & pro Benutzer & für alle gleich \\
+Einsatz & \textbf{absolutes Minimum} & seltener (kompliziert) \\
+\end{tabularx}
+\end{mainbox}
+
+\subsection{Perceptual Hashes}
+
+\begin{mainbox}{Perceptual / Fuzzy / Neuro Hashes}
+Kryptographische Hashes taugen nicht zur \textbf{Ähnlichkeitserkennung}.\\
+\textbf{Ziel:} ähnliche Medien (aus menschlicher Sicht) ergeben \textbf{ähnliche
+Hashwerte}.\\
+\textbf{Einsatz:} Malware-, Bild-, Musik-, Plagiatserkennung.
+\end{mainbox}
+
+\subsection{Message Authentication Code}
+
+\begin{mainbox}{MAC: HMAC \& CMAC}
+\textbf{Integrität} + \textbf{Authentizität} (Nachricht vom gewünschten Absender)
+dank gemeinsamem Schlüssel $k$, aber \emph{keine} Nicht-Abstreitbarkeit
+(braucht $k_{pr}$, vgl.\ Kap.\ 1).
+\begin{itemize}
+    \item \textbf{HMAC:} mit Hash (z.B.\ SHA-256)
+    \item \textbf{CMAC:} mit symm.\ Verschlüsselung (z.B.\ AES)
+\end{itemize}
+\textbf{Ablauf:} Alice sendet Nachricht + MAC. Bob berechnet den MAC mit demselben
+$k$ und vergleicht.
+\end{mainbox}
+
+\subsection{Klassische Chiffren}
+
+\begin{mainbox}{XOR $\oplus$}
+$A \oplus 0 = A$, \quad $A \oplus A = 0$, \quad $A \oplus B = B \oplus A$\\
+Ergibt 1 genau bei ungleichen Bits; häufig in Kryptoverfahren.
+\end{mainbox}
+
+\begin{mainbox}{Cäsar \& Vigenère}
+\textbf{Cäsar:} \textbf{monoalphabetische} Substitution, $x_i, y_i, z \in Z_{26}$:
+$$y_i = x_i + z \bmod 26,\quad x_i = y_i - z \bmod 26$$
+Bsp.\ $z = 3$: \texttt{LFK NDP} $\to$ \texttt{ICH KAM}.\\[2pt]
+\textbf{Vigenère} (16.\ Jh.): \textbf{polyalphabetisch}, Schlüssel wiederholen
+(A = 0):\\
+\texttt{HELLO} + \texttt{KEYKE} $\bmod 26$ = \texttt{RIJVS}.
+\end{mainbox}
+
+\begin{mainbox}{Vernam / One-Time-Pad (OTP)}
+$y_i = x_i \oplus z_i$ ($= x_i + z_i \bmod 2$). Eve hat pro Gleichung 2 Unbekannte.\\
+\textbf{OTP, wenn} der Schlüssel
+\begin{itemize}
+    \item \textbf{mindestens so lang} wie die Nachricht,
+    \item \textbf{echt zufällig} ist,
+    \item \textbf{nur einmal} verwendet wird.
+\end{itemize}
+Sonst bricht es: VENONA-Projekt.\\
+\textbf{Bsp.:} \texttt{H} $= 01001000$, Key $11010101$ $\Rightarrow$ $10011101$.\\
+\textbf{Mehrfach verwendet:} $y_1 \oplus y_2 = x_1 \oplus x_2$; der Schlüssel fällt
+weg, die Klartexte werden sichtbar (Bildübung).
+\end{mainbox}
+
+\begin{mainbox}{Encoding $\neq$ Encryption}
+Encoding schützt \textbf{nichts}, es stellt Daten nur anders dar:
+\begin{itemize}
+    \item \textbf{Zeichen:} ASCII, UTF-8 (1--4 Bytes, ASCII-kompatibel)
+    \item \textbf{Daten:} Base64, URL-Encoding (\texttt{\%20})
+    \item \textbf{Multimedia:} MP3, JPEG (Platz sparen)
+\end{itemize}
+\end{mainbox}
+
+\subsection{Sicherheitsbegriffe}
+
+\begin{mainbox}{Kerckhoffs' Prinzip}
+Ein Kryptosystem soll sicher sein, auch wenn \textbf{alles ausser dem geheimen
+Schlüssel} bekannt ist.\\
+\textbf{Modell:} $Y = E_Z(X)$ über \emph{öffentlichen} Kanal (Eve hört, Oscar
+greift ein), $X = D_Z(Y)$; $Z$ über \emph{sicheren} Kanal.
+\end{mainbox}
+
+\begin{mainbox}{Informationstheoretisch vs.\ Computational}
+\begin{itemize}
+    \item \textbf{Informationstheoretisch} (unconditional): nicht brechbar, auch
+          mit \textbf{unendlich} Rechenleistung. Bsp.: OTP, Quantenkryptographie.
+    \item \textbf{Computational:} nicht brechbar mit bekannter \& künftig
+          verfügbarer Rechenleistung. Bsp.: AES-256.
+\end{itemize}
+In der Praxis nur Computational. Grössenordnung: $2^{256}$ Schlüssel vs.\
+$\sim 2^{266}$ Atome im Weltall.
+\end{mainbox}
+
+\subsection{Strom- \& Blockchiffren}
+
+\begin{mainbox}{Symmetrische Verschlüsselung}
+\textbf{Derselbe Schlüssel} für Ver- und Entschlüsselung.
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.32\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Vorteile} & \textbf{Nachteile} \\
+\hline
+sicher (Vertraulichkeit), schnell & Schlüsselverteilung: sicherer Kanal, Anzahl
+  wächst quadratisch (Kap.\ 6); kein Schutz vor Betrug von Alice oder Bob \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Strom- vs.\ Blockchiffre}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Strom} & \textbf{Block} \\
+\hline
+Daten & Bit/Byte & feste Blöcke \\
+Bsp. & RC4, A5/1, Salsa20, ChaCha20 & AES, DES, 3DES, Blowfish \\
+Modi & CFB, OFB, CTR & ECB, CBC, CFB, CTR, GCM \\
+Einsatz & Echtzeit, Streaming, GSM & Dateien, Disk, VPN \\
+Padding & nein & je nach Modus (ECB, CBC) \\
+Sync. & genau nötig & weniger anfällig \\
+Parallel & eingeschränkt & CTR, GCM stark \\
+Risiko & Bit-Flipping & Muster (ECB) \\
+\end{tabularx}
+\textbf{Strom:} $y_i = f(z_i, x_i)$, Schlüsselstrom aus Generator.\\
+AES wird mit \textbf{CTR, OFB, CFB} zur Stromchiffre.
+\end{mainbox}
+
+\begin{mainbox}{Blockchiffren (Bit)}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|l|l@{}}
+ & \textbf{Key} & \textbf{Block} & \textbf{Runden} \\
+\hline
+DES & 56 & 64 & 16 \\
+3DES & 112, 168 & 64 & 48 \\
+IDEA & 128 & 64 & 8.5 \\
+\textbf{AES} & 128, 192, 256 & 128 & 10, 12, 14 \\
+Camellia & 128, 192, 256 & 128 & 18, 24 \\
+\end{tabularx}
+\textbf{DES:} unsicher. \textbf{3DES:} veraltet, langsam. \textbf{IDEA:} veraltet.
+\textbf{AES:} weltweiter Standard, sehr schnell. \textbf{Camellia:} v.a.\ Japan.
+\end{mainbox}
+
+\begin{mainbox}{AES}
+\textbf{Runde:} Substitution (Byte Sub) $\to$ Shift Row $\to$ Mix Column $\to$
+Add Round Key. Rundenschlüssel aus \textbf{Schlüsselexpansion}.\\
+\textbf{Entropie} ($H = -\sum p_i \log_2 p_i$, max.\ 8 Bit/Byte), Bsp.\
+\emph{Buddenbrooks}: Klartext \textbf{4.54}, AES-256-Chiffrat \textbf{8.00}.\\
+\textbf{Häufigkeit der Bytes:} Cäsar: gleiche Form, nur verschoben;
+Vigenère: flacher, Spitzen bleiben; AES: praktisch gleichverteilt.
+\end{mainbox}
+
+\begin{mainbox}{AES-Modi}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Merkmal} & \textbf{Bewertung} \\
+\hline
+ECB & Blöcke unabhängig, kein IV & \textbf{unsicher:} gleicher Klartext $\to$
+  gleiches Chiffrat \\
+CBC & IV, Verkettung, Padding, sequenziell & Padding-Oracle möglich; von GCM
+  abgelöst \\
+CFB & IV, Strom, kein Padding & sicher; Fehler wirken weiter \\
+OFB & IV, Strom, keine Fehlerfortpflanzung & sicher; Keystream nie
+  wiederverwenden \\
+CTR & Zähler, parallel, wahlfreier Zugriff & sehr sicher; Zähler nie
+  wiederverwenden \\
+GCM & Verschlüsselung \textbf{+ Authentisierung}, schnell & sehr sicher mit
+  eindeutiger Nonce \\
+CCM & Verschlüsselung + CBC-MAC & hoch, langsamer als GCM \\
+\end{tabularx}
+\textbf{Einsatz:} GCM: TLS, IPSec, SSH, 802.11ad; CTR: WinZip, TLS 1.3.
+\end{mainbox}
+
+\begin{subbox}{Merkregel: Modi}
+\textbf{ECB} verrät Muster. \textbf{CBC} verkettet. \textbf{CFB, OFB, CTR} machen
+aus AES eine Stromchiffre. \textbf{GCM, CCM} prüfen zusätzlich die Integrität.
+\end{subbox}
+
+\begin{subbox}{Übung Fragen (eigene Lösung)}
+Strom-/Blockchiffren sind \textbf{symmetrische Verschlüsselung}, rechtfertigen sich
+gegen \textbf{intelligente, aktive Gegner} und schützen \textbf{gegen Abhören}.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Hash $\neq$ Verschlüsselung; Encoding $\neq$ Verschlüsselung.
+    \item 2.\ Urbild: $x_1$ \emph{gegeben}; Kollision: beide frei wählbar.
+    \item Salt ist \emph{nicht} geheim, Pepper schon.
+    \item OTP-Schlüssel nie wiederverwenden.
+    \item Verschlüsselung allein sichert keine Integrität: Bit-Flipping; dafür
+          MAC oder GCM.
+    \item \textbf{Folienfehler:} Cäsar-Entschlüsselung steht mit $+z$ (richtig
+          $-z$). ISBN-Summe: 111 statt 101, Prüfziffer bleibt 9 (auch in Kap.\ 1).
+    \item \textbf{Folien uneinheitlich:} CFB ``ohne'' (Folie 49) vs.\ ``mit''
+          Fehlerfortpflanzung (Folie 57, korrekt). Cäsar zählt A = 1, Vigenère
+          A = 0. OTP-Schlüssel ``$>$'' vs.\ ``mindestens so lang''.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Hash: E1--E3, 3 Resistenzen, Lawineneffekt
+    \item MD5, SHA-1 gebrochen; SHA-2, SHA-3
+    \item Passwörter: Argon2 mit Salt (\& Pepper)
+    \item MAC: HMAC, CMAC; Perceptual Hash
+    \item Cäsar, Vigenère, OTP; Kerckhoffs
+    \item Informationstheoretisch vs.\ Computational
+    \item Strom vs.\ Block; AES; Modi ECB bis GCM
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

@@ -535,3 +535,99 @@ Lückentext	isf	Zugriffsverfahren beim biometrischen Pass: {{c1::BAC}} (Auslesen
 Lückentext	isf	Betrugschance beim Zero-Knowledge-Beweis nach n Runden mit Zufallsraten: P = {{c1::2^-n}}.		isf::kryptographische-protokolle
 Lückentext	isf	Blind-RSA: blinden m' = {{c1::m · r^e mod n}}, signieren s' = {{c2::(m')^d mod n}}, entblinden s = {{c3::s' · r^-1 mod n}}.		isf::kryptographische-protokolle
 Lückentext	isf	Beim MPC-Durchschnittsgehalt kennt jeder maximal {{c1::3}} von {{c2::4}} Unbekannten (r, a, b, c).		isf::kryptographische-protokolle
+Standard	isf	Was bedeutet die Hash-Eigenschaft «deterministisch»?	Eine gleiche Eingabe liefert immer die gleiche Ausgabe.	isf::symmetrische-kryptologie
+Standard	isf	Was bedeutet die Hash-Eigenschaft «Kompression»?	Eine Eingabe beliebiger Länge wird auf eine Ausgabe endlicher Länge n abgebildet.	isf::symmetrische-kryptologie
+Standard	isf	Nenne Anwendungen von Hash-Funktionen.	Datei identifizieren (Suche), Fehlererkennung, Integritätsprüfung, MAC, Signatur des Hash-Werts, Proof-of-Work bei Blockchains.	isf::symmetrische-kryptologie
+Standard	isf	Was bedeutet Urbildresistenz (Pre-image resistance)?	Zu einem gegebenen Hashwert y lässt sich kein x mit h(x) = y finden.	isf::symmetrische-kryptologie
+Standard	isf	Was bedeutet schwache Urbildresistenz (Second pre-image resistance)?	Zu einem gegebenen x1 lässt sich kein anderes x2 mit h(x1) = h(x2) finden.	isf::symmetrische-kryptologie
+Standard	isf	Was bedeutet Kollisionsresistenz?	Es lässt sich kein beliebiges Paar x1 ≠ x2 mit h(x1) = h(x2) finden.	isf::symmetrische-kryptologie
+Standard	isf	Worin unterscheiden sich schwache Urbildresistenz und Kollisionsresistenz?	Bei der schwachen Urbildresistenz ist x1 vorgegeben; bei der Kollisionsresistenz sind beide Werte frei wählbar.	isf::symmetrische-kryptologie
+Standard	isf	Aus der Analyse von Coca-Cola lässt sich nicht aufs Rezept schliessen. Welcher kryptographischen Eigenschaft entspricht das?	Der Urbildresistenz.	isf::symmetrische-kryptologie
+Standard	isf	Zum Coca-Cola-Rezept lässt sich kein zweites Rezept mit exakt gleichem Geschmack finden. Welcher kryptographischen Eigenschaft entspricht das?	Der schwachen Urbildresistenz.	isf::symmetrische-kryptologie
+Standard	isf	Was ist der Lawineneffekt?	Eine kleine Änderung der Eingabe ändert den Hash-Output massiv; das verhindert Kryptoanalyse.	isf::symmetrische-kryptologie
+Standard	isf	Was ist ein keyed Hash in der Kategorisierung von Hash-Funktionen?	Ein Message Authentication Code (MAC).	isf::symmetrische-kryptologie
+Standard	isf	Welche Resistenzen hat eine OWHF (One-Way Hash Function)?	Urbildresistenz und schwache Urbildresistenz.	isf::symmetrische-kryptologie
+Standard	isf	Welche Resistenzen hat eine CRHF (Collision Resistant Hash Function)?	Schwache Urbildresistenz und Kollisionsresistenz.	isf::symmetrische-kryptologie
+Standard	isf	Welche Hash-Funktionen gelten als gebrochen?	MD4, MD5 und SHA-1.	isf::symmetrische-kryptologie
+Standard	isf	Wie heisst der bekannte Kollisionsangriff auf SHA-1?	SHAttered.	isf::symmetrische-kryptologie
+Standard	isf	Welche Hash-Funktion wird für den Proof-of-Work in Bitcoin verwendet?	SHA2-256.	isf::symmetrische-kryptologie
+Standard	isf	Was zeigt das Nostradamus-Experiment mit 12 PDFs zur US-Wahl 2008?	12 verschiedene PDFs haben denselben MD5-Hash: MD5 ist nicht mehr sicher.	isf::symmetrische-kryptologie
+Standard	isf	Wie verhält sich die Laufzeit einer Hash-Berechnung zur Dateigrösse?	Sie steigt etwa linear.	isf::symmetrische-kryptologie
+Standard	isf	Warum ist das Speichern von Passwort-Hashes besser als das verschlüsselte Speichern?	Verschlüsselt speichern ist kompliziert; Hashes sind die einfachere, gute Lösung. Noch besser ist Salt &amp; Pepper mit Argon2.	isf::symmetrische-kryptologie
+Standard	isf	Welche Hash-Funktion wird zum Speichern von Passwörtern empfohlen?	Argon2, mit Salt &amp; Pepper.	isf::symmetrische-kryptologie
+Standard	isf	Was ist eine Rainbow Table?	Eine Tabelle mit vorberechneten Passwort-Hashwert-Paaren; schneller als Brute Force.	isf::symmetrische-kryptologie
+Standard	isf	Was ist die Gegenmassnahme gegen Rainbow Tables?	Ein Salt.	isf::symmetrische-kryptologie
+Standard	isf	Wo wird ein Salt gespeichert?	Als Klartext in der Datenbank.	isf::symmetrische-kryptologie
+Standard	isf	Wie wird ein Salt erzeugt, und wem gehört er?	Zufällig; jeder Benutzer bekommt einen eigenen.	isf::symmetrische-kryptologie
+Standard	isf	Wo wird ein Pepper gespeichert?	Nicht in der Datenbank; er soll geheim bleiben.	isf::symmetrische-kryptologie
+Standard	isf	Für wen gilt ein Pepper?	Er ist für alle Benutzer gleich.	isf::symmetrische-kryptologie
+Standard	isf	Warum wird Pepper seltener eingesetzt als Salt?	Die Implementierung kann kompliziert werden.	isf::symmetrische-kryptologie
+Standard	isf	Warum taugen kryptographische Hashes nicht zur Ähnlichkeitserkennung?	Wegen des Lawineneffekts: Schon ähnliche Eingaben ergeben völlig verschiedene Hashwerte.	isf::symmetrische-kryptologie
+Standard	isf	Was ist das Ziel von Perceptual Hashes?	Ähnliche Medieninhalte sollen ähnliche Hashwerte ergeben, gemessen daran, was Ähnlichkeit für den Menschen bedeutet.	isf::symmetrische-kryptologie
+Standard	isf	Nenne Anwendungen von Perceptual Hashes.	Malware-Erkennung, Bildersuche, Musikerkennung und Plagiatserkennung.	isf::symmetrische-kryptologie
+Standard	isf	Worauf basiert HMAC?	Auf einer Hash-Methode, z.B. SHA-256.	isf::symmetrische-kryptologie
+Standard	isf	Worauf basiert CMAC?	Auf einer symmetrischen Verschlüsselung, z.B. AES.	isf::symmetrische-kryptologie
+Standard	isf	Wie prüft Bob einen MAC?	Er berechnet den MAC der Nachricht mit demselben Schlüssel und vergleicht ihn mit dem empfangenen.	isf::symmetrische-kryptologie
+Standard	isf	Welche Art von Substitution ist die Cäsar-Chiffre?	Eine monoalphabetische Substitution.	isf::symmetrische-kryptologie
+Standard	isf	Welche Art von Substitution ist die Vigenère-Chiffre?	Eine polyalphabetische Substitution.	isf::symmetrische-kryptologie
+Standard	isf	Wie lautet HELLO mit Vigenère und Schlüssel KEY (A = 0)?	RIJVS.	isf::symmetrische-kryptologie
+Standard	isf	Entschlüssle LFK NDP mit der Cäsar-Chiffre, Schlüssel z = 3.	ICH KAM.	isf::symmetrische-kryptologie
+Standard	isf	Was bedeutet das Kerckhoffs-Prinzip?	Ein Kryptosystem soll sicher sein, auch wenn alles ausser dem geheimen Schlüssel bekannt ist.	isf::symmetrische-kryptologie
+Standard	isf	Was unterscheidet Encoding von Encryption?	Encoding stellt Daten nur anders dar, um sie zu verarbeiten, zu speichern oder zu übertragen; Encryption schützt die Daten.	isf::symmetrische-kryptologie
+Standard	isf	Wozu dient Data Encoding wie Base64 oder URL-Encoding?	Zur leichteren Speicherung und Übertragung von Daten.	isf::symmetrische-kryptologie
+Standard	isf	Wozu dient Multimedia-Encoding wie MP3 oder JPEG?	Um Platz zu sparen.	isf::symmetrische-kryptologie
+Standard	isf	Was ist die Beziehung zwischen UTF-8 und ASCII?	UTF-8 ist rückwärtskompatibel mit ASCII.	isf::symmetrische-kryptologie
+Standard	isf	Wann ist ein Kryptosystem informationstheoretisch sicher?	Wenn es auch mit unendlich viel Rechenleistung nicht gebrochen werden kann.	isf::symmetrische-kryptologie
+Standard	isf	Nenne Beispiele für informationstheoretisch sichere Verfahren.	One-Time-Pad und Quantenkryptographie.	isf::symmetrische-kryptologie
+Standard	isf	Wann ist ein Kryptosystem computational sicher?	Wenn es mit bekannter und zukünftig verfügbarer Rechenleistung nicht geknackt werden kann.	isf::symmetrische-kryptologie
+Standard	isf	Welche Sicherheit bietet AES-256?	Computational Security.	isf::symmetrische-kryptologie
+Standard	isf	Welche drei Bedingungen muss der Schlüssel eines One-Time-Pads erfüllen?	Mindestens so lang wie die Nachricht, echt zufällig und nur einmal verwendet.	isf::symmetrische-kryptologie
+Standard	isf	Warum darf ein One-Time-Pad-Schlüssel nicht wiederverwendet werden?	Aus y1 ⊕ y2 fällt der Schlüssel weg, es bleibt x1 ⊕ x2: Die Klartexte werden sichtbar.	isf::symmetrische-kryptologie
+Standard	isf	Welches historische Projekt zeigt die Folgen falsch verwendeter One-Time-Pads?	Das VENONA-Projekt.	isf::symmetrische-kryptologie
+Standard	isf	Was kennzeichnet symmetrische Verschlüsselung?	Derselbe Schlüssel wird für Ver- und Entschlüsselung verwendet.	isf::symmetrische-kryptologie
+Standard	isf	Worauf beruht die Sicherheit symmetrischer Verschlüsselung?	Auf der Vertraulichkeit des Schlüssels (Kerckhoffs-Prinzip).	isf::symmetrische-kryptologie
+Standard	isf	Vor welchem Problem schützt symmetrische Kryptographie zwischen Alice und Bob nicht?	Vor Betrug durch Alice oder Bob selbst, weil beide denselben Schlüssel haben.	isf::symmetrische-kryptologie
+Standard	isf	Wie verarbeitet eine Stromchiffre Daten?	Bit für Bit oder Byte für Byte als kontinuierlichen Datenstrom.	isf::symmetrische-kryptologie
+Standard	isf	Wie verarbeitet eine Blockchiffre Daten?	In Blöcken fester Grösse.	isf::symmetrische-kryptologie
+Standard	isf	Nenne Beispiele für Stromchiffren.	RC4, A5/1, Salsa20 und ChaCha20.	isf::symmetrische-kryptologie
+Standard	isf	Nenne Beispiele für Blockchiffren.	AES, DES, 3DES und Blowfish.	isf::symmetrische-kryptologie
+Standard	isf	Mit welchen Modi wird AES zur Stromchiffre?	CTR, OFB und CFB.	isf::symmetrische-kryptologie
+Standard	isf	Welches Sicherheitsrisiko haben Stromchiffren?	Sie können anfällig für Bit-Flipping-Angriffe sein.	isf::symmetrische-kryptologie
+Standard	isf	Braucht eine Stromchiffre Padding?	Nein.	isf::symmetrische-kryptologie
+Standard	isf	Wofür werden Stromchiffren typischerweise eingesetzt?	Echtzeitkommunikation, Streaming und mobile Kommunikation.	isf::symmetrische-kryptologie
+Standard	isf	Wofür werden Blockchiffren typischerweise eingesetzt?	Datei- und Festplattenverschlüsselung sowie VPNs.	isf::symmetrische-kryptologie
+Standard	isf	Gegen welche Angreifer rechtfertigt sich der Einsatz von Strom- und Blockchiffren?	Gegen intelligente, aktive Gegner wie Hacker oder Geheimdienste.	isf::symmetrische-kryptologie
+Standard	isf	Welches Schutzziel erfüllen Strom- und Blockchiffren?	Schutz gegen Abhören.	isf::symmetrische-kryptologie
+Standard	isf	Wie sicher gilt DES heute?	Als unsicher: Es lässt sich leicht knacken und wird nicht mehr empfohlen.	isf::symmetrische-kryptologie
+Standard	isf	Wie wird 3DES heute beurteilt?	Als veraltet und unsicher; ausserdem langsam wegen der dreifachen Verschlüsselung.	isf::symmetrische-kryptologie
+Standard	isf	Wo ist die Blockchiffre Camellia verbreitet?	Vor allem in Japan; sie ist ähnlich sicher wie AES.	isf::symmetrische-kryptologie
+Standard	isf	Welche Schritte hat eine AES-Runde?	Substitution (Byte Sub), Shift Row, Mix Column und Add Round Key.	isf::symmetrische-kryptologie
+Standard	isf	Woher kommen die Rundenschlüssel bei AES?	Aus der Schlüsselexpansion.	isf::symmetrische-kryptologie
+Standard	isf	Wie sieht die Häufigkeitsverteilung der Bytes im AES-Chiffrat aus?	Praktisch gleichverteilt.	isf::symmetrische-kryptologie
+Standard	isf	Wie verändert die Cäsar-Chiffre die Häufigkeitsverteilung der Zeichen?	Gar nicht in der Form, sie wird nur verschoben.	isf::symmetrische-kryptologie
+Standard	isf	Warum ist der AES-Modus ECB unsicher?	Gleiche Klartextblöcke ergeben gleiche Chiffratblöcke; Muster bleiben sichtbar.	isf::symmetrische-kryptologie
+Standard	isf	Welches Merkmal hat der AES-Modus CBC gegenüber ECB?	Gleiche Klartextblöcke ergeben dank IV und Verkettung verschiedene Chiffratblöcke.	isf::symmetrische-kryptologie
+Standard	isf	Für welchen Angriff ist der AES-Modus CBC bei falscher Implementierung anfällig?	Für Padding-Oracle-Angriffe.	isf::symmetrische-kryptologie
+Standard	isf	Was bewirkt ein Fehler in einem Block beim AES-Modus CBC?	Er wirkt sich auch auf den nächsten Block aus.	isf::symmetrische-kryptologie
+Standard	isf	Welcher Vorteil zeichnet den AES-Modus CTR aus?	Er ist hoch parallelisierbar und erlaubt wahlfreien Zugriff auf verschlüsselte Blöcke.	isf::symmetrische-kryptologie
+Standard	isf	Was darf beim AES-Modus CTR nie passieren?	Ein Zähler darf nicht wiederverwendet werden.	isf::symmetrische-kryptologie
+Standard	isf	Was darf beim AES-Modus OFB nie passieren?	Der Keystream darf nicht wiederverwendet werden.	isf::symmetrische-kryptologie
+Standard	isf	Was leistet der AES-Modus GCM zusätzlich zur Verschlüsselung?	Integrität bzw. Authentisierung.	isf::symmetrische-kryptologie
+Standard	isf	Was verlangt der AES-Modus GCM für jede Verschlüsselung?	Eine eindeutige IV/Nonce.	isf::symmetrische-kryptologie
+Standard	isf	Worin unterscheiden sich die AES-Modi CCM und GCM?	Beide authentisieren; CCM ist wegen der zusätzlichen MAC-Berechnung langsamer.	isf::symmetrische-kryptologie
+Standard	isf	Welcher AES-Modus wird in TLS, IPSec und SSH verwendet?	GCM.	isf::symmetrische-kryptologie
+Standard	isf	Welche AES-Modi brauchen keinen IV beziehungsweise kein Padding?	ECB braucht keinen IV; CFB, OFB und CTR brauchen kein Padding.	isf::symmetrische-kryptologie
+Lückentext	isf	Hash-Funktion, Mindesteigenschaften: E1 {{c1::deterministisch}}, E2 {{c2::einfach berechenbar}}, E3 {{c3::Kompression}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Kryptographische Hash-Eigenschaften: {{c1::Urbildresistenz}}, {{c2::schwache Urbildresistenz}}, {{c3::Kollisionsresistenz}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Ausgabelänge in Bit: MD5 {{c1::128}}, SHA-1 {{c2::160}}, SHA2-256 {{c3::256}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Blocklänge in Bit: MD5 {{c1::512}}, SHA2-256 {{c2::512}}, SHA2-512 {{c3::1024}}, SHA3-256 {{c4::1088}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Passwörter speichern: {{c1::Klartext}} ist schlecht, {{c2::Verschlüsselung}} kompliziert, {{c3::Hash-Werte}} gut, {{c4::Salt &amp; Pepper mit Argon2}} besser.		isf::symmetrische-kryptologie
+Lückentext	isf	XOR-Regeln: A ⊕ 0 = {{c1::A}}, A ⊕ A = {{c2::0}}, A ⊕ B = {{c3::B ⊕ A}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Cäsar-Chiffre: verschlüsseln y = {{c1::x + z mod 26}}, entschlüsseln x = {{c2::y − z mod 26}}.		isf::symmetrische-kryptologie
+Lückentext	isf	One-Time-Pad (Vernam): y_i = {{c1::x_i ⊕ z_i}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Schlüsselgrösse in Bit: DES {{c1::56}}, 3DES {{c2::112 oder 168}}, IDEA {{c3::128}}, AES {{c4::128, 192 oder 256}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Blockgrösse in Bit: DES {{c1::64}}, 3DES {{c2::64}}, AES {{c3::128}}.		isf::symmetrische-kryptologie
+Lückentext	isf	AES-Runden: 128 Bit {{c1::10}}, 192 Bit {{c2::12}}, 256 Bit {{c3::14}}.		isf::symmetrische-kryptologie
+Lückentext	isf	Entropie: H = {{c1::−Σ p_i · log2(p_i)}}; bei Byte-Daten maximal {{c2::8}} Bit pro Byte.		isf::symmetrische-kryptologie
+Lückentext	isf	Beispiel Buddenbrooks: Entropie des Klartexts ca. {{c1::4.54}}, des AES-256-Chiffrats ca. {{c2::8.00}} Bit pro Byte.		isf::symmetrische-kryptologie
+Lückentext	isf	AES-Modi: {{c1::ECB}} (Codebook), {{c2::CBC}} (Verkettung), {{c3::CFB}} (Feedback), {{c4::OFB}} (Output Feedback), {{c5::CTR}} (Zähler), {{c6::GCM}} (Galois/Counter), {{c7::CCM}} (Counter mit CBC-MAC).		isf::symmetrische-kryptologie

@@ -2508,6 +2508,198 @@ IT-Ankündigungen, einfachere Einschreibung \& Onboarding.
 \end{subbox}
 
 % ============================================================================
+% SECTION: SERVERSYSTEME IM RZ
+% ============================================================================
+\section{Serversysteme im RZ}
+
+\subsection{Server: Grundlagen}
+
+\begin{mainbox}{Server vs.\ Desktop-Computer}
+Grundsätzlich dasselbe wie ein Desktop-Computer, aber mit Vorteilen:
+\begin{itemize}
+    \item mehrere (Multi-Core-)\textbf{Prozessoren}
+    \item schnellere \textbf{RAM}-Optionen (\textbf{Interleave})
+    \item \textbf{Festplatteneinschübe}: mehr Kapazität \& Redundanz
+    \item spezielle \textbf{Netzwerkkarten}, mehr \textbf{Slots}
+    \item \textbf{Redundanz} (Power, Ventilatoren)
+    \item \textbf{Fernsteuerung} (Lights-out, z.B.\ HPE \textbf{iLO})
+\end{itemize}
+\textbf{Interleave} (eigene Erklärung): Zugriffe parallel über mehrere
+Speicherkanäle verteilt $\Rightarrow$ höhere Bandbreite.
+\end{mainbox}
+
+\subsection{Bauformen}
+
+\begin{mainbox}{Bauformen im Überblick}
+\textbf{Leistung, Verwendungszweck, Erweiterungen \& Kapazitäten} bestimmen die
+Bauform.
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X@{}}
+\textbf{Bauform} & \textbf{Merkmale / Einsatz} \\
+\hline
+Tower & ältere Serverräume, kleine Anlagen ohne Rack; oft in Rackmount
+  konvertierbar \\
+Rackmount & 19'', 1--12\,HE; hohe Dichte, gut erweiterbar, servicefreundlich \\
+Blade & \textbf{höchste} Dichte, zentralisierte Komponenten \\
+Cartridge & z.B.\ Moonshot: bis 45 Server im Chassis \\
+Appliance & 1\,U, fixer Ausbau, dedizierte Aufgabe \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{19-Zoll-Rackmount}
+Rack-optimiertes Standardgehäuse:
+$\boxed{1\ \text{HE} = 1\ \text{U} = 1.75'' = 4.45\ \text{cm}}$
+\begin{itemize}
+    \item ausziehbar für die Wartung, werkzeugloser Ersatz
+    \item Verkabelung hinten, Schwenkarm für Kabel
+    \item Luftführung \textbf{vorne $\to$ hinten}
+\end{itemize}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|l|l@{}}
+\textbf{HE} & \textbf{Einsatz} & \textbf{Slots} & \textbf{Disks} \\
+\hline
+1\,U & hohe Dichte, Ausbau begrenzt & 1--2 & 1--4 \\
+2\,U & Standard: starke CPUs, mittlere RAM-Grösse & 2--8 & 2--24 \\
+3--6\,U & High Performance: 2--8 CPUs, höchste RAM-Grösse & viele & bis
+  48+ \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Blade Server (z.B.\ HP Blade Server 7000)}
+\begin{itemize}
+    \item \textbf{höchste Dichte}
+    \item \textbf{zentralisiert:} Power Supplies, Management, Switches (LAN + FC)
+    \item \textbf{Hot-Swap ganzer Server} (\emph{Rip \& Replace}), automatische
+          Provisionierung
+    \item flexibler Ausbau mit Switches
+    \item \textbf{alle} Komponenten redundant \& Hot-Swap
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{HPE Moonshot (EOL)}
+Chassis für bis zu \textbf{45 Cartridges}, 1 Cartridge = 1 Server (z.B.\ ProLiant
+m710p); gemeinsame Stromversorgung, Switches \& Controller auf dem Baseboard.\\
+\textbf{Moonshot 1500} (Citrix-Referenzarchitektur): 4.3\,U, 2 Switch-Module,
+5 Lüftermodule \& 4 Netzteile (Hot-Plug). Einsatz: gehostete Desktops \&
+Applikationen.
+\end{subbox}
+
+\begin{mainbox}{Spezialserver}
+\textbf{1U-Appliance:} meist fixer Ausbau, dedizierter Server mit fixen Aufgaben
+(Firewall, IDP, Web-Filter, NAS).
+\begin{itemize}
+    \item einfache Konfiguration (USB oder Web)
+    \item sehr einfacher Ersatz: Konfiguration kopieren
+\end{itemize}
+Daneben: oft futuristische Gehäuse, Platz für Entwicklungen \& Nischenprodukte.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Server-Tiers einer Webanwendung (Dell)}
+Internet $\to$ Router $\to$ Firewall, dann:
+\begin{enumerate}
+    \item \textbf{Tier 1:} Cache- \& Webserver
+    \item \textbf{Tier 2:} Application-Server
+    \item \textbf{Tier 3:} DB-Server \& externer Storage
+\end{enumerate}
+\end{subbox}
+
+\subsection{Bauweise \& Einsatzzwecke}
+
+\begin{mainbox}{Bauweise: modular \& Hot-Swap}
+\textbf{Modulare Bauweise} $\Rightarrow$ servicefreundlich.\\
+\textbf{Hot-Swap möglich bei:}
+\begin{itemize}
+    \item Festplatten (RAID-Level)
+    \item Netzteilen (N+1 oder 2N)
+    \item Ventilatoren (N+1 oder 2N)
+\end{itemize}
+Meist erkennbar an der \textbf{Magenta-Verriegelung}.\\
+\textbf{Achtung:} Austausch im Betrieb nur bei \textbf{genügender Redundanz}!
+\end{mainbox}
+
+\begin{mainbox}{Einsatzzwecke}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Zweck} & \textbf{Ausstattung} \\
+\hline
+Einfache Dienste (Web, Firewall) & kleinere Rechenleistung, wenig Memory, lokale
+  Disks \\
+Virtualisierung & hohe Prozessorleistung, viel RAM, zentrale Disks, SAN \\
+HPC & höchste Prozessordichte, sehr viel Speicher \\
+Standalone-DB & SAP mit Oracle-DB oder Hadoop (Big Data); In-Memory-DB (mehrere
+  TB RAM) \\
+\end{tabularx}
+\end{mainbox}
+
+\subsection{Ausbau \& Leistung}
+
+\begin{mainbox}{Ausbau / Leistungsbestimmung}
+\begin{itemize}
+    \item \textbf{HD-Slots:} Local Storage, Diskless, SAN-Boot, SD-Card-Boot
+    \item \textbf{Erweiterungskarten:} Netzwerk, Fibre Channel, SSD, SAS, SATA
+    \item \textbf{RAM:} onboard, Interleave, Riser-Cards
+    \item \textbf{CPU:} 1--$X$ CPUs mit vielen Cores; Taktrate, Cache
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Leistungsfaktoren (eigene Ergänzung, Folie leer)}
+CPU (Anzahl, Cores, Takt, Cache); RAM (Grösse, Takt, Interleave); Storage
+(Medium, RAID, Controller, Anbindung); Netzwerk (Anzahl \& Speed der Ports);
+Bus/Slots (PCIe); Kühlung (Drosselung bei Hitze); Software \& Lastprofil.
+\end{subbox}
+
+\begin{subbox}{Marktanteile}
+\textbf{Umsatz weltweit, Q3 2020 (IDC/Statista):} Dell 16.7\,\%; aus Grafik
+abgelesen ca.: ODM-Direktverkäufe 28\,\%, HPE 16\,\%, Inspur 10\,\%, Lenovo
+6\,\%.\\
+\textbf{Marktpenetration 2019 (Folie, it-markt.ch):} HPE 44\,\%, Managed Cloud
+25\,\%, Dell 10\,\%, Andere 10\,\%, Lenovo 6\,\%.\\
+Basis \& Jahr verschieden, Werte daher nicht direkt vergleichbar.
+ODM = Original Design Manufacturer (z.B.\ Quanta). IBM verkaufte das
+x86-Geschäft 2014 an Lenovo.
+\end{subbox}
+
+\begin{subbox}{Denkprozess: Server dimensionieren (eigener Vorschlag)}
+\begin{enumerate}
+    \item Anforderungen: Cores, Takt, RAM, Ports, Disks (nur OS?)
+    \item Servertypen wählen, ev.\ gemischt (Spezialfälle mit viel RAM)
+    \item Anzahl mit \textbf{N+1}: nach Ausfall eines Servers muss die Kapazität
+          noch reichen: $(n-1) \cdot c \ge C_{\text{gesamt}}$
+    \item Netzwerk, Rack (HE zählen) ebenfalls redundant
+    \item USV: $E = P \cdot t$, mit Reserve
+    \item Klima: Abwärme $\approx$ el.\ Leistung; 1000\,BTU/h $\approx$ 293\,W
+\end{enumerate}
+\textbf{Beispiel:} $\ge$ 240 Cores mit 32-Core-Servern:
+$240/32 = 7.5$ $\Rightarrow$ 8 + 1 = \textbf{9 Server}.\\
+USV: 10\,kW für 10\,min $\Rightarrow$ $E \approx 1.67$\,kWh;
+Kühlung: 10\,kW $\approx$ 34'000\,BTU/h.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Hot-Swap $\neq$ gefahrlos: ohne Redundanz fällt der Dienst trotzdem aus.
+    \item Blade: zentrale Komponenten teilen sich alle Server $\Rightarrow$ darum
+          müssen sie redundant sein.
+    \item 1\,U = hohe Dichte, aber \emph{wenig} Slots \& Disks. Dichte $\neq$
+          Ausbaubarkeit.
+    \item Virtualisierung: zentrale Disks/SAN statt lokaler Disks.
+    \item Server-Tier 1--3 $\neq$ RZ-Tier I--IV $\neq$ Support-Tier 0--4
+          $\neq$ Storage-Tiers.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Serverbesonderheiten gegenüber Desktop
+    \item Bauformen: Tower, Rackmount (1\,U, 2\,U, 3--6\,U), Blade, Appliance
+    \item Hot-Swap: Disks, Netzteile, Lüfter, nur mit Redundanz
+    \item Einsatz: einfache Dienste, Virtualisierung, HPC, DB
+    \item Ausbau: HD-Slots, Erweiterungskarten, RAM, CPU
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

@@ -1489,8 +1489,8 @@ vereinfachtes Mgmt., nachrüstbar, Glas/Kupfer. Huawei S7700 (bis 100\,GE):
 10--50k CHF.\\
 \textbf{Cisco Nexus} (2019/22): 36180YC-R (48$\times$SFP, 3.6\,Tbps)
 $\approx$ 40--46k USD; 3636C-R (36$\times$QSFP28, 7.2\,Tbps)
-$\approx$ 84--102k USD.\\
-\textbf{Transceiver:} SFP 10G-SR ab 175\,USD; QSFP 100G-SR4 (100\,m, MMF)
+$\approx$ 84--102k USD. Laut Chat 2022 EOL, Nachfolger: Catalyst 9400/9600.\\
+\textbf{Transceiver:} SFP 10G-SR 175\,USD (2022: 826); QSFP 100G-SR4 (100\,m, MMF)
 $\approx$ 2k; 100G-LR4 (10\,km, SMF) $\approx$ 30k USD -- kompatible
 Drittanbieter-Module nur $\approx$ 100--800 CHF!
 \end{subbox}
@@ -1613,6 +1613,33 @@ wenige Aktionen:
 (Match-Felder aus Header $\to$ Aktion + Zähler). Unbekannter Flow $\to$
 an Controller, der neuen Eintrag installiert.
 \end{mainbox}
+
+\begin{mainbox}{Aufbau der Flow Table}
+Pro Flow ein Eintrag aus 3 Teilen, letzter Eintrag mit \textbf{Default Action}:
+\begin{itemize}
+    \item \textbf{Rule} (exact \& wildcard): Switch Port, MAC src/dst, Eth type,
+          VLAN ID, IP src/dst/prot, TCP sport/dport + \textbf{Maske}, welche
+          Felder zu prüfen sind
+    \item \textbf{Action:} (1) an Port(s) weiterleiten, (2) kapseln \& an
+          Controller, (3) Paket verwerfen, (4) an normale Processing Pipeline
+    \item \textbf{Stats:} Paket- \& Byte-Zähler
+\end{itemize}
+\textbf{Header} = Ethernet (DA, SA) + IP (DA, SA) + TCP (DP, SP).
+\end{mainbox}
+
+\begin{subbox}{Beispiele Flow Table}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|l@{}}
+\textbf{Typ} & \textbf{Match} (Rest \texttt{*}) & \textbf{Aktion} \\
+\hline
+Switching & MAC dst 00:1f:\dots & port6 \\
+Flow Switching & \emph{alle} Felder (port3, MACs, 0800, vlan1, 1.2.3.4
+  $\to$ 5.6.7.8, Prot 4, 17264 $\to$ 80) & port6 \\
+Firewall & TCP dport 22 & drop \\
+\end{tabularx}
+Dieselbe Tabelle bildet also Switch, Flow-Switch \emph{und} Firewall ab.
+\end{subbox}
 
 \begin{subbox}{Merkregel: Klassisch vs.\ SDN}
 \textbf{Klassisch:} Hirn (Control) + Muskeln (Datapath) in \emph{jedem}

@@ -673,3 +673,16 @@ Lückentext	iteo	Kette im IT-Support: {{c1::Event}} → {{c2::Alert}} → {{c3::
 Lückentext	iteo	Incident-Logging ist möglich über {{c1::Telefon}}, {{c2::E-Mail}}, {{c3::SMS}}, {{c4::Webformular im Self-Service-Portal}} und {{c5::Live-Chat}}.		iteo::service-support-event-incident-problem-management
 Lückentext	iteo	Beispiel Grossbank: Täglich entstehen ca. {{c1::200'000}} Events, davon erscheinen nur {{c2::2'250}} auf den Konsolen des Kommandozentrums.		iteo::service-support-event-incident-problem-management
 Lückentext	iteo	Schichten der Monitoring-Architektur (unten nach oben): {{c1::Infrastructure Monitoring}} → {{c2::Communication Layer}} → {{c3::Integration Layer}} → {{c4::Event Processing}}.		iteo::service-support-event-incident-problem-management
+Standard	iteo	Aus welchen drei Teilen besteht ein Eintrag der OpenFlow Flow Table?	Rule, Action und Statistics.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Art von Übereinstimmung erlaubt die Rule eines OpenFlow-Flow-Table-Eintrags?	Exakte Werte und Wildcards.	iteo::netzwerke-im-rz
+Standard	iteo	Wozu dient die Maske in einer OpenFlow-Rule?	Sie legt fest, welche Header-Felder geprüft werden.	iteo::netzwerke-im-rz
+Standard	iteo	Nenne die vier Actions eines OpenFlow-Flow-Table-Eintrags.	Paket an Port(s) weiterleiten; kapseln und an Controller senden; Paket verwerfen; an die normale Processing Pipeline übergeben.	iteo::netzwerke-im-rz
+Standard	iteo	Was zeichnet die OpenFlow Flow Table im Eintrag «Statistics» auf?	Paket- und Byte-Zähler.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Action hat der letzte Eintrag einer OpenFlow Flow Table?	Die Default Action.	iteo::netzwerke-im-rz
+Standard	iteo	Wie sieht ein Flow-Table-Eintrag aus, der klassisches Switching abbildet?	Nur MAC dst ist gesetzt, alle übrigen Felder sind Wildcards; Action: an den passenden Port weiterleiten.	iteo::netzwerke-im-rz
+Standard	iteo	Wie sieht ein Flow-Table-Eintrag für Flow Switching aus?	Alle Match-Felder sind exakt gesetzt; Action: an den passenden Port weiterleiten.	iteo::netzwerke-im-rz
+Standard	iteo	Wie sieht ein Flow-Table-Eintrag aus, der als Firewall SSH sperrt?	Nur TCP dport 22 ist gesetzt, alle übrigen Felder sind Wildcards; Action: drop.	iteo::netzwerke-im-rz
+Standard	iteo	Was versteht man bei Netzwerk-Devices unter einem Datenfluss?	Pakete werden an einem Port empfangen und an 0..n Ports wieder ausgegeben.	iteo::netzwerke-im-rz
+Standard	iteo	Welche Funktion haben die Edge-Switches im Core Layer des Facebook Data Center Fabric?	Sie stellen die Uplinks bereit.	iteo::netzwerke-im-rz
+Lückentext	iteo	Match-Felder der OpenFlow Flow Table: {{c1::Switch Port}}, {{c2::MAC src/dst}}, {{c3::Eth type}}, {{c4::VLAN ID}}, {{c5::IP src/dst/prot}}, {{c6::TCP sport/dport}}.		iteo::netzwerke-im-rz
+Lückentext	iteo	Der Header im Flowspace umfasst: {{c1::Ethernet}} (DA, SA), {{c2::IP}} (DA, SA), {{c3::TCP}} (DP, SP).		iteo::netzwerke-im-rz

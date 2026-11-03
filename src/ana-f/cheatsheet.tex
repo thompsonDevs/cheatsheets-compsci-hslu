@@ -1384,6 +1384,203 @@ $z(0) = (\varphi(0), \dot{\varphi}(0))^T$.
 \end{subbox}
 
 % ============================================================================
+% SECTION: HYPERBELFUNKTIONEN
+% ============================================================================
+\section{Hyperbelfunktionen}
+
+\subsection{Definition \& Hyperbolischer Pythagoras}
+
+\begin{mainbox}{Definition}
+\begin{align*}
+\cosh x &:= \tfrac{1}{2}\left(e^{x} + e^{-x}\right)\\
+\sinh x &:= \tfrac{1}{2}\left(e^{x} - e^{-x}\right)\\
+\tanh x &:= \frac{\sinh x}{\cosh x} = \frac{e^{2x} - 1}{e^{2x} + 1}\\
+\coth x &= \frac{1}{\tanh x} = \frac{\cosh x}{\sinh x}
+\end{align*}
+\textbf{Vergleich} (aus Eulerscher Formel, Kap.\ 4):
+\begin{align*}
+\cos x &= \tfrac{1}{2}\left(e^{ix} + e^{-ix}\right)\\
+\sin x &= \tfrac{1}{2i}\left(e^{ix} - e^{-ix}\right)
+\end{align*}
+\end{mainbox}
+
+\begin{subbox}{Verlauf}
+\begin{center}
+\begin{tikzpicture}[x=0.75cm,y=0.42cm]
+\draw[->] (-2.5,0) -- (2.6,0) node[right] {$x$};
+\draw[->] (0,-3.6) -- (0,4.2) node[above] {$y$};
+\foreach \t in {-2,-1,1,2} \draw (\t,0.1) -- (\t,-0.1) node[below] {\tiny $\t$};
+\foreach \t in {-3,-1,1,3} \draw (0.05,\t) -- (-0.05,\t) node[left] {\tiny $\t$};
+\draw[gray,dashed] (-2.5,1) -- (2.5,1);
+\draw[gray,dashed] (-2.5,-1) -- (2.5,-1);
+\draw[maincolor,thick,domain=-2.05:2.05,samples=50]
+  plot (\x,{(exp(\x)+exp(-\x))/2});
+\node[maincolor,above left] at (-1.3,3.4) {\tiny $\cosh$};
+\draw[blue,thick,domain=-1.95:1.95,samples=50]
+  plot (\x,{(exp(\x)-exp(-\x))/2});
+\node[blue,right] at (1.9,3.3) {\tiny $\sinh$};
+\draw[red,thick,domain=-2.5:2.5,samples=50]
+  plot (\x,{(exp(2*\x)-1)/(exp(2*\x)+1)});
+\node[red,below right] at (1.1,0.9) {\tiny $\tanh$};
+\end{tikzpicture}
+\end{center}
+\end{subbox}
+
+\begin{mainbox}{Eigenschaften (eigene Ergänzung)}
+\renewcommand*{\arraystretch}{1.3}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l|ccc}
+ & $\cosh$ & $\sinh$ & $\tanh$ \\
+\hline
+$D$ & $\R$ & $\R$ & $\R$ \\
+$W$ & $[1,\infty)$ & $\R$ & $(-1,1)$ \\
+Symm. & gerade & ungerade & ungerade \\
+$f(0)$ & $1$ & $0$ & $0$ \\
+\end{tabular}\\[2pt]
+\textbf{Nicht periodisch}; $\tanh x \to \pm 1$ für $x \to \pm\infty$.\\
+$\cosh x + \sinh x = e^{x}$, \quad $\cosh x - \sinh x = e^{-x}$
+\end{mainbox}
+
+\begin{mainbox}{Hyperbolischer Pythagoras}
+$$\boxed{\cosh^2 x - \sinh^2 x = 1}$$
+vgl.\ $\cos^2 x + \sin^2 x = 1$.\\
+\textbf{Beweis:} $\cosh^2 x = \tfrac{1}{4}\left(e^{2x} + 2 + e^{-2x}\right)$,
+$\sinh^2 x = \tfrac{1}{4}\left(e^{2x} - 2 + e^{-2x}\right)$; Differenz
+$= \tfrac{1}{4} \cdot 4 = 1$.
+\end{mainbox}
+
+\begin{subbox}{Kreis vs.\ Hyperbel (Notebook)}
+\textbf{Kreis:} $c(t) = (\cos t, \sin t)$, also $x^2 + y^2 = 1$.\\
+\textbf{Hyperbel:} $c(t) = (\cosh t, \sinh t)$, also $x^2 - y^2 = 1$: nur der
+\textbf{rechte Ast}, Asymptoten $y = \pm x$.\\
+\textbf{Bezug zu $h(x) = \frac{1}{x}$:} Hyperbel mit $\sqrt{2}$ skalieren und um
+$45^\circ$ (bzw.\ $225^\circ$ für den 2.\ Ast) drehen.
+\end{subbox}
+
+\subsection{Additionstheoreme \& Ableitungen}
+
+\begin{mainbox}{Additionstheoreme}
+\begin{align*}
+\cosh(x + y) &= \cosh x \cosh y + \sinh x \sinh y\\
+\sinh(x + y) &= \sinh x \cosh y + \cosh x \sinh y
+\end{align*}
+\textbf{Eigene Ergänzung}, Minus via Symmetrie, Doppelwinkel mit $y = x$:
+\begin{align*}
+\cosh(x - y) &= \cosh x \cosh y - \sinh x \sinh y\\
+\sinh(x - y) &= \sinh x \cosh y - \cosh x \sinh y\\
+\sinh(2x) &= 2 \sinh x \cosh x\\
+\cosh(2x) &= \cosh^2 x + \sinh^2 x
+\end{align*}
+\end{mainbox}
+
+\begin{subbox}{Merkregel: Trigonometrie $\to$ Hyperbel}
+Formel übernehmen, aber \textbf{Vorzeichen wechseln, wo $\sinh \cdot \sinh$
+entsteht} (auch $\sinh^2$):\\
+$\cos^2 + \sin^2 = 1 \to \cosh^2 - \sinh^2 = 1$\\
+$\cos(x + y) = \ldots - \sin\sin \to \cosh(x + y) = \ldots + \sinh\sinh$\\
+Grund (eigene Ergänzung): $\cos x = \cosh(ix)$, $\sin x = \frac{1}{i}\sinh(ix)$.
+\end{subbox}
+
+\begin{mainbox}{Ableitungen}
+\begin{align*}
+(\cosh x)' &= \sinh x \quad \text{(kein Minus!)}\\
+(\sinh x)' &= \cosh x\\
+(\tanh x)' &= \frac{1}{\cosh^2 x} = 1 - \tanh^2 x
+\end{align*}
+Eigene Ergänzung: $(\coth x)' = -\dfrac{1}{\sinh^2 x} = 1 - \coth^2 x$.\\
+\textbf{Vergleich:} $(\cos x)' = -\sin x$, $(\sin x)' = \cos x$,
+$(\tan x)' = \frac{1}{\cos^2 x} = 1 + \tan^2 x$.\\
+$\tanh'$ via Quotientenregel und Pythagoras.
+\end{mainbox}
+
+\begin{mainbox}{Reihenentwicklung (MacLaurin)}
+\begin{align*}
+\cosh x &= 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \ldots\\
+&= \sum_{k=0}^{\infty} \frac{x^{2k}}{(2k)!}\\
+\sinh x &= x + \frac{x^3}{3!} + \frac{x^5}{5!} + \ldots\\
+&= \sum_{k=0}^{\infty} \frac{x^{2k+1}}{(2k+1)!}
+\end{align*}
+Wie $\cos$, $\sin$, aber \textbf{ohne} $(-1)^k$: gerade bzw.\ ungerade Terme der
+$e^x$-Reihe.
+\end{mainbox}
+
+\subsection{Areafunktionen}
+
+\begin{mainbox}{Umkehrfunktionen}
+\renewcommand*{\arraystretch}{1.6}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|l|>{\raggedright\arraybackslash}X@{}}
+ & $D \to W$ & \textbf{Formel} \\
+\hline
+$\operatorname{arsinh} x$ & $\R \to \R$ & $\ln\left(x + \sqrt{x^2 + 1}\right)$ \\
+$\operatorname{arcosh} x$ & $[1,\infty) \to \R_0^+$ &
+  $\ln\left(x + \sqrt{x^2 - 1}\right)$ \\
+$\operatorname{artanh} x$ & $(-1,1) \to \R$ &
+  $\frac{1}{2}\ln\frac{1 + x}{1 - x}$ \\
+\end{tabularx}
+$\cosh$ ist nur auf $\R_0^+$ umkehrbar (gerade Funktion).
+\end{mainbox}
+
+\begin{subbox}{Herleitung arsinh}
+$x = \sinh y = \frac{1}{2}\left(e^{y} - e^{-y}\right)$; mit $2e^{y}$
+multiplizieren, $z := e^{y}$:
+$$z^2 - 2xz - 1 = 0 \Rightarrow z_{1/2} = x \pm \sqrt{x^2 + 1}$$
+Nur $+$ erfüllt $z = e^{y} > 0$ (da $\sqrt{x^2 + 1} > |x|$).\\
+$y = \ln z = \ln\left(x + \sqrt{x^2 + 1}\right)$
+\end{subbox}
+
+\begin{mainbox}{Ableitungen der Areafunktionen}
+\begin{align*}
+(\operatorname{arsinh} x)' &= \frac{1}{\sqrt{x^2 + 1}}\\
+(\operatorname{arcosh} x)' &= \frac{1}{\sqrt{x^2 - 1}}\quad (x > 1)\\
+(\operatorname{artanh} x)' &= \frac{1}{1 - x^2}\quad (|x| < 1)
+\end{align*}
+\textbf{Herleitung:} $(f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}$; mit
+$\cosh = \sqrt{1 + \sinh^2}$:
+$$(\operatorname{arsinh} x)' = \frac{1}{\cosh(\operatorname{arsinh} x)}
+= \frac{1}{\sqrt{1 + x^2}}$$
+Positive Wurzel, da $\operatorname{arsinh}$ streng monoton wächst.
+\end{mainbox}
+
+\begin{subbox}{Kettenlinie (eigene Ergänzung, Folie nur Link)}
+Frei hängendes Seil: $y = a \cosh\left(\frac{x}{a}\right)$, $a > 0$.
+Keine Parabel!
+\end{subbox}
+
+\begin{subbox}{Denkprozess: Gleichung mit $\cosh$ (eigenes Bsp.)}
+$\cosh x = \frac{5}{4}$:
+\begin{enumerate}
+    \item Bereich prüfen: $\frac{5}{4} \ge 1$, also lösbar.
+    \item $\operatorname{arcosh}$:
+          $\ln\left(\frac{5}{4} + \sqrt{\frac{25}{16} - 1}\right) = \ln 2$.
+    \item $\cosh$ ist gerade $\Rightarrow$ \textbf{zwei} Lösungen: $x = \pm\ln 2$.
+    \item Probe: $\frac{1}{2}\left(2 + \frac{1}{2}\right) = \frac{5}{4}$ $\checkmark$
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Pythagoras: $\cosh^2 - \sinh^2 = 1$, \emph{Minus}.
+    \item $(\cosh x)' = +\sinh x$, anders als bei $\cos$.
+    \item $(\tanh x)' = 1 - \tanh^2 x$, nicht $1 + \ldots$
+    \item Notation: $\operatorname{ar}$ (Area), nicht $\operatorname{arc}$.
+    \item $\cosh x = c$: $c < 1$ keine Lösung, $c > 1$ zwei Lösungen.
+    \item $\sinh$, $\cosh$ haben \emph{keine} Periode, kein $i$ in der Definition.
+    \item \textbf{Folienfehler} (Folie 6): $e^{-ix} = \cos(-x)
+          \mathbf{+}\, i\sin(-x)$; das Ergebnis $\cos x - i\sin x$ stimmt.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item $\cosh$, $\sinh$ aus $e^{x}$, $e^{-x}$; $\tanh$, $\coth$ als Quotienten
+    \item $\cosh^2 - \sinh^2 = 1$; Hyperbel $x^2 - y^2 = 1$
+    \item Additionstheoreme, Ableitungen, Reihen
+    \item Area: $\ln$-Formeln und Ableitungen
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

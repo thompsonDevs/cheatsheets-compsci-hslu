@@ -2700,6 +2700,316 @@ Kühlung: 10\,kW $\approx$ 34'000\,BTU/h.
 \end{subbox}
 
 % ============================================================================
+% SECTION: SERVICE SUPPORT (EVENT, INCIDENT, PROBLEM MANAGEMENT)
+% ============================================================================
+\section{Service Support: Event, Incident \& Problem Mgmt.}
+
+\subsection{Event, Alert, Incident, Problem}
+
+\begin{mainbox}{Die 4 Begriffe}
+\begin{itemize}
+    \item \textbf{Event (Ereignis):} jede Änderung in einem IT-System oder
+          -Dienst; jedes protokollierte Vorkommnis $\to$ Event Mgmt.
+    \item \textbf{Alert (Warnung):} Event, das eine Untersuchung erfordert;
+          Benachrichtigung, ausgelöst durch einen \textbf{Threshold}
+    \item \textbf{Incident (Vorfall):} ungeplante Dienstunterbrechung oder
+          -beeinträchtigung; erfordert \textbf{sofortiges Handeln} $\to$ Incident
+          Mgmt.
+    \item \textbf{Problem:} \textbf{zugrunde liegende Ursache} eines oder
+          mehrerer Incidents $\to$ Problem Mgmt.
+\end{itemize}
+\textbf{Eskalationskette:} Event erreicht Threshold (z.B.\ CPU $>$ 90\,\%)
+$\to$ Alert; Eingriff nötig $\to$ Hochstufung zum Incident.
+\end{mainbox}
+
+\begin{mainbox}{Event vs.\ Alert vs.\ Incident}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{2pt}
+\footnotesize
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Event} & \textbf{Alert} & \textbf{Incident} \\
+\hline
+Zweck & Verhal\-ten \& Metri\-ken erfassen & IT-Team informie\-ren & Service her\-stellen, Impact mindern \\
+Impact & kein direkter & Risiko, falls ignoriert & direkt auf User \& Geschäft \\
+Daten & rohe Metri\-ken & Events mit Kontext \& Priorität & bestä\-tigte Störung \\
+Wer & Moni\-toring-Tools & On-Call, Spezia\-listen & Service Desk, Re\-sponse-Teams \\
+Folge & ev.\ Alert & ev.\ Incident & Lösung \& Review \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{subbox}{Merkregel}
+\textbf{Event:} etwas ist passiert. \textbf{Alert:} schau es an.
+\textbf{Incident:} behebe es jetzt. \textbf{Problem:} warum passiert es?
+\end{subbox}
+
+\begin{mainbox}{Ziele im Überblick}
+\begin{itemize}
+    \item \textbf{Event Mgmt.:} Umgebung ist überwacht
+    \item \textbf{Incident Mgmt.:} Serviceunterbrechungen vermeiden oder schnell
+          beheben
+    \item \textbf{Problem Mgmt.:} Ursachen beheben, \textbf{künftiges Auftreten
+          verhindern}
+\end{itemize}
+Erst die akute Unterbrechung beheben, danach die Ursache analysieren.
+\end{mainbox}
+
+\subsection{Event Mgmt.\ \& Monitoring}
+
+\begin{mainbox}{Event Management}
+\textbf{Ziel:} Zustandsänderungen eines IT-Service erkennen \& protokollieren
+$\Rightarrow$ vollständiger Überblick.\\
+\textbf{Praxis:} Bedeutung eines Events bestimmen, richtige Reaktion
+identifizieren \& einleiten; Infos aufzeichnen, speichern, relevanten Parteien
+bereitstellen.\\
+\textbf{Monitoring} überwacht Services \& Komponenten und erkennt Fehlerzustände:
+\begin{itemize}
+    \item zeigt jederzeit plattformübergreifend den Zustand von HW \& Applikationen
+    \item Infos zur \textbf{präventiven} Erkennung (Trends), Analyse \&
+          Fehlerbehebung
+    \item konfiguriert automatische Überwachung \& Steuerung
+\end{itemize}
+\textbf{Nicht alles ist ein Event:} Monitoring ist notwendig, führt aber nicht
+immer zu einem Event; \textbf{Thresholds} \& andere Kriterien entscheiden.
+\end{mainbox}
+
+\begin{mainbox}{Event-Lifecycle (6 Aktivitäten)}
+\begin{enumerate}
+    \item \textbf{Detection}
+    \item \textbf{Logging}
+    \item \textbf{Filtering \& Correlation}
+    \item \textbf{Classification}
+    \item \textbf{Response Selected}
+    \item \textbf{Notifications \& Response}
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Resource Monitoring}
+Erkennt Fehler \& Performance-Probleme von Servern, Applikationen etc.
+\begin{itemize}
+    \item \textbf{Monitored Object:} zu überwachendes System(teil), z.B.\ Server,
+          Disk, Prozess
+    \item \textbf{Messpunkt:} konkret \textbf{gemessenes} Merkmal (läuft ja/nein,
+          Durchsatz). Ein Object hat \textbf{$\ge$ 1 Messpunkte}.
+\end{itemize}
+\textbf{Bsp.\ Disk:} Füllgrad \& Lesezeit ergeben die Verfügbarkeitsaussage.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Grossbank}
+\textbf{Architektur} (unten $\to$ oben): Infrastructure Monitoring $\to$
+Communication Layer $\to$ Integration Layer $\to$ Event Processing $\to$
+Konsolen 1st/2nd Level. Überwacht: OS, Middleware, DBs, Applikationen.\\
+\textbf{Volumen:} ca.\ 200'000 Events/Tag im Integration Layer, davon nur
+\textbf{2'250} auf den Konsolen ($\approx$ 1\,\%). Daher: relevante auswählen,
+zusammenfassen, kategorisieren, Reaktion festlegen.\\
+\textbf{Service-Dashboard:} Status \& Response Time je Service und Standort,
+alle 10\,min aktualisiert.
+\end{subbox}
+
+\subsection{Incident Management}
+
+\begin{mainbox}{Incident Management}
+\textbf{Incident:} jede Störung der IT-Dienste, für einzelne Benutzer oder das
+ganze Unternehmen; alles, was die \textbf{Geschäftskontinuität} unterbricht.\\
+\textbf{IM:} Dienste \textbf{innerhalb der SLAs} wiederherstellen. Beginnt mit
+der Meldung, endet mit der Lösung.\\
+\textbf{Erkennung:} Monitoring-Events, Fehler, Anwenderfragen, Meldungen von
+IT-MA, fehlende Services, Hotline.\\
+\textbf{Ziele:}
+\begin{itemize}
+    \item Normalbetrieb \textbf{so schnell wie möglich} wiederherstellen
+    \item Auswirkungen aufs Geschäft minimieren
+    \item bestmögliche Servicequalität \& Verfügbarkeit
+    \item Produktivität der Anwender steigern
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Incident-Lifecycle (8 Schritte)}
+\begin{enumerate}
+    \item \textbf{Identifizierung}
+    \item \textbf{Logging:} Telefon, E-Mail, SMS, Self-Service-Portal, Chat
+    \item \textbf{Kategorisierung} nach IT-/Geschäftsbereich (Netzwerk, HW \dots)
+    \item \textbf{Priorisierung:} Auswirkung $\times$ Dringlichkeit
+    \item \textbf{Zuweisung/Diagnose:} automatisch an passenden Techniker, ev.\
+          in Teilaufgaben
+    \item \textbf{SLA-Verwaltung \& Eskalation:} SLA droht zu brechen oder ist
+          verletzt $\Rightarrow$ funktional/hierarchisch eskalieren
+    \item \textbf{Lösung:} \textbf{Workaround} oder dauerhafte Lösung
+    \item \textbf{Abschluss:} erst wenn der \textbf{Benutzer bestätigt}
+\end{enumerate}
+Danach: \textbf{nachträgliche Überprüfung}, Erkenntnisse dokumentieren.
+\end{mainbox}
+
+\begin{mainbox}{Incident-Priority Matrix}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{2pt}
+\begin{center}
+\begin{tabular}{l|c|c|c}
+\textbf{U$\downarrow$ I$\to$} & \textbf{High} & \textbf{Med.} &
+  \textbf{Low} \\
+\hline
+\textbf{High} & Critical & High & Moderate \\
+\textbf{Med.} & High & Moderate & Low \\
+\textbf{Low} & Moderate & Low & Low \\
+\end{tabular}
+\end{center}
+\textbf{I = Impact:} High = systemweit (Abteilung, Standort); Medium = mehrere User;
+Low = einzelner User.\\
+\textbf{U = Urgency:} High = Kernaufgaben nicht mehr möglich; Medium = beeinträchtigt,
+Workaround vorhanden; Low = lästig.
+\end{mainbox}
+
+\begin{subbox}{Priorisierung nach SLA (Bsp.\ Zendesk)}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}X|l|l@{}}
+\textbf{Priorität} & \textbf{Zuweisung} & \textbf{Lösung} \\
+\hline
+Niedrig & 8\,h & 1 Woche \\
+Normal & 2\,h & 2 Tage \\
+Hoch & 1\,h & 24\,h \\
+Dringend & 1\,h & 8\,h \\
+\end{tabularx}
+Gilt für 95\,\% der Tickets. Reaktions- \& Lösungszeit werden vereinbart, Tickets
+daran gemessen.
+\end{subbox}
+
+\begin{subbox}{Incident Record (Auswahl)}
+ID, Kategorie, Dringlichkeit \& Auswirkung, Priorität, Erfassungsdatum, Erfasser,
+Meldeart, Anwender \& Kontakt, Beschreibung (Symptome), Status, betroffene
+\textbf{CIs}, zugeordnetes Team, verlinkte Probleme/\textbf{Known Errors},
+Massnahmen, Zeit von Behebung \& Abschluss, Abschlusskategorie.
+\end{subbox}
+
+\begin{mainbox}{Support-Eskalation}
+Jeder Level versucht es selbst: Checklisten, eigene Berechtigungen, ev.\
+Knowledge Base. Keine Lösung $\Rightarrow$ Eskalation an die nächste Stufe
+(Spezialisten, Hersteller).\\
+\textbf{Ablauf:} Incident $\to$ Bearbeitung $\to$ Lösung bekannt?
+\textbf{Ja:} beheben \& schliessen. \textbf{Nein:} nächste Line diagnostiziert
+(1st $\to$ 2nd $\to$ n).
+\begin{itemize}
+    \item \textbf{funktional} (= horizontal): an höhere Fachkenntnis
+    \item \textbf{hierarchisch:} Folie ohne Definition; nach ITIL an
+          Vorgesetzte
+\end{itemize}
+\textbf{Eng verbunden mit:} Problem, Change, Service Level, Knowledge,
+Configuration Mgmt., Continual Improvement.
+\end{mainbox}
+
+\begin{mainbox}{Support Levels}
+Kleinbetrieb: Level 1--3 (gem.\ ITIL); Grossbetrieb: Level 0--4.
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X@{}}
+\textbf{0} & lokale Ansprechpartner, Power User; kein eigentlicher Incident \\
+\textbf{1} & Service Desk, erste Anlaufstelle; Checklisten auf Benutzerebene,
+  SW-Verteilung \\
+\textbf{2} & höhere Rechte, Server-Administration; Checklisten, Service Restarts \\
+\textbf{3} & System Engineers; höhere Ausbildung, hohe Systemrechte \\
+\textbf{4} & Senior Engineers, Entwickler, Architects, Consultants; mit Herstellern
+  \& ext.\ Spezialisten \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{KPIs Incident Mgmt.}
+\textbf{KPI:} Kennzahl, ob ein Ziel erreicht wird.
+\begin{itemize}
+    \item Anzahl Incidents, Incidents pro Fortschrittskategorie
+    \item Incidents innerhalb/ausserhalb SLA
+    \item durchschn.\ Kosten pro Incident, durchschn.\ Lösungszeit
+    \item durchschn.\ Zeit zwischen Vorfällen
+    \item Wiedereröffnungen, Lösungsrate, Direktlösungen
+\end{itemize}
+\end{mainbox}
+
+\subsection{Problem Management}
+
+\begin{mainbox}{Problem Management}
+In der Regel \textbf{proaktiv}: \textbf{Grundursache} identifizieren \& beheben,
+Lösungen umsetzen, um ein \textbf{erneutes Auftreten zu verhindern}.\\
+\textbf{Eng verbunden mit:} Incident, Change, Service Level, Knowledge,
+Configuration Mgmt., Continual Improvement.
+\end{mainbox}
+
+\begin{mainbox}{Problem-Lifecycle (8 Schritte)}
+\begin{enumerate}
+    \item Erkennen
+    \item Protokollieren (\textbf{mit Incidents verknüpfen})
+    \item Support-Gruppe zuweisen
+    \item Kategorisieren
+    \item Priorisieren
+    \item Untersuchung \& Diagnose
+    \item Lösung
+    \item Überprüfung \& Schliessung schwerwiegender Probleme
+\end{enumerate}
+\textbf{Im Ablauf:} nach der Analyse: \textbf{Change Mgmt.\ nötig?} Ja $\to$ Change
+Mgmt.; Nein $\to$ Resolution $\to$ Closure. Bei Bedarf \textbf{Reopen}.
+\end{mainbox}
+
+\begin{mainbox}{Beiträge zur Problem Detection}
+Quellen: \textbf{Service Desk, Event Mgmt., Incident Mgmt., proaktives Problem
+Mgmt., Lieferanten}.
+\begin{itemize}
+    \item \textbf{Event Mgmt.:} High-Priority-Alert erzeugt Incident \& Problem
+          und verknüpft sie
+    \item \textbf{Incident Mgmt.:} verknüpft jeden Incident über die
+          Service-Kategorie mit einem Problem, erstellt es falls nötig; nutzt
+          vorhandene \textbf{Workarounds}
+\end{itemize}
+\textbf{Voraussetzung:} genaue, konsistente Incident-Doku, v.a.\ betroffener
+Dienst \& Symptome; nur so lassen sich ähnliche Vorfälle erfassen.
+\end{mainbox}
+
+\begin{subbox}{Gesamtablauf EM $\to$ IM/PM}
+Event $\to$ Notification, Detection, Filter $\to$ \textbf{Significance:}
+\begin{itemize}
+    \item \emph{Informational} $\to$ Event Logged
+    \item \emph{Warning} $\to$ Correlation, Trigger $\to$ Auto Response oder Alert
+    \item \emph{Exception} $\to$ direkt zu \textbf{Type?}
+\end{itemize}
+Alert $\to$ Human Intervention $\to$ \textbf{Type?} $\to$ Incident-, Problem- oder
+Change Mgmt. $\to$ Event Review: \textbf{Resolved?} Ja $\to$ Closure; Nein $\to$
+zurück zu Type?
+\end{subbox}
+
+\begin{subbox}{Denkprozess: Meldung einordnen (eigener Vorschlag)}
+\begin{enumerate}
+    \item Nur protokolliert, kein Handlungsbedarf? $\to$ \textbf{Event}
+    \item Threshold überschritten, Untersuchung nötig? $\to$ \textbf{Alert}
+    \item Service gestört, Eingriff nötig? $\to$ \textbf{Incident}: Impact \&
+          Urgency bestimmen, Matrix anwenden
+    \item Wiederkehrend oder Ursache unbekannt? $\to$ \textbf{Problem}
+    \item Behebung ändert Systeme? $\to$ \textbf{Change}
+\end{enumerate}
+\textbf{Bsp.:} Mailserver fällt für alle aus, niemand kann arbeiten: Impact High,
+Urgency High $\Rightarrow$ \textbf{Critical}.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Nicht jedes Event ist ein Alert, nicht jeder Alert ein Incident.
+    \item Incident gelöst $\neq$ Ursache behoben: Ein Workaround reicht für IM,
+          die Ursache bleibt Sache des PM.
+    \item Lösung $\neq$ Abschluss: Abschluss erst nach Benutzerbestätigung.
+    \item Priorität = Impact $\times$ Urgency, nicht Bauchgefühl.
+    \item Support \textbf{Level} 0 (Power User) $\neq$ \textbf{Tier} 0
+          (Self-Service, Kap.\ 8).
+    \item Folien uneinheitlich: Schritt 5 heisst Zuweisung \emph{oder} Diagnose;
+          Priorität Medium \emph{oder} Moderate.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Event, Alert, Incident, Problem abgrenzen
+    \item Lifecycles: Event 6, Incident 8, Problem 8 Schritte
+    \item Monitored Object vs.\ Messpunkt
+    \item Priority Matrix, SLA, Eskalation, Level 0--4
+    \item KPIs \& Incident Record
+    \item PM braucht saubere Incident-Doku
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

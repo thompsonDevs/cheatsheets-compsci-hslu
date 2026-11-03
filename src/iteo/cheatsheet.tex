@@ -2158,6 +2158,356 @@ Messgrössen: Latenz, Durchsatz (MB/s), IOPS.
 \end{subbox}
 
 % ============================================================================
+% SECTION: TICKETING SYSTEM, HELPDESK & SERVICE DESK
+% ============================================================================
+\section{Ticketing System, Helpdesk \& Service Desk}
+
+\subsection{Begriffe}
+
+\begin{mainbox}{Ticketsystem -- Helpdesk -- Service Desk -- Callcenter}
+Begriffe werden oft synonym verwendet, sind es aber nicht:
+\begin{itemize}
+    \item \textbf{Ticketsystem:} \textbf{Softwaretool}, das Helpdesk \emph{und}
+          Service Desk nutzen, um Anfragen zu verfolgen, zu organisieren \& zu
+          priorisieren. Eines der ITSM-Module.
+    \item \textbf{Helpdesk:} \textbf{Team}, behebt technische Probleme
+          (Drucker, Passwort, PC-Fehler). Ideal für \textbf{kleine}
+          Organisationen.
+    \item \textbf{Service Desk:} umfassendere, \textbf{strategische
+          Weiterentwicklung} des Helpdesks. Nötig für \textbf{mittlere bis
+          grosse} Organisationen mit komplexen Anforderungen.
+    \item \textbf{Callcenter:} allgemeiner \textbf{Kundenservice} (Telesales,
+          Basisberatung, Aufträge). Agenten sind keine IT-Experten
+          $\to$ verweisen an Service Desk/Helpdesk.
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Merkregel}
+\textbf{Ticketsystem} = Werkzeug; \textbf{Helpdesk} = repariert, was kaputt ist;
+\textbf{Service Desk} = Helpdesk + Requests + Prozesse + Business-Sicht.
+\end{subbox}
+
+\subsection{Ticketing System}
+
+\begin{mainbox}{Support-Anfrage \& Ticket}
+\textbf{Support-Anfrage:} Incident, Service Request, Warnung oder Event eines
+internen/externen Kunden, via E-Mail, Telefon, Webformular \dots{} $\to$
+\textbf{Ticketerstellung}.
+
+\textbf{Ticket:} Dokument/Datensatz in einem \textbf{zentralen Repository}.
+Erklärt das Problem, enthält Kontext sowie Kennungen wie \textbf{Status,
+Priorität, Kategorie}.
+\end{mainbox}
+
+\begin{mainbox}{3 Ticket-Quellen}
+\begin{itemize}
+    \item \textbf{Mitarbeitende/Endbenutzer:} E-Mail, Telefon, Webformular
+    \item \textbf{IT-Support-Agenten:} im Namen von Endbenutzern oder für
+          ITSM-Prozesse (Problem, Change, Projektmgmt.)
+    \item \textbf{Automatisierte Systeme:} Monitoring erzeugt Tickets aus
+          Warnungen (Malware erkannt, Website down)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Multichannel vs.\ Omnichannel}
+\begin{itemize}
+    \item \textbf{Multichannel:} mehrere \textbf{nicht integrierte} Kanäle.
+          Kunde mailt und ruft an $\Rightarrow$ \textbf{2 separate Tickets}.
+    \item \textbf{Omnichannel:} mehrere \textbf{integrierte}, koordinierte
+          Kanäle $\Rightarrow$ ein durchgängiger Vorgang.
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Ticket-Lebenszyklus (5 Phasen)}
+\begin{enumerate}
+    \item \textbf{Erstellung \& Identifizierung}
+    \item \textbf{Kategorisierung \& Priorisierung} (Triage)
+    \item \textbf{Zuweisung} an zuständigen Mitarbeiter
+    \item \textbf{Untersuchung \& Lösung}
+    \item \textbf{Bestätigung} durch Kunden \& \textbf{Abschluss}
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Ablauf in der Ticketing-Software}
+Omnichannel-Erstellung $\to$ E-Mail wird zu Ticket $\to$ autom.
+Kategorisierung \& Priorisierung (Regeln) $\to$ autom. Zuweisung
+(Round-Robin, Load-Balancing) $\to$ Lösung $\to$ Abschluss \& Umfrage $\to$
+\textbf{Continual Service Improvement} (SLA-Metriken, Umfragen).
+
+Keine Lösung $\Rightarrow$ \textbf{Eskalation} an Spezialisten.
+
+\textbf{Lösung $\to$ Knowledge-Base-Artikel:} später als Referenz nutzbar,
+damit Kunden \& Support ähnliche Probleme einfach lösen.
+\end{mainbox}
+
+\begin{mainbox}{Häufige Fehler im Ticket-Workflow \& Lösungen}
+\textbf{Fehler:}
+\begin{itemize}
+    \item Dringlichkeit übersehen (fehlende SLAs, falsche Priorisierung,
+          verzögerte/falsche Zuweisung)
+    \item inkonsistente Status-Updates, schlechte Kommunikation
+    \item fehlende Bestätigung der Kundenzufriedenheit
+    \item vorzeitiger Ticketabschluss
+\end{itemize}
+\textbf{Lösungen:}
+\begin{itemize}
+    \item Routing \& Tagging automatisieren
+    \item Vorlagen für häufige Probleme
+    \item SLA-basierte Workflows
+    \item interne Notizen \& Zusammenarbeit ermöglichen
+    \item Schulung zu Best Practices im Lebenszyklus
+    \item Tools: KI, Self-Service-Portal, Dashboards, Benachrichtigungen
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Ticketing-Softwareoptionen}
+\begin{itemize}
+    \item \textbf{Cloud (SaaS):} nur übers Internet, einfache Einrichtung,
+          sofort nutzbar, zentrales Repository, integrierbar
+    \item \textbf{Vor Ort (selbst gehostet):} Daten auf privatem Webserver im
+          Unternehmen, dort verwaltet \& gewartet
+    \item \textbf{Open Source:} Quellcode an Geschäftsanforderungen anpassbar
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Ticketing im KMU}
+Kleine Teams: Anruf beim Techniker, Support-Mail, Spreadsheet oder
+Eigenentwicklung. \textbf{Beim Wachstum nicht mehr effizient genug}, schadet
+auch IT-Projekten. Vorteile eines Ticketsystems: zentrale Verwaltung, weniger
+manuelle Arbeit, Self-Service-Portal, Daten automatisch statt von Hand in
+Tabellen gepflegt.
+\end{subbox}
+
+\begin{mainbox}{Ticketsystem: Funktionen \& Vorteile}
+\textbf{Funktionen:} Omnichannel; Zuweisung, Routing, Kategorisierung,
+Eskalation; Workflow-Automatisierung; Berichte \& Analysen; KI; Selbstbedienung.
+
+\textbf{Vorteile:} Integration mit anderen Systemen, automatisierte Abläufe,
+bessere Entscheide durch Analysen, einfachere Zusammenarbeit, Kundenfeedback,
+KI-Tools (Chatbots, Wissensmanagement, generative KI).
+\end{mainbox}
+
+\subsection{IT-Helpdesk}
+
+\begin{mainbox}{IT-Helpdesk}
+\textbf{Erste Anlaufstelle} für Benutzer mit IT-Problemen. Fokus:
+\textbf{Fehlerbehebung (Incident Mgmt.)} und schnelle Lösung.
+\begin{itemize}
+    \item Einrichtung: Ticketing-Software implementieren
+    \item eigenständige Lösung \emph{oder} Teil des Service Desks
+    \item \textbf{Level-1- \& Level-2-Support}, Eskalation nach Bedarf
+    \item geeignet für kleine Unternehmen, die nur Incident Mgmt.\ \&
+          Soforthilfe brauchen
+\end{itemize}
+\textbf{Ablauf:} Ticket über bevorzugten Kanal (Telefon, Chat, E-Mail)
+$\to$ Software klassifiziert, steuert, automatisiert $\to$ Abschluss nach
+Behebung. Alternativ selbst in der Wissensdatenbank suchen.
+\end{mainbox}
+
+\begin{subbox}{Typische Helpdesk-Fälle}
+Fehler in Unternehmenssoftware, allg.\ Fragen, Incident Monitoring, Anfragen zu
+neuen Funktionen, Netzwerk/VPN, Anmeldedaten, Gerätekompatibilität, geplante
+Wartungsupdates.
+\end{subbox}
+
+\begin{mainbox}{Best Practices IT-Helpdesk}
+\begin{itemize}
+    \item passende Software wählen
+    \item mehrere Kommunikationskanäle anbieten
+    \item Probleme bei der \textbf{ersten Interaktion} lösen
+    \item Funktionen automatisieren
+    \item Wissensdatenbank aufbauen
+    \item \textbf{KPIs} analysieren
+    \item Feedback der Benutzer einholen
+\end{itemize}
+\end{mainbox}
+
+\subsection{Service Desk}
+
+\begin{mainbox}{Service Desk}
+Kommunikationszentrum und \textbf{Single Point of Contact (SPOC)} zwischen
+Unternehmen, Kunden, Mitarbeitenden \& Geschäftspartnern. Aus dem Helpdesk
+entstanden (ITSM-Best-Practice): \textbf{IT als Service}. Fokus auf
+\textbf{Geschäftsanforderungen \& -ziele}.
+
+\textbf{Bearbeitet:} Incidents, Service Requests, Requests for Information,
+komplexere IT-Aufgaben.
+
+\textbf{Weitere Dienste möglich:} Change, Release, Konfiguration, On-/Offboarding,
+Geschäftskontinuität, Reporting \& Metriken, Dienstüberwachung.
+\end{mainbox}
+
+\begin{mainbox}{Support-Stufen (Tier 0--4)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+\textbf{0} Self-Service & Website-Infos, FAQ, Handbücher, Foren, Social Media \\
+\textbf{1} Basis-Support & Passwort-Reset, Netzwerk-, Anwendungs-,
+  HW-Leistung \\
+\textbf{2} Erweitert & komplexe HW-/Server- \& Backend-Probleme, die Stufe~1
+  nicht lösen kann \\
+\textbf{3} Fachexperten & hochkomplexe HW-, Code-, Architekturprobleme;
+  Serverwartung; Eskalationen aus 1+2 \\
+\textbf{4} Extern & Anbieter/Partner: spez. HW, Sicherheitsrisiken, Firmware,
+  Patches \\
+\end{tabularx}
+Aufsteigend: höhere Fachkenntnis, Pyramide verjüngt sich nach oben.
+\end{mainbox}
+
+\begin{mainbox}{Funktionen des Service Desks}
+\begin{itemize}
+    \item \textbf{Ticketsystem:} Erstellung, Routing, Automatisierung
+    \item \textbf{Knowledge Mgmt.:} Datenbank fördert Self-Service
+    \item \textbf{IT-Asset-Mgmt.:} Assets organisiert, \textbf{CMDB}
+          (Configuration Mgmt.\ Database), Bewertung
+    \item \textbf{Automatisierung:} tägliche Aufgaben \& Eskalationen
+    \item \textbf{SLA-Verwaltung:} Tickets auf SLA-Basis steuern
+    \item \textbf{Servicekatalog:} Online-Katalog aller Services
+    \item \textbf{Incident Mgmt.:} ungeplante Vorfälle schnell lösen
+\end{itemize}
+Dazu: Omnichannel, Self-Service-Portal, Chatbots, Analytics.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Ablauf im Service Desk (Comarch)}
+\begin{enumerate}
+    \item Registrierung, Identifikation \& Priorisierung
+    \item Erstdiagnose \& Lösung
+    \item \textbf{funktionale} oder \textbf{hierarchische} Eskalation
+\end{enumerate}
+\textbf{Incident:} Einzelfall mit punktueller Lösung.
+\textbf{Problem:} wiederkehrende/systematische Fehler, Analyse nötig
+$\to$ danach Knowledge-Base aktualisieren.
+\end{subbox}
+
+\begin{subbox}{KI \& Knowledge-Base-Integration}
+User meldet Incident (z.B.\ via Teams) an \textbf{Bot} $\to$ Bot löst mit Hilfe
+der Knowledge Base \textbf{oder} erstellt/weist Ticket automatisch zu. Kann der
+Bot nicht antworten: \textbf{Handshake} an Live-Agent. Engineer
+arbeitet mit anderen Teams (Child-Tickets), Statusupdate, Ticket gelöst, Feedback.
+\end{subbox}
+
+\begin{mainbox}{Helpdesk vs.\ Service Desk}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+\textbf{Helpdesk} & \textbf{Service Desk} \\
+\hline
+\textbf{User-centric:} Fokus Endnutzer & \textbf{Business-centric:} Fokus
+  Geschäft \\
+\textbf{Reaktiv:} Problem $\to$ Lösung & \textbf{Proaktiv:} entwickelt
+  Lösungen voraus \\
+\textbf{Break-Fix:} Nutzer meldet, Support behebt & \textbf{Complete Picture:}
+  bezieht andere Prozesse ein, vermeidet künftige Vorfälle \\
+\textbf{Task-oriented:} Lösung nach Bedarf & \textbf{Process-oriented:} ganzer
+  Supportprozess \\
+\end{tabularx}
+\end{mainbox}
+
+\subsection{Service Desk einführen}
+
+\begin{mainbox}{Business Case Service Desk}
+\textbf{1.\ Ist-Zustand \& Problem}
+\begin{itemize}
+    \item hohes Ticketaufkommen: Telefon/Mail für repetitive Anfragen
+          (Passwort-Reset, Statusabfrage)
+    \item Ressourcenengpass: L1/L2 überlastet, Projekte kommen zu kurz
+    \item schlechte Kennzahlen: lange Erstantwortzeit, tiefe CSAT, viele
+          Tickets pro MA
+\end{itemize}
+\textbf{2.\ Lösung:} ITSM-Best-Practices (\textbf{ITIL 4}),
+Self-Service-Portal mit Wissensdatenbank \& Workflows, passende Plattform
+(z.B.\ TOPdesk, Freshworks).
+
+\textbf{3.\ Finanzieller Nutzen}
+\begin{itemize}
+    \item Self-Service/Automatisierung: Ticketkosten auf ca.\ \textbf{5\,\%}
+          eines manuellen Tickets
+    \item Personal: gesparte Zeit/Ticket $\times$ Kosten/h
+    \item \textbf{TCO} über \textbf{3--5 Jahre}: Lizenzen, Implementierung,
+          Schulung, Wartung
+\end{itemize}
+\textbf{4.\ Alternativen:} Nichts tun / Minimaler Aufwand (Tools anpassen) /
+Maximaler Aufwand (Neugestaltung, Toolwechsel).
+
+\textbf{5.\ Risiken:} Widerstand der Nutzer, Verzögerung bei
+Legacy-Integration, Datenverlust bei Migration.
+\textbf{Minderung:} phasenweise Einführung, Schulungen, klare Kommunikation.
+
+\textbf{6.\ KPIs} (siehe unten)
+\end{mainbox}
+
+\begin{mainbox}{Service-Desk-KPIs}
+\begin{itemize}
+    \item \textbf{RR} Resolution Rate: Lösungsquote
+    \item \textbf{FCR} First-Contact Resolution: Lösung beim 1.\ Kontakt
+    \item \textbf{CSAT} Customer/Employee Satisfaction
+    \item \textbf{AHT} Average Handling Time
+    \item Rückgang des Ticketaufkommens
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Service Desk standardisieren (ITRG)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+\textbf{Phase} & \textbf{Typische Herausforderungen} \\
+\hline
+1 Kontakt & schwer erreichbar, wenig Self-Help, Wartezeit; Direktkontakt zu
+  Technikern \\
+2 Erfassung & keine Rückmeldung/ETA; Tickets bleiben liegen, falsch
+  kategorisiert \\
+3 Bearbeitung & kein Status; Backlog, Silos, falsche Eskalation \\
+4 Abschluss & vorzeitig geschlossen; SLA verletzt, schlechte Bewertung \\
+\end{tabularx}
+\textbf{Lösungsansatz:} Ziele \& Vision definieren; Erfassung, Kategorisierung,
+Priorisierung verbessern; richtige Daten erfassen \& auswerten; Incident- \&
+Request-Workflows dokumentieren; Lösungen nach links verschieben (\textbf{Shift
+Left}: Richtung tieferer Stufen).
+\end{subbox}
+
+\begin{subbox}{Einsatz nach Branche/Grösse}
+\textbf{Kleine Unternehmen:} zentrale IT-Verwaltung, weniger manuelle Arbeit,
+Self-Service, verlässliche Daten.\\
+\textbf{Ausbildung:} zentrales Portal (z.B.\ WLAN-Zugang), Plattform für
+IT-Ankündigungen, einfachere Einschreibung \& Onboarding.
+\end{subbox}
+
+\begin{subbox}{Aufgabe IT-Support: Lösungsvorschlag}
+\emph{Folien nennen keine Musterlösung -- eigener Vorschlag:}
+\begin{itemize}
+    \item \textbf{Kein VPN-Zugriff:} zuerst Self-Service (Tier 0, KB), sonst
+          Ticket via Portal/Telefon $\to$ L1; Incident.
+    \item \textbf{HR-System reagiert nicht (Onboarding):} Incident-Ticket mit
+          Auswirkung $\to$ Priorisierung $\to$ L1, bei Bedarf Eskalation an
+          L2/Applikationsteam; Status an HR.
+    \item \textbf{Monitoring: mehrere Server down:} Ticket automatisch,
+          hohe Priorität, direkt an L2/L3; Betroffene informieren; danach
+          Problem Mgmt.\ (Root Cause) \& KB-Eintrag.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Ticketsystem = Software, kein Team; Helpdesk \emph{und} Service Desk
+          nutzen es.
+    \item Der Service Desk macht \emph{mehr} als Incidents: auch Service
+          Requests \& Informationsanfragen.
+    \item Multichannel $\neq$ Omnichannel: entscheidend ist die
+          \textbf{Integration} der Kanäle.
+    \item Ticket erst nach \textbf{Kundenbestätigung} schliessen (Phase 5).
+    \item Support-Tier 0--4 $\neq$ RZ-Tier I--IV $\neq$ Storage-Tiers.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Abgrenzung Ticketsystem, Helpdesk, Service Desk, Callcenter
+    \item 3 Ticket-Quellen, 5 Lebenszyklus-Phasen
+    \item SaaS / selbst gehostet / Open Source
+    \item Tier 0--4 und Eskalation
+    \item Helpdesk vs.\ Service Desk: 4 Gegensätze
+    \item Business Case und KPIs (RR, FCR, CSAT, AHT)
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

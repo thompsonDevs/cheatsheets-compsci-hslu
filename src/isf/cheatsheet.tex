@@ -2122,6 +2122,256 @@ DIR/VA), Chain of Trust, CRL/OCSP $\to$ TLS, ab 1.3 mit PFS.
 \end{subbox}
 
 % ============================================================================
+% SECTION: KRYPTOGRAPHISCHE PROTOKOLLE
+% ============================================================================
+\section{Kryptographische Protokolle}
+
+\subsection{Grundlagen}
+
+\begin{mainbox}{Algorithmus vs.\ Protokoll}
+\textbf{Algorithmus:} endliche, wohldefinierte Abfolge von Schritten, die ein
+Problem löst. Bsp.: SHA-256, AES, RSA.\\
+\textbf{Protokoll:} Regelmenge für die Kommunikation \textbf{mehrerer Teilnehmer}:
+legt fest, \textbf{welche Nachrichten in welcher Reihenfolge} ausgetauscht und
+\textbf{welche Algorithmen} angewendet werden. Bsp.: TLS.
+\end{mainbox}
+
+\begin{subbox}{Charaktere}
+\renewcommand*{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X@{}}
+Alice, Bob & Senderin, Empfänger \\
+Carol, Dave & weitere Teilnehmer (Multi-Party) \\
+Eve & Lauscherin: hört \textbf{passiv} mit \\
+Mallory & \textbf{aktiv}: manipuliert, ersetzt, blockiert (MitM) \\
+Oscar & generischer Angreifer \\
+Trent & Vertrauensinstanz (PKI) \\
+Peggy, Victor & Prover, Verifier (ZK-Proofs) \\
+Sybil & viele Fake-Identitäten \\
+\end{tabularx}
+\end{subbox}
+
+\begin{mainbox}{Klassisch vs.\ Post-Quantum (PQ)}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.3\linewidth}|>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Kategorie} & \textbf{Klassisch} & \textbf{PQ} \\
+\hline
+Hash & SHA-256 & SHA-256+ \\
+Symm. & AES & AES-256+ \\
+Schlüssel\-tausch & DH & Crystals-Kyber \\
+Asymm. & RSA, ECC & Crystals-Kyber \\
+Signatur & RSA, DSA & Dilithium, Falcon, SPHINCS+ \\
+\end{tabularx}
+\textbf{Symmetrische} Verfahren überleben Quantum (mit grösseren Schlüsseln),
+\textbf{asymmetrische} müssen ersetzt werden.
+\end{mainbox}
+
+\begin{mainbox}{Integritätsmechanismen}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Schützt vor} & \textbf{Nicht vor} \\
+\hline
+Checksum & Bitfehler & Manipulation \\
+CRC & zufällige Fehler & gezielter Manipulation \\
+Hash & unabsichtl.\ Änderung, einfacher Manipulation & aktivem Angreifer (rechnet
+  neu) \\
+MAC & Angreifer ohne Schlüssel & Insider mit Schlüssel \\
+Signatur & Manipulation; + Authentizität, Nichtabstreitbarkeit &
+  kompromit\-tiertem Private Key \\
+\end{tabularx}
+Schutz aufsteigend: sehr schwach, schwach, mittel, stark, sehr stark.
+\textbf{MAC} = Hash + Schlüssel; \textbf{Signatur} = Hash + asymm.\ Krypto.
+Vgl.\ \emph{Prüfsumme bis Signatur} (Kap.\ 1).
+\end{mainbox}
+
+\begin{mainbox}{TLS-Cipher-Suite (bis TLS 1.2)}
+Handshake: siehe Kap.\ 6. Eine Suite legt eine Kombination fest aus:
+\begin{itemize}
+    \item \textbf{Schlüsseltausch:} RSA, DH, ECDH, PSK
+    \item \textbf{Authentifizierung:} RSA, DSA, ECDSA, PSK
+    \item \textbf{Verschlüsselung:} NULL, RC4, DES, 3DES, AES
+    \item \textbf{Hash für HMAC:} MD5, SHA
+\end{itemize}
+\textbf{Bsp.:} \texttt{TLS\_ECDHE\_RSA\_WITH}\\
+\texttt{\_AES\_128\_GCM\_SHA256}\\
+ECDHE = Tausch, RSA = Auth., AES-128-GCM = Verschlüsselung, SHA-256 = Hash.
+\end{mainbox}
+
+\subsection{Anwendungen}
+
+\begin{subbox}{Denkprozess: Protokoll analysieren}
+\begin{enumerate}
+    \item \textbf{Verhalten:} Welche Anforderungen hat das System? (noch nicht
+          die Umsetzung)
+    \item \textbf{Phasen:} Welche gibt es, was gilt in jeder?
+    \item \textbf{Algorithmen:} Welche sind Teil des Protokolls?
+    \item \textbf{Lücken:} Fehlen Algorithmen für diese Anforderungen?
+\end{enumerate}
+\end{subbox}
+
+\begin{mainbox}{E-Voting: 5 Sicherheitsziele}
+\begin{itemize}
+    \item \textbf{Authentifizierung:} nur Berechtigte stimmen ab
+    \item \textbf{Vertraulichkeit (Anonymität):} niemand sieht, wie jemand wählt
+    \item \textbf{Integrität:} Stimmen nicht veränder- oder löschbar
+    \item \textbf{Verifizierbarkeit:} jeder kann das Ergebnis prüfen, ohne
+          Wahlgeheimnis zu brechen
+    \item \textbf{Unwiederholbarkeit:} jede Person nur einmal
+\end{itemize}
+\textbf{Phase 1 Registrieren:} Alice lässt den Stimmzettel im Umschlag mit Absender
+vom Wahlamt \textbf{blind signieren}.\\
+\textbf{Phase 2 Abstimmen:} signierten Zettel \textbf{anonym} einsenden; das
+Wahlamt publiziert Zettel \& Resultat. (Aus Diagramm gelesen.)
+\end{mainbox}
+
+\begin{mainbox}{Biometrischer Pass}
+RFID-Chip: Personendaten, Foto, opt.\ Biometrie (Finger, Iris), digitale
+Signatur. \textbf{Phasen:} ausstellen, verwenden.
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Ziel} & \textbf{Verfahren} \\
+\hline
+BAC & unbefugtes Auslesen verhindern & symm.\ (3DES, AES) \\
+PA & Echtheit der Chipdaten & asymm.\ (RSA, ECDSA) \\
+AA & Klonen verhindern & asymm.\ Challenge-Response \\
+EAC & Biometrie schützen & PKI + asymm.\ Sitzungsschlüssel \\
+\end{tabularx}
+B/E = Basic/Extended Access Control; P/A = Passive/Active Authentication.
+\end{mainbox}
+
+\begin{mainbox}{e-Cash}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+\textbf{Ziel} & \textbf{Verfahren} \\
+\hline
+Anonymität & \textbf{Blinde Signatur} (RSA) \\
+Echtheit der Coins & Signatur (RSA, DSA, ECDSA) \\
+Double Spending & \textbf{ZK-Proofs} \\
+Konto-/Münzbindung & Hash (SHA-256, SHA-3) \\
+Transaktionsschutz & AES \\
+Sitzungsschlüssel & DH, ECDH \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{subbox}{Buch auf e-Reader}
+\textbf{E-Book (DRM):} AES-128/256; \textbf{Schlüsseltausch:} RSA-2048, ECDH;
+\textbf{Signatur} (Inhalte, Geräte, Firmware): RSA-2048, ECDSA;
+\textbf{Integrität:} SHA-256; \textbf{Schlüsselerzeugung:} CTR-DRBG;
+\textbf{Kommunikation:} TLS.
+\end{subbox}
+
+\begin{subbox}{Software Update}
+\textbf{Prüfsumme:} SHA-256/384 über Firmware; \textbf{Signatur:} Hersteller
+signiert (RSA-2048, ECDSA-P256); \textbf{X.509:} authentifiziert Hersteller;
+\textbf{Download:} TLS 1.2/1.3; \textbf{optional:} an Seriennummer gebunden
+(HMAC-SHA256).
+\end{subbox}
+
+\subsection{Blinde Signatur \& Zero-Knowledge}
+
+\begin{mainbox}{Blinde Signatur}
+Die unterschreibende Person \textbf{weiss, dass} sie unterschreibt, sieht aber
+\textbf{nicht, was}.\\
+\textbf{Ablauf:} Dokument abdecken $\to$ senden $\to$ Signatur auf Abdeckung $\to$
+zurück $\to$ Abdeckung entfernen: Die Signatur gilt fürs Dokument.
+\end{mainbox}
+
+\begin{subbox}{Blind-RSA (eigene Ergänzung)}
+Blindungsfaktor $r$, teilerfremd zu $n$:
+\begin{align*}
+m' &= m \cdot r^e \bmod n & &\text{(blinden)}\\
+s' &= (m')^d \bmod n & &\text{(signieren)}\\
+s &= s' \cdot r^{-1} \bmod n = m^d & &\text{(entblinden)}
+\end{align*}
+\textbf{Bsp.:} $n = 33$, $e = 3$, $d = 7$, $m = 4$, $r = 2$:\\
+$m' = 4 \cdot 8 = 32$; $s' = 32^7 \bmod 33 = 32$;\\
+$s = 32 \cdot 17 \bmod 33 = 16$ \ ($2^{-1} = 17$).\\
+Prüfung: $16^3 \bmod 33 = 4 = m$ $\checkmark$
+\end{subbox}
+
+\begin{mainbox}{Zero-Knowledge Proof (ZKP)}
+Protokoll, bei dem eine Partei die andere \textbf{überzeugt}, ein Geheimnis zu
+kennen, \textbf{ohne es preiszugeben}.\\
+\textbf{Überzeugen, nicht beweisen:} nur \textbf{statistische} Garantie.\\
+Nach $n$ Runden Betrugschance bei Zufallsraten:
+$$\boxed{P = 2^{-n}}\quad n = 20:\ \tfrac{1}{1'048'576}$$
+\end{mainbox}
+
+\begin{subbox}{Beispiele ZKP}
+\textbf{Wo ist Waldo?} Alice legt eine grosse Abdeckung übers Bild, durch ein
+kleines Loch sieht man nur Waldo: Bob sieht ihn, erfährt aber nicht, wo er ist.\\[2pt]
+\textbf{Farbenblind (interaktiv):} Alice (farbenblind) hält einen roten und einen
+blauen Ball, tauscht sie hinter dem Rücken oder nicht. Bob sagt jeweils, ob getauscht
+wurde. Ohne Farbensehen rät er mit 50\,\%. Viele Runden $\Rightarrow$ Alice ist
+überzeugt, kennt die Farben aber weiterhin nicht. Hier ist \textbf{Bob Prover},
+Alice Verifier.
+\end{subbox}
+
+\subsection{Multi-Party Computation \& PET}
+
+\begin{mainbox}{Privacy-enhancing Technologies (PET)}
+\textbf{Ziel:} gesellschaftlicher \textbf{Nutzen} und \textbf{Privatsphäre}
+zugleich: PET verschiebt den Zielkonflikt nach aussen, statt nur abzuwägen.
+\begin{itemize}
+    \item \textbf{Fully Homomorphic Encryption} (krypt.)
+    \item \textbf{(Secure) Multi-Party Computation} (krypt.)
+    \item \textbf{Confidential Computing} (Hardware)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{MPC: Durchschnittsgehalt}
+\textbf{Millionärsproblem:} Wer verdient mehr, ohne das Gehalt zu verraten?
+\renewcommand*{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{l|l}
+Alice legt $r$ fest & sendet $r + a$ \\
+Bob & sendet $r + a + b$ \\
+Carol & sendet $r + a + b + c$ \\
+\end{tabular}
+\end{center}
+Alice zieht $r$ ab und verkündet $(a + b + c)/3$; jeder vergleicht sich damit.\\
+\textbf{Sicherheit:} Jeder kennt maximal 3 von 4 Unbekannten.\\
+\textbf{Aber:} Alle müssen ehrlich sein, keine zwei dürfen zusammenspannen.
+\end{mainbox}
+
+\begin{subbox}{Abstimmen mit Zettelchen}
+Gleiches Prinzip: A schreibt eine grosse Zahl auf den Zettel. Reihum Ja $+1$,
+Nein $+0$; A zieht die Zahl ab und schickt das Resultat an alle.\\
+\textbf{Bsp.:} $849 \to 849 \to 850 \to 851$; $851 - 849 = $ \textbf{2 Ja}.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Eve $\neq$ Mallory: passiv vs.\ aktiv.
+    \item Hash schützt nicht vor aktiven Angreifern: Sie berechnen ihn neu.
+    \item MAC schützt nicht vor Insidern mit Schlüssel.
+    \item Quantum: AES bleibt mit längeren Schlüsseln, RSA/ECC/DH nicht.
+    \item ZKP beweist nicht absolut: Restwahrscheinlichkeit $2^{-n}$.
+    \item Blinde Signatur: Signierer kennt den Inhalt \emph{nicht}; darum muss
+          Berechtigung separat geprüft werden.
+    \item Kollusion bei MPC (eigenes Bsp.): Alice und Carol kennen $r + a$ und
+          $r + a + b$ $\Rightarrow$ $b$ durch Differenz.
+    \item Bei GCM-Suites sichert GCM die Integrität, nicht HMAC (eigene
+          Ergänzung; Folie nennt nur HMAC).
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Algorithmus vs.\ Protokoll; Charaktere
+    \item PQ: symm.\ bleibt, asymm.\ wird ersetzt
+    \item Integrität: Checksum $<$ CRC $<$ Hash $<$ MAC $<$ Signatur
+    \item Anwendungen: E-Voting, Pass, e-Cash, e-Reader, Update
+    \item Blinde Signatur, ZKP ($2^{-n}$)
+    \item PET: FHE, MPC, Confidential Computing
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

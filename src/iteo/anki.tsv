@@ -549,3 +549,52 @@ Lückentext	iteo	Standardfunktionen des Service Desks: {{c1::Ticketsystem}}, {{c
 Lückentext	iteo	Der Helpdesk ist {{c1::user-centric}}, {{c2::reaktiv}} und {{c3::task-oriented}}; der Service Desk ist {{c4::business-centric}}, {{c5::proaktiv}} und {{c6::process-oriented}}.		iteo::ticketing-system-helpdesk-service-desk
 Lückentext	iteo	Service-Desk-Betrieb: 1. {{c1::Registrierung, Identifikation und Priorisierung}}, 2. {{c2::Erstdiagnose und Lösung}}, 3. {{c3::funktionale oder hierarchische Eskalation}}.		iteo::ticketing-system-helpdesk-service-desk
 Lückentext	iteo	Service-Desk-KPIs: {{c1::Resolution Rate}}, {{c2::First-Contact Resolution}}, {{c3::Customer/Employee Satisfaction}}, {{c4::Average Handling Time}} und Rückgang des {{c5::Ticketaufkommens}}.		iteo::ticketing-system-helpdesk-service-desk
+Standard	iteo	Nenne Vorteile eines Servers gegenüber einem Desktop-Computer.	Mehrere (Multi-Core-)Prozessoren, schnellere RAM-Optionen (Interleave), Festplatteneinschübe, spezielle Netzwerkkarten, mehr Slots, Redundanz (Power, Ventilatoren), Fernsteuerung (Lights-out).	iteo::serversysteme-im-rz
+Standard	iteo	Was bedeutet Lights-out bei einem Server?	Der Server lässt sich aus der Ferne steuern und verwalten, z.B. über das Remote-Management-Modul HPE iLO.	iteo::serversysteme-im-rz
+Standard	iteo	Was bewirkt Interleave beim Arbeitsspeicher eines Servers?	Zugriffe werden parallel über mehrere Speicherkanäle verteilt; das ergibt höhere Bandbreite und bessere Anwendungsleistung.	iteo::serversysteme-im-rz
+Standard	iteo	Welche vier Faktoren bestimmen die Bauform eines Servers?	Leistung, Verwendungszweck, Erweiterungen und Kapazitäten.	iteo::serversysteme-im-rz
+Standard	iteo	Wo werden Tower-Server typischerweise eingesetzt?	In älteren Serverräumen und kleinen Anlagen in Räumen ohne Rack.	iteo::serversysteme-im-rz
+Standard	iteo	Was ermöglichen viele Tower-Server, wenn später ein Rack vorhanden ist?	Sie lassen sich oftmals in ein Rackmount-Gehäuse konvertieren.	iteo::serversysteme-im-rz
+Standard	iteo	Wie verläuft die Luftführung bei einem Rackmount-Server?	Von vorne nach hinten.	iteo::serversysteme-im-rz
+Standard	iteo	Wo befindet sich die Verkabelung bei einem Rackmount-Server, und was hilft bei deren Führung?	Auf der Rückseite; ein Schwenkarm führt die Kabel.	iteo::serversysteme-im-rz
+Standard	iteo	Was macht Rackmount-Server servicefreundlich?	Sie sind für die Wartung ausziehbar und erlauben werkzeuglosen Ersatz.	iteo::serversysteme-im-rz
+Standard	iteo	Wofür eignet sich ein 1-U-Rackmount-Server, und was ist seine Einschränkung?	Für hohe Dichte; der Ausbau ist begrenzt (nur 1–2 Slots und 1–4 Festplatteneinschübe).	iteo::serversysteme-im-rz
+Standard	iteo	Wofür eignet sich ein 2-U-Rackmount-Server?	Für Standardanwendungen: leistungsstarke Prozessoren, mittlere RAM-Grössen, 2–8 Slots, 2–24 Festplatteneinschübe.	iteo::serversysteme-im-rz
+Standard	iteo	Wofür eignet sich ein 3–6-U-Rackmount-Server?	Als High-Performance-Rechner: viele Slots, 2–8 Prozessoren, höchste RAM-Grössen, bis 48 oder mehr Festplatten.	iteo::serversysteme-im-rz
+Standard	iteo	Welche Bauform bietet die höchste Packungsdichte?	Blade Server.	iteo::serversysteme-im-rz
+Standard	iteo	Welche Komponenten sind im Blade-System zentralisiert?	Power Supplies, Management und Switches (LAN + FC).	iteo::serversysteme-im-rz
+Standard	iteo	Was bedeutet Rip &amp; Replace bei Blade Servern?	Ein ganzer Server wird per Hot-Swap getauscht, der Ersatz automatisch provisioniert.	iteo::serversysteme-im-rz
+Standard	iteo	Warum müssen die zentralen Komponenten eines Blade-Systems redundant sein?	Alle Server im Chassis teilen sich diese Komponenten; ein Ausfall träfe sonst alle Server zugleich.	iteo::serversysteme-im-rz
+Standard	iteo	Wie ist das HPE Moonshot System aufgebaut?	Chassis mit bis zu 45 Cartridges; 1 Cartridge = 1 Server; gemeinsame Stromversorgung, Switches und Controller auf dem Baseboard.	iteo::serversysteme-im-rz
+Standard	iteo	Was ist eine Server-Appliance?	Ein dedizierter Server mit fixen Aufgaben und meist fixem Ausbau, oft 1 U (z.B. Firewall, IDP, Web-Filter, NAS).	iteo::serversysteme-im-rz
+Standard	iteo	Wie wird eine Appliance konfiguriert?	Einfach über USB oder Web.	iteo::serversysteme-im-rz
+Standard	iteo	Wie wird eine defekte Appliance ersetzt?	Sehr einfach: neues Gerät hinstellen und die Konfiguration kopieren.	iteo::serversysteme-im-rz
+Standard	iteo	Was bringt die modulare Bauweise von Servern?	Sie macht Server servicefreundlich.	iteo::serversysteme-im-rz
+Standard	iteo	Welche Serverkomponenten sind typischerweise Hot-Swap-fähig?	Festplatten, Netzteile und Ventilatoren.	iteo::serversysteme-im-rz
+Standard	iteo	Woran erkennt man Hot-Swap-Komponenten im Server oft?	An der Magenta-Verriegelung.	iteo::serversysteme-im-rz
+Standard	iteo	Welche Bedingung muss für den Austausch einer Serverkomponente im Betrieb erfüllt sein?	Es muss genügend Redundanz vorhanden sein (Festplatten: passender RAID-Level; Netzteile/Ventilatoren: N+1 oder 2N).	iteo::serversysteme-im-rz
+Standard	iteo	Wie ist ein Server für einfache Dienste (Webserver, Firewall) ausgestattet?	Kleinere Rechenleistung, wenig Memory, lokale Disks.	iteo::serversysteme-im-rz
+Standard	iteo	Wie ist ein Server als Virtualisierungsplattform ausgestattet?	Hohe Prozessorleistung, viel Arbeitsspeicher, zentrale Disks/SAN.	iteo::serversysteme-im-rz
+Standard	iteo	Wie ist ein HPC-Server ausgestattet?	Höchste Prozessordichte und sehr viel Speicher (HPC = High Performance Computing).	iteo::serversysteme-im-rz
+Standard	iteo	Was ist ein typisches Merkmal eines In-Memory-DB-Servers?	Sehr viel RAM (mehrere TB).	iteo::serversysteme-im-rz
+Standard	iteo	Nenne Beispiele für den Einsatz von Standalone-DB-Servern.	SAP mit Oracle-DB-Server, Hadoop (Big Data), In-Memory-DB-Server.	iteo::serversysteme-im-rz
+Standard	iteo	In welchen vier Bereichen lässt sich ein Server ausbauen?	HD-Slots, Steckplätze für Erweiterungskarten, RAM und CPU.	iteo::serversysteme-im-rz
+Standard	iteo	Welche Boot-/Speichervarianten gibt es beim Ausbau der HD-Slots eines Servers?	Local Storage, Diskless, SAN-Boot, SD-Card-Boot.	iteo::serversysteme-im-rz
+Standard	iteo	Welche Erweiterungskarten werden in Server-Steckplätze eingebaut?	Netzwerk, Fibre Channel, SSD, SAS, SATA.	iteo::serversysteme-im-rz
+Standard	iteo	Welche CPU-Eigenschaften bestimmen die Serverleistung?	Anzahl CPUs, Anzahl Cores, Taktrate und Cache.	iteo::serversysteme-im-rz
+Standard	iteo	Welche Möglichkeiten gibt es für den RAM-Ausbau eines Servers?	Onboard, Interleave und Riser-Cards.	iteo::serversysteme-im-rz
+Standard	iteo	Nenne die drei Server-Tiers einer klassischen Webanwendung.	Tier 1: Cache- und Webserver; Tier 2: Application-Server; Tier 3: DB-Server und externer Storage.	iteo::serversysteme-im-rz
+Standard	iteo	Wie viele Server braucht es für mind. 240 Cores mit N+1-Redundanz bei 32 Cores pro Server?	9 Server: 240 / 32 = 7.5, also 8 Server, plus 1 Reserve.	iteo::serversysteme-im-rz
+Standard	iteo	Wofür steht ODM im Servermarkt?	Original Design Manufacturer: Hersteller, die direkt an Grosskunden liefern (z.B. Quanta).	iteo::serversysteme-im-rz
+Standard	iteo	Was geschah 2014 mit dem x86-Servergeschäft von IBM?	IBM verkaufte es an Lenovo.	iteo::serversysteme-im-rz
+Lückentext	iteo	Rackmount-Server gibt es als {{c1::1}}- bis {{c2::12}}-HE-Modelle.		iteo::serversysteme-im-rz
+Lückentext	iteo	Rackmount-Slots: 1 U {{c1::1–2}}, 2 U {{c2::2–8}}, 3–6 U {{c3::viele}}.		iteo::serversysteme-im-rz
+Lückentext	iteo	Rackmount-Festplatteneinschübe: 1 U {{c1::1–4}}, 2 U {{c2::2–24}}, 3–6 U {{c3::bis 48 oder mehr}}.		iteo::serversysteme-im-rz
+Lückentext	iteo	Ein 3–6-U-High-Performance-Server hat {{c1::2–8}} Prozessoren.		iteo::serversysteme-im-rz
+Lückentext	iteo	Ein Moonshot-Chassis fasst bis zu {{c1::45}} Cartridges; 1 Cartridge = {{c2::1 Server}}.		iteo::serversysteme-im-rz
+Lückentext	iteo	Hot-Swap-Netzteile und -Ventilatoren sind als {{c1::N+1}} oder {{c2::2N}} ausgelegt.		iteo::serversysteme-im-rz
+Lückentext	iteo	Bauformen physischer Server: {{c1::Tower}}, {{c2::19-Zoll-Rackmount}}, {{c3::Blade}}, {{c4::Spezialserver/Appliance}}.		iteo::serversysteme-im-rz
+Lückentext	iteo	Einsatzzwecke von Servern: {{c1::einfache Dienste}}, {{c2::Virtualisierungsplattform}}, {{c3::HPC}}, {{c4::Standalone-DB-Server}}.		iteo::serversysteme-im-rz
+Lückentext	iteo	Beim Server-Ausbau: {{c1::HD-Slots}}, {{c2::Erweiterungskarten}}, {{c3::RAM}}, {{c4::CPU}}.		iteo::serversysteme-im-rz
+Lückentext	iteo	N+1 bei Servern: nach Ausfall eines Servers muss gelten: {{c1::(n − 1) · c}} ≥ {{c2::benötigte Gesamtkapazität}} (n = Anzahl Server, c = Kapazität pro Server).		iteo::serversysteme-im-rz
+Lückentext	iteo	Weltweiter Server-Umsatzanteil von Dell in Q3 2020 (IDC): rund {{c1::16.7 %}}.		iteo::serversysteme-im-rz

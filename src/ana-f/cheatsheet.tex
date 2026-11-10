@@ -1581,6 +1581,219 @@ $\cosh x = \frac{5}{4}$:
 \end{subbox}
 
 % ============================================================================
+% SECTION: KURVEN
+% ============================================================================
+\section{Kurven}
+
+\subsection{Darstellung \& Ableitung}
+
+\begin{mainbox}{Darstellungsformen}
+\textbf{Parameterform} (eben / Raum), $t \in [a, b]$:
+$$c(t) = \begin{pmatrix} x(t) \\ y(t) \end{pmatrix}, \quad
+c(t) = \begin{pmatrix} x(t) \\ y(t) \\ z(t) \end{pmatrix}$$
+\textbf{Explizit:} $y = f(x)$ $\Leftrightarrow$ $c(x) = (x, f(x))^T$.\\
+\textbf{Implizit:} $F(x, y) = 0$, z.B.\ Kreis $x^2 + y^2 - r^2 = 0$.\\
+\textbf{Polar:} $r = r(\varphi)$ $\Rightarrow$
+$c(\varphi) = r(\varphi)\,(\cos\varphi, \sin\varphi)^T$.\\
+Parameter $t$ oft als \textbf{Zeit}: $c(t)$ = Ort eines Punktes.
+\end{mainbox}
+
+\begin{subbox}{Beispiele (Notebook)}
+\renewcommand*{\arraystretch}{1.4}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l|l|l@{}}
+\textbf{Name} & $c(t)$ & $t$ \\
+\hline
+Alpha & $(t^2 - 1,\ t - t^3)$ & $[-\frac{5}{4}, \frac{5}{4}]$ \\
+InfTrig ($\infty$) & $(2\sin t,\ \sin 2t)$ & $[0, 2\pi]$ \\
+Neil. Parabel & $(t^3,\ 2t^2)$ & $[-2, 2]$ \\
+Kreis & $(r\cos t,\ r\sin t)$ & $[0, 2\pi]$ \\
+Helix & $(r\cos t,\ r\sin t,\ ht)$ & $\R$ \\
+\end{tabular}\\[2pt]
+Alpha: Doppelpunkt bei $t = \pm 1$ ($c = (0, 0)$).
+\end{subbox}
+
+\begin{mainbox}{Ableitung: komponentenweise!}
+$$\dot c(t) = \lim_{h \to 0} \frac{c(t + h) - c(t)}{h}
+= \begin{pmatrix} \dot x(t) \\ \dot y(t) \end{pmatrix}$$
+\begin{itemize}
+    \item $\dot c(t_0)$: \textbf{Tangenten-} bzw.\ \textbf{Geschwindigkeitsvektor}
+    \item $|\dot c(t_0)|$: Bahngeschwindigkeit (Betrag)
+    \item $\ddot c(t_0)$: \textbf{Beschleunigungsvektor}
+    \item Einheitstangente: $T = \dfrac{\dot c}{|\dot c|}$
+    \item Tangente: $g(\lambda) = c(t_0) + \lambda\, \dot c(t_0)$
+    \item Steigung (eben): $\dfrac{dy}{dx} = \dfrac{\dot y}{\dot x}$
+\end{itemize}
+\textbf{Regulär:} $\dot c(t) \ne 0$. Sonst evtl.\ \textbf{Spitze}: Neil
+$\dot c = (3t^2, 4t)$, $\dot c(0) = 0$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: InfTrig}
+$c(t) = (2\sin t, \sin 2t)$\\
+$\dot c(t) = 2\,(\cos t, \cos 2t)$\\
+$\ddot c(t) = (-2\sin t, -4\sin 2t)$\\
+$t = 0$: $c = (0, 0)$, $\dot c = (2, 2)$ $\Rightarrow$ Tangente $y = x$.
+\end{subbox}
+
+\begin{mainbox}{Umparametrisierung}
+$u: [t_0, t_1] \to [u_0, u_1]$, neue Kurve $\tilde c(t) = c(u(t))$:
+\textbf{gleiche Bahn}, andere Geschwindigkeit. Kettenregel:
+$$\frac{d}{dt}\, c(u(t)) = c'(u(t)) \cdot \dot u(t)$$
+Tangente zeigt in \textbf{gleiche} Richtung (falls $\dot u > 0$), nur
+Länge skaliert.
+\end{mainbox}
+
+\begin{subbox}{Beispiele Umparametrisierung (Notebook)}
+\textbf{Langsamer:} $c_5(t) = c_1(\frac{t}{4})$, $t \in [-5, 5]$:
+$\dot c_5(t) = \frac{1}{4}\, \dot c_1(\frac{t}{4})$.\\[2pt]
+\textbf{Anfahren \& Bremsen:} $u: [0, 10] \to [-\frac{5}{4}, \frac{5}{4}]$
+mit $u'(0) = u'(10) = 0$. Kubischer Ansatz $u = At^3 + Bt^2 + Ct + D$,
+4 Bedingungen $\Rightarrow$
+\begin{align*}
+u(t) &= \tfrac{1}{200}\left(-t^3 + 15t^2 - 250\right)\\
+\dot u(t) &= \tfrac{1}{200}\left(-3t^2 + 30t\right)
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Numerisch differenzieren}
+$$\dot c(t) \approx \frac{c(t + h) - c(t)}{h}$$
+Bei 16 Stellen Genauigkeit: $h_{\text{opt}} \approx 10^{-8}$ (kleiner:
+Auslöschung).
+\end{subbox}
+
+\subsection{Bogenlänge}
+
+\begin{mainbox}{Bogenlänge}
+$$s = \int_a^b |\dot c(t)| \dt$$
+\begin{align*}
+\text{eben: } & \int_a^b \sqrt{\dot x^2 + \dot y^2} \dt\\
+\text{Raum: } & \int_a^b \sqrt{\dot x^2 + \dot y^2 + \dot z^2} \dt\\
+y = f(x)\text{: } & \int_a^b \sqrt{1 + f'(x)^2} \dx\\
+r = r(\varphi)\text{: } & \int_{\varphi_1}^{\varphi_2}
+  \sqrt{r^2 + \dot r^2}\, d\varphi
+\end{align*}
+Unabhängig von der Parametrisierung. \textbf{Weg = $\int$ Geschwindigkeit.}\\
+\textbf{Bogenlängen-Param.} $s$: $|c'(s)| = 1$ (natürliche Param.).
+\end{mainbox}
+
+\begin{subbox}{Beispiele Bogenlänge}
+\textbf{Kreis:} $|\dot c| = r \Rightarrow s = \int_0^{2\pi} r \dt = 2\pi r$.\\[2pt]
+\textbf{Helix}, 1 Windung: $|\dot c| = \sqrt{r^2 + h^2}$,
+$s = 2\pi\sqrt{r^2 + h^2}$.\\[2pt]
+\textbf{Neil}, $t \in [0, 1]$: $|\dot c| = \sqrt{9t^4 + 16t^2} = t\sqrt{9t^2 + 16}$
+\begin{align*}
+s &= \int_0^1 t\sqrt{9t^2 + 16} \dt
+   = \left[\tfrac{1}{27}(9t^2 + 16)^{3/2}\right]_0^1\\
+  &= \tfrac{125 - 64}{27} = \tfrac{61}{27}
+\end{align*}
+\end{subbox}
+
+\subsection{Krümmung \& Hauptnormale}
+
+\begin{mainbox}{Krümmung}
+Änderung der Richtung pro Bogenlänge: $\kappa = \left|\dfrac{dT}{ds}\right|
+= \dfrac{|\dot T|}{|\dot c|}$.
+\begin{align*}
+\text{eben: } \kappa &= \frac{\dot x \ddot y - \ddot x \dot y}
+  {\left(\dot x^2 + \dot y^2\right)^{3/2}}\\
+y = f(x)\text{: } \kappa &= \frac{f''(x)}{\left(1 + f'(x)^2\right)^{3/2}}\\
+\text{Raum: } \kappa &= \frac{|\dot c \times \ddot c|}{|\dot c|^3}
+\end{align*}
+Eben mit \textbf{Vorzeichen}: $\kappa > 0$ Linkskurve, $\kappa < 0$
+Rechtskurve, $\kappa = 0$ Gerade / Wendepunkt.\\
+Krümmungsradius: $\rho = \dfrac{1}{|\kappa|}$
+\end{mainbox}
+
+\begin{mainbox}{Hauptnormale \& Krümmungskreis}
+\textbf{Hauptnormale} $N = \dfrac{\dot T}{|\dot T|}$: $\perp T$, zeigt zum
+Krümmungsmittelpunkt (Kurveninneres).\\[2pt]
+\textbf{Eben (Notebook):} $n = (-T_y, T_x)$ ($T$ um $90^\circ$ nach links
+gedreht), dann mit vorzeichenbehaftetem $\kappa$:
+$$M = P + \frac{1}{\kappa}\, n$$
+Kreis um $M$ mit Radius $\rho$ schmiegt sich in $P$ an die Kurve
+(gleiche Tangente \& Krümmung).\\[2pt]
+Eigene Ergänzung, Raum: Binormale $B = T \times N$.
+\end{mainbox}
+
+\begin{subbox}{Krümmungskreis $y = \cosh x$ in $x_0 = 0$}
+\begin{minipage}{0.48\linewidth}
+$f' = \sinh$, $f'' = \cosh$\\
+$f'(0) = 0$, $f''(0) = 1$\\
+$\kappa = \frac{1}{1^{3/2}} = 1$, $\rho = 1$\\
+$n = (0, 1)$\\
+$M = (0, 1) + 1 \cdot (0, 1)$\\
+$\phantom{M} = (0, 2)$
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+\centering
+\begin{tikzpicture}[scale=0.5]
+\draw[->] (-2,0) -- (2.2,0) node[right] {\tiny $x$};
+\draw[->] (0,-0.2) -- (0,3.4) node[above] {\tiny $y$};
+\draw[thick,domain=-1.8:1.8,samples=40] plot (\x,{(exp(\x)+exp(-\x))/2});
+\draw[red] (0,2) circle (1);
+\fill (0,1) circle (1.5pt);
+\fill[red] (0,2) circle (1.5pt) node[right] {\tiny $M$};
+\draw[->,blue,thick] (0,1) -- (1,1) node[below] {\tiny $T$};
+\draw[->,maincolor,thick] (0,1) -- (0,1.9);
+\node[maincolor,left] at (0,1.5) {\tiny $n$};
+\end{tikzpicture}
+\end{minipage}
+\end{subbox}
+
+\begin{subbox}{Beispiele Krümmung}
+\textbf{Gerade:} $\kappa = 0$. \quad \textbf{Kreis} Radius $r$: $\kappa = \frac{1}{r}$.\\
+\textbf{Helix:} $\dot c \times \ddot c = (hr\sin t, -hr\cos t, r^2)$
+$$\kappa = \frac{r\sqrt{r^2 + h^2}}{(r^2 + h^2)^{3/2}} = \frac{r}{r^2 + h^2}$$
+konstant; $h = 0$ gibt den Kreis.
+\end{subbox}
+
+\begin{subbox}{Beschleunigung zerlegen (eigene Ergänzung)}
+Mit $v = |\dot c|$:
+$$\ddot c = \dot v\, T + \kappa v^2 N$$
+Tangential: Tempoänderung; normal: Richtungsänderung
+(Zentripetalbeschl.\ $\frac{v^2}{\rho}$).
+\end{subbox}
+
+\begin{subbox}{Denkprozess: Krümmung in einem Punkt}
+Alpha $c(t) = (t^2 - 1, t - t^3)$ in $t = 0$:
+\begin{enumerate}
+    \item Ableiten: $\dot c = (2t, 1 - 3t^2)$, $\ddot c = (2, -6t)$.
+    \item Einsetzen: $P = (-1, 0)$, $\dot c = (0, 1)$, $\ddot c = (2, 0)$.
+    \item $\kappa = \frac{0 \cdot 0 - 2 \cdot 1}{1^{3/2}} = -2$: Rechtskurve,
+          $\rho = \frac{1}{2}$.
+    \item $T = (0, 1)$, $n = (-1, 0)$.
+    \item $M = (-1, 0) - \frac{1}{2}(-1, 0) = (-\frac{1}{2}, 0)$.
+    \item Plausibel: $P$ ist linkester Punkt ($x = t^2 - 1 \ge -1$), Kurve
+          biegt nach rechts.
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Erst ableiten, \emph{dann} $t_0$ einsetzen.
+    \item Bogenlänge: Betrag $|\dot c|$ integrieren, nicht $\dot c$.
+    \item Exponent $\frac{3}{2}$ im Nenner der Krümmung nicht vergessen.
+    \item Zähler $\dot x \ddot y - \ddot x \dot y$: Reihenfolge bestimmt das
+          Vorzeichen.
+    \item $|\dot c| = \sqrt{\ldots}$: oft perfektes Quadrat oder
+          Pythagoras ($\sin^2 + \cos^2$).
+    \item Umparametrisierung: Kettenfaktor $\dot u(t)$ nicht vergessen.
+    \item Krümmung, Bogenlänge: unabhängig von Param.; $\dot c$, $\ddot c$ nicht.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Kurve $c(t)$; komponentenweise ableiten
+    \item $\dot c$ Tangente/Geschw., $\ddot c$ Beschleunigung
+    \item Bogenlänge $s = \int |\dot c| \dt$
+    \item $\kappa = \frac{\dot x \ddot y - \ddot x \dot y}{(\dot x^2 + \dot y^2)^{3/2}}$
+          bzw.\ $\frac{|\dot c \times \ddot c|}{|\dot c|^3}$, $\rho = \frac{1}{|\kappa|}$
+    \item Hauptnormale $N$, Krümmungsmittelpunkt $M = P + \rho N$
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

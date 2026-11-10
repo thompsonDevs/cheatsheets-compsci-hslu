@@ -631,3 +631,63 @@ Lückentext	isf	AES-Runden: 128 Bit {{c1::10}}, 192 Bit {{c2::12}}, 256 Bit {{c3
 Lückentext	isf	Entropie: H = {{c1::−Σ p_i · log2(p_i)}}; bei Byte-Daten maximal {{c2::8}} Bit pro Byte.		isf::symmetrische-kryptologie
 Lückentext	isf	Beispiel Buddenbrooks: Entropie des Klartexts ca. {{c1::4.54}}, des AES-256-Chiffrats ca. {{c2::8.00}} Bit pro Byte.		isf::symmetrische-kryptologie
 Lückentext	isf	AES-Modi: {{c1::ECB}} (Codebook), {{c2::CBC}} (Verkettung), {{c3::CFB}} (Feedback), {{c4::OFB}} (Output Feedback), {{c5::CTR}} (Zähler), {{c6::GCM}} (Galois/Counter), {{c7::CCM}} (Counter mit CBC-MAC).		isf::symmetrische-kryptologie
+Standard	isf	Was unterscheidet die 1. von der 2. Quantenrevolution?	1. Revolution: Quanteneffekte nur statistisch genutzt, ohne volle Kontrolle (z.B. Halbleiter, Laser, MRI, Atomuhren). 2. Revolution: gezielte Kontrolle einzelner Quantensysteme (Atome, Photonen).	isf::quantentechnologie
+Standard	isf	Welche drei Anwendungsfelder umfasst die 2. Quantenrevolution?	Quantum Computing, Quantum Sensing (Metrologie) und Quantum Communication.	isf::quantentechnologie
+Standard	isf	Nenne zwei Beispiele für Quantum Sensing/Metrologie.	Die Sekunde ist über einen Energieübergang im Cäsium-133-Atom definiert (1 s Fehler in 1.4 Mio. Jahren); das Kilogramm seit 2019 über die Planck-Konstante h statt über ein Referenzgewicht.	isf::quantentechnologie
+Standard	isf	Warum braucht man Quantencomputer, um physikalische Systeme zu simulieren?	Die Natur ist quantenmechanisch; Quantensysteme klassisch zu simulieren ist ein schweres Problem. Quantencomputer nutzen selbst Quantenphänomene und simulieren solche Systeme effizienter (Feynman).	isf::quantentechnologie
+Standard	isf	Was ist ein Qubit?	Die kleinste Einheit Quanteninformation, physikalisch als Zwei-Niveau-Quantensystem realisiert; kann klassische Bits kodieren, aber auch in Superposition sein.	isf::quantentechnologie
+Standard	isf	Was passiert, wenn ein Qubit gemessen wird?	Es kollabiert in einen klassischen Bit-Zustand (0 oder 1).	isf::quantentechnologie
+Standard	isf	Welche Eigenschaften sollte ein ideales Qubit haben?	Schnell und einfach präparier-, steuer- und auslesbar; bleibt lange «quantum» (kohärent); kann mit anderen Qubits interagieren.	isf::quantentechnologie
+Standard	isf	Was bedeutet NISQ?	Noisy Intermediate-Scale Quantum: heutige Quantencomputer mit Hunderten verrauschter physikalischer Qubits, ohne Fehlerkorrektur.	isf::quantentechnologie
+Standard	isf	Welchen Meilenstein erreichte Google im Dezember 2024?	Experimenteller Nachweis, dass Surface Codes (Quantenfehlerkorrektur) bessere logische Qubits liefern.	isf::quantentechnologie
+Standard	isf	Was ist der nächste grosse Meilenstein beim Bau von Quantencomputern?	Ein fehlertolerantes Qubit, d.h. fehlertolerante Zwei-Qubit-Gatter mit kleinen Fehlerraten (~10⁻⁶).	isf::quantentechnologie
+Standard	isf	Wie funktionieren supraleitende Qubits und wer nutzt sie?	Schaltkreise aus supraleitendem Metall, nahe dem absoluten Nullpunkt gekühlt, verhalten sich wie künstliche Atome; häufigster Ansatz (IBM, Google).	isf::quantentechnologie
+Standard	isf	Wie funktionieren Ionenfallen-Qubits (trapped ions)?	Einzelne geladene Atome werden mit elektromagnetischen Feldern gefangen und mit Lasern manipuliert (z.B. Quantinuum, IonQ).	isf::quantentechnologie
+Standard	isf	Was ist der Vor- und Nachteil photonischer Qubits?	Vorteil: laufen bei Raumtemperatur. Nachteil: schwer skalierbar.	isf::quantentechnologie
+Standard	isf	Was ist die Idee topologischer Qubits?	Qubits, die inhärent vor Fehlern geschützt sind; bisher grösstenteils Theorie (z.B. Microsoft, Majorana-Qubits).	isf::quantentechnologie
+Standard	isf	Werden Quantencomputer klassische Computer ersetzen?	Nein. Sie werden eine neue Beschleunigerplattform für bestimmte Aufgaben (wie GPUs oder FPGAs).	isf::quantentechnologie
+Standard	isf	Wie verbreitet sind bewiesene Speedups durch Quantenalgorithmen?	Nur für eine kleine Auswahl von Algorithmen; ein exponentieller Speedup ist nur in sehr wenigen Fällen bewiesen.	isf::quantentechnologie
+Standard	isf	Welche zwei Probleme löst Shors Algorithmus effizient?	Faktorisierung grosser Zahlen und den diskreten Logarithmus.	isf::quantentechnologie
+Standard	isf	Welche Verfahren bricht Shors Algorithmus?	Public-Key-Kryptographie: RSA (Faktorisierung), Diffie-Hellman und ECC (diskreter Logarithmus).	isf::quantentechnologie
+Standard	isf	Welche zwei Schutzziele gefährdet ein Angreifer mit Shor-fähigem Quantencomputer?	Vertraulichkeit (Verschlüsselung brechen) und Integrität/Authentizität (digitale Signaturen fälschen).	isf::quantentechnologie
+Standard	isf	Was bewirkt Grovers Algorithmus theoretisch bei Brute-Force-Angriffen?	Quadratischer Speedup: etwa √(2ⁿ) = 2^(n/2) statt 2ⁿ Anfragen, also effektiv halbe Schlüssellänge.	isf::quantentechnologie
+Standard	isf	Warum ist Grovers Algorithmus in der Praxis kaum eine Bedrohung?	Der Speedup bei den Anfragen wird nicht zu einem Speedup in der Laufzeit, v.a. weil Grover schlecht parallelisierbar ist.	isf::quantentechnologie
+Standard	isf	Was ist laut Folien das grösste aktuelle Problem der Quantenbedrohung?	«Harvest now, decrypt later»: Verschlüsselter Verkehr wird heute gespeichert und später mit einem Quantencomputer entschlüsselt.	isf::quantentechnologie
+Standard	isf	Was besagt das Mosca-Theorem?	Wenn Schutzdauer der Daten (x) + Migrationszeit (y) grösser ist als die Zeit bis zum relevanten Quantencomputer (z), gibt es ein Problem: x + y > z.	isf::quantentechnologie
+Standard	isf	Warum ist es laut Folien irrelevant, wann genau ein relevanter Quantencomputer kommt?	Wegen «harvest now, decrypt later» und Mosca: Schutzdauer plus Migrationszeit übersteigen die Vorlaufzeit ohnehin, also muss jetzt migriert werden.	isf::quantentechnologie
+Standard	isf	Warum braucht RSA-2048 heute weniger physikalische Qubits als früher geschätzt?	Durch Fortschritte in der Quantenfehlerkorrektur (QEC) und andere Optimierungen: etwa 20-mal weniger.	isf::quantentechnologie
+Standard	isf	Was ist Post-Quanten-Kryptographie (PQC)?	Klassische, mathematische Ersatzverfahren für RSA, DH und ECC, basierend auf neuen Problemen, die (vermutlich) für klassische und Quantencomputer schwer sind; laufen auf normaler Hardware.	isf::quantentechnologie
+Standard	isf	Nenne ein schweres Problem, auf dem gitterbasierte Kryptographie beruht.	Learning With Errors (LWE).	isf::quantentechnologie
+Standard	isf	Seit wann standardisiert NIST PQC-Verfahren?	Seit 2016.	isf::quantentechnologie
+Standard	isf	Was ist ML-KEM und welcher Standard?	Gitterbasierter Key Encapsulation Mechanism (Schlüsselaustausch), FIPS 203 (ex Kyber).	isf::quantentechnologie
+Standard	isf	Was ist ML-DSA und welcher Standard?	Gitterbasiertes digitales Signaturverfahren, FIPS 204 (ex Dilithium).	isf::quantentechnologie
+Standard	isf	Was ist SLH-DSA und welcher Standard?	Hash-basiertes, zustandsloses Signaturverfahren, FIPS 205 (ex SPHINCS+).	isf::quantentechnologie
+Standard	isf	Was regelt NIST SP 800-208?	Zwei zustandsbehaftete hash-basierte Signaturverfahren (LMS, XMSS) – sicher, aber schwer korrekt zu verwenden.	isf::quantentechnologie
+Standard	isf	Hängt die Migration zu PQC davon ab, wann fehlertolerante Quantencomputer verfügbar sind?	Nein, sie passiert unabhängig davon – und je nach Branche setzen Regulatoren bereits Fristen.	isf::quantentechnologie
+Standard	isf	Was war die «erste Migration» zu PQC und wie lief sie?	Die Migration des Schlüsselaustauschs (KEM); sie war (meist) einfach – über 50 % des Internet-Verkehrs ist schon mit quantensicheren KEMs geschützt.	isf::quantentechnologie
+Standard	isf	Was ist X25519MLKEM768?	Ein hybrider TLS-Schlüsselaustausch aus klassischem X25519 und ML-KEM-768; sicher, solange eines der beiden Verfahren hält. Default in OpenSSL 3.5.	isf::quantentechnologie
+Standard	isf	Was braucht ein vollständig quantensicheres Protokoll?	Sowohl quantensichere KEMs (Schlüsselaustausch) als auch quantensichere digitale Signaturen.	isf::quantentechnologie
+Standard	isf	Warum ist die zweite Migration (Signaturen/Zertifikate) viel schwieriger?	Viele Beteiligte (HSMs, CAs, CA/B Forum, …) und sehr grosse PQ-Signaturen und Public Keys; heute nutzt ~0 % des Internets quantensichere Authentisierung.	isf::quantentechnologie
+Standard	isf	Wie gross sind ML-DSA-44 Public Key und Signatur im Vergleich zu Ed25519?	ML-DSA-44: 1312 B Key, 2420 B Signatur; Ed25519: 32 B Key, 64 B Signatur.	isf::quantentechnologie
+Standard	isf	Welches Problem verursachen PQ-Signaturen in TLS-Zertifikatsketten?	Die Kette wird riesig: mit ML-DSA-44 ~14 KB statt unter 1 KB mit ECDSA.	isf::quantentechnologie
+Standard	isf	Was sind Merkle Tree Certificates (MTC)?	Neue Web-PKI-Architektur: Zertifikate stehen in einem Issuance Log (Merkle-Baum), der Browser kennt signierte Teilbäume (Landmarks); der Server schickt nur Log-Eintrag + Inclusion Proof statt einer Kette vieler Signaturen.	isf::quantentechnologie
+Standard	isf	Wozu dienen Merkle Tree Certificates?	Sie reduzieren die Grösse der Authentisierungsdaten in TLS trotz grosser PQ-Signaturen (Landmark-MTC ~1.3 KB statt ~14 KB).	isf::quantentechnologie
+Standard	isf	Nenne Software, mit der man PQC nutzen kann.	liboqs (Open Quantum Safe), OpenSSL ab 3.5 (ML-KEM, ML-DSA, SLH-DSA), wolfSSL.	isf::quantentechnologie
+Standard	isf	Was ist Quantenkryptographie?	Eine «Quanten-Lösung» für die Quantenbedrohung: Kryptographie, die Quantenphänomene und Quanten-Hardware nutzt (QKD, QRNG).	isf::quantentechnologie
+Standard	isf	Was ist QKD?	Quantum Key Distribution: Protokolle, die informationstheoretisch sichere Schlüssel über einen öffentlichen (unsicheren) Quantenkanal erzeugen.	isf::quantentechnologie
+Standard	isf	Welche zwei Kanäle braucht QKD?	Einen öffentlichen Quantenkanal (z.B. Glasfaser) und einen authentischen klassischen Kanal.	isf::quantentechnologie
+Standard	isf	Was ist ein QRNG?	Quantum Random Number Generator: erzeugt beweisbar (nicht nur wahrscheinlich) echten Zufall aus Quantenphänomenen.	isf::quantentechnologie
+Standard	isf	Wie viele Quantenzustände nutzt das QKD-Protokoll BB84?	Vier.	isf::quantentechnologie
+Standard	isf	Welche Art von Sicherheit bieten PQC bzw. QKD?	PQC: computational (beruht auf der Annahme, dass ein Problem schwer ist). QKD (mit OTP): informationstheoretisch.	isf::quantentechnologie
+Standard	isf	Warum ist «QKD vs. PQC» eine falsche Gegenüberstellung?	QKD braucht einen authentischen klassischen Kanal und damit in der Praxis PQC-Signaturen und eine quantensichere PKI.	isf::quantentechnologie
+Standard	isf	Wie sicher ist die Adoption von PQC bzw. QKD laut Folien?	PQC-Adoption passiert zu 100 % sicher; die QKD-Adoption ist noch eine offene Frage.	isf::quantentechnologie
+Standard	isf	Wie entwickelt sich die Bruchwahrscheinlichkeit von RSA, PQC und QKD+OTP über die Zeit?	RSA steigt mit Algorithmen/Hardware und springt beim ersten universellen Quantencomputer auf «gebrochen»; PQC steigt nur schrittweise; QKD+OTP bleibt konstant tief.	isf::quantentechnologie
+Standard	isf	Braucht Post-Quanten-Kryptographie einen Quantencomputer?	Nein. PQC ist klassische Mathematik auf bestehender Hardware; «Post-Quanten» heisst nur, dass sie auch nach dem Quantencomputer sicher bleibt.	isf::quantentechnologie
+Lückentext	isf	Shors Algorithmus bricht {{c1::asymmetrische}} Kryptographie; symmetrische Verfahren und Hashes sind nur durch {{c2::Grovers}} Algorithmus (schwach) betroffen.		isf::quantentechnologie
+Lückentext	isf	Mosca-Theorem: {{c1::Schutzdauer x}} + {{c2::Migrationszeit y}} &gt; {{c3::Zeit bis zum Quantencomputer z}} ⇒ Problem.		isf::quantentechnologie
+Lückentext	isf	NIST-PQC-Standards: FIPS 203 = {{c1::ML-KEM}}, FIPS 204 = {{c2::ML-DSA}}, FIPS 205 = {{c3::SLH-DSA}}.		isf::quantentechnologie
+Lückentext	isf	ML-KEM und ML-DSA basieren auf {{c1::Gittern}}, SLH-DSA auf {{c2::Hashfunktionen}}.		isf::quantentechnologie
+Lückentext	isf	Qubits können in {{c1::Superposition}} sein, mehrere Qubits können {{c2::verschränkt}} sein, und bei der {{c3::Messung}} kollabieren sie in Bit-Zustände.		isf::quantentechnologie
+Lückentext	isf	BB84-Ablauf nach dem Quantenaustausch: {{c1::Sifting}} → {{c2::Parameter Estimation}} (Abbruch bei zu hoher Fehlerrate) → {{c3::Information Reconciliation}} (Fehler korrigieren) → {{c4::Privacy Amplification}} (Schlüssel kürzen).		isf::quantentechnologie
+Lückentext	isf	Grover reduziert Brute Force theoretisch von 2ⁿ auf {{c1::2^(n/2)}} Anfragen.		isf::quantentechnologie
+Lückentext	isf	Bekannte Quantenalgorithmen: {{c1::Shor}} (1994) und {{c2::Grover}} (1996).		isf::quantentechnologie

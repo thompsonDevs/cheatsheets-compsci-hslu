@@ -2660,6 +2660,251 @@ gegen \textbf{intelligente, aktive Gegner} und schützen \textbf{gegen Abhören}
 \end{subbox}
 
 % ============================================================================
+% SECTION: QUANTENTECHNOLOGIE
+% ============================================================================
+\section{Quantentechnologie}
+
+\begin{subbox}{Prüfungsrelevanz (laut Folien)}
+\textbf{PQC} ist relevant für Midterm/Final. BB84 nicht im Detail, aber die
+\textbf{Unterschiede Quantenkryptographie vs.\ PQC} kennen.
+\end{subbox}
+
+\subsection{Quantenphysik \& Quantenrevolutionen}
+
+\begin{mainbox}{Quantenphysik}
+Entstanden in den 1920ern, weil Experimente (UV-Katastrophe, Photoeffekt) der
+klassischen Physik widersprachen. Beschreibt Atome, Moleküle, Materialien; alle
+klassischen Theorien ausser der Gravitation sind ``quantisiert''. QED
+(Licht--Materie) ist die genaueste Theorie überhaupt.
+\end{mainbox}
+
+\begin{mainbox}{1.\ vs.\ 2.\ Quantenrevolution}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X@{}}
+\textbf{1.} & Quanteneffekte nur \textbf{statistisch} genutzt, ohne volle
+  Kontrolle: Halbleiter, Laser, MRI, Glasfaser, Atomuhren, Solarzellen \\
+\textbf{2.} & Kontrolle \textbf{einzelner} Quantensysteme (Atome, Photonen):
+  Quantum \textbf{Computing}, \textbf{Sensing}, \textbf{Communication} \\
+\end{tabularx}
+\textbf{Sensing/Metrologie:} Sekunde über Cäsium-133-Übergang (1\,s Fehler in
+1.4 Mio.\ Jahren); Kilogramm seit 2019 über Planck-Konstante $h$.
+\end{mainbox}
+
+\subsection{Quantencomputer}
+
+\begin{mainbox}{Warum Quantencomputer?}
+\textbf{Einfache} Probleme: in Polynomialzeit lösbar; alle anderen \textbf{schwer}
+(intractable), grössere Computer helfen nicht.\\
+Physikalische Systeme simulieren ist schwer, weil die Natur quantenmechanisch ist
+(Feynman: ``Nature isn't classical, dammit'').
+\end{mainbox}
+
+\begin{mainbox}{Vom Bit zum Qubit}
+\begin{itemize}
+    \item \textbf{Qubit:} kleinste Einheit Quanteninformation, als
+          Zwei-Niveau-System realisiert; kann Bits kodieren.
+    \item \textbf{Superposition:} Qubit kann in Überlagerung sein.
+    \item \textbf{Verschränkung:} mehrere Qubits können verschränkt sein.
+    \item \textbf{Messung:} Qubit kollabiert in einen Bit-Zustand.
+    \item Sehr \textbf{fragil}; ideal: schnell präparier-/steuer-/lesbar, lange
+          ``quantum'', interagiert mit anderen Qubits.
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Virtual Lab: Strahlteiler (eigene Notiz)}
+Einzelphotonenquelle $\to$ Strahlteiler $\to$ 2 Detektoren: Das Photon ist danach
+in Superposition beider Wege; die Messung zeigt es \textbf{zufällig} (50/50) in
+\emph{genau einem} Detektor (Kollaps).
+\end{subbox}
+
+\begin{mainbox}{Heutige Quantencomputer: NISQ}
+\textbf{NISQ} = Noisy Intermediate-Scale Quantum: Hunderte \emph{verrauschte}
+physikalische Qubits, öffentlich nutzbar (IBM, AWS, Google Cloud).\\
+\textbf{Meilenstein} (Google, Dez.\ 2024): Surface Codes liefern bessere
+\textbf{logische} Qubits. \textbf{Nächster:} fehlertolerante Qubits
+(Zwei-Qubit-Gatter mit Fehler $\sim 10^{-6}$).
+\end{mainbox}
+
+\begin{subbox}{Qubit-Technologien}
+\renewcommand*{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X@{}}
+Supraleitend & Schaltkreise nahe 0\,K, ``künstliche Atome''; am
+  verbreitetsten (IBM, Google) \\
+Ionenfalle & geladene Atome im EM-Feld, Laser (Quantinuum, IonQ) \\
+Photonisch & Photonen, Raumtemperatur, schwer skalierbar \\
+Neutralatom & ungeladene Atome in optischen Pinzetten \\
+Silizium & Spin eines Elektrons, ähnlich Transistor \\
+Topologisch & v.a.\ Theorie, inhärent fehlergeschützt (Microsoft) \\
+\end{tabularx}
+\end{subbox}
+
+\begin{mainbox}{Quantenalgorithmen}
+\begin{itemize}
+    \item Neue (interessante) Algorithmen zu finden ist \textbf{schwer}; oft
+          ``dequantisiert'' (Ewin Tang).
+    \item Klassische Berechnungen wären möglich, aber sinnlos: QC wird
+          \textbf{Beschleuniger} für bestimmte Aufgaben (wie GPU, FPGA),
+          ersetzt klassische Computer \textbf{nicht}.
+    \item Bewiesener Speedup nur für wenige, \textbf{exponentieller} für sehr
+          wenige Algorithmen.
+    \item Bekannt: \textbf{Shor} (1994), \textbf{Grover} (1996).
+\end{itemize}
+\end{mainbox}
+
+\subsection{Die ``Quantenbedrohung''}
+
+\begin{mainbox}{Shor: Public-Key-Krypto gebrochen}
+\textbf{RSA} beruht auf Faktorisierung, \textbf{DH}/\textbf{ECC} auf diskretem
+Logarithmus. \textbf{Shor} löst beide effizient. Ein Angreifer mit grossem QC kann
+\begin{itemize}
+    \item Verschlüsselung brechen $\Rightarrow$ \textbf{Vertraulichkeit},
+    \item Signaturen fälschen $\Rightarrow$ \textbf{Integrität}/Authentizität.
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Grover: Symmetrisch \& Hash kaum betroffen}
+Grover beschleunigt Brute Force \emph{theoretisch} quadratisch: $\sqrt{2^n} = 2^{n/2}$
+statt $2^n$ Anfragen, also halbe effektive Schlüssellänge.\\
+In der Praxis kaum Laufzeitgewinn, da Grover \textbf{schlecht parallelisiert}.
+$\Rightarrow$ AES, SHA-2/3 bleiben (mit genügend langen Schlüsseln, z.B.\ AES-256)
+sicher.
+\end{mainbox}
+
+\begin{mainbox}{Harvest now, decrypt later \& Mosca}
+\textbf{HNDL:} Angreifer speichert heute verschlüsselten Verkehr und entschlüsselt
+ihn, sobald ein QC verfügbar ist. $\Rightarrow$ \textbf{grösstes aktuelles
+Problem}.\\[2pt]
+\textbf{Mosca-Theorem:} $x$ = Schutzdauer der Daten (shelf-life), $y$ =
+Migrationszeit, $z$ = Zeit bis zum relevanten QC:
+$$\boxed{x + y > z \Rightarrow \text{Problem!}}$$
+Wann genau der QC kommt (15? 20 Jahre?) ist daher \textbf{irrelevant}: jetzt
+migrieren.
+\end{mainbox}
+
+\begin{subbox}{Stand 2026}
+NISQ-Geräte (IBM, Google, \ldots) liegen weit unter dem Nötigen. Dank QEC-Fortschritt
+braucht RSA-2048 aber schon \textbf{20$\times$ weniger} physikalische Qubits als
+früher geschätzt (Grössenordnung $10^5$--$10^6$).
+\end{subbox}
+
+\subsection{Post-Quanten-Kryptographie (PQC)}
+
+\begin{mainbox}{PQC}
+\textbf{Klassische, mathematische} Lösung: Ersatz für RSA, DH, ECC durch neue
+Probleme, die (vermutlich) für \textbf{klassische und Quantencomputer} schwer sind,
+z.B.\ \textbf{Gitter} (Learning With Errors, LWE). Läuft auf normaler Hardware.\\
+NIST-Standardisierung seit 2016:
+\renewcommand*{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|l|>{\raggedright\arraybackslash}X@{}}
+FIPS 203 & \textbf{ML-KEM} & KEM, Gitter (ex Kyber) \\
+FIPS 204 & \textbf{ML-DSA} & Signatur, Gitter (ex Dilithium) \\
+FIPS 205 & \textbf{SLH-DSA} & Signatur, Hash (ex SPHINCS+) \\
+FIPS 206 & FN-DSA & Signatur, Gitter, bald \\
+SP 800-208 & LMS, XMSS & zustandsbehaftete Hash-Sig. \\
+\end{tabularx}
+Weitere folgen (z.B.\ HQC). Migration läuft \textbf{unabhängig} davon, wann ein QC
+kommt; Regulatoren setzen teils schon Fristen.
+\end{mainbox}
+
+\begin{mainbox}{1.\ Migration: Schlüsselaustausch (KEM)}
+(Meist) einfach und schon passiert: $>$50\,\% des Internet-Verkehrs mit
+quantensicherem KEM. \textbf{Hybrid}: \texttt{X25519MLKEM768} (klassisch +
+PQC, sicher solange eines hält); Default in OpenSSL 3.5, Browser, Signal.\\
+Kosten: Keyshare $\sim$1\,KB statt 32\,B, aber schnell.
+\end{mainbox}
+
+\begin{mainbox}{2.\ Migration: Signaturen/Zertifikate}
+Voll quantensicher heisst \textbf{KEM und Signatur} quantensicher. Viel
+\textbf{schwieriger}: viele Beteiligte (HSMs, CAs, CA/B Forum); heute $\sim$0\,\%
+quantensichere Authentisierung. Erste PQ-Zertifikate 2027.\\
+\textbf{Problem:} grosse Signaturen/Keys (ML-DSA-44: Key 1312\,B, Sig.\ 2420\,B
+vs.\ Ed25519: 32\,B, 64\,B). Zertifikatskette in TLS: $\sim$14\,KB statt
+$<$1\,KB.
+\end{mainbox}
+
+\begin{subbox}{Merkle Tree Certificates (MTC)}
+Neue Web-PKI-Architektur (ab 2027): CA schreibt Zertifikate in ein
+\textbf{Issuance Log} (Merkle-Baum), \textbf{Cosigner} spiegeln es. Browser kennen
+signierte Teilbäume (\emph{Landmarks}) schon; der Server schickt nur Log-Eintrag +
+\textbf{Inclusion Proof} statt Kette mit vielen Signaturen.\\
+Landmark-MTC $\sim$1.3\,KB, Standalone $\sim$4\,KB, statt $\sim$14\,KB.
+\end{subbox}
+
+\begin{subbox}{PQC ausprobieren}
+liboqs (Open Quantum Safe), OpenSSL $\ge$ 3.5 (ML-KEM, ML-DSA, SLH-DSA), wolfSSL.
+Browser Dev Tools $\to$ Security: \emph{Key Exchange Group} \texttt{mlkem768x25519},
+Signatur meist noch ECDSA.
+\end{subbox}
+
+\subsection{Quantenkryptographie}
+
+\begin{mainbox}{Quantenkryptographie}
+``Quanten-Lösung'' für die Quantenbedrohung, braucht \textbf{Quanten-Hardware}.
+\begin{itemize}
+    \item \textbf{QKD} (Quantum Key Distribution): erzeugt
+          \textbf{informationstheoretisch} sichere Schlüssel über einen
+          öffentlichen Quantenkanal (Glasfaser) + \textbf{authentischen}
+          klassischen Kanal. Abhören stört die Zustände und fällt auf.
+    \item \textbf{QRNG}: \emph{beweisbar} echter Zufall (nicht nur
+          ``wahrscheinlich'') aus Quantenphänomenen.
+\end{itemize}
+\textbf{BB84:} QKD-Protokoll mit 4 Quantenzuständen. Ablauf: Zustände
+präparieren $\to$ messen $\to$ \emph{Sifting} $\to$ \emph{Parameter Estimation}
+(Fehlerrate zu hoch? Abbruch) $\to$ \emph{Information Reconciliation} (Fehler
+korrigieren) $\to$ \emph{Privacy Amplification} (Schlüssel kürzen).
+\end{mainbox}
+
+\begin{mainbox}{PQC vs.\ Quantenkryptographie}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{PQC} & \textbf{QKD} \\
+\hline
+Art & klassische Mathematik & Quantenphysik \\
+Hardware & bestehende & Spezialgeräte, Quantenkanal \\
+Sicherheit & computational (Annahme: Problem schwer) & informations\-theoretisch
+  (mit OTP) \\
+Leistung & KEM + Signatur & nur Schlüssel\-austausch \\
+Adoption & \textbf{100\,\% sicher}, läuft & offene Frage \\
+\end{tabularx}
+\textbf{Kein ``entweder--oder'':} QKD braucht einen authentischen Kanal, also in
+der Praxis PQC-Signaturen und eine quantensichere PKI.
+\end{mainbox}
+
+\begin{subbox}{Merkregel: andere Art von Sicherheit}
+Bruchwahrscheinlichkeit über die Zeit: \textbf{RSA} steigt mit Algorithmen und
+Hardware und springt beim ersten QC auf ``gebrochen''; \textbf{PQC} steigt nur
+schrittweise; \textbf{QKD + OTP} bleibt konstant tief.\\
+\textbf{Post-Quanten} = \emph{nach} dem QC noch sicher (Mathe).
+\textbf{Quanten}krypto = \emph{mit} Quanten (Physik).
+\end{subbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item PQC $\neq$ Quantenkryptographie, trotz ähnlichem Namen.
+    \item PQC braucht \emph{keinen} Quantencomputer und keine Quanten-Hardware.
+    \item Shor bricht \textbf{asymmetrische} Krypto; symmetrische/Hashes sind nur
+          von Grover (schwach) betroffen.
+    \item QC ersetzt klassische Computer nicht, nur Beschleuniger.
+    \item ``Erst migrieren, wenn der QC da ist'' ist falsch: HNDL und Mosca.
+    \item Nur KEM migriert $\neq$ quantensicher: Signaturen fehlen noch.
+    \item QKD löst Authentisierung nicht selbst.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+Qubit (Superposition, Verschränkung, Messung) $\to$ NISQ heute $\to$ Shor bricht
+RSA/DH/ECC, Grover kaum relevant $\to$ HNDL + Mosca: jetzt handeln $\to$ PQC
+(ML-KEM, ML-DSA, SLH-DSA): KEM fertig, Signaturen/MTC folgen $\to$ QKD/QRNG als
+physikalische Ergänzung, nicht Ersatz.
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

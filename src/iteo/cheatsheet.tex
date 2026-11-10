@@ -3392,6 +3392,316 @@ $\to$ 56} Verbindungen $\Rightarrow$ bei 64\,Bit Breite kaum machbar.
 \end{subbox}
 
 % ============================================================================
+% SECTION: SERVICE IMPROVEMENT (ASSET, CONFIG, CHANGE, RELEASE, CSI)
+% ============================================================================
+\section{Service Improvement: Asset, Config, Change, Release \& CSI}
+
+\subsection{IT-Asset Management (ITAM)}
+
+\begin{mainbox}{IT-Asset}
+Jede \textbf{Hardware-, Software-, Cloud-Ressource oder Datenkomponente}, die ein
+Unternehmen besitzt, mietet oder für den Betrieb benötigt (bzw.\ die für das
+Unternehmen \textbf{von Wert} ist).
+\begin{itemize}
+    \item \textbf{Hardware:} Laptops, Server, Router, Switches, Storage, Handys
+    \item \textbf{Software:} OS, Tools, lizenzierte Apps, SaaS-Abos
+    \item \textbf{Cloud/virtuell:} VMs, Container-Cluster (Kubernetes),
+          Cloud-Instanzen (EC2, Azure VMs), PaaS
+    \item \textbf{Daten/digital:} DBs, Code-Repos, Logs, Backups
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{ITAM}
+Assets über den \textbf{gesamten Lebenszyklus} verfolgen, steuern \&
+optimieren (Beschaffung $\to$ Wartung \& Finanzen $\to$ sichere Entsorgung).
+Fokus: \textbf{Wert, Besitz, Lizenzierung, Lebenszyklus}.
+\begin{itemize}
+    \item \textbf{HAM} (Hardware-AM): physische Geräte, Standort, Wartung,
+          Garantie
+    \item \textbf{SAM} (Software-AM): \textbf{Lizenz-Compliance}, gekaufte
+          vs.\ genutzte Lizenzen, Bussgelder bei Audits vermeiden
+\end{itemize}
+Tools: z.B.\ ServiceNow, ManageEngine AssetExplorer.
+\end{mainbox}
+
+\begin{mainbox}{ITAM-Prozess (5 Schritte)}
+Regelmässig überprüfen \& aktualisieren!
+\begin{enumerate}
+    \item \textbf{Inventarisierung:} was gehört uns, wo, seit wann, Kosten
+    \item \textbf{Lebenszykluskosten:} Anschaffung + Wartung + Upgrade +
+          Entsorgung $\Rightarrow$ \textbf{TCO}
+    \item \textbf{Tracking} (ITAM-Tool): Nutzung, Verträge, Lizenzen,
+          Garantieablauf
+    \item \textbf{Wartung:} reparieren, aktualisieren, ersetzen;
+          \textbf{dokumentieren}
+    \item \textbf{Finanzplanung:} Budgets aus Asset-/Kostendaten
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{ITAM-Lebenszyklus (6 Phasen)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Phase} & \textbf{Kernaktivitäten} \\
+\hline
+1 Planung & Bedarf, Budget, Anbieterrecherche; Roadmaps, langfristige Ziele \\
+2 Beschaffung & Anbieterwahl, Verträge, Einkauf; Standardisierung
+  (Mengenrabatt) \\
+3 Bereitstellung & Konfiguration, Installation, Schulung;
+  \textbf{Dokumentation} \\
+4 Betrieb & Nutzung, Monitoring, Lizenzmgmt., Support (\textbf{längste
+  Phase}) \\
+5 Wartung & Updates, Reparaturen, Patches; \textbf{proaktiv} $\Rightarrow$
+  längere Lebensdauer \\
+6 Ausserbetriebn. & Datenlöschung, umweltgerechte Entsorgung, Restwert \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{subbox}{ITAM: Strategie \& Vorteile}
+\textbf{Best Practice:} Ziele definieren, inventarisieren, Richtlinien
+festlegen, Performance \& Auslastung bewerten, Asset-DB einführen,
+Mitarbeiter schulen, überwachen \& optimieren.\\
+\textbf{Vorteile:} Kosteneffizienz (keine Doppelkäufe), Transparenz \&
+Verantwortlichkeit, Sicherheit/Cyberresilienz, bessere Entscheide,
+Compliance, weniger Ausfallzeiten, Agilität.\\
+\textbf{Asset Inventory Mgmt.:} kontinuierlich erfassen, katalogisieren,
+nachverfolgen \& instand halten über den ganzen Lebenszyklus.
+\end{subbox}
+
+\begin{subbox}{Beispiel: Lizenzen \& Offboarding}
+50 Designer à 600\,\$/Jahr = 30'000\,\$. 10 verlassen die Firma, Offboarding
+manuell $\Rightarrow$ 60 statt 50 Lizenzen bezahlt: \textbf{6'000\,\$/Jahr}
+Verlust.\\
+\textbf{Mit ITAM:} Lizenzen pro Mitarbeiter erfasst; HR-System löst bei
+Austritt Meldung aus; Lizenz einziehen/kündigen; Inventar als
+\textbf{Audit-Nachweis} (100\,\% Compliance).
+\end{subbox}
+
+\subsection{Configuration Management}
+
+\begin{mainbox}{Configuration Item (CI)}
+Jedes HW-/SW-Element, Netzkomponente, Dienst oder Dokument, das in der
+\textbf{CMDB} verwaltet werden muss, um einen IT-Dienst zu erbringen.\\
+\textbf{CI wird man,} wenn IT \textbf{Status kontrollieren, Zuständigkeit
+nachverfolgen \& Abhängigkeiten abbilden} muss (für Changes, Incidents).\\
+\textbf{Attribute:} eindeutige ID (Inventarnr.), CI-Typ, Name, Beschreibung,
+Version, Vendor, Status, \textbf{Beziehungen} zu anderen CIs, Eigentümer.
+\end{mainbox}
+
+\begin{mainbox}{Asset vs.\ CI}
+\textbf{Jedes CI ist ein Asset, aber nicht jedes Asset ein CI.}
+\begin{itemize}
+    \item \textbf{Asset Mgmt.:} \textbf{Wert}, Besitz, Lizenz, Lebenszyklus
+          (Finanzen, Beschaffung, Garantie)
+    \item \textbf{Config Mgmt.:} \textbf{Nutzen, Funktion, Verfügbarkeit}
+          (Auswirkung auf Betrieb \& Service)
+\end{itemize}
+Gleiches Problem aus zwei Perspektiven; beide gehen über die IT hinaus
+(Gebäude, Fahrzeuge; Mitarbeiter, Lieferanten, Doku als CIs).
+\end{mainbox}
+
+\begin{mainbox}{Configuration Mgmt.\ \& CMS}
+Stellt \textbf{Konsistenz, Performance \& Funktionalität} der Assets über den
+Lebenszyklus sicher: CIs \textbf{identifizieren, dokumentieren,
+kontrollieren}.\\
+\textbf{CMS} (Config.\ Mgmt.\ System): Tools \& DBs für Konfigurationsdaten,
+von \textbf{allen} ITSM-Prozessen genutzt. Kern: \textbf{CMDB}
+(Details der IT-Infrastruktur):
+\begin{itemize}
+    \item Verwaltung der CIs
+    \item \textbf{Versionierung} aller Komponenten
+    \item \textbf{Historisierung} aller Änderungen
+    \item pro Objekt: aktuelle, geplante \& historische Konfigurationen
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Vorteile Configuration Mgmt.}
+Systemkonsistenz (Standards statt Einzelkonfiguration), weniger Fehler \&
+Ausfälle, schnellere Fehlerbehebung (Baseline, Versionshistorie,
+\textbf{Rollback}), Automatisierung \& Skalierbarkeit, Sicherheit (keine
+Konfigurationsabweichungen), \textbf{Audit/Compliance} (wer, was, wann, warum;
+ISO 27001, HIPAA, PCI DSS).
+\end{subbox}
+
+\subsection{Change Management}
+
+\begin{mainbox}{Change Management}
+ITSM-Prozess, der Änderungen an IT-Systemen effizient verwaltet und
+\textbf{Unterbrechungen \& Risiken minimiert}. Alle Changes werden
+\textbf{priorisiert, genehmigt, terminiert \& dokumentiert}.\\
+\textbf{Steuert:} Änderungen an bestehenden Diensten/SW/HW, neue Dienste,
+Ausserbetriebnahme von Diensten.\\
+\textbf{Ziele:}
+\begin{itemize}
+    \item effiziente \& effektive Umsetzung, in angemessener Zeit
+    \item negative Auswirkungen auf Geschäftsprozesse \& Störungen minimieren
+    \item unnötige Nacharbeit minimieren
+    \item Services an Geschäftsanforderungen ausrichten
+    \item genehmigte Changes: priorisiert, geplant, getestet, implementiert,
+          überprüft
+    \item alle Änderungen an CIs im \textbf{CMS} dokumentiert
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Begriffe \& Change-Modelle}
+\textbf{RFC} (Request for Change): Antrag auf Änderung; Grundlage für
+Bewertung, Planung \& Genehmigung.\\
+\textbf{Change Schedule (CS):} alle freigegebenen Changes mit geplantem
+Datum.
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Typ} & \textbf{Merkmale / Beispiele} \\
+\hline
+Standard & risikoarm, häufig, \textbf{vorab genehmigt}, dokumentierter Ablauf.
+  Bsp.: Speicher hinzufügen, defekten Router 1:1 ersetzen, neue DB-Instanz \\
+Normal & nicht dringend, \textbf{kein} vorab genehmigter Prozess
+  $\Rightarrow$ einzeln bewerten. Bsp.: OS-Upgrade,
+  Leistungsverbesserung \\
+Emergency & unerwarteter Fehler/Bedrohung, \textbf{sofort}. Bsp.:
+  Security-Patch, Serverausfall, Major Incident \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Change Manager \& Zielkonflikt}
+\textbf{Change Manager:} sammelt/koordiniert RFC-Inputs (CSI,
+Geschäftsbedürfnisse, Innovation, andere Prozesse), sitzt in Ausschüssen
+(z.B.\ CAB), liefert Dokumente \& Aufträge, sammelt Erkenntnisse.\\
+\textbf{Ziele:} Auswirkungen minimieren \emph{und} Innovationsfähigkeit
+erhalten $\Rightarrow$ Kompromiss:
+\begin{itemize}
+    \item \textbf{Flexibilität:} schnelle Umsetzung, aber höheres Risiko
+          für Fehlschläge \& Nebenwirkungen
+    \item \textbf{Stabilität:} bürokratisch, zuverlässig, aber zeit- \&
+          ressourcenintensiv, oft rasch \textbf{Engpass}
+\end{itemize}
+\end{mainbox}
+
+\subsection{Release \& Deployment Management}
+
+\begin{mainbox}{Release vs.\ Deployment}
+\textbf{Release Mgmt.:} Planung, Koordination \& Kontrolle von \textbf{Build \&
+Test} einer Version neuer/geänderter Dienste, Apps \& Infrastruktur.\\
+\textbf{Deployment Mgmt.:} \textbf{vollständig getestete} Releases
+implementieren, inkl.\ Dokumentation \& Schulung.\\
+\textbf{Ziel:} Releases erfolgreich in die Zielumgebung integrieren,
+\textbf{im Zeitplan des Change Mgmt.}, ohne laufenden Betrieb zu stören.
+\end{mainbox}
+
+\begin{mainbox}{Begriffe}
+\begin{itemize}
+    \item \textbf{Release Unit:} gemeinsam getestete \& ausgerollte Einheit
+          (Services, Apps, Equipment mit Abhängigkeiten); Grösse von
+          Geschäftsprozessen beeinflusst
+    \item \textbf{Release Package:} $\ge 1$ Release Units; alle Änderungen
+          zur \textbf{neuen Baseline}, inkl.\ Doku, Handbücher, Checklisten
+    \item \textbf{Release Cycle:} wöchentlich, monatlich, quartalsweise,
+          vertragsbasiert, saisonal, marktgeführt; zu häufig $\Rightarrow$
+          kleine Änderungen, nervig
+\end{itemize}
+\textbf{Modelle} definieren: Start-/Endkriterien, Release-Struktur
+(Package, Zielumgebung), Dev-/Testumgebungen, Rollen, Zeitpläne, Templates,
+Übergabe- \& Abnahmekriterien.
+\end{mainbox}
+
+\begin{mainbox}{Rollout-Optionen}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X@{}}
+\textbf{Option} & \textbf{Merkmale} \\
+\hline
+Big Bang & alles in einem Schritt; rasch, aber höheres Fehlerrisiko \\
+Phased & nach Standort/Funktion; zeitintensiv, Lernen von Phase zu Phase \\
+Push & aktive Verteilung mit ``Zwang''; rasch, stört Benutzer \\
+Pull & SW-Kiosk, ev.\ fixer Endtermin; Benutzer wählen Rand-/Pausenzeiten
+  $\Rightarrow$ weniger Störung \\
+\end{tabularx}
+\textbf{Vorteile R\&D-Mgmt.:} zufriedenere Kunden, bessere Planung, weniger
+Unterbrechungen \& Planungsfehler.
+\end{mainbox}
+
+\subsection{Continual Service Improvement (CSI)}
+
+\begin{mainbox}{CSI}
+Strukturierter Ansatz: IT-Services \& Prozesse regelmässig
+\textbf{überprüfen, messen \& verfeinern}, um sie an sich wandelnde
+Geschäftsanforderungen anzupassen. Im Wesentlichen
+\textbf{Qualitätsmanagement} für Services \& ITSM-Prozesse.
+\begin{itemize}
+    \item Ausrichtung an Geschäftszielen
+    \item Effizienz \& Qualität steigern (Engpässe, Verschwendung)
+    \item \textbf{Kultur} stetiger Verbesserung statt einmaligem Projekt
+\end{itemize}
+\textbf{Ziel:} Qualität, Effektivität \& Effizienz kontinuierlich verbessern.
+CSI hat \textbf{nur einen Prozess}: den 7-Step Improvement Process.
+\end{mainbox}
+
+\begin{mainbox}{7-Schritte-Verbesserungsprozess (ITIL)}
+\begin{enumerate}
+    \item festlegen, \textbf{was gemessen werden soll}
+    \item bestimmen, was \textbf{konkret gemessen wird} (KPIs)
+    \item Daten \textbf{erheben}
+    \item Daten \textbf{verarbeiten} \& strukturieren
+    \item Informationen \textbf{analysieren} (vs.\ Benchmarks)
+    \item Ergebnisse mit Stakeholdern \textbf{präsentieren} \& nutzen
+    \item Korrekturmassnahmen \textbf{umsetzen}, neue \textbf{Baseline}
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{PDCA-/Deming-Zyklus}
+Grundlage aller Aktivitäten im kontinuierlichen Verbesserungsprozess:
+\begin{itemize}
+    \item \textbf{Plan:} Ziele, Aktionspläne, Rollen \& Verantwortlichkeiten
+    \item \textbf{Do:} Massnahmen umsetzen \& dokumentieren
+    \item \textbf{Check:} Messdaten sammeln, Berichte
+    \item \textbf{Act:} Abweichungen bewerten, Korrekturen als Input für
+          neues Plan
+    \item \textbf{Kontrolle} (5.\ Aktivität): über alle Phasen, sichert
+          Durchführung \& Dokumentation
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Prozessreifegrade (0--5)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Grad} & \textbf{Merkmale} \\
+\hline
+0 Chaotisch & keine/wenige Prozesse, kaum Ziele, unvollständige Ergebnisse \\
+1 Situational & ad hoc, kaum definiert; Erfolg hängt an \textbf{``Helden''} \\
+2 Definiert & pro Team definiert \& dokumentiert, aber \textbf{nicht
+  einheitlich}, Überschneidungen \\
+3 Etabliert & \textbf{organisationsweit einheitlich}, gelebt; KPIs
+  gelegentlich, inkonsistent \\
+4 Quantitativ gemanagt & + Prozessverantwortliche, \textbf{einheitliche KPIs}
+  intensiv genutzt \\
+5 Optimierend & + KPIs \textbf{systematisch} für Verbesserung; KVP
+  etabliert \\
+\end{tabularx}
+Beurteilung oft als \textbf{externe Beurteilung vs.\ Selbsteinschätzung}
+pro Prozess (Bsp.\ Versicherung: Change Mgmt.\ 1.5 / 1.8).
+\end{mainbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Asset $\neq$ CI: Asset = Finanzsicht, CI = Betriebssicht.
+    \item Standard Change ist \emph{vorab} genehmigt; Normal Change braucht
+          Einzelbewertung; Emergency $\neq$ Standard.
+    \item Release = bauen \& testen; Deployment = Getestetes ausrollen.
+    \item CMS $\supset$ CMDB.
+    \item PDCA hat laut Folien \textbf{5} Aktivitäten (+ Kontrolle).
+    \item CSI = nur \textbf{ein} Prozess (7 Schritte).
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item ITAM: HAM/SAM, 5 Prozessschritte, 6 Lebenszyklusphasen, TCO
+    \item CI, Asset vs.\ CI, CMS/CMDB
+    \item Change: RFC, CS, Standard/Normal/Emergency, Flexibilität
+          vs.\ Stabilität
+    \item Release Unit/Package/Cycle; Big Bang, Phased, Push, Pull
+    \item CSI: 7 Schritte, PDCA, Reifegrade 0--5
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

@@ -1784,6 +1784,270 @@ $\Rightarrow$ \textbf{approximiert $\pi$}.
 \end{subbox}
 
 % ============================================================================
+% SECTION 9: PRIMZAHLEN
+% ============================================================================
+\section{Primzahlen}
+
+\subsection{Prim, zusammengesetzt \& Sorten}
+
+\begin{mainbox}{Definition}
+$\mathbb{N} = \{1\} \cup \{\text{prim}\} \cup \{\text{zusammengesetzt}\}$.
+$n \in \mathbb{N}$ heisst
+\begin{itemize}
+    \item \textbf{prim}, wenn $n$ \textbf{genau zwei} verschiedene Teiler hat
+          ($1$ und $n$),
+    \item \textbf{zusammengesetzt}, wenn $n$ \textbf{mehr als zwei} Teiler hat.
+\end{itemize}
+$1$ (nur ein Teiler) ist \textbf{weder} prim noch zusammengesetzt
+(multiplikative Einheit).\\
+$\mathbb{P} = \{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, \ldots\}$
+\end{mainbox}
+
+\begin{mainbox}{Satz: drei Sorten von Primzahlen}
+\begin{align*}
+\mathbb{P} = \{2\} &\cup \{p \in \mathbb{P} : p \Mod 4 = 1\}\\
+&\cup \{p \in \mathbb{P} : p \Mod 4 = 3\}
+\end{align*}
+\textbf{Begründung (Partition):} $n = (n \Div 4) \cdot 4 + (n \Mod 4)$,
+der erste Summand ist gerade. Primzahl $p > 2$ ist ungerade, also
+$p \Mod 4 \in \{1, 3\}$.\\
+Unter $1000$: $1 + 80 + 87 = 168$ Primzahlen.
+\end{mainbox}
+
+\begin{mainbox}{Primzahlzwillinge}
+Zwei Primzahlen mit Abstand 2:\\
+$(3,5)$, $(5,7)$, $(11,13)$, $(17,19)$, $(29,31)$, $(41,43)$, $(59,61)$,
+$(71,73)$, \ldots\\
+\textbf{Satz:} ausser $(3, 5)$ gilt immer $a \Mod 6 = 5$.\\
+\textbf{Begründung:} $a = (a \Div 6) \cdot 6 + (a \Mod 6)$, $a > 3$ prim
+$\Rightarrow$ $a \Mod 6 \in \{1, 5\}$ (sonst durch 2 oder 3 teilbar).
+Wäre $a \Mod 6 = 1$, dann $b \Mod 6 = 3$, also $3 \mid b$ \lightning.
+\end{mainbox}
+
+\begin{subbox}{Ungelöste Vermutungen}
+\begin{itemize}
+    \item \textbf{Zwillinge:} Es gibt unendlich viele Primzahlzwillinge.
+    \item \textbf{Goldbach} (1742): Jede \textbf{gerade} Zahl $> 2$ ist
+          Summe zweier Primzahlen: $4 = 2+2$, $10 = 3+7 = 5+5$,
+          $18 = 7+11 = 5+13$. Zerlegung nicht eindeutig; Anzahl wächst
+          tendenziell mit $n$.
+\end{itemize}
+\textbf{Ulam-Spirale:} $\mathbb{N}$ spiralförmig aufschreiben, Primzahlen
+häufen sich auf Diagonalen.
+\end{subbox}
+
+\subsection{Mersenne-Primzahlen \& Lucas-Lehmer}
+
+\begin{mainbox}{Mersenne-Zahlen}
+$\boxed{M_n = 2^n - 1}$; ist $M_n$ prim: \textbf{Mersenne-Primzahl}.\\
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}l|ccccccc@{}}
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+$M_n$ & 1 & \textbf{3} & \textbf{7} & 15 & \textbf{31} & 63 & \textbf{127}
+\end{tabular}\\[2pt]
+\textbf{Satz:} $n$ zusammengesetzt $\Rightarrow$ $M_n$ zusammengesetzt:
+\begin{align*}
+M_{a \cdot b} &= 2^{ab} - 1\\
+&= (2^a - 1)\\
+&\quad \cdot \left(2^{0} + 2^{a} + 2^{2a} + \ldots + 2^{a(b-1)}\right)
+\end{align*}
+$M_n$ prim $\Rightarrow$ $n$ prim, aber \textbf{nicht umgekehrt}:
+$M_{11} = 2047 = 23 \cdot 89$.\\
+\textbf{Binär:} $M_n = \underbrace{11\ldots1_2}_{n}$ (nur Einsen).
+\end{mainbox}
+
+\begin{subbox}{Mersenne-Primzahlen sind selten}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}l|ccccccc@{}}
+$p$ & 2 & 3 & 5 & 7 & 11 & 13 & 17 \\ \hline
+$M_p$ & 3 & 7 & 31 & 127 & $23 \cdot 89$ & 8191 & 131071
+\end{tabular}\\[2pt]
+52.\ bekannte (Okt.\ 2024): $M_{136\,279\,841}$. Gesucht mit GIMPS
+(Software Prime95, auch CPU-Stresstest), Langzahlarithmetik.\\
+\textbf{Anzahl Dezimalziffern} von $2^p - 1$:
+$\lfloor p \cdot \log_{10} 2 \rfloor + 1$, hier
+$\lfloor 41\,024\,319.9\ldots \rfloor + 1 = \mathbf{41\,024\,320}$.
+\end{subbox}
+
+\begin{mainbox}{Lucas-Lehmer-Test (für $M_p$, $p$ prim)}
+$$S(1) = 4, \quad S(k + 1) = S(k)^2 - 2 \Mod M_p$$
+$\boxed{M_p \text{ prim} \iff S(p - 1) = 0}$\\
+Deterministisch, $p - 2$ Quadrierschritte.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Lucas-Lehmer}
+\textbf{$M_7 = 127$}, bis $S(6)$:\\
+$4 \to 14 \to 67 \to 42 \to 111 \to \mathbf{0}$ $\Rightarrow$ \textbf{prim}\\
+\textbf{$M_{11} = 2047$}, bis $S(10)$:\\
+$4 \to 14 \to 194 \to 788 \to 701 \to 119 \to 1877$\\
+$\to 240 \to 282 \to \mathbf{1736}$ $\Rightarrow$ \textbf{nicht prim}\\
+Z.B.\ $S(3) = 67^2 - 2 = 4487 = 35 \cdot 127 + 42$.
+\end{subbox}
+
+\subsection{Anzahl Primzahlen}
+
+\begin{mainbox}{Satz von Euklid: unendlich viele Primzahlen}
+\textbf{Fakt:} Jedes $n \ge 2$ hat einen Primteiler $p \le n$ (der kleinste
+Teiler $\ge 2$ ist prim).\\
+\textbf{Beweis (Widerspruch):} Gäbe es nur $p_1, \ldots, p_k$, dann ist
+$$P = p_1 \cdot p_2 \cdots p_k + 1$$
+durch keine $p_i$ teilbar (Rest 1) \lightning\ Fakt.
+\end{mainbox}
+
+\begin{mainbox}{Primzahlsatz (Rosser \& Schoenfeld 1962)}
+$\texttt{primes}(n)$ = Anzahl Primzahlen $\le n$ (Gauß). Für $n \ge 67$:
+$$\frac{n}{\ln n - 0.5} < \texttt{primes}(n) < \frac{n}{\ln n - 1.5}$$
+Asymptotisch: $\boxed{\texttt{primes}(n) \approx \frac{n}{\ln n}}$\\
+\textbf{Dichte:} um $n$ ist etwa jede $\ln n$-te Zahl prim.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: 10-stellige Primzahlen}
+\begin{align*}
+&\texttt{primes}(10^{10}) - \texttt{primes}(10^9)\\
+&\approx \frac{10^{10}}{10 \ln 10} - \frac{10^9}{9 \ln 10}
+= \frac{10^9}{\ln 10}\left(1 - \frac{1}{9}\right)\\
+&\approx \mathbf{386\,039\,539}
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Beispiel: zufällige 200-stellige ungerade Zahl prim?}
+\#Primzahlen $\approx \frac{10^{200}}{200 \ln 10} - \frac{10^{199}}{199 \ln 10}
+\approx 10^{199} \cdot 0.01953$\\
+\#200-stellige Zahlen $= 10^{200} - 10^{199} = 9 \cdot 10^{199}$, davon
+die Hälfte ungerade:
+$$P = \frac{10^{199} \cdot 0.01953}{0.5 \cdot 9 \cdot 10^{199}}
+\approx 0.0043 \approx \mathbf{0.5\,\%}$$
+Schnell: $\frac{2}{\ln(10^{200})} = \frac{2}{460.5}$ (Faktor 2, da nur ungerade).
+\end{subbox}
+
+\subsection{Sieb des Eratosthenes}
+
+\begin{mainbox}{Sieb des Eratosthenes}
+Alle Primzahlen $\le n$ finden:
+\begin{enumerate}
+    \item Liste $2, 3, \ldots, n$.
+    \item Für $i = 2, \ldots, \lfloor\sqrt{n}\rfloor$: ist $i$ noch in der
+          Liste, alle Vielfachen $i \cdot k$ mit $k \ge i$ streichen.
+    \item Übrig bleiben genau die Primzahlen.
+\end{enumerate}
+\textbf{Warum $k \ge i$?} $i \cdot k = k \cdot i$ wurde bei kleinerem Faktor
+schon gestrichen.\\
+\textbf{Warum $i \le \sqrt{n}$?} Schon das kleinste Produkt $i \cdot i$ muss
+$\le n$ sein.
+\end{mainbox}
+
+\begin{subbox}{Python-Implementierung}
+\texttt{primes = [i for i in range(2,n+1)]}\\
+\texttt{for i in range(2,int(math.sqrt(n))+1):}\\
+\phantom{xx}\texttt{if i in primes:}\\
+\phantom{xxxx}\texttt{for k in range(n//i,i-1,-1):}\\
+\phantom{xxxxxx}\texttt{if k in primes:}\\
+\phantom{xxxxxxxx}\texttt{primes.remove(i*k)}\\[2pt]
+$k$ läuft \textbf{rückwärts} von $n \Div i$ bis $i$, damit $k$ selbst
+noch nicht entfernt ist, wenn $i \cdot k$ gestrichen wird.\\
+\textbf{Bsp.} $n = 25$: $i = 2$: $k = 12, \ldots, 2$; $i = 3$: $k = 8,
+\ldots, 3$ (nur $k \in$ primes); $i = 4$ gestrichen; $i = 5$: $5 \cdot 5$;
+Stopp bei $6 > \sqrt{25}$.
+\end{subbox}
+
+\subsection{Fermat \& Miller-Rabin}
+
+\begin{mainbox}{Kleiner Satz von Fermat}
+Ist $p$ \textbf{prim}, dann
+\begin{align*}
+a^p \Mod p &= a \quad \text{für } a \in \{0, \ldots, p - 1\}\\
+a^{p-1} \Mod p &= 1 \quad \text{für } a \in \{1, \ldots, p - 1\}
+\end{align*}
+\textbf{Fermat-Test} für $n$, $a \in \{1, \ldots, n - 1\}$:
+\begin{itemize}
+    \item $a^{n-1} \Mod n \ne 1$ $\Rightarrow$ $n$ \textbf{sicher nicht prim}
+    \item $a^{n-1} \Mod n = 1$ $\Rightarrow$ \textbf{keine Aussage}
+\end{itemize}
+\textbf{Bsp.} $341 = 11 \cdot 31$: $2^{340} \Mod 341 = 1$ (täuscht!), aber
+$3^{340} \Mod 341 = 56$.
+\end{mainbox}
+
+\begin{mainbox}{Miller-Rabin-Test (Monte Carlo)}
+Gegeben: ungerades $n > 2$.
+\begin{enumerate}
+    \item $n - 1 = 2^s \cdot d$ mit $d$ \textbf{ungerade}.
+    \item $a \in \{2, \ldots, n - 2\}$ uniform zufällig.
+    \item $a^d \Mod n = 1$ $\Rightarrow$ \emph{vermutlich prim}.
+    \item Für $r = 0, \ldots, s - 1$:\\
+          $a^{2^r d} \Mod n = n - 1$ $\Rightarrow$ \emph{vermutlich prim}.
+    \item Sonst: \textbf{zusammengesetzt}.
+\end{enumerate}
+\textbf{``zusammengesetzt''} ist \textbf{immer korrekt} (Primzahlen bestehen
+3) oder 4) immer).\\
+\textbf{``vermutlich prim''}: mit W'keit $\le 25\,\%$ trotzdem
+zusammengesetzt (\textbf{starke Pseudoprimzahl}, $a$ = falscher Zeuge).\\
+$k$ unabhängige Wiederholungen: Fehler $\le \left(\frac{1}{4}\right)^k$.
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: Miller-Rabin von Hand}
+\begin{enumerate}
+    \item $n - 1$ so lange halbieren, bis ungerade: ergibt $s$, $d$.
+    \item $x = a^d \Mod n$ (Square-and-Multiply). $x \in \{1, n-1\}$?
+          $\Rightarrow$ vermutlich prim.
+    \item Sonst bis zu $s - 1$-mal $x \gets x^2 \Mod n$; trifft $x = n - 1$
+          $\Rightarrow$ vermutlich prim.
+    \item Nie getroffen (oder $x = 1$ ohne vorher $n - 1$)
+          $\Rightarrow$ zusammengesetzt.
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Beispiele Miller-Rabin}
+\textbf{$n = 561$} $= 3 \cdot 11 \cdot 17$: $560 = 2^4 \cdot 35$, $a = 2$:\\
+$2^{35} \to 263 \to 166 \to 67$, nie $560$ $\Rightarrow$
+\textbf{zusammengesetzt} (Fermat hätte $2^{560} \Mod 561 = 1$!).\\[2pt]
+\textbf{$n = 15$}: $14 = 2^1 \cdot 7$, nur $a^7 \Mod 15 \in \{1, 14\}$ prüfen:
+für \textbf{kein} $a \in \{2, \ldots, 13\}$ $\Rightarrow$ immer korrekt
+erkannt.\\[2pt]
+\textbf{$n = 13$}: $12 = 2^2 \cdot 3$: z.B.\ $2^3 = 8$, $2^6 = 12$ \checkmark;
+$3^3 = 1$ \checkmark. Für \textbf{alle} $a$ besteht ein Test.\\[2pt]
+\textbf{$n = 2047$} $= 23 \cdot 89$: $2046 = 2 \cdot 1023$,
+$2^{1023} \Mod 2047 = 1$ $\Rightarrow$ ``vermutlich prim'' (falsch).
+Starke Pseudoprimzahl zur Basis 2, insgesamt \textbf{240 falsche Zeugen}.
+\end{subbox}
+
+\begin{subbox}{Beispiel: Anzahl Wiederholungen}
+Korrekt mit $99.9\,\%$: $\left(\frac{1}{4}\right)^k \le 0.001$
+$$k = \lceil \log_{1/4}(0.001) \rceil = \lceil 4.98 \rceil = \mathbf{5}$$
+(vgl.\ \emph{Fehler durch Wiederholen senken}).
+\end{subbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item $1$ ist \textbf{keine} Primzahl; $2$ ist die einzige gerade.
+    \item $p$ prim $\not\Rightarrow$ $M_p$ prim ($M_{11} = 23 \cdot 89$).
+    \item Lucas-Lehmer: Start bei $S(1) = 4$, Ende bei $S(p - 1)$, nicht $S(p)$;
+          nach jedem Schritt $\Mod M_p$.
+    \item ``$k$-stellig'': $\texttt{primes}(10^k) - \texttt{primes}(10^{k-1})$,
+          nicht nur $\texttt{primes}(10^k)$.
+    \item Zufällige \emph{ungerade} Zahl: Wahrscheinlichkeit verdoppelt sich.
+    \item Fermat/Miller-Rabin beweisen nur \textbf{Zusammengesetztheit}, nie
+          Primalität.
+    \item Miller-Rabin: $d$ muss \textbf{ungerade} sein; auf $n - 1$
+          (nicht $-1$) prüfen; $r$ läuft nur bis $s - 1$.
+    \item Wiederholungen: \textbf{aufrunden}.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung Vorgehen}
+\begin{enumerate}
+    \item Partition/Rest-Argument: $n = (n \Div m) \cdot m + (n \Mod m)$,
+          Reste ausschliessen, die durch 2 oder 3 teilbar machen.
+    \item Mersenne: $n$ prim prüfen, dann Lucas-Lehmer.
+    \item Anzahl/W'keit: Primzahlsatz $\frac{n}{\ln n}$, Differenz bilden.
+    \item Alle $p \le n$: Sieb bis $\sqrt{n}$.
+    \item Grosses $n$ testen: Miller-Rabin, $k$ Runden mit
+          $(1/4)^k \le$ Fehler.
+\end{enumerate}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

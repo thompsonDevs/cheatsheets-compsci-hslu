@@ -3037,6 +3037,361 @@ Urgency High $\Rightarrow$ \textbf{Critical}.
 \end{subbox}
 
 % ============================================================================
+% SECTION: PARALLELE ARCHITEKTUREN
+% ============================================================================
+\section{Parallele Architekturen}
+
+\subsection{SMP \& Multicore}
+
+\begin{mainbox}{SMP -- Symmetrisches Multiprozessing}
+Standalone-Computer mit:
+\begin{itemize}
+    \item $\ge 2$ \textbf{gleichartigen} Prozessoren mit vergleichbaren Fähigkeiten
+    \item gemeinsamer \textbf{Main Memory} (über Bus/interne Verbindung)
+    \item gemeinsame \textbf{I/O-Devices}
+    \item alle CPUs führen \textbf{dieselben Funktionen} aus $\Rightarrow$
+          ``symmetrisch''
+    \item \textbf{ein integriertes OS} steuert Interaktion (Job, Task, File,
+          Daten)
+\end{itemize}
+\textbf{Vorteile} (eigene Ergänzung): Leistung durch Parallelität,
+Verfügbarkeit (Ausfall einer CPU $\neq$ Systemausfall), inkrementelles
+Wachstum (CPUs nachrüsten), Skalierung (Produktlinien).
+\end{mainbox}
+
+\begin{mainbox}{Multicore-Prozessor (CMP)}
+\textbf{CMP = Chip Multi Processing}: $\ge 2$ Cores auf \textbf{einem Silicon
+Die}. Jeder Core enthält alle Komponenten eines unabhängigen Prozessors.
+\begin{itemize}
+    \item \textbf{L1, L2}: privat pro Core
+    \item \textbf{L3 = LLC} (Last Level Cache): \textbf{shared} über alle Cores
+    \item Beispiele: Intel Core 2 Duo (2006), OpenSPARC T2 (8 Cores, 2008)
+    \item Grossteil der Transistoren geht in den L3 (i7-3960X: 15\,MB)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{On-Die-Ring \& LLC-Platzierung}
+Cores, LLC, Memory \& I/O hängen am \textbf{On-Die-Ring}:
+\begin{itemize}
+    \item LLC-Zugriff über \textbf{CBox}; lokaler Memory über \textbf{Home
+          Agent} + integrierten Memory Controller; remote NUMA-Node über
+          \textbf{QPI-Agent}
+    \item LLC in 2.5\,MB-Stücke aufgeteilt; Zuordnung Stück $\leftrightarrow$
+          Core nur physikalisch
+    \item Core \textbf{kann Datenplatzierung nicht steuern}, sieht ganzen LLC
+    \item Latenz $\sim$ Anzahl \textbf{Hops} auf dem Ring
+\end{itemize}
+\end{subbox}
+
+\subsection{Speicherorganisation}
+
+\begin{mainbox}{UMA vs.\ NUMA}
+\textbf{UMA} (Uniform Memory Access):
+\begin{itemize}
+    \item alle CPUs haben \textbf{direkten} Zugriff auf alle Speicherstellen,
+          \textbf{gleiche} Zugriffszeit
+    \item einfacher \& schneller Kommunikationsmechanismus
+    \item zusätzlich möglich: Private Memory (mehrere lokale Adressräume)
+\end{itemize}
+\textbf{NUMA} (Non-Uniform Memory Access):
+\begin{itemize}
+    \item meist $\ge 2$ SMPs physisch verbunden
+    \item \textbf{ein globaler linearer Adressraum} (Shared Memory)
+    \item SMP greift auch auf Memory anderer SMPs zu (\textbf{remote}, Transfer
+          über andere CPU)
+    \item Zugriffszeit $= f(\text{Speicheradresse})$
+    \item mit Cache-Kohärenz: \textbf{CC-NUMA}
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{NUMA in der Praxis}
+2-Socket-Rechner = 2 NUMA-Nodes: Memory-Latenz $\approx$ \textbf{100\,ns},
+remote (random) \textbf{+50\,ns}.\\
+OS ignoriert NUMA-Lokalität meist; für Spezialapplikationen gibt es
+\textbf{NUMA-System-Calls} (Linux, Solaris, Windows).\\
+\textbf{Gemischte UMA/NUMA-Skizze:} pro Node mehrere CPUs + lokaler Memory
+(UMA innerhalb Node), Nodes über Interconnect (QPI) verbunden
+$\Rightarrow$ NUMA zwischen Nodes.
+\end{subbox}
+
+\begin{mainbox}{Anzahl Prozessoren nach Architektur}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|X|l@{}}
+\textbf{Kategorie} & \textbf{Architektur} & \textbf{\# CPUs} \\
+\hline
+Komm.\ & Message Passing & 8 -- $\ge$256 \\
+              & Shared Addr.\ NUMA & 8 -- 256 \\
+              & Shared Addr.\ UMA & 2 -- 64 \\
+\hline
+Phys.\ Verb.  & Network & 8 -- 256 \\
+              & Bus & 3 -- 32 \\
+\end{tabularx}
+Mehr Cores $\Rightarrow$ \textbf{Message Passing} bzw.\ \textbf{Netzwerk}
+bevorzugt.
+\end{mainbox}
+
+\subsection{Memory Stalls \& Multithreading}
+
+\begin{mainbox}{Memory Stalls}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}X|l|l@{}}
+\textbf{Applikation} & \textbf{Zyklen/Instr.} & \textbf{Stalls} \\
+\hline
+Transactional DB & 3--6 & $>$75\,\% \\
+Web Server & 1.5--2.5 & $\sim$50\,\% \\
+Decision-Support-DB & 1--1.5 & 10--50\,\% \\
+\end{tabularx}
+\textbf{Merkregel:} ca.\ \textbf{50\,\%} der CPU-Zeit ist Warten auf Memory!
+\end{mainbox}
+
+\begin{subbox}{Wie lange wartet eine CPU? (3.3\,GHz)}
+1 Zyklus (0.3\,ns) $\widehat{=}$ \textbf{1\,s}: L1 \textbf{3\,s}, L3
+\textbf{45\,s}, DRAM \textbf{6\,min}, Disk \textbf{Monate}, entferntes DC
+\textbf{Jahre}. (Skalierung 3.3 Mrd.\,:\,1; Menschen empfinden $<$50\,ms als
+gleichzeitig.)
+\end{subbox}
+
+\begin{subbox}{Beispiel Waschküche (Pipelining)}
+4 Personen; Waschen 30, Trocknen 40, Bügeln 20\,min.
+\begin{itemize}
+    \item \textbf{sequenziell:} $4 \cdot 90 = 360$\,min = \textbf{6\,h}
+    \item \textbf{pipelined:} $30 + 4 \cdot 40 + 20 = 210$\,min =
+          \textbf{3.5\,h}
+\end{itemize}
+Langsamste Stufe (Trockner) bestimmt den Takt.
+\end{subbox}
+
+\begin{mainbox}{SMT -- Simultaneous Multithreading}
+Mehrere \textbf{Hardware-Threads} pro Core teilen sich die Funktionseinheiten.
+\begin{itemize}
+    \item \textbf{Hauptgrund:} Memory Stalls überbrücken -- wartet ein Thread
+          auf Memory, nutzt ein anderer die freien Einheiten
+    \item \textbf{Implementierung:} Architekturzustand (Register, PC)
+          \textbf{dupliziert}, Ausführungseinheiten \& Caches \textbf{geteilt}
+          (eigene Ergänzung)
+    \item SMT: \textbf{+10\,\%} Transistoren; CMP: \textbf{$>$+50\,\%}
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Superskalare Architektur (SSC)}
+Auch \textbf{Instruction Level Parallelism} (ILP) genannt.
+\begin{itemize}
+    \item \textbf{$>$1 Instruktion pro Clock-Cycle}, verteilt auf mehrere
+          \textbf{redundante Funktionseinheiten} innerhalb \emph{einer} CPU
+    \item Funktionseinheit $\neq$ CPU, sondern z.B.\ ALU, Bitshifter,
+          Multiplier
+    \item oft \textbf{out-of-order}
+    \item Pipeline-Stufen: IF (Fetch), ID (Decode), EX (Execute), MEM (Memory
+          Access), WB (Write Back)
+    \item Bsp.\ 2-fach: 2 Instr./Zyklus, sofern genug Einheiten \& keine
+          Blockierung
+\end{itemize}
+\textbf{VLIW} (Very Long Instruction Word): \textbf{Compiler} parallelisiert,
+Befehle in einem Schritt (statt Hardware wie bei SSC).
+\end{mainbox}
+
+\subsection{Leistungsmessung: Amdahl}
+
+\begin{mainbox}{Amdahls Gesetz}
+$a$ = nicht parallelisierbarer Anteil, $n$ = Anzahl Prozessoren, $T(1) = 1$:
+\[
+\boxed{T(n) = a + \frac{1-a}{n}}
+\]
+\[
+S(n) = \frac{1}{a + \frac{1-a}{n}} \xrightarrow{n\to\infty} \frac{1}{a}
+\]
+Laufzeit \textbf{konvergiert gegen $a$} $\Rightarrow$ Speedup ist durch den
+seriellen Anteil begrenzt (Overhead vernachlässigt). Effizienz $E = S/n$
+(eigene Ergänzung).
+\end{mainbox}
+
+\begin{subbox}{Beispiel $a = 20\,\%$}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|X|l@{}}
+$n$ & $T(n) = 0.2 + 0.8/n$ & $S$ \\
+\hline
+1 & 1 & 1 \\
+2 & 0.6 & 1.67 \\
+10 & 0.28 & 3.57 \\
+100 & 0.202 & 4.95 \\
+\end{tabularx}
+Max.\ Speedup $= 1/0.2 = \mathbf{5}$. Grund für nicht-lineare Messwerte:
+serieller Anteil + Overhead (Sync, Kommunikation, Kohärenz).
+\end{subbox}
+
+\subsection{Cache-Kohärenz}
+
+\begin{mainbox}{Problem \& Schreibstrategien}
+Nur bei \textbf{Multicore}: mehrere private Caches halten Kopien derselben
+Variable $\Rightarrow$ \textbf{inkohärente} Werte.
+\begin{itemize}
+    \item \textbf{Write-Through:} Schreiben geht sofort auch in den
+          Hauptspeicher. Problem: P1 schreibt $X=1$, P2 liest alten Wert aus
+          \emph{eigenem Cache}.
+    \item \textbf{Write-Back:} Hauptspeicher wird erst später aktualisiert.
+          Problem: P2 liest alten Wert aus dem \emph{Hauptspeicher}.
+\end{itemize}
+\textbf{Lösungen:} (1) Kohärenzprotokolle (Snoopy, Directory) oder
+(2) \textbf{gemeinsamer Cache} (grosser HW-Aufwand, sequentialisiert Zugriffe).
+\end{mainbox}
+
+\begin{mainbox}{Snoopy vs.\ Directory}
+\textbf{Snoopy:} alle Zugriffe über \textbf{gleiches Medium} (Bus/Switch);
+Cache-Controller \textbf{hören mit} und passen eigene Kopien an oder verwerfen
+sie.
+\begin{itemize}
+    \item zusätzliche Cache-Controller implementieren das Protokoll
+    \item aufwändig: globale Kommunikation (jeder mit allen)
+\end{itemize}
+\textbf{Directory:} \textbf{zentrale Liste} mit Status aller Cache-Blöcke
+(wer hat was, wer hat verändert, was gilt).
+\begin{itemize}
+    \item pro Speicherblock \textbf{ein Eintrag}; \textbf{Bitvektor} zeigt,
+          in welchen Caches der Block liegt
+    \item Zustände: \textbf{Uncached} (in keinem Cache), \textbf{Shared}
+          (1+ Caches, up-to-date, read-only), \textbf{Exclusive} (ein Cache
+          besitzt ihn, Memory nicht up-to-date)
+    \item \textbf{verteilt}: jedes Directory nur für Blöcke seines
+          Hauptspeichers (Remote-Zugriff $\approx$ 140 Cycles)
+    \item \textbf{Beteiligte:} Caches/Cache-Controller, Directory, Hauptspeicher
+          (Home-Node), Verbindungsnetz
+\end{itemize}
+\textbf{Ab 64 CPUs/Cores nur Directory}, da Bus-Bandbreite nicht skaliert.
+\textbf{Kombiniert:} Snoopy im Node (Bus), Directory über Nodes hinweg.
+\end{mainbox}
+
+\begin{subbox}{Protokoll-Varianten}
+Snoop und Directory jeweils mit \textbf{Write-Invalidate} (andere Kopien
+ungültig machen) oder \textbf{Write-Update} (andere Kopien aktualisieren),
+für Write-Through- wie Write-Back-Caches. Resultat gleich, nur Verfahren
+anders.
+\end{subbox}
+
+\subsection{Verbindungsnetzwerke}
+
+\begin{mainbox}{Entwurf \& Klassifikation}
+\textbf{Zielkonflikt:} hohe Leistung (viele Leitungen) vs.\ niedrige Kosten
+(wenige Leitungen).
+\begin{itemize}
+    \item \textbf{Topologie:} gemeinsames Medium vs.\ geschaltete Verbindung;
+          \textbf{statisch} (invariant) vs.\ \textbf{dynamisch} (auf
+          Anforderung)
+    \item \textbf{Routing:} Verteilung (store-and-forward, wormhole,
+          cut-through, circuit/packet switching); Pfadalgorithmus
+          (deterministisch, off-line, adaptiv, randomized)
+\end{itemize}
+\textbf{Machbarkeit:} 1000 CPUs voll vernetzt $\approx 10^6$ Verbindungen
+$\times$ 64\,Bit $= 6.4\cdot 10^7$ Leitungen $\Rightarrow$ 100-lagige
+Platine $\approx$ 6\,km breit.
+\end{mainbox}
+
+\begin{mainbox}{Kennwerte von Verbindungsnetzen}
+\begin{itemize}
+    \item \textbf{Inzidenz:} Knoten liegt an einem Ende einer Kante (und
+          umgekehrt).
+    \item \textbf{Durchmesser:} max.\ kürzeste Distanz (Hops) zwischen zwei
+          Knoten $\Rightarrow$ max.\ Transferzeit.
+    \item \textbf{Grad:} Links pro Knoten; überall gleich $\Rightarrow$
+          \textbf{regulär}. Höher $\Rightarrow$ teurer.
+    \item \textbf{Bisektionsbreite:} min.\ Anzahl Links, die man schneiden
+          muss, um das Netz in 2 Hälften à $N/2$ zu teilen $\Rightarrow$
+          Leistungsmass; tief = schlecht.
+    \item \textbf{Symmetrie:} Netz sieht von jedem Knoten/Link gleich aus
+          (Automorphismen) $\Rightarrow$ einfaches Routing \& Lastverteilung.
+    \item \textbf{Skalierbarkeit:} kleinstes Inkrement (Knoten + Links), um
+          das man erweitern kann, ohne Leistungseinbussen \& unter Erhalt der
+          Eigenschaften.
+    \item \textbf{Konnektivität:} min.\ Anzahl Knoten/Links, die ausfallen
+          müssen, bis das Netz nicht mehr funktioniert $\Rightarrow$
+          Ausfallsicherheit.
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Statische Topologien ($N$ Knoten)}
+\renewcommand*{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}X|c|c|c|c@{}}
+\textbf{Topologie} & \textbf{D} & \textbf{G} & \textbf{B} & \textbf{S} \\
+\hline
+Lin.\ Feld & $N{-}1$ & $\le 2$ & 1 & -- \\
+Ring & $\lfloor\frac{N}{2}\rfloor$ & 2 & 2 & \checkmark \\
+Stern & 2 & $\le N{-}1$ & $\lfloor\frac{N}{2}\rfloor$ & -- \\
+Binärbaum & $\approx 2\log N$ & $\le 3$ & 1 & -- \\
+Vollvernetzt & 1 & $N{-}1$ & $\frac{N^2}{4}$ & \checkmark \\
+Hypercube & $\log N$ & $\log N$ & $\frac{N}{2}$ & \checkmark \\
+\end{tabularx}
+D = Durchmesser, G = Grad, B = Bisektionsbreite, S = symmetrisch;
+$\log = \log_2$; Ring bidirektional. Werte: eigene Ergänzung (Folien zeigen
+nur Grafiken).
+\begin{itemize}
+    \item \textbf{Lineares Feld:} einfachstes Netz; asymmetrisch wegen
+          Endknoten
+    \item \textbf{Ring:} symmetrisch; bidirektional $\Rightarrow$ integrierte
+          Redundanz. Bsp.\ Intel: 4 Ringe (Data, Request, Acknowledge, Snoop)
+    \item \textbf{Stern:} Zentrumsknoten = Engpass \& SPOF
+    \item \textbf{Hypercube:} $N = 2^d$; teils zum \textbf{Torus} erweitert
+          (Supercomputer)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Vollvernetzung: Anzahl Verbindungen}
+Unidirektional: $n(n-1)$; bidirektional: $n(n-1)/2$.\\
+Intel QPI (unidirektional): \textbf{4 Sockets $\to$ 12}, \textbf{8 Sockets
+$\to$ 56} Verbindungen $\Rightarrow$ bei 64\,Bit Breite kaum machbar.
+\end{subbox}
+
+\begin{mainbox}{Koppelnetze (geschaltete Netze)}
+\begin{itemize}
+    \item \textbf{Crossbar Switch} ($k \times k$): jeder Port mit jedem
+          verbunden, konstante Anzahl Hops; $k^2$ Schaltpunkte.
+          \textbf{Nicht blockierend}: jede Permutation gleichzeitig schaltbar,
+          da jedes Paar einen eigenen Kreuzungspunkt hat.
+    \item \textbf{Omega-Netzwerk}: mehrstufig aus $2\times2$-Switches
+          ($\log_2 n$ Stufen, $\frac{n}{2}\log_2 n$ Switches, eigene
+          Ergänzung). Weniger aufwändig, aber \textbf{blockierend}: Pfade
+          teilen sich Switches/Leitungen $\Rightarrow$ Konflikte.
+\end{itemize}
+\end{mainbox}
+
+\subsection{Skalierbare Applikationen}
+
+\begin{mainbox}{Wie skaliert meine Applikation?}
+\begin{itemize}
+    \item skalierbare Algorithmen
+    \item \textbf{feingranulares Locking} pro Objekt
+    \item \textbf{Worker-Thread-Pools}
+    \item Skalier-Tests ausführen \& Applikation beobachten
+    \item identifizieren: Wait-Time-Stellen, \textbf{heisse Locks},
+          nicht skalierbare Algorithmen
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item UMA = \emph{gleiche}, NUMA = \emph{adressabhängige} Zugriffszeit --
+          beide haben \emph{einen} gemeinsamen Adressraum.
+    \item SMT (Threads in einem Core, +10\,\%) $\neq$ CMP (mehrere Cores,
+          $>$+50\,\%) $\neq$ superskalar (mehrere Einheiten, ILP).
+    \item Superskalar: Hardware parallelisiert; VLIW: Compiler.
+    \item Kohärenzproblem existiert erst mit mehreren Caches auf
+          \emph{gleiche} Daten.
+    \item Amdahl: $n \to \infty$ bringt nur $1/a$, nie linear.
+    \item Crossbar nicht blockierend, Omega blockierend.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item SMP \& CMP; L1/L2 privat, LLC shared
+    \item UMA vs.\ (CC-)NUMA
+    \item $\sim$50\,\% Memory Stalls $\Rightarrow$ SMT; superskalar, VLIW
+    \item Amdahl: $T = a + (1-a)/n$
+    \item Write-Through/-Back; Snoopy vs.\ Directory
+    \item Netz-Kennwerte \& Topologien; Crossbar vs.\ Omega
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

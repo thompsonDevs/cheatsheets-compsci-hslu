@@ -3702,6 +3702,394 @@ pro Prozess (Bsp.\ Versicherung: Change Mgmt.\ 1.5 / 1.8).
 \end{subbox}
 
 % ============================================================================
+% SECTION: ITIL & BEST PRACTICE FRAMEWORKS
+% ============================================================================
+\section{ITIL \& Best Practice Frameworks}
+
+\subsection{Rolle der Best Practice Frameworks}
+
+\begin{mainbox}{Best Practice Framework}
+\textbf{Definition:} Eine Arbeitsmethode (oder eine Reihe davon), die
+\textbf{offiziell als die beste} für ein bestimmtes Unternehmen oder eine
+Branche anerkannt ist -- formal \& detailliert beschrieben.
+
+\textbf{Für ITSM:} \textbf{ITIL}, \textbf{COBIT}, \textbf{ISO 20000} --
+Sammlung von Prozessen, Listen \& Strategien, die Organisationen übernehmen
+können, um die Bereitstellung von IT-Services zu verbessern.
+\begin{itemize}
+    \item Zentraler Punkt sind \textbf{nicht} mehr die Prozesse, sondern
+          die \textbf{Services}
+    \item Pro \textbf{Servicegruppe} werden verschiedene Prozesse definiert
+\end{itemize}
+Deckt v.a.\ die Governance-Schwerpunkte \emph{Strategic Alignment} \&
+\emph{Value Creation} ab (vgl.\ Abschn.\ IT-Governance: COBIT = WAS,
+ITIL = WIE, ISO 20000 = Standard).
+\end{mainbox}
+
+\begin{subbox}{Analogie: Restaurant}
+\textbf{ITSM} = der \textbf{Restaurantbetrieb} (kochen, Menüplanung, Zutaten
+beschaffen, Kunden bedienen, Küche instand halten).\\
+\textbf{ITIL} = ein \textbf{renommiertes Kochbuch} (Rezepte, Kochtechniken,
+Präsentationstipps).
+\begin{itemize}
+    \item Restaurant funktioniert \emph{ohne} Kochbuch $\Rightarrow$ ITSM
+          existiert ohne ITIL
+    \item Kochbuch ohne Restaurant-Konzept wäre sinnlos $\Rightarrow$ ITIL
+          existiert nur \emph{für} ITSM
+    \item ITIL wurde entwickelt, um ITSM zu \textbf{unterstützen \&
+          verbessern}
+\end{itemize}
+\end{subbox}
+
+\subsection{ITIL v3: Service Lifecycle}
+
+\begin{mainbox}{ITIL v3 -- IT Infrastructure Library}
+``\textbf{Good Practice Framework}'' für Definition \& Erbringung von
+IT-Services.
+\begin{itemize}
+    \item öffentlich zugängliche Bibliothek, Trägerschaft \textbf{OGC}
+          (brit.\ Office of Government \& Commerce)
+    \item seit Ende der \textbf{80er} entwickelt; v3 besteht aus
+          \textbf{5 Kern-``Büchern''}
+    \item beschreibt die Prozesse für effektiven \& effizienten Betrieb der
+          \emph{gesamten} IT-Infrastruktur
+    \item \textbf{zertifizierbar} durch unabhängige Instanzen; Hersteller
+          machen eigene Adaptionen (Microsoft, HP, CA)
+\end{itemize}
+\textbf{Grundlage von v3: der Service Lifecycle} (SDLC-Gedanke) -- von der
+Anforderungserfassung über Gestaltung, Implementierung, Betrieb bis zur
+kontinuierlichen Anpassung und schliesslich \textbf{Ausserbetriebnahme}.
+\end{mainbox}
+
+\begin{mainbox}{5 Servicegruppen (Phasen), 25 Prozesse}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Phase} & \textbf{Inhalt} \\
+\hline
+Service Strategy & Ziele definieren, Chancen für neue IT-Services
+  identifizieren \\
+Service Design & Anleitung für Design von Services \& SM-Prozessen; Design
+  wird gegen die Geschäftsanforderungen getestet \\
+Service Transition & Services \& Änderungen einführen: Bereitstellungsplanung,
+  Verbesserung, Gesetze \& Standards, Garantien, Service beenden \\
+Service Operation & effizienter Betrieb, Support \& Unterhalt der
+  IT-Services \\
+Continual Service Improvement & Qualitätsmgmt.\ für die SM-Prozesse;
+  verbessert Design, Transition \& Operation \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{4 Ps des Service Designs (v3)}
+\textbf{People} (Menschen) -- \textbf{Processes} -- \textbf{Products}
+(Services, Technologie, Tools) -- \textbf{Partners} (Lieferanten, Hersteller,
+Vendoren).
+
+Beziehung Serviceanbieter $\to$ Servicekonsument ist in v3
+\textbf{einseitig} (Anbieter erzeugt Wert, Kunde konsumiert).
+\end{mainbox}
+
+\begin{mainbox}{Zielkonflikte im Service Operation}
+Service Operation muss gegensätzliche Sichten ausbalancieren:
+\begin{itemize}
+    \item \textbf{interne IT-Sicht} (Technik, Komponenten) vs.\
+          \textbf{externe Business-Sicht} (Service, Nutzen)
+    \item \textbf{Stabilität} vs.\ \textbf{Reaktionsfähigkeit}
+          (Änderungen schnell umsetzen)
+    \item \textbf{Kosten} (Wirtschaftlichkeit) vs.\ \textbf{Qualität}
+          (Servicelevel)
+    \item \textbf{reaktiv} (auf Vorfälle warten) vs.\ \textbf{proaktiv}
+          (vorbeugen, optimieren)
+\end{itemize}
+Einseitige Optimierung einer Seite schadet immer der anderen.
+\end{mainbox}
+
+\begin{subbox}{Probleme der ITIL-v3-Adaption}
+\begin{itemize}
+    \item wurde zur \textbf{Anweisung} statt Best Practice (was \emph{und}
+          wie)
+    \item sehr \textbf{formal \& administrativ}, ressourcenintensiv
+    \item keine Flexibilität / Anpassungsfähigkeit
+    \item für \textbf{KMU} zu anspruchsvoll
+    \item in Grossunternehmen meist \emph{umgesetzt, aber nicht angenommen}
+    \item neue Trends nicht vorgesehen: \textbf{Agile, DevOps, Cloud}
+\end{itemize}
+\end{subbox}
+
+\subsection{Service, Produkt \& Serviceangebot}
+
+\begin{mainbox}{Servicedefinition (ITIL 4, allgemein)}
+Ein \textbf{Mittel, um Kunden einen Mehrwert zu bieten}, indem die von ihnen
+\textbf{gewünschten Ergebnisse} erzielt werden, \textbf{ohne} dass dabei
+bestimmte \textbf{Kosten und Risiken} auf sie zukommen.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Restaurantservice}
+\textbf{Kunde:} zahlt für den Abendessen-Service, Mahlzeit von Profis
+zubereitet, \emph{kein} Einkauf von Zutaten/Getränken/Dessert.\\
+\textbf{Restaurant liefert:} Produkt (Essen, Getränke) + Service (Kellnerin,
+Parkplatz, Online-Buchung).\\
+\textbf{Risiken} (kein frisches Gemüse, fehlendes Hilfspersonal) trägt das
+\textbf{Restaurant}, nicht der Kunde.
+\end{subbox}
+
+\begin{mainbox}{Ressource $\to$ Produkt $\to$ Service}
+\begin{itemize}
+    \item \textbf{Ressource:} alles, was einen Namen hat und nützlich ist
+          (Personen, Prozesse, Lieferanten, IT-Systeme)
+    \item \textbf{Produkt:} Kombination von Ressourcen
+    \item \textbf{Service:} Kombination von Produkten
+\end{itemize}
+\textbf{Serviceangebot} (Service Offering) = Waren + Zugriff auf Ressourcen
++ Serviceaktionen:
+\begin{itemize}
+    \item \textbf{Waren (Goods):} materielle Güter, \textbf{Eigentum geht
+          über} (Hardware, Apple-Handy)
+    \item \textbf{Zugriff auf Ressourcen:} \emph{kein} Eigentumsübergang,
+          Zugriff lizenziert/gewährt (iCloud, monatlich)
+    \item \textbf{Serviceaktionen:} Aufgaben im Unternehmen gemäss
+          Vereinbarung (Rechnung bearbeiten, Call-Center-Beratung)
+\end{itemize}
+Ein Service kann \textbf{mehrere Serviceangebote} haben -- je eigenes
+Element im \textbf{Servicekatalog} mit eigenem \textbf{SLA} (verschiedene
+Leistungsstufen \& Funktionen).
+\end{mainbox}
+
+\begin{mainbox}{Value Co-Creation (gemeinsame Wertschöpfung)}
+\textbf{Frage:} Was kann ein Dienstleister tun, um für \emph{alle}
+Beteiligten einen Mehrwert zu schaffen?
+
+\textbf{Bsp.:} freundliches Personal, individuelle Mahlzeiten, schön
+arrangierte Tische, Kinderspielplatz, kostenloses Parken.
+\begin{itemize}
+    \item \textbf{Kunden} zahlen nicht extra, erhalten aber Mehrwert
+    \item \textbf{Mitarbeiter} sammeln Erfahrung
+    \item \textbf{Lieferanten} erhalten Anerkennung \& mehr Arbeit
+    \item \textbf{Restaurant} erhält positive Bewertungen \& treue Kunden
+\end{itemize}
+$\Rightarrow$ neben Produkt \& Service entsteht \textbf{gemeinsamer
+Mehrwert} (Erfahrung, Anerkennung, Bewertungen, Treue).
+
+\textbf{Schlüsselidee:} ITIL 4 ersetzt ``Wertschöpfung'' durch
+``\textbf{gemeinsame} Wertschöpfung'' -- Wert entsteht durch \textbf{aktive
+Zusammenarbeit} von Anbieter \emph{und} Stakeholdern (v3: einseitig).
+\end{mainbox}
+
+\subsection{ITIL 4: Kernelemente}
+
+\begin{mainbox}{ITIL 4 -- erste Sicht}
+\textbf{ITIL v3 gilt weiterhin}; ITIL 4 bringt nur eine \textbf{neue Sicht}
+und andere Schwerpunkte. Bewährte Bausteine bleiben.
+\begin{itemize}
+    \item die zentrale Sicht des \textbf{Service Lifecycle fällt weg}
+    \item v3: Lifecycle-Ansatz, \emph{einseitige} Kommunikation;\\
+          ITIL 4: \textbf{agiler} Ansatz, \emph{zweiseitige} Kommunikation
+          mit Stakeholdern
+    \item mehr Gewicht auf \textbf{Zusammenarbeit} und den
+          \textbf{Menschen}
+    \item straffer, lesbarer, praktischer; Kernpunkt
+          \textbf{Service-Management}
+    \item Empfehlungen für \textbf{Agile, DevOps, Lean IT}; neue,
+          passgenauere Betriebsmodelle
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{4 Dimensionen des Servicemanagements}
+Ersetzen \& erweitern die 4 Ps aus v3 (gleicher Zweck, grössere Version):
+\begin{enumerate}
+    \item \textbf{Organisation \& Menschen:} Kultur, Kapazität, Kompetenz
+    \item \textbf{Information \& Technologie:} Wissen für das Management
+    \item \textbf{Partner \& Lieferanten:} Design, Ausbreitung, Betrieb,
+          Support, kontinuierliche Verbesserung
+    \item \textbf{Wertstrom (Value Stream) \& Prozesse:} verbinden Werte zu
+          Produkten \& Services
+\end{enumerate}
+\textbf{Zentralpunkt: Value.} Alle Unternehmensaktivitäten werden über diese
+Dimensionen gesteuert.\\
+\textbf{Externe Faktoren:} politisch, wirtschaftlich, sozial, technologisch,
+rechtlich (\textbf{PESTLE}-artig).
+\end{mainbox}
+
+\begin{mainbox}{SVS -- Service Value System}
+Beschreibt, wie \textbf{alle Komponenten \& Aktivitäten} der Organisation
+als \textbf{System} zusammenwirken, um Wertschöpfung zu ermöglichen
+(Input: \emph{Nachfrage \& Chancen} $\to$ Output: \emph{Wert}).
+
+\textbf{5 Komponenten:}
+\begin{enumerate}
+    \item \textbf{Leitprinzipien} (7): jeder Ansatz/jede Entscheidung muss
+          die Ziele der Organisation erfüllen
+    \item \textbf{Kontinuierliche Verbesserung:} Aktivitäten auf
+          \emph{allen} Ebenen, damit die Leistung den sich entwickelnden
+          Stakeholder-Zielen entspricht
+    \item \textbf{Governance:} Massnahmen auf strategische Ausrichtung \&
+          Ziele abstimmen
+    \item \textbf{Practices} (34): Organisationsressourcen, basierend auf
+          den 4 Dimensionen, zur Ausführung von Arbeit
+    \item \textbf{Service Value Chain (SVC):} Betriebsmodell für Erstellung,
+          Bereitstellung \& Verbesserung von Services
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{SVC -- Service Value Chain: 6 Aktivitäten}
+Wandelt Nachfrage \& Chancen über \textbf{sechs miteinander verbundene}
+Aktivitäten in Wert um:
+\begin{enumerate}
+    \item \textbf{Plan:} gemeinsames Verständnis, \emph{was} der
+          Dienstanbieter erreichen muss und \emph{wie}
+    \item \textbf{Engage:} Stakeholder einbinden, Bedürfnisse verstehen \&
+          erfüllen
+    \item \textbf{Design \& Transition:} neue/geänderte Services erstellen,
+          die Qualität, Kosten \& Markteinführungszeit erfüllen
+    \item \textbf{Obtain/Build:} Servicekomponenten erstellen/beschaffen --
+          verfügbar wann \& wo benötigt, gemäss Spezifikation
+    \item \textbf{Deliver \& Support:} Services gemäss Vereinbarungen \&
+          Erwartungen liefern \emph{und} unterstützen
+    \item \textbf{Improve:} kontinuierliche Verbesserung von Produkten,
+          Services \& Practices
+\end{enumerate}
+Die Aktivitäten sind \textbf{nicht} sequenziell -- jeder Wertstrom nutzt sie
+in eigener Reihenfolge/Kombination.
+\end{mainbox}
+
+\begin{mainbox}{Value Stream (Wertstrom)}
+\textbf{Abfolge von Aktivitäten}, die erforderlich ist, um ein bestimmtes
+Produkt oder einen Service zu \textbf{entwerfen, herzustellen \&
+bereitzustellen}.
+\begin{itemize}
+    \item die formalen, \textbf{isolierten v3-Prozesse existieren nicht}
+          mehr (z.B.\ ``Neukunde einrichten'')
+    \item Wertströme umfassen \textbf{mehrere Organisationen, Funktionen \&
+          Prozesse}
+    \item \textbf{Immer wenn Kundennachfrage besteht, gibt es einen
+          Wertstrom} -- die Herausforderung ist, ihn zu \emph{erkennen}
+\end{itemize}
+\textbf{Typische Wertströme:} neue Servicekomponente; Neukunde für
+bestehenden Service; Vorfälle lösen \& verbessern.
+\end{mainbox}
+
+\begin{mainbox}{7 Leitprinzipien (Führungsprinzipien)}
+\begin{enumerate}
+    \item \textbf{Fokus auf Wert:} jedes Produkt/jeder Service wird mit
+          Blick auf Kundenzufriedenheit entwickelt
+    \item \textbf{Fangen Sie dort an, wo Sie sind:} Stärken des bestehenden
+          Systems nutzen -- Bestehendes hat bereits Wert
+    \item \textbf{Iterativ vorgehen mit Feedback:} in kleine Schritte
+          teilen, nach jedem Schritt Feedback (agil)
+    \item \textbf{Zusammenarbeiten \& Sichtbarkeit fördern:} Teamarbeit
+    \item \textbf{Ganzheitlich denken \& arbeiten:} alles muss in die
+          bestehenden Rahmenbedingungen passen \& zum Gesamtergebnis
+          beitragen
+    \item \textbf{Einfach \& praktisch halten:} laufend prüfen, dass keine
+          unnötigen Schritte nötig sind
+    \item \textbf{Optimieren \& automatisieren:} Effizienz als Schlüssel zu
+          hoher Produktivität
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{34 Management Practices}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.3\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Gruppe} & \textbf{Herkunft / Beispiele} \\
+\hline
+\textbf{Allgemeine} Mgmt.-Practices (14) & aus allg.\ Geschäftsmanagement
+  übernommen \& angepasst: Continual Improvement, Information Security,
+  Knowledge, Risk, Supplier, Projekt-, Portfolio-, Strategie-,
+  Architektur-, Beziehungs-, Finanz-Mgmt., Measurement \& Reporting,
+  Org.\ Change, Workforce \& Talent \\
+\textbf{Service-}Mgmt.-Practices (17) & in Servicemanagement/ITSM
+  entwickelt: Service Desk, Service Catalogue, Service Level, Service
+  Request, Incident, Problem, Change Enablement, Release, Monitoring \&
+  Event, IT Asset, Service Configuration, Availability, Capacity \&
+  Performance, Service Continuity, Service Design, Business Analysis,
+  Service Validation \& Testing \\
+\textbf{Technische} Mgmt.-Practices (3) & aus dem Technologiemanagement
+  angepasst: Deployment Mgmt., Infrastructure \& Platform Mgmt., Software
+  Development \& Mgmt. \\
+\end{tabularx}
+\textbf{Merkregel:} $14 + 17 + 3 = 34$.
+\end{mainbox}
+
+\subsection{v3 vs.\ ITIL 4}
+
+\begin{mainbox}{Vergleich}
+\renewcommand*{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{ITIL v3} & \textbf{ITIL 4} \\
+\hline
+Kernidee & Service \textbf{Lifecycle} & Service \textbf{Value System} \\
+Struktur & 5 Phasen, 25 Prozesse & SVS, SVC (6 Akt.), 34 Practices \\
+Modell & 4 Ps & 4 Dimensionen \\
+Wert & einseitig erbracht & \textbf{Co-Creation} (beidseitig) \\
+Ansatz & plan-getrieben, formal & \textbf{agil}, flexibel, Agile/DevOps/Lean \\
+Fokus & Prozesse & \textbf{Wert \& Wertströme}, Menschen \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{subbox}{Übung: Pizzeria als Dienstleister (1)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{0.3\linewidth}@{}}
+\textbf{Situation} & \textbf{Prozess} \\
+\hline
+Speisekarte mit allen Pizzasorten \& Beilagen & Service Catalog \\
+Bestellt eine Pizza seiner Wahl & Service Request Mgmt. \\
+Versprechen: 15\,min über den Tresen, 30\,min nach Hause & Service Level
+  Mgmt. \\
+Manager überwacht Nachfrage \& passt Angebot an & Change Mgmt. \\
+Feedback zu neuen Sorten, Prüfung nach Geschäftswert \& Marktanforderung &
+  Continual Service Improvement \\
+Neues Angebot als Pilot, dann lokal/weltweit einführen & Release Mgmt. \\
+\end{tabularx}
+\end{subbox}
+
+\begin{subbox}{Übung: Pizzeria als Dienstleister (2)}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{0.28\linewidth}@{}}
+\textbf{Situation} & \textbf{Prozess} \\
+\hline
+``Fliege'' auf der Pizza entdeckt & Incident \\
+Beschwerde einreichen & Help Desk / Ticketing \\
+Kellner prüft Pizza vs.\ Bestelleingang & Incident Mgmt.\ (Diagnose) \\
+Sorte existiert gar nicht im Menü & Service Catalog \\
+Ersatzpizza gemäss Richtlinien schnell serviert & Service Level Mgmt. \\
+Untersuchung, wie die Fliege in die Küche kam & Problem Mgmt. \\
+Lieferant (befallene Zutaten) wird gewechselt & (Supply) Change Mgmt. \\
+Lieferqualität künftig regelmässig prüfen & Cont.\ Service Improvement \\
+\end{tabularx}
+Hätte der Kunde ``Fliege'' als Belag \emph{bestellt}, wäre es \textbf{kein
+Incident} -- Service wie vereinbart geliefert.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item ITIL 4 \textbf{ersetzt} v3 nicht -- v3 gilt weiter, ITIL 4 ist
+          eine andere Sicht.
+    \item ``Prozesse'' (v3) vs.\ ``\textbf{Practices}'' (ITIL 4) -- in
+          ITIL 4 gibt es keine isolierten Prozesse mehr.
+    \item SVS = ganzes System; \textbf{SVC} = nur eine Komponente davon
+          (das Betriebsmodell mit 6 Aktivitäten).
+    \item 4 Ps (v3) $\neq$ 4 Dimensionen (ITIL 4).
+    \item Co-Creation: Wert für \emph{alle} Stakeholder, nicht nur für den
+          zahlenden Kunden.
+    \item Serviceangebot $\neq$ Service: ein Service kann mehrere Angebote
+          (Katalogelemente, SLAs) haben.
+    \item Waren = Eigentumsübergang; Zugriff auf Ressourcen = nur Lizenz.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Frameworks: ITIL (WIE), COBIT (WAS), ISO 20000 (Standard)
+    \item v3: Lifecycle, 5 Phasen / 25 Prozesse, 4 Ps, Zielkonflikte im
+          Service Operation
+    \item Service = Mehrwert ohne Kosten \& Risiken für den Kunden
+    \item Ressource $\to$ Produkt $\to$ Service; Angebot = Waren +
+          Zugriff + Serviceaktionen
+    \item ITIL 4: 4 Dimensionen, SVS (5 Komponenten), SVC (6 Aktivitäten),
+          7 Leitprinzipien, 34 Practices, Value Co-Creation
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

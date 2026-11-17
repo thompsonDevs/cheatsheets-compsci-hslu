@@ -2905,6 +2905,362 @@ physikalische Ergänzung, nicht Ersatz.
 \end{subbox}
 
 % ============================================================================
+% SECTION: PRIVACY
+% ============================================================================
+\section{Privacy}
+
+\subsection{Begriffe sauber trennen}
+
+\begin{mainbox}{Vertraulichkeit vs.\ Anonymität vs.\ Unbeobachtbarkeit}
+Terminologie nach \textbf{Pfitzmann/Hansen}:
+\begin{itemize}
+    \item \textbf{Vertraulichkeit} schützt den \textbf{Inhalt}:\\
+          ``Niemand liest mit.'' (Verschlüsselung)
+    \item \textbf{Anonymität} schützt \textbf{Identität / Verkettung}:\\
+          ``Niemand weiss, dass ich es war.''
+    \item \textbf{Unbeobachtbarkeit} verbirgt, \textbf{dass überhaupt}
+          kommuniziert wird:\\
+          ``Niemand sieht, dass etwas passiert.''
+\end{itemize}
+\textbf{Kernsatz:} Vertraulichkeit $\neq$ Anonymität.
+\end{mainbox}
+
+\begin{mainbox}{Welche Daten identifizieren?}
+\begin{itemize}
+    \item \textbf{Direkte Identifizierer:} zeigen \emph{direkt} auf eine
+          Person -- Name, AHV-Nr., E-Mail
+    \item \textbf{Quasi-Identifizierer (QID):} einzeln harmlos,
+          \textbf{kombiniert eindeutig} -- PLZ, Geburtsdatum, Geschlecht
+    \item \textbf{Sensible Attribute:} das Schützenswerte -- Diagnose,
+          Gehalt, Religion
+\end{itemize}
+\textbf{Merksatz:} Name weg \textbf{$\neq$} anonym -- das ist nur
+\textbf{Pseudonymisierung}. Solange $k = 1$, ist jede Person
+re-identifizierbar.
+\end{mainbox}
+
+\subsection{Re-Identifikation}
+
+\begin{mainbox}{Linkage Attack}
+Zwei Datensätze über die \textbf{gemeinsamen Quasi-Identifizierer}
+verknüpfen:
+$$\text{(QID, Diagnose)} \ \bowtie\ \text{(QID, Name)}$$
+$$\Rightarrow\ \text{Name} \leftrightarrow \text{Diagnose}$$
+\begin{itemize}
+    \item ``anonyme'' Daten: PLZ $\cdot$ Geb.\ $\cdot$ Geschlecht
+          + \emph{Diagnose}
+    \item öffentliche Liste: PLZ $\cdot$ Geb.\ $\cdot$ Geschlecht
+          + \emph{Name}
+\end{itemize}
+\textbf{Sweeney:} $\approx \mathbf{87\,\%}$ der US-Bevölkerung sind allein
+durch \{PLZ, Geburtsdatum, Geschlecht\} \textbf{eindeutig} bestimmt.
+\end{mainbox}
+
+\begin{subbox}{Der Fall Latanya Sweeney (1997)}
+\begin{enumerate}
+    \item Massachusetts veröffentlicht ``anonymisierte'' Spitaldaten --
+          Name weg, aber PLZ, Geburtsdatum, Geschlecht bleiben.
+    \item Sweeney kauft für $\approx 20$\,\$ das Wählerregister von
+          Cambridge.
+    \item Verknüpfung $\Rightarrow$ sie findet die Krankenakte von
+          Gouverneur \textbf{William Weld} und schickt sie ihm zu.
+\end{enumerate}
+\textbf{Kernsatz:} ``Anonymisiert'' $\neq$ anonym. Genau dieser Fall
+motivierte die $k$-Anonymität (von Sweeney selbst).
+\end{subbox}
+
+\subsection{$k$-Anonymität}
+
+\begin{mainbox}{$k$-Anonymität}
+Jede Person versteckt sich in einer \textbf{Äquivalenzklasse} von mindestens
+$k$ Personen mit \emph{gleichen} Quasi-Identifizierern (PLZ, Alter,
+Geschlecht).
+$$\boxed{k = \min_{\text{Klassen}} |\text{Äquivalenzklasse}|}$$
+$\Rightarrow$ man kann nicht sagen, welche Zeile die gesuchte Person ist.
+\begin{itemize}
+    \item \textbf{Generalisierung:} Werte vergröbern
+          ($8001 \to 80$**, $23 \to 20$--$39$)
+    \item \textbf{Suppression:} Werte ganz unterdrücken
+          (Geschlecht $\to$ *), ggf.\ einzelne Ausreisser-Zeilen löschen
+\end{itemize}
+\textbf{Vorgehen:} so weit generalisieren, bis die \emph{kleinste} Klasse
+$\ge k$ ist. Mehr Generalisierung = mehr Schutz, weniger Nutzen.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Rohdaten ($k=1$)}
+\renewcommand*{\arraystretch}{1.0}
+\setlength{\tabcolsep}{3pt}
+\begin{center}
+\begin{tabular}{@{}l|r|r|c|l@{}}
+\textbf{Name} & \textbf{PLZ} & \textbf{Alt} & \textbf{G} & \textbf{Diagnose} \\
+\hline
+Anna & 8001 & 23 & F & Grippe \\
+Beat & 8004 & 27 & M & Krebs \\
+Chiara & 8008 & 29 & F & Herzinfarkt \\
+Deniz & 8003 & 34 & M & Krebs \\
+Eva & 8006 & 37 & F & Krebs \\
+Fabio & 8002 & 31 & M & Krebs \\
+Gina & 8057 & 42 & F & Grippe \\
+Hans & 8032 & 48 & M & Diabetes \\
+Ira & 8041 & 45 & F & Herzinfarkt \\
+Jonas & 8820 & 53 & M & Diabetes \\
+Katja & 8810 & 58 & F & Grippe \\
+Luca & 8853 & 51 & M & Herzinfarkt \\
+\end{tabular}
+\end{center}
+Name streichen genügt nicht: jede QID-Kombination ist einmalig
+$\Rightarrow k = 1$.
+\end{subbox}
+
+\begin{subbox}{Beispiel: generalisiert ($k=3$)}
+\renewcommand*{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3pt}
+\begin{center}
+\begin{tabular}{@{}l|l|c|c|l@{}}
+\textbf{PLZ} & \textbf{Alter} & \textbf{G} & \textbf{\#} & \textbf{Diagnosen} \\
+\hline
+80** & 20--39 & * & 6 & Gri., Krebs$\times$4, Herz. \\
+80** & 40--59 & * & 3 & Gri., Diab., Herz. \\
+88** & 40--59 & * & 3 & Diab., Gri., Herz. \\
+\end{tabular}
+\end{center}
+Drei Äquivalenzklassen der Grössen $6, 3, 3$
+$\Rightarrow k = \min = \mathbf{3}$.\\
+\textbf{Achtung:} $k$ ist die \emph{kleinste} Klasse, nicht die
+durchschnittliche.
+\end{subbox}
+
+\begin{mainbox}{Homogenitätsfalle (Homogeneity Attack)}
+Eine Klasse mit $k = 3$ sieht gut aus:
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l|l|l@{}}
+\textbf{PLZ} & \textbf{Alter} & \textbf{Diagnose} \\
+\hline
+602* & 30--39 & Depression \\
+602* & 30--39 & Depression \\
+602* & 30--39 & Depression \\
+\end{tabular}
+\end{center}
+\textbf{Aber:} alle drei haben \emph{dieselbe} Diagnose.\\
+\textbf{Angriff:} Nachbar (34 J., PLZ 6021) ist im Datensatz $\Rightarrow$
+er fällt in genau diese Klasse $\Rightarrow$ seine Diagnose ist bekannt --
+\emph{ohne} seine Zeile zu kennen.
+
+\textbf{Kernsatz:} $k$ schützt die \textbf{Identität}, nicht das
+\textbf{Attribut}. Identität versteckt -- Geheimnis trotzdem verraten.
+\end{mainbox}
+
+\begin{mainbox}{$\ell$-Diversität \& $t$-Closeness}
+\begin{itemize}
+    \item \textbf{$\ell$-Diversität:} jede Klasse muss mindestens $\ell$
+          \textbf{verschiedene} Werte des sensiblen Attributs enthalten
+          (z.B.\ Grippe, Depression, Diabetes $\Rightarrow \ell = 3$)
+    \item \textbf{$t$-Closeness} (strenger): die \textbf{Verteilung} des
+          sensiblen Attributs in der Klasse muss der Verteilung im
+          \emph{Gesamtdatensatz} ähneln (Abstand $\le t$)
+\end{itemize}
+\textbf{Reihenfolge:} $k$-Anonymität $\to$ $\ell$-Diversität $\to$
+$t$-Closeness -- jede Stufe schliesst eine Lücke der vorigen.
+\end{mainbox}
+
+\subsection{Differential Privacy (DP)}
+
+\begin{mainbox}{Idee in einem Satz}
+Das Ergebnis einer Auswertung \textbf{ändert sich kaum}, ob eine bestimmte
+Person im Datensatz ist oder nicht.
+
+$\Rightarrow$ Die Teilnahme einer Einzelnen ist aus dem Ergebnis kaum
+erkennbar -- und zwar \textbf{unabhängig davon, was die Angreiferin sonst
+noch weiss}.
+
+\textbf{Schlüsselidee:} kein Patchen gegen \emph{bekanntes} Zusatzwissen
+(wie bei $k$-Anonymität), sondern eine \textbf{Eigenschaft des
+Mechanismus}.
+\end{mainbox}
+
+\begin{mainbox}{$\varepsilon$-Differential Privacy}
+Für zwei \textbf{benachbarte} Datensätze $D, D'$ (Unterschied: genau
+\emph{eine} Person) und jedes mögliche Ergebnis $S$:
+$$\boxed{\Pr[M(D) \in S] \le e^{\varepsilon} \cdot \Pr[M(D') \in S]}$$
+\textbf{$\varepsilon$ = Privacy-Budget:}
+\begin{itemize}
+    \item $\varepsilon$ \textbf{klein} $\Rightarrow$ viel Rauschen, viel
+          Schutz, wenig Nutzen
+    \item $\varepsilon$ \textbf{gross} $\Rightarrow$ wenig Rauschen, wenig
+          Schutz, viel Nutzen
+\end{itemize}
+\textbf{Laplace-Mechanismus:} Antwort $+$ Rauschen
+$\sim \mathrm{Lap}(\Delta f / \varepsilon)$ mit der
+\textbf{Sensitivität} $\Delta f$ = wie stark \emph{eine} Person das
+Ergebnis maximal ändern kann.
+\end{mainbox}
+
+\begin{mainbox}{Randomized Response (Warner, 1965)}
+DP zum Anfassen -- eine Münze entscheidet, ob ehrlich geantwortet wird.
+\textbf{Protokoll} pro Person:
+\begin{enumerate}
+    \item 1.\ Münze \textbf{Kopf} ($\tfrac12$): \emph{ehrlich} antworten
+    \item 1.\ Münze \textbf{Zahl} ($\tfrac12$): 2.\ Münze werfen --
+          Kopf = ``ja'', Zahl = ``nein'' (egal was wahr ist)
+\end{enumerate}
+\textbf{Warum anonym?} Jedes ``ja'' kann echt sein \emph{oder} nur vom
+Münzwurf kommen $\Rightarrow$ \textbf{plausible Deniability}. Niemandem
+kann sein ``ja'' vorgeworfen werden.
+\end{mainbox}
+
+\begin{subbox}{Denkprozess: Entrauschen}
+$\pi$ = wahrer Ja-Anteil (gesucht), $p$ = beobachteter Ja-Anteil
+(ausgezählt). Wann sagt jemand ``ja''? Auf \textbf{zwei} Wegen:
+\begin{enumerate}
+    \item Kopf \emph{und} ehrlich ``ja'': $\tfrac12 \pi$
+    \item Zahl \emph{und} 2.\ Münze Kopf: $\tfrac12 \cdot \tfrac12
+          = \tfrac14$ (\textbf{Rausch-Sockel})
+\end{enumerate}
+\begin{align*}
+p &= \tfrac12 \pi + \tfrac14
+  &&\Rightarrow&
+\boxed{\hat{\pi} = 2p - \tfrac12}
+\end{align*}
+\textbf{Merkregel:} erst den $\tfrac14$-Sockel abziehen, dann
+\emph{mal 2} (nur die Hälfte hat ehrlich geantwortet).\\
+Selbst bei $\pi = 0$ wären $\tfrac14$ aller Antworten ``ja''.\\
+\textbf{Preis:} erwartungstreu, aber verrauscht -- kleine Gruppen
+$\Rightarrow$ grosser Fehler.
+\end{subbox}
+
+\begin{subbox}{Wo das real läuft}
+\begin{itemize}
+    \item \textbf{Apple:} Tastatur-/Emoji-Statistiken, \emph{lokale} DP
+          auf dem Gerät
+    \item \textbf{US Census 2020:} erstmals DP für die Veröffentlichung
+          der Volkszählung
+    \item \textbf{Google, Microsoft:} Telemetrie \& Nutzungsstatistiken
+\end{itemize}
+\textbf{Muster:} Nutzen fürs \emph{Kollektiv}, Schutz für die
+\emph{Einzelne}.
+\end{subbox}
+
+\subsection{Daten verbinden: Schutzebenen}
+
+\begin{mainbox}{Vier Schutzebenen}
+\renewcommand*{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
+\textbf{Schicht} & \textbf{Schützt} & \textbf{Mittel} \\
+\hline
+at rest, in transit & gespeicherte \& übertragene Daten &
+  Verschlüs\-selung \\
+in use & Daten beim Join (\textbf{Input-Privacy}) &
+  Confid.\ Comp.\ / TEE, PSI, MPC \\
+Resultat & publizierter Output (\textbf{Output-Privacy}) &
+  Differen\-tial Privacy \\
+\end{tabularx}
+\textbf{Kernsatz:} Confidential Computing schützt die Daten
+\emph{während} der Verknüpfung (Input), Differential Privacy das
+\emph{Ergebnis} (Output) -- zwei \textbf{Schichten}, keine Alternativen.
+\end{mainbox}
+
+\begin{subbox}{Data Clean Room}
+Zwei Datensätze verbinden, ohne dass jemand die Rohdaten sieht:
+Datensatz A (Spital) und B (Kasse) gehen \textbf{verschlüsselt} in eine
+\textbf{Enklave (TEE)}:
+\begin{enumerate}
+    \item Join auf gemeinsamem Schlüssel
+    \item Analyse
+    \item $+$ DP-Rauschen
+\end{enumerate}
+$\Rightarrow$ heraus kommt nur ein \textbf{aggregiertes, DP-geschütztes}
+Ergebnis.\\
+\textbf{Remote Attestation} beweist: nur der vereinbarte Code läuft.
+Rohdaten sieht niemand -- auch der Cloud-Betreiber nicht.
+\end{subbox}
+
+\subsection{Anonymitätsnetze}
+
+\begin{mainbox}{Onion-/Mix-Prinzip}
+Weg: Du $\to$ R1 $\to$ R2 $\to$ R3 $\to$ Ziel.
+\begin{itemize}
+    \item \textbf{Mehrfach geschichtete} Verschlüsselung (Tor, I2P); jeder
+          Knoten schält genau \emph{eine} Schicht
+    \item \textbf{R1} kennt dich, aber nicht das Ziel; \textbf{R3} kennt
+          das Ziel, aber nicht dich
+    \item \textbf{Kein einzelner Knoten} kennt Sender \emph{und} Empfänger
+    \item \textbf{Anonymitätsmenge:} man verschwindet in der Masse --
+          je grösser, desto besser
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Grenze: Metadaten \& Korrelation}
+\begin{itemize}
+    \item Inhalte sind verschlüsselt -- \textbf{Metadaten} (wer, wann,
+          wie viel, wie oft) bleiben
+    \item \textbf{Traffic-Korrelation:} wer Ein- \emph{und} Ausgang des
+          Netzes beobachtet, kann über \textbf{Timing/Volumen}
+          deanonymisieren
+\end{itemize}
+\textbf{Angreiferperspektive:} Deanonymisierung ist kein ``Ja/Nein'',
+sondern eine Frage von \textbf{Beobachtungsmacht und Wahrscheinlichkeit}.
+\end{mainbox}
+
+\subsection{Privacy by Policy vs.\ by Physics}
+
+\begin{mainbox}{Die Trennlinie}
+\renewcommand*{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{by Policy} & \textbf{by Physics/Math} \\
+\hline
+Privacy & $k$-Anonymität & Differen\-tial Privacy \\
+Krypto-Analogon & rechnerische Sicherheit & informations\-theoretische
+  Sicherheit \\
+Beispiel & RSA, AES & One-Time-Pad, QKD \\
+Hält gegen & \emph{bekanntes} Angreiferwissen & \emph{beliebiges}
+  Zusatzwissen \\
+\end{tabularx}
+\textbf{Merke:} dieselbe Trennlinie wie in der Kryptographie -- nur für
+Privatsphäre statt Vertraulichkeit.
+\end{mainbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Name entfernen ist \textbf{Pseudonymisierung}, keine
+          Anonymisierung -- QIDs re-identifizieren.
+    \item Vertraulichkeit (Inhalt) $\neq$ Anonymität (Identität) $\neq$
+          Unbeobachtbarkeit (dass überhaupt).
+    \item $k$ = \emph{kleinste} Äquivalenzklasse, nicht Durchschnitt oder
+          Anzahl Klassen.
+    \item $k$-Anonymität schützt die Identität, \textbf{nicht} das
+          sensible Attribut (Homogenitätsfalle).
+    \item $\ell$ zählt \emph{verschiedene} Werte, nicht Zeilen.
+    \item DP schützt \emph{Teilnahme}, nicht einzelne Werte; die Garantie
+          gilt für den \textbf{Mechanismus}, nicht für die Daten.
+    \item Kleines $\varepsilon$ = \emph{mehr} Schutz (nicht weniger).
+    \item Randomized Response: $\hat{\pi} = 2p - \tfrac12$ -- Sockel
+          abziehen \emph{und} verdoppeln; nur eines von beidem ist falsch.
+    \item Confidential Computing (Input) ersetzt DP (Output) nicht.
+    \item Tor verbirgt Inhalt \& Pfad, aber nicht alle Metadaten.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{enumerate}
+    \item Namen entfernen ist keine Anonymisierung -- Quasi-Identifizierer
+          re-identifizieren (Sweeney: 87\,\%).
+    \item $k$-Anonymität schützt die Identität, nicht das Attribut
+          (Homogeneity Attack) $\to$ $\ell$-Diversität, $t$-Closeness.
+    \item Differential Privacy gibt eine \textbf{mathematische Garantie},
+          unabhängig vom Zusatzwissen -- das Privacy-Pendant zur
+          informationstheoretischen Sicherheit.
+    \item Schichten: Verschlüsselung (at rest/transit), TEE/MPC (in use),
+          DP (Output).
+\end{enumerate}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

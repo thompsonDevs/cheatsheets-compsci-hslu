@@ -1793,6 +1793,196 @@ Alpha $c(t) = (t^2 - 1, t - t^3)$ in $t = 0$:
 \end{itemize}
 \end{subbox}
 
+\section{Partielle Ableitungen}
+
+\subsection{Funktionen mehrerer Variablen}
+
+\begin{mainbox}{Darstellung}
+$f: D \subseteq \R^2 \to \R$, $(x, y) \mapsto z = f(x, y)$: Graph ist eine
+\textbf{Fläche} im Raum.\\[2pt]
+\textbf{Explizit:} $z = f(x, y)$, z.B.\ $z = x^2 + y^2$.\\
+\textbf{Implizit:} $F(x, y, z) = 0$, z.B.\ Kugel $x^2 + y^2 + z^2 - r^2 = 0$.\\[2pt]
+\textbf{Höhenlinie} (Niveaulinie) zum Niveau $c$: $f(x, y) = c$ in der
+$xy$-Ebene (wie Karte).\\
+\textbf{Parameterlinien:} $y = y_0$ fest (\emph{$x$-Linie}) bzw.\ $x = x_0$
+fest (\emph{$y$-Linie}): Schnittkurven der Fläche.
+\end{mainbox}
+
+\begin{subbox}{Grundflächen (Notebook)}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l|l@{}}
+$x^2 + y^2 + 1$ & Paraboloid; Kreise \\
+$\frac{x^2}{2} + y^2$ & ellipt.\ Parab.; Ellipsen \\
+$x^2 - y^2 + 15$ & Sattel; Hyperbeln \\
+\end{tabular}\\[1pt]
+(rechte Spalte: Fläche; Höhenlinien)
+\end{subbox}
+
+\begin{mainbox}{Grenzwert \& Stetigkeit}
+$\displaystyle\lim_{(x,y) \to (x_0,y_0)} f(x, y) = g$, falls $f(x_n, y_n) \to g$
+für \textbf{jede} Folge $(x_n, y_n) \to (x_0, y_0)$.\\
+\textbf{Stetig} in $(x_0, y_0)$: Grenzwert existiert und $= f(x_0, y_0)$.\\[2pt]
+\textbf{Nicht-Existenz zeigen:} zwei Wege mit verschiedenen Grenzwerten,
+z.B.\ $y = 0$ vs.\ $y = x$ vs.\ $y = mx$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: kein Grenzwert}
+$f(x, y) = \frac{xy}{x^2 + y^2}$, $(x, y) \to (0, 0)$:\\
+Weg $y = mx$: $f = \frac{m x^2}{(1 + m^2) x^2} = \frac{m}{1 + m^2}$,
+hängt von $m$ ab ($m = 0$: $0$, $m = 1$: $\frac{1}{2}$)
+$\Rightarrow$ kein Grenzwert, nicht stetig fortsetzbar.\\[2pt]
+Tipp: \textbf{Polarkoord.} $x = r\cos\varphi$, $y = r\sin\varphi$: hängt
+der Ausdruck für $r \to 0$ noch von $\varphi$ ab $\Rightarrow$ kein GW.
+\end{subbox}
+
+\subsection{Partielle Ableitungen}
+
+\begin{mainbox}{Partielle Ableitung 1.\ Ordnung}
+Nach \textbf{einer} Variablen ableiten, alle anderen als \textbf{Konstante}:
+$$f_x = \pdn{f}{x} = \lim_{h \to 0} \frac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}$$
+analog $f_y$. Geometrisch: Steigung der Fläche in $x$- bzw.\
+$y$-Richtung (Tangente an die Parameterlinie).
+\end{mainbox}
+
+\begin{mainbox}{Höhere Ableitungen \& Satz von Schwarz}
+$$f_{xx} = \pdn{^2 f}{x^2}, \quad f_{xy} = \pdn{}{y}\Big(\pdn{f}{x}\Big),
+\quad f_{yy}$$
+\textbf{Schwarz:} sind die gemischten Ableitungen stetig, gilt
+$$f_{xy} = f_{yx}$$
+(Reihenfolge egal) $\Rightarrow$ gute Rechenkontrolle!
+\end{mainbox}
+
+\begin{subbox}{Beispiel}
+$f(x, y) = x^2 y^3 + e^{xy}$
+\begin{align*}
+f_x &= 2xy^3 + y\,e^{xy}\\
+f_y &= 3x^2y^2 + x\,e^{xy}\\
+f_{xx} &= 2y^3 + y^2 e^{xy}\\
+f_{yy} &= 6x^2 y + x^2 e^{xy}\\
+f_{xy} &= 6xy^2 + (1 + xy)\,e^{xy} = f_{yx}
+\end{align*}
+\end{subbox}
+
+\begin{mainbox}{Totales Differential \& Tangentialebene}
+$$dz = f_x\, dx + f_y\, dy$$
+Linearisierung: $\Delta z \approx f_x \Delta x + f_y \Delta y$
+(Fehlerfortpflanzung).\\
+\textbf{Tangentialebene} in $P = (x_0, y_0, z_0)$:
+\begin{align*}
+z - z_0 = \ &f_x(x_0, y_0)\,(x - x_0)\\
+ + \ &f_y(x_0, y_0)\,(y - y_0)
+\end{align*}
+\end{mainbox}
+
+\begin{subbox}{Numerisch (Notebook)}
+$f_x \approx \frac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}$, $h \approx 10^{-8}$,
+analog $f_y$.
+\end{subbox}
+
+\subsection{Gradient \& Richtungsableitung}
+
+\begin{mainbox}{Gradient}
+$$\operatorname{grad} f = \nabla f = \begin{pmatrix} f_x \\ f_y \end{pmatrix}$$
+Raum: $\nabla f = (f_x, f_y, f_z)^T$.
+\begin{itemize}
+    \item zeigt in Richtung des \textbf{steilsten Anstiegs}
+    \item $|\nabla f|$ = maximale Steigung
+    \item steht \textbf{senkrecht auf der Höhenlinie}
+          (bzw.\ Niveaufläche $F = c$)
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Richtungsableitung}
+Steigung in Richtung eines \textbf{Einheitsvektors} $\vec e$, $|\vec e| = 1$:
+$$\pdn{f}{\vec e} = \nabla f \cdot \vec e = |\nabla f| \cos\alpha$$
+Richtung per Winkel: $\vec e = (\cos\varphi, \sin\varphi)^T$.\\
+Max.\ für $\vec e \parallel \nabla f$, null entlang der Höhenlinie,
+min.\ für $\vec e \parallel -\nabla f$.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Gradient}
+$f = x^2 + y^2 + 1$, $P = (1, 2)$: $\nabla f = (2x, 2y) = (2, 4)$.\\
+Richtung $\vec a = (3, 4)$ $\Rightarrow$ $\vec e = \frac{1}{5}(3, 4)$:
+$$\pdn{f}{\vec e} = \tfrac{1}{5}(2 \cdot 3 + 4 \cdot 4) = \tfrac{22}{5}$$
+Max.\ Steigung $|\nabla f| = \sqrt{20} = 2\sqrt 5$.
+Gradient zeigt radial nach aussen $\perp$ Kreis-Höhenlinien.
+\end{subbox}
+
+\subsection{Extrema \& Sattelpunkte}
+
+\begin{mainbox}{Kritische Punkte}
+\textbf{Notwendig} für Extremum in $(x_0, y_0)$:
+$$f_x(x_0, y_0) = 0 \quad \text{und} \quad f_y(x_0, y_0) = 0$$
+d.h.\ $\nabla f = \vec 0$, Tangentialebene horizontal.
+Lösungen = \textbf{kritische} (stationäre) Punkte.
+\end{mainbox}
+
+\begin{mainbox}{Klassifikation mit Hesse-Matrix}
+$$H = \begin{pmatrix} f_{xx} & f_{xy} \\ f_{yx} & f_{yy} \end{pmatrix}$$
+$$\Delta = \det H = f_{xx} f_{yy} - f_{xy}^2$$
+im kritischen Punkt auswerten:\\[2pt]
+\renewcommand*{\arraystretch}{1.3}
+\begin{tabular}{@{}l|l@{}}
+$\Delta > 0$, $f_{xx} < 0$ & \textbf{Maximum} \\
+$\Delta > 0$, $f_{xx} > 0$ & \textbf{Minimum} \\
+$\Delta < 0$ & \textbf{Sattelpunkt} \\
+$\Delta = 0$ & keine Aussage \\
+\end{tabular}\\[2pt]
+Bei $\Delta > 0$ haben $f_{xx}$ und $f_{yy}$ dasselbe Vorzeichen.
+\end{mainbox}
+
+\begin{subbox}{Merkregel}
+Maximum: Fläche ist ein umgedrehter Topf ($f_{xx} < 0$, negativ
+gekrümmt). Sattel: in einer Richtung Max., in anderer Min.\
+(Pferdesattel / Passhöhe, z.B.\ $x^2 - y^2$).
+\end{subbox}
+
+\begin{subbox}{Denkprozess: $z = 3xy - x^3 - y^3$ (Bsp.\ 2)}
+\begin{enumerate}
+    \item $f_x = 3y - 3x^2$, $f_y = 3x - 3y^2$.
+    \item $= 0$: $y = x^2$ einsetzen $\Rightarrow x = x^4$
+          $\Rightarrow x(x^3 - 1) = 0$, $x \in \{0, 1\}$.
+          Krit.\ Punkte $(0, 0)$, $(1, 1)$.
+    \item $f_{xx} = -6x$, $f_{xy} = 3$, $f_{yy} = -6y$.
+    \item $(0, 0)$: $\Delta = 0 - 9 = -9 < 0$ $\Rightarrow$ \textbf{Sattel}.
+    \item $(1, 1)$: $\Delta = 36 - 9 = 27 > 0$, $f_{xx} = -6 < 0$
+          $\Rightarrow$ \textbf{Max.}, $z = 1$.
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Bsp.\ 1 (Maxima)}
+$z = -4x^3y^2 + 3xy^4 - 3x + 2y + 5$\\
+$f_x = -12x^2y^2 + 3y^4 - 3$, $f_y = -8x^3y + 12xy^3 + 2$\\
+Reelle krit.\ Punkte (numerisch): $\approx (\mp 0.157, \pm 1.025)$,
+beide $\Delta \approx -175 < 0$ $\Rightarrow$ zwei \textbf{Sattelpunkte},
+keine Extrema. Nichtlineare Systeme oft nur mit CAS lösbar.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Beim partiellen Ableiten andere Variablen als Konstanten
+          behandeln, auch in Produkten ($\pdn{}{x}\, x y^2 = y^2$).
+    \item Gleichungssystem $f_x = f_y = 0$: Fallunterscheidung beim
+          Ausklammern, keine Lösung verlieren (nicht durch $x$ teilen!).
+    \item $\Delta$ \emph{im Punkt} auswerten, nicht allgemein.
+    \item $\Delta = f_{xx} f_{yy} - f_{xy}^{\,2}$: Quadrat nicht vergessen.
+    \item $\Delta = 0$: Test versagt, nicht automatisch Sattel.
+    \item Richtungsableitung: Richtungsvektor \textbf{normieren}.
+    \item Kontrolle: $f_{xy} = f_{yx}$.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item $f_x$, $f_y$: andere Variablen konstant; $f_{xy} = f_{yx}$
+    \item $\nabla f$: steilster Anstieg, $\perp$ Höhenlinie
+    \item $\pdn{f}{\vec e} = \nabla f \cdot \vec e$, $|\vec e| = 1$
+    \item Krit.\ Punkte: $\nabla f = \vec 0$
+    \item $\Delta = f_{xx} f_{yy} - f_{xy}^2$: $> 0$ Extremum
+          (Vorz.\ $f_{xx}$), $< 0$ Sattel, $= 0$ offen
+\end{itemize}
+\end{subbox}
+
 % ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================

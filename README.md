@@ -5,21 +5,23 @@ Cheatsheets and Anki flashcards for BSc Computer Science@HSLU, one folder per co
 
 ## License
 
-Copyright © Thomas Schnyder.
+This repository uses two licenses: one for the study material, one for the Claude Code skills.
 
-Unless stated otherwise, everything in this repository (the cheatsheets as `.tex` and `.pdf`,
-the Anki card files, the LaTeX template and the Claude Code skills under `.claude/skills/`) is
-licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
-See [`LICENSE`](LICENSE) for the full legal text.
+**Study material: CC BY 4.0.** Copyright © Thomas Schnyder. The cheatsheets (`.tex` and `.pdf`),
+the Anki card files and the LaTeX template under `src/` are licensed under the
+[Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/);
+full text in [`LICENSE`](LICENSE). You may share and adapt the material for any purpose, including
+commercially, as long as you give appropriate credit, link to the license, and indicate if
+changes were made.
 
-You may share and adapt the material for any purpose, including commercially, as long as you
-give appropriate credit, link to the license, and indicate if changes were made.
+**Skills: Apache License 2.0.** Everything under `.claude/skills/` is licensed under the
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0); each skill folder contains a
+copy in its own `LICENSE` file.
 
-**Exceptions**
+- `cheatsheet/` and `anki/`: Copyright © Thomas Schnyder.
+- `skill-reviewer/`: third-party, by Terryc21
+  ([source](https://github.com/Terryc21/skill-reviewer)), included unmodified.
 
-- `.claude/skills/skill-reviewer/` is third-party code by Terryc21
-  ([source](https://github.com/Terryc21/skill-reviewer)) and remains under the Apache License 2.0
-  (see its own `LICENSE`).
-- The cheatsheets summarize HSLU course material. The license covers this summary and its
-  presentation; exercise problems or figures taken from lecture material remain with their
-  original authors.
+**Note on course material.** The cheatsheets summarize HSLU course material. The license covers
+this summary and its presentation; exercise problems or figures taken from lecture material
+remain with their original authors.

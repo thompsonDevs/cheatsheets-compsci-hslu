@@ -2404,6 +2404,260 @@ abschliessende \texttt{\% m} macht negative $t$ wieder positiv.
 \end{subbox}
 
 % ============================================================================
+% SECTION: CHINESISCHER RESTSATZ
+% ============================================================================
+\section{Chinesischer Restsatz}
+
+\subsection{Idee \& Satz}
+
+\begin{mainbox}{Idee: grosser Modul $\to$ kleine Module}
+Rechenaufgabe in der modularen Arithmetik mit grossem Modul $m$ aufteilen:
+\begin{enumerate}
+    \item $m = m_1 \cdot m_2 \cdots m_n$ in \textbf{paarweise teilerfremde}
+          Faktoren zerlegen
+    \item Aufgabe \textbf{unabhängig} (parallel) für jeden Modul $m_i$
+          lösen $\Rightarrow$ Reste $r_i$
+    \item Aus den $r_i$ die Lösung mit Modul $m$ zusammensetzen
+\end{enumerate}
+Schritt 3 ist effizient lösbar $\Rightarrow$ Effizienzvorteil
+(Krypto/RSA, parallele \& fehlertolerante Systeme).
+\end{mainbox}
+
+\begin{mainbox}{Chinesischer Restsatz (Sun Zi)}
+Seien $m_1, \ldots, m_n$ \textbf{paarweise teilerfremd}
+($\mathrm{ggT}(m_i,m_j) = 1$ für $i \neq j$) und $m = m_1 \cdots m_n$.
+Dann haben die simultanen Restgleichungen
+$$x \Mod m_1 = r_1,\ \ldots,\ x \Mod m_n = r_n$$
+genau \textbf{eine} Lösung $x \in \{0, 1, \ldots, m-1\}$:
+$$\boxed{x = \Big(\sum_{i=1}^n M_i \cdot y_i \cdot r_i\Big) \Mod m}$$
+\begin{itemize}
+    \item $M_i = m / m_i$ (Produkt der \emph{anderen} Module)
+    \item $y_i = M_i^{-1}$ \textbf{in der Arithmetik mit Modul $m_i$}
+          (erweiterter Euklid)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Schlüsselidee: Warum funktioniert die Formel?}
+Betrachte den Summanden $M_i y_i r_i$ modulo $m_j$:
+\begin{itemize}
+    \item $j \neq i$: $m_j$ steckt in $M_i$ $\Rightarrow$
+          $M_i y_i r_i \Mod m_j = 0$
+    \item $j = i$: $M_i y_i \Mod m_i = 1$ $\Rightarrow$
+          $M_i y_i r_i \Mod m_i = r_i$
+\end{itemize}
+$\Rightarrow$ Jeder Summand ``schaltet'' genau eine Gleichung ein.
+\textbf{Paarweise teilerfremd} ist nötig, damit
+$\mathrm{ggT}(M_i, m_i) = 1$ und $y_i$ existiert.
+\end{subbox}
+
+\begin{mainbox}{Vorgehen (Rezept)}
+\begin{enumerate}
+    \item Prüfen: Module paarweise teilerfremd?
+    \item $m = m_1 \cdots m_n$ und $M_i = m/m_i$ berechnen
+    \item $M_i \Mod m_i$ reduzieren (kleinere Zahlen!)
+    \item $y_i = (M_i \Mod m_i)^{-1}$ in Modul $m_i$ mit erw.\
+          Euklid ($a = m_i$, $b = M_i \Mod m_i$, $y_i = t \Mod m_i$)
+    \item $x = \sum M_i y_i r_i \Mod m$ -- hier das \textbf{volle} $M_i$!
+    \item Probe: $x \Mod m_i = r_i$ für alle $i$
+\end{enumerate}
+Bei kleinen Modulen: Inverse durch \textbf{Probieren} finden.
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Modul $210 = 5 \cdot 6 \cdot 7$}
+$x \Mod 5 = 4$,\ $x \Mod 6 = 5$,\ $x \Mod 7 = 2$
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}rr|rrr@{}}
+$m_i$ & $r_i$ & $M_i$ & $M_i \Mod m_i$ & $y_i$ \\
+\hline
+5 & 4 & 42 & 2 & 3 \\
+6 & 5 & 35 & 5 & 5 \\
+7 & 2 & 30 & 2 & 4 \\
+\end{tabular}
+\end{center}
+Euklid: $1 = 1\cdot 5 - 2 \cdot 2 \Rightarrow 2^{-1} = -2 \equiv 3$;\
+$1 = 1 \cdot 6 - 1 \cdot 5 \Rightarrow 5^{-1} = -1 \equiv 5$;\
+$1 = 1 \cdot 7 - 3 \cdot 2 \Rightarrow 2^{-1} = -3 \equiv 4$.
+\begin{align*}
+x &= 42\cdot3\cdot4 + 35\cdot5\cdot5 + 30\cdot4\cdot2 \Mod 210\\
+  &= 1619 \Mod 210 = \mathbf{149}
+\end{align*}
+Probe: $149 \Mod 5 = 4$, $\Mod 6 = 5$, $\Mod 7 = 2$ \checkmark
+\end{subbox}
+
+\begin{subbox}{Beispiel: $m = 35 \cdot 37 \cdot 39 = 50505$}
+$x \Mod 35 = 20$,\ $x \Mod 37 = 12$,\ $x \Mod 39 = 5$
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}rr|rrr@{}}
+$m_i$ & $r_i$ & $M_i$ & $M_i \Mod m_i$ & $y_i$ \\
+\hline
+35 & 20 & 1443 & 8 & 22 \\
+37 & 12 & 1365 & 33 & 9 \\
+39 & 5 & 1295 & 8 & 5 \\
+\end{tabular}
+\end{center}
+\begin{align*}
+x &= 1443\cdot22\cdot20 + 1365\cdot9\cdot12\\
+  &\quad + 1295\cdot5\cdot5 \Mod 50505 = \mathbf{6635}
+\end{align*}
+\end{subbox}
+
+\subsection{Restlisten \& Bijektion}
+
+\begin{mainbox}{Rest $\leftrightarrow$ Restliste}
+Wegen der Eindeutigkeit gehört zu jedem $x \in \{0, \ldots, m-1\}$ genau
+eine \textbf{Restliste} und umgekehrt (\textbf{bijektiv}):
+$$x \ \longleftrightarrow\ [x \Mod m_1, \ldots, x \Mod m_n]$$
+Restliste $\to$ Rest: mit dem chinesischen Restsatz.\\
+$+$ und $\cdot$ dürfen \textbf{komponentenweise} (je Modul $m_i$)
+gerechnet werden.
+\end{mainbox}
+
+\begin{subbox}{Beispiel $m_1 = 5$, $m_2 = 4$, $m = 20$}
+\renewcommand*{\arraystretch}{1.05}
+\begin{center}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lllll@{}}
+0\,[0,0] & 4\,[4,0] & 8\,[3,0] & 12\,[2,0] & 16\,[1,0] \\
+1\,[1,1] & 5\,[0,1] & 9\,[4,1] & 13\,[3,1] & 17\,[2,1] \\
+2\,[2,2] & 6\,[1,2] & 10\,[0,2] & 14\,[4,2] & 18\,[3,2] \\
+3\,[3,3] & 7\,[2,3] & 11\,[1,3] & 15\,[0,3] & 19\,[4,3] \\
+\end{tabular}
+\end{center}
+Alle $5 \cdot 4 = 20$ Restlisten kommen genau einmal vor.
+\end{subbox}
+
+\subsection{Anwendungen}
+
+\begin{subbox}{Grosse Produkte aufteilen}
+$123456789 \cdot 987654321 \Mod 1009091$, mit
+$1009091 = 97 \cdot 101 \cdot 103$. Faktoren erst je Modul reduzieren:
+\begin{align*}
+97&: & 39 \cdot 30 \Mod 97 &= 6\\
+101&: & 45 \cdot 66 \Mod 101 &= 41\\
+103&: & 62 \cdot 93 \Mod 103 &= 101
+\end{align*}
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}rr|rrr@{}}
+$m_i$ & $r_i$ & $M_i$ & $M_i \Mod m_i$ & $y_i$ \\
+\hline
+97 & 6 & 10403 & 24 & 93 \\
+101 & 41 & 9991 & 93 & 63 \\
+103 & 101 & 9797 & 12 & 43 \\
+\end{tabular}
+\end{center}
+$x = \sum M_i y_i r_i \Mod 1009091 = \mathbf{496355}$\\
+$\Rightarrow$ parallel rechenbar, fehlertolerant, effizient in Hardware.
+\end{subbox}
+
+\begin{subbox}{Geheimnis auf Server verteilen}
+Passwort $x$ wird nicht direkt übermittelt; jeder Server kennt nur einen
+Rest, die Module $101, 103, 107$ sind öffentlich:
+\renewcommand*{\arraystretch}{1.1}
+\begin{center}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}rr|rrr@{}}
+$m_i$ & $r_i$ & $M_i$ & $M_i \Mod m_i$ & $y_i$ \\
+\hline
+101 & 95 & 11021 & 12 & 59 \\
+103 & 68 & 10807 & 95 & 90 \\
+107 & 65 & 10403 & 24 & 58 \\
+\end{tabular}
+\end{center}
+$x = \sum M_i y_i r_i \Mod 1113121 = \mathbf{162705}$\\
+Nur \textbf{alle drei} zusammen sind eindeutig; ein oder zwei Server kennen
+$x$ nur bis auf viele Kandidaten.
+\end{subbox}
+
+\subsection{Fehlererkennung \& -korrektur}
+
+\begin{mainbox}{Fehlererkennung mit redundantem Residuum}
+Zahl $x < m_1 \cdots m_n$ als Residuen $r_i = x \Mod m_i$ senden.
+\textbf{Sender:} zusätzlichen Modul $m_{n+1}$ wählen (teilerfremd zu allen
+$m_i$) und $r_{n+1} = x \Mod m_{n+1}$ mitsenden:
+$(r_1, \ldots, r_n, r_{n+1})$.\\
+\textbf{Empfänger:}
+\begin{enumerate}
+    \item $x$ aus $(r_1, \ldots, r_n)$ rekonstruieren (Restsatz)
+    \item Prüfen: $x \Mod m_{n+1} \overset{!}{=} r_{n+1}$; sonst
+          \textbf{Fehler}
+\end{enumerate}
+Mehr Module als zur Rekonstruktion nötig $\Rightarrow$ Fehler erkennbar.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Erkennung: Module $5, 7, 3 \mid 11$}
+Codiert werden $x < 5 \cdot 7 \cdot 3 = 105$, Prüfmodul $11$.
+\begin{itemize}
+    \item $(3,5,2,1)$: $x = 68$, aber $68 \Mod 11 = 2 \neq 1$
+          $\Rightarrow$ \textbf{fehlerhaft}
+    \item $(3,2,2,1)$: $x = 23$, $23 \Mod 11 = 1$ \checkmark{}
+          $\Rightarrow$ \textbf{korrekt}, $x = 23$
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Fehlerkorrektur mit $\ge 2$ redundanten Residuen}
+Bei mehreren Zusatzmodulen (und höchstens \textbf{einem} Fehler):
+\begin{enumerate}
+    \item $x$ aus \textbf{allen Kombinationen} von $n$ Residuen
+          rekonstruieren (je mit dem Produkt der zugehörigen Module)
+    \item \textbf{Mehrheitsentscheid:} der häufigste Wert ist das
+          korrekte $x$
+\end{enumerate}
+Alle Kombinationen \emph{ohne} das fehlerhafte Residuum liefern dasselbe
+$x$; die mit Fehler streuen. Werte $\ge m_1 \cdots m_n$ sind ohnehin
+ungültig.
+\end{mainbox}
+
+\begin{subbox}{Beispiel Korrektur: $5, 7, 3 \mid 11, 13$}
+$x < 105$, alle $\binom{5}{3} = 10$ Dreier-Kombinationen:
+\begin{itemize}
+    \item $(3,2,2,1,10)$: alle 10 liefern $23$ $\Rightarrow$ kein Fehler
+    \item $(3,2,1,1,10)$:\\
+          $58, 23, 23, 133, 88, 23, 100, 205, 23, 166$\\
+          $\Rightarrow$ $23$ (4-mal) ist korrekt; genau die 4 Kombinationen
+          ohne $r_3$ ergeben $23$ $\Rightarrow$ $r_3 = 1$ war falsch
+          ($23 \Mod 3 = 2$)
+\end{itemize}
+\end{subbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Module müssen \textbf{paarweise} teilerfremd sein. Gegenbeispiel
+          $4, 6$: $x \Mod 4 = 1$, $x \Mod 6 = 2$ hat \emph{keine} Lösung
+          ($x$ ungerade und gerade).
+    \item $y_i$ ist das Inverse \textbf{im Modul $m_i$}, nicht im Modul $m$.
+    \item $M_i \Mod m_i$ nur zum Invertieren verwenden; in der Summe steht
+          das \textbf{volle} $M_i = m/m_i$.
+    \item Negatives $t$ aus Euklid: $+m_i$ rechnen ($-2 \equiv 3$ mod 5).
+    \item Am Schluss $\Mod m$ nicht vergessen, Probe für jedes $m_i$.
+    \item Grosse Faktoren zuerst je Modul reduzieren, dann multiplizieren.
+    \item Fehlerkorrektur: nur bei $\le 1$ Fehler und $\ge 2$ redundanten
+          Residuen; mit nur einem lässt sich ein Fehler nur
+          \emph{erkennen}.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item Paarweise teilerfremde $m_i$ $\Rightarrow$ eindeutiges
+          $x \in \{0, \ldots, m-1\}$
+    \item $x = \sum M_i y_i r_i \Mod m$, $M_i = m/m_i$,
+          $y_i = M_i^{-1}$ mod $m_i$
+    \item Bijektion Rest $\leftrightarrow$ Restliste; Rechnen
+          komponentenweise
+    \item Anwendungen: grosse Produkte parallel, Geheimnis verteilen
+    \item 1 Zusatzmodul: Fehler erkennen; $\ge 2$: per Mehrheit korrigieren
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

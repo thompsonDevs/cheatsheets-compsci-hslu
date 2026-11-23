@@ -1,6 +1,7 @@
 ---
 name: anki
 description: Turn lecture slides (PDF or Markdown) into Anki flashcards for an HSLU course, stored as a diffable TSV source file and committed. Use when the user gives a slides file plus a subject/course name and wants flashcards, as a companion to (or independent of) that subject's cheatsheet.
+argument-hint: <slides.pdf|slides.md> <subject>
 ---
 
 # Anki card authoring skill
@@ -21,6 +22,10 @@ Read `CLAUDE.md` at the repo root first if you haven't this session, for repo co
 
 1. A path to a **PDF** or **Markdown** file with the lecture slides/content.
 2. A **subject** name — the course folder under `src/` (e.g. `dmath-algo`, `lial`, `ana-g`).
+
+Paths often contain spaces (e.g. `.../SW11/Chinesischer Restsatz.md`), so don't split the
+arguments on whitespace naively: the **subject is the last token**, everything before it is the
+path. Verify the path exists before continuing.
 
 If either is missing, or the subject doesn't match an existing `src/` folder and isn't clearly a
 new course, ask rather than guessing.
@@ -66,7 +71,24 @@ Lückentext	<subject>	<text with {{c1::hidden part}}>		<subject>::<chapter-slug>
   Slugify the chapter/topic name (lowercase, hyphens) consistently with how it's named in the
   matching cheatsheet section, if one exists.
 - No literal tabs or newlines inside a field. `#html:true` is set, so use `<br>` for line breaks
-  within a field if ever needed, and escape any literal `<`/`&` that isn't meant as HTML.
+  within a field if ever needed.
+- **HTML escaping:** because of `#html:true`, every literal `<`, `>` and `&` that isn't HTML
+  markup must be written as `&lt;`, `&gt;`, `&amp;`, **including inside MathJax** (MathJax sees
+  the decoded character, so `\(a &lt; b\)` renders as a < b). A bare `<` can swallow the rest of
+  the field as a broken tag without any import error.
+
+### Note identity: the first field is the key
+
+There is no GUID column, so on re-import Anki recognises an existing note **only by its first
+field** (column 3: the Standard question, or the whole Lückentext text). Consequences:
+
+- **Never edit column 3 of an existing row.** A changed first field re-imports as a *new* note,
+  and the old one stays in the collection as a duplicate with its review history.
+- Editing column 4 (answer/extra) or the tags of an existing row is safe: re-importing with
+  "Update" overwrites the matched note.
+- If a card's question or cloze text really must change (e.g. it was wrong), change it, and
+  tell the user explicitly in the step-8 report which old note to delete in Anki (quote its old
+  front text).
 
 ## Steps
 
@@ -76,26 +98,22 @@ Confirm `src/<subject>/` — it may already contain a `cheatsheet.tex`, an `anki
 neither. Creating one doesn't require or affect the other. If the subject folder doesn't exist at
 all, confirm with the user before creating it (avoid a typo'd new folder).
 
-### 2. Get the slide content as Markdown
+### 2. Get the slide content
 
-Same as the cheatsheet skill:
-- `.md` input: read directly.
-- `.pdf` input: convert via `markitdown` into a throwaway temp dir, read the result, delete the
-  temp dir immediately after:
-
-  ```bash
-  tmp=$(mktemp -d)
-  markitdown "<input.pdf>" -o "$tmp/slides.md"
-  # read "$tmp/slides.md"
-  rm -rf "$tmp"
-  ```
+Follow **step 2 of `.claude/skills/cheatsheet/SKILL.md` exactly** (read that section now; it is
+the single source of truth for the input pipeline). It covers Markdown notes that only embed
+PDFs, the `markitdown` → `pdftotext` → `pdftoppm` fallback chain for PDFs (including image-only
+solution PDFs), temp-dir cleanup, and the warning that extracted numbers can be garbled. Don't
+re-implement a shorter version here.
 
 ### 3. Read the existing anki.tsv before writing anything
 
-If `src/<subject>/anki.tsv` already exists, read it fully first. This is how you avoid: adding a
-near-duplicate card for a fact already covered, reusing a chapter tag inconsistently, and losing
-track of the notetype/column header (never rewrite or duplicate the `#` header lines — they go
-once at the very top of the file only).
+If `src/<subject>/anki.tsv` already exists, read it fully first (decks reach ~1000 lines; if one
+is longer than a single `Read` window, read it in parts, or at minimum grep the existing tags with
+`cut -f5 anki.tsv | sort | uniq -c` and read every row whose tag or topic overlaps the new slides).
+This is how you avoid: adding a near-duplicate card for a fact already covered, reusing a chapter
+tag inconsistently, and losing track of the notetype/column header (never rewrite or duplicate the
+`#` header lines — they go once at the very top of the file only).
 
 ### 4. Draft the cards
 
@@ -116,20 +134,43 @@ slide content accordingly, don't just port over what a cheatsheet `mainbox` woul
   before (see `CLAUDE.md`).
 - Skip trivia that isn't worth long-term recall (e.g. slide numbers, lecturer's name) — this is
   study material, not a transcript.
+- **Formeln:** write math as MathJax, which Anki renders natively: inline `\( ... \)`, display
+  `\[ ... \]` (not `$...$`, which Anki doesn't render). Simple expressions without special
+  symbols (e.g. `n = 5`) can stay plain text. Inside a cloze, a `}}` in the LaTeX ends the cloze
+  early: separate closing braces with a space, e.g. `{{c1::\(\frac{a}{b} \)}}` or
+  `\(\frac{a}{ {{c1::b}} }\)`, never `{{c1::\frac{a}{b}}}`. Remember the HTML-escaping rule above
+  for `<`, `>`, `&`.
+- **Verify every number.** A wrong answer card is worse than a wrong line on the cheatsheet:
+  spaced repetition drills it into memory. Recompute every numeric answer and worked-example
+  value with a quick `python3 -I -c '...'`, and compare against the solutions PDF if there is
+  one. If the slides disagree with your computation, work out which is the extraction error
+  instead of copying the slide value.
 
 ### 5. Append to the file
 
 Add the new rows after the existing ones (or after the header, if the file is new). Don't
-reorder or touch existing rows.
+reorder or touch existing rows (see "Note identity" above for why column 3 is untouchable).
 
 ### 6. Sanity-check before committing
 
-- Every row has exactly 5 tab-separated columns.
-- No literal tabs inside a field's text (that would silently shift columns).
-- `Lückentext` rows actually contain `{{c1::...}}` (or `c2`, etc.) syntax in column 3.
-- No accidental duplicate header lines partway through the file.
-- Column 1 values are exactly `Standard` or `Lückentext` (not `Basic`/`Cloze`) — see the notetype
-  note above.
+Run these from `src/<subject>/`. **Every command must print nothing**; fix any row it reports
+and re-run:
+
+```bash
+f=anki.tsv
+awk -F'\t' '!/^#/ && NF!=5 {print NR": "NF" columns"}' "$f"                 # exactly 5 columns
+awk -F'\t' '!/^#/ && $1!="Standard" && $1!="Lückentext" {print NR": "$1}' "$f"  # notetype names
+awk -F'\t' '$1=="Lückentext" && $3!~/\{\{c[0-9]+::/ {print NR": no cloze"}' "$f"
+grep -n '^#' "$f" | awk -F: '$1>6 {print $1": header line inside body"}'
+grep -nP '<(?![a-zA-Z/!])' "$f"            # bare < (must be &lt;)
+grep -nP '&(?![a-zA-Z]+;|#[0-9]+;)' "$f"   # bare & (must be &amp;)
+grep -n '}}}' "$f"                         # cloze closed by LaTeX brace
+grep -nP '\$[^\s$]([^$\t]*[^\s$])?\$' "$f"  # $...$ math Anki won't render (not "5 $")
+grep -nP '¨|\x{0308}' "$f"                 # mangled Umlauts
+```
+
+The `NF!=5` check also catches literal tabs inside a field, since those shift the columns. The
+column-1 check catches `Basic`/`Cloze` (see the notetype note above).
 
 ### 7. Commit (do not push)
 
@@ -141,7 +182,15 @@ Do **not** push. Tell the user the commit is local and ask if they'd like it pus
 
 ### 8. Report back, and remind about import
 
-State how many `Standard` and `Lückentext` cards were added and under which chapter tag. Remind
-the user this is a source file, not a live Anki deck: they import/re-import it into Anki via
-**File → Import** and pick "Update" for existing notes if re-importing after edits (AnkiConnect
-isn't set up in this environment, so there's no automatic sync to a running Anki instance).
+State:
+- how many `Standard` and `Lückentext` cards were added, under which chapter tag, and the new
+  total card count of `anki.tsv` (`grep -vc '^#' anki.tsv`);
+- any input problems you worked around (missing tool, image-only PDF, slide values that were
+  wrong and corrected);
+- if an existing row's column 3 was changed, which old note (quote its old front) the user must
+  delete in Anki.
+
+Remind the user this is a source file, not a live Anki deck: they import it into Anki via
+**File → Import**, choosing "Update" for existing notes. Update only matches notes whose first
+field is unchanged; new rows come in as new notes. (AnkiConnect isn't set up in this environment,
+so there's no automatic sync to a running Anki instance.)

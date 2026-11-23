@@ -3261,6 +3261,384 @@ Privatsphäre statt Vertraulichkeit.
 \end{subbox}
 
 % ============================================================================
+% SECTION: ZUGANGSKONTROLLE
+% ============================================================================
+\section{Zugangskontrolle}
+
+\subsection{IAAA \& Grundprinzipien}
+
+\begin{mainbox}{IAAA -- vier Schritte}
+\begin{enumerate}
+    \item \textbf{Identifizierung} -- Identität bekanntgeben:\\
+          ``Wer sind Sie?''
+    \item \textbf{Authentifizierung} -- Identität überprüfen:\\
+          ``Sind Sie es wirklich?''
+    \item \textbf{Autorisierung} -- Berechtigungen prüfen:\\
+          ``Was dürfen Sie?''
+    \item \textbf{Accounting} -- Nachvollziehbarkeit sicherstellen:\\
+          ``Was haben Sie getan?''
+\end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Benutzerverwaltung}
+\begin{enumerate}
+    \item \textbf{Identifiziert} durch den Benutzernamen \texttt{max.muster}
+    \item \textbf{Authentifiziert} durch das Passwort (DB: Salt + Hash)
+    \item \textbf{Autorisiert} für die Benutzerverwaltung über die Rolle
+          \texttt{admin}
+    \item \textbf{Nachvollziehbar} durch das Applikationslog
+          (``User maria.inauen deleted by max.muster'')
+\end{enumerate}
+\end{subbox}
+
+\begin{mainbox}{Drei Grundprinzipien}
+\begin{itemize}
+    \item \textbf{Defense in Depth} -- ``mehrere Schutzschichten'': versagt
+          eine Massnahme, schützen weitere das Asset.
+    \item \textbf{Least Privilege} -- ``so viel wie nötig, so wenig wie
+          möglich'': Rechte nach \emph{Need-to-know}; nicht mehr benötigte
+          Rechte entziehen.
+    \item \textbf{Deny by Default} -- ``was nicht erlaubt ist, ist verboten'':
+          undefinierte Berechtigung $\Rightarrow$ Zugriff verweigert;
+          Rechte bei \textbf{jedem Request} prüfen.
+\end{itemize}
+Sie \textbf{ergänzen} einander, keines ersetzt ein anderes (Liste nicht
+abschliessend).
+\end{mainbox}
+
+\begin{subbox}{Fallbeispiel: Midnight Blizzard (Jan.\ 2024)}
+APT29 / Cozy Bear (russisch, staatlich) im Microsoft-Netz, $\approx 2$
+Monate unentdeckt. Ziel: Mailboxen von Geschäftsleitung, Security- \&
+Legal-Teams.
+\begin{enumerate}
+    \item \textbf{Password Spray} auf vergessenen Legacy-\textbf{Test}-Account
+          (erratbares Passwort, \textbf{kein MFA})
+    \item Legacy-Test-OAuth-App gekapert -- hatte hohe Rechte im
+          \textbf{Corp}-Tenant
+    \item neue OAuth-Apps + Admin-Konto erstellt, \texttt{full\_access\_as\_app}
+          erteilt $\Rightarrow$ Zugriff auf Exchange-Online-Mailboxen
+\end{enumerate}
+\textbf{Lehre:} verletzt \emph{alle} drei Prinzipien -- kein MFA, zu viele
+Rechte, vergessene Altlast.
+\end{subbox}
+
+\subsection{Login-Protokolle}
+
+\begin{mainbox}{Login mit Passwort}
+\textbf{Setup:} Bob speichert $\mathrm{Hash}(\text{PW} \,\|\, \text{Salt})$.\\
+\textbf{Login:} Alice sendet ``Ich bin Alice'' + \textbf{Passwort}; Bob
+berechnet $\mathrm{Hash}(\text{PW} \,\|\, \text{Salt})$ und vergleicht
+$\to$ OK/NOK.\\
+$\Rightarrow$ Das \textbf{Geheimnis selbst wird übertragen}.
+\end{mainbox}
+
+\begin{mainbox}{Challenge-Response (CR)}
+Bob sendet eine zufällige \textbf{Challenge}; Alice beweist, dass sie das
+Geheimnis kennt, \emph{ohne es zu senden}.
+\renewcommand*{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.15\linewidth}|>{\raggedright\arraybackslash}p{0.15\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Art} & \textbf{Setup} & \textbf{Ablauf} \\
+\hline
+symm. & beide: $sk$ & Alice: $\mathrm{HMAC}(sk, C)$; Bob rechnet nach \\
+asym. ENC & Bob: $pk_A$ & $C = E(pk_A, R)$; Alice: $R = D(sk_A, C)$;
+  Bob prüft $R$ \\
+asym. SIGN & Bob: $pk_A$ & Alice: $\mathrm{SIGN}(sk_A, C)$; Bob:
+  $\mathrm{VERIFY}(pk_A, \dots)$ \\
+SIGN + Cert & Bob: nichts & Alice sendet \textbf{Zertifikat} mit $pk_A$;
+  Bob prüft Zert., dann wie SIGN \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{subbox}{Merkhilfe: Passwort vs.\ CR}
+\textbf{Passwort:} das Geheimnis (bzw.\ Hash) wird übertragen und geprüft.\\
+\textbf{CR:} das Geheimnis wird \textbf{nie} übertragen, nur der
+\textbf{Beweis seines Besitzes}.\\
+\textbf{Schlüsselidee:} Bob prüft nicht das Geheimnis, sondern den Beweis,
+dass Alice es kennt. Frische Challenge $\Rightarrow$ kein Replay.
+\end{subbox}
+
+\subsection{Multi-Faktor-Authentifizierung (MFA)}
+
+\begin{mainbox}{MFA: Faktoren unterschiedlicher Eigenschaft}
+Drei Eigenschaften: \textbf{W}issen (Passwort, PIN) $\cdot$
+\textbf{H}aben (OTP-Device, Smartcard) $\cdot$ \textbf{S}ein (Biometrie).
+\begin{itemize}
+    \item Passwort + PIN = W + W $\Rightarrow$ \textbf{keine MFA}
+    \item Passwort + OTP-Device = W + H $\Rightarrow$ \textbf{MFA}
+\end{itemize}
+\textbf{Merke:} zwei Faktoren \emph{derselben} Eigenschaft sind keine MFA.
+\end{mainbox}
+
+\begin{subbox}{Merkhilfe: Sicherheit der Faktoren}
+Grundsätzlich: \textbf{jede MFA ist besser als keine MFA}.
+\begin{enumerate}
+    \item Faktoren sind unterschiedlich sicher (OTP phishbar, Passkey nicht).
+    \item MFA wirkt gegen passwortbezogene Angriffe (Spraying, Stuffing),
+          ist aber \emph{kein} vollständiger Schutz.
+    \item MFA nicht nur beim Login, auch bei \textbf{Privilegienerhöhung}.
+\end{enumerate}
+\end{subbox}
+
+\subsection{Time-Based One-Time Password (TOTP)}
+
+\begin{mainbox}{TOTP (RFC 6238, basiert auf HOTP RFC 4226)}
+Alle \textbf{30\,s} ein neuer \textbf{6-stelliger} Code.
+\begin{itemize}
+    \item \textbf{Shared Secret $K$:} symmetrisch, bei Registrierung via
+          \textbf{QR-Code} geteilt; Client \emph{und} Server speichern $K$
+    \item \textbf{Offline-fähig:} kein Netz zur Code-Generierung nötig
+    \item \textbf{Kein Replay:} Code nur kurz gültig (Toleranzfenster)
+\end{itemize}
+\textbf{Berechnung} (Client und Server identisch, ohne Kommunikation):
+\begin{align*}
+T &= \lfloor \text{Unix-Zeit} / 30 \rfloor \\
+\text{Code} &= \mathrm{Trunc}(\mathrm{HMAC}(K, T)) \bmod 10^6
+\end{align*}
+\textbf{Dynamic Truncation:} letztes Nibble des Hashs = Offset $o$; 4 Byte
+ab $o$, oberstes Bit weg (31 Bit), dann $\bmod 10^6$.\\
+Server akzeptiert $T$ $\pm$ Toleranz (max.\ 1 Schritt). Gleicher Code
+$\Rightarrow$ Besitz von $K$ nachgewiesen.
+\end{mainbox}
+
+\begin{subbox}{Registrierung (Enrollment)}
+\begin{enumerate}
+    \item Benutzer wählt ``TOTP einrichten''
+    \item Server generiert zufälliges $K$ (160 Bit, Base32 $\to$ 32 Zeichen)
+    \item Server zeigt QR-Code mit \texttt{otpauth://}-URI
+    \item App scannt, \textbf{speichert $K$} sicher im Gerät
+    \item App erzeugt ersten Code; Benutzer gibt ihn ein
+    \item Server verifiziert $\Rightarrow$ Registrierung abgeschlossen
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{QR-Code-Inhalt (\texttt{otpauth://})}
+{\footnotesize\texttt{otpauth://totp/Issuer:user@example.com?\\
+secret=JBSWY3DPEHPK3PXP\&issuer=Issuer\\
+\&algorithm=SHA1\&digits=6\&period=30}}
+\begin{itemize}
+    \item \texttt{totp/Label}: Typ + Anbieter:Konto (Anzeige in App)
+    \item \texttt{secret}: $K$, Base32 \;$\cdot$\; \texttt{issuer}: Dienst
+    \item \texttt{algorithm}: HMAC-Hash (Standard SHA1)
+    \item \texttt{digits}=6, \texttt{period}=30\,s
+\end{itemize}
+Gleiches $K$ + gleiche Zeit $\Rightarrow$ \textbf{alle} sehen denselben Code.
+\end{subbox}
+
+\begin{subbox}{Beispiel: RFC-6238-Testvektor}
+$K$ = ASCII \texttt{12345678901234567890}, SHA1, Unix-Zeit 59\,s:
+\begin{align*}
+T &= \lfloor 59/30 \rfloor = 1 \\
+\text{8-stellig} &= 94287082 \\
+\text{6-stellig} &= 94287082 \bmod 10^6 = 287082
+\end{align*}
+\end{subbox}
+
+\subsection{Passkeys}
+
+\begin{mainbox}{Passkey (FIDO2 / WebAuthn)}
+Offener Standard von \textbf{W3C} und \textbf{FIDO Alliance} --
+asymmetrisches Challenge-Response (SIGN).
+\begin{itemize}
+    \item \textbf{Gerät:} Private Key, bleibt im Secure Element / TPM;
+          entsperrt per Biometrie oder Geräte-PIN
+    \item \textbf{Server (Relying Party):} nur Public Key + Credential-ID
+          zur Benutzer-ID
+\end{itemize}
+\textbf{Registrierung:} Gerät erzeugt Schlüsselpaar $\to$ sendet Public Key
+$\to$ Server speichert ihn.\\
+\textbf{Login:} Server sendet zufällige \textbf{Nonce} $\to$ Gerät:
+$\mathrm{Sign}(sk, \text{Nonce})$ $\to$ Server:
+$\mathrm{Verify}(pk, \text{Sig})$.\\
+$\Rightarrow$ Private Key verlässt das Gerät nie: \textbf{nichts zum
+Abphishen}.
+\end{mainbox}
+
+\begin{mainbox}{Nicht jede MFA schützt vor Phishing}
+\textbf{AitM-Phishing:} Angreifer betreibt täuschend echte Kopie unter
+fremder Domain als \textbf{Proxy}; Benutzer gibt Passwort + OTP ein $\to$
+sofort an echten Dienst weitergeleitet $\to$ \textbf{Session für den
+Angreifer}.
+\begin{itemize}
+    \item \textbf{OTP phishbar:} Code an \emph{keine Domain} gebunden; 30\,s
+          reichen für automatische Weiterleitung.
+    \item \textbf{Passkey nicht:} Signatur an die Domain gebunden
+          (\textbf{Origin Binding}) -- auf der Phishing-Seite entsteht
+          nichts, was beim echten Dienst gilt.
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Synced vs.\ Device-bound Passkeys}
+\renewcommand*{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{Synced} & \textbf{Device-bound} \\
+\hline
+Private Key & OS-Keychain / Passwortmanager & Hardware-Token
+  (Secure Element) \\
+Sync & ja, über Cloud & nein, verlässt Key nie \\
+Verlust & Cloud-Backup & Zugang weg $\Rightarrow$ Backup-Key nötig \\
+Schutz & FaceID, Fingerprint, PIN & PIN / Fingerprint am Key \\
+Sicherheit & hoch, abh.\ von Cloud & sehr hoch, physisch isoliert \\
+Usability & sehr einfach & umständlicher \\
+\end{tabularx}
+\end{subbox}
+
+\begin{subbox}{Merkhilfe: Passkeys}
+Benutzerfreundlichkeit und Sicherheit stehen \textbf{nicht} im Zielkonflikt:
+\begin{enumerate}
+    \item \textbf{Phishing-resistent}: kryptographisch an Domain gebunden
+    \item \textbf{Kein Shared Secret} auf dem Server: geleakte DB liefert
+          nichts Verwertbares (vgl.\ TOTP: $K$ liegt auf dem Server!)
+    \item \textbf{Einfach}: Biometrie/PIN statt komplexer Passwörter
+\end{enumerate}
+\end{subbox}
+
+\subsection{Autorisierung}
+
+\begin{mainbox}{Was ist Autorisierung?}
+Prüft für die \textbf{authentifizierte} Identität:
+\textbf{Wer?} (Identität) darf \textbf{was?} (lesen, ändern, löschen)
+\textbf{worauf?} (Datei, Datensatz, Funktion) $\to$ Zugriff erlaubt /
+verweigert.
+\end{mainbox}
+
+\begin{mainbox}{Vier Autorisierungsmodelle}
+\begin{itemize}
+    \item \textbf{DAC} (Discretionary): jede Ressource hat einen
+          \textbf{Besitzer}, der Rechte selbst vergibt.\\
+          \emph{Bsp.:} UNIX \texttt{-rw-r----- alice staff bericht.txt}
+    \item \textbf{MAC} (Mandatory): Rechte werden \textbf{zentral} vergeben.\\
+          \emph{Bsp.:} Badge -- Organisation legt fest, welche Türen
+          aufgehen.
+    \item \textbf{RBAC} (Role-Based): Rechte $\to$ \textbf{Rollen},
+          Rollen $\to$ Benutzer; \emph{statisch} (fix) oder
+          \emph{dynamisch} (unter Voraussetzungen).\\
+          \emph{Bsp.:} \texttt{max.muster} darf über Rolle \texttt{admin},
+          nicht als Person.
+    \item \textbf{ABAC} (Attribute-Based): \textbf{Policies} werten bei
+          jedem Zugriff Attribute von Subjekt, Objekt, Aktion, Umgebung
+          aus (Abteilung, Standort, Uhrzeit, Gerätezustand).\\
+          \emph{Bsp.:} Conditional Access: Login ausserhalb CH $\to$ MFA.
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Interaktive Autorisierung mit Token}
+\textbf{Bisher:} System prüft, \emph{darf} der Benutzer das?\\
+\textbf{Interaktiv:} Benutzer bestätigt mit Token, \emph{soll} das
+ausgeführt werden?
+\begin{itemize}
+    \item \textbf{E-Banking:} Transaktionssignierung (neuer Empfänger,
+          CHF 4'800); risikoabhängig -- Bekanntes auf Allow-Liste, ``seltene''
+          Bestätigungen genau prüfen!
+    \item \textbf{Admin:} Global-Admin-Rolle nur mit erneutem TOTP aktivieren,
+          auch wenn schon angemeldet.
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Schwache Autorisierung \& Gegenmassnahmen}
+\textbf{Schwachstellen:}
+\begin{itemize}
+    \item \textbf{Direkter URL-Aufruf} (\texttt{/admin}) zeigt geschützte
+          Ressourcen
+    \item \textbf{Manipulierte ID} (\texttt{?user\_id=1042} $\to$
+          \texttt{1043}) $\Rightarrow$ fremde Daten (IDOR)
+    \item Rechte \textbf{nur Client-seitig} geprüft bzw.\ Funktion nur
+          ausgeblendet: \texttt{<button hidden>}
+\end{itemize}
+\textbf{Gegenmassnahmen:}
+\begin{enumerate}
+    \item Rechte immer \textbf{Server-seitig} prüfen
+    \item \textbf{zentrales} Tool zum Prüfen \& Administrieren der Rechte
+    \item Deny by Default \& Least Privilege
+    \item Rechte in \textbf{jedem Workflow-Schritt} durchsetzen
+    \item nur \textbf{indirekte Objektreferenzen} (pro Benutzer/Session,
+          Server bildet ab) -- Zugriffsprüfung trotzdem nötig
+\end{enumerate}
+\end{mainbox}
+
+\subsection{Accounting \& Auditing}
+
+\begin{mainbox}{Security Audit (NIST)}
+\textbf{Unabhängige} Überprüfung der Aufzeichnungen und Aktivitäten eines
+Systems, um Angemessenheit der Kontrollen zu beurteilen, Einhaltung der
+Richtlinien sicherzustellen, Verletzungen zu erkennen und Änderungen an
+Gegenmassnahmen zu empfehlen.
+
+\textbf{Ziele:}
+\begin{itemize}
+    \item \textbf{Accountability:} Handlungen eindeutig einer Identität
+          zuordnen
+    \item \textbf{Detection:} verdächtige/unautorisierte Aktivität erkennen
+    \item \textbf{Forensics:} Vorfall rekonstruieren (was, wann, wer?)
+    \item \textbf{Compliance:} Nachweis gegenüber Regulator/Auditor
+          (ISO 27001, DSG, GDPR, FINMA)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Was wird auditiert?}
+\textbf{Identity \& Access:} Login ok/fehlgeschlagen, MFA-Prompt, Lockout;
+Privilege Use (sudo, Run-As, Token-Issue); Account erstellt/geändert/gelöscht,
+Gruppen-Mitgliedschaft.\\
+\textbf{System \& Daten:} File-Access (r/w/d), Prozess-Start,
+Registry-Change; Konfig-/Policy-Änderungen, \textbf{Audit-Log-Clearing}.\\
+\textbf{Grundsatz -- 5 W:} Wer? Was? Wann? Wo? Womit?
+\end{subbox}
+
+\begin{mainbox}{Schwaches Accounting \& Gegenmassnahmen}
+\textbf{Schwächen:}
+\begin{enumerate}
+    \item wichtige Events (Logins, Fehl-Logins, Credential-Änderungen,
+          Transaktionen) nicht geloggt
+    \item Fehler erzeugen keine/unklare Lognachrichten
+    \item kein zentrales Log-System
+    \item Logs ungenügend geschützt, manipulierbar
+    \item Logs nicht (genügend) überwacht/analysiert
+\end{enumerate}
+\textbf{Gegenmassnahmen:} alle kritischen Events nachvollziehbar loggen;
+\textbf{zentrales} Log-System; Logs regelmässig analysieren \& überwachen.
+\end{mainbox}
+
+\begin{subbox}{OWASP Cheat Sheet Series}
+Hilfen zur Umsetzung von IAAA: Authentication, Multifactor Authentication,
+Password Storage, Authorization, Transaction Authorization, Forgot Password,
+Logging (\texttt{cheatsheetseries.owasp.org}).
+\end{subbox}
+
+\subsection{Häufige Fehler \& Zusammenfassung}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Identifizierung (wer?) $\neq$ Authentifizierung (beweisen)
+          $\neq$ Autorisierung (dürfen).
+    \item Passwort + PIN ist \textbf{keine} MFA (beides Wissen).
+    \item MFA $\neq$ phishing-resistent: OTPs lassen sich per AitM-Proxy
+          weiterleiten; nur Passkeys (Origin Binding) nicht.
+    \item TOTP: $K$ liegt auch auf dem \textbf{Server} (symmetrisch) --
+          Passkey: Server hat nur Public Key.
+    \item Bei CR wird das Geheimnis \textbf{nie} übertragen.
+    \item Client-seitig ausblenden ist keine Autorisierung.
+    \item Indirekte Objektreferenzen ersetzen die Zugriffsprüfung
+          \textbf{nicht}.
+    \item DAC = Besitzer entscheidet, MAC = zentral entscheidet.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{enumerate}
+    \item IAAA: Identifizierung $\to$ Authentifizierung $\to$ Autorisierung
+          $\to$ Accounting.
+    \item Prinzipien: Defense in Depth, Least Privilege, Deny by Default.
+    \item Login: Passwort (Geheimnis übertragen) vs.\ Challenge-Response
+          (Besitz beweisen).
+    \item MFA = verschiedene Eigenschaften (W/H/S); Passkeys sind die
+          phishing-resistente Variante.
+    \item Autorisierung: DAC, MAC, RBAC, ABAC; immer Server-seitig.
+    \item Accounting: 5 W loggen, zentral, geschützt, überwacht.
+\end{enumerate}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

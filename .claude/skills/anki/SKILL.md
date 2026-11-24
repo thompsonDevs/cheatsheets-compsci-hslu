@@ -153,24 +153,21 @@ reorder or touch existing rows (see "Note identity" above for why column 3 is un
 
 ### 6. Sanity-check before committing
 
-Run these from `src/<subject>/`. **Every command must print nothing**; fix any row it reports
-and re-run:
+Run the check script that sits next to this file, from the repo root:
 
 ```bash
-f=anki.tsv
-awk -F'\t' '!/^#/ && NF!=5 {print NR": "NF" columns"}' "$f"                 # exactly 5 columns
-awk -F'\t' '!/^#/ && $1!="Standard" && $1!="Lückentext" {print NR": "$1}' "$f"  # notetype names
-awk -F'\t' '$1=="Lückentext" && $3!~/\{\{c[0-9]+::/ {print NR": no cloze"}' "$f"
-grep -n '^#' "$f" | awk -F: '$1>6 {print $1": header line inside body"}'
-grep -nP '<(?![a-zA-Z/!])' "$f"            # bare < (must be &lt;)
-grep -nP '&(?![a-zA-Z]+;|#[0-9]+;)' "$f"   # bare & (must be &amp;)
-grep -n '}}}' "$f"                         # cloze closed by LaTeX brace
-grep -nP '\$[^\s$]([^$\t]*[^\s$])?\$' "$f"  # $...$ math Anki won't render (not "5 $")
-grep -nP '¨|\x{0308}' "$f"                 # mangled Umlauts
+bash .claude/skills/anki/check.sh src/<subject>/anki.tsv
 ```
 
-The `NF!=5` check also catches literal tabs inside a field, since those shift the columns. The
-column-1 check catches `Basic`/`Cloze` (see the notetype note above).
+**It must print nothing and exit 0**; fix every row it reports and re-run. It checks: exactly 5
+columns per row (also catches literal tabs inside a field), column 1 is `Standard`/`Lückentext`
+(catches `Basic`/`Cloze`, see the notetype note above), every Lückentext row has a cloze, no `#`
+header line inside the body, no bare `<` or `&` (must be `&lt;`/`&amp;`), no `}}}` (cloze closed
+by a LaTeX brace), no `$...$` math, no mangled Umlauts, and no duplicate first fields.
+
+Don't inline these checks back into this file: the skill loader replaces positional shell/awk
+variables (dollar sign + digit) in SKILL.md with the skill's arguments, which silently turned the
+awk field references into garbage and made the checks pass vacuously.
 
 ### 7. Commit (do not push)
 

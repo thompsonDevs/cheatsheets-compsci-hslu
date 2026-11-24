@@ -4090,6 +4090,353 @@ Incident} -- Service wie vereinbart geliefert.
 \end{subbox}
 
 % ============================================================================
+% SECTION: SYSTEMSOFTWARE (PROZESSE)
+% ============================================================================
+\section{Systemsoftware (Prozesse)}
+
+\begin{subbox}{Blockdiagramm Systemkern}
+\textbf{User Level} (Programme, Libraries) $\to$ Syscall-Schnittstelle
+$\to$ \textbf{Kernel Level} (File System, Prozess-System) $\to$
+\textbf{Hardware Level}.
+\end{subbox}
+
+\subsection{Prozess-Elemente \& PCB}
+
+\begin{mainbox}{Prozess \& PCB}
+\textbf{Prozess} = Programm in Ausführung, eindeutig charakterisiert durch
+seine \textbf{Prozess-Elemente}; zusammen = \textbf{PCB} (Prozess-Kontroll-Block):
+\begin{itemize}
+    \item \textbf{Identifier}: eindeutige Prozess-ID (PID)
+    \item \textbf{State}: z.B.\ running, ready, blocked
+    \item \textbf{Priority}: relativ zu anderen Prozessen
+    \item \textbf{Program Counter}: Adresse der nächsten Instruktion
+    \item \textbf{Memory Pointers}: auf Code, Daten, Shared Memory
+    \item \textbf{Context Data}: aktuelle CPU-Registerinhalte
+    \item \textbf{I/O Status Info}: offene I/O-Anfragen, zugeordnete Devices
+    \item \textbf{Accounting Info}: CPU-Zeit, Clock Cycles
+\end{itemize}
+PCB wird vom \textbf{OS erzeugt \& verwaltet}, erlaubt Prozess zu
+\textbf{unterbrechen \& später fortzusetzen} $\Rightarrow$ Schlüssel für
+\textbf{mehrere gleichzeitige Prozesse}.
+\end{mainbox}
+
+\begin{mainbox}{Prozess-Image}
+Was das OS über einen Prozess wissen muss: \textbf{Location} (wo?) +
+\textbf{Attribute} (für Verwaltung).\\
+\textbf{Prozess-Image} = \textbf{Programm(code)} + \textbf{Daten} +
+\textbf{Stack} (Prozeduraufrufe, Parameter) + \textbf{Attribute (PCB)}.\\
+Standort des Images hängt vom Memory-Management-Schema ab (z.B.\
+virtuelles Memory).
+\end{mainbox}
+
+\begin{mainbox}{Queuing-Modell \& Dispatcher}
+\begin{itemize}
+    \item PCBs werden in \textbf{Queues} verwaltet: Ready Queue +
+          \textbf{pro Event eine Blocked Queue} (statt einer einzigen, die
+          bei 1000en Prozessen ganz durchsucht werden müsste)
+    \item Event tritt ein $\Rightarrow$ \textbf{alle} Prozesse dieser
+          Event-Queue $\to$ Ready Queue
+    \item in der Praxis \textbf{(doppelt) verkettete Listen} statt reiner
+          FIFOs
+    \item \textbf{Dispatcher}: wechselt den Prozessor von einem Prozess
+          zum anderen
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Schutz der Kern-Datenstrukturen}
+Beim Umhängen von Pointern (Verkettung, mehrere Schritte) erhöht der Kern
+die \textbf{Priorität} des Kern-Prozesses so weit, dass ihn \textbf{niemand
+unterbrechen} kann $\Rightarrow$ \textbf{atomare} Operation, Verkettung
+bleibt konsistent.
+\end{mainbox}
+
+\subsection{Prozesszustände}
+
+\begin{mainbox}{UNIX-Prozesszustände}
+\renewcommand*{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.4\linewidth}|>{\raggedright\arraybackslash}X@{}}
+\textbf{Zustand} & \textbf{Bedeutung} \\
+\hline
+Created & neu erzeugt, noch nicht lauffähig \\
+User Running & läuft im User-Mode \\
+Kernel Running & läuft im Kernel-Mode \\
+Ready to Run, in Mem. & lauffähig, wartet auf Scheduler \\
+Asleep in Memory & blockiert (wartet auf Event), im RAM \\
+Ready to Run, Swapped & lauffähig, muss erst eingeswappt werden \\
+Sleeping, Swapped & blockiert \& ausgelagert \\
+Preempted & Rückkehr Kernel$\to$User, Kern verdrängt ihn \\
+Zombie & beendet, Record bleibt für den Parent \\
+\end{tabularx}
+\end{mainbox}
+
+\begin{mainbox}{Übergänge (Stallings)}
+\begin{itemize}
+    \item \texttt{fork} $\to$ Created $\to$ Ready in Mem.\ (genug Memory)
+          bzw.\ Ready Swapped (zu wenig)
+    \item Ready in Mem.\ $\xrightarrow{\text{reschedule}}$ Kernel Running
+          $\xrightarrow{\text{return}}$ User Running
+    \item User Running $\xrightarrow{\text{syscall, interrupt}}$ Kernel
+          Running (Interrupt im Kernel: Schleife auf sich selbst)
+    \item Kernel Running $\xrightarrow{\text{sleep}}$ Asleep in Mem.\
+          $\xrightarrow{\text{wakeup}}$ Ready in Mem.
+    \item Kernel Running $\xrightarrow{\text{preempt}}$ Preempted
+          $\xrightarrow{\text{return to user}}$ User Running
+    \item Swap out/in: Ready in Mem.\ $\leftrightarrow$ Ready Swapped;
+          Asleep $\xrightarrow{\text{swap out}}$ Sleep Swapped
+          $\xrightarrow{\text{wakeup}}$ Ready Swapped
+    \item Kernel Running $\xrightarrow{\text{exit}}$ \textbf{Zombie}
+\end{itemize}
+\textbf{Merkregel:} Zustandswechsel \& \texttt{exit} laufen immer über
+\textbf{Kernel Running}.
+\end{mainbox}
+
+\begin{subbox}{Kann sich ein Prozess selbst schlafen legen?}
+\textbf{Ja} -- per System Call (z.B.\ \texttt{wait()}, \texttt{sleep()},
+blockierendes \texttt{read()}): Prozess wechselt in den Kernel-Mode und der
+Kern setzt ihn auf \emph{Asleep}. Aufwecken kann er sich \textbf{nicht}
+selbst -- das macht der Kern beim Event (\emph{wakeup}).\\
+\textbf{Sperre:} Wird eine Ressource frei, werden \textbf{alle}
+schlafenden Prozesse geweckt; einer belegt sie, die anderen legen sich
+beim nächsten Zugriff wieder schlafen.
+\end{subbox}
+
+\begin{mainbox}{Prozess-Status-Wechsel}
+\textbf{Process Switch} -- Schritte:
+\begin{enumerate}
+    \item \textbf{Kontext} des Prozessors speichern (PC, Register)
+    \item \textbf{PCB} des laufenden Prozesses updaten (Status
+          running $\to$ ready/blocked \ldots)
+    \item PCB in die \textbf{richtige Queue} verschieben
+    \item \textbf{anderen Prozess} für die Ausführung wählen
+    \item PCB des gewählten Prozesses updaten (running)
+    \item \textbf{Memory-Mgmt.-Datenstrukturen} updaten
+    \item Prozessor-Kontext \textbf{restoren} $\Rightarrow$ läuft genau da
+          weiter, wo er angehalten wurde
+\end{enumerate}
+\end{mainbox}
+
+\begin{mainbox}{Modus-Wechsel (Mode Switch)}
+Liegt ein Interrupt an: PC $\to$ Startadresse des
+\textbf{Interrupt-Handlers}, Wechsel \textbf{User-Mode $\to$
+Kernel-Mode} (privilegierte Instruktionen erlaubt). Sonst: normal mit
+\emph{fetch} der nächsten Instruktion weiter.\\
+\textbf{Mode Switch $\neq$ Process Switch:} Mode Switch geht \textbf{ohne
+Statuswechsel} des Prozesses $\Rightarrow$ nur Kontext sichern/restoren,
+\textbf{sehr kleiner Overhead}. Process Switch $\Rightarrow$
+\textbf{substantielle} Environment-Wechsel des OS.
+\end{mainbox}
+
+\subsection{Prozess erzeugen: fork, exec, wait}
+
+\begin{mainbox}{\texttt{fork()} -- Schritte im Kernel-Mode}
+\begin{enumerate}
+    \item freien Platz in der \textbf{Prozesstabelle} allozieren
+    \item eindeutige \textbf{PID} für den Child vergeben
+    \item \textbf{Kopie des Parent-Images} (ausser Shared Memory)
+    \item \textbf{File-Zähler} für jede Datei des Parents inkrementieren
+    \item Child in die \textbf{Ready-to-Run-Queue}
+    \item Rückgabe: Parent erhält \textbf{Child-PID}, Child erhält
+          \textbf{0}
+\end{enumerate}
+Child setzt beim \textbf{gleichen Befehlszählerstand} fort wie der Parent.
+\end{mainbox}
+
+\begin{mainbox}{fork / exec / wait}
+\begin{itemize}
+    \item \texttt{fork()}: Child = vollständiger \textbf{Klon} des Parents
+    \item \texttt{exec()} (\texttt{execve}): ersetzt den
+          \textbf{kompletten Adressraum} durch ein neues Programm, keine
+          Rückkehr zum Aufrufer; komplizierteste Aufruf
+    \item \texttt{wait()}: Parent schläft bis ein Child endet, liefert
+          dessen PID (kein Child: $-1$)
+    \item Windows: \texttt{CreateProcess()} mit Programmname (fork + exec
+          in einem)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel fork + exec + wait}
+\texttt{if (fork() == 0) execl(...);}\\
+\texttt{wait(0);}\\
+Nach \texttt{fork} sind \textbf{beide lauffähig} und führen denselben Code
+aus. Nur der \textbf{Child} (Rückgabe 0) ruft \texttt{execl} auf und wird
+zum neuen Programm. Der \textbf{Parent} (Rückgabe = PID $\neq 0$) springt
+über das \texttt{if} zu \texttt{wait} und schläft, bis der Child fertig
+ist und ihn per Signal weckt.
+\end{subbox}
+
+\begin{subbox}{Daemon, Waise, Zombie}
+\begin{itemize}
+    \item \textbf{Daemon}: schliesst stdin/stdout/stderr, läuft im
+          Hintergrund
+    \item \textbf{Waise}: Parent endet vor dem Child $\Rightarrow$ vom
+          \textbf{init}-Prozess adoptiert
+    \item \textbf{Zombie}: beendet, Eintrag bleibt, bis der Parent ihn
+          abholt (\texttt{wait}); Fork.pdf nennt auch Waisen ohne
+          Terminal ``Zombie''
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{File Descriptors}
+\textbf{0 = stdin, 1 = stdout, 2 = stderr}.
+\begin{itemize}
+    \item \texttt{ls -l > f.txt}: stdout in Datei
+    \item \texttt{cmd 2> err.txt}: stderr in Datei
+    \item \texttt{cmd 1>\&2}: stdout $\to$ stderr
+    \item \texttt{cmd 2>\&1}: stderr $\to$ stdout
+    \item \texttt{cmd \&> /dev/null}: beides verwerfen
+\end{itemize}
+\end{subbox}
+
+\subsection{Traps \& Interrupts}
+
+\begin{mainbox}{Unterbrechung eines Prozesses}
+\begin{itemize}
+    \item \textbf{HW-Interrupt}: externes Event (I/O-Device, Clock),
+          \textbf{asynchron}
+    \item \textbf{HW-Trap}: synchron oder asynchron, bezogen auf den
+          \textbf{laufenden Prozess} (Division durch 0, invalider Pointer)
+    \item \textbf{SW-initiierter Trap}: System forciert ein Event (z.B.\
+          Re-Scheduling, Netzwerkpaket-Verarbeitung); setzt ein
+          \textbf{Flag}, das beim Exit aus dem Kernel-Mode geprüft wird
+\end{itemize}
+\textbf{System Calls sind SW-initiierte Traps!}
+\end{mainbox}
+
+\begin{mainbox}{Interrupt-Prioritäten}
+hoch $\to$ tief: \textbf{Maschinenfehler} $>$ \textbf{Zeitgeber} $>$
+\textbf{Disk} $>$ \textbf{Netzwerk} $>$ \textbf{Terminals} $>$
+\textbf{SW-Interrupts}.
+\end{mainbox}
+
+\begin{subbox}{Trap, Exception, Interrupt (x86)}
+\begin{itemize}
+    \item \textbf{Trap}: vom Programmierer \textbf{explizit} ausgelöst
+          (\texttt{int}-Instr.), ``SW-Interrupt''
+    \item \textbf{Exception}: \textbf{automatisch} erzwungener Trap bei
+          Fehler (Div.\ durch 0, illegaler Opcode, Memory Protection)
+    \item \textbf{(HW-)Interrupt}: externes HW-Event, unabhängig von der
+          laufenden Instruktion
+    \item alle drei werden von einer \textbf{ISR} (Interrupt Service
+          Routine) behandelt
+\end{itemize}
+x86: \textbf{256} Vektoren, Tabelle ab 0:0 (256 $\times$ 4\,B = 1\,KB).
+Ablauf: Flags + Rücksprungadresse auf Stack, Vektor von
+\texttt{0:nr*4} holen, ISR anspringen; Rückkehr mit \texttt{iret}.
+\end{subbox}
+
+\begin{mainbox}{Ablauf System Call (Trap)}
+Beispiel: \texttt{count = read(fd, buf, n);}
+\begin{enumerate}
+    \item[1--3.] Aufrufer legt \textbf{Parameter auf den Stack}
+          (umgekehrte Reihenfolge; \texttt{buf} als Referenz)
+    \item[4.] Sprung in die \textbf{Bibliotheksfunktion} \texttt{read}
+          (normaler Call)
+    \item[5.] \textbf{Syscall-Nummer} ins Register
+    \item[6.] \textbf{TRAP}: User $\to$ Kernel-Mode, Sprung an
+          \textbf{feste Adresse} im Kern
+    \item[7.] Kern: Nummer = \textbf{Index in Tabelle von
+          Funktionszeigern}
+    \item[8.] Syscall-Handler läuft
+    \item[9.] Kontrolle zurück an die Bibliotheksfunktion
+    \item[10.] Rückkehr ins Benutzerprogramm
+    \item[11.] Aufrufer räumt Stack auf (\textbf{SP erhöhen})
+\end{enumerate}
+Rückgabe: Anzahl gelesener Bytes ($\le n$), Fehler: $-1$ + \texttt{errno}.
+Blockiert der Aufruf (z.B.\ Tastatur), wählt das OS einen anderen Prozess;
+9--11 erst bei vorhandenen Daten.
+\end{mainbox}
+
+\subsection{Prozess- \& Thread-Kontext}
+
+\begin{mainbox}{Prozess-Kontext}
+\begin{itemize}
+    \item \textbf{Benutzer-Kontext}: zugewiesener Adressraum \& Daten
+    \item \textbf{Hardware-Kontext} (Multitasking): CPU-Register,
+          Seitentabelle, \ldots
+    \item \textbf{System-Kontext} (Sicht OS): PID, offene Dateien,
+          Eltern/Kind-Info, Prioritäten, \ldots
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Thread-Kontext}
+Prozess hat \textbf{$\ge 1$ Thread}. Threads eines Prozesses
+\textbf{teilen}: \textbf{Codesegment, Datensegment, Dateideskriptoren}.\\
+\textbf{Pro Thread eigen}: \textbf{Stack} \& \textbf{Code Pointer}
+(PC, Register).
+\end{mainbox}
+
+\subsection{Threads}
+
+\begin{mainbox}{Vorteile von Threads}
+\begin{itemize}
+    \item \textbf{Erzeugen} schneller als bei Prozessen
+    \item \textbf{Wechsel} zwischen Threads schneller
+    \item \textbf{Kommunikation} natürlich über gemeinsamen
+          Prozess-Kontext
+\end{itemize}
+Moderne OS: \textbf{Scheduling \& Dispatching auf Thread-Basis};
+Status in Thread-Level-Datenstrukturen. Prozess unterbrechen/terminieren
+$\Rightarrow$ \textbf{alle} seine Threads.
+\end{mainbox}
+
+\begin{mainbox}{Kernel-Level Threads (KLT)}
+Thread-Management \textbf{durch den Kern}, nicht durch die Applikation.
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Threads eines Prozesses auf \textbf{mehrere CPUs} verteilbar
+    \item blockiert ein Thread, kann ein \textbf{anderer desselben
+          Prozesses} laufen
+    \item Kern-Prozeduren selbst \textbf{multithreaded}
+\end{itemize}
+\textbf{Kernel Thread} = fundamentale Einheit, die auf die CPU verlegt
+wird; Switch sehr schnell; für Kernel-Tasks (Prozessausführung,
+Interrupt Handling).
+\end{mainbox}
+
+\begin{mainbox}{Zwei-Level-Thread-Modell (LWP)}
+Erzeugen/Löschen von Threads ist teuer, jeder braucht einen Stack
+$\Rightarrow$ Zusatzschicht:
+\begin{itemize}
+    \item \textbf{User Threads} werden auf \textbf{LWPs} (Light Weight
+          Processes) gescheduled
+    \item jeder LWP hängt an einem \textbf{Kernel Thread}
+    \item nur Threads auf einem LWP sind \textbf{aktiv}
+    \item User Thread + LWP = \textbf{Kern-Objekt} $\Rightarrow$ läuft
+          unabhängig von anderen Threads des Prozesses
+\end{itemize}
+OS nutzt für Multithreading ausschliesslich Kernel Threads.
+\textbf{Syscall-API} = Schnittstelle User-Prozess $\leftrightarrow$ Kern.
+Nächster Schritt: \textbf{Hypervisor} virtualisiert die HW (HW-Virt.).
+\end{mainbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item \textbf{Mode Switch $\neq$ Process Switch} -- Mode Switch ohne
+          Statuswechsel, billig.
+    \item fork-Rückgabe: \textbf{Child = 0}, Parent = Child-PID (nicht
+          umgekehrt!).
+    \item \texttt{exec} erzeugt \textbf{keinen} neuen Prozess, sondern
+          ersetzt das Image (PID bleibt).
+    \item System Call = \textbf{SW-Trap}, kein HW-Interrupt.
+    \item Threads teilen Code/Daten/Files, aber \textbf{nicht den Stack}.
+    \item Zombie $\neq$ Waise: Zombie ist tot, Waise lebt (bei init).
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item PCB: 8 Elemente; Prozess-Image = Code + Daten + Stack + PCB
+    \item Queues pro Event; Kern-Pointer-Ops atomar (Priorität hoch)
+    \item 9 UNIX-Zustände, Übergänge via Kernel Running
+    \item Process Switch (7 Schritte) vs.\ Mode Switch
+    \item fork (6 Schritte), exec, wait; Daemon/Waise/Zombie
+    \item HW-Interrupt, HW-Trap, SW-Trap; Syscall in 11 Schritten
+    \item Kontext: Benutzer/HW/System; Thread: eigener Stack \& PC
+    \item KLT-Vorteile, LWP-Zwei-Level-Modell
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

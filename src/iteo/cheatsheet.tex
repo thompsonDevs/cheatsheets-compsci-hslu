@@ -4437,6 +4437,447 @@ Nächster Schritt: \textbf{Hypervisor} virtualisiert die HW (HW-Virt.).
 \end{subbox}
 
 % ============================================================================
+% SECTION: COBIT 2019 & ISO 20000
+% ============================================================================
+\section{COBIT 2019 \& ISO 20000}
+
+\begin{subbox}{Einordnung (Wiederholung)}
+Geschäftsstrategie $\to$ \textbf{IT-Strategie} (Plan, wie Technologie die
+Ziele erreicht) $\to$ \textbf{IT-Governance} (\textbf{WAS}; Risk, Performance,
+Ressourcen) $\to$ \textbf{IT-Management} (\textbf{WIE}; Planung, Umsetzung,
+Verwaltung von Diensten) $\to$ ITOM/ITSM $\to$ IT-Infrastruktur.\\
+\textbf{COBIT} = Governance (WAS), \textbf{ITIL} = Empfehlungen (WIE),
+\textbf{ISO 20000} = zertifizierbarer \textbf{Standard}, stark an ITIL
+angelehnt.
+\end{subbox}
+
+\subsection{COBIT 2019}
+
+\begin{mainbox}{COBIT -- Definition}
+\textbf{C}ontrol \textbf{OB}jectives for \textbf{I}nformation and related
+\textbf{T}echnologies: IT-Governance-Framework der \textbf{ISACA} (Information
+Systems Audit and Control Association).
+\begin{itemize}
+    \item \textbf{Framework}: WAS zu tun ist, Best Practices \& Richtlinien
+    \item \textbf{Governance}: IT an Geschäftszielen ausrichten
+    \item \textbf{Management}: Ressourcen, Performance, Risk, Security
+    \item \textbf{Prozesse}: für effektive Governance \& Management
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{COBIT-Domänen: 40 Objectives}
+\renewcommand*{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}l|X|r@{}}
+\textbf{Dom.} & \textbf{Bedeutung} & \textbf{\#} \\
+\hline
+\multicolumn{3}{@{}l}{\emph{Governance Objectives}} \\
+EDM & Evaluate, Direct \& Monitor & 5 \\
+\hline
+\multicolumn{3}{@{}l}{\emph{Management Objectives}} \\
+APO & Align, Plan \& Organize & 14 \\
+BAI & Build, Acquire \& Implement & 11 \\
+DSS & Deliver, Service \& Support & 6 \\
+MEA & Monitor, Evaluate \& Assess & 4 \\
+\hline
+ & \textbf{Total} & \textbf{40} \\
+\end{tabularx}
+\begin{itemize}
+    \item \textbf{EDM}: Bewertung, Steuerung, Überwachung der IT-Aktivitäten
+    \item \textbf{APO}: Planung der gesamten Unternehmensstrategie
+    \item \textbf{BAI}: Integration von IT-Lösungen in Geschäftsprozesse
+    \item \textbf{DSS}: operative Umsetzung \& Sicherheit
+    \item \textbf{MEA}: Leistungsüberwachung \& Verbesserung
+\end{itemize}
+\textbf{Merkregel:} $5 + 14 + 11 + 6 + 4 = 40$; Governance nur EDM.
+\end{mainbox}
+
+\begin{subbox}{COBIT SWOT}
+\begin{itemize}
+    \item \textbf{S}: umfassend \& anerkannt, flexibel (2019 generischer),
+          Business-Alignment ($\uparrow$ ROI), internat.\ ``Standard''
+    \item \textbf{W}: komplex, schwierige Umsetzung, ressourcenintensiv
+          (v.a.\ für KMU)
+    \item \textbf{O}: Integration mit ITIL \& ISO 27001; anpassbar an
+          Cloud, KI, Cybersecurity, Branchen
+    \item \textbf{T}: neue Technologien, uneinheitliche Anwendung
+          (fragmentierte Governance), fehlende Stakeholder-Einbindung,
+          Skill-Lücken
+\end{itemize}
+\end{subbox}
+
+\begin{mainbox}{COBIT implementieren}
+\textbf{Bewerten} (Ist-Praktiken) $\to$ \textbf{Planen} (Roadmap an
+Unternehmenszielen) $\to$ \textbf{Implementieren} (alle Abteilungen) $\to$
+\textbf{Evaluieren} (regelmässig Effektivität prüfen).\\
+\textbf{Best Practice:} Risikomgmt., Kontrollen, Performance Mgmt., Audit,
+Stakeholder einbinden, Schulungen, kontinuierliche Verbesserung.
+\end{mainbox}
+
+\begin{subbox}{Fallstudie SecureBank (500 MA, 20 Filialen)}
+\begin{enumerate}
+    \item Unternehmenskonzept \& Strategie verstehen
+    \item Ist-Zustand bewerten (Audits)
+    \item Zielzustand definieren (Ziele + Regulierung)
+    \item \textbf{Lückenanalyse} (Ist vs.\ Soll)
+    \item Priorisieren \& planen (Roadmap nach Ressourcen)
+    \item Implementierung in Phasen
+    \item Überwachen \& anpassen (quartalsweise)
+    \item Ausweitung (2.\ Jahr)
+    \item Kontinuierliche Verbesserung (jährl.\ COBIT-Bewertung)
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{COBIT KPI-Beispiele}
+\textbf{Performance Management} -- Metriken/KPIs:
+User Growth, Cost Reduction, Satisfaction Rate, Project Completion, Risk
+Level, Compliance Rate, Incident Response, Process Maturity, User
+Satisfaction.
+\end{subbox}
+
+\begin{mainbox}{COBIT 2019 -- Zusammenfassung}
+Legt \textbf{übergeordnete Kontrollziele} fest, bietet detaillierte
+Vorgehensweisen, ganzheitlicher Governance-Ansatz, Prozesszielüberwachung,
+setzt Richtlinien durch, schafft \textbf{Transparenz} \&
+Stakeholder-Engagement.
+\end{mainbox}
+
+\subsection{ISO 20000}
+
+\begin{mainbox}{ISO 20000 -- Definition}
+Internationaler \textbf{Standard} mit Anforderungen an Entwicklung,
+Implementierung, Überwachung, Wartung \& kontinuierliche Verbesserung eines
+\textbf{IT-Service-Management-Systems (SMS)}.
+\begin{itemize}
+    \item vergibt \textbf{Zertifizierungen} an Organisationen (ITIL \&
+          COBIT nicht!)
+    \item Managed Services vergleichen, Servicelevel messen, Leistung
+          bewerten
+    \item allgemein: jede Grösse/Branche, auch Cloud \& BPO
+    \item weitgehend an \textbf{ITIL angelehnt} -- aber \textbf{keine
+          formale Beziehung}
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Implementierung nach PDCA}
+\begin{itemize}
+    \item \textbf{Plan}: Dokumente, Richtlinien \& Ziele, Pläne \& Prozesse
+    \item \textbf{Do}: umsetzen \& betreiben (Design, Bereitstellung,
+          Umstellung, Verbesserung)
+    \item \textbf{Check}: SMS kontrollieren, überwachen, messen
+    \item \textbf{Act}: SMS kontinuierlich verbessern
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Zertifizierungsprozess (5 Stufen)}
+\begin{enumerate}
+    \item Systemumfang \& Projektplanung
+    \item Dokumentation \& Tool-Implementierung
+    \item Schulung \& Systemimplementierung
+    \item Interne Bewertung \& Managementprüfung
+    \item \textbf{Zertifizierungsaudit durch Dritte}
+\end{enumerate}
+Empfehlung: Experte für ITSM \& ITIL sein.
+\end{mainbox}
+
+\begin{subbox}{Vorteile ISO 20000}
+Servicequalität, Kundenzufriedenheit, effiziente Bereitstellung,
+optimierte Prozesse, Risikomgmt., Wettbewerbsvorteil, Kommunikation,
+datenbasierte Entscheide, \textbf{weltweite Anerkennung}.
+\end{subbox}
+
+\subsection{Vergleich \& Auswahl}
+
+\begin{mainbox}{ISO 20000 vs.\ COBIT}
+\renewcommand*{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X@{}}
+ & \textbf{ISO 20000} & \textbf{COBIT} \\
+\hline
+Zweck & ITSM & IT-Governance \& -Mgmt. \\
+Zertif. & \textbf{ja}, formaler Standard & \textbf{nein}, Rahmenwerk \\
+Scope & Servicemgmt.\ & ganzes Unternehmen, alle IT \\
+Output & Nachweis eines QS-geprüften SMS & Kontrollen \& Richtlinien \\
+\end{tabularx}
+ISO 20000 = Nachweis \textbf{hochwertiger Servicebereitstellung}; COBIT =
+\textbf{gesamte} IT-Governance \& -Mgmt.
+\end{mainbox}
+
+\begin{mainbox}{ITIL 4 vs.\ COBIT vs.\ ISO 20000}
+\begin{itemize}
+    \item \textbf{ITIL}: Best Practices für Service Mgmt.; Fokus interne
+          Verfahren (ITIL 4: Wert \& Kunde); jede Org.\ mit
+          internen/externen Diensten, v.a.\ operativ; Zweck: operatives
+          Servicemgmt.\ definieren
+    \item \textbf{COBIT}: Geschäftsrahmen zur Steuerung \& Verwaltung der
+          Unternehmens-IT; Fokus Governance, Mgmt., Risiko; internat.\
+          IT-Org.\ für \textbf{Audit \& Compliance}; Zweck: Audit- \&
+          Compliance-Anforderungen definieren
+    \item \textbf{ISO 20000}: internat.\ Standard für SMS-Anforderungen;
+          Fokus \textbf{Zertifizierung}; IT-Org., die einen externen
+          Standard nachweisen wollen; Zweck: Einhaltung internat.\
+          Standards
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Wann welches?}
+\begin{itemize}
+    \item \textbf{ISO 20000}: Managed Service Provider, Finanz, Gesundheit,
+          Behörden, Produktion, Telko; internationale Firmen (versch.\
+          Vorschriften); ``Kombination aus ITIL \& COBIT''
+    \item \textbf{COBIT}: jede Branche; Fokus Governance, Risiko,
+          Compliance; empfohlen bei \textbf{KI-Lösungen} (digitales
+          Vertrauen); Finanz, E-Commerce, Behörden, Telko
+    \item \textbf{ITIL}: interne/externe Serviceorganisation (WIE)
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{ServiceNow (Testat T09)}
+Cloud-basiertes \textbf{SaaS}-ITSM/ITOM-Tool (Browser) für ITIL-Prozesse,
+auch für weitere Betriebsprozesse; KI-Integration; Quasi-Standard im
+Cloud-IT-Betrieb.
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Nur \textbf{ISO 20000} ist zertifizierbar.
+    \item Governance-Domäne ist nur \textbf{EDM}; APO, BAI, DSS, MEA sind
+          Management.
+    \item Folien schreiben ``MEA = \ldots{} Access'' -- offiziell
+          \textbf{Assess}.
+    \item ISO 20000 basiert auf ITIL, aber ohne formale Beziehung.
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
+% SECTION: DEVOPS
+% ============================================================================
+\section{DevOps}
+
+\subsection{SDLC \& Agile}
+
+\begin{mainbox}{SDLC (Software Development Life Cycle)}
+Framework, das die Aktivitäten jeder Phase eines SW-Projekts beschreibt:
+\begin{enumerate}
+    \item Anforderungen erheben \& analysieren (Planung)
+    \item Design \& Prototyping
+    \item Entwicklung (Codierung)
+    \item Testen
+    \item Einsatz (Installation/Konvertierung)
+    \item Betrieb \& Wartung
+\end{enumerate}
+\textbf{Wasserfall}: linear-sequentiell, Phase fertig vor der nächsten;
+für feste, klare Anforderungen.
+\end{mainbox}
+
+\begin{subbox}{SDLC: Vor- \& Nachteile}
+\textbf{+} Basis für Planung/Schätzung, einheitliche Terminologie,
+Tracking \& Kontrolle, Fortschritt für Stakeholder sichtbar.\\
+\textbf{--} unflexibel bei Änderungen, hohe Vorlaufkosten, zeitaufwändig,
+lauffähiges Produkt erst am Ende (Risiko Unzufriedenheit), viel Doku --
+ungeeignet für kleine Projekte.
+\end{subbox}
+
+\begin{mainbox}{Agile SDLC}
+\textbf{Iterativ} in kurzen \textbf{Sprints} statt linear:
+Anforderungsanalyse $\to$ -definition (Teilaufgaben) $\to$ Programmierung
+$\to$ Testen (jede Iteration) $\to$ Bereitstellung (Inkremente) $\to$
+\textbf{Feedback} $\circlearrowleft$.\\
+Frameworks: \textbf{Scrum, Kanban, XP, Lean}.
+\end{mainbox}
+
+\begin{subbox}{Agile: Vor- \& Nachteile}
+\textbf{+} flexibel, schnelleres Time-to-Market, höhere Qualität (frühes
+Feedback, weniger techn.\ Schulden), Zusammenarbeit, direkter
+Kundeneinfluss.\\
+\textbf{--} Zeit/Budget schwer schätzbar, Sprint-Stress, Überforderung
+unerfahrener Teams, wenig Doku, Ergebnis weicht evtl.\ vom Plan ab.
+\end{subbox}
+
+\subsection{Definition \& Prinzipien}
+
+\begin{subbox}{Geschichte}
+\textbf{2008} Patrick Debois (Agile-Konferenz Toronto): Konflikt Dev vs.\
+Ops; \textbf{2009} Flickr ``10+ Deployments pro Tag''; \textbf{2010} erste
+US-DevOpsDays; \textbf{2011} Open-Source-Tools (Vagrant, kompatibel mit
+Puppet/Chef). Wurzeln: Agile, Ops Mgmt., Lean, ITSM.
+\end{subbox}
+
+\begin{mainbox}{DevOps -- Definition}
+Kunstwort aus \textbf{Dev}elopment + \textbf{Op}eration\textbf{s}.
+\textbf{Kultur} / Denkweise / Methodik der Zusammenarbeit von Entwicklung \&
+Betrieb, um Code \textbf{schneller, automatisiert \& wiederholbar} in die
+Produktion zu bringen -- Vereinheitlichung auf \textbf{Kultur-, Praxis- \&
+Werkzeugebene}.
+\begin{itemize}
+    \item Fokus: Kultur (Teamarbeit, Verantwortung, Vertrauen), Vernetzung
+          von Tools \& Prozessen, funktionsübergreifende Rollen
+    \item \textbf{Hauptprinzipien}: Automatisierung, kontinuierliche
+          Bereitstellung, schnelle Reaktion auf Feedback
+    \item \textbf{Ziel}: zeitnahe Entwicklung, Test \& Betrieb
+          hochqualitativer, stabiler SW
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{CAMS -- die DevOps-Säulen}
+\begin{itemize}
+    \item \textbf{C}ulture: Kommunikation, Prozesse, Werkzeuge
+    \item \textbf{A}utomation von Prozessen
+    \item \textbf{M}easurement von KPIs
+    \item \textbf{S}haring von Feedback, Verfahren, Wissen
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Was DevOps \emph{nicht} ist}
+\begin{enumerate}
+    \item nicht bloss Zusammenlegen von Dev- \& Ops-Teams
+    \item \textbf{kein separates Team}
+    \item \textbf{kein Werkzeug}
+    \item keine One-size-fits-all-Strategie
+    \item \textbf{mehr als Automatisierung}
+\end{enumerate}
+\end{mainbox}
+
+\subsection{DevOps-Pyramide}
+
+\begin{mainbox}{Pyramide: Kultur -- Methoden -- Tools}
+\begin{itemize}
+    \item \textbf{Kultur} (Basis): IT-Organisation adaptieren,
+          \textbf{Leadership} (vorleben), \textbf{Enabling People},
+          \textbf{Fehlerkultur}
+    \item \textbf{Methoden} (Mitte): kleine Releases, API first,
+          \textbf{CI/CD} -- wie entwickeln, wie ausrollen?
+    \item \textbf{Tools} (Spitze): \textbf{IaC}, Container,
+          Automatisierung auf allen Stufen
+\end{itemize}
+\textbf{Positive Fehlerkultur}: offen über Fehler sprechen, Ursachen
+analysieren, gemeinsam lösen -- \textbf{statt Schuldige suchen}; Fehler als
+Lernchance.
+\end{mainbox}
+
+\begin{subbox}{Plan-Build-Run vs.\ DevOps}
+\textbf{Klassisch}: getrennte Silos \textbf{Planen} (Business Analyst,
+IT-Architekt, InfoSec) | \textbf{Aufbauen} (Engineering, Entwicklung,
+Test/QA) | \textbf{Betreiben} (IT-Betrieb, SL-/Supplier Mgr.) -- ``Mauern''
+dazwischen.\\
+\textbf{DevOps}: \textbf{ein Team} mit allen Rollen + \textbf{Product
+Owner}, Deployment- \& Infrastruktur/Plattform-Mgmt.
+\end{subbox}
+
+\begin{mainbox}{CI / CD / Continuous \ldots}
+\begin{itemize}
+    \item \textbf{Continuous Integration (CI)}: jede Änderung wird beim
+          Integrieren in die Codebasis \textbf{sofort getestet \&
+          dokumentiert} $\Rightarrow$ schnelles Feedback, Fehler früh
+    \item \textbf{Continuous Delivery (CD)}: jede Änderung, die die Tests
+          besteht, wird \textbf{automatisch bereitgestellt}
+    \item \textbf{Continuous (Release) Deployment}: Version geht in die
+          \textbf{Produktion}
+    \item \textbf{Continuous Monitoring \& Feedback}: Kundenfeedback
+          zeitnah, proaktiv handeln, App-/Infra-Performance optimieren
+\end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Infrastructure as Code (IaC)}
+Code (Hochsprache oder deklarativ) schreiben, um \textbf{Konfigurationen
+zu verwalten} \& \textbf{Infrastruktur-Bereitstellung zu automatisieren}.
+Entstanden mit \textbf{Puppet} \& \textbf{Chef}.\\
+Nutzen: Testumgebungen \textbf{rasch \& immer gleich} aufbauen; Tests auf
+unverfälschten Umgebungen. Container: Umgebungen im Schichtenmodell.
+\end{mainbox}
+
+\subsection{Lebenszyklus \& Feedback}
+
+\begin{mainbox}{DevOps-Lebenszyklus (Tool Chain)}
+Code einchecken $\to$ Änderungen für Build abrufen $\to$ Tests (CI-Server:
+Builds, Releases) $\to$ Artefakte im Repository $\to$ Bereitstellen \&
+Veröffentlichen $\to$ Umgebung konfigurieren $\to$ DBs \& Apps updaten
+$\to$ Push-Benachrichtigung an Nutzer $\to$ App- \& Netzwerk-Monitoring
+$\to$ \emph{spülen \& wiederholen}.
+\end{mainbox}
+
+\begin{subbox}{Feedback Loops}
+\begin{enumerate}
+    \item Erkenntnisse an das Betriebsteam
+    \item Rückmeldung aus Betrieb an den Prozessanfang
+    \item[3.] Rückmeldung zu a) Build \& Tests, b) Deployment,
+          c) Produktivumgebung, d) Kunde
+\end{enumerate}
+\end{subbox}
+
+\subsection{DevOps \& ITSM / ITIL / Cloud}
+
+\begin{mainbox}{DevOps \& ITSM / ITIL}
+Lebenszyklus in Feedbackschleife via: Infrastruktur- \&
+Bereitstellungsautomatisierung, Konfigurationsverwaltung,
+Infrastrukturüberwachung, Protokollverwaltung, App- \& Leistungsmgmt.
+\begin{itemize}
+    \item \textbf{Prinzipien}: Dev \& Test mit produktionsnahen Systemen;
+          wiederholbare, zuverlässige Bereitstellung; Betriebsqualität
+          überwachen; Feedbackschleifen verstärken
+    \item \textbf{Praktiken}: kontinuierliche Integration, Bereitstellung,
+          Testen, Monitoring \& Feedback
+    \item nicht vergessen: \textbf{Security} \& \textbf{Project Mgmt.}
+    \item Grundlagen: Zusammenarbeit, Automatisierung, IaC
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel ITIL 4 + DevOps: ``Neues Produkt''}
+\begin{enumerate}
+    \item User $\to$ ITSM-Servicekatalog: \emph{Pull} ``I want a Thing''
+    \item ITSM-Katalog $\to$ AWS-Servicekatalog: ``User X needs a Thing''
+    \item \emph{Push}: CI/CD-Pipeline baut das Thing
+    \item ``Your Thing is ready'' $\to$ AWS-Katalog
+    \item AWS $\to$ ITSM-Katalog: ``Here's your Thing''
+    \item ITSM-Katalog $\to$ User
+    \item User greift auf das Thing zu
+\end{enumerate}
+\end{subbox}
+
+\begin{mainbox}{DevSecOps}
+Security steht über allem: DevOps liefert Infrastruktur \& Dienste,
+\textbf{DevSecOps} sichert Infrastruktur \& \textbf{IT-Compliance}.
+\textbf{Aufgaben}: Zoning \& Containment (Security Groups),
+Anlagenwirtschaft \& Geräteattestierung, Logging/Monitoring/Auditing \&
+OpsDB, AuthN/AuthZ, Verschlüsselung \& Zertifikate, NAC / Software Defined
+Perimeter.\\
+\emph{Grund:} anfangs DevOps ohne Security $\Rightarrow$ Übergriffe \&
+instabile Umgebungen.
+\end{mainbox}
+
+\begin{mainbox}{DevOps \& Cloud}
+Unabhängige, sich \textbf{gegenseitig verstärkende} Strategien; früh von
+Public-Cloud-Anbietern übernommen -- Infrastruktur ist Teil des Codes.
+WebOps-Grössen (Google, Amazon, Twitter, Etsy): \textbf{mehrmals täglich}
+Deployments bei \textbf{niedriger Fehlerrate}.
+\end{mainbox}
+
+\begin{subbox}{DevOps-Tools}
+\textbf{Docker} (Container), \textbf{Jenkins} (CI), \textbf{Ansible}
+(Config Mgmt.), \textbf{Puppet} (IaC), \textbf{Vagrant}
+(Virtualisierungsplattform / Dev-Umgebungen).
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item DevOps ist \textbf{Kultur}, kein Team, kein Tool.
+    \item Pyramide von unten: \textbf{Kultur} $\to$ Methoden $\to$ Tools.
+    \item CI = integrieren + testen; CD = automatisch bereitstellen;
+          Deployment = in Produktion.
+    \item CAMS: Culture, Automation, Measurement, Sharing.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item SDLC (6 Phasen, Wasserfall) vs.\ Agile (Sprints, Feedback)
+    \item DevOps = Dev + Ops, CAMS, 5$\times$ ``ist nicht''
+    \item Pyramide Kultur/Methoden/Tools; Fehlerkultur
+    \item CI, CD, Deployment, Monitoring; IaC (Puppet, Chef)
+    \item Lebenszyklus, Feedback Loops, ITIL-Integration
+    \item DevSecOps, Cloud, Tools
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %

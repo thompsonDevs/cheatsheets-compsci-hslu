@@ -2013,7 +2013,11 @@ dy\Bigg] dx$$
 $$\iint_A f\, dA = \int_{y=c}^{d} \Bigg[\int_{x=u(y)}^{v(y)} f(x, y)\,
 dx\Bigg] dy$$
 Innen: andere Variable \textbf{konstant}; innere Grenzen dürfen von der
-äusseren Variablen abhängen, äussere Grenzen sind \textbf{Konstanten}.
+äusseren Variablen abhängen, äussere Grenzen sind \textbf{Konstanten}.\\
+Die \textbf{Reihenfolge der Differentiale} legt die Integrationsreihenfolge
+fest (innen $dy$ $\Rightarrow$ zuerst nach $y$).\\
+Schneiden sich die Randkurven, $A$ in \textbf{Teilbereiche} zerlegen (oben/
+unten muss je eindeutig sein).
 \end{mainbox}
 
 \begin{mainbox}{Rechteck: Reihenfolge egal (Fubini)}
@@ -2021,7 +2025,19 @@ $A = [a, b] \times [c, d]$, alle Grenzen konstant:
 $$\int_a^b \!\! \int_c^d f\, dy\, dx = \int_c^d \!\! \int_a^b f\, dx\, dy$$
 \textbf{Produkt} $f = g(x)\, h(y)$:
 $$\iint_A f\, dA = \int_a^b g\, dx \cdot \int_c^d h\, dy$$
+Sonst gilt: beim Vertauschen \textbf{Grenzen neu bestimmen}.
 \end{mainbox}
+
+\begin{subbox}{Beispiel Papula: drei Wege}
+\begin{align*}
+I &= \int_0^1 \! \int_0^{\pi/4} x \cos(2y)\, dy\, dx\\
+\text{innen: } & \tfrac{x}{2}\sin(2y)\Big|_0^{\pi/4} = \tfrac x2\\
+\text{aussen: } & \int_0^1 \tfrac x2\, dx = \tfrac14\\
+\text{Prod.: } & \int_0^1 x\,dx \cdot \int_0^{\pi/4} \cos(2y)\,dy
+  = \tfrac12 \cdot \tfrac12
+\end{align*}
+Auch vertauscht ($dx\,dy$): $\frac14$.
+\end{subbox}
 
 \begin{subbox}{Denkprozess}
 \begin{enumerate}
@@ -2105,7 +2121,8 @@ $V = 2 \cdot |A| = 2 \cdot \big(\frac{12}{5}\big)^2$.
 \subsection{Polarkoordinaten}
 
 \begin{mainbox}{Doppelintegral in Polarkoordinaten}
-$x = r\cos\varphi$, $y = r\sin\varphi$, $x^2 + y^2 = r^2$.
+$x = r\cos\varphi$, $y = r\sin\varphi$, $x^2 + y^2 = r^2$
+($r \ge 0$, $0 \le \varphi < 2\pi$).
 \textbf{Flächenelement:}
 $$dA = r\, dr\, d\varphi \quad (\text{Faktor } r \text{ nicht vergessen!})$$
 \begin{align*}
@@ -2113,8 +2130,13 @@ $$dA = r\, dr\, d\varphi \quad (\text{Faktor } r \text{ nicht vergessen!})$$
   \int_{r_i(\varphi)}^{r_a(\varphi)}\\
   &f(r\cos\varphi, r\sin\varphi)\, r\, dr\, d\varphi
 \end{align*}
+Erst \textbf{radial} ($r$), dann nach $\varphi$; Grenzen (Skizze!) in
+Polarkoordinaten neu bestimmen.
 Lohnt sich bei \textbf{kreis-/sektorförmigen} Bereichen oder Integranden
-mit $x^2 + y^2$.
+mit $x^2 + y^2$.\\[2pt]
+\textbf{Flächeninhalt} (innere Integration ausgeführt):
+$$A = \frac12 \int_{\varphi_1}^{\varphi_2} \big(r_a^2(\varphi)
+- r_i^2(\varphi)\big)\, d\varphi$$
 \end{mainbox}
 
 \begin{subbox}{Beispiele Polarkoordinaten}
@@ -2126,6 +2148,58 @@ $\int_0^{2\pi} \int_0^R r\, dr\, d\varphi = 2\pi \cdot \frac{R^2}{2}
 V &= \int_0^{2\pi} \int_0^2 (4 - r^2)\, r\, dr\, d\varphi\\
   &= 2\pi \Big[2r^2 - \tfrac{r^4}{4}\Big]_0^2 = 2\pi \cdot 4 = 8\pi
 \end{align*}
+\textbf{Kardioide} $r = 1 + \cos\varphi$:
+$A = \frac12 \int_0^{2\pi} (1 + \cos\varphi)^2\, d\varphi
+= \frac12 (2\pi + \pi) = \frac{3\pi}{2}$.\\[2pt]
+\textbf{Achtelkreis} $R = 2$, $0 \le \varphi \le \frac\pi4$:
+$\iint xy\, dA = \int_0^{\pi/4} \int_0^2 r^3 \sin\varphi\cos\varphi\,
+dr\, d\varphi = 4 \cdot \frac14 = 1$.
+\end{subbox}
+
+\subsection{Dreifachintegrale}
+
+\begin{mainbox}{Dreifachintegral (kartesisch)}
+$$\iiint_V f\, dV = \lim_{n \to \infty} \sum_{k=1}^n
+f(x_k, y_k, z_k)\, \Delta V_k$$
+\textbf{Volumenelement} $dV = dx\, dy\, dz$. Keine geometrische Deutung
+(anders als das Doppelintegral).\\[2pt]
+Bereich $V$: $z_u(x, y) \le z \le z_o(x, y)$ (Boden/Deckel),
+$f_u(x) \le y \le f_o(x)$, $a \le x \le b$:
+$$\iiint_V f\, dV = \int_a^b \! \int_{f_u(x)}^{f_o(x)} \!
+\int_{z_u(x,y)}^{z_o(x,y)} f\, dz\, dy\, dx$$
+Von innen nach aussen ($z$, $y$, $x$), übrige Variablen jeweils konstant.
+Nach der $z$-Integration bleibt ein Doppelintegral über die Projektion $A$.
+\begin{itemize}
+    \item \textbf{Volumen}: $V = \iiint_V dV$ ($f \equiv 1$)
+    \item alle Grenzen konstant \& $f = f_1(x) f_2(y) f_3(z)$
+          $\Rightarrow$ Produkt dreier Integrale
+\end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Beispiel (Aufg.\ 19b)}
+$\int_0^{\pi/2} \int_0^1 \int_y^{y^2} yz \sin x\, dz\, dy\, dx$
+\begin{align*}
+z\text{: } & y \sin x \Big[\tfrac{z^2}{2}\Big]_y^{y^2}
+  = \tfrac12 (y^5 - y^3) \sin x\\
+I &= \tfrac12 \int_0^{\pi/2} \sin x\, dx \cdot \int_0^1 (y^5 - y^3)\, dy\\
+  &= \tfrac12 \cdot 1 \cdot \big(\tfrac16 - \tfrac14\big) = -\tfrac{1}{24}
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Übungen Papula (Aufg.\ 1, 3, 19)}
+\begin{itemize}
+    \item 1a) $\int_0^1 \int_1^e \frac{x^2}{y}\, dy\, dx
+          = \frac13 \cdot \ln e = \frac13$
+    \item 1b) $\int_0^3 \int_0^{1-x} (2xy - x^2 - y^2)\, dy\, dx
+          = \frac{77}{4}$; innen
+          $\frac13(7x^3 - 12x^2 + 6x - 1)$
+    \item 3) Fläche $y = x^2$, $y = -x + 6$: Schnitt $x = -3, 2$;
+          $A = \int_{-3}^{2} (-x + 6 - x^2)\, dx = \frac{125}{6}$
+    \item 19a) $\int_0^1 \int_1^4 \int_0^\pi x^2 y \cos(yz)\, dz\, dy\, dx$:
+          innen $x^2 \sin(\pi y)$; $= \frac13 \cdot \big(-\frac2\pi\big)
+          = -\frac{2}{3\pi}$
+    \item 19b) $-\frac{1}{24}$ (siehe oben)
+\end{itemize}
 \end{subbox}
 
 \begin{subbox}{Häufige Fehler \& Tipps}
@@ -2151,7 +2225,9 @@ V &= \int_0^{2\pi} \int_0^2 (4 - r^2)\, r\, dr\, d\varphi\\
     \item Normalbereich: äussere Grenzen konstant, innere Randkurven
     \item Fläche $\iint dA$, Volumen $\iint f\,dA$ bzw.\
           $\iint (z_o - z_u)\,dA$
-    \item Polar: $dA = r\,dr\,d\varphi$
+    \item Polar: $dA = r\,dr\,d\varphi$; Fläche
+          $\frac12 \int (r_a^2 - r_i^2)\, d\varphi$
+    \item Dreifach: $dz\,dy\,dx$ von innen, $V = \iiint dV$
     \item Papula Bd.\ 2, III.3 (ohne Schwerpunkt und Flächenmomente)
 \end{itemize}
 \end{subbox}

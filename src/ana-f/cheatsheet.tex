@@ -1984,6 +1984,179 @@ keine Extrema. Nichtlineare Systeme oft nur mit CAS lösbar.
 \end{subbox}
 
 % ============================================================================
+% SECTION: MEHRDIMENSIONALE INTEGRALE
+% ============================================================================
+\section{Mehrdimensionale Integrale}
+
+\subsection{Doppelintegral: Definition \& Deutung}
+
+\begin{mainbox}{Doppelintegral}
+$f(x, y)$ über einem Bereich $A$ der $xy$-Ebene: $A$ in kleine Flächen
+$\Delta A_k$ zerlegen, Grenzwert der Summe:
+$$\iint_A f(x, y)\, dA = \lim_{n \to \infty} \sum_{k=1}^{n}
+f(x_k, y_k)\, \Delta A_k$$
+$dA$ = \textbf{Flächenelement}; kartesisch $dA = dx\, dy$.\\[2pt]
+\textbf{Geometrisch} ($f \ge 0$): \textbf{Volumen} des ``Zylinders''
+zwischen Grundfläche $A$ und Fläche $z = f(x, y)$.\\
+Spezialfall $f \equiv 1$: \textbf{Flächeninhalt} von $A$.
+\end{mainbox}
+
+\subsection{Berechnung in kartesischen Koordinaten}
+
+\begin{mainbox}{Normalbereiche \& Integrationsreihenfolge}
+Doppelintegral = \textbf{zwei gewöhnliche Integrale} nacheinander, von
+\textbf{innen nach aussen}.\\[2pt]
+\textbf{$y$-Normalbereich} $a \le x \le b$, $g(x) \le y \le h(x)$:
+$$\iint_A f\, dA = \int_{x=a}^{b} \Bigg[\int_{y=g(x)}^{h(x)} f(x, y)\,
+dy\Bigg] dx$$
+\textbf{$x$-Normalbereich} $c \le y \le d$, $u(y) \le x \le v(y)$:
+$$\iint_A f\, dA = \int_{y=c}^{d} \Bigg[\int_{x=u(y)}^{v(y)} f(x, y)\,
+dx\Bigg] dy$$
+Innen: andere Variable \textbf{konstant}; innere Grenzen dürfen von der
+äusseren Variablen abhängen, äussere Grenzen sind \textbf{Konstanten}.
+\end{mainbox}
+
+\begin{mainbox}{Rechteck: Reihenfolge egal (Fubini)}
+$A = [a, b] \times [c, d]$, alle Grenzen konstant:
+$$\int_a^b \!\! \int_c^d f\, dy\, dx = \int_c^d \!\! \int_a^b f\, dx\, dy$$
+\textbf{Produkt} $f = g(x)\, h(y)$:
+$$\iint_A f\, dA = \int_a^b g\, dx \cdot \int_c^d h\, dy$$
+\end{mainbox}
+
+\begin{subbox}{Denkprozess}
+\begin{enumerate}
+    \item Bereich $A$ \textbf{skizzieren}, Randkurven \& Schnittpunkte
+          bestimmen.
+    \item Normalbereich wählen: welche Variable hat \textbf{konstante}
+          Grenzen? $\to$ aussen.
+    \item Innere Grenzen = untere/obere Randkurve als Funktion der
+          äusseren Variablen.
+    \item Inneres Integral (andere Var.\ konstant), dann äusseres.
+    \item Plausibilität: Vorzeichen, Symmetrie, Grössenordnung.
+\end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Beispiel: Rechteck}
+$\int_0^2 \int_0^3 x y^2\, dy\, dx$: innen
+$\big[\tfrac{x y^3}{3}\big]_0^3 = 9x$, aussen
+$\int_0^2 9x\, dx = \big[\tfrac{9x^2}{2}\big]_0^2 = \mathbf{18}$.\\
+Als Produkt: $\int_0^2 x\,dx \cdot \int_0^3 y^2\,dy = 2 \cdot 9 = 18$.
+\end{subbox}
+
+\begin{subbox}{Beispiel: Normalbereich}
+$\iint_A xy\, dA$, $A$: zwischen $y = x^2$ und $y = x$ (Schnittpunkte
+$x = 0$, $x = 1$).
+\begin{align*}
+\text{innen: } & \int_{x^2}^{x} xy\, dy
+  = \tfrac{x}{2}\big(x^2 - x^4\big)\\
+\text{aussen: } & \tfrac{1}{2} \int_0^1 (x^3 - x^5)\, dx\\
+  &= \tfrac12\big(\tfrac14 - \tfrac16\big) = \tfrac{1}{24}
+\end{align*}
+Umgekehrt ($x$-Normalbereich): $0 \le y \le 1$, $y \le x \le \sqrt y$ $\to$
+ebenfalls $\frac{1}{24}$.
+\end{subbox}
+
+\subsection{Flächen \& Volumina}
+
+\begin{mainbox}{Flächeninhalt}
+\begin{align*}
+A = \iint_A dA &= \int_a^b \int_{g(x)}^{h(x)} dy\, dx\\
+  &= \int_a^b \big(h(x) - g(x)\big)\, dx
+\end{align*}
+(= bekannte Formel \emph{Fläche zwischen zwei Kurven}).
+\end{mainbox}
+
+\begin{mainbox}{Volumen}
+Zylinder unter $z = f(x, y) \ge 0$ über $A$:
+$$V = \iint_A f(x, y)\, dA$$
+Zwischen zwei Flächen $z_u \le z \le z_o$ über $A$:
+$$V = \iint_A \big(z_o(x, y) - z_u(x, y)\big)\, dA$$
+\end{mainbox}
+
+\begin{subbox}{Beispiel: Fläche}
+Zwischen $y = x^2$ und $y = x$:
+$A = \int_0^1 (x - x^2)\, dx = \frac12 - \frac13 = \frac{1}{6}$.
+\end{subbox}
+
+\begin{subbox}{Beispiel: Volumen über Dreieck}
+$z = x + y + 2$ über $0 \le y \le x \le 1$:
+\begin{align*}
+\text{innen: } & \int_0^x (x + y + 2)\, dy = \tfrac32 x^2 + 2x\\
+V &= \int_0^1 \big(\tfrac32 x^2 + 2x\big)\, dx = \tfrac12 + 1
+  = \tfrac{3}{2}
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Praxis: Eberthalle}
+Hyperbolische Paraboloidschale.\\
+Dach $f(x, y) = 2 + xy$ über $A = I \times I$,
+$I = \big[-\frac65, \frac65\big]$. Umbautes Volumen:
+\begin{align*}
+V &= \int_{-6/5}^{6/5} \Big[2y + \tfrac12 x y^2\Big]_{-6/5}^{6/5} dx\\
+  &= \int_{-6/5}^{6/5} \tfrac{24}{5}\, dx\\
+  &= \tfrac{24}{5} \cdot \tfrac{12}{5} = \tfrac{288}{25}
+   = \mathbf{11.52}
+\end{align*}
+Der Term $\frac12 x y^2$ fällt weg (gerade in $y$, gleiche Werte an
+beiden Grenzen); $\iint xy\,dA = 0$ aus Symmetrie $\Rightarrow$
+$V = 2 \cdot |A| = 2 \cdot \big(\frac{12}{5}\big)^2$.
+\end{subbox}
+
+\subsection{Polarkoordinaten}
+
+\begin{mainbox}{Doppelintegral in Polarkoordinaten}
+$x = r\cos\varphi$, $y = r\sin\varphi$, $x^2 + y^2 = r^2$.
+\textbf{Flächenelement:}
+$$dA = r\, dr\, d\varphi \quad (\text{Faktor } r \text{ nicht vergessen!})$$
+\begin{align*}
+\iint_A f\, dA = &\int_{\varphi_1}^{\varphi_2}
+  \int_{r_i(\varphi)}^{r_a(\varphi)}\\
+  &f(r\cos\varphi, r\sin\varphi)\, r\, dr\, d\varphi
+\end{align*}
+Lohnt sich bei \textbf{kreis-/sektorförmigen} Bereichen oder Integranden
+mit $x^2 + y^2$.
+\end{mainbox}
+
+\begin{subbox}{Beispiele Polarkoordinaten}
+\textbf{Kreisfläche} Radius $R$:
+$\int_0^{2\pi} \int_0^R r\, dr\, d\varphi = 2\pi \cdot \frac{R^2}{2}
+= \pi R^2$.\\[2pt]
+\textbf{Paraboloid} $z = 4 - x^2 - y^2$ über $z \ge 0$ (Kreis $r \le 2$):
+\begin{align*}
+V &= \int_0^{2\pi} \int_0^2 (4 - r^2)\, r\, dr\, d\varphi\\
+  &= 2\pi \Big[2r^2 - \tfrac{r^4}{4}\Big]_0^2 = 2\pi \cdot 4 = 8\pi
+\end{align*}
+\end{subbox}
+
+\begin{subbox}{Häufige Fehler \& Tipps}
+\begin{itemize}
+    \item Äussere Grenzen müssen \textbf{Konstanten} sein; Variable der
+          inneren Grenzen = äussere Integrationsvariable.
+    \item Beim Vertauschen der Reihenfolge \textbf{Grenzen neu
+          bestimmen} (Skizze!), nicht einfach tauschen -- nur beim
+          Rechteck gleich.
+    \item Polarkoordinaten: \textbf{$dA = r\,dr\,d\varphi$}, nicht
+          $dr\,d\varphi$.
+    \item $V = \iint f\,dA$ ist nur für $f \ge 0$ ein Volumen; sonst
+          heben sich Teile auf.
+    \item Symmetrie nutzen: ungerader Integrand über symmetrischem
+          Bereich $\Rightarrow 0$.
+\end{itemize}
+\end{subbox}
+
+\begin{subbox}{Zusammenfassung}
+\begin{itemize}
+    \item $\iint_A f\, dA$: von innen nach aussen, innen andere Var.\
+          konstant
+    \item Normalbereich: äussere Grenzen konstant, innere Randkurven
+    \item Fläche $\iint dA$, Volumen $\iint f\,dA$ bzw.\
+          $\iint (z_o - z_u)\,dA$
+    \item Polar: $dA = r\,dr\,d\varphi$
+    \item Papula Bd.\ 2, III.3 (ohne Schwerpunkt und Flächenmomente)
+\end{itemize}
+\end{subbox}
+
+% ============================================================================
 % TIPS FOR AVOIDING OVERFULL BOXES
 % ============================================================================
 %
